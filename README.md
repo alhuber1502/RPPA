@@ -8,7 +8,7 @@ Romantic Period Poetry Archive (RPPA)
 The Romantic Period Poetry Archive — 
 [romanticperiodpoetry.org](https://www.romanticperiodpoetry.org/) — is a
 collaborative digital archive and research project devoted to the poetry 
-of the Romantic period (c. 1780-1848).  Its focus is the multilingual 
+of the global Romantic period (c. 1760s-1860s).  Its focus is the 
 comparative study of Global Romanticism as expressed in the poetry of the
 period and its contexts in other literatures, philosophy, the arts, 
 science, religion, economics, politics, popular culture, theatre, 
