@@ -221,3 +221,13 @@ section div {
   margin-bottom: calc(100vh / 2 - 130px ); 
 }
 
+.addthis_inline_share_toolbox .at4-show {
+  display: inline-block !important;  
+  vertical-align: middle !important;
+}
+.addthis_inline_share_toolbox .at-share-btn-elements {
+  margin-top: unset !important;		     
+}
+.addthis_inline_share_toolbox .at-icon-wrapper > svg > g > path {
+  text-shadow: unset !important;
+}
