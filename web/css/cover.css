@@ -4,6 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
+@media print {
+    div.cover {
+        overflow: visible !important;
+    }
+    header,footer {
+	display:none;
+    }
+}
+
 /* Links */
 a,
 a:focus,
