@@ -3,7 +3,7 @@ Romantic Period Poetry Archive (RPPA)
 ![](https://img.shields.io/github/last-commit/alhuber1502/RPPA.svg?style=flat)
 ![](https://img.shields.io/badge/license-CC%20BY--SA-orange.svg?style=flat)
 ![](https://img.shields.io/website-up-down-green-red/http/www.romanticperiodpoetry.org.svg?style=flat)
-![](https://img.shields.io/maintenance/yes/2020.svg?style=flat)
+![](https://img.shields.io/maintenance/yes/2021.svg?style=flat)
 
 The Romantic Period Poetry Archive — 
 [romanticperiodpoetry.org](https://www.romanticperiodpoetry.org/) — is a
