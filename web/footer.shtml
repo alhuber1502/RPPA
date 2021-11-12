@@ -1,30 +1,21 @@
-      
-      <footer class="mastfoot footer mt-auto">
-	<div class="inner">
-	  <p>© 2020 Romantic Period Poetry Archive (RPPA) ·
-	    RPPA is licensed under
-	    <a rel="license" target="_blank"
-	    href="https://creativecommons.org/licenses/by-sa/4.0/"
-	    class="noborder"><img alt="CC BY-SA 4.0"
-	    style="border-width:0" class="align-middle"
-	    src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"></a>
-	    ·
-	    Website by <a href="https://www.hubers.org.uk/"
-		target="_blank"><img style="height:16px;margin-bottom:2px;filter:invert(.9)" 
-				     title="Huber Digital" alt="Huber Digital"
-		src="https://huberdigital.files.wordpress.com/2019/09/cropped-hd-logo.png"></a><br/>
-	    <small><em>Picture credit:</em> Knud Andreassen Baade
-	      – <a href="https://www.the-athenaeum.org/art/detail.php?ID=340545"
-		   target="_blank">Scene from the Era of Norwegian Sagas</a> (1850)
-	    </small>
-	  </p>
-	</div>
-      </footer>
-      
-    </div>
 
-    <script src="js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<footer class="footer mt-auto py-2 bg-light">
+		<div class="container-fluid">
+			<span class="text-muted">© 2020 Romantic Period Poetry Archive (RPPA) &nbsp;·&nbsp; 
+			RPPA is licensed under
+			<a rel="license" target="_blank"
+			href="https://creativecommons.org/licenses/by-sa/4.0/"
+			class="noborder"><img alt="CC BY-SA 4.0"
+			style="border-width:0" class="align-middle"
+			src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"></a> 
+			 &nbsp;·&nbsp; 
+			Website by <a href="https://www.hubers.org.uk/"
+			target="_blank"><img style="height:16px;margin-bottom:3px;" 
+						title="Huber Digital" alt="Huber Digital"
+			src="https://huberdigital.files.wordpress.com/2019/09/cropped-hd-logo.png"></a></span>
+			<p class="text-muted" style="display:inline-block;float:right;padding-top:10px;font-size:12px;"><em><!--#include virtual="/version"--> (<!--#config timefmt="%Y-%m-%dT%H:%M:%SZ"--><!--#flastmod virtual="/version" -->)</em></p>
+		</div>
+  	</footer>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e1cf5963f6c9ece"></script>

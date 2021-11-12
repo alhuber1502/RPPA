@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
   <head>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async
-	src="https://www.googletagmanager.com/gtag/js?id=UA-4528798-7"></script>
+    	src="https://www.googletagmanager.com/gtag/js?id=UA-4528798-7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -13,17 +13,18 @@
       gtag('config', 'UA-4528798-7', { 'anonymize_ip': true });      
     </script>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Romantic Period Poetry Archive (RPPA)">
     <meta name="author" content="Alexander Huber">
 
     <title>Home · Romantic Period Poetry Archive (RPPA)</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
-    <link href="css/cover.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap-icons-1.4.1/bootstrap-icons.css">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <link href="/css/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -43,20 +44,66 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
+    <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/js/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <script src="/js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+    <!-- Leaflet.js -->
+    <link rel="stylesheet" href="/js/leaflet/leaflet.css"/>
+    <script src="/js/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <link rel="stylesheet" href="/js/leaflet-sidebar-v2-master/css/leaflet-sidebar.min.css">
+    <script src="/js/leaflet-sidebar-v2-master/js/leaflet-sidebar.min.js"></script>
+    <script src="/js/OverlappingMarkerSpiderfier-Leaflet-0.2.6/bin/oms.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <script src="/js/underscore-umd-min.js" crossorigin="anonymous"></script>
+
   </head>
 
-  <body class="text-center">
-
-    <div class="cover-container container d-flex w-100 h-100 mx-auto
-		flex-column">
-
-      <header class="masthead mb-auto">
-	<div class="inner">
-	  <h1 class="masthead-brand">Romantic Period Poetry Archive</h1>
-	  <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link" href="#home">Home</a>
-            <a class="nav-link" href="#about">About</a>
-            <a class="nav-link" href="#contact">Contact</a>
-	  </nav>
-	</div>
-      </header>
+  <body class="d-flex flex-column h-100">
+  
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="/images/authors/ByroGe1788_NPG_detail.jpg" alt="[Lord Byron (1788-1824) / © National Portrait Gallery, London]"
+              title="[Lord Byron (1788-1824) / © National Portrait Gallery, London]">
+            <span>Romantic Period Poetry Archive<sup>alpha</sup></span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='home' -->" aria-current="page" href="#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='about' -->" href="#about">About</a>
+              </li>
+              <!--
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='authors' -->" href="#authors">Authors</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='texts' -->" href="#texts">Texts</a>
+              </li>
+              //-->
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='map' -->" href="#map">Map</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='help' -->" href="#help">Help</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <!--#echo var='contact' -->" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>

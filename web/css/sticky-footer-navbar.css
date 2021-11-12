@@ -1,0 +1,221 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+a {
+  color:#e07012;
+}
+a:hover, a:active, a:visited {
+  color:  #cd6711;
+}
+main > .container-fluid {
+  padding: 40px 0px 40px 0px;
+}
+header > nav {
+  height: 40px;
+}
+
+.navbar > .container-fluid {
+  position: absolute;
+}
+.navbar-brand {
+  margin: 0 30px 0 0;
+  font-size:1.4rem;
+  line-height:32px;
+}
+.navbar-brand > img {
+  display: inline-block;
+  margin-right: 15px;
+  height: 40px;
+  width: 40px;
+}
+.navbar-brand sup, .leaflet-sidebar-header sup {
+  font-variant: small-caps;
+  font-size: .75rem;
+  padding: 0 5px;
+  top: -.6rem;
+}
+.leaflet-sidebar-tabs > li:hover, .leaflet-sidebar-tabs > ul > li:hover {
+  background-color: unset;
+}
+.nav-link {
+  padding-right:1rem !important;
+  padding-left:1rem !important;
+}
+
+footer {
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #ccc;
+}
+.map {
+  height: 100%;
+  top: 0;
+  position: relative;
+  background-color: #f1e4cf;
+}
+
+@media (min-width:768px) {
+  .leaflet-sidebar {
+   top:10px;
+   bottom:10px;
+   transition:width .5s;
+   border:3px solid transparent;
+   border-radius:4px;
+   z-index: auto !important;
+  }
+  .leaflet-sidebar-left {
+   left:10px !important;
+  }
+  .leaflet-sidebar-right {
+   right:10px !important;
+  }
+}
+.leaflet-sidebar.collapsed {
+  width: 42px !important;
+}
+.leaflet-sidebar-header {
+  background-color: #e07012 !important;
+}
+.leaflet-sidebar-tabs > li.active, .leaflet-sidebar-tabs > ul > li.active {
+  background-color: #ce5f04 !important;
+}
+
+.leaflet-verticalcenter {
+  /********************************************/
+  /* Same as .leaflet-top and .leaflet-bottom */
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+  /********************************************/
+  top: 50%;
+  transform: translateY(-50%);
+  padding-top: 10px;
+}
+.leaflet-sidebar {
+  z-index:1000 !important;
+  max-width:40%;
+}
+.leaflet-sidebar-tabs i {
+  font-size:20px;
+  margin-left:-2px
+}
+.leaflet-sidebar-tabs {
+  background-color: #eee !important;
+}
+.leaflet-sidebar-header {
+  font-size:1.4rem !important;
+}
+.leaflet-sidebar-content h2 {
+  margin-top: 8px;
+  font-size: 1.3rem;
+}
+.leaflet-sidebar-content h3 {
+  font-size: 1.15rem;
+  margin-left: 5px;
+}
+.leaflet-container,.popup {
+  font-size:16px !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  background:unset;
+}
+#sidebar,.popup,.leaflet-control-container {
+  font-size:15px !important;
+}
+.leaflet-container option {
+  font-size:14px !important;
+}
+.leaflet-container a {
+  color:#e07012;
+}
+.leaflet-control-container a {
+  color:#000 !important;
+}
+.legend-dot {
+  height: 11px;
+  width: 11px;
+  border-radius: 50%;
+  display: inline-block;  
+}
+
+
+.gender input[type=checkbox] + label, .continents input.cont[type=checkbox] + label
+{
+  font-size: 1.2em;
+  padding-right: 0.6em;
+}
+.gender input[type=checkbox], .continents input.cont[type=checkbox] 
+{ display:none; }
+.gender input[type=checkbox] + label:before, .continents input.cont[type=checkbox] + label:before
+{
+  display: inline-block;
+  content: "\f111";
+  font-family: "Font Awesome 5 Free";
+  padding-right: .3em; 
+}
+.gender input[type=checkbox]:checked + label:before {
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
+  color: black;
+}
+.continents input[type=checkbox]#AF:checked 
++ label:before {
+  content: "\f57c";
+  font-weight: 700;
+}
+.continents input[type=checkbox]#AS:checked 
++ label:before {
+  content: "\f57e";
+  font-weight: 700;
+}
+.continents input[type=checkbox]#NA:checked 
++ label:before {
+  content: "\f57d";
+  font-weight: 700;
+}
+.continents input[type=checkbox]#SA:checked 
++ label:before {
+  content: "\f57d";
+  font-weight: 700;
+}
+.continents input[type=checkbox]#EU:checked 
++ label:before {
+  content: "\f7a2";
+  font-weight: 700;
+}
+.continents input[type=checkbox]#OC:checked 
++ label:before {
+  content: "\f57e";
+  font-weight: 700;
+}
+
+.leaflet-popup-pane .popup .name {
+  font-weight: bold;
+  font-size:14px;
+}
+.leaflet-popup-pane .popup .loc {
+  font-style: italic;
+  font-size:13px;
+  display: block;
+}
+
+a:not(.img).external {
+  background: url(/images/extlink.png) right center no-repeat;
+  padding-right: .75em;
+}
+
+img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
+  width:35px !important;
+  background-color: #fff;
+}
+#profile .results ul li span {
+  font-variant: small-caps;
+}
+#profile .results ul li, #help .results ul li
+ {
+  text-indent: -15px;
+  margin: 0 0 2px -10px;
+  list-style-type: none;
+}
