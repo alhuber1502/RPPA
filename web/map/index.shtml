@@ -660,8 +660,8 @@
 
   async function poet_profile( id ) {
     var poet = await load_poet_overview( id );
-    var birthDate = new Date( persons[ id ].dob );
-    var deathDate = new Date( persons[ id ].dod );
+    var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
+    var deathDate = new Date( persons[ id ].dod.replace("T00:00:00Z","").split('-') );
     var works='<ul>', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
