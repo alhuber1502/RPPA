@@ -11,7 +11,7 @@
         <div class="modal-body">
           <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
             <span class="h4">Romantic Period Poetry Archive (RPPA)</span><br><small><b>Alexander Huber, Editor.</b></small><br>
-          <p>RPPA <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i></a>
+          <p>RPPA <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
             is a new, open access digital platform for global Romantic-period poetry — 
             start your journey (almost) anywhere in the world!</p>
           <p class="small">RPPA is a rapidly prototyped and openly developed DH project. It will run from late 2020-2025, 
@@ -43,13 +43,13 @@
   <!-- Nav tabs -->
   <div class="leaflet-sidebar-tabs">
       <ul role="tablist">
-          <li><a href="#home" role="tab"><i class="fas fa-globe"></i></a></li>
-          <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i></a></li>
-          <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
-          <li class="disabled"><a href="#" role="tab"></a></li>
-          <li><a href="#about" role="tab"><i class="fas fa-info"></i></a></li>
-          <li><a href="#help" role="tab"><i class="fas fa-question-circle"></i></a></li>
-          <li><a href="#contact" role="tab"><i class="fas fa-envelope-open"></i></a></li>
+          <li><a href="#home" role="tab"><i class="fas fa-globe"></i><span class="sr-only">[Home]</span></a></li>
+          <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i><span class="sr-only">[Location]</span></a></li>
+          <li><a href="#profile" role="tab"><i class="fa fa-user"></i><span class="sr-only">[Profile]</span></a></li>
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <li><a href="#about" role="tab"><i class="fas fa-info"></i><span class="sr-only">[About]</span></a></li>
+          <li><a href="#help" role="tab"><i class="fas fa-question-circle"></i><span class="sr-only">[Help]</span></a></li>
+          <li><a href="#contact" role="tab"><i class="fas fa-envelope-open"></i><span class="sr-only">[Contact]</span></a></li>
           <!--
           <li class="disabled"><a href="#messages" role="tab"><i class="far fa-envelope"></i></a></li>
           <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fab fa-github"></i></a></li>
@@ -79,29 +79,29 @@
           <div class="controls gender" style="margin-top:15px;">
             <h2>Filter by gender</h2>
             <input id="male" value="m" class="checkbox" type="checkbox" checked/>
-            <label for="male"><i class="fa fa-male"></i></label>
+            <label for="male"><i class="fa fa-male"></i><span class="sr-only">Male</span></label>
             <input id="female" value="f" class="checkbox" type="checkbox" checked/>
-            <label for="female"><i class="fa fa-female"></i></label>
+            <label for="female"><i class="fa fa-female"></i><span class="sr-only">Female</span></label>
           </div>
           <div class="controls continents" style="margin-top:15px;">
             <h2>Filter by locations</h2>
             <input id="AF" value="AF" class="checkbox cont" type="checkbox" checked/>
-            <label for="AF">Africa &nbsp;<a href="#cont-AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i></a></label>
+            <label for="AF">Africa &nbsp;<a href="#cont-AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Africa</span></a></label>
             <div data-id="AF"></div>
             <input id="NA" value="NA" class="checkbox cont" type="checkbox" checked/>
-            <label for="NA">North America &nbsp;<a href="#cont-NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 42)"><i class="fas fa-map-marked-alt"></i></a></label>
+            <label for="NA">North America &nbsp;<a href="#cont-NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 42)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
             <div data-id="NA"></div>
             <input id="SA" value="SA" class="checkbox cont" type="checkbox" checked/>
-            <label for="SA">South America &nbsp;<a href="#cont-SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i></a></label>
+            <label for="SA">South America &nbsp;<a href="#cont-SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">South America</span></a></label>
             <div data-id="SA"></div>
             <input id="AS" value="AS" class="checkbox cont" type="checkbox" checked/>
-            <label for="AS">Asia &nbsp;<a href="#cont-AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(100 35)"><i class="fas fa-map-marked-alt"></i></a></label>
+            <label for="AS">Asia &nbsp;<a href="#cont-AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(100 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
             <div data-id="AS"></div>
             <input id="EU" value="EU" class="checkbox cont" type="checkbox" checked/>
-            <label for="EU">Europe &nbsp;<a href="#cont-EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i></a></label>    
+            <label for="EU">Europe &nbsp;<a href="#cont-EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Europe</span></a></label>    
             <div data-id="EU"></div>     
             <input id="OC" value="OC" class="checkbox cont" type="checkbox" checked/>
-            <label for="OC">Oceania &nbsp;<a href="#cont-OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i></a></label>  
+            <label for="OC">Oceania &nbsp;<a href="#cont-OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Oceania</span></a></label>  
             <div data-id="OC"></div>   
           </div>
       </div>
@@ -125,7 +125,7 @@
 
           <h2>Introduction</h2>
           <p>The Romantic Period Poetry Archive, or RPPA 
-            <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i></a>
+            <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
             for short, is a new open access digital platform of
             global Romantic-period poetry.<sup>2</sup> It comprises a
             <em>full-text poetry database</em> and
@@ -543,7 +543,7 @@
   map.zoomControl.setPosition('topright');
 
   // "Center" map in a good starting position and add reset button next to zoom
-  L.easyButton( '<i class="fas fa-undo-alt reset_map"></i>', function(){
+  L.easyButton( '<i class="fas fa-undo-alt reset_map"></i><span class="sr-only">Reset map</span>', function(){
     map.setView([17,20], 3);
   }).setPosition('topright').addTo( map );
 
