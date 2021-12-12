@@ -49,6 +49,8 @@
           <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
           <li><a href="#about" role="tab"><i class="fas fa-info"></i><span class="sr-only">[About]</span></a></li>
           <li><a href="#help" role="tab"><i class="fas fa-question-circle"></i><span class="sr-only">[Help]</span></a></li>
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <li><a href="#feed" role="tab"><i class="fas fa-rss"></i><span class="sr-only">[News/Updates]</span></a></li>
           <li><a href="#contact" role="tab"><i class="fas fa-envelope-open"></i><span class="sr-only">[Contact]</span></a></li>
           <!--
           <li class="disabled"><a href="#messages" role="tab"><i class="far fa-envelope"></i></a></li>
@@ -357,6 +359,14 @@
             </li>
           </ul>
 
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="feed">
+        <h1 class="leaflet-sidebar-header">News/Updates
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <div id="twitter-updates" style="margin-bottom:25px; width:359px;">
+            <!--#include virtual="/updates.shtml" -->
         </div>
       </div>
       <div class="leaflet-sidebar-pane" id="contact">
