@@ -365,7 +365,7 @@
         <h1 class="leaflet-sidebar-header">News/Updates
           <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
         </h1>
-        <div id="twitter-updates" style="margin-bottom:25px; width:359px;">
+        <div id="twitter-updates" style="margin-bottom:25px; max-width:359px;">
             <!--#include virtual="/updates.shtml" -->
         </div>
       </div>
@@ -384,10 +384,10 @@
             not hesitate to reach out:
           </p>
       
-          <p style="margin-left:20px;">
+          <p style="margin-left:15px;">
             <b>Romantic Period Poetry Archive (RPPA)</b><br>
             Alexander Huber, Editor<br>
-          <ul style="list-style:none;padding:0 20px;">
+          <ul style="list-style:none;padding:0 15px;">
             <li style="height:25px;"><span>E-mail:</span> <a href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
             <li style="height:25px;"><span>Twitter:</span> <a target="_blank" href="https://twitter.com/C18AH" class="external">@C18AH</a>
             <li style="height:25px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
@@ -635,7 +635,7 @@
       }
       var icon = L.icon({
         className: "poet-marker",
-        iconUrl: (v.img)?v.img+"?width=250px":(v.sex == 'm')?'/images/male.png':'/images/female.png',
+        iconUrl: (v.img)?v.img.replace('http://','https://')+"?width=250px":(v.sex == 'm')?'/images/male.png':'/images/female.png',
         iconSize: [35]
       });
       markers[ v.id ] = L.marker([ coords[1],coords[0] ], {
@@ -704,7 +704,7 @@
     works += `</ul>`;
     $( "#profile .results" ).html( 
       `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
-        ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="`+persons[ id ].img+`?width=250px" />`:``)+
+        ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="`+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
         `<h3>Biographical details</h3><ul><li><span>Country:</span> 
         <a href='#coun-`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
         data-count='`+persons[ id ].nat.substring(0,2)+`' data-coord='`+nations[ persons[ id ].nat.substring(0,2) ].coord+`'>`+
