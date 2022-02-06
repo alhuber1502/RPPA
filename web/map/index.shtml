@@ -860,7 +860,7 @@
   // main 
   (function() {
     var mymodal;
-    if ( !document.referrer.includes( "romanticperiodpoetry.org") ) {
+    if ( !document.referrer.includes( "romanticperiodpoetry.") ) {
       myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
 	    myModal.toggle();
     } else {
