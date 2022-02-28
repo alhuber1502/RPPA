@@ -635,7 +635,7 @@
       }
       var icon = L.icon({
         className: "poet-marker",
-        iconUrl: (v.img)?v.img.replace('http://','https://')+"?width=250px":(v.sex == 'm')?'/images/male.png':'/images/female.png',
+        iconUrl: (v.img)?v.img.replace(/http:\/\/commons.wikimedia.org\/wiki\/Special:FilePath\/(.*)\.(.*)/,'/map/data/img/thumb/$1.jpg'):(v.sex == 'm')?'/images/male.png':'/images/female.png',
         iconSize: [35]
       });
       markers[ v.id ] = L.marker([ coords[1],coords[0] ], {
