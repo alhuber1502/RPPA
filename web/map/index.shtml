@@ -675,6 +675,7 @@
     var works='', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
+      (poet[id].ernie?`<li><a href="`+poet[id].ernie+`" class="external" target="_blank"><span>ERNiE</span></a>`:``)+
       (poet[id].europeana?`<li><a href="`+poet[id].europeana+`" class="external" target="_blank"><span>Europeana</span></a>`:``)+
       (poet[id].viaf?`<li><a href="`+poet[id].viaf+`" class="external" target="_blank"><span>VIAF</span></a>`:``)+
       (poet[id].cerl?`<li><a href="`+poet[id].cerl+`" class="external" target="_blank"><span>CERL thesaurus</span></a>`:``)+
