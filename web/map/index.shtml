@@ -672,7 +672,7 @@
     var poet = await load_poet_overview( id );
     var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
     var deathDate = new Date( persons[ id ].dod.replace("T00:00:00Z","").split('-') );
-    var works='<ul>', links='<ul style="columns:2;">';
+    var works='', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
       (poet[id].europeana?`<li><a href="`+poet[id].europeana+`" class="external" target="_blank"><span>Europeana</span></a>`:``)+
@@ -690,6 +690,7 @@
     }
     links += wiki + wikisource + `</ul>`;
     if ( poet[id].bibl ) {
+      works += `<ul>`;
       $.each( _.sortBy( poet[id].bibl, 'date' ), function(i,v) {
         works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
@@ -698,10 +699,8 @@
           (v.date?` (`+v.date+`)`:``)+
           `</li>`;
       });
-    } else {
-      works += `<li><!--[forthcoming]--></li>`;
+      works += `</ul>`;
     }
-    works += `</ul>`;
     $( "#profile .results" ).html( 
       `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
         ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="`+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
@@ -729,7 +728,8 @@
           :``):``)+(persons[ id ].pod?`)`:``)+`</li>`+
         (poet[id].occ?`<li><span>Occupation:</span> `+_.uniq( poet[id].occ ).join("; ")+`</li>`:``)
         +`</ul>`+
-        `<h3>Texts</h3>`+works+
+        `<h3>Poems</h3><ul><li>[forthcoming]</li></ul>`+
+        ((poet[id].bibl)?`<h3>Bibliography</h3>`+works:``)+
         `<h3>Links</h3>`+links
     );
     sidebar.open('profile');
