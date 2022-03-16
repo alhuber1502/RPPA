@@ -423,7 +423,7 @@
 
   // start with whole network
   var startyr = 1760;
-  var endyr = 1875;
+  var endyr = 1880;
 
   // initialize map view
   var lat = Math.floor(Math.random() *  (70  - -50  + 1)) + -50;  // max 70,  min -50
@@ -623,10 +623,10 @@
     markerLayer.clearLayers();
     $.each( new_persons, function ( i,v ) {
       var coords = [], POB = '';
-      var source = (v.pob && !v.gen && places[ v.pob ].coord)?places[ v.pob ].coord:nations[ v.nat.substring(0, 2) ].coord;
+      var source = (v.pob && !v.gen && places[ v.pob ] && places[ v.pob ].coord)?places[ v.pob ].coord:nations[ v.nat.substring(0, 2) ].coord;
       source.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
       POB += nations[ v.nat.substring(0, 2) ].name.split(',')[0];
-      if ( v.pob && places[ v.pob ].name && places[ v.pob ].name != nations[ v.nat.substring(0, 2) ].name.split(',')[0]) {
+      if ( v.pob && places[ v.pob ] && places[ v.pob ].name && places[ v.pob ].name != nations[ v.nat.substring(0, 2) ].name.split(',')[0]) {
         POB += ' (born in '+(( places[ v.pob ].name )?places[ v.pob ].name:``)+
           ((places[ v.pob ].nat && nations[ places[ v.pob ].nat.substring(0, 2) ].name && nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0] != nations[ v.nat.substring(0, 2) ].name.split(',')[0] )?
           `, `+nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0]
@@ -672,7 +672,7 @@
     var poet = await load_poet_overview( id );
     var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
     var deathDate = new Date( persons[ id ].dod.replace("T00:00:00Z","").split('-') );
-    var works='', links='<ul style="columns:2;">';
+    var works='', poems='', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
       (poet[id].ernie?`<li><a href="`+poet[id].ernie+`" class="external" target="_blank"><span>ERNiE</span></a>`:``)+
@@ -691,13 +691,25 @@
     }
     links += wiki + wikisource + `</ul>`;
     if ( poet[id].bibl ) {
-      works += `<ul>`;
+      poems += `<ul>`;
       $.each( _.sortBy( poet[id].bibl, 'date' ), function(i,v) {
+        poems += `<li>`+
+          ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
+          `<em>`+v.title+`</em>`+
+          ((v.url)?'</a>':'')+
+          (v.date?` (`+v.date.substring(0,4)+`)`:``)+
+          `</li>`;
+      });
+      poems += `</ul>`;
+    }
+    if ( poet[id].otw ) {
+      works += `<ul>`;
+      $.each( _.sortBy( poet[id].otw, 'date' ), function(i,v) {
         works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
           `<em>`+v.title+`</em>`+
           ((v.url)?'</a>':'')+
-          (v.date?` (`+v.date+`)`:``)+
+          (v.date?` (`+v.date.substring(0,4)+`)`:``)+
           `</li>`;
       });
       works += `</ul>`;
@@ -713,12 +725,12 @@
         (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
           `<li><span>Birth:</span> `+ 
         ((persons[ id ].dob.length == 20 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
-        (persons[ id ].pob?` (`+
-          (( places[ persons[ id ].pob ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pob+`" class="external" target="_blank">`+places[ persons[ id ].pob ].name+`</a>`:``)+
-          ((places[ persons[ id ].pob ].nat && nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name &&
+        (persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name ?` (`+
+          (( places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pob+`" class="external" target="_blank">`+places[ persons[ id ].pob ].name+`</a>`:``)+
+          ((places[ persons[ id ].pob ] && places[ persons[ id ].pob ].nat && nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name &&
             nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name.split(',')[0] != places[ persons[ id ].pob ].name)?
           `, `+nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name.split(',')[0]
-          :``):``)+(persons[ id ].pob?`)`:``)+`</li>`+
+          :``):``)+(persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name?`)`:``)+`</li>`+
           `<li><span>Death:</span> `+ 
         ((persons[ id ].dod.length == 20 && !persons[ id ].dod.includes("-01-01"))?deathDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):deathDate.getFullYear())+
         (persons[ id ].pod?` (`+
@@ -729,8 +741,8 @@
           :``):``)+(persons[ id ].pod?`)`:``)+`</li>`+
         (poet[id].occ?`<li><span>Occupation:</span> `+_.uniq( poet[id].occ ).join("; ")+`</li>`:``)
         +`</ul>`+
-        `<h3>Poems</h3><ul><li>[forthcoming]</li></ul>`+
-        ((poet[id].bibl)?`<h3>Bibliography</h3>`+works:``)+
+        `<h3>Poems</h3>`+((poet[id].bibl)?poems:`<ul><li>[forthcoming]</li></ul>`)+
+        ((poet[id].otw)?`<h3>Bibliography</h3>`+works:``)+
         `<h3>Links</h3>`+links
     );
     sidebar.open('profile');

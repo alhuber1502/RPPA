@@ -26,6 +26,15 @@
         ],
         "coord": "Point(23.67 -30.44)"
     },
+    "EG": {
+        "id": "EG",
+        "name": "Egypt, Arab Republic of",
+        "cont": "AF",
+        "coord": "Point(29.0 27.0)",
+        "lang": [
+            "ar"
+        ]
+    },
     "AM": {
         "id": "AM",
         "name": "Armenia, Republic of",
@@ -51,8 +60,8 @@
         "cont": "AS",
         "coord": "Point(83.0 22.8)",
         "lang": [
-            "en",
-            "hi"
+            "hi",
+            "en"
         ]
     },
     "JP": {
@@ -62,6 +71,15 @@
         "coord": "Point(136.0 35.0)",
         "lang": [
             "ja"
+        ]
+    },
+    "LB": {
+        "id": "LB",
+        "name": "Lebanon, Lebanese Republic",
+        "cont": "AS",
+        "coord": "Point(35.766667 33.833333)",
+        "lang": [
+            "ar"
         ]
     },
     "RU": {
@@ -91,6 +109,15 @@
             "tr"
         ]
     },
+    "AL": {
+        "id": "AL",
+        "name": "Albania, Republic of",
+        "cont": "EU",
+        "coord": "Point(20.0 41.0)",
+        "lang": [
+            "sq"
+        ]
+    },
     "AT": {
         "id": "AT",
         "name": "Austria, Republic of",
@@ -107,8 +134,8 @@
         "coord": "Point(4.668055555 50.641111111)",
         "lang": [
             "fr",
-            "nl",
-            "de"
+            "de",
+            "nl"
         ]
     },
     "BG": {
@@ -350,6 +377,18 @@
             "sv"
         ]
     },
+    "CH": {
+        "id": "CH",
+        "name": "Switzerland, Swiss Confederation",
+        "cont": "EU",
+        "coord": "Point(8.231973 46.798562)",
+        "lang": [
+            "fr",
+            "de",
+            "it",
+            "rm"
+        ]
+    },
     "UA": {
         "id": "UA",
         "name": "Ukraine",
@@ -365,8 +404,8 @@
         "cont": "EU",
         "coord": "Point(21.716667 41.65)",
         "lang": [
-            "sq",
-            "mk"
+            "mk",
+            "sq"
         ]
     },
     "GB": {
@@ -406,6 +445,13 @@
             "es"
         ]
     },
+    "DO": {
+        "id": "DO",
+        "name": "Dominican Republic",
+        "cont": "NA",
+        "lang": [],
+        "coord": "Point(-70.2 18.8)"
+    },
     "SV": {
         "id": "SV",
         "name": "El Salvador, Republic of",
@@ -432,6 +478,15 @@
         "lang": [
             "es"
         ]
+    },
+    "MQ": {
+        "id": "MQ",
+        "name": "Martinique",
+        "cont": "NA",
+        "lang": [
+            "fr"
+        ],
+        "coord": "Point(-61.015 14.65)"
     },
     "MX": {
         "id": "MX",
@@ -488,6 +543,18 @@
             "es"
         ]
     },
+    "BO": {
+        "id": "BO",
+        "name": "Bolivia, Republic of",
+        "cont": "SA",
+        "coord": "Point(-64.991228611 -17.056869611)",
+        "lang": [
+            "ay",
+            "es",
+            "qu",
+            "gn"
+        ]
+    },
     "BR": {
         "id": "BR",
         "name": "Brazil, Federative Republic of",
@@ -495,6 +562,15 @@
         "coord": "Point(-53.0 -14.0)",
         "lang": [
             "pt"
+        ]
+    },
+    "CL": {
+        "id": "CL",
+        "name": "Chile, Republic of",
+        "cont": "SA",
+        "coord": "Point(-71.0 -33.0)",
+        "lang": [
+            "es"
         ]
     },
     "CO": {
@@ -530,9 +606,9 @@
         "cont": "SA",
         "coord": "Point(-76.0 -9.4)",
         "lang": [
-            "es",
             "qu",
-            "ay"
+            "ay",
+            "es"
         ]
     },
     "UY": {
@@ -553,36 +629,60 @@
             "es"
         ]
     },
+    "IR": {
+        "coord": "Point(53.0 32.0)",
+        "lang": [
+            "Q9168"
+        ]
+    },
+    "DZ": {
+        "coord": "Point(1.0 28.0)",
+        "lang": [
+            "Q61053330",
+            "Q13955"
+        ]
+    },
+    "JE": {
+        "coord": "Point(-2.11 49.19)",
+        "lang": [
+            "Q56430",
+            "Q2047043",
+            "Q1860"
+        ]
+    },
+    "MG": {
+        "coord": "Point(47.0 -20.0)",
+        "lang": [
+            "Q7930",
+            "Q150"
+        ]
+    },
+    "GH": {
+        "coord": "Point(-0.5 8.0)",
+        "lang": [
+            "Q1860"
+        ]
+    },
     "AZ": {
         "coord": "Point(47.7 40.3)",
         "lang": [
             "Q9292"
         ]
     },
-    "CH": {
-        "coord": "Point(8.231973 46.798562)",
+    "BD": {
+        "coord": "Point(89.866667 24.016667)",
         "lang": [
-            "Q652",
-            "Q13199",
-            "Q188",
-            "Q150"
-        ]
-    },
-    "CL": {
-        "coord": "Point(-71.0 -33.0)",
-        "lang": [
-            "Q1321"
-        ]
-    },
-    "DZ": {
-        "coord": "Point(1.0 28.0)",
-        "lang": [
-            "Q13955",
-            "Q61053330"
+            "Q9610"
         ]
     },
     "BZ": {
         "coord": "Point(-88.7 17.066666666)",
+        "lang": [
+            "Q1860"
+        ]
+    },
+    "LC": {
+        "coord": "Point(-60.966666666 13.883333333)",
         "lang": [
             "Q1860"
         ]
@@ -593,29 +693,17 @@
             "Q1860"
         ]
     },
-    "GD": {
-        "coord": "Point(-61.666667 12.116667)",
-        "lang": [
-            "Q4252500",
-            "Q1860"
-        ]
-    },
-    "LC": {
-        "coord": "Point(-60.966666666 13.883333333)",
-        "lang": [
-            "Q1860"
-        ]
-    },
     "JM": {
         "coord": "Point(-77.4 18.18)",
         "lang": [
             "Q1860"
         ]
     },
-    "DO": {
-        "coord": "Point(-70.2 18.8)",
+    "GD": {
+        "coord": "Point(-61.666667 12.116667)",
         "lang": [
-            "Q1321"
+            "Q1860",
+            "Q4252500"
         ]
     },
     "HT": {
@@ -631,56 +719,29 @@
             "Q1860"
         ]
     },
-    "NI": {
-        "coord": "Point(-85.0 13.0)",
-        "lang": [
-            "Q1321"
-        ]
-    },
     "PA": {
         "coord": "Point(-80.366667 8.616667)",
         "lang": [
             "Q1321"
         ]
     },
-    "BD": {
-        "coord": "Point(89.866667 24.016667)",
+    "NI": {
+        "coord": "Point(-85.0 13.0)",
         "lang": [
-            "Q9610"
-        ]
-    },
-    "JE": {
-        "coord": "Point(-2.11 49.19)",
-        "lang": [
-            "Q1860",
-            "Q56430",
-            "Q2047043"
-        ]
-    },
-    "IR": {
-        "coord": "Point(53.0 32.0)",
-        "lang": [
-            "Q9168"
-        ]
-    },
-    "MG": {
-        "coord": "Point(47.0 -20.0)",
-        "lang": [
-            "Q150",
-            "Q7930"
-        ]
-    },
-    "GH": {
-        "coord": "Point(-0.5 8.0)",
-        "lang": [
-            "Q1860"
+            "Q1321"
         ]
     },
     "MD": {
         "coord": "Point(28.516667 47.25)",
         "lang": [
-            "Q36392",
-            "Q7913"
+            "Q7913",
+            "Q36392"
+        ]
+    },
+    "IL": {
+        "coord": "Point(35.0 31.0)",
+        "lang": [
+            "Q9288"
         ]
     }
 }
