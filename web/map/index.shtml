@@ -743,7 +743,7 @@
         +`</ul>`+
         `<h3>Poems</h3>`+((poet[id].bibl)?poems:`<ul><li>[forthcoming]</li></ul>`)+
         ((poet[id].otw)?`<h3>Bibliography</h3>`+works:``)+
-        `<h3>Links</h3>`+links
+        ((links != '<ul style="columns:2;"></ul>')?`<h3>Links</h3>`+links:``)
     );
     sidebar.open('profile');
     // update country in background
