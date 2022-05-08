@@ -422,8 +422,8 @@
   continents[ "OC" ] = { id: "OC", name: "Oceania", coord: "Point(145 -30)" };
 
   // start with whole network
-  var startyr = 1760;
-  var endyr = 1880;
+  var startyr = 1770;
+  var endyr = 1905;
 
   // initialize map view
   var lat = Math.floor(Math.random() *  (70  - -50  + 1)) + -50;  // max 70,  min -50
