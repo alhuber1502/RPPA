@@ -1,0 +1,57 @@
+{
+    "@context" : {
+
+	"rppa"     : "https://www.romanticperiodpoetry.org/rppa/",
+
+	"rdf"      : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+	"rdfs"     : "http://www.w3.org/2000/01/rdf-schema#",
+	"xs"       : "http://www.w3.org/2001/XMLSchema#",
+	"owl"      : "http://www.w3.org/2002/07/owl#",
+	"link"     : "http://www.w3.org/2007/ont/link#",
+	"cnt"	   : "http://www.w3.org/2011/content#",
+
+	"crm"      : "http://www.cidoc-crm.org/cidoc-crm/",
+	"crminf"   : "http://www.ics.forth.gr/isl/CRMinf/",
+	"crmsci"   : "http://www.ics.forth.gr/isl/CRMsci/",
+	"crmdig"   : "http://www.ics.forth.gr/isl/CRMdig/",
+	"lrmoo"    : "http://iflastandards.info/ns/lrm/lrmoo/",
+
+	"pdc"      : "http://postdata.linhd.uned.es/ontology/postdata-core#",
+	"pdt"      : "http://postdata.linhd.uned.es/ontology/postdata-transmission#",
+	"pdp"      : "http://postdata.linhd.uned.es/ontology/postdata-poeticAnalysis#",
+
+	"dcterm"   : "http://purl.org/dc/terms/",
+	"skos"     : "http://www.w3.org/2004/02/skos/core#",
+	"foaf"     : "http://xmlns.com/foaf/0.1/",
+	"viaf"     : "http://viaf.org/viaf/",
+	"bf"	   : "http://id.loc.gov/ontologies/bibframe/",
+
+	"wd"       : "http://www.wikidata.org/entity/",
+	"wdt"      : "http://www.wikidata.org/prop/direct/",
+
+	"lcs"      : "http://id.loc.gov/authorities/subjects/",
+	"lcn"      : "http://id.loc.gov/authorities/names/",
+	"lcf"      : "http://id.loc.gov/vocabulary/mencformat/",
+	"lcr"      : "http://id.loc.gov/vocabulary/relators/",
+	"lct"      : "http://id.loc.gov/vocabulary/resourceTypes/",
+	"lcg"      : "http://id.loc.gov/authorities/genreForms/",
+
+	"sc"	   : "http://iiif.io/api/presentation/2#",
+	"as"	   : "http://www.w3.org/ns/activitystreams#",
+
+	"fts"	   : "http://www.bigdata.com/rdf/fts#",
+	"bds"	   : "http://www.bigdata.com/rdf/search#",
+
+	"id"	   : "@id",
+	"type"	   : "@type",
+	"graph"	   : "@graph",
+
+	"lrmoo:R71_specifies_material_part"  : { "@container": "@set" },
+	"crm:P106_is_composed_of"	     : { "@container": "@set" },
+	"crm:P70i_is_documented_in"	     : { "@container": "@set" },
+	"lrmoo:R3_is_realised_in"	     : { "@container": "@set" },
+	"lrmoo:R3i_realises"	     	     : { "@container": "@set" },
+	"crmdig:L1_digitized"		     : { "@container": "@set" }
+
+    }
+}
