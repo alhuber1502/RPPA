@@ -389,6 +389,7 @@
             Alexander Huber, Editor<br>
           <ul style="list-style:none;padding:0 15px;">
             <li style="height:25px;"><span>E-mail:</span> <a href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
+            <li style="height:25px;"><span>Facebook:</span> <a target="_blank" href="https://www.facebook.com/RomanticPeriodPoetryArchive" class="external">@RomanticPeriodPoetryArchive</a>
             <li style="height:25px;"><span>Twitter:</span> <a target="_blank" href="https://twitter.com/C18AH" class="external">@C18AH</a>
             <li style="height:25px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
               class="external">http://users.ox.ac.uk/~bodl0153/</a>
@@ -690,21 +691,34 @@
       }
     }
     links += wiki + wikisource + `</ul>`;
-    if ( poet[id].bibl ) {
-      poems += `<ul>`;
-      $.each( _.sortBy( poet[id].bibl, 'date' ), function(i,v) {
+    // available global texts
+    if ( poet[id].texts && poet[id].texts.poems.length > 0 ) {
+      poems += `<ul style="columns:2;column-gap:2rem;">`;
+      $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
+//          `<a href="/id/`+v.work+`" onclick="return display_globaltext('`+v.work+`')">`+
+          `<em>`+v.title+`</em>`+
+//          '</a>'+
+          (v.date?` (`+v.date.substring(0,4)+`)`:``)+
+          `</li>`;
+      });
+      poems += `</ul>`;
+    }
+    // select bibliography
+    if ( poet[id].otw ) {
+      works += `<ul>`;
+      $.each( _.sortBy( poet[id].otw, 'date' ), function(i,v) {
+        works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
           `<em>`+v.title+`</em>`+
           ((v.url)?'</a>':'')+
           (v.date?` (`+v.date.substring(0,4)+`)`:``)+
           `</li>`;
       });
-      poems += `</ul>`;
-    }
-    if ( poet[id].otw ) {
+      works += `</ul>`;
+    } else if ( poet[id].bibl ) {
       works += `<ul>`;
-      $.each( _.sortBy( poet[id].otw, 'date' ), function(i,v) {
+      $.each( _.sortBy( poet[id].bibl, 'date' ), function(i,v) {
         works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
           `<em>`+v.title+`</em>`+
@@ -739,10 +753,10 @@
             nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name.split(',')[0] != places[ persons[ id ].pod ].name)?
           `, `+nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name.split(',')[0]
           :``):``)+(persons[ id ].pod?`)`:``)+`</li>`+
-        (poet[id].occ?`<li><span>Occupation:</span> `+_.uniq( poet[id].occ ).join("; ")+`</li>`:``)
+        (poet[id].occ?`<li><span>Occupation:</span> `+_.uniq( poet[id].occ.sort() ).join("; ")+`</li>`:``)
         +`</ul>`+
-        `<h3>Poems</h3>`+((poet[id].bibl)?poems:`<ul><li>[forthcoming]</li></ul>`)+
-        ((poet[id].otw)?`<h3>Bibliography</h3>`+works:``)+
+        `<h3>Poems</h3>`+((poet[id].texts && poet[id].texts.poems.length > 0)?poems:`<ul><li>[forthcoming]</li></ul>`)+
+        ((poet[id].otw  || poet[id].bibl)?`<h3>Select bibliography</h3>`+works:``)+
         ((links != '<ul style="columns:2;"></ul>')?`<h3>Links</h3>`+links:``)
     );
     sidebar.open('profile');
