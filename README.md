@@ -14,7 +14,7 @@ period and its contexts in other literatures, philosophy, the arts,
 science, religion, economics, politics, popular culture, theatre, 
 newspapers, and many more relevant contexts.
 
-## [Methodology](http://www.romanticperiodpoetry.org/about/#methodology)
+## Methodology
 * transcription and descriptive markup
 * multilingual DH
 * poetic analysis
