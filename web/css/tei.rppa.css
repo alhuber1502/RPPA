@@ -1,0 +1,618 @@
+.h1, h1 {
+    font-size: 1.5rem;
+    line-height: 1.8em;
+}
+.h2, h2 {
+    font-size: 1.4rem;
+    line-height: 1.7em;
+}
+.h3, h3 {
+    font-size: 1.3rem;
+    line-height: 1.6em;
+}
+.h4, h4 {
+    font-size: 1.2rem;
+    line-height: 1.5em;
+}
+.h5, h5 {
+    font-size: 1.1rem;
+    line-height: 1.4em;
+}
+.h6, h6 {
+    font-size: 1rem;
+    line-height: 1.3em;
+}
+
+.titlem, .titles, .titlej {
+    font-style: italic;
+}
+.titlea:before, .titlea:after {
+    content:'"';
+}
+
+/* drop letter */
+.text span.decorInit,
+.text span.decoratedInitial {
+    display: block;
+}
+
+/* head section */
+.text h1 {
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 1.4em;
+}
+.text h1.titlem {
+    font-style: normal;
+}
+.title_page {
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+
+/* lg indent and/or vertical space */
+.text div.lg.lgindent div[class="line"]:first-of-type span.l {
+    text-indent: 1em;
+}
+.text div.lgvspace {
+    margin-bottom: 1em;
+}
+.text div.lg {
+    margin-bottom: 1em;
+}
+
+#myScrollspy {
+    position: fixed;
+}
+.input-group-addon {
+    background-color:#eee;
+    border-radius: 5px 0 0 5px;
+}
+.input-group-addon label {
+    margin-top: 8px;
+}
+/* line numbers */
+.text .ln {
+    font-size: .85em;
+    float: right;
+    color: #FFF;
+    font-style: normal;
+}
+.text .ln.rend {
+    color: inherit;
+}
+
+.text .castList {
+    width: 75%;
+}
+.text ul,
+.myXML ul {
+    list-style-type: none;
+}
+.text li {
+    padding-bottom: 5px;
+}
+ul.textstructure {
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0 0 0 18px;
+}
+ul.bibliography {
+    padding: 5px 0 0 18px;
+}
+ul.bibliography div.biblfree {
+    display: inline;
+}
+.bibl {
+    text-indent: -1.2em;
+    margin-left: 1.2em;
+}
+li span.bibl {
+    margin-left: -1em;
+}
+
+/* block full-text spans */
+.text div.lg > div span.l, 
+.text div.sp > div span.l {
+    display: initial;
+}
+.text .castList {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text div.lg > div span.l,
+.text div.sp > div span.l {
+    width: auto; /* <--- adapt this dynamically as an inline style to create center block for full-text */
+}
+
+/* highlight poem lines */
+/*
+.text div.line:hover *:not(a):not(sup):not(i) {
+    color: #000;
+    background-color: #F7F7F7;
+}
+*/
+
+/* highlight w/pc */
+/*
+.text div.line span.l span.w:hover,
+.text div.line span.l span.pc:hover
+{
+    color: #fff;
+    background-color: #f7f7f7;
+}
+*/
+.highlight {
+    color: #fff;
+    background-color: #f7f7f7;
+    display:inline;
+}
+
+/* pagebreaks */
+.text a[onclick] {
+    font-size: .85em;
+    display: block;
+    text-align: right;
+    font-style: normal;
+    padding:1em 0;
+}
+.about a[onclick] {
+    font-size: .85em;
+    display: inline;
+    text-align: right;
+    font-style: normal;
+    padding:1em 0;
+}
+/* gap */
+.text .gap {
+/*    display: inline !important;*/
+}
+
+/* byline, figure */
+.text .byline, .text .figure {
+    display: block;
+    padding-bottom: 10px;
+}
+.text .figure {
+    text-align: center;
+    font-size: 13px;
+}
+
+.text .aside {
+    font-size: 13px;
+}
+
+.text .notemarginRight {
+    float: right !important;
+    min-width: 150px;
+    width: 20%;
+    padding: 3px 0 3px 5px;
+    margin: 3px 0 3px 5px;
+    font-size: 13px;
+    clear: right;
+    border-left: gray dashed 1px !important;
+    border-top: gray dashed 1px !important;
+    border-bottom: gray dashed 1px !important;
+}
+.text .notemarginLeft {
+    float: left !important;
+    min-width: 150px;
+    width: 20%;
+    padding: 3px 5px 3px 0;
+    margin: 3px 5px 3px 0;
+    font-size: 13px;
+    clear: left;
+    border-right: gray dashed 1px !important;
+    border-top: gray dashed 1px !important;
+    border-bottom: gray dashed 1px !important;
+}
+
+.text div.note {
+    border-width: 1px;
+    border-style: dotted none;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 2px;
+    font-variant: normal;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+}
+
+.text div.note[id^="app_"] {
+    border-width: 1px;
+    border-style: dashed none;
+}
+
+.text .head, .text .head-part, .text .head-stanza, .text .stage, .text .trailer {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: block;
+}
+.text .stage {
+    font-variant: all-small-caps;
+}
+.text .trailer {
+    margin-bottom: 10px;
+}
+.text .head-part {
+    margin-top: 10px;
+    font-size: 1.1em;
+    line-height: 1.3em;
+}
+.about .head-part {
+    margin-top: 10px;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    text-align: left;
+}
+.text .head-stanza {
+    font-size: 1em;
+}
+.text .sub {
+    margin-top: 0px;
+}
+.hi {
+    font-style: italic;
+}
+.h_15 { margin-left: 15em !important; }
+.h_8 { margin-left: 8em !important; }
+.h_0 { margin-left: 0 !important; text-indent: 0 !important; }
+
+.text a.notelink sup {
+    color: #fff;
+    background-color: #f7f7f7;
+    padding-right:1px;
+    padding-left:1px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+}
+.text a.notelink {
+    text-decoration: none;
+}
+
+.text blockquote {
+    border: 0;
+    font-size: 1em;
+    margin: 0;
+    padding: 10px 20px 0 20px;
+}
+
+/* uses flex to reorder elements in authors */
+.portrait {
+    float: right;
+    max-width: 400px;
+    margin: 0 0 20px 20px;
+}
+
+.portrait .figure {
+    display: flex;
+    flex-direction: column;
+}
+
+img.graphic {
+    max-width:100%;
+}
+
+.portrait .figure img {
+    order: 1;
+    max-width: 100%;
+    height: auto;
+}
+.portrait .figure figcaption {
+    order: 2;
+}
+.portrait .figure p {
+    order: 3;
+}
+.carousel-caption {
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.4),
+     -4px -4px 8px rgba(0,0,0,0.4);
+    
+}
+.portrait {
+/*    max-width: 400px !important; */
+}
+.tools .info,
+.about .info,
+.downloads h1.info {
+    text-align:left;
+    font-size:1.3em
+}
+.downloads h2.info {
+    text-align:left;
+    font-size:1.15em
+}
+.text .twocols {
+    columns: 2;
+    column-fill: auto;
+}
+
+a > .expan::before, .ex::after, .expan::after {
+    content: ' ';
+}
+.ex {
+    font-style:italic;
+}
+[id ^= 'popover'],
+[id ^= 'tooltip']
+ {
+/*    z-index: 1 !important;*/
+    font-size: .85rem;
+}
+.citbibl:before {
+    content: '—';
+}
+.citbibl {
+    display: block;
+}
+mjx-container[jax="CHTML"][display="true"] {
+    display: initial !important;
+}
+
+.item-tools a {
+    font-size: .9rem;
+}
+/*
+#results_main img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 125px;
+  margin-right: 10px;
+}
+*/
+#ent_results_main,
+#results_main,
+#objects_main {
+    margin-left: 15px;
+}
+#ent_results_main img:hover,
+#results_main img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+#ent_results_main ol li h3,
+#results_main ol li h3,
+#objects_main ul li h3 {
+    margin-top:5px;
+    margin-bottom:0px;
+    display: inherit;
+}
+#ent_results_main ol li,
+#results_main ol li,
+#objects_main ul li {
+    border-bottom: 1px solid rgba(190,190,188,0.4);
+    padding: 10px 0 15px 5px;
+    clear: both;
+    text-indent: unset;
+    width:100%;
+}
+#ent_results_main ol li div div span,
+#results_main ol li div div span,
+#objects_main ul li div div span {
+/*    font-weight: 600;*/
+}
+#ent_results_main ol li div.item-desc,
+#results_main ol li div.item-desc,
+#objects_main ul li div.item-desc {
+    display:block;
+}
+.item-desc div {
+    text-indent: -1.5rem;
+    margin-left: 1.5rem;
+}
+.item-desc .item-tools,
+.item-desc .snippets,
+.item-desc .snippet {
+    text-indent: unset;
+    margin-left: unset;
+}
+#ent_results_main ol li div.item-tools ul,
+#results_main ol li div.item-tools ul,
+#objects_main ul li div.item-tools ul {
+    padding: 10px 15px 0 0;
+}
+#ent_results_main ol li div.item-tools li,
+#results_main ol li div.item-tools li,
+#objects_main ul li div.item-tools li {
+    border: 0;
+    padding: 3px 10px 3px 0;
+    display: inline;
+}
+#ent_results_main ol li div div,
+#results_main ol li div div,
+#objects_main ul li div div {
+    font-size: .9rem;
+}
+#ent_results_main h3,
+#results_main h3,
+#objects_main h3 {
+    font-size: 1.1rem;
+    line-height: 1.4em;    
+}
+#ent_filters_main ul li .facet_label,
+#filters_main ul li .facet_label {
+    width:100%;
+    text-align: left;
+    margin-left: 3px;
+}
+#ent_filters_main ul li .facet_count,
+#filters_main ul li .facet_count {
+    width: 50px;
+    text-align: right;
+}
+#ent_filters_main ul li,
+#filters_main ul li {
+    text-indent: unset;
+    display: flex;
+    width: 100%;
+}
+#ent_filters_main div.collapse {
+    margin-top: 5px;
+    max-height: 80vh;
+    overflow: auto;
+}
+#filters_main div.collapse {
+    max-height: 180px;
+    overflow: auto;
+    margin-top: 5px;
+}
+#ent_filters_main a[role],
+#filters_main a[role] {
+    width:100%;
+    background-color:#f3f3f3;
+}
+#ent_filters_main .collapsing,
+#filters_main .collapsing {
+    max-height: 180px !important;
+}
+#ent_filters_main .filter,
+#filters_main .filter {
+    margin-bottom: 10px;
+}
+#ent_filters_main .facet_delete,
+#filters_main .facet_delete {
+    display: block;
+}
+#ent_filters_header,
+#filters_header {
+    margin-bottom: 15px;
+}
+
+#advsearch .input-group span {
+    min-width: 210px;
+    text-align: left;
+    padding-left: 10px;
+}
+#advsearch .input-group input {
+    max-width: 1500px;
+}
+#advsearch .input-group {
+    margin: 10px 0 15px 25px;
+    display: flex;
+}
+#advanced_search .panel-body {
+    position:unset;
+    padding-bottom:unset;
+}
+#advanced_search .panel {
+    margin-top:63px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    padding:10px;
+    margin-left:20px;
+}
+#advsearch button:not(.close) {
+    margin-top:10px;
+}
+.advanced-help {
+    padding-top: 10px;
+}
+.advanced-help li {
+    padding: 3px 0;
+}
+#advsearch .input-group-addon {
+    line-height: 1.4;
+}
+#ent_results_main .item-desc span.snippet,
+#results_main .snippets .listBibl li span {
+   /* display: inline-block;*/
+    background-color: #ffc;
+    padding: 0 3px;
+}
+#ent_results_main .snippets .listBibl li,
+#results_main .snippets .listBibl li {
+    padding:0;
+    border-bottom:unset;
+    list-style: none;
+}
+
+#editions section .row > div.col-xs-8 {
+    border: unset;
+}
+
+#home #simsearch {
+    margin: 25px auto 15px auto;
+    width: 85%;
+}
+#home #simsearch > .input-group {
+/*   width:50%;*/
+}
+#editions #simsearch {
+    padding-bottom:20px;
+    border-bottom: 1px solid #ddd;
+}
+#results {
+    margin-top:15px;
+}
+#filters {
+    margin-top:32px;
+}
+.modal-body #filters {
+    margin-top: -5px;
+}
+#myeditions {
+    margin-top: 5px;
+    font-size:14px;
+}
+#editions #simsearch > .input-group {
+    width:85%;
+}
+.sync-pagination {
+  height: 40px;
+  max-height: 40px;
+  border:1px;
+  border-style:solid;
+  border-color:#ddd;
+  text-align: center;
+}
+.sync-pagination {
+  border: 0;
+  margin:auto;
+}
+#ent_results>.sync-pagination,
+#results>.sync-pagination {
+  margin-bottom: 15px;    
+}
+#results_header .dropdown-menu > li > a {
+    color: unset;
+    width: 100%;
+    display: inline-block;
+}
+.btn {
+    border: 1px solid #999; 
+}
+.page-link {
+    padding: .5rem 0;
+    min-width: 40px;
+    min-height: 40px;
+    color: rgb(12, 128, 161);
+}
+.page-item.active .page-link {
+    z-index: 0;
+    background-color: #085a72;;
+    border-color: unset;
+}
+.bootstrap-select.btn-group .dropdown-menu {
+  background-color: yellow;
+}
+.custom-select {
+    width: unset;
+}
+.modal-header, .modal-footer {
+    padding: .4rem 1rem;
+    background-color: #f5f5f5;
+}
+.modal-body {
+    height: inherit;
+    width: inherit;
+}
+.k-card-subtitle .add_instance,
+.k-card-subtitle .show_object {
+    font-size:16px;
+}
