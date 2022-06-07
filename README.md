@@ -23,7 +23,7 @@ newspapers, and many more relevant contexts.
 
 ## Web Technologies
 * HTML5/CSS3
-* Bootstrap 4
+* Bootstrap 5
 * JavaScript/jQuery3
 * JSON
 
