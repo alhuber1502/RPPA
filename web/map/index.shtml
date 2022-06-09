@@ -673,8 +673,8 @@
 
   async function poet_profile( id ) {
     var poet = await load_poet_overview( id );
-    var birthDate = new Date( persons[ id ].dob.split('-') );
-    var deathDate = new Date( persons[ id ].dod.split('-') );
+    var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
+    var deathDate = new Date( persons[ id ].dod.replace("T00:00:00Z","").split('-') );
     var works='', poems='', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
@@ -740,7 +740,7 @@
         (persons[ id ].sex?`<li><span>Gender:</span> `+(persons[ id ].sex == 'm'?`male`:`female`):``)+`</li>`+
         (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
           `<li><span>Birth:</span> `+ 
-        ((persons[ id ].dob.length == 10 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
+        ((persons[ id ].dob.length == 20 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
         (persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name ?` (`+
           (( places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pob+`" class="external" target="_blank">`+places[ persons[ id ].pob ].name+`</a>`:``)+
           ((places[ persons[ id ].pob ] && places[ persons[ id ].pob ].nat && nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name &&
@@ -748,7 +748,7 @@
           `, `+nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name.split(',')[0]
           :``):``)+(persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name?`)`:``)+`</li>`+
           `<li><span>Death:</span> `+ 
-        ((persons[ id ].dod.length == 10 && !persons[ id ].dod.includes("-01-01"))?deathDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):deathDate.getFullYear())+
+        ((persons[ id ].dod.length == 20 && !persons[ id ].dod.includes("-01-01"))?deathDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):deathDate.getFullYear())+
         (persons[ id ].pod?` (`+
           (( places[ persons[ id ].pod ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pod+`" class="external" target="_blank">`+places[ persons[ id ].pod ].name+`</a>`:``)+
           ((places[ persons[ id ].pod ].nat && nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name &&
