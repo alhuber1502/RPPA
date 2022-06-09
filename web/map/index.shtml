@@ -88,22 +88,22 @@
           <div class="controls continents" style="margin-top:15px;">
             <h2>Filter by locations</h2>
             <input id="AF" value="AF" class="checkbox cont" type="checkbox" checked/>
-            <label for="AF">Africa &nbsp;<a href="#cont-AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Africa</span></a></label>
+            <label for="AF">Africa &nbsp;<a href="#continent/AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Africa</span></a></label>
             <div data-id="AF"></div>
             <input id="NA" value="NA" class="checkbox cont" type="checkbox" checked/>
-            <label for="NA">North America &nbsp;<a href="#cont-NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 42)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
+            <label for="NA">North America &nbsp;<a href="#continent/NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 42)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
             <div data-id="NA"></div>
             <input id="SA" value="SA" class="checkbox cont" type="checkbox" checked/>
-            <label for="SA">South America &nbsp;<a href="#cont-SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">South America</span></a></label>
+            <label for="SA">South America &nbsp;<a href="#continent/SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">South America</span></a></label>
             <div data-id="SA"></div>
             <input id="AS" value="AS" class="checkbox cont" type="checkbox" checked/>
-            <label for="AS">Asia &nbsp;<a href="#cont-AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(100 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
+            <label for="AS">Asia &nbsp;<a href="#continent/AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(100 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
             <div data-id="AS"></div>
             <input id="EU" value="EU" class="checkbox cont" type="checkbox" checked/>
-            <label for="EU">Europe &nbsp;<a href="#cont-EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Europe</span></a></label>    
+            <label for="EU">Europe &nbsp;<a href="#continent/EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Europe</span></a></label>    
             <div data-id="EU"></div>     
             <input id="OC" value="OC" class="checkbox cont" type="checkbox" checked/>
-            <label for="OC">Oceania &nbsp;<a href="#cont-OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Oceania</span></a></label>  
+            <label for="OC">Oceania &nbsp;<a href="#continent/OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Oceania</span></a></label>  
             <div data-id="OC"></div>   
           </div>
       </div>
@@ -503,7 +503,7 @@
     $.each( natbycont , function( i,v ) {
       var cont = "<ul style='columns:3;margin-bottom:.5rem;'>";
       $.each( _.sortBy( v, 'name' ), function( i2,v2 ) {
-        cont += "<li><a href='#coun-"+v2.id+"' class='country-focus' data-cont='"+v2.cont+"' data-count='"+v2.id+"' data-coord='"+v2.coord+"'>"+v2.name.split(',')[0]+"</a></li>";
+        cont += "<li><a href='#country/"+v2.id+"' class='country-focus' data-cont='"+v2.cont+"' data-count='"+v2.id+"' data-coord='"+v2.coord+"'>"+v2.name.split(',')[0]+"</a></li>";
       });
       cont += "</ul>";
       $( "#home .continents div[data-id='"+i+"']" ).html( cont )
@@ -673,8 +673,8 @@
 
   async function poet_profile( id ) {
     var poet = await load_poet_overview( id );
-    var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
-    var deathDate = new Date( persons[ id ].dod.replace("T00:00:00Z","").split('-') );
+    var birthDate = new Date( persons[ id ].dob.split('-') );
+    var deathDate = new Date( persons[ id ].dod.split('-') );
     var works='', poems='', links='<ul style="columns:2;">';
     links += 
       (poet[id].ecpa?`<li><a href="`+poet[id].ecpa+`" class="external" target="_blank"><span>ECPA</span></a>`:``)+
@@ -734,13 +734,13 @@
       `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
         ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="`+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
         `<h3>Biographical details</h3><ul><li><span>Country:</span> 
-        <a href='#coun-`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
+        <a href='#country/`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
         data-count='`+persons[ id ].nat.substring(0,2)+`' data-coord='`+nations[ persons[ id ].nat.substring(0,2) ].coord+`'>`+
         nations[ persons[ id ].nat.substring(0,2) ].name.split(',')[0]+`</a></li>`+
         (persons[ id ].sex?`<li><span>Gender:</span> `+(persons[ id ].sex == 'm'?`male`:`female`):``)+`</li>`+
         (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
           `<li><span>Birth:</span> `+ 
-        ((persons[ id ].dob.length == 20 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
+        ((persons[ id ].dob.length == 10 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
         (persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name ?` (`+
           (( places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pob+`" class="external" target="_blank">`+places[ persons[ id ].pob ].name+`</a>`:``)+
           ((places[ persons[ id ].pob ] && places[ persons[ id ].pob ].nat && nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name &&
@@ -748,7 +748,7 @@
           `, `+nations[ places[ persons[ id ].pob ].nat.substring(0, 2) ].name.split(',')[0]
           :``):``)+(persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name?`)`:``)+`</li>`+
           `<li><span>Death:</span> `+ 
-        ((persons[ id ].dod.length == 20 && !persons[ id ].dod.includes("-01-01"))?deathDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):deathDate.getFullYear())+
+        ((persons[ id ].dod.length == 10 && !persons[ id ].dod.includes("-01-01"))?deathDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):deathDate.getFullYear())+
         (persons[ id ].pod?` (`+
           (( places[ persons[ id ].pod ].name )?`<a href="https://www.wikidata.org/wiki/`+persons[ id ].pod+`" class="external" target="_blank">`+places[ persons[ id ].pod ].name+`</a>`:``)+
           ((places[ persons[ id ].pod ].nat && nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name &&
@@ -768,7 +768,7 @@
 
   function update_country( country ) {
     var overview = `<h2>`+nations[ country ].name.split(',')[0]+`, `+
-      `<a href="#cont-`+continents[ nations[ country ].cont ].id+`" class='cont-focus' data-cont="`+continents[ nations[ country ].cont ].id+`" 
+      `<a href="#continent/`+continents[ nations[ country ].cont ].id+`" class='cont-focus' data-cont="`+continents[ nations[ country ].cont ].id+`" 
       data-name="`+continents[ nations[ country ].cont ].name+`" data-coord="`+continents[ nations[ country ].cont ].coord+`">`+
       continents[ nations[ country ].cont ].name+`</a> (`+
       _.filter( persons, function(record){ return record.nat.substring(0,2) == country } ).length+` `+
@@ -804,7 +804,7 @@
     $.each( _.sortBy( poets, 'name' ), function( i,v ) {
       var birthDate = new Date( v.dob );
       var deathDate = new Date( v.dod );
-      return_poets += `<li><a href='#id-`+v.id+`' class='poet-focus' data-id='`+v.id+`'>`+v.name+` 
+      return_poets += `<li><a href='#id/`+v.id+`' class='poet-focus' data-id='`+v.id+`'>`+v.name+` 
         (`+birthDate.getFullYear()+`–`+deathDate.getFullYear()+`)</a></li>`;
     });
     return_poets += "</ul>";
@@ -842,19 +842,19 @@
   });
 
   function checkPath() {
-    var hash = location.href.substring( location.href.indexOf("-")+1 ), source;
-    switch ( location.href.substring( location.href.indexOf("#"), location.href.indexOf("-")+1 ) ) {
-      case "#id-":
+    var hash = location.hash.substring( location.hash.indexOf("/")+1 ), source;
+    switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
+      case "#id/":
         poet_profile( hash );
         markers[ hash ].fire('click');
         source = nations[ persons[ hash ].nat.substring(0, 2) ].coord;
         break;
-      case "#cont-":
+      case "#continent/":
         $( "#location .results" ).html( update_continent( hash ) );
         sidebar.open('location');
         source = continents[ hash ].coord;
       break;
-      case "#coun-":
+      case "#country/":
         $( "#location .results" ).html( update_country( hash ) );
         sidebar.open('location');
         source = nations[ hash ].coord;
@@ -864,7 +864,7 @@
       // pan to target
       var coords = [];
       source.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
-      map.setView( [coords[1], coords[0]], (location.href.substring( location.href.indexOf("#"), location.href.indexOf("-")+1 ).includes( "#cont-" )?4:5) );
+      map.setView( [coords[1], coords[0]], (location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ).includes( "#continent/" )?4:5) );
     }
   }
 
@@ -916,14 +916,14 @@
 
     oms.addListener('click', function(marker) {
       poet_profile( marker._icon.id );
-      window.location.hash = "#id-"+marker._icon.id;
+      window.location.hash = "#id/"+marker._icon.id;
     });
     oms.addListener('spiderfy', function(markers) {
       $.each( markers, function(i,v) {
         var popup = v.getPopup();
         if ( popup.isOpen() ) {
           poet_profile( v._icon.id );
-          window.location.hash = "#id-"+v._icon.id;
+          window.location.hash = "#id/"+v._icon.id;
           return false;
         }
       });
