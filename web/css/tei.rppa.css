@@ -73,13 +73,12 @@
     margin-top: 8px;
 }
 /* line numbers */
-.text .ln {
+.text .numbering {
     font-size: .85em;
     float: right;
-    color: #FFF;
     font-style: normal;
 }
-.text .ln.rend {
+.text .numbering.rend {
     color: inherit;
 }
 
