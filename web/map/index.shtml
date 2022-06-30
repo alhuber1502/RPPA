@@ -429,7 +429,7 @@
   var endyr = 1900;
 
   // initialize map view
-  var lat = Math.floor(Math.random() *  (70  - -50  + 1)) + -50;  // max 70,  min -50
+  var lat = Math.floor(Math.random() *  (80  - -50  + 1)) + -50;  // max 80,  min -50
   var lon = Math.floor(Math.random() *  (180 - -180 + 1)) + -180; // max 180, min -180
   var zoom = Math.floor(Math.random() * (4   - 4    + 1)) + 4;    // max 4,   min 4
 
@@ -453,10 +453,12 @@
     zoomDelta: 0.5,
     minZoom: 3,
     maxZoom: 10,
+    /*
     maxBounds: [
       [-78,-180],
       [90,180]
     ],
+    */
     layers: [
       baseMap,
       overlayMap
@@ -695,13 +697,13 @@
     links += wiki + wikisource + `</ul>`;
     // available global texts
     if ( poet[id].texts && poet[id].texts.poems.length > 0 ) {
-      poems += `<ul style="columns:2;column-gap:2rem;">`;
+      poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-//          `<a href="/id/`+v.work+`" onclick="return display_globaltext('`+v.work+`')">`+
+//          `<a href="/id/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`" onclick="return display_globaltext('`+v.text+`')">`+
           `<em>`+v.title+`</em>`+
 //          '</a>'+
-          (v.date?` (`+v.date.substring(0,4)+`)`:``)+
+          ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
       poems += `</ul>`;
