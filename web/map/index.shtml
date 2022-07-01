@@ -660,7 +660,7 @@
   function load_poet_overview( id ) {
     return new Promise(function(resolve, reject) {
       $.ajax({
-          url: "/map/data/persons/"+id+".json",
+          url: "/data/persons/"+id+".json",
           type: "GET",
           dataType: "json",
           success: function(data) {
@@ -700,9 +700,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-//          `<a href="/id/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`" onclick="return display_globaltext('`+v.text+`')">`+
+          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-//          '</a>'+
+          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
