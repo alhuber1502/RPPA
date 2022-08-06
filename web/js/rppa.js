@@ -48,7 +48,7 @@ async function display_globaltext( id ) {
     ORDER BY ?s`;
     var r = await getJSONLD( q );
     workbench[ id ] = _.keyBy( r.graph, 'id');
-    // I can use /data/persons/*.json and /data/works/*.json for basic interface
+    // TODO: I can use /data/persons/*.json and /data/works/*.json for basic interface
     // metadata
 
     zInd = zInd+1;
@@ -102,7 +102,9 @@ async function display_globaltext( id ) {
     // on closing a modal
     myModalEl.addEventListener('hide.bs.modal', function (event) {
         $(".popover").hide();
+        $(this).remove();
         if ( $('.modal.show').length ) { // if open modal remains: close updating DOM
+            clearInterval( t );
             t = setInterval(updateDOM,500);    
         } else {                         // if last open modal: reset
             done_tooltipTriggerList = [];

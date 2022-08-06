@@ -700,9 +700,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
+//          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-          '</a>'+
+//          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
