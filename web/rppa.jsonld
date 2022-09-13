@@ -39,19 +39,16 @@
 	"sc"	   : "http://iiif.io/api/presentation/2#",
 	"as"	   : "http://www.w3.org/ns/activitystreams#",
 
-	"fts"	   : "http://www.bigdata.com/rdf/fts#",
-	"bds"	   : "http://www.bigdata.com/rdf/search#",
-
 	"id"	   : "@id",
 	"type"	   : "@type",
 	"graph"	   : "@graph",
 
-	"lrmoo:R71_specifies_material_part"  : { "@container": "@set" },
-	"crm:P106_is_composed_of"	     : { "@container": "@set" },
-	"crm:P70i_is_documented_in"	     : { "@container": "@set" },
-	"lrmoo:R3_is_realised_in"	     : { "@container": "@set" },
-	"lrmoo:R3i_realises"	     	     : { "@container": "@set" },
-	"crmdig:L1_digitized"		     : { "@container": "@set" }
+	"lrmoo:R71_specifies_material_part"	: { "@container": "@set" },
+	"crm:P106_is_composed_of"			: { "@container": "@set" },
+	"crm:P70i_is_documented_in"			: { "@container": "@set" },
+	"lrmoo:R3_is_realised_in"			: { "@container": "@set" },
+	"lrmoo:R3i_realises"				: { "@container": "@set" },
+	"crmdig:L1_digitized"				: { "@container": "@set" }
 
     }
 }
