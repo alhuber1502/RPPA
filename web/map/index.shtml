@@ -91,13 +91,13 @@
             <label for="AF">Africa &nbsp;<a href="#continent/AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Africa</span></a></label>
             <div data-id="AF"></div>
             <input id="NA" value="NA" class="checkbox cont" type="checkbox" checked/>
-            <label for="NA">North America &nbsp;<a href="#continent/NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 42)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
+            <label for="NA">North America &nbsp;<a href="#continent/NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 40)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
             <div data-id="NA"></div>
             <input id="SA" value="SA" class="checkbox cont" type="checkbox" checked/>
             <label for="SA">South America &nbsp;<a href="#continent/SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">South America</span></a></label>
             <div data-id="SA"></div>
             <input id="AS" value="AS" class="checkbox cont" type="checkbox" checked/>
-            <label for="AS">Asia &nbsp;<a href="#continent/AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(100 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
+            <label for="AS">Asia &nbsp;<a href="#continent/AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(78 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
             <div data-id="AS"></div>
             <input id="EU" value="EU" class="checkbox cont" type="checkbox" checked/>
             <label for="EU">Europe &nbsp;<a href="#continent/EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Europe</span></a></label>    
@@ -700,9 +700,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-//          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
+          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-//          '</a>'+
+          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
