@@ -2,36 +2,9 @@
 <!--#set var="map" value="active" -->
 <!--#include virtual="/header.shtml" -->
 
-<!-- welcome modal -->
 <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
-<div id="myModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-content text-center pt-3">
-        <div class="modal-body">
-          <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
-            <span class="h4">Romantic Period Poetry Archive (RPPA)</span><br><small><b>Alexander Huber, Editor.</b></small><br>
-          <p>RPPA <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
-            is a new, open access digital platform for global Romantic-period poetry — 
-            start your journey (almost) anywhere in the world!</p>
-          <p class="small">RPPA is a rapidly prototyped and openly developed DH project. It will run from late 2020-2025, 
-            when it will have reached <span style="font-variant:small-caps;">beta</span> stage.</p>
-        </div>
-        <div class="modal-footer" style="padding:.5rem .75rem;background-color: #f5f5f5 !important;">
-          <div class="custom-control">
-            <label class="custom-control-label small">This is RPPA <!--#include virtual="/version"--> (<!--#config timefmt="%Y-%m-%dT%H:%M:%SZ"--><!--#flastmod virtual="/version" -->)</label>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: var(--bs-orange);color:#fff;">Learn more</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- main -->
-
 <main class="h-100 flex-shrink-0">
   <div class="container-fluid h-100">
     <div class="map" id="map"></div>
@@ -43,6 +16,7 @@
   <!-- Nav tabs -->
   <div class="leaflet-sidebar-tabs">
       <ul role="tablist">
+          <li><a href="#welcome" role="tab"><i class="fas fa-door-open"></i><span class="sr-only">[Welcome]</span></a></li>
           <li><a href="#home" role="tab"><i class="fas fa-globe"></i><span class="sr-only">[Home]</span></a></li>
           <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i><span class="sr-only">[Location]</span></a></li>
           <li><a href="#profile" role="tab"><i class="fa fa-user"></i><span class="sr-only">[Profile]</span></a></li>
@@ -65,9 +39,30 @@
   </div>
   <!-- Tab panes -->
   <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="welcome">
+        <h1 class="leaflet-sidebar-header">
+          Welcome to RPPA<sup>alpha</sup>
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <div style="text-align:center;margin-top:25px;">
+            <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
+              <span class="h2">Romantic Period Poetry Archive</span><br><small><b>Alexander Huber, Editor.</b></small><br>
+            <p style="text-align:left;">The Romantic Period Poetry Archive—or RPPA <a href="#"
+            onclick="document.getElementById('player').play()"><i class="fas
+            fa-volume-up"></i><span class="sr-only">[Listen]</span></a> for
+            short—is a new, open access digital platform for global
+            Romantic-period poetry — start your journey (almost) anywhere in the world!</p>
+            <button type="button" class="btn" onclick="sidebar.open( 'home' );"
+            style="background-color:
+            var(--bs-orange);color:#fff;float:right;">Start exploring</button>
+            <p class="small" style="clear:both;text-align:left; margin-top:65px;">RPPA is a rapidly prototyped and openly developed
+              DH project, currently in public <span style="font-variant:small-caps;">alpha</span>. It will run from late 2020 to 2025, 
+                when it will have reached <span style="font-variant:small-caps;">beta</span> stage.</p>
+        </div>
+      </div>
       <div class="leaflet-sidebar-pane" id="home">
           <h1 class="leaflet-sidebar-header">
-              Welcome to RPPA<sup>alpha</sup>
+              The Romantic-period world
               <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
           </h1>
           <div>
@@ -124,7 +119,6 @@
             be a comparatist [...]
             <cite style="font-size:13px;font-weight:initial;">—Ben Hutchinson<sup>1</sup></cite>
           </blockquote>
-
           <h2>Introduction</h2>
           <p>The Romantic Period Poetry Archive, or RPPA 
             <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
@@ -137,7 +131,6 @@
             and publication, such as computationally-augmented analysis,
             visualizations, network analysis, knowledge modelling, and more.
           </p>
-
           <h2>Approach</h2>
           <p>Comparative in nature, RPPA conceptualizes Romanticism as
             a global, deeply interconnected phenomenon.  
@@ -155,7 +148,6 @@
             conversations the texts enter into with each other, 
             directly, or much more frequently, indirectly.
           </p>
-
           <h2>Scope</h2>
           <p>
             RPPA participates in movements that aim to address
@@ -170,7 +162,6 @@
             It connects these nodes reflexively as well as to 
             various internal and external contexts.
           </p>
-
           <h2>Features</h2>
           <ul>
             <li>RPPA will assemble an extensive and open-ended archive of
@@ -196,7 +187,6 @@
             <li>RPPA incorporates digital humanities approaches as a
               form of comparative literary study.
           </ul>
-
           <h2>Timeline</h2>
           <p>RPPA is a 5-year, independently-funded research project.  It 
             will run from late 2020-2025.  As with other projects conceived
@@ -212,7 +202,6 @@
             overall progress of the project will be posted on this
             website.
           </p> 
-
           <h2>Outcome</h2>
           <p>
             The expected outcome of this project is a fuller
@@ -227,8 +216,6 @@
             of new contexts and the construction of new global texts<sup>4</sup>
             that cast a fresh light on the seemingly familiar.  This project
             provides that space.</p>
-
-
           <div class="small" style="border-top:1px solid #999;">
             <sup>1</sup> Hutchinson, Ben. <em>Comparative Literature: A Very Short Introduction</em>. 
             Oxford: OUP, 2018. 22.<br>
@@ -263,7 +250,6 @@
         <h1 class="leaflet-sidebar-header">Help
           <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
         <div class="results">
-
           <h2>The map</h2>
           <p>The historical map used in this visualization is John Arrowsmith's <em><a 
             href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002"
@@ -274,14 +260,12 @@
              purposes the map has been aligned with the Web mercator 
              projection, the de facto standard for maps on the web.  
           </p>
-
           <p>Poets are shown at their place of birth, unless it is unknown or the poet 
             is generally associated with a country other than their birth country, in which
             case they are shown at the country's geographical centre.  Images of the poets
             have been sourced from <a class="external" target="_blank" 
             href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
           </p>
-
           <h2>Mapping global Romantic-period poetry</h2>
           <p>
             While little more than a visual access point at the moment, our aim is to use
@@ -310,7 +294,6 @@
             useful as an emerging historical canvas for the 
             poetry of the global Romantic period.
           </p>
-
           <h2>Known issues</h2>
           <p>Despite every effort to include the most relevant figures of the 
           Romantic period, a disclaimer needs to be issued regarding the 
@@ -323,7 +306,6 @@
           <a href="mailto:huber@romanticperiodpoetry.org">editor</a>
           would be grateful for any corrections and suggestions for additions and
           improvements.</p>
-
           <p>Also, regretfully, for navigational purposes, country names and borders
           used in the map navigation correspond to present-day denominations and 
           historical reality.  We apologize for the resulting distortion
@@ -332,7 +314,6 @@
           <a href="https://openhistoricalmap.org/" class="external" 
           target="_blank">OpenHistoricalMap</a> as they evolve and mature. 
           </p>
-
           <h2>Further reading</h2>
           <ul style="font-size:14px;">
             <li>
@@ -358,7 +339,6 @@
                 Scale of World Literature"</a>. <em>New Literary History</em> 39(3) (Summer 2008): 599-617.
             </li>
           </ul>
-
         </div>
       </div>
       <div class="leaflet-sidebar-pane" id="feed">
@@ -373,7 +353,6 @@
         <h1 class="leaflet-sidebar-header">Contact
           <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
         <div class="results">
-
           <h2>Get in touch</h2>
           <p>This is an open invitation to academics, research
             projects, digital archives and repositories, and anyone with
@@ -383,7 +362,6 @@
             collaboration or other forms of participation.  Please do
             not hesitate to reach out:
           </p>
-      
           <p style="margin-left:15px;">
             <b>Romantic Period Poetry Archive (RPPA)</b><br>
             Alexander Huber, Editor<br>
@@ -397,7 +375,6 @@
               class="external">http://users.ox.ac.uk/~bodl0153/</a>
             <li style="height:25px;"><span>Share:</span> <span style="display:inline-block;vertical-align:middle;" class="addthis_inline_share_toolbox"></span>
           </ul>
-
         </div>
       </div>
       <!--
@@ -497,7 +474,7 @@
       }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
     });
   }
-  $.when( loadPlaces(), loadPersons(), loadNations() ).done( function() {
+  $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts() ).done( function() {
     draw_viz( persons );
     var natbycont = _.groupBy( _.filter( nations, function(record){ return record.name } ) , function( record ) { 
       return record.cont; 
@@ -672,6 +649,21 @@
       });
     });
   }
+  function load_work_overview( id ) {
+    return new Promise(function(resolve, reject) {
+      $.ajax({
+          url: "/data/works/"+id+".json",
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+              resolve(data)
+          },
+          error: function(err) {
+              reject(err)
+          }
+      });
+    });
+  }
 
   async function poet_profile( id ) {
     var poet = await load_poet_overview( id );
@@ -700,9 +692,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-//          `<a class="show_globaltext" href="#" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
+          `<a class="show_globaltext" href="#text/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-//          '</a>'+
+          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
@@ -784,10 +776,10 @@
     var name = continents[ cont ].name;
     var countries = _.filter( nations, function(record){ return record.cont == cont } );
     var overview = `<h2>`+name+
-      //` (`+
-      //_.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length+` `+
-      //(_.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length > 1?`poets`:`poet`)         
-      //+`)`+
+      ` (`+
+      _.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length+` `+
+      (_.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length > 1?`poets`:`poet`)         
+      +`)`+
       `</h2>`;
     $.each( _.sortBy( countries, 'name' ), function( i,v ) {
       overview += `<h3>`+v.name.split(',')[0]+` (`+
@@ -843,7 +835,7 @@
     map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?4:5) );
   });
 
-  function checkPath() {
+  async function checkPath() {
     var hash = location.hash.substring( location.hash.indexOf("/")+1 ), source;
     switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
       case "#id/":
@@ -860,6 +852,15 @@
         $( "#location .results" ).html( update_country( hash ) );
         sidebar.open('location');
         source = nations[ hash ].coord;
+      break;
+      case "#text/":
+        var work = await load_work_overview( texts[ hash ][ "work" ] );
+        if ( work.aut != '' ) {
+          var aut = work.aut.split(';');
+          poet_profile( aut[0] );
+          source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
+        }
+        display_globaltext( hash, texts[ hash ][ "work" ] );
       break;
     }
     if ( source ) {
@@ -890,15 +891,8 @@
 
   // main 
   (function() {
-    var mymodal;
-    if ( document.referrer != "www.romanticperiodpoetry.org" ) {
-      myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
-	    myModal.toggle();
-    } else {
-      if ( $( ".leaflet-sidebar-tabs li.active" ).length == 0 ) {
-        sidebar.open( 'home' );
-      }
-    }
+
+    sidebar.open( 'welcome' );
     window.addEventListener("hashchange", checkHash, false);
 
     $( "#slider-range" ).slider({
@@ -931,13 +925,6 @@
       });
     });
 
-    var myModalEl = document.getElementById('myModal');
-    myModalEl.addEventListener('hidden.bs.modal', function (event) {
-      if ( $( ".leaflet-sidebar-tabs li.active" ).length == 0 ) {
-        sidebar.open( 'home' );
-      }
-      myModal.dispose();
-    });
   })();
 
 </script>
