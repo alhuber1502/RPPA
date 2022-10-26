@@ -5,11 +5,13 @@ var domain = "https://www.romanticperiodpoetry.org";
 var SOLR_RPPA;
 var BG_RPPA;
 if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
-    BG_RPPA = "https://guineapig.hubers.org.uk/blzg/blazegraph/namespace/rppa/";
-    SOLR_RPPA = "https://guineapig.hubers.org.uk/solr/solr/rppa/select";
+    BG_RPPA = "https://api.prisms.digital/blzg/blazegraph/namespace/rppa/";
+    SOLR_RPPA = "https://api.prisms.digital/solr/solr/rppa/select";
 } else {
     BG_RPPA = "http://192.168.1.2:9999/blazegraph/namespace/rppa/";
     SOLR_RPPA = "http://192.168.1.2:8983/solr/rppa/select";
+
+    BG_RPPA = "http://192.168.1.2:3030/rppa/"
 }
 
 // rppa.jsonld
@@ -35,15 +37,16 @@ var done_popoverTriggerList = [];
 // display a global text
 async function display_globaltext( id ) {
 
-    var q = `SELECT *
+    var q = namespaces+`SELECT *
     WHERE {
-        GRAPH ?g { ?s ?p ?o }
+        ?s ?p ?o
         FILTER (
             (CONTAINS (STR(?s), ?searchString)) ||
             (CONTAINS (STR(?p), ?searchString)) ||
             (CONTAINS (STR(?o), ?searchString))
         )
         BIND("`+id+`" AS ?searchString)
+        BIND(<default> AS ?g)
     }
     ORDER BY ?s`;
     var r = await getJSONLD( q );
@@ -221,7 +224,7 @@ async function getRPPAobject( id ) {
 	ids.push( id );
 	node_seen[ id ] = 1;
 	while( ids.length > 0 ) {
-		var q = "SELECT * WHERE { GRAPH ?g { <"+ids[ 0 ]+"> ?p ?o . BIND (<"+ids[ 0 ]+"> AS ?s) } }";
+		var q = namespaces+"SELECT * WHERE { <"+ids[ 0 ]+"> ?p ?o . BIND (<"+ids[ 0 ]+"> AS ?s) BIND (<default> AS ?g)}";
 		var graph = await getJSONLD( q, "raw" );
 		for (var j = 0; j < graph.length; j++ ) {
 			var v = graph[ j ];

@@ -222,3 +222,57 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
   margin: 0 0 2px -10px;
   list-style-type: none;
 }
+
+.text .attribution {
+  font-size:.85em;
+  float:right;
+  width: 80%;
+  text-align: right;
+}
+.text .attribution div {
+  display: inline-block;
+}
+.text .attribution div>span:nth-of-type(1) {
+  font-style: italic;
+  margin-right:3px;
+}
+.text .attribution div .bibl {
+  margin-left: 0;
+  text-indent: 0;
+}
+.text .head+br {
+  display: none;
+}
+.text .head:nth-of-type(1) {
+  font-size:1.3em;
+}
+.rppa .head {
+  font-size:1.1em !important;
+}
+
+.modal-header .tools {
+  margin: 0 auto;
+}
+.modal-header .tools span {
+  display: inline-block;
+  margin-right:10px;
+}
+.read {
+  color: #e76f51;
+}
+.edit {
+  color: #2a9d8f;
+}
+.publish {
+  color: #264653;
+}
+.nav-link.active code {
+  color:unset;
+}
+
+.modal-body .row > div {
+  overflow: auto;
+  height: calc( 100vh - 72px);
+  border-right: 1px #ddd dashed;
+  border-left: 1px #ddd dashed;
+}

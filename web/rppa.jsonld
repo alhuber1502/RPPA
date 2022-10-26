@@ -44,11 +44,13 @@
 	"graph"	   : "@graph",
 
 	"lrmoo:R71_specifies_material_part"	: { "@container": "@set" },
-	"crm:P106_is_composed_of"			: { "@container": "@set" },
-	"crm:P70i_is_documented_in"			: { "@container": "@set" },
-	"lrmoo:R3_is_realised_in"			: { "@container": "@set" },
-	"lrmoo:R3i_realises"				: { "@container": "@set" },
-	"crmdig:L1_digitized"				: { "@container": "@set" }
+	"crm:P106_is_composed_of"		: { "@container": "@set" },
+	"crm:P70i_is_documented_in"		: { "@container": "@set" },
+	"lrmoo:R3_is_realised_in"		: { "@container": "@set" },
+	"lrmoo:R3i_realises"			: { "@container": "@set" },
+	"lrmoo:R15_has_fragment"		: { "@container": "@set" },
+	"crm:P2_has_type"			: { "@container": "@set" },
+	"crmdig:L1_digitized"			: { "@container": "@set" }
 
     }
 }
