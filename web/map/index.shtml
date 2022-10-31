@@ -862,6 +862,15 @@
         }
         display_globaltext( hash, texts[ hash ][ "work" ] );
       break;
+      case "#work/":
+        var work = await load_work_overview( hash );
+        if ( work.aut != '' ) {
+          var aut = work.aut.split(';');
+          poet_profile( aut[0] );
+          source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
+        }
+        display_globaltext( "", hash );
+      break;
     }
     if ( source ) {
       // pan to target
