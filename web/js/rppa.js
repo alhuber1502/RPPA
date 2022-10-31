@@ -1,22 +1,19 @@
 // RPPA
 var workbench = {};
-
 var domain = "https://www.romanticperiodpoetry.org";
+
 var SOLR_RPPA;
 var BG_RPPA;
 if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
-    BG_RPPA = "https://api.prisms.digital/blzg/blazegraph/namespace/rppa/";
-    SOLR_RPPA = "https://api.prisms.digital/solr/solr/rppa/select";
+    BG_RPPA = "https://data.prisms.digital/query/rppa/";
+    SOLR_RPPA = "https://data.prisms.digital/solr/rppa/select";
 } else {
-    BG_RPPA = "http://192.168.1.2:9999/blazegraph/namespace/rppa/";
+    BG_RPPA = "http://192.168.1.2:3030/rppa/";
     SOLR_RPPA = "http://192.168.1.2:8983/solr/rppa/select";
-
-    BG_RPPA = "http://192.168.1.2:3030/rppa/"
 }
 
 // rppa.jsonld
 var namespaces = '';
-
 // load PRISMS JSON-LD context and create namespaces
 $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 	success: function(data) {
@@ -30,13 +27,32 @@ $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 });
 
 // global text modal
-var t, myModal, zInd = 1054;
+var t, myModalGT, zInd = 1054;
 var done_tooltipTriggerList = [];
 var done_popoverTriggerList = [];
 
-// display a global text
-async function display_globaltext( id ) {
+var loadTexts = function() {
+    return $.ajax({ url: "/data/texts.min.json", dataType: 'json',
+      success: function(data) {
+        texts = data;
+      }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
+    });
+}
 
+// display a global text
+async function display_globaltext( tid, wid ) {
+
+    // load work and author(s)
+    var work = await load_work_overview( wid );
+    var separator = "", author = "";
+    if ( work.aut != '' ) {
+        for (var i = 0; i < work.aut.split(';').length; ++i) {
+            var tmp = await load_poet_overview( work.aut.split(';')[i] );
+            author += separator + tmp[ work.aut.split(';')[i] ].name;
+            separator = " and ";
+        }
+    }
+    // retrieve RDF in JSON-LD
     var q = namespaces+`SELECT *
     WHERE {
         ?s ?p ?o
@@ -45,34 +61,54 @@ async function display_globaltext( id ) {
             (CONTAINS (STR(?p), ?searchString)) ||
             (CONTAINS (STR(?o), ?searchString))
         )
-        BIND("`+id+`" AS ?searchString)
+        BIND("`+wid+`" AS ?searchString)
         BIND(<default> AS ?g)
     }
     ORDER BY ?s`;
     var r = await getJSONLD( q );
-    workbench[ id ] = _.keyBy( r.graph, 'id');
-    // TODO: I can use /data/persons/*.json and /data/works/*.json for basic interface
-    // metadata
 
+    // add work to workbench
+    workbench[ wid ] = _.keyBy( r.graph, 'id');
     zInd = zInd+1;
+
     if ( $('.modal.show').length ) { 
-//        myModal.hide(); // close any open texts if a new one is requested
+//        myModalGT.hide(); // close any open texts if a new one is requested
         $(".popover").hide(); // hide if new text was called from a popover
     }
+    // create global text modal
     var text = `<!-- Modal -->
-        <div style="z-index:`+zInd+`" class="modal fade" id="`+id+`" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <style>
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+            color: #fff;
+            background-color: var(--bs-orange);
+        }
+        .nav-link {
+            color: #333;
+        }
+        .nav-link:focus, .nav-link:hover {
+            color: #000;
+        }
+        </style>
+        <div style="z-index:`+zInd+`" class="modal fade" id="`+wid+`" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-head" id="exampleModalLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="ModalLabel">`+truncateString(work.tit,50)+` / `+author+`</h5>
+                        <div class="tools">
+                            <a role="button" class="changeMode" data-mode="read"><span class="read"><i class="fas fa-book-open"></i> Read</span></a>
+                            <a role="button" class="changeMode" data-mode="edit"><span class="edit"><i class="fas fa-edit"></i> Edit</span></a>
+                            <a role="button" class="changeMode" data-mode="publ"><span class="publish"><i class="fas fa-check-circle"></i> Publish</span></a>
+                        </div>
+                        <button type="button" class="btn-close changeMode" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-sm-9 text-text">
+                                <div class="col-sm-4 text" id="`+tid+`">
                                 </div>
-                                <div class="col-sm-3 text-meta">
+                                <div class="col-sm-4 context">
+                                </div>
+                                <div class="col-sm-4 work">
                                 </div>
                             </div>
                         </div>
@@ -88,22 +124,76 @@ async function display_globaltext( id ) {
         </div>`;
     $( "body" ).prepend( text );
 
-    var $div = $('<div>');
-    $div.load( workbench[ id ][ "https://www.romanticperiodpoetry.org/id/"+id+"/transcription/1/delivery" ][ "crm:P106_is_composed_of" ][0], function(){
-        $( "#"+id+" .text-text" ).append( $div );
-        $( "#"+id+" .text-meta" ).append( $(this).find("#"+id+"-about" ).html() );
-        $( "#"+id+" .text-head" ).append( $(this).find("#"+id+"-heading" ).html() );
-        t = setInterval(updateDOM,500);
-    });
+    // populate global text
+    // load work's realization(s)
+    var tab_content = "", tab_nav = "", excerpt = null;
+    for (i=0; i<workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ].length; i++ ) { // expressions
+        var nav_name = '', cnt_lang = '';
+        cnt_lang = workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P72_has_language" ];
+        // navigation
+        if ( i == 0 ) {
+            if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) {
+                nav_name = 'Original text (excerpt)';
+            } else {
+                nav_name = 'Original text';
+            }
+        } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:txt' }) != -1 ) {
+            nav_name = 'Translation (<code>'+cnt_lang+'</code>)';
+        } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'sc:Manifest' || typ.id == 'lct:img' || typ.id == 'lct:dig'}) != -1) {
+            nav_name = 'Facsimile';
+        } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:aud' || typ.id == 'lct:mov' }) != -1) {
+            nav_name = 'Reading';
+        } else {
+            console.log( 'Error: unknown content type' );
+        }
+        if ( nav_name != '' ) {
+            tab_nav += `<li class="nav-item" role="presentation">
+                <button class="nav-link`+((i==0)?' active':'')+`" id="pills-`+i+`-tab" data-bs-toggle="pill" data-bs-target="#pills-`+i+`" type="button" role="tab" aria-controls="pills-`+i+`" aria-selected="true">`+nav_name+`</button>
+                </li>`;
+        }
+        // content
+        var cnt_loc = null;
+        if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:txt' }) != -1 ) {
+            if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) { // fragments
+                if ( i == 0 && tid != '' ) {                                                                                                                         // text (one fragment)
+                    excerpt = _.findIndex( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ], function(typ) { 
+                        return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].includes( '/'+tid+'/' );
+                    });
+                } else if ( tid == '' ) {                                                                                                                            // work (all fragments)
+                    tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">`;
+                    $.each(  workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ], function( j, frag ) {
+                        tab_content += function () { var tmp = null; $.ajax({ 'async': false, 'type': "POST", 'dataType': 'html', 'url': workbench[ wid ][ workbench[ wid ][ frag.id ][ "crm:P106_is_composed_of" ][0].id ][ "crm:P106_is_composed_of" ][0], 
+                                'success': function (data) { tmp = data; } }); return tmp; }()+'<br style="clear:both;"></br>'
+                    });
+                    tab_content += `</div>`;
+                }
+                if ( tid != '' ) {
+                    cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ]
+                }
+            } else {                                                                                                                                                 // manifestations
+                try { cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ] }
+                catch { }
+            }
+            if ( tid != '' && cnt_loc != null ) {
+                tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">`+
+                    function () { var tmp = null; $.ajax({ 'async': false, 'type': "POST", 'dataType': 'html', 'url': workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0], 
+                        'success': function (data) { tmp = data; } }); return tmp; }()
+                +`</div>`;
+            }
+        }
+        // ... other content types ...
+    }       
+    $( "#"+wid+" .text" ).append( `<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
+    t = setInterval(updateDOM,500);
 
-    var myModalEl = document.getElementById(id);
-    myModal = new bootstrap.Modal(myModalEl, {
+    var myModalGTEl = document.getElementById(wid);
+    myModalGT = new bootstrap.Modal(myModalGTEl, {
         backdrop: 'static',
         keyboard: false
     });
-    myModal.show();
+    myModalGT.show();
     // on closing a modal
-    myModalEl.addEventListener('hide.bs.modal', function (event) {
+    myModalGTEl.addEventListener('hide.bs.modal', function (event) {
         $(".popover").hide();
         $(this).remove();
         if ( $('.modal.show').length ) { // if open modal remains: close updating DOM
@@ -114,6 +204,7 @@ async function display_globaltext( id ) {
             done_popoverTriggerList = [];
             clearInterval( t );
             zInd = 1054;
+            location.href = "#id/"+work.aut.split(';')[0]; // reset location to work's author
         }
     });
     return false;
@@ -326,13 +417,21 @@ function show_alert_mod( message, type, hide, ms ) {
 	}
 }
 
+$( document ).on('click', '.changeMode', function() {
+    var modeC = {}
+    modeC[ 'edit' ] = '#2a9d8f';
+    modeC[ 'read' ] = 'var(--bs-orange)';
+    modeC[ 'publ' ] = '#264653';
+    $( "#mode" ).remove();
+    $( "head" ).append( `<style type="text/css" id="mode">a,a:hover,a:visited,a:active{color: `+modeC[$(this).data("mode")]+`;}.nav-pills .nav-link.active{background-color:`+modeC[$(this).data("mode")]+` !important;}</style>` );
+});
+
 $( document ).on('click', 'a.show_globaltext', async function (e) {
-    e.preventDefault();
-    display_globaltext( e.currentTarget.dataset.wid );
+    display_globaltext( e.currentTarget.dataset.tid,e.currentTarget.dataset.wid );
 });
 
 $( document ).ready(function() {
 
-//    display_globaltext( 'work00385' );
+
 
 });
