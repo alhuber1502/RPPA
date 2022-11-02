@@ -1,1 +1,1395 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#translation_fra #excerpt"
+     corresp="#work00394"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00439"
+     xml:lang="eng">
+   <link target="#pers00113" type="author"/>
+   <link target="#pers00712" type="translator"/>
+   <link target="#text00438" type="translation"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n00265">
+      <date type="publ" when="1837">
+         <w xml:id="erar-2350890">1908</w>
+      </date>
+      <bibl>
+         <title>
+            <w xml:id="erar-2350920">The</w>
+            <c> </c>
+            <w xml:id="erar-2350930">complete</w>
+            <c> </c>
+            <w xml:id="erar-2350940">writings</w>
+            <c> </c>
+            <w xml:id="erar-2350950">of</w>
+            <c> </c>
+            <w xml:id="erar-2350960">Alfred</w>
+            <c> </c>
+            <w xml:id="erar-2350970">de</w>
+            <c> </c>
+            <w xml:id="erar-2350980">Musset</w>
+         </title>
+         <pc xml:id="erar-2350990" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-2351000">Santayana</w>
+         <pc xml:id="erar-2351010">,</pc>
+         <c> </c>
+         <w xml:id="erar-2351020">George</w>
+         <c> </c>
+         <w xml:id="erar-2351030">et</w>
+         <c> </c>
+         <w xml:id="erar-2351040">al.</w>
+         <pc xml:id="erar-2351050">,</pc>
+         <c> </c>
+         <w xml:id="erar-2351060">trans</w>
+         <pc xml:id="erar-2351070" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-2351080">New</w>
+         <c> </c>
+         <w xml:id="erar-2351090">York</w>
+         <pc xml:id="erar-2351100">:</pc>
+         <c> </c>
+         <w xml:id="erar-2351110">Brainard</w>
+         <pc xml:id="erar-2351120">,</pc>
+         <c> </c>
+         <w xml:id="erar-2351130">1908.</w>
+         <pc unit="sentence" xml:id="erar-2351130-eos"/>
+      </bibl>
+   </note>
+   <head type="main" xml:id="erar-h00540">
+      <w xml:id="erar-2344260">The</w>
+      <c> </c>
+      <w xml:id="erar-2344270">Nights</w>
+   </head>
+   <head type="sub" xml:id="erar-h00545">
+      <pc xml:id="erar-2344300">[</pc>
+      <w xml:id="erar-2344310">The</w>
+      <c> </c>
+      <w xml:id="erar-2344320">night</w>
+      <c> </c>
+      <w xml:id="erar-2344330">of</w>
+      <c> </c>
+      <w xml:id="erar-2344340">October</w>
+      <c> </c>
+      <pc xml:id="erar-2344350">(</pc>
+      <w xml:id="erar-2344360">excerpt</w>
+      <pc xml:id="erar-2344370">)</pc>
+      <pc xml:id="erar-2344380" unit="sentence">]</pc>
+   </head>
+   <div n="octobre" type="section" xml:id="erar-div00750">
+      <sp xml:id="erar-s23440">
+         <speaker>
+            <w xml:id="erar-2344430">THE</w>
+            <c> </c>
+            <w xml:id="erar-2344440">POET</w>
+            <pc unit="sentence" xml:id="erar-2344440-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23445">
+            <l xml:id="erar-l08700">
+               <w xml:id="erar-2344470">My</w>
+               <c> </c>
+               <w xml:id="erar-2344480">griefs</w>
+               <c> </c>
+               <w xml:id="erar-2344490">have</w>
+               <c> </c>
+               <w xml:id="erar-2344500">vanished</w>
+               <c> </c>
+               <w xml:id="erar-2344510">like</w>
+               <c> </c>
+               <w xml:id="erar-2344520">a</w>
+               <c> </c>
+               <w xml:id="erar-2344530">midnight</w>
+               <c> </c>
+               <w xml:id="erar-2344540">dream</w>
+               <pc xml:id="erar-2344550">;</pc>
+            </l>
+            <l xml:id="erar-l08705">
+               <c> </c>
+               <w xml:id="erar-2344560">All</w>
+               <c> </c>
+               <w xml:id="erar-2344570">I</w>
+               <c> </c>
+               <w xml:id="erar-2344580">remember</w>
+               <c> </c>
+               <w xml:id="erar-2344590">of</w>
+               <c> </c>
+               <w xml:id="erar-2344600">them</w>
+               <c> </c>
+               <w xml:id="erar-2344610">I</w>
+               <c> </c>
+               <w xml:id="erar-2344620">compare</w>
+            </l>
+            <l xml:id="erar-l08710">
+               <c> </c>
+               <w xml:id="erar-2344630">To</w>
+               <c> </c>
+               <w xml:id="erar-2344640">those</w>
+               <c> </c>
+               <w xml:id="erar-2344650">light</w>
+               <c> </c>
+               <w xml:id="erar-2344660">mists</w>
+               <c> </c>
+               <w xml:id="erar-2344670">that</w>
+               <c> </c>
+               <w xml:id="erar-2344680">rise</w>
+               <c> </c>
+               <w xml:id="erar-2344690">at</w>
+               <c> </c>
+               <w xml:id="erar-2344700">morning’s</w>
+               <c> </c>
+               <w xml:id="erar-2344710">gleam</w>
+               <pc xml:id="erar-2344720" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08715">
+               <w xml:id="erar-2344730">And</w>
+               <pc xml:id="erar-2344740">,</pc>
+               <c> </c>
+               <w xml:id="erar-2344750">with</w>
+               <c> </c>
+               <w xml:id="erar-2344760">the</w>
+               <c> </c>
+               <w xml:id="erar-2344770">dewdrops</w>
+               <pc xml:id="erar-2344780">,</pc>
+               <c> </c>
+               <w xml:id="erar-2344790">melt</w>
+               <c> </c>
+               <w xml:id="erar-2344800">into</w>
+               <c> </c>
+               <w xml:id="erar-2344810">the</w>
+               <c> </c>
+               <w xml:id="erar-2344820">air</w>
+               <pc xml:id="erar-2344830" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23450">
+         <speaker>
+            <w xml:id="erar-2344870">THE</w>
+            <c> </c>
+            <w xml:id="erar-2344880">MUSE</w>
+            <pc unit="sentence" xml:id="erar-2344880-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23455">
+            <l xml:id="erar-l08720">
+               <w xml:id="erar-2344910">What</w>
+               <c> </c>
+               <w xml:id="erar-2344920">grief</w>
+               <c> </c>
+               <w xml:id="erar-2344930">was</w>
+               <c> </c>
+               <w xml:id="erar-2344940">it</w>
+               <pc xml:id="erar-2344950">,</pc>
+               <c> </c>
+               <w xml:id="erar-2344960">O</w>
+               <c> </c>
+               <w xml:id="erar-2344970">Poet</w>
+               <pc xml:id="erar-2344980">,</pc>
+               <c> </c>
+               <w xml:id="erar-2344990">tell</w>
+               <pc xml:id="erar-2345000">,</pc>
+            </l>
+            <l xml:id="erar-l08725">
+               <c> </c>
+               <w xml:id="erar-2345010">That</w>
+               <c> </c>
+               <w xml:id="erar-2345020">seared</w>
+               <c> </c>
+               <w xml:id="erar-2345030">your</w>
+               <c> </c>
+               <w xml:id="erar-2345040">heart</w>
+               <c> </c>
+               <w xml:id="erar-2345050">up</w>
+               <c> </c>
+               <w xml:id="erar-2345060">like</w>
+               <c> </c>
+               <w xml:id="erar-2345070">a</w>
+               <c> </c>
+               <w xml:id="erar-2345080">spell</w>
+               <pc xml:id="erar-2345090">,</pc>
+            </l>
+            <l xml:id="erar-l08730">
+               <c> </c>
+               <w xml:id="erar-2345100">And</w>
+               <c> </c>
+               <w xml:id="erar-2345110">parted</w>
+               <c> </c>
+               <w xml:id="erar-2345120">our</w>
+               <c> </c>
+               <w xml:id="erar-2345130">fond</w>
+               <c> </c>
+               <w xml:id="erar-2345140">souls</w>
+               <c> </c>
+               <w xml:id="erar-2345150">in</w>
+               <c> </c>
+               <w xml:id="erar-2345160">twain</w>
+               <pc xml:id="erar-2345170" unit="sentence">?</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08735">
+               <w xml:id="erar-2345180">Tho</w>
+               <pc xml:id="erar-2345190">’</pc>
+               <c> </c>
+               <w xml:id="erar-2345200">deeply</w>
+               <c> </c>
+               <w xml:id="erar-2345210">in</w>
+               <c> </c>
+               <w xml:id="erar-2345220">your</w>
+               <c> </c>
+               <w xml:id="erar-2345230">heart</w>
+               <c> </c>
+               <w xml:id="erar-2345240">conceal’d</w>
+               <pc xml:id="erar-2345250">,</pc>
+            </l>
+            <l xml:id="erar-l08740">
+               <c> </c>
+               <w xml:id="erar-2345260">Each</w>
+               <c> </c>
+               <w xml:id="erar-2345270">accent</w>
+               <c> </c>
+               <w xml:id="erar-2345280">and</w>
+               <c> </c>
+               <w xml:id="erar-2345290">each</w>
+               <c> </c>
+               <w xml:id="erar-2345300">glance</w>
+               <c> </c>
+               <w xml:id="erar-2345310">reveal’d</w>
+            </l>
+            <l xml:id="erar-l08745">
+               <c> </c>
+               <w xml:id="erar-2345320">The</w>
+               <c> </c>
+               <w xml:id="erar-2345330">woes</w>
+               <c> </c>
+               <w xml:id="erar-2345340">I’ve</w>
+               <c> </c>
+               <w xml:id="erar-2345350">long</w>
+               <c> </c>
+               <w xml:id="erar-2345360">time</w>
+               <c> </c>
+               <w xml:id="erar-2345370">mourned</w>
+               <c> </c>
+               <w xml:id="erar-2345380">in</w>
+               <c> </c>
+               <w xml:id="erar-2345390">vain</w>
+               <pc xml:id="erar-2345400" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23460">
+         <speaker>
+            <w xml:id="erar-2345440">THE</w>
+            <c> </c>
+            <w xml:id="erar-2345450">POET</w>
+            <pc unit="sentence" xml:id="erar-2345450-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23465">
+            <l xml:id="erar-l08750">
+               <w xml:id="erar-2345480">It</w>
+               <c> </c>
+               <w xml:id="erar-2345490">was</w>
+               <c> </c>
+               <w xml:id="erar-2345500">a</w>
+               <c> </c>
+               <w xml:id="erar-2345510">vulgar</w>
+               <c> </c>
+               <w xml:id="erar-2345520">evil</w>
+               <pc xml:id="erar-2345530">,</pc>
+               <c> </c>
+               <w xml:id="erar-2345540">and</w>
+               <c> </c>
+               <w xml:id="erar-2345550">well</w>
+               <c> </c>
+               <w xml:id="erar-2345560">known</w>
+               <pc xml:id="erar-2345570">;</pc>
+            </l>
+            <l xml:id="erar-l08755">
+               <c> </c>
+               <w xml:id="erar-2345580">But</w>
+               <c> </c>
+               <w xml:id="erar-2345590">oftentimes</w>
+               <c> </c>
+               <w xml:id="erar-2345600">when</w>
+               <c> </c>
+               <w xml:id="erar-2345610">we</w>
+               <c> </c>
+               <w xml:id="erar-2345620">are</w>
+               <c> </c>
+               <w xml:id="erar-2345630">sick</w>
+               <c> </c>
+               <w xml:id="erar-2345640">at</w>
+               <c> </c>
+               <w xml:id="erar-2345650">soul</w>
+               <pc xml:id="erar-2345660">,</pc>
+            </l>
+            <l xml:id="erar-l08760">
+               <c> </c>
+               <w xml:id="erar-2345670">We</w>
+               <c> </c>
+               <w xml:id="erar-2345680">think</w>
+               <c> </c>
+               <w xml:id="erar-2345690">that</w>
+               <c> </c>
+               <w xml:id="erar-2345700">we</w>
+               <pc xml:id="erar-2345710">,</pc>
+               <c> </c>
+               <w xml:id="erar-2345720">of</w>
+               <c> </c>
+               <w xml:id="erar-2345730">all</w>
+               <c> </c>
+               <w xml:id="erar-2345740">the</w>
+               <c> </c>
+               <w xml:id="erar-2345750">world</w>
+               <c> </c>
+               <w xml:id="erar-2345760">alone</w>
+               <pc xml:id="erar-2345770">,</pc>
+            </l>
+            <l xml:id="erar-l08765">
+               <c> </c>
+               <w xml:id="erar-2345780">Are</w>
+               <c> </c>
+               <w xml:id="erar-2345790">crushed</w>
+               <c> </c>
+               <w xml:id="erar-2345800">with</w>
+               <c> </c>
+               <w xml:id="erar-2345810">misery</w>
+               <c> </c>
+               <w xml:id="erar-2345820">beyond</w>
+               <c> </c>
+               <w xml:id="erar-2345830">control</w>
+               <pc xml:id="erar-2345840" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23470">
+         <speaker>
+            <w xml:id="erar-2345880">THE</w>
+            <c> </c>
+            <w xml:id="erar-2345890">MUSE</w>
+            <pc unit="sentence" xml:id="erar-2345890-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23475">
+            <l xml:id="erar-l08770">
+               <w xml:id="erar-2345920">It</w>
+               <c> </c>
+               <w xml:id="erar-2345930">cannot</w>
+               <c> </c>
+               <w xml:id="erar-2345940">be</w>
+               <c> </c>
+               <w xml:id="erar-2345950">a</w>
+               <c> </c>
+               <w xml:id="erar-2345960">vulgar</w>
+               <c> </c>
+               <w xml:id="erar-2345970">grief</w>
+            </l>
+            <l xml:id="erar-l08775">
+               <c> </c>
+               <w xml:id="erar-2345980">That</w>
+               <c> </c>
+               <w xml:id="erar-2345990">comes</w>
+               <c> </c>
+               <w xml:id="erar-2346000">not</w>
+               <c> </c>
+               <w xml:id="erar-2346010">from</w>
+               <c> </c>
+               <w xml:id="erar-2346020">a</w>
+               <c> </c>
+               <w xml:id="erar-2346030">vulgar</w>
+               <c> </c>
+               <w xml:id="erar-2346040">mind</w>
+               <pc xml:id="erar-2346050">;</pc>
+            </l>
+            <l xml:id="erar-l08780">
+               <c> </c>
+               <w xml:id="erar-2346060">But</w>
+               <c> </c>
+               <w xml:id="erar-2346070">tell</w>
+               <c> </c>
+               <w xml:id="erar-2346080">me</w>
+               <c> </c>
+               <w xml:id="erar-2346090">all</w>
+               <c> </c>
+               <w xml:id="erar-2346100">that</w>
+               <c> </c>
+               <w xml:id="erar-2346110">lurks</w>
+               <c> </c>
+               <w xml:id="erar-2346120">behind</w>
+               <pc xml:id="erar-2346130">,</pc>
+            </l>
+            <l xml:id="erar-l08785">
+               <c> </c>
+               <w xml:id="erar-2346140">And</w>
+               <c> </c>
+               <w xml:id="erar-2346150">give</w>
+               <c> </c>
+               <w xml:id="erar-2346160">your</w>
+               <c> </c>
+               <w xml:id="erar-2346170">aching</w>
+               <c> </c>
+               <w xml:id="erar-2346180">heart</w>
+               <c> </c>
+               <w xml:id="erar-2346190">relief</w>
+               <pc xml:id="erar-2346200" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08790">
+               <w xml:id="erar-2346210">Oh</w>
+               <pc xml:id="erar-2346220">,</pc>
+               <c> </c>
+               <w xml:id="erar-2346230">trust</w>
+               <c> </c>
+               <w xml:id="erar-2346240">me</w>
+               <pc xml:id="erar-2346250">,</pc>
+               <c> </c>
+               <w xml:id="erar-2346260">and</w>
+               <c> </c>
+               <w xml:id="erar-2346270">confess</w>
+               <c> </c>
+               <w xml:id="erar-2346280">with</w>
+               <c> </c>
+               <w xml:id="erar-2346290">truth</w>
+            </l>
+            <l xml:id="erar-l08795">
+               <c> </c>
+               <w xml:id="erar-2346300">That</w>
+               <c> </c>
+               <w xml:id="erar-2346310">Silence</w>
+               <pc xml:id="erar-2346320">’</pc>
+               <c> </c>
+               <w xml:id="erar-2346330">God</w>
+               <pc xml:id="erar-2346340">,</pc>
+               <c> </c>
+               <w xml:id="erar-2346350">in</w>
+               <c> </c>
+               <w xml:id="erar-2346360">very</w>
+               <c> </c>
+               <w xml:id="erar-2346370">sooth</w>
+               <pc xml:id="erar-2346380">,</pc>
+            </l>
+            <l xml:id="erar-l08800">
+               <c> </c>
+               <w xml:id="erar-2346390">Is</w>
+               <c> </c>
+               <w xml:id="erar-2346400">brother</w>
+               <c> </c>
+               <w xml:id="erar-2346410">to</w>
+               <c> </c>
+               <w xml:id="erar-2346420">the</w>
+               <c> </c>
+               <w xml:id="erar-2346430">God</w>
+               <c> </c>
+               <w xml:id="erar-2346440">of</w>
+               <c> </c>
+               <w xml:id="erar-2346450">Death</w>
+               <pc xml:id="erar-2346460" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08805">
+               <w xml:id="erar-2346470">Telling</w>
+               <c> </c>
+               <w xml:id="erar-2346480">our</w>
+               <c> </c>
+               <w xml:id="erar-2346490">woes</w>
+               <c> </c>
+               <w xml:id="erar-2346500">we</w>
+               <c> </c>
+               <w xml:id="erar-2346510">ofttimes</w>
+               <c> </c>
+               <w xml:id="erar-2346520">heal</w>
+            </l>
+            <l xml:id="erar-l08810">
+               <c> </c>
+               <w xml:id="erar-2346530">The</w>
+               <c> </c>
+               <w xml:id="erar-2346540">very</w>
+               <c> </c>
+               <w xml:id="erar-2346550">ills</w>
+               <c> </c>
+               <w xml:id="erar-2346560">that</w>
+               <c> </c>
+               <w xml:id="erar-2346570">we</w>
+               <c> </c>
+               <w xml:id="erar-2346580">reveal</w>
+               <pc xml:id="erar-2346590">,</pc>
+            </l>
+            <l xml:id="erar-l08815">
+               <c> </c>
+               <w xml:id="erar-2346600">And</w>
+               <c> </c>
+               <w xml:id="erar-2346610">mourn</w>
+               <c> </c>
+               <w xml:id="erar-2346620">and</w>
+               <c> </c>
+               <w xml:id="erar-2346630">cure</w>
+               <c> </c>
+               <w xml:id="erar-2346640">them</w>
+               <c> </c>
+               <w xml:id="erar-2346650">in</w>
+               <c> </c>
+               <w xml:id="erar-2346660">a</w>
+               <c> </c>
+               <w xml:id="erar-2346670">breath</w>
+               <pc xml:id="erar-2346680" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23480">
+         <speaker>
+            <w xml:id="erar-2346720">THE</w>
+            <c> </c>
+            <w xml:id="erar-2346730">POET</w>
+            <pc unit="sentence" xml:id="erar-2346730-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23485">
+            <l xml:id="erar-l08820">
+               <w xml:id="erar-2346760">If</w>
+               <c> </c>
+               <w xml:id="erar-2346770">I</w>
+               <c> </c>
+               <w xml:id="erar-2346780">must</w>
+               <c> </c>
+               <w xml:id="erar-2346790">tell</w>
+               <c> </c>
+               <w xml:id="erar-2346800">thee</w>
+               <c> </c>
+               <w xml:id="erar-2346810">of</w>
+               <c> </c>
+               <w xml:id="erar-2346820">my</w>
+               <c> </c>
+               <w xml:id="erar-2346830">suffering</w>
+               <pc xml:id="erar-2346840">,</pc>
+            </l>
+            <l xml:id="erar-l08825">
+               <c> </c>
+               <w xml:id="erar-2346850">I</w>
+               <c> </c>
+               <w xml:id="erar-2346860">scarcely</w>
+               <c> </c>
+               <w xml:id="erar-2346870">know</w>
+               <c> </c>
+               <w xml:id="erar-2346880">what</w>
+               <c> </c>
+               <w xml:id="erar-2346890">name</w>
+               <c> </c>
+               <w xml:id="erar-2346900">it</w>
+               <c> </c>
+               <w xml:id="erar-2346910">ought</w>
+               <c> </c>
+               <w xml:id="erar-2346920">to</w>
+               <c> </c>
+               <w xml:id="erar-2346930">bear</w>
+               <pc xml:id="erar-2346940">,</pc>
+            </l>
+            <l xml:id="erar-l08830">
+               <c> </c>
+               <w xml:id="erar-2346950">Whether</w>
+               <c> </c>
+               <w xml:id="erar-2346960">it</w>
+               <c> </c>
+               <w xml:id="erar-2346970">rose</w>
+               <c> </c>
+               <w xml:id="erar-2346980">from</w>
+               <c> </c>
+               <w xml:id="erar-2346990">love</w>
+               <pc xml:id="erar-2347000">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347010">or</w>
+               <c> </c>
+               <w xml:id="erar-2347020">was</w>
+               <c> </c>
+               <w xml:id="erar-2347030">a</w>
+               <c> </c>
+               <w xml:id="erar-2347040">thing</w>
+            </l>
+            <l xml:id="erar-l08835">
+               <c> </c>
+               <w xml:id="erar-2347050">Of</w>
+               <c> </c>
+               <w xml:id="erar-2347060">pride</w>
+               <c> </c>
+               <w xml:id="erar-2347070">and</w>
+               <c> </c>
+               <w xml:id="erar-2347080">folly</w>
+               <c> </c>
+               <w xml:id="erar-2347090">and</w>
+               <c> </c>
+               <w xml:id="erar-2347100">my</w>
+               <c> </c>
+               <w xml:id="erar-2347110">own</w>
+               <c> </c>
+               <w xml:id="erar-2347120">despair</w>
+               <pc xml:id="erar-2347130" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08840">
+               <w xml:id="erar-2347140">But</w>
+               <c> </c>
+               <w xml:id="erar-2347150">now</w>
+               <c> </c>
+               <w xml:id="erar-2347160">I</w>
+               <c> </c>
+               <w xml:id="erar-2347170">will</w>
+               <c> </c>
+               <w xml:id="erar-2347180">unfold</w>
+               <c> </c>
+               <w xml:id="erar-2347190">my</w>
+               <c> </c>
+               <w xml:id="erar-2347200">burning</w>
+               <c> </c>
+               <w xml:id="erar-2347210">pain</w>
+               <pc xml:id="erar-2347220">,</pc>
+            </l>
+            <l xml:id="erar-l08845">
+               <c> </c>
+               <w xml:id="erar-2347230">Since</w>
+               <c> </c>
+               <w xml:id="erar-2347240">we</w>
+               <c> </c>
+               <w xml:id="erar-2347250">are</w>
+               <c> </c>
+               <w xml:id="erar-2347260">here</w>
+               <pc xml:id="erar-2347270">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347280">alone</w>
+               <c> </c>
+               <w xml:id="erar-2347290">beside</w>
+               <c> </c>
+               <w xml:id="erar-2347300">the</w>
+               <c> </c>
+               <w xml:id="erar-2347310">fire</w>
+               <pc xml:id="erar-2347320">,</pc>
+            </l>
+            <l xml:id="erar-l08850">
+               <c> </c>
+               <w xml:id="erar-2347330">If</w>
+               <c> </c>
+               <w xml:id="erar-2347340">thou</w>
+               <pc xml:id="erar-2347350">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347360">dear</w>
+               <c> </c>
+               <w xml:id="erar-2347370">Muse</w>
+               <pc xml:id="erar-2347380">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347390">wilt</w>
+               <c> </c>
+               <w xml:id="erar-2347400">lull</w>
+               <c> </c>
+               <w xml:id="erar-2347410">my</w>
+               <c> </c>
+               <w xml:id="erar-2347420">racking</w>
+               <c> </c>
+               <w xml:id="erar-2347430">brain</w>
+               <pc xml:id="erar-2347440">,</pc>
+            </l>
+            <l xml:id="erar-l08855">
+               <c> </c>
+               <w xml:id="erar-2347450">As</w>
+               <c> </c>
+               <w xml:id="erar-2347460">in</w>
+               <c> </c>
+               <w xml:id="erar-2347470">my</w>
+               <c> </c>
+               <w xml:id="erar-2347480">happier</w>
+               <c> </c>
+               <w xml:id="erar-2347490">days</w>
+               <pc xml:id="erar-2347500">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347510">with</w>
+               <c> </c>
+               <w xml:id="erar-2347520">thy</w>
+               <c> </c>
+               <w xml:id="erar-2347530">loved</w>
+               <c> </c>
+               <w xml:id="erar-2347540">lyre</w>
+               <pc xml:id="erar-2347550" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23490">
+         <speaker>
+            <w xml:id="erar-2347590">THE</w>
+            <c> </c>
+            <w xml:id="erar-2347600">MUSE</w>
+            <pc unit="sentence" xml:id="erar-2347600-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23495">
+            <l xml:id="erar-l08860">
+               <w xml:id="erar-2347630">Before</w>
+               <c> </c>
+               <w xml:id="erar-2347640">you</w>
+               <c> </c>
+               <w xml:id="erar-2347650">tell</w>
+               <c> </c>
+               <w xml:id="erar-2347660">me</w>
+               <c> </c>
+               <w xml:id="erar-2347670">your</w>
+               <c> </c>
+               <w xml:id="erar-2347680">harsh</w>
+               <c> </c>
+               <w xml:id="erar-2347690">fate</w>
+            </l>
+            <l xml:id="erar-l08865">
+               <c> </c>
+               <w xml:id="erar-2347700">Drive</w>
+               <c> </c>
+               <w xml:id="erar-2347710">cruel</w>
+               <c> </c>
+               <w xml:id="erar-2347720">rancor</w>
+               <c> </c>
+               <w xml:id="erar-2347730">far</w>
+               <c> </c>
+               <w xml:id="erar-2347740">away</w>
+               <pc xml:id="erar-2347750">;</pc>
+            </l>
+            <l xml:id="erar-l08870">
+               <c> </c>
+               <w xml:id="erar-2347760">For</w>
+               <pc xml:id="erar-2347770">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347780">Poet</w>
+               <pc xml:id="erar-2347790">,</pc>
+               <c> </c>
+               <w xml:id="erar-2347800">you</w>
+               <c> </c>
+               <w xml:id="erar-2347810">must</w>
+               <c> </c>
+               <w xml:id="erar-2347820">speak</w>
+               <c> </c>
+               <w xml:id="erar-2347830">to-day</w>
+            </l>
+            <l xml:id="erar-l08875">
+               <c> </c>
+               <w xml:id="erar-2347840">Without</w>
+               <c> </c>
+               <w xml:id="erar-2347850">a</w>
+               <c> </c>
+               <w xml:id="erar-2347860">trace</w>
+               <c> </c>
+               <w xml:id="erar-2347870">of</w>
+               <c> </c>
+               <w xml:id="erar-2347880">love</w>
+               <c> </c>
+               <w xml:id="erar-2347890">or</w>
+               <c> </c>
+               <w xml:id="erar-2347900">hate</w>
+               <pc xml:id="erar-2347910" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08880">
+               <w xml:id="erar-2347920">If</w>
+               <c> </c>
+               <w xml:id="erar-2347930">you</w>
+               <c> </c>
+               <w xml:id="erar-2347940">remember</w>
+               <c> </c>
+               <w xml:id="erar-2347950">long</w>
+               <c> </c>
+               <w xml:id="erar-2347960">ago</w>
+            </l>
+            <l xml:id="erar-l08885">
+               <c> </c>
+               <w xml:id="erar-2347970">You</w>
+               <c> </c>
+               <w xml:id="erar-2347980">held</w>
+               <c> </c>
+               <w xml:id="erar-2347990">me</w>
+               <c> </c>
+               <w xml:id="erar-2348000">soother</w>
+               <c> </c>
+               <w xml:id="erar-2348010">of</w>
+               <c> </c>
+               <w xml:id="erar-2348020">your</w>
+               <c> </c>
+               <w xml:id="erar-2348030">heart</w>
+               <c> </c>
+               <pc xml:id="erar-2348040">–</pc>
+            </l>
+            <l xml:id="erar-l08890">
+               <c> </c>
+               <w xml:id="erar-2348050">Then</w>
+               <c> </c>
+               <w xml:id="erar-2348060">would</w>
+               <c> </c>
+               <w xml:id="erar-2348070">you</w>
+               <c> </c>
+               <w xml:id="erar-2348080">have</w>
+               <c> </c>
+               <w xml:id="erar-2348090">me</w>
+               <c> </c>
+               <w xml:id="erar-2348100">take</w>
+               <c> </c>
+               <w xml:id="erar-2348110">a</w>
+               <c> </c>
+               <w xml:id="erar-2348120">part</w>
+            </l>
+            <l xml:id="erar-l08895">
+               <c> </c>
+               <w xml:id="erar-2348130">In</w>
+               <c> </c>
+               <w xml:id="erar-2348140">passions</w>
+               <c> </c>
+               <w xml:id="erar-2348150">which</w>
+               <c> </c>
+               <w xml:id="erar-2348160">have</w>
+               <c> </c>
+               <w xml:id="erar-2348170">wrought</w>
+               <c> </c>
+               <w xml:id="erar-2348180">your</w>
+               <c> </c>
+               <w xml:id="erar-2348190">woe</w>
+               <pc xml:id="erar-2348200" unit="sentence">?</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23500">
+         <speaker>
+            <w xml:id="erar-2348240">THE</w>
+            <c> </c>
+            <w xml:id="erar-2348250">POET</w>
+            <pc unit="sentence" xml:id="erar-2348250-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23505">
+            <l xml:id="erar-l08900">
+               <w xml:id="erar-2348280">So</w>
+               <c> </c>
+               <w xml:id="erar-2348290">well</w>
+               <c> </c>
+               <w xml:id="erar-2348300">I</w>
+               <c> </c>
+               <w xml:id="erar-2348310">conquered</w>
+               <c> </c>
+               <w xml:id="erar-2348320">all</w>
+               <c> </c>
+               <w xml:id="erar-2348330">this</w>
+               <c> </c>
+               <w xml:id="erar-2348340">hideous</w>
+               <c> </c>
+               <w xml:id="erar-2348350">strife</w>
+               <pc xml:id="erar-2348360">,</pc>
+            </l>
+            <l xml:id="erar-l08905">
+               <c> </c>
+               <w xml:id="erar-2348370">That</w>
+               <c> </c>
+               <w xml:id="erar-2348380">sometimes</w>
+               <c> </c>
+               <w xml:id="erar-2348390">when</w>
+               <c> </c>
+               <w xml:id="erar-2348400">I</w>
+               <c> </c>
+               <w xml:id="erar-2348410">dream</w>
+               <c> </c>
+               <w xml:id="erar-2348420">me</w>
+               <c> </c>
+               <w xml:id="erar-2348430">of</w>
+               <c> </c>
+               <w xml:id="erar-2348440">my</w>
+               <c> </c>
+               <w xml:id="erar-2348450">ill</w>
+               <pc xml:id="erar-2348460">,</pc>
+            </l>
+            <l xml:id="erar-l08910">
+               <c> </c>
+               <w xml:id="erar-2348470">In</w>
+               <c> </c>
+               <w xml:id="erar-2348480">those</w>
+               <c> </c>
+               <w xml:id="erar-2348490">same</w>
+               <c> </c>
+               <w xml:id="erar-2348500">spots</w>
+               <c> </c>
+               <w xml:id="erar-2348510">I</w>
+               <c> </c>
+               <w xml:id="erar-2348520">risked</w>
+               <c> </c>
+               <w xml:id="erar-2348530">my</w>
+               <c> </c>
+               <w xml:id="erar-2348540">boyhood’s</w>
+               <c> </c>
+               <w xml:id="erar-2348550">life</w>
+            </l>
+            <l xml:id="erar-l08915">
+               <c> </c>
+               <w xml:id="erar-2348560">A</w>
+               <c> </c>
+               <w xml:id="erar-2348570">stranger</w>
+               <c> </c>
+               <w xml:id="erar-2348580">takes</w>
+               <c> </c>
+               <w xml:id="erar-2348590">the</w>
+               <c> </c>
+               <w xml:id="erar-2348600">place</w>
+               <c> </c>
+               <w xml:id="erar-2348610">I</w>
+               <c> </c>
+               <w xml:id="erar-2348620">wont</w>
+               <c> </c>
+               <w xml:id="erar-2348630">to</w>
+               <c> </c>
+               <w xml:id="erar-2348640">fill</w>
+               <pc xml:id="erar-2348650" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08920">
+               <w xml:id="erar-2348660">Be</w>
+               <c> </c>
+               <w xml:id="erar-2348670">fearless</w>
+               <c> </c>
+               <w xml:id="erar-2348680">then</w>
+               <pc xml:id="erar-2348690">,</pc>
+               <c> </c>
+               <w xml:id="erar-2348700">O</w>
+               <c> </c>
+               <w xml:id="erar-2348710">Muse</w>
+               <pc xml:id="erar-2348720">,</pc>
+               <c> </c>
+               <w xml:id="erar-2348730">and</w>
+               <c> </c>
+               <w xml:id="erar-2348740">mark</w>
+               <pc xml:id="erar-2348750">,</pc>
+               <c> </c>
+               <w xml:id="erar-2348760">that</w>
+               <c> </c>
+               <w xml:id="erar-2348770">while</w>
+            </l>
+            <l xml:id="erar-l08925">
+               <c> </c>
+               <w xml:id="erar-2348780">I</w>
+               <c> </c>
+               <w xml:id="erar-2348790">tell</w>
+               <c> </c>
+               <w xml:id="erar-2348800">my</w>
+               <c> </c>
+               <w xml:id="erar-2348810">woes</w>
+               <pc xml:id="erar-2348820">,</pc>
+               <c> </c>
+               <w xml:id="erar-2348830">there</w>
+               <c> </c>
+               <w xml:id="erar-2348840">is</w>
+               <c> </c>
+               <w xml:id="erar-2348850">no</w>
+               <c> </c>
+               <w xml:id="erar-2348860">fond</w>
+               <c> </c>
+               <w xml:id="erar-2348870">regret</w>
+               <pc xml:id="erar-2348880">;</pc>
+            </l>
+            <l xml:id="erar-l08930">
+               <c> </c>
+               <w xml:id="erar-2348890">Sweet</w>
+               <c> </c>
+               <w xml:id="erar-2348900">it</w>
+               <c> </c>
+               <w xml:id="erar-2348910">is</w>
+               <c> </c>
+               <w xml:id="erar-2348920">to</w>
+               <c> </c>
+               <w xml:id="erar-2348930">weep</w>
+               <pc xml:id="erar-2348940">,</pc>
+               <c> </c>
+               <w xml:id="erar-2348950">but</w>
+               <c> </c>
+               <w xml:id="erar-2348960">sweeter</w>
+               <c> </c>
+               <w xml:id="erar-2348970">still</w>
+               <c> </c>
+               <w xml:id="erar-2348980">to</w>
+               <c> </c>
+               <w xml:id="erar-2348990">smile</w>
+            </l>
+            <l xml:id="erar-l08935">
+               <c> </c>
+               <w xml:id="erar-2349000">At</w>
+               <c> </c>
+               <w xml:id="erar-2349010">the</w>
+               <c> </c>
+               <w xml:id="erar-2349020">thoughts</w>
+               <c> </c>
+               <w xml:id="erar-2349030">of</w>
+               <c> </c>
+               <w xml:id="erar-2349040">woes</w>
+               <c> </c>
+               <w xml:id="erar-2349050">we</w>
+               <c> </c>
+               <w xml:id="erar-2349060">are</w>
+               <c> </c>
+               <w xml:id="erar-2349070">able</w>
+               <c> </c>
+               <w xml:id="erar-2349080">to</w>
+               <c> </c>
+               <w xml:id="erar-2349090">forget</w>
+               <pc xml:id="erar-2349100" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23510">
+         <speaker>
+            <w xml:id="erar-2349140">THE</w>
+            <c> </c>
+            <w xml:id="erar-2349150">MUSE</w>
+            <pc unit="sentence" xml:id="erar-2349150-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23515">
+            <l xml:id="erar-l08940">
+               <w xml:id="erar-2349180">Like</w>
+               <c> </c>
+               <w xml:id="erar-2349190">a</w>
+               <c> </c>
+               <w xml:id="erar-2349200">watchful</w>
+               <c> </c>
+               <w xml:id="erar-2349210">mother</w>
+               <c> </c>
+               <w xml:id="erar-2349220">bending</w>
+            </l>
+            <l xml:id="erar-l08945">
+               <c> </c>
+               <w xml:id="erar-2349230">O’er</w>
+               <c> </c>
+               <w xml:id="erar-2349240">the</w>
+               <c> </c>
+               <w xml:id="erar-2349250">cradle</w>
+               <c> </c>
+               <w xml:id="erar-2349260">of</w>
+               <c> </c>
+               <w xml:id="erar-2349270">her</w>
+               <c> </c>
+               <w xml:id="erar-2349280">son</w>
+               <pc xml:id="erar-2349290">,</pc>
+            </l>
+            <l xml:id="erar-l08950">
+               <c> </c>
+               <w xml:id="erar-2349300">So</w>
+               <c> </c>
+               <w xml:id="erar-2349310">I</w>
+               <c> </c>
+               <w xml:id="erar-2349320">rest</w>
+               <pc xml:id="erar-2349330">,</pc>
+               <c> </c>
+               <w xml:id="erar-2349340">while</w>
+               <c> </c>
+               <w xml:id="erar-2349350">you</w>
+               <c> </c>
+               <w xml:id="erar-2349360">are</w>
+               <c> </c>
+               <w xml:id="erar-2349370">blending</w>
+            </l>
+            <l xml:id="erar-l08955">
+               <c> </c>
+               <w xml:id="erar-2349380">Future</w>
+               <c> </c>
+               <w xml:id="erar-2349390">hopes</w>
+               <c> </c>
+               <w xml:id="erar-2349400">with</w>
+               <c> </c>
+               <w xml:id="erar-2349410">deeds</w>
+               <c> </c>
+               <w xml:id="erar-2349420">misdone</w>
+               <pc xml:id="erar-2349430" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l08960">
+               <w xml:id="erar-2349440">Speak</w>
+               <pc xml:id="erar-2349450">,</pc>
+               <c> </c>
+               <w xml:id="erar-2349460">O</w>
+               <c> </c>
+               <w xml:id="erar-2349470">Poet</w>
+               <pc xml:id="erar-2349480">,</pc>
+               <c> </c>
+               <w xml:id="erar-2349490">and</w>
+               <c> </c>
+               <w xml:id="erar-2349500">my</w>
+               <c> </c>
+               <w xml:id="erar-2349510">lyre</w>
+            </l>
+            <l xml:id="erar-l08965">
+               <c> </c>
+               <w xml:id="erar-2349520">Shall</w>
+               <c> </c>
+               <w xml:id="erar-2349530">every</w>
+               <c> </c>
+               <w xml:id="erar-2349540">trembling</w>
+               <c> </c>
+               <w xml:id="erar-2349550">accent</w>
+               <c> </c>
+               <w xml:id="erar-2349560">fire</w>
+               <pc xml:id="erar-2349570">,</pc>
+            </l>
+            <l xml:id="erar-l08970">
+               <c> </c>
+               <w xml:id="erar-2349580">And</w>
+               <c> </c>
+               <w xml:id="erar-2349590">lull</w>
+               <c> </c>
+               <w xml:id="erar-2349600">you</w>
+               <c> </c>
+               <w xml:id="erar-2349610">with</w>
+               <c> </c>
+               <w xml:id="erar-2349620">its</w>
+               <c> </c>
+               <w xml:id="erar-2349630">wonted</w>
+               <c> </c>
+               <w xml:id="erar-2349640">lays</w>
+               <pc xml:id="erar-2349650">,</pc>
+            </l>
+            <l xml:id="erar-l08975">
+               <c> </c>
+               <w xml:id="erar-2349660">Till</w>
+               <pc xml:id="erar-2349670">,</pc>
+               <c> </c>
+               <w xml:id="erar-2349680">in</w>
+               <c> </c>
+               <w xml:id="erar-2349690">a</w>
+               <c> </c>
+               <w xml:id="erar-2349700">flood</w>
+               <c> </c>
+               <w xml:id="erar-2349710">of</w>
+               <c> </c>
+               <w xml:id="erar-2349720">silver</w>
+               <c> </c>
+               <w xml:id="erar-2349730">light</w>
+               <pc xml:id="erar-2349740">,</pc>
+            </l>
+            <l xml:id="erar-l08980">
+               <c> </c>
+               <w xml:id="erar-2349750">Like</w>
+               <c> </c>
+               <w xml:id="erar-2349760">some</w>
+               <c> </c>
+               <w xml:id="erar-2349770">vision</w>
+               <c> </c>
+               <w xml:id="erar-2349780">gay</w>
+               <c> </c>
+               <w xml:id="erar-2349790">and</w>
+               <c> </c>
+               <w xml:id="erar-2349800">bright</w>
+               <pc xml:id="erar-2349810">,</pc>
+            </l>
+            <l xml:id="erar-l08985">
+               <c> </c>
+               <w xml:id="erar-2349820">Fades</w>
+               <c> </c>
+               <w xml:id="erar-2349830">all</w>
+               <c> </c>
+               <w xml:id="erar-2349840">the</w>
+               <c> </c>
+               <w xml:id="erar-2349850">gloom</w>
+               <c> </c>
+               <w xml:id="erar-2349860">of</w>
+               <c> </c>
+               <w xml:id="erar-2349870">bygone</w>
+               <c> </c>
+               <w xml:id="erar-2349880">days</w>
+               <pc xml:id="erar-2349890" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+      <sp xml:id="erar-s23520">
+         <speaker>
+            <w xml:id="erar-2349930">THE</w>
+            <c> </c>
+            <w xml:id="erar-2349940">POET</w>
+            <pc unit="sentence" xml:id="erar-2349940-eos"/>
+         </speaker>
+         <lg xml:id="erar-s23525">
+            <l xml:id="erar-l08990">
+               <w xml:id="erar-2349970">Loved</w>
+               <c> </c>
+               <w xml:id="erar-2349980">nights</w>
+               <c> </c>
+               <w xml:id="erar-2349990">of</w>
+               <c> </c>
+               <w xml:id="erar-2350000">toil</w>
+               <pc xml:id="erar-2350010">,</pc>
+               <c> </c>
+               <w xml:id="erar-2350020">of</w>
+               <c> </c>
+               <w xml:id="erar-2350030">darling</w>
+               <c> </c>
+               <w xml:id="erar-2350040">solitude</w>
+               <pc xml:id="erar-2350050">,</pc>
+            </l>
+            <l xml:id="erar-l08995">
+               <c> </c>
+               <w xml:id="erar-2350060">O</w>
+               <c> </c>
+               <w xml:id="erar-2350070">nights</w>
+               <c> </c>
+               <w xml:id="erar-2350080">of</w>
+               <c> </c>
+               <w xml:id="erar-2350090">toil</w>
+               <c> </c>
+               <w xml:id="erar-2350100">when</w>
+               <c> </c>
+               <w xml:id="erar-2350110">life</w>
+               <c> </c>
+               <w xml:id="erar-2350120">sped</w>
+               <c> </c>
+               <w xml:id="erar-2350130">fast</w>
+               <c> </c>
+               <pc xml:id="erar-2350140">–</pc>
+            </l>
+            <l xml:id="erar-l09000">
+               <c> </c>
+               <w xml:id="erar-2350150">To</w>
+               <c> </c>
+               <w xml:id="erar-2350160">my</w>
+               <c> </c>
+               <w xml:id="erar-2350170">old</w>
+               <c> </c>
+               <w xml:id="erar-2350180">study</w>
+               <pc xml:id="erar-2350190">,</pc>
+               <c> </c>
+               <w xml:id="erar-2350200">in</w>
+               <c> </c>
+               <w xml:id="erar-2350210">my</w>
+               <c> </c>
+               <w xml:id="erar-2350220">wonted</w>
+               <c> </c>
+               <w xml:id="erar-2350230">mood</w>
+               <pc xml:id="erar-2350240">,</pc>
+            </l>
+            <l xml:id="erar-l09005">
+               <c> </c>
+               <w xml:id="erar-2350250">Thank</w>
+               <c> </c>
+               <w xml:id="erar-2350260">God!</w>
+               <c> </c>
+               <w xml:id="erar-2350270">I</w>
+               <c> </c>
+               <w xml:id="erar-2350280">have</w>
+               <c> </c>
+               <w xml:id="erar-2350290">come</w>
+               <c> </c>
+               <w xml:id="erar-2350300">back</w>
+               <c> </c>
+               <w xml:id="erar-2350310">at</w>
+               <c> </c>
+               <w xml:id="erar-2350320">last</w>
+               <pc xml:id="erar-2350330" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l09010">
+               <w xml:id="erar-2350340">Tho</w>
+               <pc xml:id="erar-2350350">’</pc>
+               <c> </c>
+               <w xml:id="erar-2350360">oft</w>
+               <c> </c>
+               <w xml:id="erar-2350370">deserted</w>
+               <pc xml:id="erar-2350380">,</pc>
+               <c> </c>
+               <w xml:id="erar-2350390">how</w>
+               <c> </c>
+               <w xml:id="erar-2350400">I</w>
+               <c> </c>
+               <w xml:id="erar-2350410">love</w>
+               <c> </c>
+               <w xml:id="erar-2350420">each</w>
+               <c> </c>
+               <w xml:id="erar-2350430">wall</w>
+               <c> </c>
+               <pc xml:id="erar-2350440">–</pc>
+            </l>
+            <l xml:id="erar-l09015">
+               <c> </c>
+               <w xml:id="erar-2350450">Each</w>
+               <c> </c>
+               <w xml:id="erar-2350460">book</w>
+               <c> </c>
+               <w xml:id="erar-2350470">upon</w>
+               <c> </c>
+               <w xml:id="erar-2350480">the</w>
+               <c> </c>
+               <w xml:id="erar-2350490">dusty</w>
+               <c> </c>
+               <w xml:id="erar-2350500">shelves</w>
+               <pc xml:id="erar-2350510" unit="sentence">!</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l09020">
+               <w xml:id="erar-2350520">Remember</w>
+               <pc xml:id="erar-2350530">,</pc>
+               <c> </c>
+               <w xml:id="erar-2350540">Muse</w>
+               <pc xml:id="erar-2350550">,</pc>
+               <c> </c>
+               <w xml:id="erar-2350560">how</w>
+               <c> </c>
+               <w xml:id="erar-2350570">it</w>
+               <c> </c>
+               <w xml:id="erar-2350580">was</w>
+               <c> </c>
+               <w xml:id="erar-2350590">all</w>
+               <c> </c>
+               <w xml:id="erar-2350600">in</w>
+               <c> </c>
+               <w xml:id="erar-2350610">all</w>
+               <pc xml:id="erar-2350620">,</pc>
+            </l>
+            <l xml:id="erar-l09025">
+               <c> </c>
+               <w xml:id="erar-2350630">A</w>
+               <c> </c>
+               <w xml:id="erar-2350640">universe</w>
+               <c> </c>
+               <w xml:id="erar-2350650">for</w>
+               <c> </c>
+               <w xml:id="erar-2350660">our</w>
+               <c> </c>
+               <w xml:id="erar-2350670">two</w>
+               <c> </c>
+               <w xml:id="erar-2350680">selves</w>
+               <pc xml:id="erar-2350690" unit="sentence">!</pc>
+               <c> </c>
+            </l>
+            <l xml:id="erar-l09030">
+               <w xml:id="erar-2350700">When</w>
+               <c> </c>
+               <w xml:id="erar-2350710">to</w>
+               <c> </c>
+               <w xml:id="erar-2350720">the</w>
+               <c> </c>
+               <w xml:id="erar-2350730">careless</w>
+               <c> </c>
+               <w xml:id="erar-2350740">scoffing</w>
+               <c> </c>
+               <w xml:id="erar-2350750">world</w>
+               <c> </c>
+               <w xml:id="erar-2350760">I</w>
+               <c> </c>
+               <w xml:id="erar-2350770">told</w>
+            </l>
+            <l xml:id="erar-l09035">
+               <c> </c>
+               <w xml:id="erar-2350780">The</w>
+               <c> </c>
+               <w xml:id="erar-2350790">burning</w>
+               <c> </c>
+               <w xml:id="erar-2350800">songs</w>
+               <c> </c>
+               <w xml:id="erar-2350810">I</w>
+               <c> </c>
+               <w xml:id="erar-2350820">heard</w>
+               <c> </c>
+               <w xml:id="erar-2350830">from</w>
+               <c> </c>
+               <w xml:id="erar-2350840">you</w>
+               <pc xml:id="erar-2350850" unit="sentence">.</pc>
+               <c> </c>
+            </l>
+         </lg>
+      </sp>
+   </div>
+</div>

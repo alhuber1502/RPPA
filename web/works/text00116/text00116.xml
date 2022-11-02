@@ -1,1 +1,339 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original"
+     corresp="#work00116"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00116"
+     xml:lang="eng">
+   <link target="#pers00009" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="pbrp-n00590">
+      <date from="1784" to="1789" type="comp">
+         <w xml:id="pbrp-1477520">1784-1789</w>
+      </date>
+      <date type="publ" when="1789">
+         <w xml:id="pbrp-1477550">1789</w>
+      </date>
+      <bibl>
+         <title level="m">
+            <w xml:id="pbrp-1477580">Songs</w>
+            <c> </c>
+            <w xml:id="pbrp-1477590">of</w>
+            <c> </c>
+            <w xml:id="pbrp-1477600">Innocence</w>
+         </title>
+         <c> </c>
+         <pc xml:id="pbrp-1477610">(</pc>
+         <date type="publ" when="1789">
+            <w xml:id="pbrp-1477630">1789</w>
+         </date>
+         <pc xml:id="pbrp-1477650" unit="sentence">)</pc>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="eng" xml:id="pbrp-h02665">
+      <w xml:id="pbrp-1476110">The</w>
+      <c> </c>
+      <w xml:id="pbrp-1476120">Lamb</w>
+   </head>
+   <lg xml:id="pbrp-s11835">
+      <l rendition="#h_3" xml:id="pbrp-l65720">
+         <w xml:id="pbrp-1476150">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1476160">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1476170">who</w>
+         <c> </c>
+         <w xml:id="pbrp-1476180">made</w>
+         <c> </c>
+         <w xml:id="pbrp-1476190">thee</w>
+         <pc xml:id="pbrp-1476200" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="pbrp-l65725">
+         <w xml:id="pbrp-1476210">Dost</w>
+         <c> </c>
+         <w xml:id="pbrp-1476220">thou</w>
+         <c> </c>
+         <w xml:id="pbrp-1476230">know</w>
+         <c> </c>
+         <w xml:id="pbrp-1476240">who</w>
+         <c> </c>
+         <w xml:id="pbrp-1476250">made</w>
+         <c> </c>
+         <w xml:id="pbrp-1476260">thee</w>
+         <pc xml:id="pbrp-1476270">,</pc>
+      </l>
+      <l xml:id="pbrp-l65730">
+         <c> </c>
+         <w xml:id="pbrp-1476280">Gave</w>
+         <c> </c>
+         <w xml:id="pbrp-1476290">thee</w>
+         <c> </c>
+         <w xml:id="pbrp-1476300">life</w>
+         <c> </c>
+         <w xml:id="pbrp-1476310">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1476320">bid</w>
+         <c> </c>
+         <w xml:id="pbrp-1476330">thee</w>
+         <c> </c>
+         <w xml:id="pbrp-1476340">feed</w>
+      </l>
+      <l xml:id="pbrp-l65735">
+         <c> </c>
+         <w xml:id="pbrp-1476350">By</w>
+         <c> </c>
+         <w xml:id="pbrp-1476360">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1476370">stream</w>
+         <c> </c>
+         <w xml:id="pbrp-1476380">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1476390">o’er</w>
+         <c> </c>
+         <w xml:id="pbrp-1476400">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1476410">mead</w>
+         <pc xml:id="pbrp-1476420">,</pc>
+      </l>
+      <l n="5" xml:id="pbrp-l65740">
+         <c> </c>
+         <w xml:id="pbrp-1476430">Gave</w>
+         <c> </c>
+         <w xml:id="pbrp-1476440">thee</w>
+         <c> </c>
+         <w xml:id="pbrp-1476450">clothing</w>
+         <c> </c>
+         <w xml:id="pbrp-1476460">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1476470">delight</w>
+         <pc xml:id="pbrp-1476480">,</pc>
+      </l>
+      <l xml:id="pbrp-l65745">
+         <c> </c>
+         <w xml:id="pbrp-1476490">Softest</w>
+         <c> </c>
+         <w xml:id="pbrp-1476500">clothing</w>
+         <c> </c>
+         <w xml:id="pbrp-1476510">woolly</w>
+         <c> </c>
+         <w xml:id="pbrp-1476520">bright</w>
+         <pc xml:id="pbrp-1476530">,</pc>
+      </l>
+      <l xml:id="pbrp-l65750">
+         <c> </c>
+         <w xml:id="pbrp-1476540">Gave</w>
+         <c> </c>
+         <w xml:id="pbrp-1476550">thee</w>
+         <c> </c>
+         <w xml:id="pbrp-1476560">such</w>
+         <c> </c>
+         <w xml:id="pbrp-1476570">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1476580">tender</w>
+         <c> </c>
+         <w xml:id="pbrp-1476590">voice</w>
+         <pc xml:id="pbrp-1476600">,</pc>
+      </l>
+      <l xml:id="pbrp-l65755">
+         <c> </c>
+         <w xml:id="pbrp-1476610">Making</w>
+         <c> </c>
+         <w xml:id="pbrp-1476620">all</w>
+         <c> </c>
+         <w xml:id="pbrp-1476630">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1476640">vales</w>
+         <c> </c>
+         <w xml:id="pbrp-1476650">rejoice</w>
+         <pc xml:id="pbrp-1476660" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="pbrp-l65760">
+         <w xml:id="pbrp-1476670">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1476680">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1476690">who</w>
+         <c> </c>
+         <w xml:id="pbrp-1476700">made</w>
+         <c> </c>
+         <w xml:id="pbrp-1476710">thee</w>
+         <pc xml:id="pbrp-1476720">,</pc>
+      </l>
+      <l n="10" rendition="#h_3" xml:id="pbrp-l65765">
+         <c> </c>
+         <w xml:id="pbrp-1476730">Dost</w>
+         <c> </c>
+         <w xml:id="pbrp-1476740">thou</w>
+         <c> </c>
+         <w xml:id="pbrp-1476750">know</w>
+         <c> </c>
+         <w xml:id="pbrp-1476760">who</w>
+         <c> </c>
+         <w xml:id="pbrp-1476770">made</w>
+         <c> </c>
+         <w xml:id="pbrp-1476780">thee</w>
+         <pc xml:id="pbrp-1476790" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pbrp-s11840">
+      <l rendition="#h_3" xml:id="pbrp-l65770">
+         <w xml:id="pbrp-1476820">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1476830">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1476840">I’ll</w>
+         <c> </c>
+         <w xml:id="pbrp-1476850">tell</w>
+         <c> </c>
+         <w xml:id="pbrp-1476860">thee</w>
+         <pc xml:id="pbrp-1476870">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="pbrp-l65775">
+         <c> </c>
+         <w xml:id="pbrp-1476880">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1476890">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1476900">I’ll</w>
+         <c> </c>
+         <w xml:id="pbrp-1476910">tell</w>
+         <c> </c>
+         <w xml:id="pbrp-1476920">thee</w>
+         <pc xml:id="pbrp-1476930" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pbrp-l65780">
+         <w xml:id="pbrp-1476940">He</w>
+         <c> </c>
+         <w xml:id="pbrp-1476950">is</w>
+         <c> </c>
+         <w xml:id="pbrp-1476960">call
+<m subtype="sounded" type="suffix">
+                ed
+              </m>
+         </w>
+         <c> </c>
+         <w xml:id="pbrp-1476970">by</w>
+         <c> </c>
+         <w xml:id="pbrp-1476980">thy</w>
+         <c> </c>
+         <w xml:id="pbrp-1476990">name</w>
+         <pc xml:id="pbrp-1477000">,</pc>
+      </l>
+      <l xml:id="pbrp-l65785">
+         <c> </c>
+         <w xml:id="pbrp-1477010">For</w>
+         <c> </c>
+         <w xml:id="pbrp-1477020">He</w>
+         <c> </c>
+         <w xml:id="pbrp-1477030">calls</w>
+         <c> </c>
+         <w xml:id="pbrp-1477040">himself</w>
+         <c> </c>
+         <w xml:id="pbrp-1477050">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1477060">lamb</w>
+         <pc xml:id="pbrp-1477070">;</pc>
+      </l>
+      <l n="15" xml:id="pbrp-l65790">
+         <c> </c>
+         <w xml:id="pbrp-1477080">He</w>
+         <c> </c>
+         <w xml:id="pbrp-1477090">is</w>
+         <c> </c>
+         <w xml:id="pbrp-1477100">meek</w>
+         <c> </c>
+         <w xml:id="pbrp-1477110">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1477120">He</w>
+         <c> </c>
+         <w xml:id="pbrp-1477130">is</w>
+         <c> </c>
+         <w xml:id="pbrp-1477140">mild</w>
+         <pc xml:id="pbrp-1477150">,</pc>
+      </l>
+      <l xml:id="pbrp-l65795">
+         <c> </c>
+         <w xml:id="pbrp-1477160">He</w>
+         <c> </c>
+         <w xml:id="pbrp-1477170">became</w>
+         <c> </c>
+         <w xml:id="pbrp-1477180">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1477190">little</w>
+         <c> </c>
+         <w xml:id="pbrp-1477200">child</w>
+         <pc xml:id="pbrp-1477210" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pbrp-l65800">
+         <w xml:id="pbrp-1477220">I</w>
+         <c> </c>
+         <w xml:id="pbrp-1477230">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1477240">child</w>
+         <c> </c>
+         <w xml:id="pbrp-1477250">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1477260">thou</w>
+         <c> </c>
+         <w xml:id="pbrp-1477270">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1477280">lamb</w>
+         <pc xml:id="pbrp-1477290">,</pc>
+      </l>
+      <l xml:id="pbrp-l65805">
+         <c> </c>
+         <w xml:id="pbrp-1477300">We</w>
+         <c> </c>
+         <w xml:id="pbrp-1477310">are</w>
+         <c> </c>
+         <w xml:id="pbrp-1477320">call
+<m subtype="sounded" type="suffix">
+                ed
+              </m>
+         </w>
+         <c> </c>
+         <w xml:id="pbrp-1477330">by</w>
+         <c> </c>
+         <w xml:id="pbrp-1477340">his</w>
+         <c> </c>
+         <w xml:id="pbrp-1477350">name</w>
+         <c> </c>
+         <pc xml:id="pbrp-1477360">–</pc>
+      </l>
+      <l rendition="#h_3" xml:id="pbrp-l65810">
+         <c> </c>
+         <w xml:id="pbrp-1477370">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1477380">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1477390">God</w>
+         <c> </c>
+         <w xml:id="pbrp-1477400">bless</w>
+         <c> </c>
+         <w xml:id="pbrp-1477410">thee</w>
+         <pc xml:id="pbrp-1477420">,</pc>
+      </l>
+      <l n="20" rendition="#h_3" xml:id="pbrp-l65815">
+         <c> </c>
+         <w xml:id="pbrp-1477430">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1477440">lamb</w>
+         <c> </c>
+         <w xml:id="pbrp-1477450">God</w>
+         <c> </c>
+         <w xml:id="pbrp-1477460">bless</w>
+         <c> </c>
+         <w xml:id="pbrp-1477470">thee</w>
+         <pc xml:id="pbrp-1477480" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

@@ -1,1 +1,676 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original"
+     corresp="#work00464"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00589"
+     xml:lang="rus">
+   <link target="#pers00376" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n01085">
+      <date type="comp" when="1837">
+         <w xml:id="erar-4826250">1837</w>
+      </date>
+   </note>
+   <head type="main" xml:id="erar-h02090">
+      <w xml:id="erar-4823270">Лес</w>
+   </head>
+   <lg xml:id="erar-s55930">
+      <l xml:id="erar-l55705">
+         <w xml:id="erar-4823300">Что</w>
+         <pc xml:id="erar-4823310">,</pc>
+         <c> </c>
+         <w xml:id="erar-4823320">дремучий</w>
+         <c> </c>
+         <w xml:id="erar-4823330">лес</w>
+         <pc xml:id="erar-4823340">,</pc>
+      </l>
+      <l xml:id="erar-l55710">
+         <c> </c>
+         <w xml:id="erar-4823350">Призадумался</w>
+         <pc xml:id="erar-4823360">,</pc>
+         <c> </c>
+         <pc xml:id="erar-4823370">–</pc>
+      </l>
+      <l xml:id="erar-l55715">
+         <c> </c>
+         <w xml:id="erar-4823380">Грустью</w>
+         <c> </c>
+         <w xml:id="erar-4823390">темною</w>
+      </l>
+      <l xml:id="erar-l55720">
+         <c> </c>
+         <w xml:id="erar-4823400">Затуманился</w>
+         <pc xml:id="erar-4823410" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55935">
+      <l xml:id="erar-l55725">
+         <w xml:id="erar-4823440">Что</w>
+         <c> </c>
+         <w xml:id="erar-4823450">Бова-силач</w>
+      </l>
+      <l xml:id="erar-l55730">
+         <c> </c>
+         <w xml:id="erar-4823460">Заколдованный</w>
+         <pc xml:id="erar-4823470">,</pc>
+      </l>
+      <l xml:id="erar-l55735">
+         <c> </c>
+         <w xml:id="erar-4823480">С</w>
+         <c> </c>
+         <w xml:id="erar-4823490">непокрытою</w>
+      </l>
+      <l xml:id="erar-l55740">
+         <c> </c>
+         <w xml:id="erar-4823500">Головой</w>
+         <c> </c>
+         <w xml:id="erar-4823510">в</w>
+         <c> </c>
+         <w xml:id="erar-4823520">бою</w>
+         <pc xml:id="erar-4823530">,</pc>
+         <c> </c>
+         <pc xml:id="erar-4823540">–</pc>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55940">
+      <l xml:id="erar-l55745">
+         <w xml:id="erar-4823570">Ты</w>
+         <c> </c>
+         <w xml:id="erar-4823580">стоишь</w>
+         <c> </c>
+         <pc xml:id="erar-4823590">–</pc>
+         <c> </c>
+         <w xml:id="erar-4823600">поник</w>
+         <pc xml:id="erar-4823610">,</pc>
+      </l>
+      <l xml:id="erar-l55750">
+         <c> </c>
+         <w xml:id="erar-4823620">И</w>
+         <c> </c>
+         <w xml:id="erar-4823630">не</w>
+         <c> </c>
+         <w xml:id="erar-4823640">ратуешь</w>
+      </l>
+      <l xml:id="erar-l55755">
+         <c> </c>
+         <w xml:id="erar-4823650">С</w>
+         <c> </c>
+         <w xml:id="erar-4823660">мимолетною</w>
+      </l>
+      <l xml:id="erar-l55760">
+         <c> </c>
+         <w xml:id="erar-4823670">Тучей-бурею</w>
+         <pc xml:id="erar-4823680" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55945">
+      <l xml:id="erar-l55765">
+         <w xml:id="erar-4823710">Густолиственный</w>
+      </l>
+      <l xml:id="erar-l55770">
+         <c> </c>
+         <w xml:id="erar-4823720">Твой</w>
+         <c> </c>
+         <w xml:id="erar-4823730">зеленый</w>
+         <c> </c>
+         <w xml:id="erar-4823740">шлем</w>
+      </l>
+      <l xml:id="erar-l55775">
+         <c> </c>
+         <w xml:id="erar-4823750">Буйный</w>
+         <c> </c>
+         <w xml:id="erar-4823760">вихрь</w>
+         <c> </c>
+         <w xml:id="erar-4823770">сорвал</w>
+         <c> </c>
+         <pc xml:id="erar-4823780">–</pc>
+      </l>
+      <l xml:id="erar-l55780">
+         <c> </c>
+         <w xml:id="erar-4823790">И</w>
+         <c> </c>
+         <w xml:id="erar-4823800">развеял</w>
+         <c> </c>
+         <w xml:id="erar-4823810">в</w>
+         <c> </c>
+         <w xml:id="erar-4823820">прах</w>
+         <pc xml:id="erar-4823830" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55950">
+      <l xml:id="erar-l55785">
+         <w xml:id="erar-4823860">Плащ</w>
+         <c> </c>
+         <w xml:id="erar-4823870">упал</w>
+         <c> </c>
+         <w xml:id="erar-4823880">к</w>
+         <c> </c>
+         <w xml:id="erar-4823890">ногам</w>
+      </l>
+      <l xml:id="erar-l55790">
+         <c> </c>
+         <w xml:id="erar-4823900">И</w>
+         <c> </c>
+         <w xml:id="erar-4823910">рассыпался</w>
+         <c> </c>
+         <pc xml:id="erar-4823920" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l55795">
+         <w xml:id="erar-4823930">Ты</w>
+         <c> </c>
+         <w xml:id="erar-4823940">стоишь</w>
+         <c> </c>
+         <pc xml:id="erar-4823950">–</pc>
+         <c> </c>
+         <w xml:id="erar-4823960">поник</w>
+         <pc xml:id="erar-4823970">,</pc>
+      </l>
+      <l xml:id="erar-l55800">
+         <c> </c>
+         <w xml:id="erar-4823980">И</w>
+         <c> </c>
+         <w xml:id="erar-4823990">не</w>
+         <c> </c>
+         <w xml:id="erar-4824000">ратуешь</w>
+         <pc xml:id="erar-4824010" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55955">
+      <l xml:id="erar-l55805">
+         <w xml:id="erar-4824040">Где</w>
+         <c> </c>
+         <w xml:id="erar-4824050">ж</w>
+         <c> </c>
+         <w xml:id="erar-4824060">девалася</w>
+      </l>
+      <l xml:id="erar-l55810">
+         <c> </c>
+         <w xml:id="erar-4824070">Речь</w>
+         <c> </c>
+         <w xml:id="erar-4824080">высокая</w>
+         <pc xml:id="erar-4824090">,</pc>
+      </l>
+      <l xml:id="erar-l55815">
+         <c> </c>
+         <w xml:id="erar-4824100">Сила</w>
+         <c> </c>
+         <w xml:id="erar-4824110">гордая</w>
+         <pc xml:id="erar-4824120">,</pc>
+      </l>
+      <l xml:id="erar-l55820">
+         <c> </c>
+         <w xml:id="erar-4824130">Доблесть</w>
+         <c> </c>
+         <w xml:id="erar-4824140">царская</w>
+         <pc xml:id="erar-4824150" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55960">
+      <l xml:id="erar-l55825">
+         <w xml:id="erar-4824180">У</w>
+         <c> </c>
+         <w xml:id="erar-4824190">тебя</w>
+         <c> </c>
+         <w xml:id="erar-4824200">ль</w>
+         <pc xml:id="erar-4824210">,</pc>
+         <c> </c>
+         <w xml:id="erar-4824220">было</w>
+         <pc xml:id="erar-4824230">,</pc>
+      </l>
+      <l xml:id="erar-l55830">
+         <c> </c>
+         <w xml:id="erar-4824240">В</w>
+         <c> </c>
+         <w xml:id="erar-4824250">ночь</w>
+         <c> </c>
+         <w xml:id="erar-4824260">безмолвную</w>
+      </l>
+      <l xml:id="erar-l55835">
+         <c> </c>
+         <w xml:id="erar-4824270">Заливная</w>
+         <c> </c>
+         <w xml:id="erar-4824280">песнь</w>
+      </l>
+      <l xml:id="erar-l55840">
+         <c> </c>
+         <w xml:id="erar-4824290">Соловьиная</w>
+         <c> </c>
+         <pc xml:id="erar-4824300" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55965">
+      <l xml:id="erar-l55845">
+         <w xml:id="erar-4824330">У</w>
+         <c> </c>
+         <w xml:id="erar-4824340">тебя</w>
+         <c> </c>
+         <w xml:id="erar-4824350">ль</w>
+         <pc xml:id="erar-4824360">,</pc>
+         <c> </c>
+         <w xml:id="erar-4824370">было</w>
+         <pc xml:id="erar-4824380">,</pc>
+      </l>
+      <l xml:id="erar-l55850">
+         <c> </c>
+         <w xml:id="erar-4824390">Дни</w>
+         <c> </c>
+         <pc xml:id="erar-4824400">–</pc>
+         <c> </c>
+         <w xml:id="erar-4824410">роскошество</w>
+         <pc xml:id="erar-4824420">,</pc>
+         <c> </c>
+         <pc xml:id="erar-4824430">–</pc>
+      </l>
+      <l xml:id="erar-l55855">
+         <c> </c>
+         <w xml:id="erar-4824440">Друг</w>
+         <c> </c>
+         <w xml:id="erar-4824450">и</w>
+         <c> </c>
+         <w xml:id="erar-4824460">недруг</w>
+         <c> </c>
+         <w xml:id="erar-4824470">твой</w>
+      </l>
+      <l xml:id="erar-l55860">
+         <c> </c>
+         <w xml:id="erar-4824480">Прохлаждаются</w>
+         <c> </c>
+         <pc xml:id="erar-4824490" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55970">
+      <l xml:id="erar-l55865">
+         <w xml:id="erar-4824520">У</w>
+         <c> </c>
+         <w xml:id="erar-4824530">тебя</w>
+         <c> </c>
+         <w xml:id="erar-4824540">ль</w>
+         <pc xml:id="erar-4824550">,</pc>
+         <c> </c>
+         <w xml:id="erar-4824560">было</w>
+         <pc xml:id="erar-4824570">,</pc>
+      </l>
+      <l xml:id="erar-l55870">
+         <c> </c>
+         <w xml:id="erar-4824580">Поздно</w>
+         <c> </c>
+         <w xml:id="erar-4824590">вечером</w>
+      </l>
+      <l xml:id="erar-l55875">
+         <c> </c>
+         <w xml:id="erar-4824600">Грозно</w>
+         <c> </c>
+         <w xml:id="erar-4824610">с</w>
+         <c> </c>
+         <w xml:id="erar-4824620">бурею</w>
+      </l>
+      <l xml:id="erar-l55880">
+         <c> </c>
+         <w xml:id="erar-4824630">Разговор</w>
+         <c> </c>
+         <w xml:id="erar-4824640">пойдет</w>
+         <pc xml:id="erar-4824650">;</pc>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55975">
+      <l xml:id="erar-l55885">
+         <w xml:id="erar-4824680">Распахнет</w>
+         <c> </c>
+         <w xml:id="erar-4824690">она</w>
+      </l>
+      <l xml:id="erar-l55890">
+         <c> </c>
+         <w xml:id="erar-4824700">Тучу</w>
+         <c> </c>
+         <w xml:id="erar-4824710">черную</w>
+         <pc xml:id="erar-4824720">,</pc>
+      </l>
+      <l xml:id="erar-l55895">
+         <c> </c>
+         <w xml:id="erar-4824730">Обоймет</w>
+         <c> </c>
+         <w xml:id="erar-4824740">тебя</w>
+      </l>
+      <l xml:id="erar-l55900">
+         <c> </c>
+         <w xml:id="erar-4824750">Ветром-холодом</w>
+         <pc xml:id="erar-4824760" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55980">
+      <l xml:id="erar-l55905">
+         <w xml:id="erar-4824790">И</w>
+         <c> </c>
+         <w xml:id="erar-4824800">ты</w>
+         <c> </c>
+         <w xml:id="erar-4824810">молвишь</w>
+         <c> </c>
+         <w xml:id="erar-4824820">ей</w>
+      </l>
+      <l xml:id="erar-l55910">
+         <c> </c>
+         <w xml:id="erar-4824830">Шумным</w>
+         <c> </c>
+         <w xml:id="erar-4824840">голосом</w>
+         <pc xml:id="erar-4824850">:</pc>
+      </l>
+      <l xml:id="erar-l55915">
+         <c> </c>
+         <pc xml:id="erar-4824860">«</pc>
+         <c> </c>
+         <w xml:id="erar-4824870">Вороти</w>
+         <c> </c>
+         <w xml:id="erar-4824880">назад</w>
+         <pc xml:id="erar-4824890" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l55920">
+         <w xml:id="erar-4824900">Держи</w>
+         <c> </c>
+         <w xml:id="erar-4824910">около</w>
+         <pc xml:id="erar-4824920">!</pc>
+         <c> </c>
+         <pc xml:id="erar-4824930">»</pc>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55985">
+      <l xml:id="erar-l55925">
+         <w xml:id="erar-4824960">Закружит</w>
+         <c> </c>
+         <w xml:id="erar-4824970">она</w>
+         <pc xml:id="erar-4824980">,</pc>
+      </l>
+      <l xml:id="erar-l55930">
+         <c> </c>
+         <w xml:id="erar-4824990">Разыграется</w>
+         <c> </c>
+         <pc xml:id="erar-4825000" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l55935">
+         <w xml:id="erar-4825010">Дрогнет</w>
+         <c> </c>
+         <w xml:id="erar-4825020">грудь</w>
+         <c> </c>
+         <w xml:id="erar-4825030">твоя</w>
+         <pc xml:id="erar-4825040">,</pc>
+      </l>
+      <l xml:id="erar-l55940">
+         <c> </c>
+         <w xml:id="erar-4825050">Зашатаешься</w>
+         <pc xml:id="erar-4825060">;</pc>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55990">
+      <l xml:id="erar-l55945">
+         <w xml:id="erar-4825090">Встрепенувшися</w>
+         <pc xml:id="erar-4825100">,</pc>
+      </l>
+      <l xml:id="erar-l55950">
+         <c> </c>
+         <w xml:id="erar-4825110">Разбушуешься</w>
+         <pc xml:id="erar-4825120">:</pc>
+      </l>
+      <l xml:id="erar-l55955">
+         <c> </c>
+         <w xml:id="erar-4825130">Только</w>
+         <c> </c>
+         <w xml:id="erar-4825140">свист</w>
+         <c> </c>
+         <w xml:id="erar-4825150">кругом</w>
+         <pc xml:id="erar-4825160">,</pc>
+      </l>
+      <l xml:id="erar-l55960">
+         <c> </c>
+         <w xml:id="erar-4825170">Голоса</w>
+         <c> </c>
+         <w xml:id="erar-4825180">и</w>
+         <c> </c>
+         <w xml:id="erar-4825190">гул</w>
+         <c> </c>
+         <pc xml:id="erar-4825200" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s55995">
+      <l xml:id="erar-l55965">
+         <w xml:id="erar-4825230">Буря</w>
+         <c> </c>
+         <w xml:id="erar-4825240">всплачется</w>
+      </l>
+      <l xml:id="erar-l55970">
+         <c> </c>
+         <w xml:id="erar-4825250">Лешим</w>
+         <pc xml:id="erar-4825260">,</pc>
+         <c> </c>
+         <w xml:id="erar-4825270">ведьмою</w>
+         <pc xml:id="erar-4825280">,</pc>
+         <c> </c>
+         <pc xml:id="erar-4825290">–</pc>
+      </l>
+      <l xml:id="erar-l55975">
+         <c> </c>
+         <w xml:id="erar-4825300">И</w>
+         <c> </c>
+         <w xml:id="erar-4825310">несет</w>
+         <c> </c>
+         <w xml:id="erar-4825320">свои</w>
+      </l>
+      <l xml:id="erar-l55980">
+         <c> </c>
+         <w xml:id="erar-4825330">Тучи</w>
+         <c> </c>
+         <w xml:id="erar-4825340">за</w>
+         <c> </c>
+         <w xml:id="erar-4825350">море</w>
+         <pc xml:id="erar-4825360" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56000">
+      <l xml:id="erar-l55985">
+         <w xml:id="erar-4825390">Где</w>
+         <c> </c>
+         <w xml:id="erar-4825400">ж</w>
+         <c> </c>
+         <w xml:id="erar-4825410">теперь</w>
+         <c> </c>
+         <w xml:id="erar-4825420">твоя</w>
+      </l>
+      <l xml:id="erar-l55990">
+         <c> </c>
+         <w xml:id="erar-4825430">Мочь</w>
+         <c> </c>
+         <w xml:id="erar-4825440">зеленая</w>
+         <pc xml:id="erar-4825450" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l55995">
+         <w xml:id="erar-4825460">Почернел</w>
+         <c> </c>
+         <w xml:id="erar-4825470">ты</w>
+         <c> </c>
+         <w xml:id="erar-4825480">весь</w>
+         <pc xml:id="erar-4825490">,</pc>
+      </l>
+      <l xml:id="erar-l56000">
+         <c> </c>
+         <w xml:id="erar-4825500">Затуманился</w>
+         <c> </c>
+         <pc xml:id="erar-4825510" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56005">
+      <l xml:id="erar-l56005">
+         <w xml:id="erar-4825540">Одичал</w>
+         <pc xml:id="erar-4825550">,</pc>
+         <c> </c>
+         <w xml:id="erar-4825560">замолк</w>
+         <c> </c>
+         <pc xml:id="erar-4825570" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l56010">
+         <w xml:id="erar-4825580">Только</w>
+         <c> </c>
+         <w xml:id="erar-4825590">в</w>
+         <c> </c>
+         <w xml:id="erar-4825600">непогодь</w>
+      </l>
+      <l xml:id="erar-l56015">
+         <c> </c>
+         <w xml:id="erar-4825610">Воешь</w>
+         <c> </c>
+         <w xml:id="erar-4825620">жалобу</w>
+      </l>
+      <l xml:id="erar-l56020">
+         <c> </c>
+         <w xml:id="erar-4825630">На</w>
+         <c> </c>
+         <w xml:id="erar-4825640">безвременье</w>
+         <pc xml:id="erar-4825650" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56010">
+      <l xml:id="erar-l56025">
+         <w xml:id="erar-4825680">Так-то</w>
+         <pc xml:id="erar-4825690">,</pc>
+         <c> </c>
+         <w xml:id="erar-4825700">темный</w>
+         <c> </c>
+         <w xml:id="erar-4825710">лес</w>
+         <pc xml:id="erar-4825720">,</pc>
+      </l>
+      <l xml:id="erar-l56030">
+         <c> </c>
+         <w xml:id="erar-4825730">Богатырь-Бова</w>
+         <pc xml:id="erar-4825740" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l56035">
+         <w xml:id="erar-4825750">Ты</w>
+         <c> </c>
+         <w xml:id="erar-4825760">всю</w>
+         <c> </c>
+         <w xml:id="erar-4825770">жизнь</w>
+         <c> </c>
+         <w xml:id="erar-4825780">свою</w>
+      </l>
+      <l xml:id="erar-l56040">
+         <c> </c>
+         <w xml:id="erar-4825790">Маял</w>
+         <c> </c>
+         <w xml:id="erar-4825800">битвами</w>
+         <pc xml:id="erar-4825810" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56015">
+      <l xml:id="erar-l56045">
+         <w xml:id="erar-4825840">Не</w>
+         <c> </c>
+         <w xml:id="erar-4825850">осилили</w>
+      </l>
+      <l xml:id="erar-l56050">
+         <c> </c>
+         <w xml:id="erar-4825860">Тебя</w>
+         <c> </c>
+         <w xml:id="erar-4825870">сильные</w>
+         <pc xml:id="erar-4825880">,</pc>
+      </l>
+      <l xml:id="erar-l56055">
+         <c> </c>
+         <w xml:id="erar-4825890">Так</w>
+         <c> </c>
+         <w xml:id="erar-4825900">дорезала</w>
+      </l>
+      <l xml:id="erar-l56060">
+         <c> </c>
+         <w xml:id="erar-4825910">Осень</w>
+         <c> </c>
+         <w xml:id="erar-4825920">черная</w>
+         <pc xml:id="erar-4825930" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56020">
+      <l xml:id="erar-l56065">
+         <w xml:id="erar-4825960">Знать</w>
+         <pc xml:id="erar-4825970">,</pc>
+         <c> </c>
+         <w xml:id="erar-4825980">во</w>
+         <c> </c>
+         <w xml:id="erar-4825990">время</w>
+         <c> </c>
+         <w xml:id="erar-4826000">сна</w>
+      </l>
+      <l xml:id="erar-l56070">
+         <c> </c>
+         <w xml:id="erar-4826010">К</w>
+         <c> </c>
+         <w xml:id="erar-4826020">безоружному</w>
+      </l>
+      <l xml:id="erar-l56075">
+         <c> </c>
+         <w xml:id="erar-4826030">Силы</w>
+         <c> </c>
+         <w xml:id="erar-4826040">вражие</w>
+      </l>
+      <l xml:id="erar-l56080">
+         <c> </c>
+         <w xml:id="erar-4826050">Понахлынули</w>
+         <pc xml:id="erar-4826060" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s56025">
+      <l xml:id="erar-l56085">
+         <w xml:id="erar-4826090">С</w>
+         <c> </c>
+         <w xml:id="erar-4826100">богатырских</w>
+         <c> </c>
+         <w xml:id="erar-4826110">плеч</w>
+      </l>
+      <l xml:id="erar-l56090">
+         <c> </c>
+         <w xml:id="erar-4826120">Сняли</w>
+         <c> </c>
+         <w xml:id="erar-4826130">голову</w>
+         <c> </c>
+         <pc xml:id="erar-4826140">–</pc>
+      </l>
+      <l xml:id="erar-l56095">
+         <c> </c>
+         <w xml:id="erar-4826150">Не</w>
+         <c> </c>
+         <w xml:id="erar-4826160">большой</w>
+         <c> </c>
+         <w xml:id="erar-4826170">горой</w>
+         <pc xml:id="erar-4826180">,</pc>
+      </l>
+      <l xml:id="erar-l56100">
+         <c> </c>
+         <w xml:id="erar-4826190">А</w>
+         <c> </c>
+         <w xml:id="erar-4826200">соломинкой</w>
+         <c> </c>
+         <pc xml:id="erar-4826210" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

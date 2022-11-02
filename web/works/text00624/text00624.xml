@@ -1,1 +1,2249 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original"
+     corresp="#work00481"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00624"
+     xml:lang="swe">
+   <link target="#pers00387" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n01275">
+      <date type="comp" when="1811">
+         <w xml:id="erar-5455920">1811</w>
+      </date>
+   </note>
+   <head type="main" xml:id="erar-h02480">
+      <w xml:id="erar-5445080">Stjärnhimmelen</w>
+   </head>
+   <epigraph xml:id="erar-div02305">
+      <l rendition="#i" xml:id="erar-l66820">
+         <w xml:id="erar-5445110">adspice</w>
+         <c> </c>
+         <w xml:id="erar-5445120">hoc</w>
+         <pc xml:id="erar-5445130">,</pc>
+         <c> </c>
+         <w xml:id="erar-5445140">sublime</w>
+         <c> </c>
+         <w xml:id="erar-5445150">candens</w>
+         <pc xml:id="erar-5445160" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <bibl>
+         <w xml:id="erar-5445180">Ennius</w>
+         <pc xml:id="erar-5445190" unit="sentence">.</pc>
+      </bibl>
+   </epigraph>
+   <lg xml:id="erar-s68940">
+      <l xml:id="erar-l66825">
+         <w xml:id="erar-5445220">Kom</w>
+         <c> </c>
+         <w xml:id="erar-5445230">räck</w>
+         <c> </c>
+         <w xml:id="erar-5445240">mig</w>
+         <c> </c>
+         <w xml:id="erar-5445250">handen</w>
+         <pc xml:id="erar-5445260">!</pc>
+         <c> </c>
+         <w xml:id="erar-5445270">du</w>
+         <c> </c>
+         <w xml:id="erar-5445280">förtryckte</w>
+         <c> </c>
+         <w xml:id="erar-5445290">Broder</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66830">
+         <c> </c>
+         <w xml:id="erar-5445300">Du</w>
+         <c> </c>
+         <w xml:id="erar-5445310">plågans</w>
+         <c> </c>
+         <w xml:id="erar-5445320">offer</w>
+         <pc xml:id="erar-5445330">,</pc>
+         <c> </c>
+         <w xml:id="erar-5445340">oförrätters</w>
+         <c> </c>
+         <w xml:id="erar-5445350">mål</w>
+         <pc xml:id="erar-5445360" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66835">
+         <w xml:id="erar-5445370">Kom</w>
+         <c> </c>
+         <w xml:id="erar-5445380">räck</w>
+         <c> </c>
+         <w xml:id="erar-5445390">mig</w>
+         <c> </c>
+         <w xml:id="erar-5445400">handen</w>
+         <pc xml:id="erar-5445410">,</pc>
+         <c> </c>
+         <w xml:id="erar-5445420">lämnom</w>
+         <c> </c>
+         <w xml:id="erar-5445430">denna</w>
+         <c> </c>
+         <w xml:id="erar-5445440">moder</w>
+         <pc xml:id="erar-5445450">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66840">
+         <c> </c>
+         <w xml:id="erar-5445460">Som</w>
+         <c> </c>
+         <w xml:id="erar-5445470">blott</w>
+         <c> </c>
+         <w xml:id="erar-5445480">vår</w>
+         <c> </c>
+         <w xml:id="erar-5445490">smärta</w>
+         <pc xml:id="erar-5445500">,</pc>
+         <c> </c>
+         <w xml:id="erar-5445510">våra</w>
+         <c> </c>
+         <w xml:id="erar-5445520">suckar</w>
+         <c> </c>
+         <w xml:id="erar-5445530">tål</w>
+         <pc xml:id="erar-5445540" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66845">
+         <w xml:id="erar-5445550">Kom</w>
+         <pc xml:id="erar-5445560">!</pc>
+         <c> </c>
+         <w xml:id="erar-5445570">följ</w>
+         <c> </c>
+         <w xml:id="erar-5445580">mig</w>
+         <c> </c>
+         <w xml:id="erar-5445590">opp</w>
+         <c> </c>
+         <w xml:id="erar-5445600">på</w>
+         <c> </c>
+         <w xml:id="erar-5445610">hoppets</w>
+         <c> </c>
+         <w xml:id="erar-5445620">ljusa</w>
+         <c> </c>
+         <w xml:id="erar-5445630">vingar</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66850">
+         <c> </c>
+         <w xml:id="erar-5445640">Med</w>
+         <c> </c>
+         <w xml:id="erar-5445650">lättat</w>
+         <c> </c>
+         <w xml:id="erar-5445660">bröst</w>
+         <c> </c>
+         <w xml:id="erar-5445670">från</w>
+         <c> </c>
+         <w xml:id="erar-5445680">livets</w>
+         <c> </c>
+         <w xml:id="erar-5445690">långa</w>
+         <c> </c>
+         <w xml:id="erar-5445700">sorg</w>
+         <pc xml:id="erar-5445710">,</pc>
+      </l>
+      <l xml:id="erar-l66855">
+         <c> </c>
+         <w xml:id="erar-5445720">Att</w>
+         <c> </c>
+         <w xml:id="erar-5445730">söka</w>
+         <c> </c>
+         <w xml:id="erar-5445740">opp</w>
+         <c> </c>
+         <w xml:id="erar-5445750">bland</w>
+         <c> </c>
+         <w xml:id="erar-5445760">högre</w>
+         <c> </c>
+         <w xml:id="erar-5445770">världars</w>
+         <c> </c>
+         <w xml:id="erar-5445780">ringar</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66860">
+         <c> </c>
+         <w xml:id="erar-5445790">Vårt</w>
+         <c> </c>
+         <w xml:id="erar-5445800">rätta</w>
+         <c> </c>
+         <w xml:id="erar-5445810">Manhem</w>
+         <c> </c>
+         <w xml:id="erar-5445820">och</w>
+         <c> </c>
+         <w xml:id="erar-5445830">vår</w>
+         <c> </c>
+         <w xml:id="erar-5445840">Faders</w>
+         <c> </c>
+         <w xml:id="erar-5445850">borg</w>
+         <pc xml:id="erar-5445860" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68945">
+      <l xml:id="erar-l66865">
+         <w xml:id="erar-5445890">O!</w>
+         <c> </c>
+         <w xml:id="erar-5445900">säkert</w>
+         <c> </c>
+         <w xml:id="erar-5445910">var</w>
+         <c> </c>
+         <w xml:id="erar-5445920">jag</w>
+         <c> </c>
+         <w xml:id="erar-5445930">en</w>
+         <c> </c>
+         <w xml:id="erar-5445940">gång</w>
+         <c> </c>
+         <w xml:id="erar-5445950">i</w>
+         <c> </c>
+         <w xml:id="erar-5445960">det</w>
+         <c> </c>
+         <w xml:id="erar-5445970">höga</w>
+         <pc xml:id="erar-5445980" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66870">
+         <w xml:id="erar-5445990">O!</w>
+         <c> </c>
+         <w xml:id="erar-5446000">säkert</w>
+         <c> </c>
+         <w xml:id="erar-5446010">kom</w>
+         <c> </c>
+         <w xml:id="erar-5446020">jag</w>
+         <c> </c>
+         <w xml:id="erar-5446030">från</w>
+         <c> </c>
+         <w xml:id="erar-5446040">en</w>
+         <c> </c>
+         <w xml:id="erar-5446050">bättre</w>
+         <c> </c>
+         <w xml:id="erar-5446060">sfär</w>
+         <pc xml:id="erar-5446070" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66875">
+         <w xml:id="erar-5446080">Och</w>
+         <c> </c>
+         <w xml:id="erar-5446090">när</w>
+         <c> </c>
+         <w xml:id="erar-5446100">dess</w>
+         <c> </c>
+         <w xml:id="erar-5446110">ljus</w>
+         <c> </c>
+         <w xml:id="erar-5446120">ej</w>
+         <c> </c>
+         <w xml:id="erar-5446130">vinkar</w>
+         <c> </c>
+         <w xml:id="erar-5446140">mer</w>
+         <c> </c>
+         <w xml:id="erar-5446150">mitt</w>
+         <c> </c>
+         <w xml:id="erar-5446160">öga</w>
+         <pc xml:id="erar-5446170">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66880">
+         <c> </c>
+         <w xml:id="erar-5446180">Så</w>
+         <c> </c>
+         <w xml:id="erar-5446190">är</w>
+         <c> </c>
+         <w xml:id="erar-5446200">min</w>
+         <c> </c>
+         <w xml:id="erar-5446210">ande</w>
+         <c> </c>
+         <w xml:id="erar-5446220">säkert</w>
+         <c> </c>
+         <w xml:id="erar-5446230">åter</w>
+         <c> </c>
+         <w xml:id="erar-5446240">där</w>
+         <pc xml:id="erar-5446250" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66885">
+         <w xml:id="erar-5446260">Vem</w>
+         <c> </c>
+         <w xml:id="erar-5446270">var</w>
+         <c> </c>
+         <w xml:id="erar-5446280">den</w>
+         <c> </c>
+         <w xml:id="erar-5446290">Lethe</w>
+         <pc xml:id="erar-5446300">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446310">säg</w>
+         <c> </c>
+         <w xml:id="erar-5446320">mig</w>
+         <pc xml:id="erar-5446330">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446340">som</w>
+         <c> </c>
+         <w xml:id="erar-5446350">fördränkte</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66890">
+         <c> </c>
+         <w xml:id="erar-5446360">De</w>
+         <c> </c>
+         <w xml:id="erar-5446370">ljuva</w>
+         <c> </c>
+         <w xml:id="erar-5446380">minnen</w>
+         <c> </c>
+         <w xml:id="erar-5446390">av</w>
+         <c> </c>
+         <w xml:id="erar-5446400">Olympens</w>
+         <c> </c>
+         <w xml:id="erar-5446410">dar</w>
+         <pc xml:id="erar-5446420" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66895">
+         <w xml:id="erar-5446430">Nej</w>
+         <pc xml:id="erar-5446440">!</pc>
+         <c> </c>
+         <w xml:id="erar-5446450">vem</w>
+         <c> </c>
+         <w xml:id="erar-5446460">du</w>
+         <c> </c>
+         <w xml:id="erar-5446470">var</w>
+         <pc xml:id="erar-5446480">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446490">jag</w>
+         <c> </c>
+         <w xml:id="erar-5446500">tackar</w>
+         <c> </c>
+         <w xml:id="erar-5446510">Dig</w>
+         <pc xml:id="erar-5446520">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446530">som</w>
+         <c> </c>
+         <w xml:id="erar-5446540">skänkte</w>
+         <pc xml:id="erar-5446550">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66900">
+         <c> </c>
+         <w xml:id="erar-5446560">Den</w>
+         <c> </c>
+         <w xml:id="erar-5446570">enda</w>
+         <c> </c>
+         <w xml:id="erar-5446580">tröst</w>
+         <c> </c>
+         <w xml:id="erar-5446590">mitt</w>
+         <c> </c>
+         <w xml:id="erar-5446600">sorgsna</w>
+         <c> </c>
+         <w xml:id="erar-5446610">hjärta</w>
+         <c> </c>
+         <w xml:id="erar-5446620">har</w>
+         <pc xml:id="erar-5446630" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68950">
+      <l xml:id="erar-l66905">
+         <w xml:id="erar-5446660">Djupt</w>
+         <c> </c>
+         <w xml:id="erar-5446670">låg</w>
+         <c> </c>
+         <w xml:id="erar-5446680">dock</w>
+         <c> </c>
+         <w xml:id="erar-5446690">kvar</w>
+         <c> </c>
+         <w xml:id="erar-5446700">i</w>
+         <c> </c>
+         <w xml:id="erar-5446710">varje</w>
+         <c> </c>
+         <w xml:id="erar-5446720">bröst</w>
+         <c> </c>
+         <w xml:id="erar-5446730">en</w>
+         <c> </c>
+         <w xml:id="erar-5446740">aning</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66910">
+         <c> </c>
+         <w xml:id="erar-5446750">Av</w>
+         <c> </c>
+         <w xml:id="erar-5446760">plågan</w>
+         <c> </c>
+         <w xml:id="erar-5446770">väckt</w>
+         <pc xml:id="erar-5446780">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446790">av</w>
+         <c> </c>
+         <w xml:id="erar-5446800">värdets</w>
+         <c> </c>
+         <w xml:id="erar-5446810">känsla</w>
+         <c> </c>
+         <w xml:id="erar-5446820">stödd</w>
+         <pc xml:id="erar-5446830" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66915">
+         <w xml:id="erar-5446840">Med</w>
+         <c> </c>
+         <w xml:id="erar-5446850">denna</w>
+         <c> </c>
+         <w xml:id="erar-5446860">syftning</w>
+         <pc xml:id="erar-5446870">,</pc>
+         <c> </c>
+         <w xml:id="erar-5446880">denna</w>
+         <c> </c>
+         <w xml:id="erar-5446890">sinnets</w>
+         <c> </c>
+         <w xml:id="erar-5446900">daning</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66920">
+         <c> </c>
+         <w xml:id="erar-5446910">Blev</w>
+         <c> </c>
+         <w xml:id="erar-5446920">mänskan</w>
+         <c> </c>
+         <w xml:id="erar-5446930">blott</w>
+         <c> </c>
+         <w xml:id="erar-5446940">till</w>
+         <c> </c>
+         <w xml:id="erar-5446950">kval</w>
+         <c> </c>
+         <w xml:id="erar-5446960">och</w>
+         <c> </c>
+         <w xml:id="erar-5446970">villor</w>
+         <c> </c>
+         <w xml:id="erar-5446980">född</w>
+         <pc xml:id="erar-5446990" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66925">
+         <w xml:id="erar-5447000">Blev</w>
+         <c> </c>
+         <w xml:id="erar-5447010">ej</w>
+         <c> </c>
+         <w xml:id="erar-5447020">ett</w>
+         <c> </c>
+         <w xml:id="erar-5447030">land</w>
+         <pc xml:id="erar-5447040">,</pc>
+         <c> </c>
+         <w xml:id="erar-5447050">en</w>
+         <c> </c>
+         <w xml:id="erar-5447060">fristad</w>
+         <c> </c>
+         <w xml:id="erar-5447070">henne</w>
+         <c> </c>
+         <w xml:id="erar-5447080">ämnad</w>
+         <pc xml:id="erar-5447090">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66930">
+         <c> </c>
+         <w xml:id="erar-5447100">Där</w>
+         <c> </c>
+         <w xml:id="erar-5447110">inga</w>
+         <c> </c>
+         <w xml:id="erar-5447120">tårar</w>
+         <c> </c>
+         <w xml:id="erar-5447130">fukta</w>
+         <c> </c>
+         <w xml:id="erar-5447140">vänners</w>
+         <c> </c>
+         <w xml:id="erar-5447150">grav</w>
+         <pc xml:id="erar-5447160" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66935">
+         <w xml:id="erar-5447170">Där</w>
+         <c> </c>
+         <w xml:id="erar-5447180">ingen</w>
+         <c> </c>
+         <w xml:id="erar-5447190">Cimon</w>
+         <c> </c>
+         <w xml:id="erar-5447200">fäders</w>
+         <c> </c>
+         <w xml:id="erar-5447210">bygd</w>
+         <c> </c>
+         <w xml:id="erar-5447220">ser</w>
+         <c> </c>
+         <w xml:id="erar-5447230">lämnad</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66940">
+         <c> </c>
+         <w xml:id="erar-5447240">Och</w>
+         <c> </c>
+         <w xml:id="erar-5447250">ingen</w>
+         <c> </c>
+         <w xml:id="erar-5447260">Cato</w>
+         <c> </c>
+         <w xml:id="erar-5447270">flyr</w>
+         <c> </c>
+         <w xml:id="erar-5447280">för</w>
+         <c> </c>
+         <w xml:id="erar-5447290">Caesars</w>
+         <c> </c>
+         <w xml:id="erar-5447300">glav</w>
+         <pc xml:id="erar-5447310" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68955">
+      <l xml:id="erar-l66945">
+         <w xml:id="erar-5447340">Förgäves</w>
+         <c> </c>
+         <w xml:id="erar-5447350">såg</w>
+         <c> </c>
+         <w xml:id="erar-5447360">i</w>
+         <c> </c>
+         <w xml:id="erar-5447370">väntans</w>
+         <c> </c>
+         <w xml:id="erar-5447380">långa</w>
+         <c> </c>
+         <w xml:id="erar-5447390">timma</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66950">
+         <c> </c>
+         <w xml:id="erar-5447400">Dess</w>
+         <c> </c>
+         <w xml:id="erar-5447410">våta</w>
+         <c> </c>
+         <w xml:id="erar-5447420">öga</w>
+         <c> </c>
+         <w xml:id="erar-5447430">över</w>
+         <c> </c>
+         <w xml:id="erar-5447440">jordens</w>
+         <c> </c>
+         <w xml:id="erar-5447450">rund</w>
+         <pc xml:id="erar-5447460">,</pc>
+      </l>
+      <l xml:id="erar-l66955">
+         <c> </c>
+         <w xml:id="erar-5447470">Det</w>
+         <c> </c>
+         <w xml:id="erar-5447480">såg</w>
+         <c> </c>
+         <w xml:id="erar-5447490">blott</w>
+         <c> </c>
+         <w xml:id="erar-5447500">sorgens</w>
+         <c> </c>
+         <w xml:id="erar-5447510">stränder</w>
+         <pc xml:id="erar-5447520">,</pc>
+         <c> </c>
+         <w xml:id="erar-5447530">tvivlets</w>
+         <c> </c>
+         <w xml:id="erar-5447540">dimma</w>
+         <pc xml:id="erar-5447550">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66960">
+         <c> </c>
+         <w xml:id="erar-5447560">Lik</w>
+         <c> </c>
+         <w xml:id="erar-5447570">höstens</w>
+         <c> </c>
+         <w xml:id="erar-5447580">i</w>
+         <c> </c>
+         <w xml:id="erar-5447590">en</w>
+         <c> </c>
+         <w xml:id="erar-5447600">regnig</w>
+         <c> </c>
+         <w xml:id="erar-5447610">morgonstund</w>
+         <pc xml:id="erar-5447620" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66965">
+         <w xml:id="erar-5447630">Nu</w>
+         <c> </c>
+         <w xml:id="erar-5447640">såg</w>
+         <c> </c>
+         <w xml:id="erar-5447650">det</w>
+         <c> </c>
+         <w xml:id="erar-5447660">opp</w>
+         <c> </c>
+         <w xml:id="erar-5447670">i</w>
+         <c> </c>
+         <w xml:id="erar-5447680">himlens</w>
+         <c> </c>
+         <w xml:id="erar-5447690">sköna</w>
+         <c> </c>
+         <w xml:id="erar-5447700">spegel</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66970">
+         <c> </c>
+         <w xml:id="erar-5447710">Och</w>
+         <c> </c>
+         <w xml:id="erar-5447720">dimman</w>
+         <c> </c>
+         <w xml:id="erar-5447730">svann</w>
+         <pc xml:id="erar-5447740">,</pc>
+         <c> </c>
+         <w xml:id="erar-5447750">som</w>
+         <c> </c>
+         <w xml:id="erar-5447760">lätta</w>
+         <c> </c>
+         <w xml:id="erar-5447770">hindars</w>
+         <c> </c>
+         <w xml:id="erar-5447780">tropp</w>
+         <pc xml:id="erar-5447790" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l66975">
+         <w xml:id="erar-5447800">Var</w>
+         <c> </c>
+         <w xml:id="erar-5447810">låga</w>
+         <c> </c>
+         <w xml:id="erar-5447820">brann</w>
+         <pc xml:id="erar-5447830">,</pc>
+         <c> </c>
+         <w xml:id="erar-5447840">en</w>
+         <c> </c>
+         <w xml:id="erar-5447850">bättre</w>
+         <c> </c>
+         <w xml:id="erar-5447860">världs</w>
+         <c> </c>
+         <w xml:id="erar-5447870">insegel</w>
+         <pc xml:id="erar-5447880">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66980">
+         <c> </c>
+         <w xml:id="erar-5447890">En</w>
+         <c> </c>
+         <w xml:id="erar-5447900">fackla</w>
+         <c> </c>
+         <w xml:id="erar-5447910">tänd</w>
+         <c> </c>
+         <w xml:id="erar-5447920">för</w>
+         <c> </c>
+         <w xml:id="erar-5447930">evighetens</w>
+         <c> </c>
+         <w xml:id="erar-5447940">hopp</w>
+         <pc xml:id="erar-5447950" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68960">
+      <l xml:id="erar-l66985">
+         <w xml:id="erar-5447980">Se</w>
+         <c> </c>
+         <w xml:id="erar-5447990">detta</w>
+         <c> </c>
+         <w xml:id="erar-5448000">klot</w>
+         <pc xml:id="erar-5448010">,</pc>
+         <c> </c>
+         <w xml:id="erar-5448020">som</w>
+         <c> </c>
+         <w xml:id="erar-5448030">nattens</w>
+         <c> </c>
+         <w xml:id="erar-5448040">skuggor</w>
+         <c> </c>
+         <w xml:id="erar-5448050">jagar</w>
+         <pc xml:id="erar-5448060">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l66990">
+         <c> </c>
+         <w xml:id="erar-5448070">Som</w>
+         <c> </c>
+         <w xml:id="erar-5448080">väcker</w>
+         <c> </c>
+         <w xml:id="erar-5448090">sippan</w>
+         <c> </c>
+         <w xml:id="erar-5448100">milt</w>
+         <c> </c>
+         <w xml:id="erar-5448110">ur</w>
+         <c> </c>
+         <w xml:id="erar-5448120">drivans</w>
+         <c> </c>
+         <w xml:id="erar-5448130">bädd</w>
+         <pc xml:id="erar-5448140">,</pc>
+      </l>
+      <l xml:id="erar-l66995">
+         <c> </c>
+         <w xml:id="erar-5448150">Som</w>
+         <c> </c>
+         <w xml:id="erar-5448160">ammar</w>
+         <c> </c>
+         <w xml:id="erar-5448170">rosens</w>
+         <c> </c>
+         <w xml:id="erar-5448180">knopp</w>
+         <c> </c>
+         <w xml:id="erar-5448190">i</w>
+         <c> </c>
+         <w xml:id="erar-5448200">vårens</w>
+         <c> </c>
+         <w xml:id="erar-5448210">dagar</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67000">
+         <c> </c>
+         <w xml:id="erar-5448220">Och</w>
+         <c> </c>
+         <w xml:id="erar-5448230">hösten</w>
+         <c> </c>
+         <w xml:id="erar-5448240">ter</w>
+         <c> </c>
+         <w xml:id="erar-5448250">i</w>
+         <c> </c>
+         <w xml:id="erar-5448260">rika</w>
+         <c> </c>
+         <w xml:id="erar-5448270">skördar</w>
+         <c> </c>
+         <w xml:id="erar-5448280">klädd</w>
+         <pc xml:id="erar-5448290" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67005">
+         <w xml:id="erar-5448300">Vad</w>
+         <pc xml:id="erar-5448310">!</pc>
+         <c> </c>
+         <w xml:id="erar-5448320">bär</w>
+         <c> </c>
+         <w xml:id="erar-5448330">det</w>
+         <c> </c>
+         <w xml:id="erar-5448340">ej</w>
+         <c> </c>
+         <w xml:id="erar-5448350">sitt</w>
+         <c> </c>
+         <w xml:id="erar-5448360">ursprungs</w>
+         <c> </c>
+         <w xml:id="erar-5448370">rätta</w>
+         <c> </c>
+         <w xml:id="erar-5448380">stämpel</w>
+         <pc xml:id="erar-5448390" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67010">
+         <w xml:id="erar-5448400">Vad</w>
+         <pc xml:id="erar-5448410">!</pc>
+         <c> </c>
+         <w xml:id="erar-5448420">prisar</w>
+         <c> </c>
+         <w xml:id="erar-5448430">det</w>
+         <c> </c>
+         <w xml:id="erar-5448440">ej</w>
+         <c> </c>
+         <w xml:id="erar-5448450">högre</w>
+         <c> </c>
+         <w xml:id="erar-5448460">himlars</w>
+         <c> </c>
+         <w xml:id="erar-5448470">Gud</w>
+         <pc xml:id="erar-5448480">,</pc>
+      </l>
+      <l xml:id="erar-l67015">
+         <c> </c>
+         <w xml:id="erar-5448490">Än</w>
+         <c> </c>
+         <w xml:id="erar-5448500">hämndens</w>
+         <c> </c>
+         <w xml:id="erar-5448510">bud</w>
+         <c> </c>
+         <w xml:id="erar-5448520">från</w>
+         <c> </c>
+         <w xml:id="erar-5448530">fanatismens</w>
+         <c> </c>
+         <w xml:id="erar-5448540">tempel</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67020">
+         <c> </c>
+         <w xml:id="erar-5448550">Och</w>
+         <c> </c>
+         <w xml:id="erar-5448560">kall</w>
+         <c> </c>
+         <w xml:id="erar-5448570">sofism</w>
+         <c> </c>
+         <w xml:id="erar-5448580">i</w>
+         <c> </c>
+         <w xml:id="erar-5448590">vetenskaplig</w>
+         <c> </c>
+         <w xml:id="erar-5448600">skrud</w>
+         <pc xml:id="erar-5448610" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68965">
+      <l xml:id="erar-l67025">
+         <w xml:id="erar-5448640">Och</w>
+         <c> </c>
+         <w xml:id="erar-5448650">Luna</w>
+         <pc xml:id="erar-5448660">,</pc>
+         <c> </c>
+         <w xml:id="erar-5448670">du</w>
+         <pc xml:id="erar-5448680">!</pc>
+         <c> </c>
+         <w xml:id="erar-5448690">med</w>
+         <c> </c>
+         <w xml:id="erar-5448700">dina</w>
+         <c> </c>
+         <w xml:id="erar-5448710">blyga</w>
+         <c> </c>
+         <w xml:id="erar-5448720">strålar</w>
+         <pc xml:id="erar-5448730">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67030">
+         <c> </c>
+         <w xml:id="erar-5448740">Med</w>
+         <c> </c>
+         <w xml:id="erar-5448750">oskuldens</w>
+         <c> </c>
+         <w xml:id="erar-5448760">och</w>
+         <c> </c>
+         <w xml:id="erar-5448770">lugnets</w>
+         <c> </c>
+         <w xml:id="erar-5448780">rena</w>
+         <c> </c>
+         <w xml:id="erar-5448790">färg</w>
+         <pc xml:id="erar-5448800">;</pc>
+      </l>
+      <l xml:id="erar-l67035">
+         <c> </c>
+         <w xml:id="erar-5448810">Hur</w>
+         <c> </c>
+         <w xml:id="erar-5448820">skön</w>
+         <c> </c>
+         <w xml:id="erar-5448830">din</w>
+         <c> </c>
+         <w xml:id="erar-5448840">bild</w>
+         <c> </c>
+         <w xml:id="erar-5448850">sig</w>
+         <c> </c>
+         <w xml:id="erar-5448860">för</w>
+         <c> </c>
+         <w xml:id="erar-5448870">den</w>
+         <c> </c>
+         <w xml:id="erar-5448880">sorgsne</w>
+         <c> </c>
+         <w xml:id="erar-5448890">målar</w>
+         <pc xml:id="erar-5448900">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67040">
+         <c> </c>
+         <w xml:id="erar-5448910">Hur</w>
+         <c> </c>
+         <w xml:id="erar-5448920">längtar</w>
+         <c> </c>
+         <w xml:id="erar-5448930">ej</w>
+         <c> </c>
+         <w xml:id="erar-5448940">hans</w>
+         <c> </c>
+         <w xml:id="erar-5448950">blick</w>
+         <c> </c>
+         <w xml:id="erar-5448960">till</w>
+         <c> </c>
+         <w xml:id="erar-5448970">dina</w>
+         <c> </c>
+         <w xml:id="erar-5448980">berg</w>
+      </l>
+      <l xml:id="erar-l67045">
+         <c> </c>
+         <w xml:id="erar-5448990">Och</w>
+         <c> </c>
+         <w xml:id="erar-5449000">vilar</w>
+         <c> </c>
+         <w xml:id="erar-5449010">ljuv</w>
+         <c> </c>
+         <w xml:id="erar-5449020">på</w>
+         <c> </c>
+         <w xml:id="erar-5449030">dina</w>
+         <c> </c>
+         <w xml:id="erar-5449040">silverslätter</w>
+         <pc xml:id="erar-5449050">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67050">
+         <c> </c>
+         <w xml:id="erar-5449060">Där</w>
+         <c> </c>
+         <w xml:id="erar-5449070">dagens</w>
+         <c> </c>
+         <w xml:id="erar-5449080">glans</w>
+         <c> </c>
+         <w xml:id="erar-5449090">ej</w>
+         <c> </c>
+         <w xml:id="erar-5449100">flyr</w>
+         <c> </c>
+         <w xml:id="erar-5449110">för</w>
+         <c> </c>
+         <w xml:id="erar-5449120">molnets</w>
+         <c> </c>
+         <w xml:id="erar-5449130">vind</w>
+      </l>
+      <l xml:id="erar-l67055">
+         <c> </c>
+         <w xml:id="erar-5449140">Och</w>
+         <c> </c>
+         <w xml:id="erar-5449150">säkert</w>
+         <c> </c>
+         <w xml:id="erar-5449160">ej</w>
+         <c> </c>
+         <w xml:id="erar-5449170">för</w>
+         <c> </c>
+         <w xml:id="erar-5449180">våldets</w>
+         <c> </c>
+         <w xml:id="erar-5449190">oförrätter</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67060">
+         <c> </c>
+         <w xml:id="erar-5449200">En</w>
+         <c> </c>
+         <w xml:id="erar-5449210">vissnad</w>
+         <c> </c>
+         <w xml:id="erar-5449220">ros</w>
+         <c> </c>
+         <w xml:id="erar-5449230">på</w>
+         <c> </c>
+         <w xml:id="erar-5449240">dina</w>
+         <c> </c>
+         <w xml:id="erar-5449250">söners</w>
+         <c> </c>
+         <w xml:id="erar-5449260">kind</w>
+         <pc xml:id="erar-5449270" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68970">
+      <l xml:id="erar-l67065">
+         <w xml:id="erar-5449300">Re’n</w>
+         <c> </c>
+         <w xml:id="erar-5449310">flyr</w>
+         <c> </c>
+         <w xml:id="erar-5449320">du</w>
+         <c> </c>
+         <w xml:id="erar-5449330">bort</w>
+         <c> </c>
+         <w xml:id="erar-5449340">från</w>
+         <c> </c>
+         <w xml:id="erar-5449350">Västerns</w>
+         <c> </c>
+         <w xml:id="erar-5449360">ljusa</w>
+         <c> </c>
+         <w xml:id="erar-5449370">branter</w>
+         <pc xml:id="erar-5449380">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67070">
+         <c> </c>
+         <w xml:id="erar-5449390">Re’n</w>
+         <c> </c>
+         <w xml:id="erar-5449400">ler</w>
+         <c> </c>
+         <w xml:id="erar-5449410">din</w>
+         <c> </c>
+         <w xml:id="erar-5449420">bild</w>
+         <c> </c>
+         <w xml:id="erar-5449430">i</w>
+         <c> </c>
+         <w xml:id="erar-5449440">Skandiens</w>
+         <c> </c>
+         <w xml:id="erar-5449450">lugna</w>
+         <c> </c>
+         <w xml:id="erar-5449460">Sund</w>
+         <pc xml:id="erar-5449470">,</pc>
+      </l>
+      <l xml:id="erar-l67075">
+         <c> </c>
+         <w xml:id="erar-5449480">Re’n</w>
+         <c> </c>
+         <w xml:id="erar-5449490">tindra</w>
+         <c> </c>
+         <w xml:id="erar-5449500">fram</w>
+         <c> </c>
+         <w xml:id="erar-5449510">de</w>
+         <c> </c>
+         <w xml:id="erar-5449520">slocknade</w>
+         <c> </c>
+         <w xml:id="erar-5449530">demanter</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67080">
+         <c> </c>
+         <w xml:id="erar-5449540">I</w>
+         <c> </c>
+         <w xml:id="erar-5449550">renad</w>
+         <c> </c>
+         <w xml:id="erar-5449560">glans</w>
+         <c> </c>
+         <w xml:id="erar-5449570">på</w>
+         <c> </c>
+         <w xml:id="erar-5449580">mörknad</w>
+         <c> </c>
+         <w xml:id="erar-5449590">azurgrund</w>
+         <pc xml:id="erar-5449600" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67085">
+         <w xml:id="erar-5449610">Vem</w>
+         <c> </c>
+         <w xml:id="erar-5449620">räknar</w>
+         <c> </c>
+         <w xml:id="erar-5449630">er</w>
+         <pc xml:id="erar-5449640">,</pc>
+         <c> </c>
+         <w xml:id="erar-5449650">I</w>
+         <c> </c>
+         <w xml:id="erar-5449660">himlens</w>
+         <c> </c>
+         <w xml:id="erar-5449670">legioner</w>
+         <pc xml:id="erar-5449680" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67090">
+         <w xml:id="erar-5449690">Vad</w>
+         <c> </c>
+         <w xml:id="erar-5449700">skådar</w>
+         <c> </c>
+         <w xml:id="erar-5449710">Bode</w>
+         <c> </c>
+         <w xml:id="erar-5449720">där</w>
+         <c> </c>
+         <w xml:id="erar-5449730">från</w>
+         <c> </c>
+         <w xml:id="erar-5449740">sin</w>
+         <c> </c>
+         <w xml:id="erar-5449750">altan</w>
+         <pc xml:id="erar-5449760" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67095">
+         <w xml:id="erar-5449770">Vad</w>
+         <c> </c>
+         <w xml:id="erar-5449780">speglar</w>
+         <c> </c>
+         <w xml:id="erar-5449790">Herschel</w>
+         <c> </c>
+         <w xml:id="erar-5449800">över</w>
+         <c> </c>
+         <w xml:id="erar-5449810">nya</w>
+         <c> </c>
+         <w xml:id="erar-5449820">zoner</w>
+         <pc xml:id="erar-5449830" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67100">
+         <w xml:id="erar-5449840">En</w>
+         <c> </c>
+         <w xml:id="erar-5449850">droppa</w>
+         <c> </c>
+         <w xml:id="erar-5449860">mer</w>
+         <c> </c>
+         <w xml:id="erar-5449870">i</w>
+         <c> </c>
+         <w xml:id="erar-5449880">stjärnors</w>
+         <c> </c>
+         <w xml:id="erar-5449890">ocean</w>
+         <pc xml:id="erar-5449900" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68975">
+      <l xml:id="erar-l67105">
+         <w xml:id="erar-5449930">Hur</w>
+         <c> </c>
+         <w xml:id="erar-5449940">skön</w>
+         <c> </c>
+         <w xml:id="erar-5449950">där</w>
+         <c> </c>
+         <w xml:id="erar-5449960">över</w>
+         <c> </c>
+         <w xml:id="erar-5449970">Deianiras</w>
+         <c> </c>
+         <w xml:id="erar-5449980">hjälte</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67110">
+         <c> </c>
+         <w xml:id="erar-5449990">Orfei</w>
+         <c> </c>
+         <w xml:id="erar-5450000">lyra</w>
+         <c> </c>
+         <w xml:id="erar-5450010">stämd</w>
+         <c> </c>
+         <w xml:id="erar-5450020">till</w>
+         <c> </c>
+         <w xml:id="erar-5450030">sfärers</w>
+         <c> </c>
+         <w xml:id="erar-5450040">dans</w>
+         <pc xml:id="erar-5450050">;</pc>
+      </l>
+      <l xml:id="erar-l67115">
+         <c> </c>
+         <w xml:id="erar-5450060">Se</w>
+         <c> </c>
+         <w xml:id="erar-5450070">där</w>
+         <c> </c>
+         <w xml:id="erar-5450080">Orion</w>
+         <c> </c>
+         <w xml:id="erar-5450090">med</w>
+         <c> </c>
+         <w xml:id="erar-5450100">sitt</w>
+         <c> </c>
+         <w xml:id="erar-5450110">gyllne</w>
+         <c> </c>
+         <w xml:id="erar-5450120">bälte</w>
+         <pc xml:id="erar-5450130">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67120">
+         <c> </c>
+         <w xml:id="erar-5450140">Se</w>
+         <c> </c>
+         <w xml:id="erar-5450150">där</w>
+         <c> </c>
+         <w xml:id="erar-5450160">Caelano</w>
+         <c> </c>
+         <w xml:id="erar-5450170">i</w>
+         <c> </c>
+         <w xml:id="erar-5450180">en</w>
+         <c> </c>
+         <w xml:id="erar-5450190">syskonkrans</w>
+         <pc xml:id="erar-5450200">;</pc>
+      </l>
+      <l xml:id="erar-l67125">
+         <c> </c>
+         <w xml:id="erar-5450210">Där</w>
+         <c> </c>
+         <w xml:id="erar-5450220">vandrar</w>
+         <c> </c>
+         <w xml:id="erar-5450230">Zeus</w>
+         <pc xml:id="erar-5450240">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450250">glömsk</w>
+         <c> </c>
+         <w xml:id="erar-5450260">av</w>
+         <c> </c>
+         <w xml:id="erar-5450270">sin</w>
+         <c> </c>
+         <w xml:id="erar-5450280">härskarinna</w>
+         <pc xml:id="erar-5450290">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67130">
+         <c> </c>
+         <w xml:id="erar-5450300">Bland</w>
+         <c> </c>
+         <w xml:id="erar-5450310">fyra</w>
+         <c> </c>
+         <w xml:id="erar-5450320">tärnors</w>
+         <c> </c>
+         <w xml:id="erar-5450330">leende</w>
+         <c> </c>
+         <w xml:id="erar-5450340">behag</w>
+         <pc xml:id="erar-5450350">,</pc>
+      </l>
+      <l xml:id="erar-l67135">
+         <c> </c>
+         <w xml:id="erar-5450360">Där</w>
+         <c> </c>
+         <w xml:id="erar-5450370">Venus</w>
+         <pc xml:id="erar-5450380">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450390">lik</w>
+         <c> </c>
+         <w xml:id="erar-5450400">en</w>
+         <c> </c>
+         <w xml:id="erar-5450410">trogen</w>
+         <c> </c>
+         <w xml:id="erar-5450420">älskarinna</w>
+         <pc xml:id="erar-5450430">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67140">
+         <c> </c>
+         <w xml:id="erar-5450440">Som</w>
+         <c> </c>
+         <w xml:id="erar-5450450">sist</w>
+         <c> </c>
+         <w xml:id="erar-5450460">flyr</w>
+         <c> </c>
+         <w xml:id="erar-5450470">bort</w>
+         <c> </c>
+         <w xml:id="erar-5450480">för</w>
+         <c> </c>
+         <w xml:id="erar-5450490">evighetens</w>
+         <c> </c>
+         <w xml:id="erar-5450500">dag</w>
+         <pc xml:id="erar-5450510" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68980">
+      <l xml:id="erar-l67145">
+         <w xml:id="erar-5450540">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5450550">ser</w>
+         <c> </c>
+         <w xml:id="erar-5450560">ej</w>
+         <c> </c>
+         <w xml:id="erar-5450570">bilder</w>
+         <c> </c>
+         <w xml:id="erar-5450580">mer</w>
+         <c> </c>
+         <w xml:id="erar-5450590">bland</w>
+         <c> </c>
+         <w xml:id="erar-5450600">dessa</w>
+         <c> </c>
+         <w xml:id="erar-5450610">under</w>
+         <pc xml:id="erar-5450620">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67150">
+         <c> </c>
+         <w xml:id="erar-5450630">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5450640">ser</w>
+         <c> </c>
+         <w xml:id="erar-5450650">ett</w>
+         <c> </c>
+         <w xml:id="erar-5450660">verk</w>
+         <c> </c>
+         <w xml:id="erar-5450670">utav</w>
+         <c> </c>
+         <w xml:id="erar-5450680">naturens</w>
+         <c> </c>
+         <w xml:id="erar-5450690">Far</w>
+         <pc xml:id="erar-5450700">,</pc>
+      </l>
+      <l xml:id="erar-l67155">
+         <c> </c>
+         <w xml:id="erar-5450710">Där</w>
+         <c> </c>
+         <w xml:id="erar-5450720">vart</w>
+         <c> </c>
+         <w xml:id="erar-5450730">sin</w>
+         <c> </c>
+         <w xml:id="erar-5450740">form</w>
+         <pc xml:id="erar-5450750">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450760">sin</w>
+         <c> </c>
+         <w xml:id="erar-5450770">bana</w>
+         <pc xml:id="erar-5450780">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450790">sina</w>
+         <c> </c>
+         <w xml:id="erar-5450800">stunder</w>
+         <pc xml:id="erar-5450810">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67160">
+         <c> </c>
+         <w xml:id="erar-5450820">Men</w>
+         <c> </c>
+         <w xml:id="erar-5450830">samma</w>
+         <c> </c>
+         <w xml:id="erar-5450840">grundkraft</w>
+         <pc xml:id="erar-5450850">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450860">samma</w>
+         <c> </c>
+         <w xml:id="erar-5450870">syfte</w>
+         <c> </c>
+         <w xml:id="erar-5450880">har</w>
+         <pc xml:id="erar-5450890" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67165">
+         <w xml:id="erar-5450900">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5450910">ser</w>
+         <c> </c>
+         <w xml:id="erar-5450920">hur</w>
+         <pc xml:id="erar-5450930">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450940">styrd</w>
+         <c> </c>
+         <w xml:id="erar-5450950">af</w>
+         <c> </c>
+         <w xml:id="erar-5450960">Keplers</w>
+         <c> </c>
+         <w xml:id="erar-5450970">lag</w>
+         <pc xml:id="erar-5450980">,</pc>
+         <c> </c>
+         <w xml:id="erar-5450990">kometen</w>
+         <pc xml:id="erar-5451000">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67170">
+         <c> </c>
+         <w xml:id="erar-5451010">I</w>
+         <c> </c>
+         <w xml:id="erar-5451020">blodig</w>
+         <c> </c>
+         <w xml:id="erar-5451030">rustning</w>
+         <c> </c>
+         <w xml:id="erar-5451040">klädd</w>
+         <pc xml:id="erar-5451050">,</pc>
+         <c> </c>
+         <w xml:id="erar-5451060">i</w>
+         <c> </c>
+         <w xml:id="erar-5451070">hotat</w>
+         <c> </c>
+         <w xml:id="erar-5451080">språng</w>
+      </l>
+      <l xml:id="erar-l67175">
+         <c> </c>
+         <w xml:id="erar-5451090">Ej</w>
+         <c> </c>
+         <w xml:id="erar-5451100">krossar</w>
+         <c> </c>
+         <w xml:id="erar-5451110">mer</w>
+         <c> </c>
+         <w xml:id="erar-5451120">den</w>
+         <c> </c>
+         <w xml:id="erar-5451130">skälvande</w>
+         <c> </c>
+         <w xml:id="erar-5451140">planeten</w>
+         <pc xml:id="erar-5451150">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67180">
+         <c> </c>
+         <w xml:id="erar-5451160">Ej</w>
+         <c> </c>
+         <w xml:id="erar-5451170">bådar</w>
+         <c> </c>
+         <w xml:id="erar-5451180">mer</w>
+         <c> </c>
+         <w xml:id="erar-5451190">dess</w>
+         <c> </c>
+         <w xml:id="erar-5451200">rikens</w>
+         <c> </c>
+         <w xml:id="erar-5451210">undergång</w>
+         <pc xml:id="erar-5451220" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68985">
+      <l xml:id="erar-l67185">
+         <w xml:id="erar-5451250">Från</w>
+         <c> </c>
+         <w xml:id="erar-5451260">dagens</w>
+         <c> </c>
+         <w xml:id="erar-5451270">bloss</w>
+         <c> </c>
+         <w xml:id="erar-5451280">till</w>
+         <c> </c>
+         <w xml:id="erar-5451290">nattens</w>
+         <c> </c>
+         <w xml:id="erar-5451300">milda</w>
+         <c> </c>
+         <w xml:id="erar-5451310">låga</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67190">
+         <c> </c>
+         <w xml:id="erar-5451320">Allt</w>
+         <c> </c>
+         <w xml:id="erar-5451330">i</w>
+         <c> </c>
+         <w xml:id="erar-5451340">systemers</w>
+         <c> </c>
+         <w xml:id="erar-5451350">trygga</w>
+         <c> </c>
+         <w xml:id="erar-5451360">kretsar</w>
+         <c> </c>
+         <w xml:id="erar-5451370">rörs</w>
+         <pc xml:id="erar-5451380">,</pc>
+      </l>
+      <l xml:id="erar-l67195">
+         <c> </c>
+         <w xml:id="erar-5451390">Den</w>
+         <c> </c>
+         <w xml:id="erar-5451400">Drott</w>
+         <pc xml:id="erar-5451410">,</pc>
+         <c> </c>
+         <w xml:id="erar-5451420">kring</w>
+         <c> </c>
+         <w xml:id="erar-5451430">vilken</w>
+         <c> </c>
+         <w xml:id="erar-5451440">elva</w>
+         <c> </c>
+         <w xml:id="erar-5451450">Furstar</w>
+         <c> </c>
+         <w xml:id="erar-5451460">tåga</w>
+         <pc xml:id="erar-5451470">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67200">
+         <c> </c>
+         <w xml:id="erar-5451480">Själv</w>
+         <c> </c>
+         <w xml:id="erar-5451490">kring</w>
+         <c> </c>
+         <w xml:id="erar-5451500">en</w>
+         <c> </c>
+         <w xml:id="erar-5451510">för</w>
+         <c> </c>
+         <w xml:id="erar-5451520">oss</w>
+         <c> </c>
+         <w xml:id="erar-5451530">okänd</w>
+         <c> </c>
+         <w xml:id="erar-5451540">Konung</w>
+         <c> </c>
+         <w xml:id="erar-5451550">förs</w>
+         <pc xml:id="erar-5451560" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67205">
+         <w xml:id="erar-5451570">Och</w>
+         <c> </c>
+         <w xml:id="erar-5451580">dennes</w>
+         <c> </c>
+         <w xml:id="erar-5451590">spira</w>
+         <c> </c>
+         <w xml:id="erar-5451600">högre</w>
+         <c> </c>
+         <w xml:id="erar-5451610">makter</w>
+         <c> </c>
+         <w xml:id="erar-5451620">styra</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67210">
+         <c> </c>
+         <w xml:id="erar-5451630">Och</w>
+         <c> </c>
+         <w xml:id="erar-5451640">så</w>
+         <c> </c>
+         <w xml:id="erar-5451650">igenom</w>
+         <c> </c>
+         <w xml:id="erar-5451660">Centrers</w>
+         <c> </c>
+         <w xml:id="erar-5451670">million</w>
+      </l>
+      <l xml:id="erar-l67215">
+         <c> </c>
+         <w xml:id="erar-5451680">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5451690">nalkas</w>
+         <c> </c>
+         <w xml:id="erar-5451700">slutligt</w>
+         <c> </c>
+         <w xml:id="erar-5451710">i</w>
+         <c> </c>
+         <w xml:id="erar-5451720">min</w>
+         <c> </c>
+         <w xml:id="erar-5451730">höga</w>
+         <c> </c>
+         <w xml:id="erar-5451740">yra</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67220">
+         <c> </c>
+         <w xml:id="erar-5451750">Till</w>
+         <c> </c>
+         <w xml:id="erar-5451760">alla</w>
+         <c> </c>
+         <w xml:id="erar-5451770">världars</w>
+         <c> </c>
+         <w xml:id="erar-5451780">Centrum</w>
+         <pc xml:id="erar-5451790">,</pc>
+         <c> </c>
+         <w xml:id="erar-5451800">Skaparns</w>
+         <c> </c>
+         <w xml:id="erar-5451810">tron</w>
+         <pc xml:id="erar-5451820" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68990">
+      <l xml:id="erar-l67225">
+         <w xml:id="erar-5451850">Förmätna</w>
+         <c> </c>
+         <w xml:id="erar-5451860">öga</w>
+         <pc xml:id="erar-5451870">,</pc>
+         <c> </c>
+         <w xml:id="erar-5451880">lyft</w>
+         <c> </c>
+         <w xml:id="erar-5451890">till</w>
+         <c> </c>
+         <w xml:id="erar-5451900">Gudazonen</w>
+         <pc xml:id="erar-5451910" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67230">
+         <w xml:id="erar-5451920">Re’n</w>
+         <c> </c>
+         <w xml:id="erar-5451930">tusen</w>
+         <c> </c>
+         <w xml:id="erar-5451940">solar</w>
+         <c> </c>
+         <w xml:id="erar-5451950">blända</w>
+         <c> </c>
+         <w xml:id="erar-5451960">där</w>
+         <c> </c>
+         <w xml:id="erar-5451970">din</w>
+         <c> </c>
+         <w xml:id="erar-5451980">syn</w>
+         <pc xml:id="erar-5451990" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67235">
+         <w xml:id="erar-5452000">Mot</w>
+         <c> </c>
+         <w xml:id="erar-5452010">deras</w>
+         <c> </c>
+         <w xml:id="erar-5452020">glans</w>
+         <pc xml:id="erar-5452030">,</pc>
+         <c> </c>
+         <w xml:id="erar-5452040">som</w>
+         <c> </c>
+         <w xml:id="erar-5452050">omger</w>
+         <c> </c>
+         <w xml:id="erar-5452060">himlatronen</w>
+         <pc xml:id="erar-5452070">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67240">
+         <c> </c>
+         <w xml:id="erar-5452080">En</w>
+         <c> </c>
+         <w xml:id="erar-5452090">skymning</w>
+         <c> </c>
+         <w xml:id="erar-5452100">är</w>
+         <c> </c>
+         <w xml:id="erar-5452110">den</w>
+         <c> </c>
+         <w xml:id="erar-5452120">dag</w>
+         <pc xml:id="erar-5452130">,</pc>
+         <c> </c>
+         <w xml:id="erar-5452140">som</w>
+         <c> </c>
+         <w xml:id="erar-5452150">skingrat</w>
+         <c> </c>
+         <w xml:id="erar-5452160">skyn</w>
+         <pc xml:id="erar-5452170" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67245">
+         <w xml:id="erar-5452180">När</w>
+         <c> </c>
+         <w xml:id="erar-5452190">Moses</w>
+         <c> </c>
+         <w xml:id="erar-5452200">fick</w>
+         <c> </c>
+         <w xml:id="erar-5452210">den</w>
+         <c> </c>
+         <w xml:id="erar-5452220">Helige</w>
+         <c> </c>
+         <w xml:id="erar-5452230">beskåda</w>
+         <pc xml:id="erar-5452240">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67250">
+         <c> </c>
+         <w xml:id="erar-5452250">Han</w>
+         <c> </c>
+         <w xml:id="erar-5452260">Honom</w>
+         <c> </c>
+         <w xml:id="erar-5452270">såg</w>
+         <c> </c>
+         <w xml:id="erar-5452280">blott</w>
+         <c> </c>
+         <w xml:id="erar-5452290">klädd</w>
+         <c> </c>
+         <w xml:id="erar-5452300">i</w>
+         <c> </c>
+         <w xml:id="erar-5452310">molnets</w>
+         <c> </c>
+         <w xml:id="erar-5452320">skrud</w>
+         <pc xml:id="erar-5452330">,</pc>
+      </l>
+      <l xml:id="erar-l67255">
+         <c> </c>
+         <w xml:id="erar-5452340">Men</w>
+         <c> </c>
+         <w xml:id="erar-5452350">ingen</w>
+         <c> </c>
+         <w xml:id="erar-5452360">såg</w>
+         <c> </c>
+         <w xml:id="erar-5452370">mer</w>
+         <c> </c>
+         <w xml:id="erar-5452380">Moses</w>
+         <c> </c>
+         <w xml:id="erar-5452390">utan</w>
+         <c> </c>
+         <w xml:id="erar-5452400">våda</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67260">
+         <c> </c>
+         <w xml:id="erar-5452410">Och</w>
+         <c> </c>
+         <w xml:id="erar-5452420">täckelset</w>
+         <c> </c>
+         <w xml:id="erar-5452430">beviste</w>
+         <pc xml:id="erar-5452440">,</pc>
+         <c> </c>
+         <w xml:id="erar-5452450">han</w>
+         <c> </c>
+         <w xml:id="erar-5452460">sett</w>
+         <c> </c>
+         <w xml:id="erar-5452470">Gud</w>
+         <pc xml:id="erar-5452480" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s68995">
+      <l xml:id="erar-l67265">
+         <w xml:id="erar-5452510">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5452520">har</w>
+         <c> </c>
+         <w xml:id="erar-5452530">ej</w>
+         <c> </c>
+         <w xml:id="erar-5452540">Mosis</w>
+         <c> </c>
+         <w xml:id="erar-5452550">anda</w>
+         <pc xml:id="erar-5452560">,</pc>
+         <c> </c>
+         <w xml:id="erar-5452570">Mosis</w>
+         <c> </c>
+         <w xml:id="erar-5452580">sinne</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67270">
+         <c> </c>
+         <pc xml:id="erar-5452590">–</pc>
+         <c> </c>
+         <pc xml:id="erar-5452600">(</pc>
+         <w xml:id="erar-5452610">Mitt</w>
+         <c> </c>
+         <w xml:id="erar-5452620">svaga</w>
+         <c> </c>
+         <w xml:id="erar-5452630">hjärta</w>
+         <c> </c>
+         <w xml:id="erar-5452640">ofta</w>
+         <c> </c>
+         <w xml:id="erar-5452650">brottsligt</w>
+         <c> </c>
+         <w xml:id="erar-5452660">var</w>
+         <pc xml:id="erar-5452670">,</pc>
+      </l>
+      <l xml:id="erar-l67275">
+         <c> </c>
+         <w xml:id="erar-5452680">Begären</w>
+         <c> </c>
+         <w xml:id="erar-5452690">storma</w>
+         <c> </c>
+         <w xml:id="erar-5452700">mången</w>
+         <c> </c>
+         <w xml:id="erar-5452710">gång</w>
+         <c> </c>
+         <w xml:id="erar-5452720">därinne</w>
+         <pc xml:id="erar-5452730">)</pc>
+         <pc xml:id="erar-5452740">,</pc>
+         <c> </c>
+         <pc xml:id="erar-5452750">–</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67280">
+         <c> </c>
+         <w xml:id="erar-5452760">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5452770">vågar</w>
+         <c> </c>
+         <w xml:id="erar-5452780">dock</w>
+         <c> </c>
+         <w xml:id="erar-5452790">att</w>
+         <c> </c>
+         <w xml:id="erar-5452800">nalkas</w>
+         <c> </c>
+         <w xml:id="erar-5452810">Dig</w>
+         <pc xml:id="erar-5452820">,</pc>
+         <c> </c>
+         <w xml:id="erar-5452830">min</w>
+         <c> </c>
+         <w xml:id="erar-5452840">Far</w>
+         <pc xml:id="erar-5452850" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67285">
+         <w xml:id="erar-5452860">Själv</w>
+         <c> </c>
+         <w xml:id="erar-5452870">bjöd</w>
+         <c> </c>
+         <w xml:id="erar-5452880">du</w>
+         <c> </c>
+         <w xml:id="erar-5452890">Hoppets</w>
+         <c> </c>
+         <w xml:id="erar-5452900">stjärna</w>
+         <c> </c>
+         <w xml:id="erar-5452910">för</w>
+         <c> </c>
+         <w xml:id="erar-5452920">mig</w>
+         <c> </c>
+         <w xml:id="erar-5452930">brinna</w>
+         <pc xml:id="erar-5452940">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67290">
+         <c> </c>
+         <w xml:id="erar-5452950">Själv</w>
+         <c> </c>
+         <w xml:id="erar-5452960">lyste</w>
+         <c> </c>
+         <w xml:id="erar-5452970">Du</w>
+         <c> </c>
+         <w xml:id="erar-5452980">den</w>
+         <c> </c>
+         <w xml:id="erar-5452990">väg</w>
+         <pc xml:id="erar-5453000">,</pc>
+         <c> </c>
+         <w xml:id="erar-5453010">mitt</w>
+         <c> </c>
+         <w xml:id="erar-5453020">öga</w>
+         <c> </c>
+         <w xml:id="erar-5453030">lopp</w>
+         <pc xml:id="erar-5453040">,</pc>
+      </l>
+      <l xml:id="erar-l67295">
+         <c> </c>
+         <w xml:id="erar-5453050">Och</w>
+         <c> </c>
+         <w xml:id="erar-5453060">dit</w>
+         <c> </c>
+         <w xml:id="erar-5453070">mitt</w>
+         <c> </c>
+         <w xml:id="erar-5453080">fjärrrglas</w>
+         <c> </c>
+         <w xml:id="erar-5453090">icke</w>
+         <c> </c>
+         <w xml:id="erar-5453100">kunde</w>
+         <c> </c>
+         <w xml:id="erar-5453110">hinna</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67300">
+         <c> </c>
+         <w xml:id="erar-5453120">Du</w>
+         <c> </c>
+         <w xml:id="erar-5453130">förde</w>
+         <c> </c>
+         <w xml:id="erar-5453140">mig</w>
+         <c> </c>
+         <w xml:id="erar-5453150">på</w>
+         <c> </c>
+         <w xml:id="erar-5453160">tankens</w>
+         <c> </c>
+         <w xml:id="erar-5453170">vingar</w>
+         <c> </c>
+         <w xml:id="erar-5453180">opp</w>
+         <pc xml:id="erar-5453190" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s69000">
+      <l xml:id="erar-l67305">
+         <w xml:id="erar-5453220">Ifrån</w>
+         <c> </c>
+         <w xml:id="erar-5453230">Din</w>
+         <c> </c>
+         <w xml:id="erar-5453240">tron</w>
+         <c> </c>
+         <w xml:id="erar-5453250">i</w>
+         <c> </c>
+         <w xml:id="erar-5453260">världens</w>
+         <c> </c>
+         <w xml:id="erar-5453270">morgontimma</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67310">
+         <c> </c>
+         <w xml:id="erar-5453280">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5453290">hör</w>
+         <c> </c>
+         <w xml:id="erar-5453300">O</w>
+         <c> </c>
+         <w xml:id="erar-5453310">Gud</w>
+         <pc xml:id="erar-5453320">!</pc>
+         <c> </c>
+         <w xml:id="erar-5453330">ett</w>
+         <c> </c>
+         <pc xml:id="erar-5453340">‘</pc>
+         <w xml:id="erar-5453350">Varde</w>
+         <pc xml:id="erar-5453360">!</pc>
+         <pc xml:id="erar-5453370">’</pc>
+         <c> </c>
+         <w xml:id="erar-5453380">och</w>
+         <c> </c>
+         <w xml:id="erar-5453390">jag</w>
+         <c> </c>
+         <w xml:id="erar-5453400">ser</w>
+      </l>
+      <l xml:id="erar-l67315">
+         <c> </c>
+         <w xml:id="erar-5453410">Millioner</w>
+         <c> </c>
+         <w xml:id="erar-5453420">klot</w>
+         <c> </c>
+         <w xml:id="erar-5453430">ur</w>
+         <c> </c>
+         <w xml:id="erar-5453440">österns</w>
+         <c> </c>
+         <w xml:id="erar-5453450">purpur</w>
+         <c> </c>
+         <w xml:id="erar-5453460">glimma</w>
+         <pc xml:id="erar-5453470">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67320">
+         <c> </c>
+         <w xml:id="erar-5453480">Millioner</w>
+         <c> </c>
+         <w xml:id="erar-5453490">liv</w>
+         <c> </c>
+         <w xml:id="erar-5453500">tillbedja</w>
+         <c> </c>
+         <w xml:id="erar-5453510">på</w>
+         <c> </c>
+         <w xml:id="erar-5453520">vår</w>
+         <c> </c>
+         <w xml:id="erar-5453530">sfär</w>
+         <pc xml:id="erar-5453540" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67325">
+         <w xml:id="erar-5453550">Från</w>
+         <c> </c>
+         <w xml:id="erar-5453560">Dig</w>
+         <c> </c>
+         <w xml:id="erar-5453570">till</w>
+         <c> </c>
+         <w xml:id="erar-5453580">alla</w>
+         <c> </c>
+         <w xml:id="erar-5453590">liv</w>
+         <c> </c>
+         <w xml:id="erar-5453600">och</w>
+         <c> </c>
+         <w xml:id="erar-5453610">kraft</w>
+         <c> </c>
+         <w xml:id="erar-5453620">sig</w>
+         <c> </c>
+         <w xml:id="erar-5453630">sprida</w>
+         <pc xml:id="erar-5453640">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67330">
+         <c> </c>
+         <w xml:id="erar-5453650">Kring</w>
+         <c> </c>
+         <w xml:id="erar-5453660">Dig</w>
+         <c> </c>
+         <w xml:id="erar-5453670">systemer</w>
+         <c> </c>
+         <w xml:id="erar-5453680">vid</w>
+         <c> </c>
+         <w xml:id="erar-5453690">harmonisk</w>
+         <c> </c>
+         <w xml:id="erar-5453700">sång</w>
+         <pc xml:id="erar-5453710">,</pc>
+      </l>
+      <l xml:id="erar-l67335">
+         <c> </c>
+         <w xml:id="erar-5453720">Än</w>
+         <c> </c>
+         <w xml:id="erar-5453730">längre</w>
+         <c> </c>
+         <w xml:id="erar-5453740">bort</w>
+         <c> </c>
+         <w xml:id="erar-5453750">i</w>
+         <c> </c>
+         <w xml:id="erar-5453760">långa</w>
+         <c> </c>
+         <w xml:id="erar-5453770">kretsar</w>
+         <c> </c>
+         <w xml:id="erar-5453780">skrida</w>
+         <pc xml:id="erar-5453790">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67340">
+         <c> </c>
+         <w xml:id="erar-5453800">Än</w>
+         <c> </c>
+         <w xml:id="erar-5453810">närmre</w>
+         <c> </c>
+         <w xml:id="erar-5453820">fly</w>
+         <pc xml:id="erar-5453830">,</pc>
+         <c> </c>
+         <w xml:id="erar-5453840">som</w>
+         <c> </c>
+         <w xml:id="erar-5453850">blixten</w>
+         <c> </c>
+         <w xml:id="erar-5453860">i</w>
+         <c> </c>
+         <w xml:id="erar-5453870">sitt</w>
+         <c> </c>
+         <w xml:id="erar-5453880">språng</w>
+         <pc xml:id="erar-5453890" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s69005">
+      <l xml:id="erar-l67345">
+         <w xml:id="erar-5453920">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5453930">skådar</w>
+         <c> </c>
+         <w xml:id="erar-5453940">genom</w>
+         <c> </c>
+         <w xml:id="erar-5453950">seklers</w>
+         <c> </c>
+         <w xml:id="erar-5453960">vikna</w>
+         <c> </c>
+         <w xml:id="erar-5453970">stunder</w>
+         <pc xml:id="erar-5453980">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67350">
+         <c> </c>
+         <w xml:id="erar-5453990">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5454000">far</w>
+         <c> </c>
+         <w xml:id="erar-5454010">från</w>
+         <c> </c>
+         <w xml:id="erar-5454020">zon</w>
+         <c> </c>
+         <w xml:id="erar-5454030">till</w>
+         <c> </c>
+         <w xml:id="erar-5454040">zon</w>
+         <pc xml:id="erar-5454050">,</pc>
+         <c> </c>
+         <w xml:id="erar-5454060">från</w>
+         <c> </c>
+         <w xml:id="erar-5454070">pol</w>
+         <c> </c>
+         <w xml:id="erar-5454080">till</w>
+         <c> </c>
+         <w xml:id="erar-5454090">pol</w>
+         <pc xml:id="erar-5454100" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67355">
+         <w xml:id="erar-5454110">Än</w>
+         <c> </c>
+         <w xml:id="erar-5454120">hylla</w>
+         <c> </c>
+         <w xml:id="erar-5454130">dig</w>
+         <c> </c>
+         <w xml:id="erar-5454140">i</w>
+         <c> </c>
+         <w xml:id="erar-5454150">samma</w>
+         <c> </c>
+         <w xml:id="erar-5454160">banors</w>
+         <c> </c>
+         <w xml:id="erar-5454170">runder</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67360">
+         <c> </c>
+         <w xml:id="erar-5454180">Den</w>
+         <c> </c>
+         <w xml:id="erar-5454190">minsta</w>
+         <c> </c>
+         <w xml:id="erar-5454200">jord</w>
+         <pc xml:id="erar-5454210">,</pc>
+         <c> </c>
+         <w xml:id="erar-5454220">de</w>
+         <c> </c>
+         <w xml:id="erar-5454230">största</w>
+         <c> </c>
+         <w xml:id="erar-5454240">världars</w>
+         <c> </c>
+         <w xml:id="erar-5454250">sol</w>
+         <pc xml:id="erar-5454260">,</pc>
+      </l>
+      <l xml:id="erar-l67365">
+         <c> </c>
+         <w xml:id="erar-5454270">Bild</w>
+         <c> </c>
+         <w xml:id="erar-5454280">av</w>
+         <c> </c>
+         <w xml:id="erar-5454290">dig</w>
+         <c> </c>
+         <w xml:id="erar-5454300">själv</w>
+         <pc xml:id="erar-5454310">,</pc>
+         <c> </c>
+         <w xml:id="erar-5454320">bild</w>
+         <c> </c>
+         <w xml:id="erar-5454330">av</w>
+         <c> </c>
+         <w xml:id="erar-5454340">odödligheten</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67370">
+         <c> </c>
+         <w xml:id="erar-5454350">Står</w>
+         <c> </c>
+         <w xml:id="erar-5454360">för</w>
+         <c> </c>
+         <w xml:id="erar-5454370">din</w>
+         <c> </c>
+         <w xml:id="erar-5454380">tron</w>
+         <c> </c>
+         <w xml:id="erar-5454390">i</w>
+         <c> </c>
+         <w xml:id="erar-5454400">första</w>
+         <c> </c>
+         <w xml:id="erar-5454410">ungdomsglans</w>
+      </l>
+      <l xml:id="erar-l67375">
+         <c> </c>
+         <w xml:id="erar-5454420">Din</w>
+         <c> </c>
+         <w xml:id="erar-5454430">Uranie</w>
+         <pc xml:id="erar-5454440">,</pc>
+         <c> </c>
+         <w xml:id="erar-5454450">din</w>
+         <c> </c>
+         <w xml:id="erar-5454460">bild</w>
+         <pc xml:id="erar-5454470">;</pc>
+         <c> </c>
+         <w xml:id="erar-5454480">och</w>
+         <c> </c>
+         <w xml:id="erar-5454490">evigheten</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67380">
+         <c> </c>
+         <w xml:id="erar-5454500">Ser</w>
+         <c> </c>
+         <w xml:id="erar-5454510">ej</w>
+         <c> </c>
+         <w xml:id="erar-5454520">en</w>
+         <c> </c>
+         <w xml:id="erar-5454530">blomma</w>
+         <c> </c>
+         <w xml:id="erar-5454540">vissnad</w>
+         <c> </c>
+         <w xml:id="erar-5454550">i</w>
+         <c> </c>
+         <w xml:id="erar-5454560">dess</w>
+         <c> </c>
+         <w xml:id="erar-5454570">krans</w>
+         <pc xml:id="erar-5454580" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s69010">
+      <l xml:id="erar-l67385">
+         <w xml:id="erar-5454610">Var</w>
+         <c> </c>
+         <w xml:id="erar-5454620">är</w>
+         <c> </c>
+         <w xml:id="erar-5454630">Du</w>
+         <pc xml:id="erar-5454640" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="erar-5454650">Var</w>
+         <c> </c>
+         <w xml:id="erar-5454660">är</w>
+         <c> </c>
+         <w xml:id="erar-5454670">jorden</w>
+         <pc xml:id="erar-5454680" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="erar-5454690">Gode</w>
+         <c> </c>
+         <w xml:id="erar-5454700">Fader</w>
+         <pc xml:id="erar-5454710" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67390">
+         <w xml:id="erar-5454720">Är</w>
+         <c> </c>
+         <w xml:id="erar-5454730">hon</w>
+         <c> </c>
+         <w xml:id="erar-5454740">väl</w>
+         <c> </c>
+         <w xml:id="erar-5454750">långt</w>
+         <c> </c>
+         <w xml:id="erar-5454760">ifrån</w>
+         <c> </c>
+         <w xml:id="erar-5454770">din</w>
+         <c> </c>
+         <w xml:id="erar-5454780">boning</w>
+         <pc xml:id="erar-5454790" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="erar-5454800">Säg</w>
+         <pc xml:id="erar-5454810" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67395">
+         <w xml:id="erar-5454820">I</w>
+         <c> </c>
+         <w xml:id="erar-5454830">vilken</w>
+         <c> </c>
+         <w xml:id="erar-5454840">av</w>
+         <c> </c>
+         <w xml:id="erar-5454850">systemers</w>
+         <c> </c>
+         <w xml:id="erar-5454860">många</w>
+         <c> </c>
+         <w xml:id="erar-5454870">grader</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67400">
+         <c> </c>
+         <w xml:id="erar-5454880">Beskriver</w>
+         <c> </c>
+         <w xml:id="erar-5454890">hon</w>
+         <c> </c>
+         <w xml:id="erar-5454900">sin</w>
+         <c> </c>
+         <w xml:id="erar-5454910">trygga</w>
+         <c> </c>
+         <w xml:id="erar-5454920">cirkelväg</w>
+         <pc xml:id="erar-5454930" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67405">
+         <w xml:id="erar-5454940">Jag</w>
+         <c> </c>
+         <w xml:id="erar-5454950">vet</w>
+         <c> </c>
+         <w xml:id="erar-5454960">det</w>
+         <c> </c>
+         <w xml:id="erar-5454970">ej</w>
+         <pc xml:id="erar-5454980" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="erar-5454990">En</w>
+         <c> </c>
+         <w xml:id="erar-5455000">blick</w>
+         <c> </c>
+         <w xml:id="erar-5455010">på</w>
+         <c> </c>
+         <w xml:id="erar-5455020">jordens</w>
+         <c> </c>
+         <w xml:id="erar-5455030">dårar</w>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67410">
+         <c> </c>
+         <w xml:id="erar-5455040">Bortflyttar</w>
+         <c> </c>
+         <w xml:id="erar-5455050">mig</w>
+         <c> </c>
+         <w xml:id="erar-5455060">till</w>
+         <c> </c>
+         <w xml:id="erar-5455070">Firmamentets</w>
+         <c> </c>
+         <w xml:id="erar-5455080">gräns</w>
+         <pc xml:id="erar-5455090">;</pc>
+      </l>
+      <l xml:id="erar-l67415">
+         <c> </c>
+         <w xml:id="erar-5455100">En</w>
+         <c> </c>
+         <w xml:id="erar-5455110">blick</w>
+         <c> </c>
+         <w xml:id="erar-5455120">på</w>
+         <c> </c>
+         <w xml:id="erar-5455130">snillet</w>
+         <pc xml:id="erar-5455140">,</pc>
+         <c> </c>
+         <w xml:id="erar-5455150">på</w>
+         <c> </c>
+         <w xml:id="erar-5455160">den</w>
+         <c> </c>
+         <w xml:id="erar-5455170">Ädles</w>
+         <c> </c>
+         <w xml:id="erar-5455180">tårar</w>
+         <pc xml:id="erar-5455190" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67420">
+         <w xml:id="erar-5455200">Och</w>
+         <c> </c>
+         <w xml:id="erar-5455210">vägen</w>
+         <c> </c>
+         <w xml:id="erar-5455220">flyr</w>
+         <c> </c>
+         <w xml:id="erar-5455230">och</w>
+         <c> </c>
+         <w xml:id="erar-5455240">Din</w>
+         <c> </c>
+         <w xml:id="erar-5455250">närvaro</w>
+         <c> </c>
+         <w xml:id="erar-5455260">känns</w>
+         <pc xml:id="erar-5455270" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="erar-s69015">
+      <l xml:id="erar-l67425">
+         <w xml:id="erar-5455300">Och</w>
+         <c> </c>
+         <w xml:id="erar-5455310">var</w>
+         <c> </c>
+         <w xml:id="erar-5455320">du</w>
+         <c> </c>
+         <w xml:id="erar-5455330">är</w>
+         <c> </c>
+         <w xml:id="erar-5455340">ditt</w>
+         <c> </c>
+         <w xml:id="erar-5455350">öga</w>
+         <c> </c>
+         <w xml:id="erar-5455360">mig</w>
+         <c> </c>
+         <w xml:id="erar-5455370">dock</w>
+         <c> </c>
+         <w xml:id="erar-5455380">hinner</w>
+         <pc xml:id="erar-5455390">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67430">
+         <c> </c>
+         <w xml:id="erar-5455400">Bland</w>
+         <c> </c>
+         <w xml:id="erar-5455410">Änglars</w>
+         <c> </c>
+         <w xml:id="erar-5455420">lovsång</w>
+         <c> </c>
+         <w xml:id="erar-5455430">hörs</w>
+         <c> </c>
+         <w xml:id="erar-5455440">min</w>
+         <c> </c>
+         <w xml:id="erar-5455450">matta</w>
+         <c> </c>
+         <w xml:id="erar-5455460">röst</w>
+         <pc xml:id="erar-5455470" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67435">
+         <w xml:id="erar-5455480">Var</w>
+         <c> </c>
+         <w xml:id="erar-5455490">morgonsol</w>
+         <c> </c>
+         <w xml:id="erar-5455500">din</w>
+         <c> </c>
+         <w xml:id="erar-5455510">godhet</w>
+         <c> </c>
+         <w xml:id="erar-5455520">mig</w>
+         <c> </c>
+         <w xml:id="erar-5455530">påminner</w>
+         <pc xml:id="erar-5455540">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67440">
+         <c> </c>
+         <w xml:id="erar-5455550">Var</w>
+         <c> </c>
+         <w xml:id="erar-5455560">aftonsol</w>
+         <c> </c>
+         <w xml:id="erar-5455570">din</w>
+         <c> </c>
+         <w xml:id="erar-5455580">milda</w>
+         <c> </c>
+         <w xml:id="erar-5455590">fadersröst</w>
+         <pc xml:id="erar-5455600" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67445">
+         <w xml:id="erar-5455610">Förgäves</w>
+         <c> </c>
+         <w xml:id="erar-5455620">stormen</w>
+         <c> </c>
+         <w xml:id="erar-5455630">sina</w>
+         <c> </c>
+         <w xml:id="erar-5455640">vingar</w>
+         <c> </c>
+         <w xml:id="erar-5455650">skakar</w>
+         <pc xml:id="erar-5455660">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67450">
+         <c> </c>
+         <w xml:id="erar-5455670">Förgäves</w>
+         <c> </c>
+         <w xml:id="erar-5455680">ljungar</w>
+         <c> </c>
+         <w xml:id="erar-5455690">viggen</w>
+         <c> </c>
+         <w xml:id="erar-5455700">kring</w>
+         <c> </c>
+         <w xml:id="erar-5455710">vårt</w>
+         <c> </c>
+         <w xml:id="erar-5455720">tjäll</w>
+         <pc xml:id="erar-5455730" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l67455">
+         <w xml:id="erar-5455740">Högt</w>
+         <c> </c>
+         <w xml:id="erar-5455750">över</w>
+         <c> </c>
+         <w xml:id="erar-5455760">oss</w>
+         <c> </c>
+         <w xml:id="erar-5455770">din</w>
+         <c> </c>
+         <w xml:id="erar-5455780">gode</w>
+         <c> </c>
+         <w xml:id="erar-5455790">Ande</w>
+         <c> </c>
+         <w xml:id="erar-5455800">vakar</w>
+         <pc xml:id="erar-5455810">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l67460">
+         <c> </c>
+         <w xml:id="erar-5455820">Som</w>
+         <c> </c>
+         <w xml:id="erar-5455830">Nordens</w>
+         <c> </c>
+         <w xml:id="erar-5455840">stjärna</w>
+         <c> </c>
+         <w xml:id="erar-5455850">över</w>
+         <c> </c>
+         <w xml:id="erar-5455860">Nordens</w>
+         <c> </c>
+         <w xml:id="erar-5455870">fjäll</w>
+         <pc xml:id="erar-5455880" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

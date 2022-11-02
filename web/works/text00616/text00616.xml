@@ -1,1 +1,1822 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original"
+     corresp="#work00477"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00616"
+     xml:lang="hun">
+   <link target="#pers00333" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n01230">
+      <date type="publ" when="1845">
+         <w xml:id="erar-5339740">1845</w>
+      </date>
+      <bibl>
+         <title>
+            <w xml:id="erar-5339770">Pesti</w>
+            <c> </c>
+            <w xml:id="erar-5339780">Divatlap</w>
+            <pc xml:id="erar-5339790">,</pc>
+            <c> </c>
+            <w xml:id="erar-5339800">vol.</w>
+            <c> </c>
+            <w xml:id="erar-5339810">1</w>
+            <pc xml:id="erar-5339820">,</pc>
+            <c> </c>
+            <w xml:id="erar-5339830">no</w>
+            <pc xml:id="erar-5339840" unit="sentence">.</pc>
+            <c> </c>
+            <w xml:id="erar-5339850">1</w>
+            <pc xml:id="erar-5339860">,</pc>
+            <c> </c>
+            <w xml:id="erar-5339870">January</w>
+            <c> </c>
+            <w xml:id="erar-5339880">1</w>
+            <pc xml:id="erar-5339890">,</pc>
+            <c> </c>
+            <w xml:id="erar-5339900">1845.</w>
+            <c> </c>
+            <w xml:id="erar-5339910">4</w>
+            <pc unit="sentence" xml:id="erar-5339910-eos"/>
+            <c> </c>
+            <pc xml:id="erar-5339920">–</pc>
+            <c> </c>
+            <w xml:id="erar-5339930">5.</w>
+            <pc unit="sentence" xml:id="erar-5339930-eos"/>
+            <c> </c>
+         </title>
+      </bibl>
+      <bibl>
+         <w xml:id="erar-5339950">Vörösmarty</w>
+         <pc xml:id="erar-5339960">,</pc>
+         <c> </c>
+         <w xml:id="erar-5339970">Mihály</w>
+         <pc xml:id="erar-5339980">,</pc>
+         <title>
+            <c> </c>
+            <w xml:id="erar-5339990">Vörösmarty</w>
+            <c> </c>
+            <w xml:id="erar-5340000">Mihály</w>
+            <c> </c>
+            <w xml:id="erar-5340010">összes</w>
+            <c> </c>
+            <w xml:id="erar-5340020">művei</w>
+         </title>
+         <pc xml:id="erar-5340030">,</pc>
+         <c> </c>
+         <w xml:id="erar-5340040">vol.</w>
+         <c> </c>
+         <w xml:id="erar-5340050">3</w>
+         <pc xml:id="erar-5340060">,</pc>
+         <c> </c>
+         <w xml:id="erar-5340070">Kisebb</w>
+         <c> </c>
+         <w xml:id="erar-5340080">költemények</w>
+         <c> </c>
+         <w xml:id="erar-5340090">3</w>
+         <pc xml:id="erar-5340100">,</pc>
+         <c> </c>
+         <pc xml:id="erar-5340110">(</pc>
+         <w xml:id="erar-5340120">1840</w>
+         <c> </c>
+         <pc xml:id="erar-5340130">–</pc>
+         <c> </c>
+         <w xml:id="erar-5340140">1855</w>
+         <pc xml:id="erar-5340150">)</pc>
+         <pc xml:id="erar-5340160" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-5340170">Edited</w>
+         <c> </c>
+         <w xml:id="erar-5340180">by</w>
+         <c> </c>
+         <w xml:id="erar-5340190">Tóth</w>
+         <pc xml:id="erar-5340200">,</pc>
+         <c> </c>
+         <w xml:id="erar-5340210">Dezső</w>
+         <pc xml:id="erar-5340220" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-5340230">Budapest</w>
+         <pc xml:id="erar-5340240">:</pc>
+         <c> </c>
+         <w xml:id="erar-5340250">Akadémiai</w>
+         <c> </c>
+         <w xml:id="erar-5340260">1962.</w>
+         <c> </c>
+         <w xml:id="erar-5340270">101</w>
+         <pc unit="sentence" xml:id="erar-5340270-eos"/>
+         <c> </c>
+         <pc xml:id="erar-5340280">–</pc>
+         <c> </c>
+         <w xml:id="erar-5340290">104.</w>
+         <pc unit="sentence" xml:id="erar-5340290-eos"/>
+      </bibl>
+   </note>
+   <head type="main" xml:id="erar-h02440">
+      <w xml:id="erar-5331750">Gondolatok</w>
+      <c> </c>
+      <w xml:id="erar-5331760">a</w>
+      <c> </c>
+      <w xml:id="erar-5331770">könyvtárban</w>
+   </head>
+   <lg xml:id="erar-s67430">
+      <l xml:id="erar-l64395">
+         <w xml:id="erar-5331800">Hová</w>
+         <c> </c>
+         <w xml:id="erar-5331810">lépsz</w>
+         <c> </c>
+         <w xml:id="erar-5331820">most</w>
+         <pc xml:id="erar-5331830">,</pc>
+         <c> </c>
+         <w xml:id="erar-5331840">gondold</w>
+         <c> </c>
+         <w xml:id="erar-5331850">meg</w>
+         <pc xml:id="erar-5331860">,</pc>
+         <c> </c>
+         <w xml:id="erar-5331870">oh</w>
+         <c> </c>
+         <w xml:id="erar-5331880">tudós</w>
+         <pc xml:id="erar-5331890">,</pc>
+      </l>
+      <l xml:id="erar-l64400">
+         <c> </c>
+         <w xml:id="erar-5331900">Az</w>
+         <c> </c>
+         <w xml:id="erar-5331910">emberiségnek</w>
+         <c> </c>
+         <w xml:id="erar-5331920">elhányt</w>
+         <c> </c>
+         <w xml:id="erar-5331930">rongyain</w>
+      </l>
+      <l xml:id="erar-l64405">
+         <c> </c>
+         <w xml:id="erar-5331940">Komor</w>
+         <c> </c>
+         <w xml:id="erar-5331950">betűkkel</w>
+         <pc xml:id="erar-5331960">,</pc>
+         <c> </c>
+         <w xml:id="erar-5331970">mint</w>
+         <c> </c>
+         <w xml:id="erar-5331980">a</w>
+         <c> </c>
+         <w xml:id="erar-5331990">téli</w>
+         <c> </c>
+         <w xml:id="erar-5332000">éj</w>
+         <pc xml:id="erar-5332010">,</pc>
+      </l>
+      <l xml:id="erar-l64410">
+         <c> </c>
+         <w xml:id="erar-5332020">Leírva</w>
+         <c> </c>
+         <w xml:id="erar-5332030">áll</w>
+         <c> </c>
+         <w xml:id="erar-5332040">a</w>
+         <c> </c>
+         <w xml:id="erar-5332050">rettentő</w>
+         <c> </c>
+         <w xml:id="erar-5332060">tanulság</w>
+         <pc xml:id="erar-5332070">:</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64415">
+         <c> </c>
+         <pc xml:id="erar-5332080">„</pc>
+         <c> </c>
+         <w xml:id="erar-5332090">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5332100">míg</w>
+         <c> </c>
+         <w xml:id="erar-5332110">nyomorra</w>
+         <c> </c>
+         <w xml:id="erar-5332120">milliók</w>
+         <c> </c>
+         <w xml:id="erar-5332130">születnek</w>
+         <pc xml:id="erar-5332140">,</pc>
+      </l>
+      <l xml:id="erar-l64420">
+         <c> </c>
+         <w xml:id="erar-5332150">Néhány</w>
+         <c> </c>
+         <w xml:id="erar-5332160">ezernek</w>
+         <c> </c>
+         <w xml:id="erar-5332170">jutna</w>
+         <c> </c>
+         <w xml:id="erar-5332180">üdv</w>
+         <c> </c>
+         <w xml:id="erar-5332190">a</w>
+         <c> </c>
+         <w xml:id="erar-5332200">földön</w>
+         <pc xml:id="erar-5332210">,</pc>
+      </l>
+      <l xml:id="erar-l64425">
+         <c> </c>
+         <w xml:id="erar-5332220">Ha</w>
+         <c> </c>
+         <w xml:id="erar-5332230">istenésszel</w>
+         <pc xml:id="erar-5332240">,</pc>
+         <c> </c>
+         <w xml:id="erar-5332250">angyal</w>
+         <c> </c>
+         <w xml:id="erar-5332260">érzelemmel</w>
+      </l>
+      <l xml:id="erar-l64430">
+         <c> </c>
+         <w xml:id="erar-5332270">Használni</w>
+         <c> </c>
+         <w xml:id="erar-5332280">tudnák</w>
+         <c> </c>
+         <w xml:id="erar-5332290">éltök</w>
+         <c> </c>
+         <w xml:id="erar-5332300">napjait</w>
+         <pc xml:id="erar-5332310">.</pc>
+         <pc xml:id="erar-5332320" unit="sentence">”</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64435">
+         <w xml:id="erar-5332330">Miért</w>
+         <c> </c>
+         <w xml:id="erar-5332340">e</w>
+         <c> </c>
+         <w xml:id="erar-5332350">lom</w>
+         <pc xml:id="erar-5332360">?</pc>
+         <c> </c>
+         <w xml:id="erar-5332370">hogy</w>
+         <c> </c>
+         <w xml:id="erar-5332380">mint</w>
+         <c> </c>
+         <w xml:id="erar-5332390">juh</w>
+         <c> </c>
+         <w xml:id="erar-5332400">a</w>
+         <c> </c>
+         <w xml:id="erar-5332410">gyepen</w>
+      </l>
+      <l xml:id="erar-l64440">
+         <c> </c>
+         <w xml:id="erar-5332420">Legeljünk</w>
+         <c> </c>
+         <w xml:id="erar-5332430">rajta</w>
+         <pc xml:id="erar-5332440" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="erar-5332450">s</w>
+         <c> </c>
+         <w xml:id="erar-5332460">léha</w>
+         <c> </c>
+         <w xml:id="erar-5332470">tudománytól</w>
+      </l>
+      <l xml:id="erar-l64445">
+         <c> </c>
+         <w xml:id="erar-5332480">Zabáltan</w>
+         <c> </c>
+         <w xml:id="erar-5332490">elhenyéljük</w>
+         <c> </c>
+         <w xml:id="erar-5332500">a</w>
+         <c> </c>
+         <w xml:id="erar-5332510">napot</w>
+         <pc xml:id="erar-5332520" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64450">
+         <w xml:id="erar-5332530">Az</w>
+         <c> </c>
+         <w xml:id="erar-5332540">isten</w>
+         <c> </c>
+         <w xml:id="erar-5332550">napját</w>
+         <pc xml:id="erar-5332560">!</pc>
+         <c> </c>
+         <w xml:id="erar-5332570">nemzet</w>
+         <c> </c>
+         <w xml:id="erar-5332580">életét</w>
+         <pc xml:id="erar-5332590" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64455">
+         <w xml:id="erar-5332600">Miért</w>
+         <c> </c>
+         <w xml:id="erar-5332610">e</w>
+         <c> </c>
+         <w xml:id="erar-5332620">lom</w>
+         <pc xml:id="erar-5332630">?</pc>
+         <c> </c>
+         <w xml:id="erar-5332640">szagáról</w>
+         <c> </c>
+         <w xml:id="erar-5332650">ismerem</w>
+         <c> </c>
+         <w xml:id="erar-5332660">meg</w>
+      </l>
+      <l xml:id="erar-l64460">
+         <c> </c>
+         <w xml:id="erar-5332670">Az</w>
+         <c> </c>
+         <w xml:id="erar-5332680">állatember</w>
+         <c> </c>
+         <w xml:id="erar-5332690">minden</w>
+         <c> </c>
+         <w xml:id="erar-5332700">bűneit</w>
+         <pc xml:id="erar-5332710" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64465">
+         <w xml:id="erar-5332720">Erény</w>
+         <c> </c>
+         <w xml:id="erar-5332730">van</w>
+         <c> </c>
+         <w xml:id="erar-5332740">írva</w>
+         <c> </c>
+         <w xml:id="erar-5332750">e</w>
+         <c> </c>
+         <w xml:id="erar-5332760">lapon</w>
+         <pc xml:id="erar-5332770">;</pc>
+         <c> </c>
+         <w xml:id="erar-5332780">de</w>
+         <c> </c>
+         <w xml:id="erar-5332790">egykor</w>
+      </l>
+      <l xml:id="erar-l64470">
+         <c> </c>
+         <w xml:id="erar-5332800">Zsivány</w>
+         <c> </c>
+         <w xml:id="erar-5332810">ruhája</w>
+         <c> </c>
+         <w xml:id="erar-5332820">volt</w>
+         <pc xml:id="erar-5332830" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-5332840">S</w>
+         <c> </c>
+         <w xml:id="erar-5332850">amott</w>
+         <pc xml:id="erar-5332860" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64475">
+         <w xml:id="erar-5332870">Az</w>
+         <c> </c>
+         <w xml:id="erar-5332880">ártatlanság</w>
+         <c> </c>
+         <w xml:id="erar-5332890">boldog</w>
+         <c> </c>
+         <w xml:id="erar-5332900">napjai</w>
+      </l>
+      <l xml:id="erar-l64480">
+         <c> </c>
+         <w xml:id="erar-5332910">Egy</w>
+         <c> </c>
+         <w xml:id="erar-5332920">eltépett</w>
+         <c> </c>
+         <w xml:id="erar-5332930">szűz</w>
+         <c> </c>
+         <w xml:id="erar-5332940">gyönge</w>
+         <c> </c>
+         <w xml:id="erar-5332950">öltönyén</w>
+         <pc xml:id="erar-5332960">,</pc>
+      </l>
+      <l xml:id="erar-l64485">
+         <c> </c>
+         <w xml:id="erar-5332970">Vagy</w>
+         <c> </c>
+         <w xml:id="erar-5332980">egy</w>
+         <c> </c>
+         <w xml:id="erar-5332990">dühös</w>
+         <c> </c>
+         <w xml:id="erar-5333000">bujának</w>
+         <c> </c>
+         <w xml:id="erar-5333010">pongyoláján</w>
+         <pc xml:id="erar-5333020" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64490">
+         <w xml:id="erar-5333030">És</w>
+         <c> </c>
+         <w xml:id="erar-5333040">itt</w>
+         <c> </c>
+         <w xml:id="erar-5333050">a</w>
+         <c> </c>
+         <w xml:id="erar-5333060">törvény</w>
+         <c> </c>
+         <pc xml:id="erar-5333070">–</pc>
+         <c> </c>
+         <w xml:id="erar-5333080">véres</w>
+         <c> </c>
+         <w xml:id="erar-5333090">lázadók</w>
+         <pc xml:id="erar-5333100">,</pc>
+      </l>
+      <l xml:id="erar-l64495">
+         <c> </c>
+         <w xml:id="erar-5333110">Hamis</w>
+         <c> </c>
+         <w xml:id="erar-5333120">birák</w>
+         <c> </c>
+         <w xml:id="erar-5333130">és</w>
+         <c> </c>
+         <w xml:id="erar-5333140">zsarnokok</w>
+         <c> </c>
+         <w xml:id="erar-5333150">mezéből</w>
+      </l>
+      <l xml:id="erar-l64500">
+         <c> </c>
+         <w xml:id="erar-5333160">Fehérre</w>
+         <c> </c>
+         <w xml:id="erar-5333170">mosdott</w>
+         <c> </c>
+         <w xml:id="erar-5333180">könyvnek</w>
+         <c> </c>
+         <w xml:id="erar-5333190">lapjain</w>
+         <pc xml:id="erar-5333200" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64505">
+         <w xml:id="erar-5333210">Emitt</w>
+         <c> </c>
+         <w xml:id="erar-5333220">a</w>
+         <c> </c>
+         <w xml:id="erar-5333230">gépek</w>
+         <c> </c>
+         <w xml:id="erar-5333240">s</w>
+         <c> </c>
+         <w xml:id="erar-5333250">számok</w>
+         <c> </c>
+         <w xml:id="erar-5333260">titkai</w>
+         <pc xml:id="erar-5333270" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64510">
+         <w xml:id="erar-5333280">De</w>
+         <c> </c>
+         <w xml:id="erar-5333290">akik</w>
+         <c> </c>
+         <w xml:id="erar-5333300">a</w>
+         <c> </c>
+         <w xml:id="erar-5333310">ruhát</w>
+         <c> </c>
+         <w xml:id="erar-5333320">elszaggaták</w>
+      </l>
+      <l xml:id="erar-l64515">
+         <c> </c>
+         <w xml:id="erar-5333330">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5333340">majd</w>
+         <c> </c>
+         <w xml:id="erar-5333350">belőle</w>
+         <c> </c>
+         <w xml:id="erar-5333360">csínos</w>
+         <c> </c>
+         <w xml:id="erar-5333370">könyv</w>
+         <c> </c>
+         <w xml:id="erar-5333380">legyen</w>
+         <pc xml:id="erar-5333390">,</pc>
+      </l>
+      <l xml:id="erar-l64520">
+         <c> </c>
+         <w xml:id="erar-5333400">Számon</w>
+         <c> </c>
+         <w xml:id="erar-5333410">kivül</w>
+         <c> </c>
+         <w xml:id="erar-5333420">maradtak</w>
+         <pc xml:id="erar-5333430">:</pc>
+         <c> </c>
+         <w xml:id="erar-5333440">Ixion</w>
+      </l>
+      <l xml:id="erar-l64525">
+         <c> </c>
+         <w xml:id="erar-5333450">Bőszült</w>
+         <c> </c>
+         <w xml:id="erar-5333460">vihartól</w>
+         <c> </c>
+         <w xml:id="erar-5333470">űzött</w>
+         <c> </c>
+         <w xml:id="erar-5333480">kerekén</w>
+      </l>
+      <l xml:id="erar-l64530">
+         <c> </c>
+         <w xml:id="erar-5333490">Örvény</w>
+         <c> </c>
+         <w xml:id="erar-5333500">nyomorban</w>
+         <pc xml:id="erar-5333510">,</pc>
+         <c> </c>
+         <w xml:id="erar-5333520">vég</w>
+         <c> </c>
+         <w xml:id="erar-5333530">nélkül</w>
+         <c> </c>
+         <w xml:id="erar-5333540">kerengők</w>
+         <pc xml:id="erar-5333550" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64535">
+         <w xml:id="erar-5333560">Az</w>
+         <c> </c>
+         <w xml:id="erar-5333570">őrült</w>
+         <c> </c>
+         <w xml:id="erar-5333580">ágyán</w>
+         <c> </c>
+         <w xml:id="erar-5333590">bölcs</w>
+         <c> </c>
+         <w xml:id="erar-5333600">fej</w>
+         <c> </c>
+         <w xml:id="erar-5333610">álmodik</w>
+         <pc xml:id="erar-5333620">;</pc>
+      </l>
+      <l xml:id="erar-l64540">
+         <c> </c>
+         <w xml:id="erar-5333630">A</w>
+         <c> </c>
+         <w xml:id="erar-5333640">csillagászat</w>
+         <c> </c>
+         <w xml:id="erar-5333650">egy</w>
+         <c> </c>
+         <w xml:id="erar-5333660">vak</w>
+         <c> </c>
+         <w xml:id="erar-5333670">koldus</w>
+         <c> </c>
+         <w xml:id="erar-5333680">asszony</w>
+      </l>
+      <l xml:id="erar-l64545">
+         <c> </c>
+         <w xml:id="erar-5333690">Condráin</w>
+         <c> </c>
+         <w xml:id="erar-5333700">méri</w>
+         <c> </c>
+         <w xml:id="erar-5333710">a</w>
+         <c> </c>
+         <w xml:id="erar-5333720">világokat</w>
+         <pc xml:id="erar-5333730">:</pc>
+      </l>
+      <l xml:id="erar-l64550">
+         <c> </c>
+         <w xml:id="erar-5333740">Világ</w>
+         <c> </c>
+         <w xml:id="erar-5333750">és</w>
+         <c> </c>
+         <w xml:id="erar-5333760">vakság</w>
+         <c> </c>
+         <w xml:id="erar-5333770">egy</w>
+         <c> </c>
+         <w xml:id="erar-5333780">hitvány</w>
+         <c> </c>
+         <w xml:id="erar-5333790">lapon</w>
+         <pc xml:id="erar-5333800" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64555">
+         <w xml:id="erar-5333810">Könyv</w>
+         <c> </c>
+         <w xml:id="erar-5333820">lett</w>
+         <c> </c>
+         <w xml:id="erar-5333830">a</w>
+         <c> </c>
+         <w xml:id="erar-5333840">rabnép</w>
+         <c> </c>
+         <w xml:id="erar-5333850">s</w>
+         <c> </c>
+         <w xml:id="erar-5333860">gyávák</w>
+         <c> </c>
+         <w xml:id="erar-5333870">köntöséből</w>
+      </l>
+      <l xml:id="erar-l64560">
+         <c> </c>
+         <w xml:id="erar-5333880">S</w>
+         <c> </c>
+         <w xml:id="erar-5333890">most</w>
+         <c> </c>
+         <w xml:id="erar-5333900">a</w>
+         <c> </c>
+         <w xml:id="erar-5333910">szabadság</w>
+         <c> </c>
+         <w xml:id="erar-5333920">és</w>
+         <c> </c>
+         <w xml:id="erar-5333930">a</w>
+         <c> </c>
+         <w xml:id="erar-5333940">hősi</w>
+         <c> </c>
+         <w xml:id="erar-5333950">kor</w>
+      </l>
+      <l xml:id="erar-l64565">
+         <c> </c>
+         <w xml:id="erar-5333960">Beszéli</w>
+         <c> </c>
+         <w xml:id="erar-5333970">benne</w>
+         <c> </c>
+         <w xml:id="erar-5333980">nagy</w>
+         <c> </c>
+         <w xml:id="erar-5333990">történetét</w>
+         <pc xml:id="erar-5334000" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64570">
+         <w xml:id="erar-5334010">Hűség</w>
+         <pc xml:id="erar-5334020">,</pc>
+         <c> </c>
+         <w xml:id="erar-5334030">barátság</w>
+         <c> </c>
+         <w xml:id="erar-5334040">aljas</w>
+         <c> </c>
+         <w xml:id="erar-5334050">hitszegők</w>
+      </l>
+      <l xml:id="erar-l64575">
+         <c> </c>
+         <w xml:id="erar-5334060">Gunyáiból</w>
+         <c> </c>
+         <w xml:id="erar-5334070">készült</w>
+         <c> </c>
+         <w xml:id="erar-5334080">lapon</w>
+         <c> </c>
+         <w xml:id="erar-5334090">regél</w>
+         <pc xml:id="erar-5334100" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64580">
+         <w xml:id="erar-5334110">Irtózatos</w>
+         <c> </c>
+         <w xml:id="erar-5334120">hazudság</w>
+         <c> </c>
+         <w xml:id="erar-5334130">mindenütt</w>
+         <pc xml:id="erar-5334140" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64585">
+         <w xml:id="erar-5334150">Az</w>
+         <c> </c>
+         <w xml:id="erar-5334160">írt</w>
+         <c> </c>
+         <w xml:id="erar-5334170">betűket</w>
+         <c> </c>
+         <w xml:id="erar-5334180">a</w>
+         <c> </c>
+         <w xml:id="erar-5334190">sápadt</w>
+         <c> </c>
+         <w xml:id="erar-5334200">levél</w>
+      </l>
+      <l xml:id="erar-l64590">
+         <c> </c>
+         <w xml:id="erar-5334210">Halotti</w>
+         <c> </c>
+         <w xml:id="erar-5334220">képe</w>
+         <c> </c>
+         <w xml:id="erar-5334230">kárhoztatja</w>
+         <c> </c>
+         <w xml:id="erar-5334240">el</w>
+         <pc xml:id="erar-5334250" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64595">
+         <w xml:id="erar-5334260">Országok</w>
+         <c> </c>
+         <w xml:id="erar-5334270">rongya</w>
+         <pc xml:id="erar-5334280">!</pc>
+         <c> </c>
+         <w xml:id="erar-5334290">könyvtár</w>
+         <c> </c>
+         <w xml:id="erar-5334300">a</w>
+         <c> </c>
+         <w xml:id="erar-5334310">neved</w>
+         <pc xml:id="erar-5334320">,</pc>
+      </l>
+      <l xml:id="erar-l64600">
+         <c> </c>
+         <w xml:id="erar-5334330">De</w>
+         <c> </c>
+         <w xml:id="erar-5334340">hát</w>
+         <c> </c>
+         <w xml:id="erar-5334350">hol</w>
+         <c> </c>
+         <w xml:id="erar-5334360">a</w>
+         <c> </c>
+         <w xml:id="erar-5334370">könyv</w>
+         <pc xml:id="erar-5334380">,</pc>
+         <c> </c>
+         <w xml:id="erar-5334390">mely</w>
+         <c> </c>
+         <w xml:id="erar-5334400">célhoz</w>
+         <c> </c>
+         <w xml:id="erar-5334410">vezet</w>
+         <pc xml:id="erar-5334420" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64605">
+         <w xml:id="erar-5334430">Hol</w>
+         <c> </c>
+         <w xml:id="erar-5334440">a</w>
+         <c> </c>
+         <w xml:id="erar-5334450">nagyobb</w>
+         <c> </c>
+         <w xml:id="erar-5334460">rész</w>
+         <c> </c>
+         <w xml:id="erar-5334470">boldogsága</w>
+         <pc xml:id="erar-5334480">?</pc>
+         <c> </c>
+         <pc xml:id="erar-5334490">–</pc>
+         <c> </c>
+         <w xml:id="erar-5334500">Ment-e</w>
+      </l>
+      <l xml:id="erar-l64610">
+         <c> </c>
+         <w xml:id="erar-5334510">A</w>
+         <c> </c>
+         <w xml:id="erar-5334520">könyvek</w>
+         <c> </c>
+         <w xml:id="erar-5334530">által</w>
+         <c> </c>
+         <w xml:id="erar-5334540">a</w>
+         <c> </c>
+         <w xml:id="erar-5334550">világ</w>
+         <c> </c>
+         <w xml:id="erar-5334560">elébb</w>
+         <pc xml:id="erar-5334570" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64615">
+         <w xml:id="erar-5334580">Ment</w>
+         <pc xml:id="erar-5334590">,</pc>
+         <c> </c>
+         <w xml:id="erar-5334600">hogy</w>
+         <c> </c>
+         <w xml:id="erar-5334610">minél</w>
+         <c> </c>
+         <w xml:id="erar-5334620">dicsőbbek</w>
+         <c> </c>
+         <w xml:id="erar-5334630">népei</w>
+         <pc xml:id="erar-5334640">,</pc>
+      </l>
+      <l xml:id="erar-l64620">
+         <c> </c>
+         <w xml:id="erar-5334650">Salakjok</w>
+         <c> </c>
+         <w xml:id="erar-5334660">annál</w>
+         <c> </c>
+         <w xml:id="erar-5334670">borzasztóbb</w>
+         <c> </c>
+         <w xml:id="erar-5334680">legyen</w>
+         <pc xml:id="erar-5334690">,</pc>
+      </l>
+      <l xml:id="erar-l64625">
+         <c> </c>
+         <w xml:id="erar-5334700">S</w>
+         <c> </c>
+         <w xml:id="erar-5334710">a</w>
+         <c> </c>
+         <w xml:id="erar-5334720">rongyos</w>
+         <c> </c>
+         <w xml:id="erar-5334730">ember</w>
+         <c> </c>
+         <w xml:id="erar-5334740">bőszült</w>
+         <c> </c>
+         <w xml:id="erar-5334750">kebele</w>
+      </l>
+      <l xml:id="erar-l64630">
+         <c> </c>
+         <w xml:id="erar-5334760">Dögvészt</w>
+         <c> </c>
+         <w xml:id="erar-5334770">sohajtson</w>
+         <c> </c>
+         <w xml:id="erar-5334780">a</w>
+         <c> </c>
+         <w xml:id="erar-5334790">hír</w>
+         <c> </c>
+         <w xml:id="erar-5334800">nemzetére</w>
+         <pc xml:id="erar-5334810" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64635">
+         <w xml:id="erar-5334820">De</w>
+         <c> </c>
+         <w xml:id="erar-5334830">hát</w>
+         <c> </c>
+         <w xml:id="erar-5334840">ledöntsük</w>
+         <pc xml:id="erar-5334850">,</pc>
+         <c> </c>
+         <w xml:id="erar-5334860">amit</w>
+         <c> </c>
+         <w xml:id="erar-5334870">ezredek</w>
+      </l>
+      <l xml:id="erar-l64640">
+         <c> </c>
+         <w xml:id="erar-5334880">Ész</w>
+         <c> </c>
+         <w xml:id="erar-5334890">napvilága</w>
+         <c> </c>
+         <w xml:id="erar-5334900">mellett</w>
+         <c> </c>
+         <w xml:id="erar-5334910">dolgozának</w>
+         <pc xml:id="erar-5334920" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64645">
+         <w xml:id="erar-5334930">A</w>
+         <c> </c>
+         <w xml:id="erar-5334940">bölcsek</w>
+         <c> </c>
+         <w xml:id="erar-5334950">és</w>
+         <c> </c>
+         <w xml:id="erar-5334960">a</w>
+         <c> </c>
+         <w xml:id="erar-5334970">költők</w>
+         <c> </c>
+         <w xml:id="erar-5334980">műveit</w>
+         <pc xml:id="erar-5334990">,</pc>
+      </l>
+      <l xml:id="erar-l64650">
+         <c> </c>
+         <w xml:id="erar-5335000">S</w>
+         <c> </c>
+         <w xml:id="erar-5335010">mit</w>
+         <c> </c>
+         <w xml:id="erar-5335020">a</w>
+         <c> </c>
+         <w xml:id="erar-5335030">tapasztalás</w>
+         <c> </c>
+         <w xml:id="erar-5335040">arany</w>
+      </l>
+      <l xml:id="erar-l64655">
+         <c> </c>
+         <w xml:id="erar-5335050">Bányáiból</w>
+         <c> </c>
+         <w xml:id="erar-5335060">kifejtett</w>
+         <c> </c>
+         <w xml:id="erar-5335070">az</w>
+         <c> </c>
+         <w xml:id="erar-5335080">idő</w>
+         <pc xml:id="erar-5335090" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64660">
+         <w xml:id="erar-5335100">Hány</w>
+         <c> </c>
+         <w xml:id="erar-5335110">fényes</w>
+         <c> </c>
+         <w xml:id="erar-5335120">lélek</w>
+         <c> </c>
+         <w xml:id="erar-5335130">tépte</w>
+         <c> </c>
+         <w xml:id="erar-5335140">el</w>
+         <c> </c>
+         <w xml:id="erar-5335150">magát</w>
+         <pc xml:id="erar-5335160">,</pc>
+      </l>
+      <l xml:id="erar-l64665">
+         <c> </c>
+         <w xml:id="erar-5335170">Virrasztott</w>
+         <c> </c>
+         <w xml:id="erar-5335180">a</w>
+         <c> </c>
+         <w xml:id="erar-5335190">sziv</w>
+         <c> </c>
+         <w xml:id="erar-5335200">égő</w>
+         <c> </c>
+         <w xml:id="erar-5335210">romja</w>
+         <c> </c>
+         <w xml:id="erar-5335220">mellett</w>
+         <pc xml:id="erar-5335230">,</pc>
+      </l>
+      <l xml:id="erar-l64670">
+         <c> </c>
+         <w xml:id="erar-5335240">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5335250">tévedt</w>
+         <pc xml:id="erar-5335260">,</pc>
+         <c> </c>
+         <w xml:id="erar-5335270">sujtott</w>
+         <c> </c>
+         <w xml:id="erar-5335280">embertársinak</w>
+      </l>
+      <l xml:id="erar-l64675">
+         <c> </c>
+         <w xml:id="erar-5335290">Irányt</w>
+         <c> </c>
+         <w xml:id="erar-5335300">adjon</w>
+         <c> </c>
+         <w xml:id="erar-5335310">s</w>
+         <c> </c>
+         <w xml:id="erar-5335320">erőt</w>
+         <pc xml:id="erar-5335330">,</pc>
+         <c> </c>
+         <w xml:id="erar-5335340">vigasztalást</w>
+         <pc xml:id="erar-5335350" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64680">
+         <w xml:id="erar-5335360">Az</w>
+         <c> </c>
+         <w xml:id="erar-5335370">el</w>
+         <c> </c>
+         <w xml:id="erar-5335380">nem</w>
+         <c> </c>
+         <w xml:id="erar-5335390">ismert</w>
+         <c> </c>
+         <w xml:id="erar-5335400">érdem</w>
+         <c> </c>
+         <w xml:id="erar-5335410">hősei</w>
+         <pc xml:id="erar-5335420">,</pc>
+      </l>
+      <l xml:id="erar-l64685">
+         <c> </c>
+         <w xml:id="erar-5335430">Kiket</w>
+         <c> </c>
+         <pc xml:id="erar-5335440">–</pc>
+         <c> </c>
+         <w xml:id="erar-5335450">midőn</w>
+         <c> </c>
+         <w xml:id="erar-5335460">már</w>
+         <c> </c>
+         <w xml:id="erar-5335470">elhunytak</w>
+         <c> </c>
+         <w xml:id="erar-5335480">s</w>
+         <c> </c>
+         <w xml:id="erar-5335490">midőn</w>
+      </l>
+      <l xml:id="erar-l64690">
+         <c> </c>
+         <w xml:id="erar-5335500">Ingyen</w>
+         <c> </c>
+         <w xml:id="erar-5335510">tehette</w>
+         <c> </c>
+         <pc xml:id="erar-5335520">–</pc>
+         <c> </c>
+         <w xml:id="erar-5335530">csúfos</w>
+         <c> </c>
+         <w xml:id="erar-5335540">háladattal</w>
+      </l>
+      <l xml:id="erar-l64695">
+         <c> </c>
+         <w xml:id="erar-5335550">Kezdett</w>
+         <c> </c>
+         <w xml:id="erar-5335560">imádni</w>
+         <c> </c>
+         <w xml:id="erar-5335570">a</w>
+         <c> </c>
+         <w xml:id="erar-5335580">galád</w>
+         <c> </c>
+         <w xml:id="erar-5335590">világ</w>
+         <pc xml:id="erar-5335600">,</pc>
+      </l>
+      <l xml:id="erar-l64700">
+         <c> </c>
+         <w xml:id="erar-5335610">Népboldogító</w>
+         <c> </c>
+         <w xml:id="erar-5335620">eszmék</w>
+         <c> </c>
+         <w xml:id="erar-5335630">vértanúi</w>
+         <pc xml:id="erar-5335640">,</pc>
+      </l>
+      <l xml:id="erar-l64705">
+         <c> </c>
+         <w xml:id="erar-5335650">Ők</w>
+         <c> </c>
+         <w xml:id="erar-5335660">mind</w>
+         <c> </c>
+         <w xml:id="erar-5335670">e</w>
+         <c> </c>
+         <w xml:id="erar-5335680">többi</w>
+         <c> </c>
+         <w xml:id="erar-5335690">rongykereskedővel</w>
+         <pc xml:id="erar-5335700">,</pc>
+      </l>
+      <l xml:id="erar-l64710">
+         <c> </c>
+         <w xml:id="erar-5335710">Ez</w>
+         <c> </c>
+         <w xml:id="erar-5335720">únt</w>
+         <c> </c>
+         <w xml:id="erar-5335730">fejek</w>
+         <c> </c>
+         <pc xml:id="erar-5335740">-</pc>
+         <c> </c>
+         <w xml:id="erar-5335750">s</w>
+         <c> </c>
+         <w xml:id="erar-5335760">e</w>
+         <c> </c>
+         <w xml:id="erar-5335770">megkorhadt</w>
+         <c> </c>
+         <w xml:id="erar-5335780">szivekkel</w>
+         <pc xml:id="erar-5335790">,</pc>
+      </l>
+      <l xml:id="erar-l64715">
+         <c> </c>
+         <w xml:id="erar-5335800">Rosz</w>
+         <c> </c>
+         <w xml:id="erar-5335810">szenvedélyek</w>
+         <c> </c>
+         <w xml:id="erar-5335820">oktatóival</w>
+      </l>
+      <l xml:id="erar-l64720">
+         <c> </c>
+         <w xml:id="erar-5335830">Ők</w>
+         <c> </c>
+         <w xml:id="erar-5335840">mind</w>
+         <c> </c>
+         <w xml:id="erar-5335850">együtt</w>
+         <c> </c>
+         <pc xml:id="erar-5335860">–</pc>
+         <c> </c>
+         <w xml:id="erar-5335870">a</w>
+         <c> </c>
+         <w xml:id="erar-5335880">jók</w>
+         <c> </c>
+         <w xml:id="erar-5335890">a</w>
+         <c> </c>
+         <w xml:id="erar-5335900">rosz</w>
+         <c> </c>
+         <w xml:id="erar-5335910">miatt</w>
+         <c> </c>
+         <pc xml:id="erar-5335920">–</pc>
+      </l>
+      <l xml:id="erar-l64725">
+         <c> </c>
+         <w xml:id="erar-5335930">Egy</w>
+         <c> </c>
+         <w xml:id="erar-5335940">máglya</w>
+         <c> </c>
+         <w xml:id="erar-5335950">üszkén</w>
+         <c> </c>
+         <w xml:id="erar-5335960">elhamvadjanak</w>
+         <pc xml:id="erar-5335970" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64730">
+         <w xml:id="erar-5335980">Oh</w>
+         <c> </c>
+         <w xml:id="erar-5335990">nem</w>
+         <pc xml:id="erar-5336000">,</pc>
+         <c> </c>
+         <w xml:id="erar-5336010">nem</w>
+         <pc xml:id="erar-5336020">!</pc>
+         <c> </c>
+         <w xml:id="erar-5336030">amit</w>
+         <c> </c>
+         <w xml:id="erar-5336040">mondtam</w>
+         <pc xml:id="erar-5336050">,</pc>
+         <c> </c>
+         <w xml:id="erar-5336060">fájdalom</w>
+         <c> </c>
+         <w xml:id="erar-5336070">volt</w>
+         <pc xml:id="erar-5336080">,</pc>
+      </l>
+      <l xml:id="erar-l64735">
+         <c> </c>
+         <w xml:id="erar-5336090">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5336100">annyi</w>
+         <c> </c>
+         <w xml:id="erar-5336110">elszánt</w>
+         <c> </c>
+         <w xml:id="erar-5336120">lelkek</w>
+         <c> </c>
+         <w xml:id="erar-5336130">fáradalma</w>
+         <pc xml:id="erar-5336140">,</pc>
+      </l>
+      <l xml:id="erar-l64740">
+         <c> </c>
+         <w xml:id="erar-5336150">Oly</w>
+         <c> </c>
+         <w xml:id="erar-5336160">fényes</w>
+         <c> </c>
+         <w xml:id="erar-5336170">elmék</w>
+         <c> </c>
+         <w xml:id="erar-5336180">a</w>
+         <c> </c>
+         <w xml:id="erar-5336190">sár</w>
+         <c> </c>
+         <w xml:id="erar-5336200">fiait</w>
+      </l>
+      <l xml:id="erar-l64745">
+         <c> </c>
+         <w xml:id="erar-5336210">A</w>
+         <c> </c>
+         <w xml:id="erar-5336220">sűlyedéstől</w>
+         <c> </c>
+         <w xml:id="erar-5336230">meg</w>
+         <c> </c>
+         <w xml:id="erar-5336240">nem</w>
+         <c> </c>
+         <w xml:id="erar-5336250">mentheték</w>
+         <pc xml:id="erar-5336260" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64750">
+         <w xml:id="erar-5336270">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5336280">még</w>
+         <c> </c>
+         <w xml:id="erar-5336290">alig</w>
+         <c> </c>
+         <w xml:id="erar-5336300">bír</w>
+         <c> </c>
+         <w xml:id="erar-5336310">a</w>
+         <c> </c>
+         <w xml:id="erar-5336320">föld</w>
+         <c> </c>
+         <w xml:id="erar-5336330">egy</w>
+         <c> </c>
+         <w xml:id="erar-5336340">zugot</w>
+         <pc xml:id="erar-5336350">,</pc>
+      </l>
+      <l xml:id="erar-l64755">
+         <c> </c>
+         <w xml:id="erar-5336360">Egy</w>
+         <c> </c>
+         <w xml:id="erar-5336370">kis</w>
+         <c> </c>
+         <w xml:id="erar-5336380">virányt</w>
+         <c> </c>
+         <w xml:id="erar-5336390">a</w>
+         <c> </c>
+         <w xml:id="erar-5336400">puszta</w>
+         <c> </c>
+         <w xml:id="erar-5336410">homokon</w>
+      </l>
+      <l xml:id="erar-l64760">
+         <c> </c>
+         <w xml:id="erar-5336420">Hol</w>
+         <c> </c>
+         <w xml:id="erar-5336430">legkelendőbb</w>
+         <c> </c>
+         <w xml:id="erar-5336440">név</w>
+         <c> </c>
+         <w xml:id="erar-5336450">az</w>
+         <c> </c>
+         <w xml:id="erar-5336460">emberé</w>
+         <pc xml:id="erar-5336470">,</pc>
+      </l>
+      <l xml:id="erar-l64765">
+         <c> </c>
+         <w xml:id="erar-5336480">Hol</w>
+         <c> </c>
+         <w xml:id="erar-5336490">a</w>
+         <c> </c>
+         <w xml:id="erar-5336500">teremtés</w>
+         <c> </c>
+         <w xml:id="erar-5336510">ősi</w>
+         <c> </c>
+         <w xml:id="erar-5336520">jogai</w>
+      </l>
+      <l xml:id="erar-l64770">
+         <c> </c>
+         <w xml:id="erar-5336530">E</w>
+         <c> </c>
+         <w xml:id="erar-5336540">névhez</w>
+         <c> </c>
+         <pc xml:id="erar-5336550">„</pc>
+         <c> </c>
+         <w xml:id="erar-5336560">ember</w>
+         <pc xml:id="erar-5336570">!</pc>
+         <pc xml:id="erar-5336580">”</pc>
+         <c> </c>
+         <w xml:id="erar-5336590">advák</w>
+         <c> </c>
+         <w xml:id="erar-5336600">örökűl</w>
+         <c> </c>
+         <pc xml:id="erar-5336610">–</pc>
+      </l>
+      <l xml:id="erar-l64775">
+         <c> </c>
+         <w xml:id="erar-5336620">Kivéve</w>
+         <c> </c>
+         <w xml:id="erar-5336630">aki</w>
+         <c> </c>
+         <w xml:id="erar-5336640">feketén</w>
+         <c> </c>
+         <w xml:id="erar-5336650">született</w>
+         <pc xml:id="erar-5336660">,</pc>
+      </l>
+      <l xml:id="erar-l64780">
+         <c> </c>
+         <w xml:id="erar-5336670">Mert</w>
+         <c> </c>
+         <w xml:id="erar-5336680">azt</w>
+         <c> </c>
+         <w xml:id="erar-5336690">baromnak</w>
+         <c> </c>
+         <w xml:id="erar-5336700">tartják</w>
+         <c> </c>
+         <w xml:id="erar-5336710">e</w>
+         <c> </c>
+         <w xml:id="erar-5336720">dicsők</w>
+      </l>
+      <l xml:id="erar-l64785">
+         <c> </c>
+         <w xml:id="erar-5336730">S</w>
+         <c> </c>
+         <w xml:id="erar-5336740">az</w>
+         <c> </c>
+         <w xml:id="erar-5336750">isten</w>
+         <c> </c>
+         <w xml:id="erar-5336760">képét</w>
+         <c> </c>
+         <w xml:id="erar-5336770">szíjjal</w>
+         <c> </c>
+         <w xml:id="erar-5336780">ostorozzák</w>
+         <pc xml:id="erar-5336790" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64790">
+         <w xml:id="erar-5336800">És</w>
+         <c> </c>
+         <w xml:id="erar-5336810">mégis</w>
+         <c> </c>
+         <pc xml:id="erar-5336820">–</pc>
+         <c> </c>
+         <w xml:id="erar-5336830">mégis</w>
+         <c> </c>
+         <w xml:id="erar-5336840">fáradozni</w>
+         <c> </c>
+         <w xml:id="erar-5336850">kell</w>
+         <pc xml:id="erar-5336860" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64795">
+         <w xml:id="erar-5336870">Egy</w>
+         <c> </c>
+         <w xml:id="erar-5336880">újabb</w>
+         <c> </c>
+         <w xml:id="erar-5336890">szellem</w>
+         <c> </c>
+         <w xml:id="erar-5336900">kezd</w>
+         <c> </c>
+         <w xml:id="erar-5336910">felküzdeni</w>
+         <pc xml:id="erar-5336920">,</pc>
+      </l>
+      <l xml:id="erar-l64800">
+         <c> </c>
+         <w xml:id="erar-5336930">Egy</w>
+         <c> </c>
+         <w xml:id="erar-5336940">új</w>
+         <c> </c>
+         <w xml:id="erar-5336950">irány</w>
+         <c> </c>
+         <w xml:id="erar-5336960">tör</w>
+         <c> </c>
+         <w xml:id="erar-5336970">át</w>
+         <c> </c>
+         <w xml:id="erar-5336980">a</w>
+         <c> </c>
+         <w xml:id="erar-5336990">lelkeken</w>
+         <pc xml:id="erar-5337000">:</pc>
+      </l>
+      <l xml:id="erar-l64805">
+         <c> </c>
+         <w xml:id="erar-5337010">A</w>
+         <c> </c>
+         <w xml:id="erar-5337020">nyers</w>
+         <c> </c>
+         <w xml:id="erar-5337030">fajokba</w>
+         <c> </c>
+         <w xml:id="erar-5337040">tisztább</w>
+         <c> </c>
+         <w xml:id="erar-5337050">érzeményt</w>
+      </l>
+      <l xml:id="erar-l64810">
+         <c> </c>
+         <w xml:id="erar-5337060">S</w>
+         <c> </c>
+         <w xml:id="erar-5337070">gyümölcsözőbb</w>
+         <c> </c>
+         <w xml:id="erar-5337080">eszméket</w>
+         <c> </c>
+         <w xml:id="erar-5337090">oltani</w>
+         <pc xml:id="erar-5337100">,</pc>
+      </l>
+      <l xml:id="erar-l64815">
+         <c> </c>
+         <w xml:id="erar-5337110">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5337120">végre</w>
+         <c> </c>
+         <w xml:id="erar-5337130">egymást</w>
+         <c> </c>
+         <w xml:id="erar-5337140">szívben</w>
+         <c> </c>
+         <w xml:id="erar-5337150">átkarolják</w>
+         <pc xml:id="erar-5337160">,</pc>
+      </l>
+      <l xml:id="erar-l64820">
+         <c> </c>
+         <w xml:id="erar-5337170">S</w>
+         <c> </c>
+         <w xml:id="erar-5337180">uralkodjék</w>
+         <c> </c>
+         <w xml:id="erar-5337190">igazság</w>
+         <pc xml:id="erar-5337200">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337210">szeretet</w>
+         <pc xml:id="erar-5337220" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64825">
+         <w xml:id="erar-5337230">Hogy</w>
+         <c> </c>
+         <w xml:id="erar-5337240">a</w>
+         <c> </c>
+         <w xml:id="erar-5337250">legalsó</w>
+         <c> </c>
+         <w xml:id="erar-5337260">pór</w>
+         <c> </c>
+         <w xml:id="erar-5337270">is</w>
+         <c> </c>
+         <w xml:id="erar-5337280">kunyhajában</w>
+      </l>
+      <l xml:id="erar-l64830">
+         <c> </c>
+         <w xml:id="erar-5337290">Mondhassa</w>
+         <c> </c>
+         <w xml:id="erar-5337300">bizton</w>
+         <pc xml:id="erar-5337310">:</pc>
+         <c> </c>
+         <w xml:id="erar-5337320">nem</w>
+         <c> </c>
+         <w xml:id="erar-5337330">vagyok</w>
+         <c> </c>
+         <w xml:id="erar-5337340">magam</w>
+         <pc xml:id="erar-5337350" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64835">
+         <w xml:id="erar-5337360">Testvérim</w>
+         <c> </c>
+         <w xml:id="erar-5337370">vannak</w>
+         <pc xml:id="erar-5337380">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337390">számos</w>
+         <c> </c>
+         <w xml:id="erar-5337400">milliók</w>
+         <pc xml:id="erar-5337410">;</pc>
+      </l>
+      <l xml:id="erar-l64840">
+         <c> </c>
+         <w xml:id="erar-5337420">Én</w>
+         <c> </c>
+         <w xml:id="erar-5337430">védem</w>
+         <c> </c>
+         <w xml:id="erar-5337440">őket</w>
+         <pc xml:id="erar-5337450">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337460">ők</w>
+         <c> </c>
+         <w xml:id="erar-5337470">megvédnek</w>
+         <c> </c>
+         <w xml:id="erar-5337480">engem</w>
+         <pc xml:id="erar-5337490" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64845">
+         <w xml:id="erar-5337500">Nem</w>
+         <c> </c>
+         <w xml:id="erar-5337510">félek</w>
+         <c> </c>
+         <w xml:id="erar-5337520">tőled</w>
+         <pc xml:id="erar-5337530">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337540">sors</w>
+         <pc xml:id="erar-5337550">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337560">bármit</w>
+         <c> </c>
+         <w xml:id="erar-5337570">akarsz</w>
+         <pc xml:id="erar-5337580" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64850">
+         <w xml:id="erar-5337590">Ez</w>
+         <c> </c>
+         <w xml:id="erar-5337600">az</w>
+         <pc xml:id="erar-5337610">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337620">miért</w>
+         <c> </c>
+         <w xml:id="erar-5337630">csüggedni</w>
+         <c> </c>
+         <w xml:id="erar-5337640">nem</w>
+         <c> </c>
+         <w xml:id="erar-5337650">szabad</w>
+         <pc xml:id="erar-5337660" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64855">
+         <w xml:id="erar-5337670">Rakjuk</w>
+         <c> </c>
+         <w xml:id="erar-5337680">le</w>
+         <pc xml:id="erar-5337690">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337700">hangyaszorgalommal</w>
+         <pc xml:id="erar-5337710">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337720">amit</w>
+      </l>
+      <l xml:id="erar-l64860">
+         <c> </c>
+         <w xml:id="erar-5337730">Agyunk</w>
+         <c> </c>
+         <w xml:id="erar-5337740">az</w>
+         <c> </c>
+         <w xml:id="erar-5337750">ihlett</w>
+         <c> </c>
+         <w xml:id="erar-5337760">órákban</w>
+         <c> </c>
+         <w xml:id="erar-5337770">teremt</w>
+         <pc xml:id="erar-5337780" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64865">
+         <w xml:id="erar-5337790">S</w>
+         <c> </c>
+         <w xml:id="erar-5337800">ha</w>
+         <c> </c>
+         <w xml:id="erar-5337810">összehordtunk</w>
+         <c> </c>
+         <w xml:id="erar-5337820">minden</w>
+         <c> </c>
+         <w xml:id="erar-5337830">kis</w>
+         <c> </c>
+         <w xml:id="erar-5337840">követ</w>
+         <pc xml:id="erar-5337850">,</pc>
+      </l>
+      <l xml:id="erar-l64870">
+         <c> </c>
+         <w xml:id="erar-5337860">Építsük</w>
+         <c> </c>
+         <w xml:id="erar-5337870">egy</w>
+         <c> </c>
+         <w xml:id="erar-5337880">újabb</w>
+         <c> </c>
+         <w xml:id="erar-5337890">kor</w>
+         <c> </c>
+         <w xml:id="erar-5337900">Bábelét</w>
+         <pc xml:id="erar-5337910">,</pc>
+      </l>
+      <l xml:id="erar-l64875">
+         <c> </c>
+         <w xml:id="erar-5337920">Míg</w>
+         <c> </c>
+         <w xml:id="erar-5337930">oly</w>
+         <c> </c>
+         <w xml:id="erar-5337940">magas</w>
+         <c> </c>
+         <w xml:id="erar-5337950">lesz</w>
+         <pc xml:id="erar-5337960">,</pc>
+         <c> </c>
+         <w xml:id="erar-5337970">mint</w>
+         <c> </c>
+         <w xml:id="erar-5337980">a</w>
+         <c> </c>
+         <w xml:id="erar-5337990">csillagok</w>
+         <pc xml:id="erar-5338000" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64880">
+         <w xml:id="erar-5338010">S</w>
+         <c> </c>
+         <w xml:id="erar-5338020">ha</w>
+         <c> </c>
+         <w xml:id="erar-5338030">majd</w>
+         <c> </c>
+         <w xml:id="erar-5338040">benéztünk</w>
+         <c> </c>
+         <w xml:id="erar-5338050">a</w>
+         <c> </c>
+         <w xml:id="erar-5338060">menny</w>
+         <c> </c>
+         <w xml:id="erar-5338070">ajtaján</w>
+         <pc xml:id="erar-5338080">,</pc>
+      </l>
+      <l xml:id="erar-l64885">
+         <c> </c>
+         <w xml:id="erar-5338090">Kihallhatók</w>
+         <c> </c>
+         <w xml:id="erar-5338100">az</w>
+         <c> </c>
+         <w xml:id="erar-5338110">angyalok</w>
+         <c> </c>
+         <w xml:id="erar-5338120">zenéjét</w>
+         <pc xml:id="erar-5338130">,</pc>
+      </l>
+      <l xml:id="erar-l64890">
+         <c> </c>
+         <w xml:id="erar-5338140">És</w>
+         <c> </c>
+         <w xml:id="erar-5338150">földi</w>
+         <c> </c>
+         <w xml:id="erar-5338160">vérünk</w>
+         <c> </c>
+         <w xml:id="erar-5338170">minden</w>
+         <c> </c>
+         <w xml:id="erar-5338180">csepjei</w>
+      </l>
+      <l xml:id="erar-l64895">
+         <c> </c>
+         <w xml:id="erar-5338190">Magas</w>
+         <c> </c>
+         <w xml:id="erar-5338200">gyönyörnek</w>
+         <c> </c>
+         <w xml:id="erar-5338210">lángjától</w>
+         <c> </c>
+         <w xml:id="erar-5338220">hevültek</w>
+         <pc xml:id="erar-5338230">,</pc>
+      </l>
+      <l xml:id="erar-l64900">
+         <c> </c>
+         <w xml:id="erar-5338240">Menjünk</w>
+         <c> </c>
+         <w xml:id="erar-5338250">szét</w>
+         <pc xml:id="erar-5338260">,</pc>
+         <c> </c>
+         <w xml:id="erar-5338270">mint</w>
+         <c> </c>
+         <w xml:id="erar-5338280">a</w>
+         <c> </c>
+         <w xml:id="erar-5338290">régi</w>
+         <c> </c>
+         <w xml:id="erar-5338300">nemzetek</w>
+         <pc xml:id="erar-5338310">,</pc>
+      </l>
+      <l xml:id="erar-l64905">
+         <c> </c>
+         <w xml:id="erar-5338320">És</w>
+         <c> </c>
+         <w xml:id="erar-5338330">kezdjünk</w>
+         <c> </c>
+         <w xml:id="erar-5338340">újra</w>
+         <c> </c>
+         <w xml:id="erar-5338350">tűrni</w>
+         <c> </c>
+         <w xml:id="erar-5338360">és</w>
+         <c> </c>
+         <w xml:id="erar-5338370">tanulni</w>
+         <pc xml:id="erar-5338380" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l rendition="#h_3" xml:id="erar-l64910">
+         <w xml:id="erar-5338390">Ez</w>
+         <c> </c>
+         <w xml:id="erar-5338400">hát</w>
+         <c> </c>
+         <w xml:id="erar-5338410">a</w>
+         <c> </c>
+         <w xml:id="erar-5338420">sors</w>
+         <c> </c>
+         <w xml:id="erar-5338430">és</w>
+         <c> </c>
+         <w xml:id="erar-5338440">nincs</w>
+         <c> </c>
+         <w xml:id="erar-5338450">vég</w>
+         <c> </c>
+         <w xml:id="erar-5338460">semmiben</w>
+         <pc xml:id="erar-5338470" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64915">
+         <w xml:id="erar-5338480">Nincs</w>
+         <c> </c>
+         <w xml:id="erar-5338490">és</w>
+         <c> </c>
+         <w xml:id="erar-5338500">nem</w>
+         <c> </c>
+         <w xml:id="erar-5338510">is</w>
+         <c> </c>
+         <w xml:id="erar-5338520">lesz</w>
+         <pc xml:id="erar-5338530">,</pc>
+         <c> </c>
+         <w xml:id="erar-5338540">míg</w>
+         <c> </c>
+         <w xml:id="erar-5338550">a</w>
+         <c> </c>
+         <w xml:id="erar-5338560">föld</w>
+         <c> </c>
+         <w xml:id="erar-5338570">ki</w>
+         <c> </c>
+         <w xml:id="erar-5338580">nem</w>
+         <c> </c>
+         <w xml:id="erar-5338590">hal</w>
+      </l>
+      <l xml:id="erar-l64920">
+         <c> </c>
+         <w xml:id="erar-5338600">S</w>
+         <c> </c>
+         <w xml:id="erar-5338610">meg</w>
+         <c> </c>
+         <w xml:id="erar-5338620">nem</w>
+         <c> </c>
+         <w xml:id="erar-5338630">kövűlnek</w>
+         <c> </c>
+         <w xml:id="erar-5338640">élő</w>
+         <c> </c>
+         <w xml:id="erar-5338650">fiai</w>
+         <pc xml:id="erar-5338660" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64925">
+         <w xml:id="erar-5338670">Mi</w>
+         <c> </c>
+         <w xml:id="erar-5338680">dolgunk</w>
+         <c> </c>
+         <w xml:id="erar-5338690">a</w>
+         <c> </c>
+         <w xml:id="erar-5338700">világon</w>
+         <pc xml:id="erar-5338710">?</pc>
+         <c> </c>
+         <w xml:id="erar-5338720">küzdeni</w>
+         <pc xml:id="erar-5338730">,</pc>
+      </l>
+      <l xml:id="erar-l64930">
+         <c> </c>
+         <w xml:id="erar-5338740">És</w>
+         <c> </c>
+         <w xml:id="erar-5338750">tápot</w>
+         <c> </c>
+         <w xml:id="erar-5338760">adni</w>
+         <c> </c>
+         <w xml:id="erar-5338770">lelki</w>
+         <c> </c>
+         <w xml:id="erar-5338780">vágyainknak</w>
+         <pc xml:id="erar-5338790" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64935">
+         <w xml:id="erar-5338800">Ember</w>
+         <c> </c>
+         <w xml:id="erar-5338810">vagyunk</w>
+         <pc xml:id="erar-5338820">,</pc>
+         <c> </c>
+         <w xml:id="erar-5338830">a</w>
+         <c> </c>
+         <w xml:id="erar-5338840">föld</w>
+         <c> </c>
+         <w xml:id="erar-5338850">s</w>
+         <c> </c>
+         <w xml:id="erar-5338860">az</w>
+         <c> </c>
+         <w xml:id="erar-5338870">ég</w>
+         <c> </c>
+         <w xml:id="erar-5338880">fia</w>
+         <pc xml:id="erar-5338890" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64940">
+         <w xml:id="erar-5338900">Lelkünk</w>
+         <c> </c>
+         <w xml:id="erar-5338910">a</w>
+         <c> </c>
+         <w xml:id="erar-5338920">szárny</w>
+         <pc xml:id="erar-5338930">,</pc>
+         <c> </c>
+         <w xml:id="erar-5338940">mely</w>
+         <c> </c>
+         <w xml:id="erar-5338950">ég</w>
+         <c> </c>
+         <w xml:id="erar-5338960">felé</w>
+         <c> </c>
+         <w xml:id="erar-5338970">viszen</w>
+         <pc xml:id="erar-5338980">,</pc>
+      </l>
+      <l xml:id="erar-l64945">
+         <c> </c>
+         <w xml:id="erar-5338990">S</w>
+         <c> </c>
+         <w xml:id="erar-5339000">mi</w>
+         <c> </c>
+         <w xml:id="erar-5339010">ahelyett</w>
+         <pc xml:id="erar-5339020">,</pc>
+         <c> </c>
+         <w xml:id="erar-5339030">hogy</w>
+         <c> </c>
+         <w xml:id="erar-5339040">törnénk</w>
+         <c> </c>
+         <w xml:id="erar-5339050">fölfelé</w>
+         <pc xml:id="erar-5339060">,</pc>
+      </l>
+      <l xml:id="erar-l64950">
+         <c> </c>
+         <w xml:id="erar-5339070">Unatkozzunk</w>
+         <c> </c>
+         <w xml:id="erar-5339080">s</w>
+         <c> </c>
+         <w xml:id="erar-5339090">hitvány</w>
+         <c> </c>
+         <w xml:id="erar-5339100">madár</w>
+         <c> </c>
+         <w xml:id="erar-5339110">gyanánt</w>
+      </l>
+      <l xml:id="erar-l64955">
+         <c> </c>
+         <w xml:id="erar-5339120">Posvány</w>
+         <c> </c>
+         <w xml:id="erar-5339130">iszapját</w>
+         <c> </c>
+         <w xml:id="erar-5339140">szopva</w>
+         <c> </c>
+         <w xml:id="erar-5339150">éldegéljünk</w>
+         <pc xml:id="erar-5339160" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64960">
+         <w xml:id="erar-5339170">Mi</w>
+         <c> </c>
+         <w xml:id="erar-5339180">dolgunk</w>
+         <c> </c>
+         <w xml:id="erar-5339190">a</w>
+         <c> </c>
+         <w xml:id="erar-5339200">világon</w>
+         <pc xml:id="erar-5339210">?</pc>
+         <c> </c>
+         <w xml:id="erar-5339220">küzdeni</w>
+      </l>
+      <l xml:id="erar-l64965">
+         <c> </c>
+         <w xml:id="erar-5339230">Erőnk</w>
+         <c> </c>
+         <w xml:id="erar-5339240">szerint</w>
+         <c> </c>
+         <w xml:id="erar-5339250">a</w>
+         <c> </c>
+         <w xml:id="erar-5339260">legnemesbekért</w>
+         <pc xml:id="erar-5339270" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64970">
+         <w xml:id="erar-5339280">Előttünk</w>
+         <c> </c>
+         <w xml:id="erar-5339290">egy</w>
+         <c> </c>
+         <w xml:id="erar-5339300">nemzetnek</w>
+         <c> </c>
+         <w xml:id="erar-5339310">sorsa</w>
+         <c> </c>
+         <w xml:id="erar-5339320">áll</w>
+         <pc xml:id="erar-5339330" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l64975">
+         <w xml:id="erar-5339340">Ha</w>
+         <c> </c>
+         <w xml:id="erar-5339350">azt</w>
+         <c> </c>
+         <w xml:id="erar-5339360">kivíttuk</w>
+         <c> </c>
+         <w xml:id="erar-5339370">a</w>
+         <c> </c>
+         <w xml:id="erar-5339380">mély</w>
+         <c> </c>
+         <w xml:id="erar-5339390">sülyedésből</w>
+      </l>
+      <l xml:id="erar-l64980">
+         <c> </c>
+         <w xml:id="erar-5339400">S</w>
+         <c> </c>
+         <w xml:id="erar-5339410">a</w>
+         <c> </c>
+         <w xml:id="erar-5339420">szellemharcok</w>
+         <c> </c>
+         <w xml:id="erar-5339430">tiszta</w>
+         <c> </c>
+         <w xml:id="erar-5339440">sugaránál</w>
+      </l>
+      <l xml:id="erar-l64985">
+         <c> </c>
+         <w xml:id="erar-5339450">Olyan</w>
+         <c> </c>
+         <w xml:id="erar-5339460">magasra</w>
+         <c> </c>
+         <w xml:id="erar-5339470">tettük</w>
+         <pc xml:id="erar-5339480">,</pc>
+         <c> </c>
+         <w xml:id="erar-5339490">mint</w>
+         <c> </c>
+         <w xml:id="erar-5339500">lehet</w>
+         <pc xml:id="erar-5339510">,</pc>
+      </l>
+      <l xml:id="erar-l64990">
+         <c> </c>
+         <w xml:id="erar-5339520">Mondhatjuk</w>
+         <pc xml:id="erar-5339530">,</pc>
+         <c> </c>
+         <w xml:id="erar-5339540">térvén</w>
+         <c> </c>
+         <w xml:id="erar-5339550">őseink</w>
+         <c> </c>
+         <w xml:id="erar-5339560">porához</w>
+         <pc xml:id="erar-5339570">:</pc>
+      </l>
+      <l xml:id="erar-l64995">
+         <c> </c>
+         <w xml:id="erar-5339580">Köszönjük</w>
+         <c> </c>
+         <w xml:id="erar-5339590">élet</w>
+         <pc xml:id="erar-5339600">!</pc>
+         <c> </c>
+         <w xml:id="erar-5339610">áldomásidat</w>
+         <pc xml:id="erar-5339620">,</pc>
+      </l>
+      <l xml:id="erar-l65000">
+         <c> </c>
+         <w xml:id="erar-5339630">Ez</w>
+         <c> </c>
+         <w xml:id="erar-5339640">jó</w>
+         <c> </c>
+         <w xml:id="erar-5339650">mulatság</w>
+         <pc xml:id="erar-5339660">,</pc>
+         <c> </c>
+         <w xml:id="erar-5339670">férfi</w>
+         <c> </c>
+         <w xml:id="erar-5339680">munka</w>
+         <c> </c>
+         <w xml:id="erar-5339690">volt</w>
+         <pc xml:id="erar-5339700" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

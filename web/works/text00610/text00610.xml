@@ -1,1 +1,829 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original #excerpt"
+     corresp="#work00474"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00610"
+     xml:lang="pol">
+   <link target="#pers00110" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n01190">
+      <date type="comp" when="1826">
+         <w xml:id="erar-5053180">1826</w>
+      </date>
+      <bibl>
+         <title>
+            <w xml:id="erar-5053210">Liryki</w>
+            <c> </c>
+            <w xml:id="erar-5053220">lozańskie</w>
+            <c> </c>
+            <pc xml:id="erar-5053230">(</pc>
+            <w xml:id="erar-5053240">1839</w>
+            <c> </c>
+            <pc xml:id="erar-5053250">–</pc>
+            <c> </c>
+            <w xml:id="erar-5053260">1840</w>
+            <pc xml:id="erar-5053270">)</pc>
+         </title>
+         <pc xml:id="erar-5053280" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-5053290">Edited</w>
+         <c> </c>
+         <w xml:id="erar-5053300">by</w>
+         <c> </c>
+         <w xml:id="erar-5053310">Czesław</w>
+         <c> </c>
+         <w xml:id="erar-5053320">Zgorzelski</w>
+         <pc xml:id="erar-5053330" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="erar-5053340">Warszawa</w>
+         <pc xml:id="erar-5053350">:</pc>
+         <c> </c>
+         <w xml:id="erar-5053360">Czytelnik</w>
+         <pc xml:id="erar-5053370">,</pc>
+         <c> </c>
+         <w xml:id="erar-5053380">1993.</w>
+         <pc unit="sentence" xml:id="erar-5053380-eos"/>
+      </bibl>
+   </note>
+   <head type="main" xml:id="erar-h02360">
+      <w xml:id="erar-5049200">Sonety</w>
+      <c> </c>
+      <w xml:id="erar-5049210">krymskie</w>
+      <pc xml:id="erar-5049220" unit="sentence">.</pc>
+   </head>
+   <head type="sub" xml:id="erar-h02365">
+      <pc xml:id="erar-5049250">[</pc>
+      <w xml:id="erar-5049260">wybór</w>
+      <pc xml:id="erar-5049270">:</pc>
+      <c> </c>
+      <w xml:id="erar-5049280">VI</w>
+      <pc xml:id="erar-5049290">,</pc>
+      <c> </c>
+      <w xml:id="erar-5049300">X</w>
+      <pc xml:id="erar-5049310">,</pc>
+      <c> </c>
+      <w xml:id="erar-5049320">XIII</w>
+      <pc xml:id="erar-5049330" unit="sentence">]</pc>
+   </head>
+   <div n="6" type="sonnet" xml:id="erar-div02145">
+      <head xml:id="erar-h02370">
+         <w xml:id="erar-5049370">VI</w>
+         <pc xml:id="erar-5049380">.</pc>
+         <c> </c>
+         <w xml:id="erar-5049390">Bakczysaraj</w>
+      </head>
+      <lg xml:id="erar-s58985">
+         <l xml:id="erar-l63110">
+            <w xml:id="erar-5049420">Jeszcze</w>
+            <c> </c>
+            <w xml:id="erar-5049430">wielka</w>
+            <pc xml:id="erar-5049440">,</pc>
+            <c> </c>
+            <w xml:id="erar-5049450">już</w>
+            <c> </c>
+            <w xml:id="erar-5049460">pusta</w>
+            <c> </c>
+            <w xml:id="erar-5049470">Girajów</w>
+            <c> </c>
+            <w xml:id="erar-5049480">dziedzina</w>
+            <pc xml:id="erar-5049490" unit="sentence">!</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63115">
+            <w xml:id="erar-5049500">Zmiatane</w>
+            <c> </c>
+            <w xml:id="erar-5049510">czołem</w>
+            <c> </c>
+            <w xml:id="erar-5049520">baszów</w>
+            <c> </c>
+            <w xml:id="erar-5049530">ganki</w>
+            <c> </c>
+            <w xml:id="erar-5049540">i</w>
+            <c> </c>
+            <w xml:id="erar-5049550">przedsienia</w>
+            <pc xml:id="erar-5049560">,</pc>
+         </l>
+         <l xml:id="erar-l63120">
+            <c> </c>
+            <w xml:id="erar-5049570">Sofy</w>
+            <pc xml:id="erar-5049580">,</pc>
+            <c> </c>
+            <w xml:id="erar-5049590">trony</w>
+            <c> </c>
+            <w xml:id="erar-5049600">potęgi</w>
+            <pc xml:id="erar-5049610">,</pc>
+            <c> </c>
+            <w xml:id="erar-5049620">miłości</w>
+            <c> </c>
+            <w xml:id="erar-5049630">schronienia</w>
+         </l>
+         <l xml:id="erar-l63125">
+            <c> </c>
+            <w xml:id="erar-5049640">Przeskakuje</w>
+            <c> </c>
+            <w xml:id="erar-5049650">sarańcza</w>
+            <pc xml:id="erar-5049660">,</pc>
+            <c> </c>
+            <w xml:id="erar-5049670">obwija</w>
+            <c> </c>
+            <w xml:id="erar-5049680">gadzina</w>
+            <pc xml:id="erar-5049690" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63130">
+            <w xml:id="erar-5049700">Skróś</w>
+            <c> </c>
+            <w xml:id="erar-5049710">okien</w>
+            <c> </c>
+            <w xml:id="erar-5049720">różnofarbnych</w>
+            <c> </c>
+            <w xml:id="erar-5049730">powoju</w>
+            <c> </c>
+            <w xml:id="erar-5049740">roślina</w>
+            <pc xml:id="erar-5049750">,</pc>
+         </l>
+         <l xml:id="erar-l63135">
+            <c> </c>
+            <w xml:id="erar-5049760">Wdzierając</w>
+            <c> </c>
+            <w xml:id="erar-5049770">się</w>
+            <c> </c>
+            <w xml:id="erar-5049780">na</w>
+            <c> </c>
+            <w xml:id="erar-5049790">głuche</w>
+            <c> </c>
+            <w xml:id="erar-5049800">ściany</w>
+            <c> </c>
+            <w xml:id="erar-5049810">i</w>
+            <c> </c>
+            <w xml:id="erar-5049820">sklepienia</w>
+            <pc xml:id="erar-5049830">,</pc>
+         </l>
+         <l xml:id="erar-l63140">
+            <c> </c>
+            <w xml:id="erar-5049840">Zajmuje</w>
+            <c> </c>
+            <w xml:id="erar-5049850">dzieło</w>
+            <c> </c>
+            <w xml:id="erar-5049860">ludzi</w>
+            <c> </c>
+            <w xml:id="erar-5049870">w</w>
+            <c> </c>
+            <w xml:id="erar-5049880">imię</w>
+            <c> </c>
+            <w xml:id="erar-5049890">przyrodzenia</w>
+         </l>
+         <l xml:id="erar-l63145">
+            <c> </c>
+            <w xml:id="erar-5049900">I</w>
+            <c> </c>
+            <w xml:id="erar-5049910">pisze</w>
+            <c> </c>
+            <w xml:id="erar-5049920">Balsazara</w>
+            <c> </c>
+            <w xml:id="erar-5049930">głoskami</w>
+            <c> </c>
+            <pc xml:id="erar-5049940">«</pc>
+            <c> </c>
+            <w xml:id="erar-5049950">RUINA</w>
+            <c> </c>
+            <pc xml:id="erar-5049960">»</pc>
+            <pc xml:id="erar-5049970" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63150">
+            <w xml:id="erar-5049980">W</w>
+            <c> </c>
+            <w xml:id="erar-5049990">środku</w>
+            <c> </c>
+            <w xml:id="erar-5050000">sali</w>
+            <c> </c>
+            <w xml:id="erar-5050010">wycięte</w>
+            <c> </c>
+            <w xml:id="erar-5050020">z</w>
+            <c> </c>
+            <w xml:id="erar-5050030">marmuru</w>
+            <c> </c>
+            <w xml:id="erar-5050040">naczynie</w>
+            <pc xml:id="erar-5050050">;</pc>
+         </l>
+         <l xml:id="erar-l63155">
+            <c> </c>
+            <w xml:id="erar-5050060">To</w>
+            <c> </c>
+            <w xml:id="erar-5050070">fontanna</w>
+            <c> </c>
+            <w xml:id="erar-5050080">haremu</w>
+            <pc xml:id="erar-5050090">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050100">dotąd</w>
+            <c> </c>
+            <w xml:id="erar-5050110">stoi</w>
+            <c> </c>
+            <w xml:id="erar-5050120">cało</w>
+         </l>
+         <l xml:id="erar-l63160">
+            <c> </c>
+            <w xml:id="erar-5050130">I</w>
+            <c> </c>
+            <w xml:id="erar-5050140">perłowe</w>
+            <c> </c>
+            <w xml:id="erar-5050150">łzy</w>
+            <c> </c>
+            <w xml:id="erar-5050160">sącząc</w>
+            <c> </c>
+            <w xml:id="erar-5050170">woła</w>
+            <c> </c>
+            <w xml:id="erar-5050180">przez</w>
+            <c> </c>
+            <w xml:id="erar-5050190">pustynie</w>
+            <pc xml:id="erar-5050200">:</pc>
+         </l>
+         <l xml:id="erar-l63165">
+            <c> </c>
+            <pc xml:id="erar-5050210">«</pc>
+            <c> </c>
+            <w xml:id="erar-5050220">Gdzież</w>
+            <c> </c>
+            <w xml:id="erar-5050230">jesteś</w>
+            <pc xml:id="erar-5050240">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050250">o</w>
+            <c> </c>
+            <w xml:id="erar-5050260">miłości</w>
+            <pc xml:id="erar-5050270">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050280">potęgo</w>
+            <c> </c>
+            <w xml:id="erar-5050290">i</w>
+            <c> </c>
+            <w xml:id="erar-5050300">chwało</w>
+            <pc xml:id="erar-5050310" unit="sentence">!</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63170">
+            <w xml:id="erar-5050320">Wy</w>
+            <c> </c>
+            <w xml:id="erar-5050330">macie</w>
+            <c> </c>
+            <w xml:id="erar-5050340">trwać</w>
+            <c> </c>
+            <w xml:id="erar-5050350">na</w>
+            <c> </c>
+            <w xml:id="erar-5050360">wieki</w>
+            <pc xml:id="erar-5050370">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050380">źródło</w>
+            <c> </c>
+            <w xml:id="erar-5050390">szybko</w>
+            <c> </c>
+            <w xml:id="erar-5050400">płynie</w>
+            <pc xml:id="erar-5050410">,</pc>
+         </l>
+         <l xml:id="erar-l63175">
+            <c> </c>
+            <w xml:id="erar-5050420">O</w>
+            <c> </c>
+            <w xml:id="erar-5050430">hańbo</w>
+            <pc xml:id="erar-5050440">!</pc>
+            <c> </c>
+            <w xml:id="erar-5050450">wyście</w>
+            <c> </c>
+            <w xml:id="erar-5050460">przeszły</w>
+            <pc xml:id="erar-5050470">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050480">a</w>
+            <c> </c>
+            <w xml:id="erar-5050490">źródło</w>
+            <c> </c>
+            <w xml:id="erar-5050500">zostało</w>
+            <pc xml:id="erar-5050510" unit="sentence">.</pc>
+            <c> </c>
+            <pc xml:id="erar-5050520">»</pc>
+         </l>
+      </lg>
+   </div>
+   <div n="10" type="sonnet" xml:id="erar-div02150">
+      <head xml:id="erar-h02375">
+         <w xml:id="erar-5050560">X.</w>
+         <c> </c>
+         <w xml:id="erar-5050570">Bajdary</w>
+      </head>
+      <lg xml:id="erar-s58990">
+         <l xml:id="erar-l63180">
+            <w xml:id="erar-5050600">Wypuszczam</w>
+            <c> </c>
+            <w xml:id="erar-5050610">na</w>
+            <c> </c>
+            <w xml:id="erar-5050620">wiatr</w>
+            <c> </c>
+            <w xml:id="erar-5050630">konia</w>
+            <c> </c>
+            <w xml:id="erar-5050640">i</w>
+            <c> </c>
+            <w xml:id="erar-5050650">nie</w>
+            <c> </c>
+            <w xml:id="erar-5050660">szczędzę</w>
+            <c> </c>
+            <w xml:id="erar-5050670">razów</w>
+            <pc xml:id="erar-5050680">;</pc>
+         </l>
+         <l xml:id="erar-l63185">
+            <c> </c>
+            <w xml:id="erar-5050690">Lasy</w>
+            <pc xml:id="erar-5050700">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050710">doliny</w>
+            <pc xml:id="erar-5050720">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050730">głazy</w>
+            <pc xml:id="erar-5050740">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050750">w</w>
+            <c> </c>
+            <w xml:id="erar-5050760">kolei</w>
+            <pc xml:id="erar-5050770">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050780">w</w>
+            <c> </c>
+            <w xml:id="erar-5050790">natłoku</w>
+         </l>
+         <l xml:id="erar-l63190">
+            <c> </c>
+            <w xml:id="erar-5050800">U</w>
+            <c> </c>
+            <w xml:id="erar-5050810">nóg</w>
+            <c> </c>
+            <w xml:id="erar-5050820">mych</w>
+            <c> </c>
+            <w xml:id="erar-5050830">płyną</w>
+            <pc xml:id="erar-5050840">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050850">giną</w>
+            <c> </c>
+            <w xml:id="erar-5050860">jak</w>
+            <c> </c>
+            <w xml:id="erar-5050870">fale</w>
+            <c> </c>
+            <w xml:id="erar-5050880">potoku</w>
+            <pc xml:id="erar-5050890">;</pc>
+         </l>
+         <l xml:id="erar-l63195">
+            <c> </c>
+            <w xml:id="erar-5050900">Chcę</w>
+            <c> </c>
+            <w xml:id="erar-5050910">odurzyć</w>
+            <c> </c>
+            <w xml:id="erar-5050920">się</w>
+            <pc xml:id="erar-5050930">,</pc>
+            <c> </c>
+            <w xml:id="erar-5050940">upić</w>
+            <c> </c>
+            <w xml:id="erar-5050950">tym</w>
+            <c> </c>
+            <w xml:id="erar-5050960">wirem</w>
+            <c> </c>
+            <w xml:id="erar-5050970">obrazów</w>
+            <pc xml:id="erar-5050980" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63200">
+            <w xml:id="erar-5050990">A</w>
+            <c> </c>
+            <w xml:id="erar-5051000">gdy</w>
+            <c> </c>
+            <w xml:id="erar-5051010">śpieniony</w>
+            <c> </c>
+            <w xml:id="erar-5051020">rumak</w>
+            <c> </c>
+            <w xml:id="erar-5051030">nie</w>
+            <c> </c>
+            <w xml:id="erar-5051040">słucha</w>
+            <c> </c>
+            <w xml:id="erar-5051050">rozkazów</w>
+            <pc xml:id="erar-5051060">,</pc>
+         </l>
+         <l xml:id="erar-l63205">
+            <c> </c>
+            <w xml:id="erar-5051070">Gdy</w>
+            <c> </c>
+            <w xml:id="erar-5051080">świat</w>
+            <c> </c>
+            <w xml:id="erar-5051090">kolory</w>
+            <c> </c>
+            <w xml:id="erar-5051100">traci</w>
+            <c> </c>
+            <w xml:id="erar-5051110">pod</w>
+            <c> </c>
+            <w xml:id="erar-5051120">całunem</w>
+            <c> </c>
+            <w xml:id="erar-5051130">mroku</w>
+            <pc xml:id="erar-5051140">,</pc>
+         </l>
+         <l xml:id="erar-l63210">
+            <c> </c>
+            <w xml:id="erar-5051150">Jak</w>
+            <c> </c>
+            <w xml:id="erar-5051160">w</w>
+            <c> </c>
+            <w xml:id="erar-5051170">rozbitym</w>
+            <c> </c>
+            <w xml:id="erar-5051180">źwierciedle</w>
+            <pc xml:id="erar-5051190">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051200">tak</w>
+            <c> </c>
+            <w xml:id="erar-5051210">w</w>
+            <c> </c>
+            <w xml:id="erar-5051220">mym</w>
+            <c> </c>
+            <w xml:id="erar-5051230">spiekłym</w>
+            <c> </c>
+            <w xml:id="erar-5051240">oku</w>
+         </l>
+         <l xml:id="erar-l63215">
+            <c> </c>
+            <w xml:id="erar-5051250">Snują</w>
+            <c> </c>
+            <w xml:id="erar-5051260">się</w>
+            <c> </c>
+            <w xml:id="erar-5051270">mary</w>
+            <c> </c>
+            <w xml:id="erar-5051280">lasów</w>
+            <c> </c>
+            <w xml:id="erar-5051290">i</w>
+            <c> </c>
+            <w xml:id="erar-5051300">dolin</w>
+            <pc xml:id="erar-5051310">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051320">i</w>
+            <c> </c>
+            <w xml:id="erar-5051330">głazów</w>
+            <pc xml:id="erar-5051340" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63220">
+            <w xml:id="erar-5051350">Ziemia</w>
+            <c> </c>
+            <w xml:id="erar-5051360">śpi</w>
+            <pc xml:id="erar-5051370">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051380">mnie</w>
+            <c> </c>
+            <w xml:id="erar-5051390">snu</w>
+            <c> </c>
+            <w xml:id="erar-5051400">nie</w>
+            <c> </c>
+            <w xml:id="erar-5051410">ma</w>
+            <pc xml:id="erar-5051420">;</pc>
+            <c> </c>
+            <w xml:id="erar-5051430">skaczę</w>
+            <c> </c>
+            <w xml:id="erar-5051440">w</w>
+            <c> </c>
+            <w xml:id="erar-5051450">morskie</w>
+            <c> </c>
+            <w xml:id="erar-5051460">łona</w>
+            <pc xml:id="erar-5051470">,</pc>
+         </l>
+         <l xml:id="erar-l63225">
+            <c> </c>
+            <w xml:id="erar-5051480">Czarny</w>
+            <pc xml:id="erar-5051490">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051500">wydęty</w>
+            <c> </c>
+            <w xml:id="erar-5051510">bałwan</w>
+            <c> </c>
+            <w xml:id="erar-5051520">z</w>
+            <c> </c>
+            <w xml:id="erar-5051530">hukiem</w>
+            <c> </c>
+            <w xml:id="erar-5051540">na</w>
+            <c> </c>
+            <w xml:id="erar-5051550">brzeg</w>
+            <c> </c>
+            <w xml:id="erar-5051560">dąży</w>
+            <pc xml:id="erar-5051570">,</pc>
+         </l>
+         <l xml:id="erar-l63230">
+            <c> </c>
+            <w xml:id="erar-5051580">Schylam</w>
+            <c> </c>
+            <w xml:id="erar-5051590">ku</w>
+            <c> </c>
+            <w xml:id="erar-5051600">niemu</w>
+            <c> </c>
+            <w xml:id="erar-5051610">czoło</w>
+            <pc xml:id="erar-5051620">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051630">wyciągam</w>
+            <c> </c>
+            <w xml:id="erar-5051640">ramiona</w>
+            <pc xml:id="erar-5051650">,</pc>
+         </l>
+         <l xml:id="erar-l63235">
+            <c> </c>
+            <w xml:id="erar-5051660">Pęka</w>
+            <c> </c>
+            <w xml:id="erar-5051670">nad</w>
+            <c> </c>
+            <w xml:id="erar-5051680">głową</w>
+            <c> </c>
+            <w xml:id="erar-5051690">fala</w>
+            <pc xml:id="erar-5051700">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051710">chaos</w>
+            <c> </c>
+            <w xml:id="erar-5051720">mię</w>
+            <c> </c>
+            <w xml:id="erar-5051730">okrąży</w>
+            <pc xml:id="erar-5051740">;</pc>
+         </l>
+         <l xml:id="erar-l63240">
+            <c> </c>
+            <w xml:id="erar-5051750">Czekam</w>
+            <pc xml:id="erar-5051760">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051770">aż</w>
+            <c> </c>
+            <w xml:id="erar-5051780">myśl</w>
+            <pc xml:id="erar-5051790">,</pc>
+            <c> </c>
+            <w xml:id="erar-5051800">jak</w>
+            <c> </c>
+            <w xml:id="erar-5051810">łódka</w>
+            <c> </c>
+            <w xml:id="erar-5051820">wirami</w>
+            <c> </c>
+            <w xml:id="erar-5051830">kręcona</w>
+            <pc xml:id="erar-5051840">,</pc>
+         </l>
+         <l xml:id="erar-l63245">
+            <c> </c>
+            <w xml:id="erar-5051850">Zbłąka</w>
+            <c> </c>
+            <w xml:id="erar-5051860">się</w>
+            <c> </c>
+            <w xml:id="erar-5051870">i</w>
+            <c> </c>
+            <w xml:id="erar-5051880">na</w>
+            <c> </c>
+            <w xml:id="erar-5051890">chwilę</w>
+            <c> </c>
+            <w xml:id="erar-5051900">w</w>
+            <c> </c>
+            <w xml:id="erar-5051910">niepamięć</w>
+            <c> </c>
+            <w xml:id="erar-5051920">pogrąży</w>
+            <pc xml:id="erar-5051930" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+      </lg>
+   </div>
+   <div n="13" type="sonnet" xml:id="erar-div02155">
+      <head xml:id="erar-h02380">
+         <w xml:id="erar-5051970">XIII</w>
+         <pc xml:id="erar-5051980">.</pc>
+         <c> </c>
+         <w xml:id="erar-5051990">Czatyrdah</w>
+      </head>
+      <lg xml:id="erar-s58995">
+         <l xml:id="erar-l63250">
+            <w xml:id="erar-5052020">Drżąc</w>
+            <c> </c>
+            <w xml:id="erar-5052030">muślimin</w>
+            <c> </c>
+            <w xml:id="erar-5052040">całuje</w>
+            <c> </c>
+            <w xml:id="erar-5052050">stopy</w>
+            <c> </c>
+            <w xml:id="erar-5052060">twej</w>
+            <c> </c>
+            <w xml:id="erar-5052070">opoki</w>
+            <pc xml:id="erar-5052080">,</pc>
+         </l>
+         <l xml:id="erar-l63255">
+            <c> </c>
+            <w xml:id="erar-5052090">Maszcie</w>
+            <c> </c>
+            <w xml:id="erar-5052100">krymskiego</w>
+            <c> </c>
+            <w xml:id="erar-5052110">statku</w>
+            <pc xml:id="erar-5052120">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052130">wielki</w>
+            <c> </c>
+            <w xml:id="erar-5052140">Czatyrdachu</w>
+            <pc xml:id="erar-5052150" unit="sentence">!</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63260">
+            <w xml:id="erar-5052160">O</w>
+            <c> </c>
+            <w xml:id="erar-5052170">minarecie</w>
+            <c> </c>
+            <w xml:id="erar-5052180">świata</w>
+            <pc xml:id="erar-5052190" unit="sentence">!</pc>
+            <c> </c>
+            <w xml:id="erar-5052200">o</w>
+            <c> </c>
+            <w xml:id="erar-5052210">gór</w>
+            <c> </c>
+            <w xml:id="erar-5052220">padyszachu</w>
+            <pc xml:id="erar-5052230" unit="sentence">!</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63265">
+            <w xml:id="erar-5052240">Ty</w>
+            <pc xml:id="erar-5052250">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052260">nad</w>
+            <c> </c>
+            <w xml:id="erar-5052270">skały</w>
+            <c> </c>
+            <w xml:id="erar-5052280">poziomu</w>
+            <c> </c>
+            <w xml:id="erar-5052290">uciekłszy</w>
+            <c> </c>
+            <w xml:id="erar-5052300">w</w>
+            <c> </c>
+            <w xml:id="erar-5052310">obłoki</w>
+            <pc xml:id="erar-5052320">,</pc>
+         </l>
+         <l xml:id="erar-l63270">
+            <c> </c>
+            <w xml:id="erar-5052330">Siedzisz</w>
+            <c> </c>
+            <w xml:id="erar-5052340">sobie</w>
+            <c> </c>
+            <w xml:id="erar-5052350">pod</w>
+            <c> </c>
+            <w xml:id="erar-5052360">bramą</w>
+            <c> </c>
+            <w xml:id="erar-5052370">niebios</w>
+            <pc xml:id="erar-5052380">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052390">jak</w>
+            <c> </c>
+            <w xml:id="erar-5052400">wysoki</w>
+         </l>
+         <l xml:id="erar-l63275">
+            <c> </c>
+            <w xml:id="erar-5052410">Gabryjel</w>
+            <c> </c>
+            <w xml:id="erar-5052420">pilnujący</w>
+            <c> </c>
+            <w xml:id="erar-5052430">edeńskiego</w>
+            <c> </c>
+            <w xml:id="erar-5052440">gmachu</w>
+            <pc xml:id="erar-5052450" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63280">
+            <w xml:id="erar-5052460">Ciemny</w>
+            <c> </c>
+            <w xml:id="erar-5052470">las</w>
+            <c> </c>
+            <w xml:id="erar-5052480">twoim</w>
+            <c> </c>
+            <w xml:id="erar-5052490">płaszczem</w>
+            <pc xml:id="erar-5052500">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052510">a</w>
+            <c> </c>
+            <w xml:id="erar-5052520">janczary</w>
+            <c> </c>
+            <w xml:id="erar-5052530">strachu</w>
+         </l>
+         <l xml:id="erar-l63285">
+            <c> </c>
+            <w xml:id="erar-5052540">Twój</w>
+            <c> </c>
+            <w xml:id="erar-5052550">turban</w>
+            <c> </c>
+            <w xml:id="erar-5052560">z</w>
+            <c> </c>
+            <w xml:id="erar-5052570">chmur</w>
+            <c> </c>
+            <w xml:id="erar-5052580">haftują</w>
+            <c> </c>
+            <w xml:id="erar-5052590">błyskawic</w>
+            <c> </c>
+            <w xml:id="erar-5052600">potoki</w>
+            <pc xml:id="erar-5052610" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <l xml:id="erar-l63290">
+            <w xml:id="erar-5052620">Nam</w>
+            <c> </c>
+            <w xml:id="erar-5052630">czy</w>
+            <c> </c>
+            <w xml:id="erar-5052640">słońce</w>
+            <c> </c>
+            <w xml:id="erar-5052650">dopieka</w>
+            <pc xml:id="erar-5052660">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052670">czyli</w>
+            <c> </c>
+            <w xml:id="erar-5052680">mgła</w>
+            <c> </c>
+            <w xml:id="erar-5052690">ocienia</w>
+            <pc xml:id="erar-5052700">,</pc>
+         </l>
+         <l xml:id="erar-l63295">
+            <c> </c>
+            <w xml:id="erar-5052710">Czy</w>
+            <c> </c>
+            <w xml:id="erar-5052720">sarańcza</w>
+            <c> </c>
+            <w xml:id="erar-5052730">plon</w>
+            <c> </c>
+            <w xml:id="erar-5052740">zetnie</w>
+            <pc xml:id="erar-5052750">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052760">czy</w>
+            <c> </c>
+            <w xml:id="erar-5052770">giaur</w>
+            <c> </c>
+            <w xml:id="erar-5052780">pali</w>
+            <c> </c>
+            <w xml:id="erar-5052790">domy</w>
+            <c> </c>
+            <pc xml:id="erar-5052800">–</pc>
+         </l>
+         <l xml:id="erar-l63300">
+            <c> </c>
+            <w xml:id="erar-5052810">Czatyrdahu</w>
+            <pc xml:id="erar-5052820">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052830">ty</w>
+            <c> </c>
+            <w xml:id="erar-5052840">zawsze</w>
+            <c> </c>
+            <w xml:id="erar-5052850">głuchy</w>
+            <pc xml:id="erar-5052860">,</pc>
+            <c> </c>
+            <w xml:id="erar-5052870">nieruchomy</w>
+            <pc xml:id="erar-5052880">,</pc>
+         </l>
+         <l xml:id="erar-l63305">
+            <c> </c>
+            <w xml:id="erar-5052890">Między</w>
+            <c> </c>
+            <w xml:id="erar-5052900">światem</w>
+            <c> </c>
+            <w xml:id="erar-5052910">i</w>
+            <c> </c>
+            <w xml:id="erar-5052920">niebem</w>
+            <c> </c>
+            <w xml:id="erar-5052930">jak</w>
+            <c> </c>
+            <w xml:id="erar-5052940">drogman</w>
+            <c> </c>
+            <w xml:id="erar-5052950">stworzenia</w>
+            <pc xml:id="erar-5052960">,</pc>
+         </l>
+         <l xml:id="erar-l63310">
+            <c> </c>
+            <w xml:id="erar-5052970">Podesławszy</w>
+            <c> </c>
+            <w xml:id="erar-5052980">pod</w>
+            <c> </c>
+            <w xml:id="erar-5052990">nogi</w>
+            <c> </c>
+            <w xml:id="erar-5053000">ziemie</w>
+            <pc xml:id="erar-5053010">,</pc>
+            <c> </c>
+            <w xml:id="erar-5053020">ludzi</w>
+            <pc xml:id="erar-5053030">,</pc>
+            <c> </c>
+            <w xml:id="erar-5053040">gromy</w>
+            <pc xml:id="erar-5053050">,</pc>
+         </l>
+         <l xml:id="erar-l63315">
+            <c> </c>
+            <w xml:id="erar-5053060">Słuchasz</w>
+            <c> </c>
+            <w xml:id="erar-5053070">tylko</w>
+            <pc xml:id="erar-5053080">,</pc>
+            <c> </c>
+            <w xml:id="erar-5053090">co</w>
+            <c> </c>
+            <w xml:id="erar-5053100">mówi</w>
+            <c> </c>
+            <w xml:id="erar-5053110">Bóg</w>
+            <c> </c>
+            <w xml:id="erar-5053120">do</w>
+            <c> </c>
+            <w xml:id="erar-5053130">przyrodzenia</w>
+            <pc xml:id="erar-5053140" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+      </lg>
+   </div>
+</div>

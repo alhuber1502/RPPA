@@ -1,1 +1,849 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original"
+     corresp="#work00432"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00520"
+     xml:lang="spa">
+   <link target="#pers00355" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erar-n00710">
+      <date type="publ" when="1838">
+         <w xml:id="erar-3484590">1838</w>
+      </date>
+      <bibl>
+         <title>
+            <w xml:id="erar-3484620">El</w>
+            <c> </c>
+            <w xml:id="erar-3484630">Seminario</w>
+            <c> </c>
+            <w xml:id="erar-3484640">Pintoresco</w>
+            <c> </c>
+            <w xml:id="erar-3484650">Español</w>
+         </title>
+         <c> </c>
+         <w xml:id="erar-3484660">III</w>
+         <c> </c>
+         <pc xml:id="erar-3484670">(</pc>
+         <w xml:id="erar-3484680">1838</w>
+         <pc xml:id="erar-3484690" unit="sentence">)</pc>
+      </bibl>
+   </note>
+   <head type="main" xml:id="erar-h01265">
+      <w xml:id="erar-3480790">El</w>
+      <c> </c>
+      <w xml:id="erar-3480800">cántico</w>
+      <c> </c>
+      <w xml:id="erar-3480810">del</w>
+      <c> </c>
+      <w xml:id="erar-3480820">esclavo</w>
+   </head>
+   <lg xml:id="erar-s39165">
+      <l xml:id="erar-l26310">
+         <w xml:id="erar-3480850">Cautivo</w>
+         <c> </c>
+         <w xml:id="erar-3480860">mísero</w>
+      </l>
+      <l xml:id="erar-l26315">
+         <c> </c>
+         <w xml:id="erar-3480870">gimo</w>
+         <c> </c>
+         <w xml:id="erar-3480880">humillado</w>
+         <pc xml:id="erar-3480890" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26320">
+         <w xml:id="erar-3480900">Ni</w>
+         <c> </c>
+         <w xml:id="erar-3480910">aun</w>
+         <c> </c>
+         <w xml:id="erar-3480920">tristes</w>
+         <c> </c>
+         <w xml:id="erar-3480930">súplicas</w>
+      </l>
+      <l xml:id="erar-l26325">
+         <c> </c>
+         <w xml:id="erar-3480940">puedo</w>
+         <c> </c>
+         <w xml:id="erar-3480950">exhalar</w>
+         <pc xml:id="erar-3480960" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26330">
+         <pc xml:id="erar-3480970">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3480980">Maldición</w>
+         <c> </c>
+         <w xml:id="erar-3480990">sobre</w>
+         <c> </c>
+         <w xml:id="erar-3481000">el</w>
+         <c> </c>
+         <w xml:id="erar-3481010">fiero</w>
+         <c> </c>
+         <w xml:id="erar-3481020">homicida</w>
+      </l>
+      <l xml:id="erar-l26335">
+         <c> </c>
+         <w xml:id="erar-3481030">que</w>
+         <c> </c>
+         <w xml:id="erar-3481040">el</w>
+         <c> </c>
+         <w xml:id="erar-3481050">primero</w>
+         <c> </c>
+         <w xml:id="erar-3481060">humilló</w>
+         <c> </c>
+         <w xml:id="erar-3481070">a</w>
+         <c> </c>
+         <w xml:id="erar-3481080">sus</w>
+         <c> </c>
+         <w xml:id="erar-3481090">iguales</w>
+         <pc xml:id="erar-3481100" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26340">
+         <pc xml:id="erar-3481110">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3481120">Maldición</w>
+         <c> </c>
+         <w xml:id="erar-3481130">sobre</w>
+         <c> </c>
+         <w xml:id="erar-3481140">aquellos</w>
+         <c> </c>
+         <w xml:id="erar-3481150">mortales</w>
+      </l>
+      <l xml:id="erar-l26345">
+         <c> </c>
+         <w xml:id="erar-3481160">que</w>
+         <c> </c>
+         <w xml:id="erar-3481170">cual</w>
+         <c> </c>
+         <w xml:id="erar-3481180">dioses</w>
+         <c> </c>
+         <w xml:id="erar-3481190">pretenden</w>
+         <c> </c>
+         <w xml:id="erar-3481200">mandar</w>
+         <pc xml:id="erar-3481210" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26350">
+         <pc xml:id="erar-3481220">¿</pc>
+         <c> </c>
+         <w xml:id="erar-3481230">Quién</w>
+         <c> </c>
+         <w xml:id="erar-3481240">al</w>
+         <c> </c>
+         <w xml:id="erar-3481250">hombre</w>
+         <c> </c>
+         <w xml:id="erar-3481260">le</w>
+         <c> </c>
+         <w xml:id="erar-3481270">ha</w>
+         <c> </c>
+         <w xml:id="erar-3481280">dado</w>
+         <c> </c>
+         <w xml:id="erar-3481290">derecho</w>
+      </l>
+      <l xml:id="erar-l26355">
+         <c> </c>
+         <w xml:id="erar-3481300">de</w>
+         <c> </c>
+         <w xml:id="erar-3481310">vender</w>
+         <c> </c>
+         <w xml:id="erar-3481320">y</w>
+         <c> </c>
+         <w xml:id="erar-3481330">comprar</w>
+         <c> </c>
+         <w xml:id="erar-3481340">a</w>
+         <c> </c>
+         <w xml:id="erar-3481350">los</w>
+         <c> </c>
+         <w xml:id="erar-3481360">hombres</w>
+      </l>
+      <l xml:id="erar-l26360">
+         <c> </c>
+         <w xml:id="erar-3481370">y</w>
+         <pc xml:id="erar-3481380">,</pc>
+         <c> </c>
+         <w xml:id="erar-3481390">entregando</w>
+         <c> </c>
+         <w xml:id="erar-3481400">al</w>
+         <c> </c>
+         <w xml:id="erar-3481410">oprobio</w>
+         <c> </c>
+         <w xml:id="erar-3481420">sus</w>
+         <c> </c>
+         <w xml:id="erar-3481430">nombres</w>
+         <pc xml:id="erar-3481440">,</pc>
+      </l>
+      <l xml:id="erar-l26365">
+         <c> </c>
+         <w xml:id="erar-3481450">con</w>
+         <c> </c>
+         <w xml:id="erar-3481460">la</w>
+         <c> </c>
+         <w xml:id="erar-3481470">infamia</w>
+         <c> </c>
+         <w xml:id="erar-3481480">su</w>
+         <c> </c>
+         <w xml:id="erar-3481490">frente</w>
+         <c> </c>
+         <w xml:id="erar-3481500">sellar</w>
+         <pc xml:id="erar-3481510" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26370">
+         <w xml:id="erar-3481520">Amo</w>
+         <c> </c>
+         <w xml:id="erar-3481530">injusto</w>
+         <pc xml:id="erar-3481540">,</pc>
+         <c> </c>
+         <w xml:id="erar-3481550">mi</w>
+         <c> </c>
+         <w xml:id="erar-3481560">espalda</w>
+         <c> </c>
+         <w xml:id="erar-3481570">desnuda</w>
+      </l>
+      <l xml:id="erar-l26375">
+         <c> </c>
+         <w xml:id="erar-3481580">tú</w>
+         <c> </c>
+         <w xml:id="erar-3481590">con</w>
+         <c> </c>
+         <w xml:id="erar-3481600">vara</w>
+         <c> </c>
+         <w xml:id="erar-3481610">de</w>
+         <c> </c>
+         <w xml:id="erar-3481620">hierro</w>
+         <c> </c>
+         <w xml:id="erar-3481630">golpeas</w>
+      </l>
+      <l xml:id="erar-l26380">
+         <c> </c>
+         <w xml:id="erar-3481640">y</w>
+         <c> </c>
+         <w xml:id="erar-3481650">en</w>
+         <c> </c>
+         <w xml:id="erar-3481660">mi</w>
+         <c> </c>
+         <w xml:id="erar-3481670">amarga</w>
+         <c> </c>
+         <w xml:id="erar-3481680">aflicción</w>
+         <c> </c>
+         <w xml:id="erar-3481690">te</w>
+         <c> </c>
+         <w xml:id="erar-3481700">recreas</w>
+         <pc xml:id="erar-3481710">,</pc>
+      </l>
+      <l xml:id="erar-l26385">
+         <c> </c>
+         <w xml:id="erar-3481720">desoyendo</w>
+         <c> </c>
+         <w xml:id="erar-3481730">mi</w>
+         <c> </c>
+         <w xml:id="erar-3481740">trémula</w>
+         <c> </c>
+         <w xml:id="erar-3481750">voz</w>
+         <pc xml:id="erar-3481760" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26390">
+         <pc xml:id="erar-3481770">¿</pc>
+         <c> </c>
+         <w xml:id="erar-3481780">Corre</w>
+         <c> </c>
+         <w xml:id="erar-3481790">acaso</w>
+         <c> </c>
+         <w xml:id="erar-3481800">otra</w>
+         <c> </c>
+         <w xml:id="erar-3481810">sangre</w>
+         <c> </c>
+         <w xml:id="erar-3481820">en</w>
+         <c> </c>
+         <w xml:id="erar-3481830">mis</w>
+         <c> </c>
+         <w xml:id="erar-3481840">venas</w>
+         <pc xml:id="erar-3481850" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26395">
+         <pc xml:id="erar-3481860">¿</pc>
+         <c> </c>
+         <w xml:id="erar-3481870">Soy</w>
+         <c> </c>
+         <w xml:id="erar-3481880">de</w>
+         <c> </c>
+         <w xml:id="erar-3481890">especie</w>
+         <c> </c>
+         <w xml:id="erar-3481900">distinta</w>
+         <c> </c>
+         <w xml:id="erar-3481910">y</w>
+         <c> </c>
+         <w xml:id="erar-3481920">natura</w>
+         <pc xml:id="erar-3481930" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26400">
+         <pc xml:id="erar-3481940">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3481950">Es</w>
+         <c> </c>
+         <w xml:id="erar-3481960">la</w>
+         <c> </c>
+         <w xml:id="erar-3481970">imagen</w>
+         <c> </c>
+         <w xml:id="erar-3481980">de</w>
+         <c> </c>
+         <w xml:id="erar-3481990">Dios</w>
+         <pc xml:id="erar-3482000">,</pc>
+         <c> </c>
+         <w xml:id="erar-3482010">es</w>
+         <c> </c>
+         <w xml:id="erar-3482020">su</w>
+         <c> </c>
+         <w xml:id="erar-3482030">hechura</w>
+      </l>
+      <l xml:id="erar-l26405">
+         <c> </c>
+         <w xml:id="erar-3482040">la</w>
+         <c> </c>
+         <w xml:id="erar-3482050">que</w>
+         <c> </c>
+         <w xml:id="erar-3482060">ultrajas</w>
+         <pc xml:id="erar-3482070">!</pc>
+         <pc xml:id="erar-3482080">,</pc>
+         <c> </c>
+         <pc xml:id="erar-3482090">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3482100">oh</w>
+         <c> </c>
+         <w xml:id="erar-3482110">dueño</w>
+         <c> </c>
+         <w xml:id="erar-3482120">feroz</w>
+         <pc xml:id="erar-3482130" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26410">
+         <pc xml:id="erar-3482140">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3482150">Ay</w>
+         <c> </c>
+         <w xml:id="erar-3482160">que</w>
+         <c> </c>
+         <w xml:id="erar-3482170">suerte</w>
+         <c> </c>
+         <w xml:id="erar-3482180">tan</w>
+         <c> </c>
+         <w xml:id="erar-3482190">triste</w>
+         <c> </c>
+         <w xml:id="erar-3482200">la</w>
+         <c> </c>
+         <w xml:id="erar-3482210">mía</w>
+         <pc xml:id="erar-3482220" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26415">
+         <w xml:id="erar-3482230">Por</w>
+         <c> </c>
+         <w xml:id="erar-3482240">doquier</w>
+         <c> </c>
+         <w xml:id="erar-3482250">de</w>
+         <c> </c>
+         <w xml:id="erar-3482260">vergü</w>
+         <c> </c>
+         <w xml:id="erar-3482270">enza</w>
+         <c> </c>
+         <w xml:id="erar-3482280">me</w>
+         <c> </c>
+         <w xml:id="erar-3482290">escondo</w>
+         <pc xml:id="erar-3482300">;</pc>
+      </l>
+      <l xml:id="erar-l26420">
+         <c> </c>
+         <w xml:id="erar-3482310">si</w>
+         <c> </c>
+         <w xml:id="erar-3482320">me</w>
+         <c> </c>
+         <w xml:id="erar-3482330">llaman</w>
+         <pc xml:id="erar-3482340">,</pc>
+         <c> </c>
+         <w xml:id="erar-3482350">temblando</w>
+         <c> </c>
+         <w xml:id="erar-3482360">respondo</w>
+         <pc xml:id="erar-3482370">,</pc>
+      </l>
+      <l xml:id="erar-l26425">
+         <c> </c>
+         <w xml:id="erar-3482380">la</w>
+         <c> </c>
+         <w xml:id="erar-3482390">voz</w>
+         <c> </c>
+         <w xml:id="erar-3482400">siento</w>
+         <c> </c>
+         <w xml:id="erar-3482410">en</w>
+         <c> </c>
+         <w xml:id="erar-3482420">mi</w>
+         <c> </c>
+         <w xml:id="erar-3482430">labio</w>
+         <c> </c>
+         <w xml:id="erar-3482440">expirar</w>
+         <pc xml:id="erar-3482450" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26430">
+         <w xml:id="erar-3482460">Si</w>
+         <c> </c>
+         <w xml:id="erar-3482470">me</w>
+         <c> </c>
+         <w xml:id="erar-3482480">miran</w>
+         <pc xml:id="erar-3482490">,</pc>
+         <c> </c>
+         <w xml:id="erar-3482500">inclino</w>
+         <c> </c>
+         <w xml:id="erar-3482510">los</w>
+         <c> </c>
+         <w xml:id="erar-3482520">ojos</w>
+      </l>
+      <l xml:id="erar-l26435">
+         <c> </c>
+         <w xml:id="erar-3482530">y</w>
+         <c> </c>
+         <w xml:id="erar-3482540">los</w>
+         <c> </c>
+         <w xml:id="erar-3482550">clavo</w>
+         <c> </c>
+         <w xml:id="erar-3482560">humillado</w>
+         <c> </c>
+         <w xml:id="erar-3482570">en</w>
+         <c> </c>
+         <w xml:id="erar-3482580">la</w>
+         <c> </c>
+         <w xml:id="erar-3482590">tierra</w>
+         <pc xml:id="erar-3482600">,</pc>
+      </l>
+      <l xml:id="erar-l26440">
+         <c> </c>
+         <w xml:id="erar-3482610">como</w>
+         <c> </c>
+         <w xml:id="erar-3482620">el</w>
+         <c> </c>
+         <w xml:id="erar-3482630">reo</w>
+         <c> </c>
+         <w xml:id="erar-3482640">que</w>
+         <c> </c>
+         <w xml:id="erar-3482650">en</w>
+         <c> </c>
+         <w xml:id="erar-3482660">un</w>
+         <c> </c>
+         <w xml:id="erar-3482670">crimen</w>
+         <c> </c>
+         <w xml:id="erar-3482680">aterra</w>
+      </l>
+      <l xml:id="erar-l26445">
+         <c> </c>
+         <w xml:id="erar-3482690">ante</w>
+         <c> </c>
+         <w xml:id="erar-3482700">el</w>
+         <c> </c>
+         <w xml:id="erar-3482710">juez</w>
+         <c> </c>
+         <w xml:id="erar-3482720">que</w>
+         <c> </c>
+         <w xml:id="erar-3482730">le</w>
+         <c> </c>
+         <w xml:id="erar-3482740">va</w>
+         <c> </c>
+         <w xml:id="erar-3482750">a</w>
+         <c> </c>
+         <w xml:id="erar-3482760">sentenciar</w>
+         <pc xml:id="erar-3482770" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26450">
+         <w xml:id="erar-3482780">Ni</w>
+         <c> </c>
+         <w xml:id="erar-3482790">el</w>
+         <c> </c>
+         <w xml:id="erar-3482800">amor</w>
+         <c> </c>
+         <w xml:id="erar-3482810">las</w>
+         <c> </c>
+         <w xml:id="erar-3482820">preciosas</w>
+         <c> </c>
+         <w xml:id="erar-3482830">caricias</w>
+      </l>
+      <l xml:id="erar-l26455">
+         <c> </c>
+         <w xml:id="erar-3482840">no</w>
+         <c> </c>
+         <w xml:id="erar-3482850">me</w>
+         <c> </c>
+         <w xml:id="erar-3482860">es</w>
+         <c> </c>
+         <w xml:id="erar-3482870">dado</w>
+         <c> </c>
+         <w xml:id="erar-3482880">gozar</w>
+         <pc xml:id="erar-3482890" unit="sentence">.</pc>
+         <c> </c>
+         <pc xml:id="erar-3482900">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3482910">Oh</w>
+         <c> </c>
+         <w xml:id="erar-3482920">tristeza</w>
+         <pc xml:id="erar-3482930" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26460">
+         <w xml:id="erar-3482940">Que</w>
+         <c> </c>
+         <w xml:id="erar-3482950">jamás</w>
+         <c> </c>
+         <w xml:id="erar-3482960">la</w>
+         <c> </c>
+         <w xml:id="erar-3482970">orgullosa</w>
+         <c> </c>
+         <w xml:id="erar-3482980">belleza</w>
+      </l>
+      <l xml:id="erar-l26465">
+         <c> </c>
+         <w xml:id="erar-3482990">pudo</w>
+         <c> </c>
+         <w xml:id="erar-3483000">amar</w>
+         <c> </c>
+         <w xml:id="erar-3483010">al</w>
+         <c> </c>
+         <w xml:id="erar-3483020">esclavo</w>
+         <c> </c>
+         <w xml:id="erar-3483030">infeliz</w>
+         <pc xml:id="erar-3483040" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26470">
+         <w xml:id="erar-3483050">La</w>
+         <c> </c>
+         <w xml:id="erar-3483060">beldad</w>
+         <c> </c>
+         <w xml:id="erar-3483070">sólo</w>
+         <c> </c>
+         <w xml:id="erar-3483080">al</w>
+         <c> </c>
+         <w xml:id="erar-3483090">noble</w>
+         <pc xml:id="erar-3483100">,</pc>
+         <c> </c>
+         <w xml:id="erar-3483110">al</w>
+         <c> </c>
+         <w xml:id="erar-3483120">valiente</w>
+      </l>
+      <l xml:id="erar-l26475">
+         <c> </c>
+         <w xml:id="erar-3483130">no</w>
+         <c> </c>
+         <w xml:id="erar-3483140">escasea</w>
+         <c> </c>
+         <w xml:id="erar-3483150">sus</w>
+         <c> </c>
+         <w xml:id="erar-3483160">dulces</w>
+         <c> </c>
+         <w xml:id="erar-3483170">favores</w>
+         <pc xml:id="erar-3483180">,</pc>
+      </l>
+      <l xml:id="erar-l26480">
+         <c> </c>
+         <w xml:id="erar-3483190">como</w>
+         <c> </c>
+         <w xml:id="erar-3483200">al</w>
+         <c> </c>
+         <w xml:id="erar-3483210">rey</w>
+         <c> </c>
+         <w xml:id="erar-3483220">de</w>
+         <c> </c>
+         <w xml:id="erar-3483230">los</w>
+         <c> </c>
+         <w xml:id="erar-3483240">astros</w>
+         <c> </c>
+         <w xml:id="erar-3483250">las</w>
+         <c> </c>
+         <w xml:id="erar-3483260">flores</w>
+      </l>
+      <l xml:id="erar-l26485">
+         <c> </c>
+         <w xml:id="erar-3483270">no</w>
+         <c> </c>
+         <w xml:id="erar-3483280">escasean</w>
+         <c> </c>
+         <w xml:id="erar-3483290">su</w>
+         <c> </c>
+         <w xml:id="erar-3483300">esencia</w>
+         <c> </c>
+         <w xml:id="erar-3483310">y</w>
+         <c> </c>
+         <w xml:id="erar-3483320">matiz</w>
+         <pc xml:id="erar-3483330" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26490">
+         <w xml:id="erar-3483340">Ved</w>
+         <c> </c>
+         <w xml:id="erar-3483350">al</w>
+         <c> </c>
+         <w xml:id="erar-3483360">hombre</w>
+         <c> </c>
+         <w xml:id="erar-3483370">que</w>
+         <c> </c>
+         <w xml:id="erar-3483380">libre</w>
+         <c> </c>
+         <w xml:id="erar-3483390">se</w>
+         <c> </c>
+         <w xml:id="erar-3483400">llama</w>
+      </l>
+      <l xml:id="erar-l26495">
+         <c> </c>
+         <w xml:id="erar-3483410">cómo</w>
+         <c> </c>
+         <w xml:id="erar-3483420">eleva</w>
+         <c> </c>
+         <w xml:id="erar-3483430">a</w>
+         <c> </c>
+         <w xml:id="erar-3483440">los</w>
+         <c> </c>
+         <w xml:id="erar-3483450">cielos</w>
+         <c> </c>
+         <w xml:id="erar-3483460">la</w>
+         <c> </c>
+         <w xml:id="erar-3483470">frente</w>
+         <pc xml:id="erar-3483480">;</pc>
+      </l>
+      <l xml:id="erar-l26500">
+         <c> </c>
+         <w xml:id="erar-3483490">cómo</w>
+         <c> </c>
+         <w xml:id="erar-3483500">el</w>
+         <c> </c>
+         <w xml:id="erar-3483510">digno</w>
+         <c> </c>
+         <w xml:id="erar-3483520">entusiasmo</w>
+         <c> </c>
+         <w xml:id="erar-3483530">que</w>
+         <c> </c>
+         <w xml:id="erar-3483540">siente</w>
+      </l>
+      <l xml:id="erar-l26505">
+         <c> </c>
+         <w xml:id="erar-3483550">se</w>
+         <c> </c>
+         <w xml:id="erar-3483560">refleja</w>
+         <c> </c>
+         <w xml:id="erar-3483570">en</w>
+         <c> </c>
+         <w xml:id="erar-3483580">su</w>
+         <c> </c>
+         <w xml:id="erar-3483590">faz</w>
+         <c> </c>
+         <w xml:id="erar-3483600">varonil</w>
+         <pc xml:id="erar-3483610" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26510">
+         <w xml:id="erar-3483620">Oigo</w>
+         <c> </c>
+         <w xml:id="erar-3483630">al</w>
+         <c> </c>
+         <w xml:id="erar-3483640">punto</w>
+         <c> </c>
+         <w xml:id="erar-3483650">una</w>
+         <c> </c>
+         <w xml:id="erar-3483660">voz</w>
+         <c> </c>
+         <w xml:id="erar-3483670">que</w>
+         <c> </c>
+         <w xml:id="erar-3483680">me</w>
+         <c> </c>
+         <w xml:id="erar-3483690">grita</w>
+         <pc xml:id="erar-3483700">:</pc>
+      </l>
+      <l xml:id="erar-l26515">
+         <c> </c>
+         <pc xml:id="erar-3483710">‘</pc>
+         <w xml:id="erar-3483720">Eres</w>
+         <c> </c>
+         <w xml:id="erar-3483730">hombre</w>
+         <pc xml:id="erar-3483740">,</pc>
+         <c> </c>
+         <w xml:id="erar-3483750">eres</w>
+         <c> </c>
+         <w xml:id="erar-3483760">libre</w>
+         <pc xml:id="erar-3483770">,</pc>
+         <c> </c>
+         <w xml:id="erar-3483780">eres</w>
+         <c> </c>
+         <w xml:id="erar-3483790">fuerte</w>
+         <pc xml:id="erar-3483800">,</pc>
+      </l>
+      <l xml:id="erar-l26520">
+         <c> </c>
+         <w xml:id="erar-3483810">y</w>
+         <c> </c>
+         <w xml:id="erar-3483820">a</w>
+         <c> </c>
+         <w xml:id="erar-3483830">quien</w>
+         <c> </c>
+         <w xml:id="erar-3483840">nunca</w>
+         <c> </c>
+         <w xml:id="erar-3483850">temor</w>
+         <c> </c>
+         <w xml:id="erar-3483860">dio</w>
+         <c> </c>
+         <w xml:id="erar-3483870">la</w>
+         <c> </c>
+         <w xml:id="erar-3483880">muerte</w>
+      </l>
+      <l xml:id="erar-l26525">
+         <c> </c>
+         <w xml:id="erar-3483890">nunca</w>
+         <pc xml:id="erar-3483900">,</pc>
+         <c> </c>
+         <w xml:id="erar-3483910">nunca</w>
+         <c> </c>
+         <w xml:id="erar-3483920">en</w>
+         <c> </c>
+         <w xml:id="erar-3483930">cadenas</w>
+         <c> </c>
+         <w xml:id="erar-3483940">gimió</w>
+         <pc xml:id="erar-3483950" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26530">
+         <w xml:id="erar-3483960">No</w>
+         <c> </c>
+         <w xml:id="erar-3483970">hay</w>
+         <c> </c>
+         <w xml:id="erar-3483980">ninguno</w>
+         <c> </c>
+         <w xml:id="erar-3483990">que</w>
+         <c> </c>
+         <w xml:id="erar-3484000">deba</w>
+         <c> </c>
+         <w xml:id="erar-3484010">oprimirnos</w>
+      </l>
+      <l xml:id="erar-l26535">
+         <c> </c>
+         <w xml:id="erar-3484020">aunque</w>
+         <c> </c>
+         <w xml:id="erar-3484030">ocupa</w>
+         <c> </c>
+         <w xml:id="erar-3484040">el</w>
+         <c> </c>
+         <w xml:id="erar-3484050">dosel</w>
+         <c> </c>
+         <w xml:id="erar-3484060">de</w>
+         <c> </c>
+         <w xml:id="erar-3484070">los</w>
+         <c> </c>
+         <w xml:id="erar-3484080">reyes</w>
+         <pc xml:id="erar-3484090">.</pc>
+      </l>
+      <l xml:id="erar-l26540">
+         <c> </c>
+         <w xml:id="erar-3484100">para</w>
+         <c> </c>
+         <w xml:id="erar-3484110">hacernos</w>
+         <c> </c>
+         <w xml:id="erar-3484120">esclavos</w>
+         <c> </c>
+         <w xml:id="erar-3484130">no</w>
+         <c> </c>
+         <w xml:id="erar-3484140">hay</w>
+         <c> </c>
+         <w xml:id="erar-3484150">leyes</w>
+         <pc xml:id="erar-3484160">;</pc>
+      </l>
+      <l xml:id="erar-l26545">
+         <c> </c>
+         <w xml:id="erar-3484170">libres</w>
+         <c> </c>
+         <w xml:id="erar-3484180">Dios</w>
+         <c> </c>
+         <w xml:id="erar-3484190">a</w>
+         <c> </c>
+         <w xml:id="erar-3484200">los</w>
+         <c> </c>
+         <w xml:id="erar-3484210">hombres</w>
+         <c> </c>
+         <w xml:id="erar-3484220">creó</w>
+         <pc xml:id="erar-3484230">’</pc>
+         <pc xml:id="erar-3484240" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26550">
+         <w xml:id="erar-3484250">Fuego</w>
+         <c> </c>
+         <w xml:id="erar-3484260">volcánico</w>
+      </l>
+      <l xml:id="erar-l26555">
+         <c> </c>
+         <w xml:id="erar-3484270">mi</w>
+         <c> </c>
+         <w xml:id="erar-3484280">pecho</w>
+         <c> </c>
+         <w xml:id="erar-3484290">inflama</w>
+         <pc xml:id="erar-3484300">;</pc>
+      </l>
+      <l xml:id="erar-l26560">
+         <c> </c>
+         <w xml:id="erar-3484310">ya</w>
+         <c> </c>
+         <w xml:id="erar-3484320">no</w>
+         <c> </c>
+         <w xml:id="erar-3484330">soy</w>
+         <c> </c>
+         <w xml:id="erar-3484340">tímido</w>
+         <pc xml:id="erar-3484350">,</pc>
+      </l>
+      <l xml:id="erar-l26565">
+         <c> </c>
+         <w xml:id="erar-3484360">soy</w>
+         <c> </c>
+         <w xml:id="erar-3484370">un</w>
+         <c> </c>
+         <w xml:id="erar-3484380">león</w>
+         <pc xml:id="erar-3484390" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="erar-l26570">
+         <w xml:id="erar-3484400">Dueño</w>
+         <c> </c>
+         <w xml:id="erar-3484410">tiránico</w>
+         <pc xml:id="erar-3484420">,</pc>
+      </l>
+      <l xml:id="erar-l26575">
+         <c> </c>
+         <w xml:id="erar-3484430">libertad</w>
+         <c> </c>
+         <w xml:id="erar-3484440">dame</w>
+      </l>
+      <l xml:id="erar-l26580">
+         <c> </c>
+         <w xml:id="erar-3484450">o</w>
+         <c> </c>
+         <w xml:id="erar-3484460">rompo</w>
+         <pc xml:id="erar-3484470">,</pc>
+         <c> </c>
+         <pc xml:id="erar-3484480">¡</pc>
+         <c> </c>
+         <w xml:id="erar-3484490">oh</w>
+         <c> </c>
+         <w xml:id="erar-3484500">pérfido</w>
+         <pc xml:id="erar-3484510">!</pc>
+         <pc xml:id="erar-3484520">,</pc>
+      </l>
+      <l xml:id="erar-l26585">
+         <c> </c>
+         <w xml:id="erar-3484530">tu</w>
+         <c> </c>
+         <w xml:id="erar-3484540">corazón</w>
+         <pc xml:id="erar-3484550" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

@@ -1,1 +1,603 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#translation_por"
+     corresp="#work00385"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00421"
+     xml:lang="eng">
+   <link target="#pers00405" type="author"/>
+   <link target="#pers00705" type="translator"/>
+   <link target="#text00420" type="translation"/>
+   <note type="source" xml:id="pcgd-n00010">
+      <bibl>
+         <title>
+            <w xml:id="pcgd-8920">Jornal</w>
+            <c> </c>
+            <w xml:id="pcgd-8930">de</w>
+            <c> </c>
+            <w xml:id="pcgd-8940">Poesia</w>
+         </title>
+         <pc xml:id="pcgd-8950" unit="sentence">.</pc>
+         <c> </c>
+         <ptr target="http://www.jornaldepoesia.jor.br/gdias01a.html"/>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="eng" xml:id="pcgd-h00025">
+      <w xml:id="pcgd-6100">The</w>
+      <c> </c>
+      <w xml:id="pcgd-6110">Song</w>
+      <c> </c>
+      <w xml:id="pcgd-6120">Of</w>
+      <c> </c>
+      <w xml:id="pcgd-6130">Exile</w>
+   </head>
+   <epigraph xml:lang="deu" xml:id="pcgd-div00040">
+      <l xml:id="pcgd-l00145">
+         <w xml:id="pcgd-6160">Kennst</w>
+         <c> </c>
+         <w xml:id="pcgd-6170">du</w>
+         <c> </c>
+         <w xml:id="pcgd-6180">das</w>
+         <c> </c>
+         <w xml:id="pcgd-6190">Land</w>
+         <pc xml:id="pcgd-6200">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-6210">wo</w>
+         <c> </c>
+         <w xml:id="pcgd-6220">die</w>
+         <c> </c>
+         <w xml:id="pcgd-6230">Citronen</w>
+         <c> </c>
+         <w xml:id="pcgd-6240">blühen</w>
+         <pc xml:id="pcgd-6250">,</pc>
+      </l>
+      <l xml:id="pcgd-l00150">
+         <c> </c>
+         <w xml:id="pcgd-6260">Im</w>
+         <c> </c>
+         <w xml:id="pcgd-6270">dunkeln</w>
+         <c> </c>
+         <w xml:id="pcgd-6280">Laub</w>
+         <c> </c>
+         <w xml:id="pcgd-6290">die</w>
+         <c> </c>
+         <w xml:id="pcgd-6300">Gold-Orangen</w>
+         <c> </c>
+         <w xml:id="pcgd-6310">glühen</w>
+         <pc xml:id="pcgd-6320">,</pc>
+      </l>
+      <l xml:id="pcgd-l00155">
+         <c> </c>
+         <w xml:id="pcgd-6330">Kennst</w>
+         <c> </c>
+         <w xml:id="pcgd-6340">du</w>
+         <c> </c>
+         <w xml:id="pcgd-6350">es</w>
+         <c> </c>
+         <w xml:id="pcgd-6360">wohl</w>
+         <pc xml:id="pcgd-6370">?</pc>
+         <c> </c>
+         <pc xml:id="pcgd-6380">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-6390">Dahin</w>
+         <pc xml:id="pcgd-6400">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-6410">dahin</w>
+         <pc xml:id="pcgd-6420" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pcgd-l00160">
+         <w xml:id="pcgd-6430">Möcht</w>
+         <c> </c>
+         <pc xml:id="pcgd-6440">'</pc>
+         <w xml:id="pcgd-6450">ich</w>
+         <c> </c>
+         <pc xml:id="pcgd-6460">...</pc>
+         <c> </c>
+         <w xml:id="pcgd-6470">ziehn</w>
+         <pc xml:id="pcgd-6480" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <bibl rend="inline">
+         <pc xml:id="pcgd-6500">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-6510">Göthe</w>
+         <pc unit="sentence" xml:id="pcgd-6510-eos"/>
+      </bibl>
+      <note resp="#AH" xml:id="pcgd-n00015">
+         <l xml:id="pcgd-l00165">
+            <w xml:id="pcgd-6530">Do</w>
+            <c> </c>
+            <w xml:id="pcgd-6540">you</w>
+            <c> </c>
+            <w xml:id="pcgd-6550">know</w>
+            <c> </c>
+            <w xml:id="pcgd-6560">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6570">land</w>
+            <c> </c>
+            <w xml:id="pcgd-6580">where</w>
+            <c> </c>
+            <w xml:id="pcgd-6590">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6600">lemons</w>
+            <c> </c>
+            <w xml:id="pcgd-6610">bloom</w>
+            <pc xml:id="pcgd-6620">,</pc>
+         </l>
+         <l xml:id="pcgd-l00170">
+            <c> </c>
+            <w xml:id="pcgd-6630">In</w>
+            <c> </c>
+            <w xml:id="pcgd-6640">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6650">dark</w>
+            <c> </c>
+            <w xml:id="pcgd-6660">foliage</w>
+            <c> </c>
+            <w xml:id="pcgd-6670">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6680">golden</w>
+            <c> </c>
+            <w xml:id="pcgd-6690">oranges</w>
+            <c> </c>
+            <w xml:id="pcgd-6700">glow</w>
+            <pc xml:id="pcgd-6710">,</pc>
+         </l>
+         <l xml:id="pcgd-l00175">
+            <c> </c>
+            <pc xml:id="pcgd-6720">[</pc>
+            <w xml:id="pcgd-6730">A</w>
+            <c> </c>
+            <w xml:id="pcgd-6740">gentle</w>
+            <c> </c>
+            <w xml:id="pcgd-6750">breeze</w>
+            <c> </c>
+            <w xml:id="pcgd-6760">blows</w>
+            <c> </c>
+            <w xml:id="pcgd-6770">from</w>
+            <c> </c>
+            <w xml:id="pcgd-6780">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6790">blue</w>
+            <c> </c>
+            <w xml:id="pcgd-6800">sky</w>
+            <pc xml:id="pcgd-6810">,</pc>
+         </l>
+         <l xml:id="pcgd-l00180">
+            <c> </c>
+            <w xml:id="pcgd-6820">The</w>
+            <c> </c>
+            <w xml:id="pcgd-6830">myrtle</w>
+            <c> </c>
+            <w xml:id="pcgd-6840">is</w>
+            <c> </c>
+            <w xml:id="pcgd-6850">still</w>
+            <c> </c>
+            <w xml:id="pcgd-6860">and</w>
+            <c> </c>
+            <w xml:id="pcgd-6870">the</w>
+            <c> </c>
+            <w xml:id="pcgd-6880">laurel</w>
+            <c> </c>
+            <w xml:id="pcgd-6890">is</w>
+            <c> </c>
+            <w xml:id="pcgd-6900">high</w>
+            <pc xml:id="pcgd-6910">,</pc>
+            <pc xml:id="pcgd-6920">]</pc>
+         </l>
+         <l xml:id="pcgd-l00185">
+            <c> </c>
+            <w xml:id="pcgd-6930">Do</w>
+            <c> </c>
+            <w xml:id="pcgd-6940">you</w>
+            <c> </c>
+            <w xml:id="pcgd-6950">know</w>
+            <c> </c>
+            <w xml:id="pcgd-6960">it</w>
+            <c> </c>
+            <w xml:id="pcgd-6970">well</w>
+            <pc xml:id="pcgd-6980" unit="sentence">?</pc>
+            <c> </c>
+            <w xml:id="pcgd-6990">There</w>
+            <pc xml:id="pcgd-7000" unit="sentence">!</pc>
+            <c> </c>
+            <w xml:id="pcgd-7010">There</w>
+         </l>
+         <l xml:id="pcgd-l00190">
+            <c> </c>
+            <w xml:id="pcgd-7020">I</w>
+            <c> </c>
+            <w xml:id="pcgd-7030">would</w>
+            <c> </c>
+            <w xml:id="pcgd-7040">go</w>
+            <c> </c>
+            <pc xml:id="pcgd-7050">[</pc>
+            <w xml:id="pcgd-7060">with</w>
+            <c> </c>
+            <w xml:id="pcgd-7070">thee</w>
+            <pc xml:id="pcgd-7080">,</pc>
+            <c> </c>
+            <w xml:id="pcgd-7090">O</w>
+            <c> </c>
+            <w xml:id="pcgd-7100">my</w>
+            <c> </c>
+            <w xml:id="pcgd-7110">beloved</w>
+            <pc xml:id="pcgd-7120">]</pc>
+            <pc xml:id="pcgd-7130" unit="sentence">.</pc>
+            <c> </c>
+         </l>
+         <bibl>
+            <pc xml:id="pcgd-7150">—</pc>
+            <c> </c>
+            <w xml:id="pcgd-7160">Goethe</w>
+            <pc xml:id="pcgd-7170">,</pc>
+            <c> </c>
+            <pc xml:id="pcgd-7180">"</pc>
+            <w xml:id="pcgd-7190">Mignons</w>
+            <c> </c>
+            <w xml:id="pcgd-7200">Lied</w>
+            <pc xml:id="pcgd-7210">"</pc>
+            <c> </c>
+            <pc xml:id="pcgd-7220">(</pc>
+            <w xml:id="pcgd-7230">1st</w>
+            <c> </c>
+            <w xml:id="pcgd-7240">stanza</w>
+            <pc xml:id="pcgd-7250">)</pc>
+            <pc xml:id="pcgd-7260" unit="sentence">.</pc>
+            <c> </c>
+            <hi>
+               <w xml:id="pcgd-7270">Translation</w>
+               <pc xml:id="pcgd-7280">:</pc>
+            </hi>
+            <c> </c>
+            <w xml:id="pcgd-7290">DeepL</w>
+            <pc unit="sentence" xml:id="pcgd-7290-eos"/>
+         </bibl>
+      </note>
+   </epigraph>
+   <lg xml:id="pcgd-s00060">
+      <l xml:id="pcgd-l00195">
+         <w xml:id="pcgd-7320">My</w>
+         <c> </c>
+         <w xml:id="pcgd-7330">homeland</w>
+         <c> </c>
+         <w xml:id="pcgd-7340">has</w>
+         <c> </c>
+         <w xml:id="pcgd-7350">many</w>
+         <c> </c>
+         <w xml:id="pcgd-7360">palm-trees</w>
+      </l>
+      <l xml:id="pcgd-l00200">
+         <c> </c>
+         <w xml:id="pcgd-7370">and</w>
+         <c> </c>
+         <w xml:id="pcgd-7380">the</w>
+         <c> </c>
+         <w xml:id="pcgd-7390">thrush-song</w>
+         <c> </c>
+         <w xml:id="pcgd-7400">fills</w>
+         <c> </c>
+         <w xml:id="pcgd-7410">its</w>
+         <c> </c>
+         <w xml:id="pcgd-7420">air</w>
+         <pc xml:id="pcgd-7430">;</pc>
+      </l>
+      <l xml:id="pcgd-l00205">
+         <c> </c>
+         <w xml:id="pcgd-7440">no</w>
+         <c> </c>
+         <w xml:id="pcgd-7450">bird</w>
+         <c> </c>
+         <w xml:id="pcgd-7460">here</w>
+         <c> </c>
+         <w xml:id="pcgd-7470">can</w>
+         <c> </c>
+         <w xml:id="pcgd-7480">sing</w>
+         <c> </c>
+         <w xml:id="pcgd-7490">as</w>
+         <c> </c>
+         <w xml:id="pcgd-7500">well</w>
+      </l>
+      <l xml:id="pcgd-l00210">
+         <c> </c>
+         <w xml:id="pcgd-7510">as</w>
+         <c> </c>
+         <w xml:id="pcgd-7520">the</w>
+         <c> </c>
+         <w xml:id="pcgd-7530">birds</w>
+         <c> </c>
+         <w xml:id="pcgd-7540">sing</w>
+         <c> </c>
+         <w xml:id="pcgd-7550">over</w>
+         <c> </c>
+         <w xml:id="pcgd-7560">there</w>
+         <pc xml:id="pcgd-7570" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pcgd-s00065">
+      <l xml:id="pcgd-l00215">
+         <w xml:id="pcgd-7600">We</w>
+         <c> </c>
+         <w xml:id="pcgd-7610">have</w>
+         <c> </c>
+         <w xml:id="pcgd-7620">fields</w>
+         <c> </c>
+         <w xml:id="pcgd-7630">more</w>
+         <c> </c>
+         <w xml:id="pcgd-7640">full</w>
+         <c> </c>
+         <w xml:id="pcgd-7650">of</w>
+         <c> </c>
+         <w xml:id="pcgd-7660">flowers</w>
+      </l>
+      <l xml:id="pcgd-l00220">
+         <c> </c>
+         <w xml:id="pcgd-7670">and</w>
+         <c> </c>
+         <w xml:id="pcgd-7680">a</w>
+         <c> </c>
+         <w xml:id="pcgd-7690">starrier</w>
+         <c> </c>
+         <w xml:id="pcgd-7700">sky</w>
+         <c> </c>
+         <w xml:id="pcgd-7710">above</w>
+         <pc xml:id="pcgd-7720">,</pc>
+      </l>
+      <l xml:id="pcgd-l00225">
+         <c> </c>
+         <w xml:id="pcgd-7730">we</w>
+         <c> </c>
+         <w xml:id="pcgd-7740">have</w>
+         <c> </c>
+         <w xml:id="pcgd-7750">woods</w>
+         <c> </c>
+         <w xml:id="pcgd-7760">more</w>
+         <c> </c>
+         <w xml:id="pcgd-7770">full</w>
+         <c> </c>
+         <w xml:id="pcgd-7780">of</w>
+         <c> </c>
+         <w xml:id="pcgd-7790">life</w>
+      </l>
+      <l xml:id="pcgd-l00230">
+         <c> </c>
+         <w xml:id="pcgd-7800">and</w>
+         <c> </c>
+         <w xml:id="pcgd-7810">a</w>
+         <c> </c>
+         <w xml:id="pcgd-7820">life</w>
+         <c> </c>
+         <w xml:id="pcgd-7830">more</w>
+         <c> </c>
+         <w xml:id="pcgd-7840">full</w>
+         <c> </c>
+         <w xml:id="pcgd-7850">of</w>
+         <c> </c>
+         <w xml:id="pcgd-7860">love</w>
+         <pc xml:id="pcgd-7870" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pcgd-s00070">
+      <l xml:id="pcgd-l00235">
+         <w xml:id="pcgd-7900">Lonely</w>
+         <c> </c>
+         <w xml:id="pcgd-7910">night-time</w>
+         <c> </c>
+         <w xml:id="pcgd-7920">meditations</w>
+      </l>
+      <l xml:id="pcgd-l00240">
+         <c> </c>
+         <w xml:id="pcgd-7930">please</w>
+         <c> </c>
+         <w xml:id="pcgd-7940">me</w>
+         <c> </c>
+         <w xml:id="pcgd-7950">more</w>
+         <c> </c>
+         <w xml:id="pcgd-7960">when</w>
+         <c> </c>
+         <w xml:id="pcgd-7970">I</w>
+         <c> </c>
+         <w xml:id="pcgd-7980">am</w>
+         <c> </c>
+         <w xml:id="pcgd-7990">there</w>
+         <pc xml:id="pcgd-8000">;</pc>
+      </l>
+      <l xml:id="pcgd-l00245">
+         <c> </c>
+         <w xml:id="pcgd-8010">my</w>
+         <c> </c>
+         <w xml:id="pcgd-8020">homeland</w>
+         <c> </c>
+         <w xml:id="pcgd-8030">has</w>
+         <c> </c>
+         <w xml:id="pcgd-8040">many</w>
+         <c> </c>
+         <w xml:id="pcgd-8050">palm-trees</w>
+      </l>
+      <l xml:id="pcgd-l00250">
+         <c> </c>
+         <w xml:id="pcgd-8060">and</w>
+         <c> </c>
+         <w xml:id="pcgd-8070">the</w>
+         <c> </c>
+         <w xml:id="pcgd-8080">thrush-song</w>
+         <c> </c>
+         <w xml:id="pcgd-8090">fills</w>
+         <c> </c>
+         <w xml:id="pcgd-8100">its</w>
+         <c> </c>
+         <w xml:id="pcgd-8110">air</w>
+         <pc xml:id="pcgd-8120" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pcgd-s00075">
+      <l xml:id="pcgd-l00255">
+         <w xml:id="pcgd-8150">Such</w>
+         <c> </c>
+         <w xml:id="pcgd-8160">delights</w>
+         <c> </c>
+         <w xml:id="pcgd-8170">as</w>
+         <c> </c>
+         <w xml:id="pcgd-8180">my</w>
+         <c> </c>
+         <w xml:id="pcgd-8190">land</w>
+         <c> </c>
+         <w xml:id="pcgd-8200">offers</w>
+      </l>
+      <l xml:id="pcgd-l00260">
+         <c> </c>
+         <w xml:id="pcgd-8210">Are</w>
+         <c> </c>
+         <w xml:id="pcgd-8220">not</w>
+         <c> </c>
+         <w xml:id="pcgd-8230">found</w>
+         <c> </c>
+         <w xml:id="pcgd-8240">here</w>
+         <c> </c>
+         <w xml:id="pcgd-8250">nor</w>
+         <c> </c>
+         <w xml:id="pcgd-8260">elsewhere</w>
+         <pc xml:id="pcgd-8270">;</pc>
+      </l>
+      <l xml:id="pcgd-l00265">
+         <c> </c>
+         <w xml:id="pcgd-8280">lonely</w>
+         <c> </c>
+         <w xml:id="pcgd-8290">night-time</w>
+         <c> </c>
+         <w xml:id="pcgd-8300">meditations</w>
+      </l>
+      <l xml:id="pcgd-l00270">
+         <c> </c>
+         <w xml:id="pcgd-8310">please</w>
+         <c> </c>
+         <w xml:id="pcgd-8320">me</w>
+         <c> </c>
+         <w xml:id="pcgd-8330">more</w>
+         <c> </c>
+         <w xml:id="pcgd-8340">when</w>
+         <c> </c>
+         <w xml:id="pcgd-8350">I</w>
+         <c> </c>
+         <w xml:id="pcgd-8360">am</w>
+         <c> </c>
+         <w xml:id="pcgd-8370">there</w>
+         <pc xml:id="pcgd-8380">;</pc>
+      </l>
+      <l xml:id="pcgd-l00275">
+         <c> </c>
+         <w xml:id="pcgd-8390">My</w>
+         <c> </c>
+         <w xml:id="pcgd-8400">homeland</w>
+         <c> </c>
+         <w xml:id="pcgd-8410">has</w>
+         <c> </c>
+         <w xml:id="pcgd-8420">many</w>
+         <c> </c>
+         <w xml:id="pcgd-8430">palm-trees</w>
+      </l>
+      <l xml:id="pcgd-l00280">
+         <c> </c>
+         <w xml:id="pcgd-8440">and</w>
+         <c> </c>
+         <w xml:id="pcgd-8450">the</w>
+         <c> </c>
+         <w xml:id="pcgd-8460">thrush-song</w>
+         <c> </c>
+         <w xml:id="pcgd-8470">fills</w>
+         <c> </c>
+         <w xml:id="pcgd-8480">its</w>
+         <c> </c>
+         <w xml:id="pcgd-8490">air</w>
+         <pc xml:id="pcgd-8500" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pcgd-s00080">
+      <l xml:id="pcgd-l00285">
+         <w xml:id="pcgd-8530">Don't</w>
+         <c> </c>
+         <w xml:id="pcgd-8540">allow</w>
+         <c> </c>
+         <w xml:id="pcgd-8550">me</w>
+         <pc xml:id="pcgd-8560">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-8570">God</w>
+         <pc xml:id="pcgd-8580">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-8590">to</w>
+         <c> </c>
+         <w xml:id="pcgd-8600">die</w>
+      </l>
+      <l xml:id="pcgd-l00290">
+         <c> </c>
+         <w xml:id="pcgd-8610">without</w>
+         <c> </c>
+         <w xml:id="pcgd-8620">getting</w>
+         <c> </c>
+         <w xml:id="pcgd-8630">back</w>
+         <c> </c>
+         <w xml:id="pcgd-8640">to</w>
+         <c> </c>
+         <w xml:id="pcgd-8650">where</w>
+      </l>
+      <l xml:id="pcgd-l00295">
+         <c> </c>
+         <w xml:id="pcgd-8660">I</w>
+         <c> </c>
+         <w xml:id="pcgd-8670">belong</w>
+         <pc xml:id="pcgd-8680">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-8690">without</w>
+         <c> </c>
+         <w xml:id="pcgd-8700">enjoying</w>
+      </l>
+      <l xml:id="pcgd-l00300">
+         <c> </c>
+         <w xml:id="pcgd-8710">the</w>
+         <c> </c>
+         <w xml:id="pcgd-8720">delights</w>
+         <c> </c>
+         <w xml:id="pcgd-8730">found</w>
+         <c> </c>
+         <w xml:id="pcgd-8740">only</w>
+         <c> </c>
+         <w xml:id="pcgd-8750">there</w>
+         <pc xml:id="pcgd-8760">,</pc>
+      </l>
+      <l xml:id="pcgd-l00305">
+         <c> </c>
+         <w xml:id="pcgd-8770">without</w>
+         <c> </c>
+         <w xml:id="pcgd-8780">seeing</w>
+         <c> </c>
+         <w xml:id="pcgd-8790">all</w>
+         <c> </c>
+         <w xml:id="pcgd-8800">those</w>
+         <c> </c>
+         <w xml:id="pcgd-8810">palm-trees</w>
+         <pc xml:id="pcgd-8820">,</pc>
+      </l>
+      <l xml:id="pcgd-l00310">
+         <c> </c>
+         <w xml:id="pcgd-8830">hearing</w>
+         <c> </c>
+         <w xml:id="pcgd-8840">thrush-songs</w>
+         <c> </c>
+         <w xml:id="pcgd-8850">fill</w>
+         <c> </c>
+         <w xml:id="pcgd-8860">the</w>
+         <c> </c>
+         <w xml:id="pcgd-8870">air</w>
+         <pc xml:id="pcgd-8880" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>

@@ -1,1 +1,461 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original #heptasyllable"
+     corresp="#work00385"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00420"
+     xml:lang="por">
+   <link target="#pers00405" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="pcgd-n00005">
+      <date type="comp" when="1843">
+         <w xml:id="pcgd-5780">July</w>
+         <c> </c>
+         <w xml:id="pcgd-5790">1843</w>
+      </date>
+      <date type="publ" when="1846">
+         <w xml:id="pcgd-5820">1846</w>
+      </date>
+      <bibl>
+         <title level="m">
+            <w xml:id="pcgd-5850">Primeiros</w>
+            <c> </c>
+            <w xml:id="pcgd-5860">Cantos</w>
+            <pc xml:id="pcgd-5870">:</pc>
+            <c> </c>
+            <w xml:id="pcgd-5880">Poesias</w>
+         </title>
+         <c> </c>
+         <pc xml:id="pcgd-5890">(</pc>
+         <w xml:id="pcgd-5900">Rio</w>
+         <c> </c>
+         <w xml:id="pcgd-5910">de</w>
+         <c> </c>
+         <w xml:id="pcgd-5920">Janeiro</w>
+         <pc xml:id="pcgd-5930">,</pc>
+         <date type="publ" when="1846">
+            <w xml:id="pcgd-5950">1846</w>
+         </date>
+         <pc xml:id="pcgd-5970" unit="sentence">)</pc>
+         <c> </c>
+         <ptr target="https://digital.bbm.usp.br/view/?45000018348&amp;bbm/4135#page/13"/>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="por" xml:id="pcgd-h00020">
+      <w xml:id="pcgd-3770">Canção</w>
+      <c> </c>
+      <w xml:id="pcgd-3780">do</w>
+      <c> </c>
+      <w xml:id="pcgd-3790">Exílio</w>
+      <note resp="authorial" anchored="true" n="*">
+         <p>Quando eu compuz esta canção, ou como melhor se chame,
+              tinha apenas visto algumas das Províncias do Norte do Brasil.</p>
+      </note>
+   </head>
+   <epigraph xml:lang="deu" xml:id="pcgd-div00025">
+      <l xml:id="pcgd-l00005">
+         <w xml:id="pcgd-3820">Kennst</w>
+         <c> </c>
+         <w xml:id="pcgd-3830">du</w>
+         <c> </c>
+         <w xml:id="pcgd-3840">das</w>
+         <c> </c>
+         <w xml:id="pcgd-3850">Land</w>
+         <pc xml:id="pcgd-3860">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-3870">wo</w>
+         <c> </c>
+         <w xml:id="pcgd-3880">die</w>
+         <c> </c>
+         <w xml:id="pcgd-3890">Citronen</w>
+         <c> </c>
+         <w xml:id="pcgd-3900">blühen</w>
+         <pc xml:id="pcgd-3910">,</pc>
+      </l>
+      <l xml:id="pcgd-l00010">
+         <c> </c>
+         <w xml:id="pcgd-3920">Im</w>
+         <c> </c>
+         <w xml:id="pcgd-3930">dunkeln</w>
+         <c> </c>
+         <w xml:id="pcgd-3940">Laub</w>
+         <c> </c>
+         <w xml:id="pcgd-3950">die</w>
+         <c> </c>
+         <w xml:id="pcgd-3960">Gold-Orangen</w>
+         <c> </c>
+         <w xml:id="pcgd-3970">glühen</w>
+         <pc xml:id="pcgd-3980">,</pc>
+      </l>
+      <l xml:id="pcgd-l00015">
+         <c> </c>
+         <w xml:id="pcgd-3990">Kennst</w>
+         <c> </c>
+         <w xml:id="pcgd-4000">du</w>
+         <c> </c>
+         <w xml:id="pcgd-4010">es</w>
+         <c> </c>
+         <w xml:id="pcgd-4020">wohl</w>
+         <pc xml:id="pcgd-4030">?</pc>
+         <c> </c>
+         <pc xml:id="pcgd-4040">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-4050">Dahin</w>
+         <pc xml:id="pcgd-4060">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-4070">dahin</w>
+         <pc xml:id="pcgd-4080" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pcgd-l00020">
+         <w xml:id="pcgd-4090">Möcht</w>
+         <c> </c>
+         <pc xml:id="pcgd-4100">'</pc>
+         <w xml:id="pcgd-4110">ich</w>
+         <c> </c>
+         <pc xml:id="pcgd-4120">...</pc>
+         <c> </c>
+         <w xml:id="pcgd-4130">ziehn</w>
+         <pc xml:id="pcgd-4140" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <bibl>
+         <pc xml:id="pcgd-4160">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-4170">Göthe</w>
+         <pc unit="sentence" xml:id="pcgd-4170-eos"/>
+      </bibl>
+   </epigraph>
+   <lg rhyme="xaxa" xml:id="pcgd-s00030">
+      <l xml:id="pcgd-l00025">
+         <w xml:id="pcgd-4200">Minha</w>
+         <c> </c>
+         <w xml:id="pcgd-4210">terra</w>
+         <c> </c>
+         <w xml:id="pcgd-4220">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4230">palmeiras</w>
+         <pc xml:id="pcgd-4240">,</pc>
+      </l>
+      <l xml:id="pcgd-l00030">
+         <c> </c>
+         <w xml:id="pcgd-4250">Onde</w>
+         <c> </c>
+         <w xml:id="pcgd-4260">canta</w>
+         <c> </c>
+         <w xml:id="pcgd-4270">o</w>
+         <c> </c>
+         <w xml:id="pcgd-4280">Sabiá</w>
+         <pc xml:id="pcgd-4290">;</pc>
+      </l>
+      <l xml:id="pcgd-l00035">
+         <c> </c>
+         <w xml:id="pcgd-4300">As</w>
+         <c> </c>
+         <w xml:id="pcgd-4310">aves</w>
+         <pc xml:id="pcgd-4320">,</pc>
+         <c> </c>
+         <w xml:id="pcgd-4330">que</w>
+         <c> </c>
+         <w xml:id="pcgd-4340">aqui</w>
+         <c> </c>
+         <w xml:id="pcgd-4350">gorjeiam</w>
+         <pc xml:id="pcgd-4360">,</pc>
+      </l>
+      <l xml:id="pcgd-l00040">
+         <c> </c>
+         <w xml:id="pcgd-4370">Não</w>
+         <c> </c>
+         <w xml:id="pcgd-4380">gorjeiam</w>
+         <c> </c>
+         <w xml:id="pcgd-4390">como</w>
+         <c> </c>
+         <w xml:id="pcgd-4400">lá</w>
+         <pc xml:id="pcgd-4410" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg rhyme="xaxa" xml:id="pcgd-s00035">
+      <l xml:id="pcgd-l00045">
+         <w xml:id="pcgd-4440">Nosso</w>
+         <c> </c>
+         <w xml:id="pcgd-4450">céu</w>
+         <c> </c>
+         <w xml:id="pcgd-4460">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4470">mais</w>
+         <c> </c>
+         <w xml:id="pcgd-4480">estrelas</w>
+         <pc xml:id="pcgd-4490">,</pc>
+      </l>
+      <l xml:id="pcgd-l00050">
+         <c> </c>
+         <w xml:id="pcgd-4500">Nossas</w>
+         <c> </c>
+         <w xml:id="pcgd-4510">várzeas</w>
+         <c> </c>
+         <w xml:id="pcgd-4520">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4530">mais</w>
+         <c> </c>
+         <w xml:id="pcgd-4540">flores</w>
+         <pc xml:id="pcgd-4550">,</pc>
+      </l>
+      <l xml:id="pcgd-l00055">
+         <c> </c>
+         <w xml:id="pcgd-4560">Nossos</w>
+         <c> </c>
+         <w xml:id="pcgd-4570">bosques</w>
+         <c> </c>
+         <w xml:id="pcgd-4580">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4590">mais</w>
+         <c> </c>
+         <w xml:id="pcgd-4600">vida</w>
+         <pc xml:id="pcgd-4610">,</pc>
+      </l>
+      <l xml:id="pcgd-l00060">
+         <c> </c>
+         <w xml:id="pcgd-4620">Nossa</w>
+         <c> </c>
+         <w xml:id="pcgd-4630">vida</w>
+         <c> </c>
+         <w xml:id="pcgd-4640">mais</w>
+         <c> </c>
+         <w xml:id="pcgd-4650">amores</w>
+         <pc xml:id="pcgd-4660" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <pb facs="pcgd/pcgd-013.png" n="10"/>
+   <lg rhyme="xaxa" xml:id="pcgd-s00040">
+      <l xml:id="pcgd-l00065">
+         <w xml:id="pcgd-4690">Em</w>
+         <c> </c>
+         <w xml:id="pcgd-4700">cismar</w>
+         <c> </c>
+         <pc xml:id="pcgd-4710">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-4720">sozinho</w>
+         <c> </c>
+         <pc xml:id="pcgd-4730">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-4740">à</w>
+         <c> </c>
+         <w xml:id="pcgd-4750">noite</w>
+         <c> </c>
+         <pc xml:id="pcgd-4760">—</pc>
+      </l>
+      <l xml:id="pcgd-l00070">
+         <c> </c>
+         <w xml:id="pcgd-4770">Mais</w>
+         <c> </c>
+         <w xml:id="pcgd-4780">prazer</w>
+         <c> </c>
+         <w xml:id="pcgd-4790">encontro</w>
+         <c> </c>
+         <w xml:id="pcgd-4800">eu</w>
+         <c> </c>
+         <w xml:id="pcgd-4810">lá</w>
+         <pc xml:id="pcgd-4820">;</pc>
+      </l>
+      <l xml:id="pcgd-l00075">
+         <c> </c>
+         <w xml:id="pcgd-4830">Minha</w>
+         <c> </c>
+         <w xml:id="pcgd-4840">terra</w>
+         <c> </c>
+         <w xml:id="pcgd-4850">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4860">palmeiras</w>
+         <pc xml:id="pcgd-4870">,</pc>
+      </l>
+      <l xml:id="pcgd-l00080">
+         <c> </c>
+         <w xml:id="pcgd-4880">Onde</w>
+         <c> </c>
+         <w xml:id="pcgd-4890">canta</w>
+         <c> </c>
+         <w xml:id="pcgd-4900">o</w>
+         <c> </c>
+         <w xml:id="pcgd-4910">Sabiá</w>
+         <pc xml:id="pcgd-4920" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg rhyme="xaxaxa" xml:id="pcgd-s00045">
+      <l xml:id="pcgd-l00085">
+         <w xml:id="pcgd-4950">Minha</w>
+         <c> </c>
+         <w xml:id="pcgd-4960">terra</w>
+         <c> </c>
+         <w xml:id="pcgd-4970">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-4980">primores</w>
+         <pc xml:id="pcgd-4990">,</pc>
+      </l>
+      <l xml:id="pcgd-l00090">
+         <c> </c>
+         <w xml:id="pcgd-5000">Que</w>
+         <c> </c>
+         <w xml:id="pcgd-5010">tais</w>
+         <c> </c>
+         <w xml:id="pcgd-5020">não</w>
+         <c> </c>
+         <w xml:id="pcgd-5030">encontro</w>
+         <c> </c>
+         <w xml:id="pcgd-5040">eu</w>
+         <c> </c>
+         <w xml:id="pcgd-5050">cá</w>
+         <pc xml:id="pcgd-5060">;</pc>
+      </l>
+      <l xml:id="pcgd-l00095">
+         <c> </c>
+         <w xml:id="pcgd-5070">Em</w>
+         <c> </c>
+         <w xml:id="pcgd-5080">cismar</w>
+         <c> </c>
+         <pc xml:id="pcgd-5090">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-5100">sozinho</w>
+         <c> </c>
+         <pc xml:id="pcgd-5110">—</pc>
+         <c> </c>
+         <w xml:id="pcgd-5120">à</w>
+         <c> </c>
+         <w xml:id="pcgd-5130">noite</w>
+         <c> </c>
+         <pc xml:id="pcgd-5140">—</pc>
+      </l>
+      <l xml:id="pcgd-l00100">
+         <c> </c>
+         <w xml:id="pcgd-5150">Mais</w>
+         <c> </c>
+         <w xml:id="pcgd-5160">prazer</w>
+         <c> </c>
+         <w xml:id="pcgd-5170">encontro</w>
+         <c> </c>
+         <w xml:id="pcgd-5180">eu</w>
+         <c> </c>
+         <w xml:id="pcgd-5190">lá</w>
+         <pc xml:id="pcgd-5200">;</pc>
+      </l>
+      <l xml:id="pcgd-l00105">
+         <c> </c>
+         <w xml:id="pcgd-5210">Minha</w>
+         <c> </c>
+         <w xml:id="pcgd-5220">terra</w>
+         <c> </c>
+         <w xml:id="pcgd-5230">tem</w>
+         <c> </c>
+         <w xml:id="pcgd-5240">palmeiras</w>
+         <pc xml:id="pcgd-5250">,</pc>
+      </l>
+      <l xml:id="pcgd-l00110">
+         <c> </c>
+         <w xml:id="pcgd-5260">Onde</w>
+         <c> </c>
+         <w xml:id="pcgd-5270">canta</w>
+         <c> </c>
+         <w xml:id="pcgd-5280">o</w>
+         <c> </c>
+         <w xml:id="pcgd-5290">Sabiá</w>
+         <pc xml:id="pcgd-5300" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg rhyme="xaxaxa" xml:id="pcgd-s00050">
+      <l xml:id="pcgd-l00115">
+         <w xml:id="pcgd-5330">Não</w>
+         <c> </c>
+         <w xml:id="pcgd-5340">permita</w>
+         <c> </c>
+         <w xml:id="pcgd-5350">Deus</w>
+         <c> </c>
+         <w xml:id="pcgd-5360">que</w>
+         <c> </c>
+         <w xml:id="pcgd-5370">eu</w>
+         <c> </c>
+         <w xml:id="pcgd-5380">morra</w>
+         <pc xml:id="pcgd-5390">,</pc>
+      </l>
+      <l xml:id="pcgd-l00120">
+         <c> </c>
+         <w xml:id="pcgd-5400">Sem</w>
+         <c> </c>
+         <w xml:id="pcgd-5410">que</w>
+         <c> </c>
+         <w xml:id="pcgd-5420">eu</w>
+         <c> </c>
+         <w xml:id="pcgd-5430">volte</w>
+         <c> </c>
+         <w xml:id="pcgd-5440">para</w>
+         <c> </c>
+         <w xml:id="pcgd-5450">lá</w>
+         <pc xml:id="pcgd-5460">;</pc>
+      </l>
+      <l xml:id="pcgd-l00125">
+         <c> </c>
+         <w xml:id="pcgd-5470">Sem</w>
+         <c> </c>
+         <w xml:id="pcgd-5480">que</w>
+         <c> </c>
+         <w xml:id="pcgd-5490">desfrute</w>
+         <c> </c>
+         <w xml:id="pcgd-5500">os</w>
+         <c> </c>
+         <w xml:id="pcgd-5510">primores</w>
+      </l>
+      <l xml:id="pcgd-l00130">
+         <c> </c>
+         <w xml:id="pcgd-5520">Que</w>
+         <c> </c>
+         <w xml:id="pcgd-5530">não</w>
+         <c> </c>
+         <w xml:id="pcgd-5540">encontro</w>
+         <c> </c>
+         <w xml:id="pcgd-5550">por</w>
+         <c> </c>
+         <w xml:id="pcgd-5560">cá</w>
+         <pc xml:id="pcgd-5570">;</pc>
+      </l>
+      <l xml:id="pcgd-l00135">
+         <c> </c>
+         <w xml:id="pcgd-5580">Sem</w>
+         <c> </c>
+         <w xml:id="pcgd-5590">qu'inda</w>
+         <c> </c>
+         <w xml:id="pcgd-5600">aviste</w>
+         <c> </c>
+         <w xml:id="pcgd-5610">as</w>
+         <c> </c>
+         <w xml:id="pcgd-5620">palmeiras</w>
+         <pc xml:id="pcgd-5630">,</pc>
+      </l>
+      <l xml:id="pcgd-l00140">
+         <c> </c>
+         <w xml:id="pcgd-5640">Onde</w>
+         <c> </c>
+         <w xml:id="pcgd-5650">canta</w>
+         <c> </c>
+         <w xml:id="pcgd-5660">o</w>
+         <c> </c>
+         <w xml:id="pcgd-5670">Sabiá</w>
+         <pc xml:id="pcgd-5680" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <closer xml:id="pcgd-s00055">
+      <w xml:id="pcgd-5710">Coimbra</w>
+      <c> </c>
+      <pc xml:id="pcgd-5720">-</pc>
+      <c> </c>
+      <w xml:id="pcgd-5730">Julho</w>
+      <c> </c>
+      <w xml:id="pcgd-5740">1843.</w>
+      <pc unit="sentence" xml:id="pcgd-5740-eos"/>
+   </closer>
+</div>

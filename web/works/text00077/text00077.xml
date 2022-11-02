@@ -1,1 +1,1264 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/ns"
+     ana="#original #excerpt"
+     corresp="#work00053"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00077"
+     xml:lang="eng">
+   <link target="#pers00006" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="pbrp-n00395">
+      <date type="comp" when="1804-02">
+         <w xml:id="pbrp-1257140">February</w>
+         <c> </c>
+         <w xml:id="pbrp-1257150">1804</w>
+      </date>
+      <date type="publ" when="1850">
+         <w xml:id="pbrp-1257180">1850</w>
+      </date>
+      <bibl>
+         <w xml:id="pbrp-1257210">MS</w>
+         <c> </c>
+         <w xml:id="pbrp-1257220">1926</w>
+         <pc unit="sentence" xml:id="pbrp-1257220-eos"/>
+      </bibl>
+      <bibl>
+         <title level="m">
+            <w xml:id="pbrp-1257240">Prelude</w>
+         </title>
+         <c> </c>
+         <w xml:id="pbrp-1257250">XIII</w>
+         <pc xml:id="pbrp-1257260">.</pc>
+         <pc xml:id="pbrp-1257270">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257280">ll</w>
+         <pc xml:id="pbrp-1257290" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257300">10</w>
+         <c> </c>
+         <pc xml:id="pbrp-1257310">–</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257320">73</w>
+         <c> </c>
+         <pc xml:id="pbrp-1257330">(</pc>
+         <w xml:id="pbrp-1257340">1805</w>
+         <pc xml:id="pbrp-1257350">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257360">publ</w>
+         <pc xml:id="pbrp-1257370" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257380">1850</w>
+         <pc xml:id="pbrp-1257390" unit="sentence">)</pc>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="eng" xml:id="pbrp-h01985">
+      <w xml:id="pbrp-1251350">Climbing</w>
+      <c> </c>
+      <w xml:id="pbrp-1251360">of</w>
+      <c> </c>
+      <w xml:id="pbrp-1251370">Snowdon</w>
+   </head>
+   <head type="sub" xml:id="pbrp-h01990">
+      <pc xml:id="pbrp-1251400">[</pc>
+      <title level="m">
+         <w xml:id="pbrp-1251410">Prelude</w>
+      </title>
+      <c> </c>
+      <w xml:id="pbrp-1251420">XIII</w>
+      <pc xml:id="pbrp-1251430">.</pc>
+      <pc xml:id="pbrp-1251440">,</pc>
+      <c> </c>
+      <w xml:id="pbrp-1251450">ll</w>
+      <pc xml:id="pbrp-1251460" unit="sentence">.</pc>
+      <c> </c>
+      <w xml:id="pbrp-1251470">10</w>
+      <c> </c>
+      <pc xml:id="pbrp-1251480">–</pc>
+      <c> </c>
+      <w xml:id="pbrp-1251490">73</w>
+      <pc xml:id="pbrp-1251500" unit="sentence">]</pc>
+   </head>
+   <lg xml:id="pbrp-s10015">
+      <l n="10" xml:id="pbrp-l54035">
+         <w xml:id="pbrp-1251530">It</w>
+         <c> </c>
+         <w xml:id="pbrp-1251540">was</w>
+         <c> </c>
+         <w xml:id="pbrp-1251550">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1251560">summer’s</w>
+         <c> </c>
+         <w xml:id="pbrp-1251570">night</w>
+         <pc xml:id="pbrp-1251580">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1251590">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1251600">close</w>
+         <c> </c>
+         <w xml:id="pbrp-1251610">warm</w>
+         <c> </c>
+         <w xml:id="pbrp-1251620">night</w>
+         <pc xml:id="pbrp-1251630">,</pc>
+      </l>
+      <l xml:id="pbrp-l54040">
+         <c> </c>
+         <w xml:id="pbrp-1251640">Wan</w>
+         <pc xml:id="pbrp-1251650">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1251660">dull</w>
+         <c> </c>
+         <w xml:id="pbrp-1251670">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1251680">glaring</w>
+         <pc xml:id="pbrp-1251690">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1251700">with</w>
+         <c> </c>
+         <w xml:id="pbrp-1251710">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1251720">dripping</w>
+         <c> </c>
+         <w xml:id="pbrp-1251730">mist</w>
+      </l>
+      <l xml:id="pbrp-l54045">
+         <c> </c>
+         <w xml:id="pbrp-1251740">Low-hung</w>
+         <c> </c>
+         <w xml:id="pbrp-1251750">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1251760">thick</w>
+         <c> </c>
+         <w xml:id="pbrp-1251770">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1251780">covered</w>
+         <c> </c>
+         <w xml:id="pbrp-1251790">all</w>
+         <c> </c>
+         <w xml:id="pbrp-1251800">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1251810">sky</w>
+      </l>
+      <l xml:id="pbrp-l54050">
+         <c> </c>
+         <w xml:id="pbrp-1251820">Half</w>
+         <c> </c>
+         <w xml:id="pbrp-1251830">threatening</w>
+         <c> </c>
+         <w xml:id="pbrp-1251840">storm</w>
+         <c> </c>
+         <w xml:id="pbrp-1251850">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1251860">rain</w>
+         <pc xml:id="pbrp-1251870">;</pc>
+         <c> </c>
+         <w xml:id="pbrp-1251880">but</w>
+         <c> </c>
+         <w xml:id="pbrp-1251890">on</w>
+         <c> </c>
+         <w xml:id="pbrp-1251900">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1251910">went</w>
+      </l>
+      <l xml:id="pbrp-l54055">
+         <c> </c>
+         <w xml:id="pbrp-1251920">Unchecked</w>
+         <pc xml:id="pbrp-1251930">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1251940">being</w>
+         <c> </c>
+         <w xml:id="pbrp-1251950">full</w>
+         <c> </c>
+         <w xml:id="pbrp-1251960">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1251970">heart</w>
+         <c> </c>
+         <w xml:id="pbrp-1251980">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1251990">having</w>
+         <c> </c>
+         <w xml:id="pbrp-1252000">faith</w>
+      </l>
+      <l n="15" xml:id="pbrp-l54060">
+         <c> </c>
+         <w xml:id="pbrp-1252010">In</w>
+         <c> </c>
+         <w xml:id="pbrp-1252020">our</w>
+         <c> </c>
+         <w xml:id="pbrp-1252030">tried</w>
+         <c> </c>
+         <w xml:id="pbrp-1252040">pilot</w>
+         <pc xml:id="pbrp-1252050" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252060">Little</w>
+         <c> </c>
+         <w xml:id="pbrp-1252070">could</w>
+         <c> </c>
+         <w xml:id="pbrp-1252080">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1252090">see</w>
+      </l>
+      <l xml:id="pbrp-l54065">
+         <c> </c>
+         <w xml:id="pbrp-1252100">Hemmed</w>
+         <c> </c>
+         <w xml:id="pbrp-1252110">round</w>
+         <c> </c>
+         <w xml:id="pbrp-1252120">on</w>
+         <c> </c>
+         <w xml:id="pbrp-1252130">every</w>
+         <c> </c>
+         <w xml:id="pbrp-1252140">side</w>
+         <c> </c>
+         <w xml:id="pbrp-1252150">with</w>
+         <c> </c>
+         <w xml:id="pbrp-1252160">fog</w>
+         <c> </c>
+         <w xml:id="pbrp-1252170">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1252180">damp</w>
+         <pc xml:id="pbrp-1252190">,</pc>
+      </l>
+      <l xml:id="pbrp-l54070">
+         <c> </c>
+         <w xml:id="pbrp-1252200">And</w>
+         <pc xml:id="pbrp-1252210">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252220">after</w>
+         <c> </c>
+         <w xml:id="pbrp-1252230">ordinary</w>
+         <c> </c>
+         <w xml:id="pbrp-1252240">travellers</w>
+         <pc xml:id="pbrp-1252250">’</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252260">chat</w>
+      </l>
+      <l xml:id="pbrp-l54075">
+         <c> </c>
+         <w xml:id="pbrp-1252270">With</w>
+         <c> </c>
+         <w xml:id="pbrp-1252280">our</w>
+         <c> </c>
+         <w xml:id="pbrp-1252290">conductor</w>
+         <pc xml:id="pbrp-1252300">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252310">silently</w>
+         <c> </c>
+         <w xml:id="pbrp-1252320">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1252330">sank</w>
+      </l>
+      <l xml:id="pbrp-l54080">
+         <c> </c>
+         <w xml:id="pbrp-1252340">Each</w>
+         <c> </c>
+         <w xml:id="pbrp-1252350">into</w>
+         <c> </c>
+         <w xml:id="pbrp-1252360">commerce</w>
+         <c> </c>
+         <w xml:id="pbrp-1252370">with</w>
+         <c> </c>
+         <w xml:id="pbrp-1252380">his</w>
+         <c> </c>
+         <w xml:id="pbrp-1252390">private</w>
+         <c> </c>
+         <w xml:id="pbrp-1252400">thoughts</w>
+         <pc xml:id="pbrp-1252410" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l n="20" xml:id="pbrp-l54085">
+         <w xml:id="pbrp-1252420">Thus</w>
+         <c> </c>
+         <w xml:id="pbrp-1252430">did</w>
+         <c> </c>
+         <w xml:id="pbrp-1252440">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1252450">breast</w>
+         <c> </c>
+         <w xml:id="pbrp-1252460">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1252470">ascent</w>
+         <pc xml:id="pbrp-1252480">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252490">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1252500">by</w>
+         <c> </c>
+         <w xml:id="pbrp-1252510">myself</w>
+      </l>
+      <l xml:id="pbrp-l54090">
+         <c> </c>
+         <w xml:id="pbrp-1252520">Was</w>
+         <c> </c>
+         <w xml:id="pbrp-1252530">nothing</w>
+         <c> </c>
+         <w xml:id="pbrp-1252540">either</w>
+         <c> </c>
+         <w xml:id="pbrp-1252550">seen</w>
+         <c> </c>
+         <w xml:id="pbrp-1252560">or</w>
+         <c> </c>
+         <w xml:id="pbrp-1252570">heard</w>
+         <c> </c>
+         <w xml:id="pbrp-1252580">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1252590">while</w>
+      </l>
+      <l xml:id="pbrp-l54095">
+         <c> </c>
+         <w xml:id="pbrp-1252600">Which</w>
+         <c> </c>
+         <w xml:id="pbrp-1252610">took</w>
+         <c> </c>
+         <w xml:id="pbrp-1252620">me</w>
+         <c> </c>
+         <w xml:id="pbrp-1252630">from</w>
+         <c> </c>
+         <w xml:id="pbrp-1252640">my</w>
+         <c> </c>
+         <w xml:id="pbrp-1252650">musings</w>
+         <pc xml:id="pbrp-1252660">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1252670">save</w>
+         <c> </c>
+         <w xml:id="pbrp-1252680">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1252690">once</w>
+      </l>
+      <l xml:id="pbrp-l54100">
+         <c> </c>
+         <w xml:id="pbrp-1252700">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1252710">shepherd’s</w>
+         <c> </c>
+         <w xml:id="pbrp-1252720">cur</w>
+         <c> </c>
+         <w xml:id="pbrp-1252730">did</w>
+         <c> </c>
+         <w xml:id="pbrp-1252740">to</w>
+         <c> </c>
+         <w xml:id="pbrp-1252750">his</w>
+         <c> </c>
+         <w xml:id="pbrp-1252760">own</w>
+         <c> </c>
+         <w xml:id="pbrp-1252770">great</w>
+         <c> </c>
+         <w xml:id="pbrp-1252780">joy</w>
+      </l>
+      <l xml:id="pbrp-l54105">
+         <c> </c>
+         <w xml:id="pbrp-1252790">Unearth</w>
+         <c> </c>
+         <w xml:id="pbrp-1252800">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1252810">hedgehog</w>
+         <c> </c>
+         <w xml:id="pbrp-1252820">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1252830">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1252840">mountain</w>
+         <c> </c>
+         <w xml:id="pbrp-1252850">crags</w>
+      </l>
+      <l n="25" xml:id="pbrp-l54110">
+         <c> </c>
+         <w xml:id="pbrp-1252860">Round</w>
+         <c> </c>
+         <w xml:id="pbrp-1252870">which</w>
+         <c> </c>
+         <w xml:id="pbrp-1252880">he</w>
+         <c> </c>
+         <w xml:id="pbrp-1252890">made</w>
+         <c> </c>
+         <w xml:id="pbrp-1252900">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1252910">barking</w>
+         <c> </c>
+         <w xml:id="pbrp-1252920">turbulent</w>
+         <pc xml:id="pbrp-1252930" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pbrp-l54115">
+         <w xml:id="pbrp-1252940">This</w>
+         <c> </c>
+         <w xml:id="pbrp-1252950">small</w>
+         <c> </c>
+         <w xml:id="pbrp-1252960">adventure</w>
+         <c> </c>
+         <pc xml:id="pbrp-1252970">(</pc>
+         <w xml:id="pbrp-1252980">for</w>
+         <c> </c>
+         <w xml:id="pbrp-1252990">even</w>
+         <c> </c>
+         <w xml:id="pbrp-1253000">such</w>
+         <c> </c>
+         <w xml:id="pbrp-1253010">it</w>
+         <c> </c>
+         <w xml:id="pbrp-1253020">seemed</w>
+      </l>
+      <l xml:id="pbrp-l54120">
+         <c> </c>
+         <w xml:id="pbrp-1253030">In</w>
+         <c> </c>
+         <w xml:id="pbrp-1253040">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1253050">wild</w>
+         <c> </c>
+         <w xml:id="pbrp-1253060">place</w>
+         <c> </c>
+         <w xml:id="pbrp-1253070">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1253080">at</w>
+         <c> </c>
+         <w xml:id="pbrp-1253090">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1253100">dead</w>
+         <c> </c>
+         <w xml:id="pbrp-1253110">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1253120">night</w>
+         <pc xml:id="pbrp-1253130">)</pc>
+      </l>
+      <l xml:id="pbrp-l54125">
+         <c> </c>
+         <w xml:id="pbrp-1253140">Being</w>
+         <c> </c>
+         <w xml:id="pbrp-1253150">over</w>
+         <c> </c>
+         <w xml:id="pbrp-1253160">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1253170">forgotten</w>
+         <pc xml:id="pbrp-1253180">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253190">on</w>
+         <c> </c>
+         <w xml:id="pbrp-1253200">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1253210">wound</w>
+      </l>
+      <l part="I" xml:id="pbrp-l54130.1">
+         <c> </c>
+         <w xml:id="pbrp-1253220">In</w>
+         <c> </c>
+         <w xml:id="pbrp-1253230">silence</w>
+         <c> </c>
+         <w xml:id="pbrp-1253240">as</w>
+         <c> </c>
+         <w xml:id="pbrp-1253250">before</w>
+         <pc xml:id="pbrp-1253260" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l part="F" rendition="#h_21" xml:id="pbrp-l54130.2">
+         <w xml:id="pbrp-1253270">With</w>
+         <c> </c>
+         <w xml:id="pbrp-1253280">forehead</w>
+         <c> </c>
+         <w xml:id="pbrp-1253290">bent</w>
+      </l>
+      <l n="30" xml:id="pbrp-l54135">
+         <c> </c>
+         <w xml:id="pbrp-1253300">Earthward</w>
+         <pc xml:id="pbrp-1253310">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253320">as</w>
+         <c> </c>
+         <w xml:id="pbrp-1253330">if</w>
+         <c> </c>
+         <w xml:id="pbrp-1253340">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1253350">opposition</w>
+         <c> </c>
+         <w xml:id="pbrp-1253360">set</w>
+      </l>
+      <l xml:id="pbrp-l54140">
+         <c> </c>
+         <w xml:id="pbrp-1253370">Against</w>
+         <c> </c>
+         <w xml:id="pbrp-1253380">an</w>
+         <c> </c>
+         <w xml:id="pbrp-1253390">enemy</w>
+         <pc xml:id="pbrp-1253400">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253410">I</w>
+         <c> </c>
+         <w xml:id="pbrp-1253420">panted</w>
+         <c> </c>
+         <w xml:id="pbrp-1253430">up</w>
+      </l>
+      <l xml:id="pbrp-l54145">
+         <c> </c>
+         <w xml:id="pbrp-1253440">With</w>
+         <c> </c>
+         <w xml:id="pbrp-1253450">eager</w>
+         <c> </c>
+         <w xml:id="pbrp-1253460">pace</w>
+         <pc xml:id="pbrp-1253470">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253480">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1253490">no</w>
+         <c> </c>
+         <w xml:id="pbrp-1253500">less</w>
+         <c> </c>
+         <w xml:id="pbrp-1253510">eager</w>
+         <c> </c>
+         <w xml:id="pbrp-1253520">thoughts</w>
+         <pc xml:id="pbrp-1253530" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pbrp-l54150">
+         <w xml:id="pbrp-1253540">Thus</w>
+         <c> </c>
+         <w xml:id="pbrp-1253550">might</w>
+         <c> </c>
+         <w xml:id="pbrp-1253560">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1253570">wear</w>
+         <c> </c>
+         <w xml:id="pbrp-1253580">perhaps</w>
+         <c> </c>
+         <w xml:id="pbrp-1253590">an</w>
+         <c> </c>
+         <w xml:id="pbrp-1253600">hour</w>
+         <c> </c>
+         <w xml:id="pbrp-1253610">away</w>
+         <pc xml:id="pbrp-1253620">,</pc>
+      </l>
+      <l xml:id="pbrp-l54155">
+         <c> </c>
+         <w xml:id="pbrp-1253630">Ascending</w>
+         <c> </c>
+         <w xml:id="pbrp-1253640">at</w>
+         <c> </c>
+         <w xml:id="pbrp-1253650">loose</w>
+         <c> </c>
+         <w xml:id="pbrp-1253660">distance</w>
+         <c> </c>
+         <w xml:id="pbrp-1253670">each</w>
+         <c> </c>
+         <w xml:id="pbrp-1253680">from</w>
+         <c> </c>
+         <w xml:id="pbrp-1253690">each</w>
+         <pc xml:id="pbrp-1253700">,</pc>
+      </l>
+      <l n="35" xml:id="pbrp-l54160">
+         <c> </c>
+         <w xml:id="pbrp-1253710">And</w>
+         <c> </c>
+         <w xml:id="pbrp-1253720">I</w>
+         <pc xml:id="pbrp-1253730">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253740">as</w>
+         <c> </c>
+         <w xml:id="pbrp-1253750">chanced</w>
+         <pc xml:id="pbrp-1253760">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1253770">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1253780">foremost</w>
+         <c> </c>
+         <w xml:id="pbrp-1253790">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1253800">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1253810">band</w>
+         <c> </c>
+         <pc xml:id="pbrp-1253820">–</pc>
+      </l>
+      <l xml:id="pbrp-l54165">
+         <c> </c>
+         <w xml:id="pbrp-1253830">When</w>
+         <c> </c>
+         <w xml:id="pbrp-1253840">at</w>
+         <c> </c>
+         <w xml:id="pbrp-1253850">my</w>
+         <c> </c>
+         <w xml:id="pbrp-1253860">feet</w>
+         <c> </c>
+         <w xml:id="pbrp-1253870">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1253880">ground</w>
+         <c> </c>
+         <w xml:id="pbrp-1253890">appeared</w>
+         <c> </c>
+         <w xml:id="pbrp-1253900">to</w>
+         <c> </c>
+         <w xml:id="pbrp-1253910">brighten</w>
+         <pc xml:id="pbrp-1253920">,</pc>
+      </l>
+      <l xml:id="pbrp-l54170">
+         <c> </c>
+         <w xml:id="pbrp-1253930">And</w>
+         <c> </c>
+         <w xml:id="pbrp-1253940">with</w>
+         <c> </c>
+         <w xml:id="pbrp-1253950">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1253960">step</w>
+         <c> </c>
+         <w xml:id="pbrp-1253970">or</w>
+         <c> </c>
+         <w xml:id="pbrp-1253980">two</w>
+         <c> </c>
+         <w xml:id="pbrp-1253990">seemed</w>
+         <c> </c>
+         <w xml:id="pbrp-1254000">brighter</w>
+         <c> </c>
+         <w xml:id="pbrp-1254010">still</w>
+         <pc xml:id="pbrp-1254020">;</pc>
+      </l>
+      <l xml:id="pbrp-l54175">
+         <c> </c>
+         <w xml:id="pbrp-1254030">Nor</w>
+         <c> </c>
+         <w xml:id="pbrp-1254040">had</w>
+         <c> </c>
+         <w xml:id="pbrp-1254050">I</w>
+         <c> </c>
+         <w xml:id="pbrp-1254060">time</w>
+         <c> </c>
+         <w xml:id="pbrp-1254070">to</w>
+         <c> </c>
+         <w xml:id="pbrp-1254080">ask</w>
+         <c> </c>
+         <w xml:id="pbrp-1254090">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1254100">cause</w>
+         <c> </c>
+         <w xml:id="pbrp-1254110">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1254120">this</w>
+         <pc xml:id="pbrp-1254130">,</pc>
+      </l>
+      <l xml:id="pbrp-l54180">
+         <c> </c>
+         <w xml:id="pbrp-1254140">For</w>
+         <c> </c>
+         <w xml:id="pbrp-1254150">instantly</w>
+         <c> </c>
+         <w xml:id="pbrp-1254160">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1254170">light</w>
+         <c> </c>
+         <w xml:id="pbrp-1254180">upon</w>
+         <c> </c>
+         <w xml:id="pbrp-1254190">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1254200">turf</w>
+      </l>
+      <l n="40" xml:id="pbrp-l54185">
+         <c> </c>
+         <w xml:id="pbrp-1254210">Fell</w>
+         <c> </c>
+         <w xml:id="pbrp-1254220">like</w>
+         <c> </c>
+         <w xml:id="pbrp-1254230">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1254240">flash</w>
+         <pc xml:id="pbrp-1254250" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254260">I</w>
+         <c> </c>
+         <w xml:id="pbrp-1254270">looked</w>
+         <c> </c>
+         <w xml:id="pbrp-1254280">about</w>
+         <pc xml:id="pbrp-1254290">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254300">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1254310">lo</w>
+         <pc xml:id="pbrp-1254320">,</pc>
+      </l>
+      <l xml:id="pbrp-l54190">
+         <c> </c>
+         <w xml:id="pbrp-1254330">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1254340">moon</w>
+         <c> </c>
+         <w xml:id="pbrp-1254350">stood</w>
+         <c> </c>
+         <w xml:id="pbrp-1254360">naked</w>
+         <c> </c>
+         <w xml:id="pbrp-1254370">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1254380">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1254390">heavens</w>
+         <c> </c>
+         <w xml:id="pbrp-1254400">at</w>
+         <c> </c>
+         <w xml:id="pbrp-1254410">height</w>
+      </l>
+      <l xml:id="pbrp-l54195">
+         <c> </c>
+         <w xml:id="pbrp-1254420">Immense</w>
+         <c> </c>
+         <w xml:id="pbrp-1254430">above</w>
+         <c> </c>
+         <w xml:id="pbrp-1254440">my</w>
+         <c> </c>
+         <w xml:id="pbrp-1254450">head</w>
+         <pc xml:id="pbrp-1254460">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254470">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1254480">on</w>
+         <c> </c>
+         <w xml:id="pbrp-1254490">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1254500">shore</w>
+      </l>
+      <l xml:id="pbrp-l54200">
+         <c> </c>
+         <w xml:id="pbrp-1254510">I</w>
+         <c> </c>
+         <w xml:id="pbrp-1254520">found</w>
+         <c> </c>
+         <w xml:id="pbrp-1254530">myself</w>
+         <c> </c>
+         <w xml:id="pbrp-1254540">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1254550">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1254560">huge</w>
+         <c> </c>
+         <w xml:id="pbrp-1254570">sea</w>
+         <c> </c>
+         <w xml:id="pbrp-1254580">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1254590">mist</w>
+         <pc xml:id="pbrp-1254600">,</pc>
+      </l>
+      <l xml:id="pbrp-l54205">
+         <c> </c>
+         <w xml:id="pbrp-1254610">Which</w>
+         <c> </c>
+         <w xml:id="pbrp-1254620">meek</w>
+         <c> </c>
+         <w xml:id="pbrp-1254630">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1254640">silent</w>
+         <c> </c>
+         <w xml:id="pbrp-1254650">rested</w>
+         <c> </c>
+         <w xml:id="pbrp-1254660">at</w>
+         <c> </c>
+         <w xml:id="pbrp-1254670">my</w>
+         <c> </c>
+         <w xml:id="pbrp-1254680">feet</w>
+         <pc xml:id="pbrp-1254690" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l n="45" xml:id="pbrp-l54210">
+         <w xml:id="pbrp-1254700">A</w>
+         <c> </c>
+         <w xml:id="pbrp-1254710">hundred</w>
+         <c> </c>
+         <w xml:id="pbrp-1254720">hills</w>
+         <c> </c>
+         <w xml:id="pbrp-1254730">their</w>
+         <c> </c>
+         <w xml:id="pbrp-1254740">dusky</w>
+         <c> </c>
+         <w xml:id="pbrp-1254750">backs</w>
+         <c> </c>
+         <w xml:id="pbrp-1254760">upheaved</w>
+      </l>
+      <l xml:id="pbrp-l54215">
+         <c> </c>
+         <w xml:id="pbrp-1254770">All</w>
+         <c> </c>
+         <w xml:id="pbrp-1254780">over</w>
+         <c> </c>
+         <w xml:id="pbrp-1254790">this</w>
+         <c> </c>
+         <w xml:id="pbrp-1254800">still</w>
+         <c> </c>
+         <w xml:id="pbrp-1254810">ocean</w>
+         <pc xml:id="pbrp-1254820">;</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254830">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1254840">beyond</w>
+         <pc xml:id="pbrp-1254850">,</pc>
+      </l>
+      <l xml:id="pbrp-l54220">
+         <c> </c>
+         <w xml:id="pbrp-1254860">Far</w>
+         <pc xml:id="pbrp-1254870">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254880">far</w>
+         <c> </c>
+         <w xml:id="pbrp-1254890">beyond</w>
+         <pc xml:id="pbrp-1254900">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254910">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1254920">vapours</w>
+         <c> </c>
+         <w xml:id="pbrp-1254930">shot</w>
+         <c> </c>
+         <w xml:id="pbrp-1254940">themselves</w>
+      </l>
+      <l xml:id="pbrp-l54225">
+         <c> </c>
+         <w xml:id="pbrp-1254950">In</w>
+         <c> </c>
+         <w xml:id="pbrp-1254960">headlands</w>
+         <pc xml:id="pbrp-1254970">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1254980">tongues</w>
+         <pc xml:id="pbrp-1254990">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255000">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1255010">promontory</w>
+         <c> </c>
+         <w xml:id="pbrp-1255020">shapes</w>
+         <pc xml:id="pbrp-1255030">,</pc>
+      </l>
+      <l xml:id="pbrp-l54230">
+         <c> </c>
+         <w xml:id="pbrp-1255040">Into</w>
+         <c> </c>
+         <w xml:id="pbrp-1255050">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255060">sea</w>
+         <c> </c>
+         <pc xml:id="pbrp-1255070">–</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255080">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255090">real</w>
+         <c> </c>
+         <w xml:id="pbrp-1255100">sea</w>
+         <pc xml:id="pbrp-1255110">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255120">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1255130">seemed</w>
+      </l>
+      <l n="50" xml:id="pbrp-l54235">
+         <c> </c>
+         <w xml:id="pbrp-1255140">To</w>
+         <c> </c>
+         <w xml:id="pbrp-1255150">dwindle</w>
+         <c> </c>
+         <w xml:id="pbrp-1255160">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1255170">give</w>
+         <c> </c>
+         <w xml:id="pbrp-1255180">up</w>
+         <c> </c>
+         <w xml:id="pbrp-1255190">its</w>
+         <c> </c>
+         <w xml:id="pbrp-1255200">majesty</w>
+         <pc xml:id="pbrp-1255210">,</pc>
+      </l>
+      <l xml:id="pbrp-l54240">
+         <c> </c>
+         <w xml:id="pbrp-1255220">Usurped</w>
+         <c> </c>
+         <w xml:id="pbrp-1255230">upon</w>
+         <c> </c>
+         <w xml:id="pbrp-1255240">as</w>
+         <c> </c>
+         <w xml:id="pbrp-1255250">far</w>
+         <c> </c>
+         <w xml:id="pbrp-1255260">as</w>
+         <c> </c>
+         <w xml:id="pbrp-1255270">sight</w>
+         <c> </c>
+         <w xml:id="pbrp-1255280">could</w>
+         <c> </c>
+         <w xml:id="pbrp-1255290">reach</w>
+         <pc xml:id="pbrp-1255300" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pbrp-l54245">
+         <w xml:id="pbrp-1255310">Meanwhile</w>
+         <pc xml:id="pbrp-1255320">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255330">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255340">moon</w>
+         <c> </c>
+         <w xml:id="pbrp-1255350">looked</w>
+         <c> </c>
+         <w xml:id="pbrp-1255360">down</w>
+         <c> </c>
+         <w xml:id="pbrp-1255370">upon</w>
+         <c> </c>
+         <w xml:id="pbrp-1255380">this</w>
+         <c> </c>
+         <w xml:id="pbrp-1255390">show</w>
+      </l>
+      <l xml:id="pbrp-l54250">
+         <c> </c>
+         <w xml:id="pbrp-1255400">In</w>
+         <c> </c>
+         <w xml:id="pbrp-1255410">single</w>
+         <c> </c>
+         <w xml:id="pbrp-1255420">glory</w>
+         <pc xml:id="pbrp-1255430">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255440">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1255450">we</w>
+         <c> </c>
+         <w xml:id="pbrp-1255460">stood</w>
+         <pc xml:id="pbrp-1255470">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255480">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255490">mist</w>
+      </l>
+      <l part="I" xml:id="pbrp-l54255.1">
+         <c> </c>
+         <w xml:id="pbrp-1255500">Touching</w>
+         <c> </c>
+         <w xml:id="pbrp-1255510">our</w>
+         <c> </c>
+         <w xml:id="pbrp-1255520">very</w>
+         <c> </c>
+         <w xml:id="pbrp-1255530">feet</w>
+         <pc xml:id="pbrp-1255540" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l part="F" rendition="#h_21" xml:id="pbrp-l54255.2">
+         <w xml:id="pbrp-1255550">And</w>
+         <c> </c>
+         <w xml:id="pbrp-1255560">from</w>
+         <c> </c>
+         <w xml:id="pbrp-1255570">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255580">shore</w>
+      </l>
+      <l n="55" xml:id="pbrp-l54260">
+         <c> </c>
+         <w xml:id="pbrp-1255590">At</w>
+         <c> </c>
+         <w xml:id="pbrp-1255600">distance</w>
+         <c> </c>
+         <w xml:id="pbrp-1255610">not</w>
+         <c> </c>
+         <w xml:id="pbrp-1255620">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255630">third</w>
+         <c> </c>
+         <w xml:id="pbrp-1255640">part</w>
+         <c> </c>
+         <w xml:id="pbrp-1255650">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1255660">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1255670">mile</w>
+      </l>
+      <l xml:id="pbrp-l54265">
+         <c> </c>
+         <w xml:id="pbrp-1255680">Was</w>
+         <c> </c>
+         <w xml:id="pbrp-1255690">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1255700">blue</w>
+         <c> </c>
+         <w xml:id="pbrp-1255710">chasm</w>
+         <pc xml:id="pbrp-1255720">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255730">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1255740">fracture</w>
+         <c> </c>
+         <w xml:id="pbrp-1255750">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1255760">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255770">vapour</w>
+         <pc xml:id="pbrp-1255780">,</pc>
+      </l>
+      <l xml:id="pbrp-l54270">
+         <c> </c>
+         <w xml:id="pbrp-1255790">A</w>
+         <c> </c>
+         <w xml:id="pbrp-1255800">deep</w>
+         <c> </c>
+         <w xml:id="pbrp-1255810">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1255820">gloomy</w>
+         <c> </c>
+         <w xml:id="pbrp-1255830">breathing-place</w>
+         <c> </c>
+         <w xml:id="pbrp-1255840">through</w>
+         <c> </c>
+         <w xml:id="pbrp-1255850">which</w>
+      </l>
+      <l xml:id="pbrp-l54275">
+         <c> </c>
+         <w xml:id="pbrp-1255860">Mounted</w>
+         <c> </c>
+         <w xml:id="pbrp-1255870">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1255880">roar</w>
+         <c> </c>
+         <w xml:id="pbrp-1255890">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1255900">waters</w>
+         <pc xml:id="pbrp-1255910">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255920">torrents</w>
+         <pc xml:id="pbrp-1255930">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255940">streams</w>
+      </l>
+      <l xml:id="pbrp-l54280">
+         <c> </c>
+         <w xml:id="pbrp-1255950">Innumerable</w>
+         <pc xml:id="pbrp-1255960">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1255970">roaring</w>
+         <c> </c>
+         <w xml:id="pbrp-1255980">with</w>
+         <c> </c>
+         <w xml:id="pbrp-1255990">one</w>
+         <c> </c>
+         <w xml:id="pbrp-1256000">voice</w>
+         <pc xml:id="pbrp-1256010" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l n="60" xml:id="pbrp-l54285">
+         <w xml:id="pbrp-1256020">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1256030">universal</w>
+         <c> </c>
+         <w xml:id="pbrp-1256040">spectacle</w>
+         <c> </c>
+         <w xml:id="pbrp-1256050">throughout</w>
+      </l>
+      <l xml:id="pbrp-l54290">
+         <c> </c>
+         <w xml:id="pbrp-1256060">Was</w>
+         <c> </c>
+         <w xml:id="pbrp-1256070">shaped</w>
+         <c> </c>
+         <w xml:id="pbrp-1256080">for</w>
+         <c> </c>
+         <w xml:id="pbrp-1256090">admiration</w>
+         <c> </c>
+         <w xml:id="pbrp-1256100">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1256110">delight</w>
+         <pc xml:id="pbrp-1256120">,</pc>
+      </l>
+      <l xml:id="pbrp-l54295">
+         <c> </c>
+         <w xml:id="pbrp-1256130">Grand</w>
+         <c> </c>
+         <w xml:id="pbrp-1256140">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1256150">itself</w>
+         <c> </c>
+         <w xml:id="pbrp-1256160">alone</w>
+         <pc xml:id="pbrp-1256170">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1256180">but</w>
+         <c> </c>
+         <w xml:id="pbrp-1256190">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1256200">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1256210">breach</w>
+      </l>
+      <l xml:id="pbrp-l54300">
+         <c> </c>
+         <w xml:id="pbrp-1256220">Through</w>
+         <c> </c>
+         <w xml:id="pbrp-1256230">which</w>
+         <c> </c>
+         <w xml:id="pbrp-1256240">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1256250">homeless</w>
+         <c> </c>
+         <w xml:id="pbrp-1256260">voice</w>
+         <c> </c>
+         <w xml:id="pbrp-1256270">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1256280">waters</w>
+         <c> </c>
+         <w xml:id="pbrp-1256290">rose</w>
+         <pc xml:id="pbrp-1256300">,</pc>
+      </l>
+      <l xml:id="pbrp-l54305">
+         <c> </c>
+         <w xml:id="pbrp-1256310">That</w>
+         <c> </c>
+         <w xml:id="pbrp-1256320">dark</w>
+         <c> </c>
+         <w xml:id="pbrp-1256330">deep</w>
+         <c> </c>
+         <w xml:id="pbrp-1256340">thoroughfare</w>
+         <pc xml:id="pbrp-1256350">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1256360">had</w>
+         <c> </c>
+         <w xml:id="pbrp-1256370">Nature</w>
+         <c> </c>
+         <w xml:id="pbrp-1256380">lodged</w>
+      </l>
+      <l n="65" xml:id="pbrp-l54310">
+         <c> </c>
+         <w xml:id="pbrp-1256390">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1256400">soul</w>
+         <pc xml:id="pbrp-1256410">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1256420">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1256430">imagination</w>
+         <c> </c>
+         <w xml:id="pbrp-1256440">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1256450">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1256460">whole</w>
+         <pc xml:id="pbrp-1256470" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pbrp-s10020">
+      <l rendition="#h_3" xml:id="pbrp-l54315">
+         <w xml:id="pbrp-1256500">A</w>
+         <c> </c>
+         <w xml:id="pbrp-1256510">meditation</w>
+         <c> </c>
+         <w xml:id="pbrp-1256520">rose</w>
+         <c> </c>
+         <w xml:id="pbrp-1256530">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1256540">me</w>
+         <c> </c>
+         <w xml:id="pbrp-1256550">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1256560">night</w>
+      </l>
+      <l xml:id="pbrp-l54320">
+         <c> </c>
+         <w xml:id="pbrp-1256570">Upon</w>
+         <c> </c>
+         <w xml:id="pbrp-1256580">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1256590">lonely</w>
+         <c> </c>
+         <w xml:id="pbrp-1256600">mountain</w>
+         <c> </c>
+         <w xml:id="pbrp-1256610">when</w>
+         <c> </c>
+         <w xml:id="pbrp-1256620">the</w>
+         <c> </c>
+         <w xml:id="pbrp-1256630">scene</w>
+      </l>
+      <l xml:id="pbrp-l54325">
+         <c> </c>
+         <w xml:id="pbrp-1256640">Had</w>
+         <c> </c>
+         <w xml:id="pbrp-1256650">passed</w>
+         <c> </c>
+         <w xml:id="pbrp-1256660">away</w>
+         <pc xml:id="pbrp-1256670">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1256680">and</w>
+         <c> </c>
+         <w xml:id="pbrp-1256690">it</w>
+         <c> </c>
+         <w xml:id="pbrp-1256700">appeared</w>
+         <c> </c>
+         <w xml:id="pbrp-1256710">to</w>
+         <c> </c>
+         <w xml:id="pbrp-1256720">me</w>
+      </l>
+      <l xml:id="pbrp-l54330">
+         <c> </c>
+         <w xml:id="pbrp-1256730">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1256740">perfect</w>
+         <c> </c>
+         <w xml:id="pbrp-1256750">image</w>
+         <c> </c>
+         <w xml:id="pbrp-1256760">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1256770">a</w>
+         <c> </c>
+         <w xml:id="pbrp-1256780">mighty</w>
+         <c> </c>
+         <w xml:id="pbrp-1256790">mind</w>
+         <pc xml:id="pbrp-1256800">,</pc>
+      </l>
+      <l n="70" xml:id="pbrp-l54335">
+         <c> </c>
+         <w xml:id="pbrp-1256810">Of</w>
+         <c> </c>
+         <w xml:id="pbrp-1256820">one</w>
+         <c> </c>
+         <w xml:id="pbrp-1256830">that</w>
+         <c> </c>
+         <w xml:id="pbrp-1256840">feeds</w>
+         <c> </c>
+         <w xml:id="pbrp-1256850">upon</w>
+         <c> </c>
+         <w xml:id="pbrp-1256860">infinity</w>
+         <pc xml:id="pbrp-1256870">,</pc>
+      </l>
+      <l xml:id="pbrp-l54340">
+         <c> </c>
+         <w xml:id="pbrp-1256880">That</w>
+         <c> </c>
+         <w xml:id="pbrp-1256890">is</w>
+         <c> </c>
+         <w xml:id="pbrp-1256900">exalted</w>
+         <c> </c>
+         <w xml:id="pbrp-1256910">by</w>
+         <c> </c>
+         <w xml:id="pbrp-1256920">an</w>
+         <c> </c>
+         <w xml:id="pbrp-1256930">underpresence</w>
+         <pc xml:id="pbrp-1256940">,</pc>
+      </l>
+      <l xml:id="pbrp-l54345">
+         <c> </c>
+         <w xml:id="pbrp-1256950">The</w>
+         <c> </c>
+         <w xml:id="pbrp-1256960">sense</w>
+         <c> </c>
+         <w xml:id="pbrp-1256970">of</w>
+         <c> </c>
+         <w xml:id="pbrp-1256980">God</w>
+         <pc xml:id="pbrp-1256990">,</pc>
+         <c> </c>
+         <w xml:id="pbrp-1257000">or</w>
+         <c> </c>
+         <w xml:id="pbrp-1257010">whatso’er</w>
+         <c> </c>
+         <w xml:id="pbrp-1257020">is</w>
+         <c> </c>
+         <w xml:id="pbrp-1257030">dim</w>
+      </l>
+      <l xml:id="pbrp-l54350">
+         <c> </c>
+         <w xml:id="pbrp-1257040">Or</w>
+         <c> </c>
+         <w xml:id="pbrp-1257050">vast</w>
+         <c> </c>
+         <w xml:id="pbrp-1257060">in</w>
+         <c> </c>
+         <w xml:id="pbrp-1257070">its</w>
+         <c> </c>
+         <w xml:id="pbrp-1257080">own</w>
+         <c> </c>
+         <w xml:id="pbrp-1257090">being</w>
+         <pc xml:id="pbrp-1257100" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>
