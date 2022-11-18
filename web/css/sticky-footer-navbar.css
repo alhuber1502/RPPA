@@ -35,6 +35,10 @@ header > nav {
   padding: 0 5px;
   top: -.6rem;
 }
+a.navbar-brand:hover, a.navbar-brand:active, a.navbar-brand:visited,
+a.nav-link:hover, a.nav-link:active, a.nav-link:visited {
+  color: #fff;
+}
 .leaflet-sidebar-tabs > li:hover, .leaflet-sidebar-tabs > ul > li:hover {
   background-color: unset;
 }
@@ -251,11 +255,10 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
 }
 
 .modal-header .tools {
-  margin: 0 auto;
+  text-align:center;
 }
 .modal-header .tools span {
   display: inline-block;
-  margin-right:10px;
 }
 .read {
   color: #e76f51;
@@ -269,10 +272,53 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
 .nav-link.active code {
   color:unset;
 }
-
+.hidden {
+  display: none;
+}
 .modal-body .row > div {
   overflow: auto;
-  height: calc( 100vh - 72px);
+  height: calc( 100vh - 84px);
   border-right: 1px #ddd dashed;
   border-left: 1px #ddd dashed;
+}
+.bg-rppa,.controls .btn {
+  background-color: var(--bs-orange);
+  text-decoration: none;
+  color:#fff;
+}
+a.bg-rppa:hover, a.bg-rppa:active {
+  color:#fff;
+}
+a.note {
+  text-decoration: none;
+}
+
+.pagebreak .image_link {
+  margin-left: 5px;
+}
+.pagebreak,.pagebreak-supplied {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #998;
+  font-size: 14px;
+  font-style: normal;
+  margin: 8px 0;
+  clear: both;
+  text-indent: 0;
+}
+.pagebreak-supplied::before, .pagebreak-supplied::after,
+.pagebreak::before, .pagebreak::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #998;
+
+}
+.pagebreak::before,
+.pagebreak-supplied::before {
+    margin-right: 1em;
+}
+.pagebreak::after,
+.pagebreak-supplied::after {
+    margin-left: 1em;
 }

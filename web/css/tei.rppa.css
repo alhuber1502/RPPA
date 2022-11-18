@@ -74,7 +74,7 @@
 }
 /* line numbers */
 .text .numbering {
-    font-size: .85em;
+    font-size: .85em !important;
     float: right;
     font-style: normal;
 }
@@ -342,6 +342,7 @@ a > .expan::before, .ex::after, .expan::after {
  {
 /*    z-index: 1 !important;*/
     font-size: .85rem;
+    min-width: 350px;
 }
 .citbibl:before {
     content: '—';

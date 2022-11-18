@@ -19,9 +19,23 @@
     font-size: 1.2em;
 }
 .text .head-part, .text .argument div {
+    font-size: 1em;
+    text-align: center;
+    margin: 10px 0;
+}
+.text .lg.head {
+    font-size: 16px !important;
+}
+.text .argument {
     font-size: 1.2em;
     text-align: center;
     margin: 10px 0;
+}
+.text .argument div.l,
+.text .argument p {
+    font-size: 16px;
+    text-align: left;
+    margin: 0;
 }
 .text .epigraph {
     width:60%;
@@ -29,7 +43,7 @@
     text-align: left;
     font-size: 14px;
 }
-.text .stage {
+.text .stage, .text .speaker {
     text-align: center;
     margin: 5px 20px;
 }
