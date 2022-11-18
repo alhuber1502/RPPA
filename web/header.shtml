@@ -58,6 +58,18 @@
     <script src="/js/leaflet-sidebar-v2-master/js/leaflet-sidebar.min.js"></script>
     <script src="/js/OverlappingMarkerSpiderfier-Leaflet-0.2.6/bin/oms.min.js"></script>
 
+    <link rel="stylesheet" href="/js/annotorious-openseadragon-2.7.8/annotorious.min.css">
+    <script src="/js//openseadragon-bin-3.1.0/openseadragon.min.js"></script>
+    <script src="/js/annotorious-openseadragon-2.7.8/openseadragon-annotorious.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
+
+    <script src="/js/js.cookie.min.js"></script>
+    <script src="/js/uuidv4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
+
     <!-- Custom styles for this template -->
     <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
     <link href="/css/tei.default.css" rel="stylesheet">
@@ -66,12 +78,24 @@
 
     <script src="/js/lodash.min.js" crossorigin="anonymous"></script>
     <script src="/js/jsonld.js-6.0.0/dist/jsonld.min.js" crossorigin="anonymous"></script>
+
+    <script src="/js/rangy-1.3.1/rangy-core.js" crossorigin="anonymous"></script>
+    <script src="/js/rangy-1.3.1/rangy-classapplier.js" crossorigin="anonymous"></script>
+    <script src="/js/rangy-1.3.1/rangy-highlighter.js" crossorigin="anonymous"></script>
+    <script src="/js/rangy-1.3.1/rangy-serializer.js" crossorigin="anonymous"></script>
+    <script src="/js/rangy-1.3.1/rangy-textrange.js" crossorigin="anonymous"></script>
+    <script src="/js/rangy-1.3.1/rangy-selectionsaverestore.js" crossorigin="anonymous"></script>
+
+    <!-- PRISMS JavaScript -->
+    <script src="/js/helpers.js" crossorigin="anonymous"></script>
+    <script src="/js/text.js" crossorigin="anonymous"></script>
+    <script src="/js/image.js" crossorigin="anonymous"></script>
     <script src="/js/rppa.js" crossorigin="anonymous"></script>
 
   </head>
 
   <body class="d-flex flex-column h-100">
-  
+
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -110,6 +134,8 @@
               </li>
             </ul>
           </div>
+          <button class="btn btn-sm sso-sign-in" style="background-color:
+          var(--bs-orange);color:#fff;" type="button">Sign in</button>
         </div>
       </nav>
     </header>
