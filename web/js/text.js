@@ -34,41 +34,42 @@ function w_and_pc_only( id ) {
     if ( id.includes( "index.xml-" )
         || id.endsWith( "_return" )
         || !id.match( /\-[\d\.]+$/gs )
-        || ($( jq( id )+":visible" ).length == 0)
+//        || ($( jq( id )+":visible" ).length == 0) // removed because popover
+//        content (authorial notes)
     ) return;
     return id;
 }
 // offer user annotation or relation options
-$( document ).on( "mouseup", ".tab-pane.active", function(e) {
+var dismiss_select = undefined;
+$( document ).on( "mouseup", ".tab-pane.active,.authorial.note .footy", function(e) {
     if ( mode == "edit" ) {
         var sel = rangy.getSelection();
         var target, ids = [];
-        $( ".popover-dismiss-select" ).popover( 'dispose' );
-        $( ".popover-dismiss-anno" ).popover( 'dispose' );
+        if ( dismiss_select ) dismiss_select.popover( 'dispose' );
+        $( ".popover-dismiss-anno" ).popover( 'hide' );
         if ( sel.text() ) {
-            target = sel.text();
-            var col = $( this ).closest( ".k-window-content" ).data( "bgcolor" );                
+            target = sel.text();              
             if ( sel.toHtml().includes(" id=") ) {
                 ids = Array.from( sel.toHtml().matchAll( /span.*?id="(.*?)"/gsi ), m => m[1]);
             } else {
                 ids = [ getHTML( sel.anchorNode.parentNode, true).match( /span.*?id="(.*?)"/si )[1] ];
             }
             ids = ids.filter( w_and_pc_only );
-            var id = $( this ).closest( '.k-window-content' ).data( 'id' );
+            var id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
+            console.log( id );
             $( jq(ids[ids.length-1]) ).popover({
                 sanitize: false,
-                content: `<a href="#" class="searchterm" data-ids="`+ids+`" data-id="`+id+`" data-col="`+col+`" data-sel="`+target+`" style="color:`+col+`;margin-right:5px;"><i class="fas fa-search"></i></a>
-                    <a href="#" class="annotation" data-ids="`+ids+`" data-id="`+id+`" data-col="`+col+`" data-sel="`+target+`" style="color:`+col+`;margin-right:5px;"><i class="fas fa-comment"></i></a>
-                    <a href="#" class="relation" data-ids="`+ids+`" data-id="`+id+`" data-col="`+col+`" data-sel="`+target+`" style="color:`+col+`;margin-right:5px;"><i class="fas fa-exchange-alt"></i></a>`,
+                content: `<a href="#" class="searchterm" data-ids="`+ids+`" data-id="`+id+`" data-sel="`+target+`" style="margin-right:5px;"><i class="fas fa-search"></i></a>
+                    <a href="#" class="annotation" data-ids="`+ids+`" data-id="`+id+`" data-sel="`+target+`" style="margin-right:5px;"><i class="fas fa-comment"></i></a>
+                    <a href="#" class="relation" data-ids="`+ids+`" data-id="`+id+`" data-sel="`+target+`" style="margin-right:5px;"><i class="fas fa-exchange-alt"></i></a>`,
                 html: true,
                 placement: 'auto',
-                template: `<div class="popover popover-dismiss-select" role="button" tabindex="0" data-trigger="focus">
-                    <div class="arrow"></div>
-                    <h3 class="popover-header"></h3>
+                template: `<div class="popover popover-dismiss-select" role="popover" tabindex="0" data-trigger="focus">
+                    <div class="popover-arrow"></div>
                     <div class="popover-body"></div>
                 </div>`
             });
-            $( jq(ids[ids.length-1]) ).popover('show');
+            dismiss_select = $( jq(ids[ids.length-1]) ).popover('show');
         }
     }
 });
