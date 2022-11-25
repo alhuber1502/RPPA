@@ -322,3 +322,21 @@ a.note {
 .pagebreak-supplied::after {
     margin-left: 1em;
 }
+.popover-dismiss-select {
+  width:80px !important;
+  min-width:80px !important;
+}
+.popover-dismiss-select .popover-body {
+  padding:5px;
+}
+
+.highlight-bb {
+  background-color: rgba(245,254,252,1);
+  border-bottom: 2px solid #0C80A1;
+  color: inherit;
+}
+.pagebreak .highlight-bb,
+.numbering .highlight-bb {
+  background-color: unset;
+  border-bottom: unset;
+}

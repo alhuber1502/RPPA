@@ -30,11 +30,9 @@ $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 	}
 });
 
-
-var t, myModalGT, zInd = 1054, wavesurfer, viewer = {}, mode = 'read';
+var t, myModalGT, myModalGTEl, zInd = 1054, wavesurfer, viewer = {}, mode = 'read';
 var done_tooltipTriggerList = [];
 var done_popoverTriggerList = [];
-
 var loadTexts = function() {
     return $.ajax({ url: "/data/texts.min.json", dataType: 'json',
       success: function(data) {
@@ -46,16 +44,6 @@ var loadTexts = function() {
 // display a global text
 async function display_globaltext( tid, wid ) {
 
-    var openseadragonOptions = {
-        showNavigator: true,
-        showRotationControl: true,
-        gestureSettingsTouch: {
-            pinchRotate: true
-        },
-        prefixUrl: "/js/openseadragon-bin-3.1.0/openseadragon-flat-toolbar-icons-master/images/",
-        sequenceMode: true,
-        preserveViewport: true
-    };
     // load work and author(s)
     var work = await load_work_overview( wid );
     var separator = "", author = "";
@@ -113,8 +101,8 @@ async function display_globaltext( tid, wid ) {
                             </div>
                             <div class="col-sm-4">
                                 <div class="tools">
-                                    <a role="button" class="btn changeMode" data-mode="read" aria-disabled="false" style="width:112px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
-                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="background-color:#2a9d8f;color:#fff;"':' style="background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Annotate</span></a>
+                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="width:112px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
+                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="background-color:#2a9d8f;color:#fff;"':' style="background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Annotate</span></a>
                                 </div>
                             </div>
                             <div class="col-sm-4" style=margin:auto auto;">
@@ -123,7 +111,7 @@ async function display_globaltext( tid, wid ) {
                                 +`
                             </div>
                         </div>
-                        <button type="button" class="btn-close changeMode" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -148,9 +136,61 @@ async function display_globaltext( tid, wid ) {
         </div>`;
     $( "body" ).prepend( text );
 
+    drawGlobalText( tid, wid );
+    processGlobalText( tid, wid );
+
+    myModalGTEl = document.getElementById(wid);
+    myModalGT = new bootstrap.Modal(myModalGTEl, {
+        backdrop: 'static',
+        keyboard: false
+    }).show();
+
+    // update UI on expression selection
+    $(document).on('click','button[data-bs-toggle="pill"]',function(){
+        if ( $( "#waveform_"+tid ).length ) {
+            wavesurfer.drawBuffer();
+        }
+        $(".popover").hide();
+        console.log( "pill changed!" );
+    });
+
+    // on showing modal
+    myModalGTEl.addEventListener('shown.bs.modal', function (event) {
+
+        console.log( "modal shown!" );
+    });
+    // on closing modal
+    myModalGTEl.addEventListener('hide.bs.modal', function (event) {
+        mode = "read";
+        $( "#mode" ).remove();
+        $(".popover").remove();
+        $(this).remove();
+        zInd = 1054;
+        location.href = "#id/"+work.aut.split(';')[0]; // reset location to work's author
+        done_tooltipTriggerList = [];
+        done_popoverTriggerList = [];
+        clearInterval( t );
+        annos = {};
+        annotorious = {};
+        console.log( "modal closed!" );
+    });
+}
+
+function drawGlobalText( tid, wid ) {
+    var imgset_id = undefined;
+    var openseadragonOptions = {
+        showNavigator: true,
+        showRotationControl: true,
+        gestureSettingsTouch: {
+            pinchRotate: true
+        },
+        prefixUrl: "/js/openseadragon-bin-3.1.0/openseadragon-flat-toolbar-icons-master/images/",
+        sequenceMode: true,
+        preserveViewport: true
+    };
     // populate global text
     // load work's realization(s)
-    var tab_content = "", tab_nav = "", excerpt = null, sources = [], imgset_id = undefined, texts = [];
+    var tab_content = "", tab_nav = "", excerpt = null, sources = [], texts = [];
     for (i=0; i<workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ].length; i++ ) { // expressions
         var nav_name = '', cnt_lang = '';
         cnt_lang = workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P72_has_language" ];
@@ -166,7 +206,11 @@ async function display_globaltext( tid, wid ) {
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'sc:Manifest' || typ.id == 'lct:img' || typ.id == 'lct:dig'}) != -1) {
             nav_name = 'Facsimile';
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:aud' || typ.id == 'lct:mov' }) != -1) {
-            nav_name = 'Reading';
+            if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) {
+                nav_name = 'Reading (excerpt)';
+            } else {
+                nav_name = 'Reading';
+            }
         } else {
             console.log( 'Error: unknown content type' );
         }
@@ -229,10 +273,14 @@ async function display_globaltext( tid, wid ) {
             openseadragonOptions.id = "openseadragon_"+tid;
             openseadragonOptions.tileSources = sources;
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:aud' }) != -1 ) {
-            cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ];
+            if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) { // fragments
+                cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][0].id ][ "crm:P106_is_composed_of" ];
+            } else {
+                cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ];
+            }
             tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
                 <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
-                data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
+                    data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
                 `<div id="waveform_`+tid+`" class="waveform" data-load="`+workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0]+`"></div>`+
                 `<div id="wavetimeline"></div>`+
                 `<div class="controls" style="text-align:center;margin-top:20px;">
@@ -251,19 +299,20 @@ async function display_globaltext( tid, wid ) {
                     <button class="btn" onclick="wavesurfer.toggleMute()">
                         <i class="fa fa-volume-off"></i>
                     </button>
-                </div>`
-            +`</div></div>`;
+                </div><br/>`+
+                `<div class="attribution"><div><span>Performance:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:contributor" ]+`</span></div>
+                 <div><span>Source:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:source" ]+`</span>
+                    <span><a href="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:identifier" ].id+`">`+
+                    workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:identifier" ].id+`</a></span></div>
+                 </div>`
+                +`</div></div>`;
         }
         // ... other content types ...
     }
     // create DOM
-    $( "#"+wid+" .text" ).append( `<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
+    $( "#"+wid+" .text" ).html( `<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
+    clearInterval( t );
     t = setInterval(updateDOM(),500);
-    var myModalGTEl = document.getElementById(wid);
-    myModalGT = new bootstrap.Modal(myModalGTEl, {
-        backdrop: 'static',
-        keyboard: false
-    }).show();
 
     // initialize expressions
     // facsimile
@@ -286,15 +335,16 @@ async function display_globaltext( tid, wid ) {
     }
     // text
     $.each( texts, function( i,v) {
-        add_text_tools( v );
+        
     })
     // audio/video
     if ( $( "#waveform_"+tid ).length ) {
         wavesurfer = WaveSurfer.create({
             container: '#waveform_'+tid,
+            partialRender: true,
             scrollParent: true,
             waveColor: '#ccc',
-            progressColor: 'hsla(200, 100%, 30%, 0.5)',
+            progressColor: '#999', //'hsla(200, 80%, 30%, 0.5)',
             skipLength: 5,
             minimap: true,
             backend: 'MediaElement',
@@ -304,7 +354,7 @@ async function display_globaltext( tid, wid ) {
                     height: 30,
                     waveColor: '#ddd',
                     progressColor: '#999',
-                    cursorColor: '#999'
+                    cursorColor: '#333'
                 }),
                 WaveSurfer.timeline.create({
                     container: "#wavetimeline"
@@ -317,42 +367,10 @@ async function display_globaltext( tid, wid ) {
             if ( $( "#waveform_"+tid ).data( "load" ).includes( '#t=') ) {
                 var default_region = $( "#waveform_"+tid ).data( "load" ).split( '#t=' )[1].split(',');
                 wavesurfer.addRegion( {"drag":false,"resize":false,"start":default_region[0],"end":default_region[1]} );
+                wavesurfer.drawBuffer();
             }
         });
     }
-
-    // update UI on expression selection
-    $(document).on('click','button[data-bs-toggle="pill"]',function(){
-        if ( $( "#waveform_"+tid ).length ) {
-            wavesurfer.drawBuffer();
-        }
-        $(".popover").hide();
-
-
-
-    });
-
-    // on showing modal
-    myModalGTEl.addEventListener('shown.bs.modal', function (event) {
-
-    });
-    // on closing modal
-    myModalGTEl.addEventListener('hide.bs.modal', function (event) {
-        $(".popover").hide();
-        $(this).remove();
-        if ( $('.modal.show').length ) { // if open modal remains: close updating DOM
-            clearInterval( t );
-            t = setInterval(updateDOM(),500);
-        } else {                         // if last open modal: reset
-            zInd = 1054;
-            location.href = "#id/"+work.aut.split(';')[0]; // reset location to work's author
-            done_tooltipTriggerList = [];
-            done_popoverTriggerList = [];
-            clearInterval( t );
-            annos = {};
-            annotorious = {};
-        }
-    });
 }
 
 function updateDOM() {
@@ -367,7 +385,8 @@ function updateDOM() {
             placement: 'auto',
             container: 'body',
             sanitize: false,
-            trigger: 'hover',
+            trigger: 'hover click',
+            customClass: 'authorial note',
             title: function() {
                 return "Authorial note"+genericCloseBtnHtml
             },
@@ -390,6 +409,7 @@ function updateDOM() {
             container: 'body',
             sanitize: false,
             trigger: 'click',
+            customClass: 'editorial note',
             title: function() {
                 return "Editorial note"+genericCloseBtnHtml
                 //$(this).attr("data-type")[0].toUpperCase() +
@@ -526,35 +546,56 @@ $( document ).on('click', '.changeMode:not([aria-disabled="true"])', function() 
     $( "head" ).append( `<style type="text/css" id="mode">a,a:hover,a:visited,a:active{color: `+modeC[$(this).data("mode")]+`;}.nav-pills .nav-link.active,.bg-rppa,.controls .btn{background-color:`+modeC[$(this).data("mode")]+` !important;}</style>` );
     switch ( $(this).data("mode") ) {
         case "read":
-            mode = "read"; // text
-            if ( Object.keys(annotorious).length > 0 ) {
-                annotorious[ Object.keys(annotorious) ].readOnly = true; // image
-            }
-            if ( $( ".waveform" ).length ) {
-                wavesurfer.disableDragSelection(); // sound
-                // TODO wavesurfer stores created regions in localStorage, these
-                // are draggable/resizable by default, which needs to be 
-                // prevented, i.e. regions have their "drag" and "resize"
-                // options turned to false when stored   
-                // https://wavesurfer-js.org/plugins/regions.html
-                // => probably need to completely suppress the default
-                // behaviour, particularly need to disable "loading" regions
-                // from localStorage in "Read" 
+            if ( mode == "edit" ) {
+                mode = "read";
+                drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
+                processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
             }
             break;
         case "edit":
-            mode = "edit"; // text
-            if ( Object.keys(annotorious).length > 0 ) {
-                annotorious[ Object.keys(annotorious) ].readOnly = false; // image
-            }
-            if ( $( ".waveform" ).length ) {
-                wavesurfer.enableDragSelection({
-                    color: randomColor(0.1)
-                }); // sound    
+            if ( mode == "read" ) {
+                mode = "edit";
+                drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
+                processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
             }
             break;
     }
 });
+
+async function processGlobalText( tid, wid ) {
+
+    if ( mode == "read" ) {
+        if ( Object.keys(annotorious).length > 0 ) {
+            annotorious[ Object.keys(annotorious) ].readOnly = true; // image
+        }
+        if ( $( ".waveform" ).length ) {
+            wavesurfer.disableDragSelection(); // sound
+            // TODO wavesurfer stores created regions in localStorage, these
+            // are draggable/resizable by default, which needs to be 
+            // prevented, i.e. regions have their "drag" and "resize"
+            // options turned to false when stored   
+            // https://wavesurfer-js.org/plugins/regions.html
+            // => probably need to completely suppress the default
+            // behaviour, particularly need to disable "loading" regions
+            // from localStorage in "Read" 
+            wavesurfer.setProgressColor( '#BD7E46' );
+        }
+    }
+    if ( mode == "edit" ) {
+        if ( Object.keys(annotorious).length > 0 ) {
+            annotorious[ Object.keys(annotorious) ].readOnly = false; // image
+        }
+        if ( $( ".waveform" ).length ) {
+            wavesurfer.enableDragSelection({
+                color: randomColor(0.1)
+            }); // sound
+            wavesurfer.setProgressColor( '#358078' );
+        }
+        var work = "https://www.romanticperiodpoetry.org/id/"+wid+"/work";
+        processBuildingBlocks( work );
+    }
+
+}
 
 $( document ).on('click', 'a.show_globaltext', async function (e) {
     display_globaltext( e.currentTarget.dataset.tid,e.currentTarget.dataset.wid );
@@ -562,11 +603,14 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 $( document ).ready(function() {
 
+    // TODO -- remove this when going live
+    $( ".sso-sign-in" ).remove();
+
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;
     } else {
-        user = "rppa:user-9ea2995f-f46d-4a80-80ed-1f7da543e9e3";
+        user = "rppa:user-9bf0ccc9-dcaa-4e57-9b83-b8a08d2614cb";
         username = "Alexander Huber";
     }
     if ( user != undefined && username != 'undefined' ) {
