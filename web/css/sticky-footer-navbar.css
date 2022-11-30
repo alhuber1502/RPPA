@@ -249,6 +249,7 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
 }
 .text .head:nth-of-type(1) {
   font-size:1.3em;
+  line-height:1.3em;
 }
 .rppa .head {
   font-size:1.1em !important;
@@ -339,4 +340,37 @@ a.note {
 .numbering .highlight-bb {
   background-color: unset;
   border-bottom: unset;
+}
+
+.pulse {
+-webkit-animation: pulse 400ms infinite alternate;
+        animation: pulse 400ms infinite alternate;
+}
+.pulse::after {
+  content: " ";
+  -webkit-animation: pulse 400ms infinite alternate;
+  animation: pulse 400ms infinite alternate;
+}
+@-webkit-keyframes pulse {
+0% { background-color: rgba(245,254,252,1) }
+100% { background-color: rgba(215,224,222,1) }
+}
+@keyframes pulse {
+0% { background-color: rgba(245,254,252,1) }
+100% { background-color: rgba(215,224,222,1) }
+}
+
+ul.bb {
+  list-style: none;
+  padding-left: 10px;
+  font-size: 15px;
+}
+.bb-item .trash {
+  margin: 0px 2px;
+}
+.bb-item label {
+  display: unset;
+}
+.workbench h2 {
+  font-size:1.2em;
 }
