@@ -381,3 +381,10 @@ ul.bb li canvas {
 .workbench h2 {
   font-size:1.2em;
 }
+.tab-content {
+  overflow: auto;
+  height: calc( 100vh - 134px );
+}
+.waveform {
+  margin-top: 15px;
+}
