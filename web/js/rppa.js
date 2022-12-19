@@ -1,9 +1,7 @@
 // RPPA
 
-// TODO
 var user = undefined, username = undefined;
-
-var workbench = {}, provider_img = '';
+var workbench = {}, provider_img = '', contexts;
 var domain = "https://www.romanticperiodpoetry.org";
 
 var SOLR_RPPA;
@@ -30,7 +28,7 @@ $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 	}
 });
 
-var t, myModalGT, myModalGTEl, zInd = 1054, wavesurfer, viewer = {}, mode = 'read';
+var t, myModalGT, myModalGTEl, zInd = 1054, wavesurfer = undefined, viewer = {}, mode = 'read';
 var done_tooltipTriggerList = [];
 var done_popoverTriggerList = [];
 var loadTexts = function() {
@@ -60,7 +58,6 @@ async function display_globaltext( tid, wid ) {
         ?s ?p ?o
         FILTER (
             (CONTAINS (STR(?s), ?searchString)) ||
-            (CONTAINS (STR(?p), ?searchString)) ||
             (CONTAINS (STR(?o), ?searchString))
         )
         BIND("`+wid+`" AS ?searchString)
@@ -91,18 +88,18 @@ async function display_globaltext( tid, wid ) {
             color: #000;
         }
         </style>
-        <div style="z-index:`+zInd+`" class="modal fade" id="`+wid+`" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div style="z-index:`+zInd+`" class="modal fade" id="`+wid+`" data-wid="`+wid+`" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row" style="width:100%;">
                             <div class="col-sm-4" style="margin:auto auto;">
-                                <h5 class="modal-title" id="ModalLabel">`+truncateString(work.tit,50)+` / `+author+`</h5>
+                                <h5 class="modal-title" id="ModalLabel" style="display:inline">`+truncateString(work.tit,50)+` / `+author+`</h5> <span>— a RPPA Global Text</span>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="margin:auto auto;">
                                 <div class="tools">
-                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="width:112px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
-                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="background-color:#2a9d8f;color:#fff;"':' style="background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Annotate</span></a>
+                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="height:36px;width:112px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
+                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="height:36px;background-color:#2a9d8f;color:#fff;"':' style="height:36px;background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Annotate</span></a>
                                 </div>
                             </div>
                             <div class="col-sm-4" style=margin:auto auto;">
@@ -118,7 +115,7 @@ async function display_globaltext( tid, wid ) {
                             <div class="row">
                                 <div class="col-sm-4 text">
                                 </div>
-                                <div class="col-sm-4 context">
+                                <div class="col-sm-4 contexts">
                                 </div>
                                 <div class="col-sm-4 workbench">
                                 </div>
@@ -145,19 +142,9 @@ async function display_globaltext( tid, wid ) {
         keyboard: false
     }).show();
 
-    // update UI on expression selection
-    $(document).on('click','button[data-bs-toggle="pill"]',function(){
-        if ( $( "#waveform_"+tid ).length ) {
-            wavesurfer.drawBuffer();
-        }
-        $(".popover").hide();
-        console.log( "pill changed!" );
-    });
-
     // on showing modal
     myModalGTEl.addEventListener('shown.bs.modal', function (event) {
 
-        console.log( "modal shown!" );
     });
     // on closing modal
     myModalGTEl.addEventListener('hide.bs.modal', function (event) {
@@ -172,7 +159,6 @@ async function display_globaltext( tid, wid ) {
         clearInterval( t );
         annos = {};
         annotorious = {};
-        console.log( "modal closed!" );
     });
 }
 
@@ -218,7 +204,8 @@ function drawGlobalText( tid, wid ) {
             tab_nav += `<li class="nav-item" role="presentation">
                 <button class="nav-link`+((i==0)?' active':'')+`" id="pills-`+i+`-tab" data-bs-toggle="pill" data-bs-target="#pills-`+i+`"
                     type="button" role="tab" aria-controls="pills-`+i+`" aria-selected="true"
-                    data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+nav_name+`</button>
+                    data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`"
+                    data-work="`+domain+"/id/"+wid+"/work"+`">`+nav_name+`</button>
                 </li>`;
         }
         // content
@@ -260,7 +247,7 @@ function drawGlobalText( tid, wid ) {
             tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
                 <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                 data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
-                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 130px);'></div>`
+                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 142px);'></div>`
                 +`</div></div>`;
             imgset_id = cnt_loc[0].id;
             $.each(workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ].sort(), function(i,v) {
@@ -310,7 +297,7 @@ function drawGlobalText( tid, wid ) {
         // ... other content types ...
     }
     // create DOM
-    $( "#"+wid+" .text" ).html( `<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
+    $( "#"+wid+" .text" ).html( `<ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
     clearInterval( t );
     t = setInterval(updateDOM(),500);
 
@@ -339,6 +326,7 @@ function drawGlobalText( tid, wid ) {
     })
     // audio/video
     if ( $( "#waveform_"+tid ).length ) {
+        if ( wavesurfer && !wavesurfer.isDestroyed ) { wavesurfer.unAll(); wavesurfer.destroy(); }
         wavesurfer = WaveSurfer.create({
             container: '#waveform_'+tid,
             partialRender: true,
@@ -348,6 +336,8 @@ function drawGlobalText( tid, wid ) {
             skipLength: 5,
             minimap: true,
             backend: 'MediaElement',
+            regionsMinLength: .25,
+            normalize: true,
             plugins: [
                 WaveSurfer.regions.create(),
                 WaveSurfer.minimap.create({
@@ -361,7 +351,15 @@ function drawGlobalText( tid, wid ) {
                 })
             ]
         });
-        wavesurfer.load( $( "#waveform_"+tid ).data( "load" ) );
+        if ( $( "#waveform_"+tid ).data( "load" ).includes( domain ) ) {
+            fetch( $( "#waveform_"+tid ).data( "load" ).replace(/\.[^/.]+$/, "")+".json" )
+            .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
+                return response.json();
+            }).then(peaks => { wavesurfer.load($( "#waveform_"+tid ).data( "load" ), peaks.data); 
+            }).catch((e) => {});            
+        } else {
+            wavesurfer.load( $( "#waveform_"+tid ).data( "load" ) );
+        }
         wavesurfer.on('ready', function() {
             // default region
             if ( $( "#waveform_"+tid ).data( "load" ).includes( '#t=') ) {
@@ -371,59 +369,6 @@ function drawGlobalText( tid, wid ) {
             }
         });
     }
-}
-
-function updateDOM() {
-    var genericCloseBtnHtml = '<button type="button" class="btn-close" aria-hidden="true" style="float:right;"></button>';
-    // initialize tooltips and popovers
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList2 = _.difference( tooltipTriggerList, done_tooltipTriggerList );
-    done_tooltipTriggerList = tooltipTriggerList;
-    var tooltipList = [...tooltipTriggerList2].map(function (tooltipTriggerEl) {
-        return new bootstrap.Popover(tooltipTriggerEl, {
-            html: true,
-            placement: 'auto',
-            container: 'body',
-            sanitize: false,
-            trigger: 'hover click',
-            customClass: 'authorial note',
-            title: function() {
-                return "Authorial note"+genericCloseBtnHtml
-            },
-            content: function() {
-                if ( $(this).next(".footy").length ) {
-                    return $(this).next().clone().removeClass("hidden");
-                } else {
-                    return $(this).parent().next().clone().removeClass("hidden");
-                }
-            }
-        });
-    });
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    popoverTriggerList2 = _.difference( popoverTriggerList, done_popoverTriggerList );
-    done_popoverTriggerList = popoverTriggerList;
-    var popoverList = [...popoverTriggerList2].map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl, {
-            html: true,
-            placement: 'auto',
-            container: 'body',
-            sanitize: false,
-            trigger: 'click',
-            customClass: 'editorial note',
-            title: function() {
-                return "Editorial note"+genericCloseBtnHtml
-                //$(this).attr("data-type")[0].toUpperCase() +
-                //$(this).attr("data-type").slice(1)+
-            },
-            content: function() {
-                if ( $(this).next(".footy").length ) {
-                    return $(this).next().clone().removeClass("hidden");
-                } else {
-                    return $(this).parent().next().clone().removeClass("hidden");
-                }
-            }
-        });
-    });
 }
 
 // retrieve a RPPA object
@@ -534,10 +479,12 @@ function show_alert_mod( message, type, hide, ms ) {
 	}
 }
 
+// close popovers
 $( document ).on('click', '.popover-header button.btn-close', function() {
    $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('hide');
 });
 
+// switch between reading/editing
 $( document ).on('click', '.changeMode:not([aria-disabled="true"])', function() {
     var modeC = {}
     modeC[ 'edit' ] = '#2a9d8f';
@@ -551,50 +498,149 @@ $( document ).on('click', '.changeMode:not([aria-disabled="true"])', function() 
                 drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
                 processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
             }
-            break;
+        break;
         case "edit":
             if ( mode == "read" ) {
                 mode = "edit";
                 drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
                 processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
             }
-            break;
+        break;
     }
 });
 
-async function processGlobalText( tid, wid ) {
+// update UI on expression selection
+$(document).on('click','button[data-bs-toggle="pill"]',function(){
+    if ( $( "[id^=waveform_]" ).length ) {
+        wavesurfer.drawBuffer();
+    }
+    $(".popover").hide();
+    if ( mode == "edit" ) {
+        processGlobalText( "", $( this ).closest( "[data-wid]" ).data( "wid" ) );
+    } else {
+        initializeContexts( contexts[ $( this ).data( "expr" ) ], mode );
+    }
+    clearInterval( t );
+    t = setInterval(updateDOM(),500);
+});
 
+var dismiss_region = undefined;
+async function processGlobalText( tid, wid ) {
+    var work = domain+"/id/"+wid+"/work";
     if ( mode == "read" ) {
+        // load all (i.e. <default>) contexts
+        var q = namespaces+`SELECT *
+        WHERE {
+            ?s dcterm:relation """`+work+`""" .\n
+            ?s ?p ?o .
+            BIND(<default> AS ?g)
+        }`;
+        var r = await getJSONLD( q );
+        if ( r.hasOwnProperty( "graph" ) ) {
+            contexts = _.groupBy( r.graph, 'dcterm:source' );
+        } else {
+            var mine = {}
+            mine[ "@context" ] = r[ "@context" ];
+            mine[ "graph" ] = [];
+            mine[ "graph" ].push( r );
+            contexts = _.groupBy( mine.graph, 'dcterm:source' );
+        }
+        // tool settings
         if ( Object.keys(annotorious).length > 0 ) {
             annotorious[ Object.keys(annotorious) ].readOnly = true; // image
         }
         if ( $( ".waveform" ).length ) {
             wavesurfer.disableDragSelection(); // sound
-            // TODO wavesurfer stores created regions in localStorage, these
-            // are draggable/resizable by default, which needs to be 
-            // prevented, i.e. regions have their "drag" and "resize"
-            // options turned to false when stored   
-            // https://wavesurfer-js.org/plugins/regions.html
-            // => probably need to completely suppress the default
-            // behaviour, particularly need to disable "loading" regions
-            // from localStorage in "Read" 
             wavesurfer.setProgressColor( '#BD7E46' );
         }
-    }
-    if ( mode == "edit" ) {
+    } else if ( mode == "edit" ) {
+        // load user contributions
+        var q = namespaces+`SELECT *
+        WHERE {
+            GRAPH `+user+` {
+                ?s dcterm:relation """`+work+`""" .\n
+                ?s ?p ?o .
+                BIND(`+user+` AS ?g)
+            }
+        }`;
+        var r = await getJSONLD( q );
+        if ( r.hasOwnProperty( "graph" ) ) {
+            contexts = _.groupBy( r.graph, 'dcterm:source' );
+        } else {
+            var mine = {}
+            mine[ "@context" ] = r[ "@context" ];
+            mine[ "graph" ] = [];
+            mine[ "graph" ].push( r );
+            contexts = _.groupBy( mine.graph, 'dcterm:source' );
+        }
+        // tool settings
         if ( Object.keys(annotorious).length > 0 ) {
             annotorious[ Object.keys(annotorious) ].readOnly = false; // image
         }
         if ( $( ".waveform" ).length ) {
+            wavesurfer.disableDragSelection();
             wavesurfer.enableDragSelection({
-                color: randomColor(0.1)
+                color: 'rgb(74, 186, 159,.2)',
+                resize: false,
+                drag: false
             }); // sound
             wavesurfer.setProgressColor( '#358078' );
+            wavesurfer.un('region-update-end');
+            wavesurfer.on('region-update-end', function( region ) {
+                wavesurfer.disableDragSelection();
+                var target = secondsToTime(region.start) + "–" + secondsToTime(region.end);
+                var id = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
+                var work = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
+                var expr = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'expr' );
+                $( ".tab-pane.active [data-id='"+region.id+"']" ).popover({
+                    sanitize: false,
+                    content: `<a role="button" class="save" data-start="`+region.start+`" data-end="`+region.end+`" data-ids="`+region.id+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+                        <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
+                    html: true,
+                    placement: 'auto',
+                    container: '.text',
+                    template: `<div class="popover popover-dismiss-select med" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
+                        <div class="popover-arrow"></div>
+                        <div class="popover-body"></div>
+                    </div>`
+                })
+                dismiss_select = $( ".tab-pane.active [data-id='"+region.id+"']" ).popover('show');
+                dismiss_select.popover('toggleEnabled'); // disable toggling
+                dismiss_region = region;
+            });
         }
-        var work = "https://www.romanticperiodpoetry.org/id/"+wid+"/work";
-        processBuildingBlocks( work );
     }
+    // initialize
+    initializeContexts( contexts[ $( ".text button.active" ).data( "expr" ) ], mode );
+}
 
+function initializeContexts( exprContexts, mode ) {
+    $( ".contexts" ).html( "" );
+    $( ".workbench" ).html( "" );
+    // filter exprContexts by type and pass to handlers
+    if ( mode == "edit" ) {
+        var bb = _.filter( exprContexts, function(o) { 
+            return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:txt";
+        });
+        processBuildingBlocks( bb );
+        if ( Object.keys(annotorious).length > 0 ) {
+            var bb = _.filter( exprContexts, function(o) { 
+                return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:img";
+            });
+            processImageAnnotations( Object.keys(annotorious), bb )
+        }
+        if ( $( ".waveform" ).length ) {
+            var bb = _.filter( exprContexts, function(o) { 
+                return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:aud";
+            });
+            processMediaBuildingBlocks( bb )
+        }
+    } else {
+        var tc = _.filter( exprContexts, function(o) {
+            return o["type"].includes( "rppa:Context" ) && o["crm:P2_has_type"][0].id == "lct:txt";
+        });
+        processTxtContexts( tc );
+    }
 }
 
 $( document ).on('click', 'a.show_globaltext', async function (e) {
@@ -603,9 +649,7 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 $( document ).ready(function() {
 
-    // TODO -- remove this when going live
-    $( ".sso-sign-in" ).remove();
-
+    //$( ".sso-sign-in" ).remove();
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;

@@ -227,20 +227,20 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
   list-style-type: none;
 }
 
-.text .attribution {
+.text .attribution, .context .attribution {
   font-size:.85em;
   float:right;
   width: 80%;
   text-align: right;
 }
-.text .attribution div {
+.text .attribution div, .context .attribution div {
   display: inline-block;
 }
-.text .attribution div>span:nth-of-type(1) {
+.text .attribution div>span:nth-of-type(1), .context .attribution  div>span:nth-of-type(1) {
   font-style: italic;
   margin-right:3px;
 }
-.text .attribution div .bibl {
+.text .attribution div .bibl, .context .attribution div .bibl {
   margin-left: 0;
   text-indent: 0;
 }
@@ -344,23 +344,51 @@ a.note {
   background-color: unset;
   border-bottom: unset;
 }
+.highlight-tc {
+  background-color: rgba(255,244,202,1);
+  border-bottom: 2px solid rgba(255,204,122,1);
+  color: inherit;
+}
+.pagebreak .highlight-tc,
+.numbering .highlight-tc {
+  background-color: unset;
+  border-bottom: unset;
+}
 
-.pulse {
--webkit-animation: pulse 400ms infinite alternate;
-        animation: pulse 400ms infinite alternate;
+.pulse-bb {
+-webkit-animation: pulse-bb 400ms infinite alternate;
+        animation: pulse-bb 400ms infinite alternate;
 }
-.pulse::after {
+.pulse-bb::after {
   content: " ";
-  -webkit-animation: pulse 400ms infinite alternate;
-  animation: pulse 400ms infinite alternate;
+  -webkit-animation: pulse-bb 400ms infinite alternate;
+  animation: pulse-bb 400ms infinite alternate;
 }
-@-webkit-keyframes pulse {
+@-webkit-keyframes pulse-bb {
 0% { background-color: rgba(245,254,252,1) }
 100% { background-color: rgba(215,224,222,1) }
 }
-@keyframes pulse {
+@keyframes pulse-bb {
 0% { background-color: rgba(245,254,252,1) }
 100% { background-color: rgba(215,224,222,1) }
+}
+
+.pulse-tc {
+  -webkit-animation: pulse-tc 400ms infinite alternate;
+          animation: pulse-tc 400ms infinite alternate;
+  }
+.pulse-tc::after {
+  content: " ";
+  -webkit-animation: pulse-tc 400ms infinite alternate;
+  animation: pulse-tc 400ms infinite alternate;
+}
+@-webkit-keyframes pulse-tc {
+0% { background-color: rgba(255,224,172,1) }
+100% { background-color: rgba(255,244,222,1) }
+}
+@keyframes pulse-tc {
+0% { background-color: rgba(255,224,172,1) }
+100% { background-color: rgba(255,244,222,1) }
 }
 
 ul.bb {
@@ -387,4 +415,34 @@ ul.bb li canvas {
 }
 .waveform {
   margin-top: 15px;
+}
+
+.highlight-gbl-start
+{ border-left: 2px dashed var(--bs-orange); padding-left: 5px; }
+.highlight-gbl-end
+{ border-right: 2px dashed var(--bs-orange); padding-right: 5px; }
+
+.context .card-footer { 
+  text-align: right;
+  font-size: 13.6px;
+  font-variant: all-petite-caps;
+}
+.context .card-header .creator { 
+  font-size: small;
+}
+.context .card-body {
+  max-height:750px;
+  overflow:auto;
+}
+.context.active {
+  border-color: var(--bs-orange);
+}
+
+.idsSelected {
+/*
+  background-color: rgb(136, 188, 223);
+  color:#fff;
+*/
+  border-bottom: 2px solid var(--bs-orange);
+  background-color: rgba(255,244,202,1);
 }

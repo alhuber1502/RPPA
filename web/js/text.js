@@ -25,7 +25,7 @@ function w_and_pc_only( id ) {
     return id;
 }
 // offer user save/cancel options
-var dismiss_select = undefined;
+var dismiss_select = undefined, alignment = {};
 $( document ).on( "mouseup", ".tab-pane.active .text", function(e) {
     if ( mode == "edit" && $(e.target).closest("a").length == 0 ) {
         var sel = rangy.getSelection();
@@ -49,7 +49,7 @@ $( document ).on( "mouseup", ".tab-pane.active .text", function(e) {
                 html: true,
                 placement: 'auto',
                 container: 'body',
-                template: `<div class="popover popover-dismiss-select" role="popover" tabindex="0" data-trigger="focus">
+                template: `<div class="popover popover-dismiss-select txt" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
                     <div class="popover-arrow"></div>
                     <div class="popover-body"></div>
                 </div>`
@@ -64,11 +64,11 @@ $( document ).on( "mouseup", ".tab-pane.active .text", function(e) {
     }
 });
 // dismiss target
-$( document ).on( "click", ".popover-dismiss-select .cancel", async function(e) {
+$( document ).on( "click", ".popover-dismiss-select.txt .cancel", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
 });
 // save target
-$( document ).on( "click", ".popover-dismiss-select .save", async function(e) {
+$( document ).on( "click", ".popover-dismiss-select.txt .save", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
     createW3Canno( $( this ).data("sel"), $( this ).data("ids").split( "," ), $( this ).data("id"), $( this ).data("work"), $( this ).data("expr") );
 });
@@ -92,13 +92,17 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "`+id+`",
         "type": "Annotation",
-        "creator": "`+domain+`",
+        "creator": "`+user+`",
         "created": "`+date.toISOString()+`",
-        "dcterm:identifier": "`+obj_id+`",
-        "dcterm:source": "`+expr+`",
+        "dcterms:identifier": "`+obj_id+`",
+        "dcterms:relation": "`+work+`",
+        "dcterms:source": "`+expr+`",
         "motivation": "highlighting",
         "target": [
           { "source": "`+obj_id+`",
+            "type": "Text",
+            "format": "lct:txt",
+            "language": "`+$( ".text .tab-content .active" ).attr( "lang" )+`",
             "selector": [
             {
                 "type": "CssSelector",
@@ -116,13 +120,15 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
     var update = namespaces+"insert data {\n";
     update += `GRAPH `+user+` { <`+id+`> a rppa:BuildingBlock, cnt:ContentAsText ;\n`;
     update += `dcterm:identifier """`+obj_id+`""" ;\n`;
-    update += `dcterm:source """`+work+`""" ;\n`;
+    update += `dcterm:relation """`+work+`""" ;\n`;
+    update += `dcterm:source """`+expr+`""" ;\n`;
     update += `cnt:characterEncoding "UTF-8" ;\n`;
-    update += `cnt:bytes """`+JSON.stringify(JSON.parse( W3Canno )).replace(/\\"/g,"&quot;")+`""" ;\n`;
+    update += `crm:P2_has_type lct:txt ;\n`;
+    update += `cnt:bytes """`+JSON.stringify(JSON.parse( W3Canno ))+`""" ;\n`;
     update += `dcterm:created """`+date.toISOString()+`""" ;\n`;
     update += `. }\n}`;
     await putTRIPLES( update );
-    processW3Canno( JSON.parse( W3Canno ) );
+    $( ".workbench .bb" ).append( processW3Canno( JSON.parse( W3Canno ) ) );
 }
 // create annotaion display and anchor
 function processW3Canno( annotation ) {
@@ -132,69 +138,158 @@ function processW3Canno( annotation ) {
     var sel = rangy.getSelection();
     var range = rangy.createRange();
     high = rangy.createHighlighter();
-    high.addClassApplier(rangy.createClassApplier("highlight-bb", {
-        ignoreWhiteSpace: true
-    }));
+    high.addClassApplier(rangy.createClassApplier("highlight-bb"));
     range.setStart( $( jqu(ids[0]) )[0], 0 );
     range.setEndAfter( $( jqu(ids[ids.length-1]) )[0], 0 );
     sel.setSingleRange(range);
     high.highlightSelection("highlight-bb");
     sel.collapseToEnd();
     sel.detach();
-    note = `"`+annotation.target[0].selector[1].exact.replace(/&quot;/g,'&').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ").replace(/(\r\n|\n|\r|\t|\f)/gm," / ")+`"` ;
-    $( ".workbench" ).append( note );
+    bb_id = annotation.id;
+    return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
+        <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
+        <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+        <label for="`+bb_id+`">`+annotation.target[0].selector[1].exact.replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
 }
 
 // delete annotation
-$( document ).on( "click", ".popover-dismiss-anno .trash,.popover-dismiss .trash", async function(e) {
-    $( ".popover-dismiss-anno,.popover-dismiss" ).popover( 'dispose' );
-    if ( $( this ).parent().prev().find( "textarea" ).data( "anno_id" ) ) {
-        var id = $( this ).parent().prev().find( "textarea" ).data( "anno_id" );
-        var ids = $( this ).parent().prev().find( "textarea" ).data( "ids" ).split( "," );
-        var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
-        await putTRIPLES( update );
-        // unhighlight annotation and detach popovers
-        $.each( ids, function( i,v ) {
-            $( jq(v) ).popover( 'dispose' );
-            $( jq(v) ).removeClass( "highlight-"+$( jq(v) ).closest( ".window" ).data( "id" ).substr(GetSubstringIndex($( jq(v) ).closest( ".window" ).data( "id" ),"/",4)+1) );
-            $( jq(v) ).next().removeClass( "highlight-"+$( jq(v) ).closest( ".window" ).data( "id" ).substr(GetSubstringIndex($( jq(v) ).closest( ".window" ).data( "id" ),"/",4)+1) );
-        });
-    }
-});
-
-// enforce single annotation toggle
-$('#windows').on('click', function (e) {
-    if ( $( ".popover-dismiss" ).length > 1) {
-        $( $( ".popover-dismiss" )[0] ).popover('hide');
-    }
+$( document ).on( "click", ".bb-item.txt .trash", async function(e) {
+    var _this = $( this );
+    var wid = $( this ).closest( "[data-wid]" ).data( "wid" );
+    var id = $( this ).prev().attr( "id" );
+    var ids = $( this ).parent().data( "ids" ).split( "," );
+    var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
+    await putTRIPLES( update );
+    // unhighlight annotation and detach popovers
+    $.each( ids, function( i,v ) {
+        _this.parent().remove();
+        $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
+        $( jqu(v) ).next( ".highlight-bb" ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
+    });
+    processGlobalText( "", wid );
 });
 // retrieve and display annotations
-async function processBuildingBlocks( text ) {
-    var q = namespaces+`SELECT * WHERE { 
-        {
-            ?s rdf:type rppa:BuildingBlock . 
-            ?s dcterm:source '''`+text+`''' . 
-            ?s cnt:bytes ?o . 
-            BIND ( rdf:type AS ?p ) BIND ( <default> as ?g ) 
-        }
-        UNION
-        {
-            GRAPH `+user+` {
-                ?s rdf:type rppa:BuildingBlock . 
-                ?s dcterm:source '''`+text+`''' . 
-                ?s cnt:bytes ?o . 
-                BIND ( rdf:type AS ?p ) BIND ( `+user+` as ?g )
-            }
-        }
-    }`;
-    var bb = await getJSONLD( q, "raw" ); // DONE
+function processBuildingBlocks( bb ) {
+    $( ".workbench" ).html( `<h2>Current selections</h2><ul class="bb"></ul>` );
+    $( ".highlight-bb" ).removeClass( "highlight-bb" );
     for (var j = 0; j < bb.length; j++ ) {
-        var v = bb[ j ];
-        processW3Canno( JSON.parse( v.o.value ) );
+        $( ".workbench .bb" ).append( processW3Canno( JSON.parse( bb[ j ][ "cnt:bytes" ].replace(/&quot;/g,'"').replace(/(\r\n|\n|\r|\t|\f)/gm," / ") ) ) );
     }
 }
+$(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
+    var id = $( e.currentTarget ).data( "ids" ).split( "," )[0] || '';
+    if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
+        $( "button[data-expr='"+$( e.currentTarget ).data( "expr" )+"']" ).trigger('click');
+    }
+    document.getElementById( id.substring(1) ).scrollIntoView( {behavior: "smooth", block: "start"} );
+    $( $( e.currentTarget ).data( "ids" ) ).addClass("pulse-bb");
+}).on('mouseleave', '.bb-item.txt', function ( e ) {
+    $( $( e.currentTarget ).data( "ids" ) ).removeClass("pulse-bb");
+});
 
+function processTxtContexts( tc ) {
+    $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
+    $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
+    $( ".highlight-tc" ).removeClass( "highlight-tc" );
+    for (var j = 0; j < tc.length; j++ ) {
+        processW3Ccontext( JSON.parse( tc[ j ][ "cnt:bytes" ] ) );
+    }
+}
+// create annotaion display and anchor
+function processW3Ccontext( annotation ) {
+    // determine action
+    var header, sub, footer;
+    switch ( annotation.body[0][ "dcterms:type" ] ) {
+        case "rppa:Alignment":
+            fetch( annotation.body[0].items[0] )
+            .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
+                return response.text();
+            }).then(data => {
+                header = `Translation Alignment Context`;
+                sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation.body[0].creator+`</span></div>`;
+                footer = ``;
+                footer += `<div>Contributed by `+annotation.creator.name+` on `+new Date( annotation.created ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
+                $( ".contexts" ).html( make_context( annotation.id, header+sub, data, footer, annotation.target.selector[0].value ) );
+                return fetch( annotation.body[0].items[1] )
+            }).then(response => {
+                return response.json();
+            }).then( data => {
+                alignment[ annotation.id ] = {};
+                for ( var prop in data ) {
+                    $.each( data[ prop ], function( index, item ) {
+                        // if alignment[ annotation.id ][ item ].length == 0
+                        if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
+                            alignment[ annotation.id ][ item ] = [];
+                        }
+                        alignment[ annotation.id ][ item ].push( prop );
+                    });
+                }
+                $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
+                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                        document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                        $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).addClass("idsSelected");       // text
+                        $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                    }
+                }).on('mouseleave', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
+                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                        $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).removeClass("idsSelected");    // text
+                        $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                    }
+                });
+                tc_id = annotation.id;
+                $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
+                    //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
+                    ((user == annotation.creator.id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
+                    +` <label for="`+tc_id+`">`+header+`</label></li>` );
+                clearInterval( t );
+                t = setInterval(updateDOM(),500);
+            }).catch((e) => {});
+        break;
+    }
+}
+function make_context( id, header, data, footer, ids ) {
+    return `<div class="card context" id="`+id+`" data-ids="`+ids+`"><div class="card-header">`+header+`</div><div class="card-body">`+data+`</div><div class="card-footer">`+footer+`</div></div>`;
+}
 
+$(document).on('mouseenter', '.context', function () {
+    $( $(this) ).addClass("active");
+    // format annotation
+    var ids = $( this ).data( "ids" ).split( "," ); // => [ "#K060422_000-02650","#K060422_000-02660.1","#K060422_000-02670","#K060422_000-02680" ]
+    // global highlight
+    $( jqu(ids[0]) ).addClass( "highlight-gbl-start" )
+    $( jqu(ids[[ids.length-1]]) ).addClass( "highlight-gbl-end" )
+    // highlight annotation
+    if ( !ids[0].startsWith( "#text" ) ) {
+        var sel = rangy.getSelection();
+        var range = rangy.createRange();
+        high = rangy.createHighlighter();
+        high.addClassApplier(rangy.createClassApplier("highlight-tc"));
+        range.setStart( $( jqu(ids[0]) )[0], 0 );
+        range.setEndAfter( $( jqu(ids[ids.length-1]) )[0], 0 );
+        sel.setSingleRange(range);
+        high.highlightSelection("highlight-tc");
+        sel.collapseToEnd();
+        sel.detach();
+    }
+}).on('mouseleave', '.context', function () {
+    $( $(this) ).removeClass("active");
+    var ids = $( this ).data( "ids" ).split( "," );
+    $.each( ids, function( i,v ) {
+        $( jqu(v) ).removeClass( "highlight-tc" ).removeClass( "highlight-gbl-start" ).removeClass( "highlight-gbl-end" );
+        $( jqu(v) ).next( ".highlight-tc" ).removeClass( "highlight-tc" );
+    });    
+});
+
+$(document ).on('mouseenter', '.tc-item.txt', function ( e ) {
+    var id = $( e.currentTarget ).data( "ids" ) || '';
+    if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
+        $( "button[data-expr='"+$( e.currentTarget ).data( "expr" )+"']" ).trigger('click');
+    }
+    document.getElementById( id ).scrollIntoView( {behavior: "smooth", block: "start"} );
+    $( "[id='"+$( e.currentTarget ).data( "ids" )+"']" ).addClass("pulse-tc");
+}).on('mouseleave', '.tc-item.txt', function ( e ) {
+    $( "[id='"+$( e.currentTarget ).data( "ids" )+"']" ).removeClass("pulse-tc");
+});
 
 // Function for a specific context-type, here highlighting @corresp-onding
 // entities  

@@ -48,6 +48,15 @@ function getFormData($form){
     return indexed_array;
 }
 
+function secondsToTime(e){
+    const h = Math.floor(e / 3600).toString().padStart(2,'0'),
+          m = Math.floor(e % 3600 / 60).toString().padStart(2,'0'),
+          s = Math.floor(e % 60).toString().padStart(2,'0');
+    
+    return h + ':' + m + ':' + s;
+    //return `${h}:${m}:${s}`;
+}
+
 // make strings JSON-safe
 String.prototype.escapeSpecialChars = function() {
     return this.replace(/\\n/g, "\\n")
@@ -60,12 +69,65 @@ String.prototype.escapeSpecialChars = function() {
                .replace(/\\f/g, "\\f");
 };
 
+function updateDOM() {
+    var genericCloseBtnHtml = '<button type="button" class="btn-close" aria-hidden="true" style="float:right;"></button>';
+    // initialize tooltips and popovers
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList2 = _.difference( tooltipTriggerList, done_tooltipTriggerList );
+    done_tooltipTriggerList = tooltipTriggerList;
+    var tooltipList = [...tooltipTriggerList2].map(function (tooltipTriggerEl) {
+        return new bootstrap.Popover(tooltipTriggerEl, {
+            html: true,
+            placement: 'auto',
+            container: 'body',
+            sanitize: false,
+            trigger: 'hover click',
+            customClass: 'authorial note',
+            title: function() {
+                return "Authorial note"+genericCloseBtnHtml
+            },
+            content: function() {
+                if ( $(this).next(".footy").length ) {
+                    return $(this).next().clone().removeClass("hidden");
+                } else {
+                    return $(this).parent().next().clone().removeClass("hidden");
+                }
+            }
+        });
+    });
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList2 = _.difference( popoverTriggerList, done_popoverTriggerList );
+    done_popoverTriggerList = popoverTriggerList;
+    var popoverList = [...popoverTriggerList2].map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            html: true,
+            placement: 'auto',
+            container: 'body',
+            sanitize: false,
+            trigger: 'click',
+            customClass: 'editorial note',
+            title: function() {
+                return "Editorial note"+genericCloseBtnHtml
+                //$(this).attr("data-type")[0].toUpperCase() +
+                //$(this).attr("data-type").slice(1)+
+            },
+            content: function() {
+                if ( $(this).next(".footy").length ) {
+                    return $(this).next().clone().removeClass("hidden");
+                } else {
+                    return $(this).parent().next().clone().removeClass("hidden");
+                }
+            }
+        });
+    });
+}
+
 function randomColor(alpha) {
     return (
         'rgba(' +
         [
             ~~(Math.random() * 255),
-            ~~(Math.random() * 255),
+            ~~(255),
             ~~(Math.random() * 255),
             alpha || 1
         ] +
@@ -193,9 +255,9 @@ function testAPI() {                      // Testing Graph API after login.  See
             } BIND( foaf:name AS ?p )
         }`;
         var usergraph = await getJSONLD( q, "quads" );
-        if ( usergraph.hasOwnProperty( 'graph' ) ) {
-            user = usergraph.graph[0].id;
-            username = usergraph.graph[0]["foaf:name"];
+        if ( usergraph.hasOwnProperty( 'id' ) ) {
+            user = usergraph.id;
+            username = usergraph["foaf:name"];
         } else {
             // new user
             user = "rppa:user-"+uuidv4();
@@ -253,9 +315,9 @@ async function handleCredentialResponse(response) {
             } BIND( foaf:name AS ?p )
         }`;
     var usergraph = await getJSONLD( q, "quads" );
-    if ( usergraph.hasOwnProperty( 'graph' ) ) {
-        user = usergraph.graph[0].id;
-        username = usergraph.graph[0]["foaf:name"];
+    if ( usergraph.hasOwnProperty( 'id' ) ) {
+        user = usergraph.id;
+        username = usergraph["foaf:name"];
     } else {
         // new user
         user = "rppa:user-"+uuidv4();
