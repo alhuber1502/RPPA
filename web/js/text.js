@@ -197,7 +197,10 @@ function processTxtContexts( tc ) {
 }
 // create annotaion display and anchor
 function processW3Ccontext( annotation ) {
-
+    // all contexts for a work expression are retrieved by default, so that they
+    // could be shown when a work with only fragments is displayed, therefore
+    // we simply check if the context target exists before we show it (may need
+    // a more sophisticated implementation)
     if ( $( annotation.target.selector[0].value ).length ) {
         var header, sub, footer;
         // determine action
