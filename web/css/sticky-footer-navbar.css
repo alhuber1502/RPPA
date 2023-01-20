@@ -251,7 +251,7 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
   font-size:1.3em;
   line-height:1.3em;
 }
-.text .head:first-child {
+.text > .head:first-child {
   font-size: 1.5rem;
 }
 .rppa .head {
@@ -281,8 +281,7 @@ img[src='/images/male.png'], img[src='/images/female.png'], .poet-marker {
 }
 .modal-body .row > div {
   overflow: auto;
-/*  height: calc( 100vh - 84px);*/
-  height: 100%;
+  height: calc( 100vh - 84px);
   border-right: 1px #ddd dashed;
   border-left: 1px #ddd dashed;
 }

@@ -197,54 +197,57 @@ function processTxtContexts( tc ) {
 }
 // create annotaion display and anchor
 function processW3Ccontext( annotation ) {
-    // determine action
-    var header, sub, footer;
-    switch ( annotation.body[0][ "dcterms:type" ] ) {
-        case "rppa:Alignment":
-            fetch( annotation.body[0].items[0] )
-            .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
-                return response.text();
-            }).then(data => {
-                header = `Translation Alignment Context`;
-                sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation.body[0].creator+`</span></div>`;
-                footer = ``;
-                footer += `<div>Contributed by `+annotation.creator.name+` on `+new Date( annotation.created ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
-                $( ".contexts" ).html( make_context( annotation.id, header+sub, data, footer, annotation.target.selector[0].value ) );
-                return fetch( annotation.body[0].items[1] )
-            }).then(response => {
-                return response.json();
-            }).then( data => {
-                alignment[ annotation.id ] = {};
-                for ( var prop in data ) {
-                    $.each( data[ prop ], function( index, item ) {
-                        // if alignment[ annotation.id ][ item ].length == 0
-                        if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
-                            alignment[ annotation.id ][ item ] = [];
+
+    if ( $( annotation.target.selector[0].value ).length ) {
+        var header, sub, footer;
+        // determine action
+        switch ( annotation.body[0][ "dcterms:type" ] ) {
+            case "rppa:Alignment":
+                fetch( annotation.body[0].items[0] )
+                .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
+                    return response.text();
+                }).then(data => {
+                    header = `Translation Alignment Context`;
+                    sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation.body[0].creator+`</span></div>`;
+                    footer = ``;
+                    footer += `<div>Contributed by `+annotation.creator.name+` on `+new Date( annotation.created ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
+                    $( ".contexts" ).append( make_context( annotation.id, header+sub, data, footer, annotation.target.selector[0].value ) );
+                    return fetch( annotation.body[0].items[1] )
+                }).then(response => {
+                    return response.json();
+                }).then( data => {
+                    alignment[ annotation.id ] = {};
+                    for ( var prop in data ) {
+                        $.each( data[ prop ], function( index, item ) {
+                            // if alignment[ annotation.id ][ item ].length == 0
+                            if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
+                                alignment[ annotation.id ][ item ] = [];
+                            }
+                            alignment[ annotation.id ][ item ].push( prop );
+                        });
+                    }
+                    $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
+                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                            $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).addClass("idsSelected");       // text
+                            $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).addClass("idsSelected");    // context
                         }
-                        alignment[ annotation.id ][ item ].push( prop );
+                    }).on('mouseleave', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
+                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).removeClass("idsSelected");    // text
+                            $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                        }
                     });
-                }
-                $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
-                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                        document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
-                        $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).addClass("idsSelected");       // text
-                        $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).addClass("idsSelected");    // context
-                    }
-                }).on('mouseleave', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
-                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                        $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).removeClass("idsSelected");    // text
-                        $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).removeClass("idsSelected"); // context
-                    }
-                });
-                tc_id = annotation.id;
-                $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
-                    //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
-                    ((user == annotation.creator.id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
-                    +` <label for="`+tc_id+`">`+header+`</label></li>` );
-                clearInterval( t );
-                t = setInterval(updateDOM(),500);
-            }).catch((e) => {});
-        break;
+                    tc_id = annotation.id;
+                    $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
+                        //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
+                        ((user == annotation.creator.id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
+                        +` <label for="`+tc_id+`">`+header+`</label></li>` );
+                    clearInterval( t );
+                    t = setInterval(updateDOM(),500);
+                }).catch((e) => {});
+            break;
+        }
     }
 }
 function make_context( id, header, data, footer, ids ) {
