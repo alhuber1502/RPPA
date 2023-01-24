@@ -210,7 +210,7 @@ function processW3Ccontext( annotation ) {
                 .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                     return response.text();
                 }).then(data => {
-                    header = `Translation Alignment Context`;
+                    header = `Translation Alignment Context: `+annotation.body[0][ "dcterms:title" ];
                     sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation.body[0].creator+`</span></div>`;
                     footer = ``;
                     footer += `<div>Contributed by `+annotation.creator.name+` on `+new Date( annotation.created ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
@@ -245,7 +245,7 @@ function processW3Ccontext( annotation ) {
                     $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
                         //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
                         ((user == annotation.creator.id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
-                        +` <label for="`+tc_id+`">`+header+`</label></li>` );
+                        +` <label for="`+tc_id+`" style="display:inline">`+header+`</label></li>` );
                     clearInterval( t );
                     t = setInterval(updateDOM(),500);
                 }).catch((e) => {});
