@@ -448,7 +448,7 @@
 
   // start with overlayMap
   baseMap.setOpacity(0);
-  $( ".map").css( "background-color", "#f1e4cf" );
+  $( ".map").css( "background-color", "#ede0cb" );
 
   // visualization layers
   var markerLayer = L.layerGroup().addTo( map );
@@ -497,7 +497,7 @@
   // switch base/overlay (to hide hist map "flaw")
   map.on('overlayadd', function() {
     baseMap.setOpacity(0);
-    $( ".map").css( "background-color", "#f1e4cf" );
+    $( ".map").css( "background-color", "#ede0cb" );
   });
   map.on('overlayremove', function() {
     $( ".map").css( "background-color", "#fff" );
@@ -512,7 +512,7 @@
     } else {
       if ( map.hasLayer( overlayMap) ) {
         baseMap.setOpacity(0);
-        $( ".map").css( "background-color", "#f1e4cf" );
+        $( ".map").css( "background-color", "#ede0cb" );
       } else {
         $( ".map").css( "background-color", "#fff" );        
         baseMap.setOpacity(1);
