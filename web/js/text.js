@@ -26,43 +26,63 @@ function w_and_pc_only( id ) {
 }
 // offer user save/cancel options
 var dismiss_select = undefined, alignment = {};
-$( document ).on( "mouseup", ".tab-pane.active .text", function(e) {
+$( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak)", function(e) {
+    e.stopPropagation();
     if ( mode == "edit" && $(e.target).closest("a").length == 0 ) {
         var sel = rangy.getSelection();
-        var target, ids = [];
+        var target, ids = [], id, work, expr;
         if ( dismiss_select ) dismiss_select.popover( 'dispose' );
-        if ( sel.text() ) {
-            target = sel.text();              
+        if ( sel.text() != "" ) { // text segment selection
+            target = sel.text();
             if ( sel.toHtml().includes(" id=") ) {
                 ids = Array.from( sel.toHtml().matchAll( /span.*?id="(.*?)"/gsi ), m => m[1]);
             } else {
                 ids = [ getHTML( sel.anchorNode.parentNode, true).match( /span.*?id="(.*?)"/si )[1] ];
             }
             ids = ids.filter( w_and_pc_only );
-            var id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
-            var work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
-            var expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
-            $( jq(ids[ids.length-1]) ).popover({
-                sanitize: false,
-                content: `<a role="button" class="save" data-ids="`+ids+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
-                    <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
-                html: true,
-                placement: 'auto',
-                container: 'body',
-                template: `<div class="popover popover-dismiss-select txt" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
-                    <div class="popover-arrow"></div>
-                    <div class="popover-body"></div>
-                </div>`
-            });
-            dismiss_select = $( jq(ids[ids.length-1]) ).popover('show');
+            id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
+            work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
+            expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
+        } else {            // structure selection
+            target = '';
+            ids.push( $( jq( $( e.currentTarget ).attr( "id" ) ) ).closest( "[id]" ).attr( 'id' ) );
+            id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
+            work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
+            expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
         }
+        $( jq(ids[ids.length-1]) ).popover({
+            sanitize: false,
+            content: `<a role="button" class="save" data-ids="`+ids+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+                <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
+            html: true,
+            placement: 'auto',
+            container: 'body',
+            template: `<div class="popover popover-dismiss-select txt" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
+                <div class="popover-arrow"></div>
+                <div class="popover-body"></div>
+            </div>`
+        });
+        dismiss_select = $( jq(ids[ids.length-1]) ).popover('show');
         $( ".pagebreak,.numbering" ).css( "visibility","revert" );
     }
-}).on( "mousedown", ".tab-pane.active .text", function(e) {
+}).on( "mousedown", ".tab-pane.active .text *:not(.pagebreak)", function(e) {
+    e.stopPropagation();
     if ( mode == "edit" && $(e.target).closest("a").length == 0 ) {
         $( ".pagebreak,.numbering" ).css( "visibility","hidden" );
     }
 });
+$(document ).on('mouseenter', '.tab-pane.active .text *:not(.pagebreak)', function ( e ) {
+    if ( mode == "edit" ) {
+        var id = $( e.currentTarget ).attr( "id" );
+        $( "[id='"+id+"']" ).addClass("highlight-bb");
+    }
+}).on('mouseleave', '.tab-pane.active .text *:not(.pagebreak)', function ( e ) {
+    if ( mode == "edit" ) {
+        var id = $( e.currentTarget ).attr( "id" );
+        $( "[id='"+id+"']" ).removeClass("highlight-bb");
+    }
+});
+
 // dismiss target
 $( document ).on( "click", ".popover-dismiss-select.txt .cancel", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
@@ -107,11 +127,14 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
             {
                 "type": "CssSelector",
                 "value": "`+ids.join( "," )+`"
-            },
-            {
+            }`;
+        if( target != '' ) { W3Canno += `  
+            ,{
                 "type": "TextQuoteSelector",
                 "exact": "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`"
-            }
+            }`;
+        }
+        W3Canno += `
             ]
           }
         ]
@@ -146,10 +169,33 @@ function processW3Canno( annotation ) {
     sel.collapseToEnd();
     sel.detach();
     bb_id = annotation.id;
-    return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
-        <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
-        <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
-        <label for="`+bb_id+`">`+annotation.target[0].selector[1].exact.replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
+    if ( annotation.target[0].selector[1] ) {
+        return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
+            <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
+            <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+            <label for="`+bb_id+`">`+annotation.target[0].selector[1].exact.replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
+    } else {
+        var sel_text = '';
+        if ( $( jqu(annotation.target[0].selector[0].value) ).find( ".w,.pc" ).length > 0 ) {
+            sel_text = $( $( jqu(annotation.target[0].selector[0].value) ).find( ".w,.pc" ) )[0].innerText+" ...";
+        } else {
+            sel_text = $( jqu(annotation.target[0].selector[0].value) )[0].innerText;
+        }
+        if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'lg' ) ) {
+            sel_text = "<em>Stanza:</em> "+sel_text;
+        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'l' ) ) {
+            sel_text = "<em>Line:</em> "+sel_text;
+        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'head' ) ) {
+            sel_text = "<em>Heading:</em> "+sel_text;
+        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'w' ) ) {
+        } else {
+            sel_text = "<em>Segment:</em> "+sel_text;
+        }
+        return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
+            <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
+            <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+            <label for="`+bb_id+`">`+sel_text+`</label></li>` ;        
+    }
 }
 
 // delete annotation
@@ -231,14 +277,44 @@ function processW3Ccontext( annotation ) {
                     }
                     $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
                         if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            var hovered = $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
                             document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
                             $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).addClass("idsSelected");       // text
                             $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                            $( '.context[id="'+annotation.id+'"] .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                   $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                   $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
                         }
                     }).on('mouseleave', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
                         if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            var hovered = $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
                             $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).removeClass("idsSelected");    // text
                             $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                            $( '.context[id="'+annotation.id+'"] .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                   $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                   $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });                            
                         }
                     });
                     tc_id = annotation.id;

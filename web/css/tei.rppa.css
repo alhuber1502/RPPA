@@ -58,8 +58,9 @@
 .text div.lgvspace {
     margin-bottom: 1em;
 }
-.text div.lg {
-    margin-bottom: 1em;
+.text div.lg, .text .epigraph {
+/*    margin-bottom: 1em;*/
+    padding: 10px;
 }
 
 #myScrollspy {

@@ -649,7 +649,7 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 $( document ).ready(function() {
 
-    $( ".sso-sign-in" ).remove();
+    //$( ".sso-sign-in" ).remove();
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;
