@@ -339,6 +339,12 @@ a.note {
   border-bottom: 2px solid #0C80A1;
   color: inherit;
 }
+.highlight-bb-m {
+  background-color: unset;
+  outline: 1px solid #0C80A1;
+  outline-offset:-1px;
+  color: inherit;
+}
 .pagebreak .highlight-bb,
 .numbering .highlight-bb {
   background-color: unset;
@@ -411,7 +417,7 @@ ul.bb li canvas {
 }
 .tab-content {
   overflow: auto;
-  height: calc( 100vh - 134px );
+  height: calc( 100vh - 149px );
 }
 .waveform {
   margin-top: 15px;

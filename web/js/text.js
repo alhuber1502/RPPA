@@ -26,7 +26,7 @@ function w_and_pc_only( id ) {
 }
 // offer user save/cancel options
 var dismiss_select = undefined, alignment = {};
-$( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak)", function(e) {
+$( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text", function(e) {
     e.stopPropagation();
     if ( mode == "edit" && $(e.target).closest("a").length == 0 ) {
         var sel = rangy.getSelection();
@@ -65,21 +65,21 @@ $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak)", functio
         dismiss_select = $( jq(ids[ids.length-1]) ).popover('show');
         $( ".pagebreak,.numbering" ).css( "visibility","revert" );
     }
-}).on( "mousedown", ".tab-pane.active .text *:not(.pagebreak)", function(e) {
+}).on( "mousedown", ".tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text", function(e) {
     e.stopPropagation();
     if ( mode == "edit" && $(e.target).closest("a").length == 0 ) {
         $( ".pagebreak,.numbering" ).css( "visibility","hidden" );
     }
 });
-$(document ).on('mouseenter', '.tab-pane.active .text *:not(.pagebreak)', function ( e ) {
+$(document ).on('mouseenter', '.tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text', function ( e ) {
     if ( mode == "edit" ) {
         var id = $( e.currentTarget ).attr( "id" );
-        $( "[id='"+id+"']" ).addClass("highlight-bb");
+        $( "[id='"+id+"']" ).addClass("highlight-bb-m");
     }
-}).on('mouseleave', '.tab-pane.active .text *:not(.pagebreak)', function ( e ) {
+}).on('mouseleave', '.tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text', function ( e ) {
     if ( mode == "edit" ) {
         var id = $( e.currentTarget ).attr( "id" );
-        $( "[id='"+id+"']" ).removeClass("highlight-bb");
+        $( "[id='"+id+"']" ).removeClass("highlight-bb-m");
     }
 });
 
@@ -128,7 +128,7 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
                 "type": "CssSelector",
                 "value": "`+ids.join( "," )+`"
             }`;
-        if( target != '' ) { W3Canno += `  
+        if( target != '' ) { W3Canno += `
             ,{
                 "type": "TextQuoteSelector",
                 "exact": "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`"
@@ -188,6 +188,8 @@ function processW3Canno( annotation ) {
         } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'head' ) ) {
             sel_text = "<em>Heading:</em> "+sel_text;
         } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'w' ) ) {
+        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'text' ) ) {
+            sel_text = "<em>Whole poem:</em> "+sel_text;
         } else {
             sel_text = "<em>Segment:</em> "+sel_text;
         }
@@ -219,7 +221,11 @@ function processBuildingBlocks( bb ) {
     $( ".workbench" ).html( `<h2>Current selections</h2><ul class="bb"></ul>` );
     $( ".highlight-bb" ).removeClass( "highlight-bb" );
     for (var j = 0; j < bb.length; j++ ) {
-        $( ".workbench .bb" ).append( processW3Canno( JSON.parse( bb[ j ][ "cnt:bytes" ].replace(/&quot;/g,'"').replace(/(\r\n|\n|\r|\t|\f)/gm," / ") ) ) );
+        try {
+            $( ".workbench .bb" ).append( processW3Canno( JSON.parse( bb[ j ][ "cnt:bytes" ].replace(/&quot;/g,'"').replace(/(\r\n|\n|\r|\t|\f)/gm," / ") ) ) );
+        } catch(err) {
+            console.log( err )
+        }
     }
 }
 $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {

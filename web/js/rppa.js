@@ -94,12 +94,12 @@ async function display_globaltext( tid, wid ) {
                     <div class="modal-header">
                         <div class="row" style="width:100%;">
                             <div class="col-sm-4" style="margin:auto auto;">
-                                <h5 class="modal-title" id="ModalLabel" style="display:inline">`+truncateString(work.tit,50)+` / `+author+`</h5> <span>— a RPPA Global Text</span>
+                                <h5 class="modal-title" id="ModalLabel" style="display:inline">`+truncateString(work.tit,50)+` / `+author+`</h5>
                             </div>
                             <div class="col-sm-4" style="margin:auto auto;">
                                 <div class="tools">
-                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="height:36px;width:112px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
-                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="height:36px;background-color:#2a9d8f;color:#fff;"':' style="height:36px;background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Annotate</span></a>
+                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="height:36px;width:123px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
+                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="height:36px;background-color:#2a9d8f;color:#fff;"':' style="height:36px;background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Contribute</span></a>
                                 </div>
                             </div>
                             <div class="col-sm-4" style=margin:auto auto;">
@@ -250,6 +250,7 @@ function drawGlobalText( tid, wid ) {
                     `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 142px);'></div>`
                 +`</div></div>`;
             imgset_id = cnt_loc[0].id;
+            sources = [];
             $.each(workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ].sort(), function(i,v) {
                 var tilesource = {
                     type: "image",
@@ -316,6 +317,9 @@ function drawGlobalText( tid, wid ) {
                 sources.push( _.find( openseadragonOptions.tileSources, function(tile) { return tile.url.includes( v ); } ) )
             });
             openseadragonOptions.tileSources = sources;
+            if( viewer[ imgset_id ] ) {
+                viewer[ imgset_id ].destroy(); viewer[ imgset_id ] = null;
+            }
             viewer[ imgset_id ] = OpenSeadragon( openseadragonOptions );
             add_image_tools( imgset_id, startPage );
         }
@@ -649,7 +653,7 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 $( document ).ready(function() {
 
-    //$( ".sso-sign-in" ).remove();
+    $( ".sso-sign-in" ).remove();
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;
