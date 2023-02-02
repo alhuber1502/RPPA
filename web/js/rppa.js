@@ -247,7 +247,7 @@ function drawGlobalText( tid, wid ) {
             tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
                 <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                 data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
-                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 142px);'></div>`
+                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 150px);'></div>`
                 +`</div></div>`;
             imgset_id = cnt_loc[0].id;
             sources = [];

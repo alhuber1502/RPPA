@@ -185,14 +185,6 @@ async function createW3Cannotorious( id, page, annotation ) {
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
 
-/* TODO:
-
-    - for consistency's sake, also adapt image selection process to this model
-      of popover-dismiss-select.img, which should be easy enough now, just set
-      annotorious[ Object.keys(annotorious) ].readOnly = true; after selection
-      popup and save or dismiss selection
-*/
-
 // highlight 
 $(document ).on('mouseenter', '.bb-item.img', function ( e ) {
     var id = $( e.currentTarget ).find( "input" ).attr( "id" );
