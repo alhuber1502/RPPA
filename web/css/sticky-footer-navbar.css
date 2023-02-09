@@ -445,12 +445,9 @@ ul.bb li canvas {
 }
 
 .idsSelected {
-/*
-  background-color: rgb(136, 188, 223);
-  color:#fff;
-*/
   border-bottom: 2px solid var(--bs-orange);
   background-color: rgba(255,244,202,1);
+  font-weight:bold;
 }
 .outline-seg {
   outline: 1px solid black;

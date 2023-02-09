@@ -389,7 +389,7 @@ $(document ).on('mouseenter', '[data-corresp]', function ( e ) {
     var corresp = [];
     corresp = $( e.currentTarget ).data( "corresp" ).split( " " ) || [];
     $.each( corresp, function( i,v ) {
-    	$( v ).addClass("idsSelected");
+    	$( v ).addClass("idsSelected").fadeIn(300);
     });
 }).on('mouseleave', '[data-corresp]', function ( e ) {
     var d = this;
@@ -397,7 +397,7 @@ $(document ).on('mouseenter', '[data-corresp]', function ( e ) {
     var corresp = [];
     corresp = $( e.currentTarget ).data( "corresp" ).split( " " ) || [];
     $.each( corresp, function( i,v ) {
-	    $( v ).removeClass("idsSelected");
+	    $( v ).removeClass("idsSelected").fadeOut(300);
     });
 });
 $(document ).on('click', '[data-corresp]', function ( e ) {
