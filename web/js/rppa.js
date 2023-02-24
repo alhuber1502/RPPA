@@ -1,11 +1,11 @@
 // RPPA
 
+// global settings
 var user = undefined, username = undefined;
 var workbench = {}, provider_img = '', contexts;
 var domain = "https://www.romanticperiodpoetry.org";
 
-var SOLR_RPPA;
-var BG_RPPA;
+var SOLR_RPPA, BG_RPPA;
 if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
     BG_RPPA = "https://data.prisms.digital/query/rppa/";
     SOLR_RPPA = "https://data.prisms.digital/solr/rppa/select";
@@ -29,8 +29,7 @@ $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 });
 
 var t, myModalGT, myModalGTEl, zInd = 1054, wavesurfer = undefined, viewer = {}, mode = 'read';
-var done_tooltipTriggerList = [];
-var done_popoverTriggerList = [];
+var done_tooltipTriggerList = [], done_popoverTriggerList = [];
 var loadTexts = function() {
     return $.ajax({ url: "/data/texts.min.json", dataType: 'json',
       success: function(data) {
@@ -132,7 +131,7 @@ async function display_globaltext( tid, wid ) {
             </div>
         </div>`;
     $( "body" ).prepend( text );
-
+    $( ".sso-sign-in" ).remove(); // TODO: remove when ready
     drawGlobalText( tid, wid );
     processGlobalText( tid, wid );
 
@@ -653,7 +652,7 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 $( document ).ready(function() {
 
-    $( ".sso-sign-in" ).remove();
+    $( ".sso-sign-in" ).remove(); // TODO: remove when ready
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;

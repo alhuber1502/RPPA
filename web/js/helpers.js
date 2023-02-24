@@ -135,6 +135,37 @@ function randomColor(alpha) {
     );
 }
 
+function load_poet_overview( id ) {
+    return new Promise(function(resolve, reject) {
+      $.ajax({
+          url: "/data/persons/"+id+".json",
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+              resolve(data)
+          },
+          error: function(err) {
+              reject(err)
+          }
+      });
+    });
+}
+function load_work_overview( id ) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: "/data/works/"+id+".json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(err) {
+                reject(err)
+            }
+        });
+    });
+}
+
 $( document ).on( "click", ".sso-sign-in", function(e) {
     var sso_modal=`
     <!-- welcome modal -->

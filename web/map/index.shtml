@@ -478,6 +478,7 @@
       }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
     });
   }
+  // load all required data before processing
   $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts() ).done( function() {
     draw_viz( persons );
     var natbycont = _.groupBy( _.filter( nations, function(record){ return record.name } ) , function( record ) { 
@@ -491,7 +492,6 @@
       cont += "</ul>";
       $( "#home .continents div[data-id='"+i+"']" ).html( cont )
     });
-    checkPath();
   });
 
   // switch base/overlay (to hide hist map "flaw")
@@ -635,37 +635,6 @@
       markers[ v.id ]._icon.id = v.id;
       // spiderfy overlapping markers
       oms.addMarker( markers[ v.id ] );
-    });
-  }
-
-  function load_poet_overview( id ) {
-    return new Promise(function(resolve, reject) {
-      $.ajax({
-          url: "/data/persons/"+id+".json",
-          type: "GET",
-          dataType: "json",
-          success: function(data) {
-              resolve(data)
-          },
-          error: function(err) {
-              reject(err)
-          }
-      });
-    });
-  }
-  function load_work_overview( id ) {
-    return new Promise(function(resolve, reject) {
-      $.ajax({
-          url: "/data/works/"+id+".json",
-          type: "GET",
-          dataType: "json",
-          success: function(data) {
-              resolve(data)
-          },
-          error: function(err) {
-              reject(err)
-          }
-      });
     });
   }
 
@@ -936,6 +905,11 @@
           return false;
         }
       });
+    });
+
+    // wait for helper functions to load
+    document.addEventListener('DOMContentLoaded', function(event) {
+      checkPath();
     });
 
   })();
