@@ -813,8 +813,8 @@
     switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
       case "#id/":
         poet_profile( hash );
-        markers[ hash ].fire('click');
         source = nations[ persons[ hash ].nat.substring(0, 2) ].coord;
+        markers[ hash ].fire('click');
         break;
       case "#continent/":
         $( "#location .results" ).html( update_continent( hash ) );
