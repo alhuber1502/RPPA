@@ -769,8 +769,8 @@
     var poets = _.filter( persons, function(record){ return record.nat.substring(0,2) == country } );
     return_poets += "<ul>";
     $.each( _.sortBy( poets, 'name' ), function( i,v ) {
-      var birthDate = new Date( v.dob );
-      var deathDate = new Date( v.dod );
+      var birthDate = new Date( v.dob.replace("T00:00:00Z","").split('-') ); // var birthDate = new Date( v.dob ); 
+      var deathDate = new Date( v.dod.replace("T00:00:00Z","").split('-') ); // var deathDate = new Date( v.dod );
       return_poets += `<li><a href='#id/`+v.id+`' class='poet-focus' data-id='`+v.id+`'>`+v.name+` 
         (`+birthDate.getFullYear()+`–`+deathDate.getFullYear()+`)</a></li>`;
     });
