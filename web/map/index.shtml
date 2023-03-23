@@ -636,6 +636,10 @@
       // spiderfy overlapping markers
       oms.addMarker( markers[ v.id ] );
     });
+    // wait for helper functions to load
+    document.addEventListener('DOMContentLoaded', function(event) {
+      checkPath();
+    });
   }
 
   async function poet_profile( id ) {
