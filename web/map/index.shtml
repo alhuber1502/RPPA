@@ -913,7 +913,9 @@
 
     // wait for helper functions to load
     document.addEventListener('DOMContentLoaded', function(event) {
-      checkPath();
+      $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts() ).done( function() {
+        checkPath();
+      });
     });
 
   })();
