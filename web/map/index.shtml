@@ -133,9 +133,10 @@
           <p>The Romantic Period Poetry Archive, or RPPA 
             <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
             for short, is a new open access digital platform of
-            global Romantic-period poetry.<sup>2</sup> It comprises a
-            <em>full-text poetry database</em> and
-            an <em>open scholarship</em> platform.  RPPA embraces both
+            global Romantic-period poetry.<sup>2</sup> 
+            Global here in the sense of Felicity Nussbaum's definition of the "Global 18th-c Century", namely as a spatially and conceptually expanded paradigm in which dialogue and exchange rather than influence and reception are the dominant categories. 
+            RPPA comprises a <em>full-text poetry database</em> and
+            an <em>open scholarship</em> platform.  It embraces both
             traditional modes of scholarly research and output, such as the
             creation of scholarly editions, and digital modes of research
             and publication, such as computationally-augmented analysis,
@@ -175,7 +176,7 @@
           <h2>Features</h2>
           <ul>
             <li>RPPA will assemble an extensive and open-ended archive of
-              full-text Romantic-period poems (both original and in
+              TEI/XML-encoded full-text poems (both original and in
               translation) and their contexts;
             <li>RPPA is transdisciplinary and intermedial, transcending
               literature, and embracing wider cultural production;
@@ -196,6 +197,32 @@
               curriculum;
             <li>RPPA incorporates digital humanities approaches as a
               form of comparative literary study.
+          </ul>
+          <h2>Implementation</h2>
+          <p>RPPA employs digital methods from the multilingual Digital
+          Humanities and the Semantic Web.
+          <ul>
+            <li><em>Multilingual DH:</em> A combination of ML- and
+              NLP-approaches is our starting point for the detection of formal
+              poetic features and points of contact more generally (shared poetic
+              genres and devices, semantic features such as motifs, themes,
+              plots, topics, characters, and types of intertextuality) within and
+              across literatures.  It is however through inviting input from and
+              seeking collaboration with domain experts from various traditions,
+              that we hope to address some of the main challenges of "distant
+              reading". 
+            </li>
+            <li><em>Semantic Web:</em> RPPA is built on the <a
+              href="https://www.w3.org/standards/semanticweb/" target="_blank"
+              class="external">Semantic Web</a>, it embraces Linked Open Data (LOD)
+              standards and methodologies.  RPPA is powered by an ontologically
+              underpinned, ever-expanding knowledgebase, drawing on both general
+              and domain-specific ontologies.  This shared framework
+              provides a unified mechanism for the cross-linguistic representation
+              of the poems while maintaining the ability to describe them
+              adequately within their cultures and poetic traditions.  It also
+              facilitates the modelling of poetic networks, circles, and schools.
+            </li>
           </ul>
           <h2>Timeline</h2>
           <p>RPPA is a 5-year, independently-funded research project.  It 
