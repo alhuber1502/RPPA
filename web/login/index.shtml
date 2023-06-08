@@ -41,7 +41,8 @@
                    foaf:accountName """`+$( "#orcidId" ).val()+`""" .
               } BIND( foaf:name AS ?p )
             }`;
-          var usergraph = await getJSONLD( q, "quads" );
+            var usergraph = await getJSONLD( q, "quads" );
+	    console.log( usergraph );
           if ( usergraph.hasOwnProperty( 'graph' ) ) {
             user = usergraph.graph[0].id;
             username = usergraph.graph[0]["foaf:name"];
