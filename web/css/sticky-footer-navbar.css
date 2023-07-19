@@ -337,9 +337,19 @@ a.note {
 
 .highlight-bb {
   background-color: rgba(245,254,252,1);
-  border-bottom: 2px solid #0C80A1;
+/*  border-bottom: 2px solid #0C80A1;*/
   color: inherit;
 }
+
+.highlight-bb-start {
+  border-left: 4px solid #0C80A1;
+  padding-left:1px;
+}
+.highlight-bb-end {
+  border-right: 4px solid #0C80A1;
+  padding-right:1px;
+}
+
 .highlight-bb-m {
   background-color: unset;
   outline: 1px solid #0C80A1;
