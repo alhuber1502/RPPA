@@ -20,12 +20,14 @@ newspapers, and many more relevant contexts.
 * poetic analysis
 * contexts, similarity and foreignness
 * comparative literary studies
+* knowledge modelling
+* mapping
 
 ## Web Technologies
 * HTML5/CSS3
 * Bootstrap 5
 * JavaScript/jQuery3
-* JSON
+* JSON-LD
 
 ## Contact
 * ORCID: [Alexander Huber](http://orcid.org/0000-0002-2151-6415)
