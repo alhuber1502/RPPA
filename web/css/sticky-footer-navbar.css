@@ -467,19 +467,18 @@ ul.bb li canvas {
   outline: 1px solid black;
 }
 
-
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
+    color: #fff !important;
     background-color: var(--bs-orange);
 }
-/*
-.nav-link {
+
+.globaltext .nav-link {
     color: #333;
 }
-.nav-link:focus, .nav-link:hover {
+.globaltext .nav-link:focus, .nav-link:hover {
     color: #000;
 }
-*/
+
 .toggle-group:hover .btn-warning,
 .toggle-group .btn-warning {
   color:white !important;
