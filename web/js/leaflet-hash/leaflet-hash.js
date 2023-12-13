@@ -106,7 +106,8 @@
 
 				this.movingMap = false;
 			} else {
-				this.onMapMove(this.map);
+// -AH- prevents hash re-write when not coordinates in hash
+//				this.onMapMove(this.map);
 			}
 		},
 
