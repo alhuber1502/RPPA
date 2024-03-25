@@ -2,6 +2,23 @@
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+html {
+  scroll-padding-top: 60px;    
+}
+body {
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;    
+}
+
+[data-bs-theme=dark] a {
+  color: #e07012;
+}
+[data-bs-theme=light] a,
+[data-bs-theme=auto] a
+{
+  color: #c66a1b;
+}
 a {
   color:#e07012;
 }
@@ -10,11 +27,16 @@ a:active,
 a:visited {
   color:  #cd6711;
 }
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #e07012;
+}
 main > .container-fluid {
-  padding: 40px 0px 40px 0px;
+  padding: 60px 15px 0px;
+  max-width: none;
+  padding-bottom: 55px;
 }
 header > nav {
-  height: 40px;
+  height: 55px;
 }
 
 .navbar > .container-fluid {
@@ -28,8 +50,8 @@ header > nav {
 .navbar-brand > img {
   display: inline-block;
   margin-right: 15px;
-  height: 40px;
-  width: 40px;
+  height: 54px;
+  width: auto;
 }
 .navbar-brand sup, 
 .leaflet-sidebar-header sup {
@@ -54,21 +76,104 @@ a.nav-link:visited {
   padding-right:1rem !important;
   padding-left:1rem !important;
 }
+.navbar-brand {
+  color: var(--bs-navbar-brand-color) !important;
+}
+.nav-link {
+  color: var(--bs-nav-link-color) !important;
+}
+.nav-link:hover {
+  color: var(--bs-navbar-hover-color) !important;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: var(--bs-navbar-active-color) !important;
+}
+.nav-link.disabled, .nav-link:disabled {
+  color: var(--bs-nav-link-disabled-color) !important;
+}
+.navbar {
+  --bs-navbar-brand-font-size: 1.5rem;
+  --bs-navbar-brand-padding-y: 0rem;
+}
+.navbar .collapse {
+  font-size:1.1rem;
+}
 
 footer {
-  height: 40px;
   position: fixed;
+  z-index: 1010;
   bottom: 0;
   width: 100%;
   border-top: 1px solid #ccc;
 }
-.map {
-  height: 100%;
-  top: 0;
-  position: relative;
-  background-color: #f1e4cf;
+footer > .container {
+  max-width: none;
+}
+nav.navbar {
+  border-bottom: 1px solid #ccc;
+}
+#bd-theme + * svg,
+#bd-theme svg
+{
+    height:16px;
+    width:16px;
+}
+[data-bs-theme=dark] header > nav,
+[data-bs-theme=auto] header > nav {
+    color: var(--bs-light-text-subtle);
+    background-color: #cd6711 !important;
+}
+[data-bs-theme=light] header > nav {
+    color: var(--bs-light-text-subtle);
+    background-color: #cd6711 !important;
+}
+[data-bs-theme=dark] footer {
+    background-color: #555 !important;
+}
+@media (min-width: 450px) and (max-width: 1399px) {
+  .mb-md-0 {
+      margin-bottom: 0!important;
+      flex-direction: column !important;
+  }
+  .navbar-collapse.collapsing,
+  .navbar-collapse.show
+  {
+      font-size:1rem;
+      z-index: 0;
+      background-color: rgb(51, 51, 51);
+      opacity: 0.95;
+      display: block;
+      top: 55px;
+      position: absolute;
+      width: calc(100vw - 30px);
+  }
+}
+@media (min-width: 1400px) {
+  .navbar-expand-xl .navbar-nav {
+      flex-direction: row !important;
+  }
+  .leaflet-sidebar-pane {
+      min-width: unset;
+  }
 }
 
+
+
+.map {
+  width: 100vw;
+  height: calc(100vh - 95px);
+  background-color: #f1e4cf;
+}
+#map_tool main > .container-fluid {
+  padding-top: 55px;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  padding-bottom: 0px;
+}
+#map_tool input {
+    accent-color: #cd6711;
+}
 @media (min-width:768px) {
   .leaflet-sidebar {
    top:10px;
@@ -91,9 +196,34 @@ footer {
 .leaflet-sidebar-header {
   background-color: #e07012 !important;
 }
+.leaflet-sidebar-tabs i {
+  font-size:20px;
+  margin-left:-2px
+}
+.leaflet-sidebar-tabs {
+  background-color: #eee !important;
+}
 .leaflet-sidebar-tabs > li.active, 
 .leaflet-sidebar-tabs > ul > li.active {
+  color: #fff !important;
   background-color: #ce5f04 !important;
+}
+[data-bs-theme=dark] .leaflet-sidebar-tabs>li, 
+[data-bs-theme=dark] .leaflet-sidebar-tabs>ul>li {
+  color: #aaa;
+}
+
+[data-bs-theme=dark] .leaflet-sidebar-content {
+  background-color: #222;
+}
+[data-bs-theme=light] .leaflet-sidebar-content {
+  background-color: #fff;
+}
+[data-bs-theme=dark] .leaflet-sidebar-tabs {
+  background-color: #444 !important;
+}
+[data-bs-theme=light] .leaflet-sidebar-tabs {
+  background-color: #eee !important;
 }
 
 .leaflet-verticalcenter {
@@ -179,7 +309,6 @@ footer {
 .gender input[type=checkbox]:checked + label:before {
   content: "\f058";
   font-family: "Font Awesome 5 Free";
-  color: black;
 }
 .continents input[type=checkbox]#AF:checked 
 + label:before {
@@ -220,6 +349,10 @@ footer {
   font-style: italic;
   font-size:13px;
   display: block;
+}
+.leaflet-popup-content-wrapper, 
+.leaflet-popup-tip {
+    background: #eee;
 }
 
 a:not(.img).external {
