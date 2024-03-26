@@ -67,7 +67,7 @@
     position: fixed;
 }
 .input-group-addon {
-    background-color:#eee;
+/*    background-color:#eee;*/
     border-radius: 5px 0 0 5px;
 }
 .input-group-addon label {
@@ -151,8 +151,8 @@ span.w, span.pc {
 }
 
 .highlight {
-    color: #fff;
-    background-color: #f7f7f7;
+/*    color: #fff;
+    background-color: #f7f7f7;*/
     display:inline;
 }
 
@@ -269,8 +269,9 @@ span.w, span.pc {
 .h_0 { margin-left: 0 !important; text-indent: 0 !important; }
 
 .text a.notelink sup {
+    /*
     color: #fff;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7;*/
     padding-right:1px;
     padding-left:1px;
     font-style: normal;
@@ -472,7 +473,7 @@ mjx-container[jax="CHTML"][display="true"] {
 #ent_filters_main a[role],
 #filters_main a[role] {
     width:100%;
-    background-color:#f3f3f3;
+/*    background-color:#f3f3f3;*/
 }
 #ent_filters_main .collapsing,
 #filters_main .collapsing {
@@ -529,7 +530,7 @@ mjx-container[jax="CHTML"][display="true"] {
 #ent_results_main .item-desc span.snippet,
 #results_main .snippets .listBibl li span {
    /* display: inline-block;*/
-    background-color: #ffc;
+/*    background-color: #ffc;*/
     padding: 0 3px;
 }
 #ent_results_main .snippets .listBibl li,
@@ -600,18 +601,18 @@ mjx-container[jax="CHTML"][display="true"] {
 }
 .page-item.active .page-link {
     z-index: 0;
-    background-color: #085a72;;
+/*    background-color: #085a72;*/
     border-color: unset;
 }
 .bootstrap-select.btn-group .dropdown-menu {
-  background-color: yellow;
+/*  background-color: yellow;*/
 }
 .custom-select {
     width: unset;
 }
 .modal-header, .modal-footer {
     padding: .4rem 1rem;
-    background-color: #f5f5f5;
+/*    background-color: #f5f5f5;*/
 }
 .modal-body {
     height: inherit;
