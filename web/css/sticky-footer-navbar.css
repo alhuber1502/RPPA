@@ -19,6 +19,19 @@ body {
 {
   color: #c66a1b;
 }
+a.bg-rppa
+{
+  color: #fff;
+}
+[data-bs-theme="dark"] .highlight-bb {
+  background: #333 !important;
+}
+[data-bs-theme=dark] .nav.nav-pills {
+  background: #555;
+}
+[data-bs-theme=light] .nav.nav-pills {
+  background: #eee;
+}
 a {
   color:#e07012;
 }
@@ -80,7 +93,7 @@ a.nav-link:visited {
   color: var(--bs-navbar-brand-color) !important;
 }
 .nav-link {
-  color: var(--bs-nav-link-color) !important;
+  color: var(--bs-navbar-hover-color) !important;
 }
 .nav-link:hover {
   color: var(--bs-navbar-hover-color) !important;
@@ -376,6 +389,21 @@ img[src='/images/female.png'],
   margin: 0 0 2px -10px;
   list-style-type: none;
 }
+.globaltext-container {
+  min-height: inherit;
+  min-width: inherit;
+}
+.globaltext {
+  overflow: hidden;
+  width:500px;
+  height:850px;
+}
+.globaltext .nav-pills {
+  border: 1px solid #999;
+}
+.globaltext .tab-content {
+  border: 1px dotted #999;
+}
 
 .globaltext .attribution, 
 .context .attribution {
@@ -383,10 +411,12 @@ img[src='/images/female.png'],
   float:right;
   width: 80%;
   text-align: right;
+  margin-right: 15px;
 }
 .globaltext .attribution div, 
 .context .attribution div {
   display: inline-block;
+  margin-right: 5px;
 }
 .globaltext .attribution div>span:nth-of-type(1), 
 .context .attribution  div>span:nth-of-type(1) {
@@ -438,7 +468,7 @@ img[src='/images/female.png'],
   height: calc( 100vh - 84px);
   border-right: 1px #ddd dashed;
   border-left: 1px #ddd dashed;
-  padding: 0 10px;
+  padding: 0px;
 }
 .bg-rppa,.controls .btn {
   background-color: var(--bs-orange);
@@ -588,10 +618,16 @@ ul.bb li canvas {
 }
 .tab-content {
   overflow: auto;
-  height: calc( 100vh - 149px );
+  height: calc(100% - 45px);
+}
+.tab-content > .active {
+  height:100%;
 }
 .waveform {
   margin-top: 15px;
+}
+[data-bs-theme=dark] #wavetimeline timeline {
+  background: #555;
 }
 
 .highlight-gbl-start{ 
