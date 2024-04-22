@@ -306,9 +306,11 @@
                 <a class="nav-link disabled <!--#echo var='search' -->" aria-disabled="true" href="#search">Search</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle disabled <!--#echo var='help' -->" href="#" data-bs-toggle="dropdown" aria-disabled="true" href="#help">Help</a>
+                <a class="nav-link dropdown-toggle disabled <!--#echo var='help' -->" data-bs-toggle="dropdown" aria-disabled="true" href="#help">Help</a>
                 <ul class="dropdown-menu">
-                  <a class="dropdown-item" aria-disabled="true" href="#contact">Contact</a>
+                  <li>
+                    <a class="dropdown-item" aria-disabled="true" href="#contact">Contact</a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -334,6 +336,7 @@
                           <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
                           </button>
                       </li>
+                      <!--
                       <li>
                           <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
                           <svg class="bi me-2 opacity-50 theme-icon"><use href="#circle-half"></use></svg>
@@ -341,6 +344,7 @@
                           <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
                           </button>
                       </li>
+                      -->
                   </ul>
               </li>
           </ul>

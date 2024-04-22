@@ -4,14 +4,6 @@
 <!--#set var="map_tool" value="active" -->
 <!--#include virtual="/header.shtml" -->
 
-<style>
-  div[data-app="share_buttons"] {
-      display:inline-block;
-      vertical-align:middle;
-      width: 225px;
-      margin-left: 10px;
-  }
-</style>
 <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
 
 <!-- main -->
@@ -417,7 +409,7 @@
               class="external">https://github.com/alhuber1502/RPPA</a>
             <li style="text-indent:-15px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
               class="external">http://users.ox.ac.uk/~bodl0153/</a>
-            <li style="text-indent:-15px;"><span>Share:</span> 
+            <li style="margin-left:-15px;"><span>Share:</span> 
               <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33106436"></div>
               <!--
               <span style="display:inline-block;vertical-align:middle;" class="addthis_inline_share_toolbox"></span>
@@ -442,16 +434,17 @@
 
   // initialize
   var oms, sidebar, markerLayer, map, continents = {}, markers = {};
-  let theme = document.documentElement.getAttribute('data-bs-theme');
-  document.addEventListener("DOMContentLoaded", function() {
+  var theme = document.documentElement.getAttribute('data-bs-theme');
 
-    // establish continents
-    continents[ "AF" ] = { id: "AF", name: "Africa", coord: "Point(16 1)" };
-    continents[ "NA" ] = { id: "NA", name: "North America", coord: "Point(-95 40)" };
-    continents[ "SA" ] = { id: "SA", name: "South America", coord: "Point(-60 -26)" };
-    continents[ "AS" ] = { id: "AS", name: "Asia", coord: "Point(78 35)" };
-    continents[ "EU" ] = { id: "EU", name: "Europe", coord: "Point(25 55)" };
-    continents[ "OC" ] = { id: "OC", name: "Oceania", coord: "Point(145 -30)" };
+  // establish continents
+  continents[ "AF" ] = { id: "AF", name: "Africa", coord: "Point(16 1)" };
+  continents[ "NA" ] = { id: "NA", name: "North America", coord: "Point(-95 40)" };
+  continents[ "SA" ] = { id: "SA", name: "South America", coord: "Point(-60 -26)" };
+  continents[ "AS" ] = { id: "AS", name: "Asia", coord: "Point(78 35)" };
+  continents[ "EU" ] = { id: "EU", name: "Europe", coord: "Point(25 55)" };
+  continents[ "OC" ] = { id: "OC", name: "Oceania", coord: "Point(145 -30)" };
+  
+  document.addEventListener("DOMContentLoaded", function() {
 
     // start with whole network
     var startyr = 1770;
@@ -806,9 +799,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-//          `<a class="show_globaltext" href="#text/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
+          `<a class="show_globaltext" href="#text/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-//          '</a>'+
+          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
