@@ -14,8 +14,7 @@ body {
 [data-bs-theme=dark] a {
   color: #e07012;
 }
-[data-bs-theme=light] a,
-[data-bs-theme=auto] a
+[data-bs-theme=light] a
 {
   color: #c66a1b;
 }
@@ -131,8 +130,7 @@ nav.navbar {
     height:16px;
     width:16px;
 }
-[data-bs-theme=dark] header > nav,
-[data-bs-theme=auto] header > nav {
+[data-bs-theme=dark] header > nav {
     color: var(--bs-light-text-subtle);
     background-color: #cd6711 !important;
 }
