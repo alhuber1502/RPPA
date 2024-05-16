@@ -833,7 +833,8 @@
     }
     $( "#profile .results" ).html( 
       `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
-        ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="`+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
+        ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="/map/data/img/thumb/`+id+`.jpg"/>`:``)+
+        //+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
         `<h3>Biographical details</h3><ul><li><span>Country:</span> 
         <a href='#country/`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
         data-count='`+persons[ id ].nat.substring(0,2)+`' data-coord='`+nations[ persons[ id ].nat.substring(0,2) ].coord+`'>`+
