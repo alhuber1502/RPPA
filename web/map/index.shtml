@@ -492,7 +492,6 @@
       //  [-78,-180],
       //  [90,180]
       //],
-      
       layers: [
         baseMap,
         overlayMap
@@ -799,9 +798,9 @@
       poems += `<ul>`;
       $.each( _.sortBy( poet[id].texts.poems, 'title' ), function(i,v) {
         poems += `<li>`+
-          `<a class="show_globaltext" href="#text/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
+//          `<a class="show_globaltext" href="#text/`+v.text+`" data-tid="`+v.text+`" data-wid="`+v.work+`">`+
           `<em>`+v.title+`</em>`+
-          '</a>'+
+//          '</a>'+
           ((v.publ != '')?` (`+v.publ+`)`: ((v.comp != '')?` (comp. `+v.comp+`)`: ``))+
           `</li>`;
       });
