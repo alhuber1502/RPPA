@@ -26,7 +26,7 @@
         "name": "Foscolo, Ugo",
         "nat": "IT",
         "wd": "https://www.wikidata.org/wiki/Q166234",
-        "desc": "Italian writer and poet (1778-1827)",
+        "desc": "Italian writer and poet (1778\u20131827)",
         "enwiki": "https://en.wikipedia.org/wiki/Ugo_Foscolo",
         "itwiki": "https://it.wikipedia.org/wiki/Ugo_Foscolo",
         "itwikisource": "https://it.wikisource.org/wiki/Autore:Ugo_Foscolo",
@@ -42,6 +42,25 @@
                 "date": "1822"
             }
         ],
-        "ernie": "https://ernie.uva.nl/viewer.p/21/56/object/131-158574"
+        "ernie": "https://ernie.uva.nl/viewer.p/21/56/object/131-158574",
+        "texts": {
+            "poems": [
+                {
+                    "text": "text00880",
+                    "title": "In morte del fratello Giovanni",
+                    "work": "work00725",
+                    "comp": "",
+                    "publ": "1803"
+                },
+                {
+                    "text": "text00882",
+                    "title": "Alla Musa",
+                    "work": "work00726",
+                    "comp": "",
+                    "publ": "1803"
+                }
+            ],
+            "prose": []
+        }
     }
 }
