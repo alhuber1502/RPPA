@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#original"
+     corresp="#work00717"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00868"
+     xml:lang="fra">
+   <link target="#pers00083" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="rocp-n00070">
+      <date type="publ" when="1819">
+         <w xml:id="rocp-107850">1819</w>
+      </date>
+      <bibl xml:id="rocp-div00160">
+         <title level="m">
+            <w xml:id="rocp-107880">Odes</w>
+            <pc xml:id="rocp-107890">,</pc>
+         </title>
+         <c> </c>
+         <w xml:id="rocp-107900">Texte</w>
+         <c> </c>
+         <w xml:id="rocp-107910">établi</w>
+         <c> </c>
+         <w xml:id="rocp-107920">par</w>
+         <c> </c>
+         <w xml:id="rocp-107930">Henri</w>
+         <c> </c>
+         <w xml:id="rocp-107940">de</w>
+         <c> </c>
+         <w xml:id="rocp-107950">Latouche</w>
+         <pc xml:id="rocp-107960">,</pc>
+         <c> </c>
+         <w xml:id="rocp-107970">1819</w>
+         <c> </c>
+         <pc xml:id="rocp-107980">(</pc>
+         <w xml:id="rocp-107990">p.</w>
+         <c> </c>
+         <w xml:id="rocp-108000">216-218</w>
+         <pc xml:id="rocp-108010">)</pc>
+         <pc xml:id="rocp-108020" unit="sentence">.</pc>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="fra" xml:id="rocp-h00145">
+      <w xml:id="rocp-102970">La</w>
+      <c> </c>
+      <w xml:id="rocp-102980">jeune</w>
+      <c> </c>
+      <w xml:id="rocp-102990">captive</w>
+   </head>
+   <lg xml:id="rocp-s01195">
+      <l xml:id="rocp-l01800">
+         <w xml:id="rocp-103020">L’Épi</w>
+         <c> </c>
+         <w xml:id="rocp-103030">naissant</w>
+         <c> </c>
+         <w xml:id="rocp-103040">mûrit</w>
+         <c> </c>
+         <w xml:id="rocp-103050">de</w>
+         <c> </c>
+         <w xml:id="rocp-103060">la</w>
+         <c> </c>
+         <w xml:id="rocp-103070">faux</w>
+         <c> </c>
+         <w xml:id="rocp-103080">respecté</w>
+         <pc xml:id="rocp-103090">;</pc>
+      </l>
+      <l xml:id="rocp-l01805">
+         <w xml:id="rocp-103100">Sans</w>
+         <c> </c>
+         <w xml:id="rocp-103110">crainte</w>
+         <c> </c>
+         <w xml:id="rocp-103120">du</w>
+         <c> </c>
+         <w xml:id="rocp-103130">pressoir</w>
+         <pc xml:id="rocp-103140">,</pc>
+         <c> </c>
+         <w xml:id="rocp-103150">le</w>
+         <c> </c>
+         <w xml:id="rocp-103160">pampre</w>
+         <c> </c>
+         <w xml:id="rocp-103170">tout</w>
+         <c> </c>
+         <w xml:id="rocp-103180">l’été</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01810">
+         <w xml:id="rocp-103190">Boit</w>
+         <c> </c>
+         <w xml:id="rocp-103200">les</w>
+         <c> </c>
+         <w xml:id="rocp-103210">doux</w>
+         <c> </c>
+         <w xml:id="rocp-103220">présens</w>
+         <c> </c>
+         <w xml:id="rocp-103230">de</w>
+         <c> </c>
+         <w xml:id="rocp-103240">l’aurore</w>
+         <pc xml:id="rocp-103250">;</pc>
+      </l>
+      <l xml:id="rocp-l01815">
+         <w xml:id="rocp-103260">Et</w>
+         <c> </c>
+         <w xml:id="rocp-103270">moi</w>
+         <pc xml:id="rocp-103280">,</pc>
+         <c> </c>
+         <w xml:id="rocp-103290">comme</w>
+         <c> </c>
+         <w xml:id="rocp-103300">lui</w>
+         <c> </c>
+         <w xml:id="rocp-103310">belle</w>
+         <pc xml:id="rocp-103320">,</pc>
+         <c> </c>
+         <w xml:id="rocp-103330">et</w>
+         <c> </c>
+         <w xml:id="rocp-103340">jeune</w>
+         <c> </c>
+         <w xml:id="rocp-103350">comme</w>
+         <c> </c>
+         <w xml:id="rocp-103360">lui</w>
+         <pc xml:id="rocp-103370">,</pc>
+      </l>
+      <l xml:id="rocp-l01820">
+         <w xml:id="rocp-103380">Quoique</w>
+         <c> </c>
+         <w xml:id="rocp-103390">l’heure</w>
+         <c> </c>
+         <w xml:id="rocp-103400">présente</w>
+         <c> </c>
+         <w xml:id="rocp-103410">ait</w>
+         <c> </c>
+         <w xml:id="rocp-103420">de</w>
+         <c> </c>
+         <w xml:id="rocp-103430">trouble</w>
+         <c> </c>
+         <w xml:id="rocp-103440">et</w>
+         <c> </c>
+         <w xml:id="rocp-103450">d’ennui</w>
+         <pc xml:id="rocp-103460">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01825">
+         <w xml:id="rocp-103470">Je</w>
+         <c> </c>
+         <w xml:id="rocp-103480">ne</w>
+         <c> </c>
+         <w xml:id="rocp-103490">veux</w>
+         <c> </c>
+         <w xml:id="rocp-103500">point</w>
+         <c> </c>
+         <w xml:id="rocp-103510">mourir</w>
+         <c> </c>
+         <w xml:id="rocp-103520">encore</w>
+         <pc xml:id="rocp-103530" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01200">
+      <l xml:id="rocp-l01830">
+         <w xml:id="rocp-103560">Qu’un</w>
+         <c> </c>
+         <w xml:id="rocp-103570">stoïque</w>
+         <c> </c>
+         <w xml:id="rocp-103580">aux</w>
+         <c> </c>
+         <w xml:id="rocp-103590">yeux</w>
+         <c> </c>
+         <w xml:id="rocp-103600">secs</w>
+         <c> </c>
+         <w xml:id="rocp-103610">vole</w>
+         <c> </c>
+         <w xml:id="rocp-103620">embrasser</w>
+         <c> </c>
+         <w xml:id="rocp-103630">la</w>
+         <c> </c>
+         <w xml:id="rocp-103640">mort</w>
+         <pc xml:id="rocp-103650">,</pc>
+      </l>
+      <l xml:id="rocp-l01835">
+         <w xml:id="rocp-103660">Moi</w>
+         <c> </c>
+         <w xml:id="rocp-103670">je</w>
+         <c> </c>
+         <w xml:id="rocp-103680">pleure</w>
+         <c> </c>
+         <w xml:id="rocp-103690">et</w>
+         <c> </c>
+         <w xml:id="rocp-103700">j’espère</w>
+         <pc xml:id="rocp-103710">;</pc>
+         <c> </c>
+         <w xml:id="rocp-103720">au</w>
+         <c> </c>
+         <w xml:id="rocp-103730">noir</w>
+         <c> </c>
+         <w xml:id="rocp-103740">souffle</w>
+         <c> </c>
+         <w xml:id="rocp-103750">du</w>
+         <c> </c>
+         <w xml:id="rocp-103760">Nord</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01840">
+         <w xml:id="rocp-103770">Je</w>
+         <c> </c>
+         <w xml:id="rocp-103780">plie</w>
+         <c> </c>
+         <w xml:id="rocp-103790">et</w>
+         <c> </c>
+         <w xml:id="rocp-103800">relève</w>
+         <c> </c>
+         <w xml:id="rocp-103810">ma</w>
+         <c> </c>
+         <w xml:id="rocp-103820">tête</w>
+         <pc xml:id="rocp-103830" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01845">
+         <w xml:id="rocp-103840">S’il</w>
+         <c> </c>
+         <w xml:id="rocp-103850">est</w>
+         <c> </c>
+         <w xml:id="rocp-103860">des</w>
+         <c> </c>
+         <w xml:id="rocp-103870">jours</w>
+         <c> </c>
+         <w xml:id="rocp-103880">amers</w>
+         <pc xml:id="rocp-103890">,</pc>
+         <c> </c>
+         <w xml:id="rocp-103900">il</w>
+         <c> </c>
+         <w xml:id="rocp-103910">en</w>
+         <c> </c>
+         <w xml:id="rocp-103920">est</w>
+         <c> </c>
+         <w xml:id="rocp-103930">de</w>
+         <c> </c>
+         <w xml:id="rocp-103940">si</w>
+         <c> </c>
+         <w xml:id="rocp-103950">doux</w>
+         <pc xml:id="rocp-103960" unit="sentence">!</pc>
+      </l>
+      <l xml:id="rocp-l01850">
+         <w xml:id="rocp-103970">Hélas</w>
+         <pc xml:id="rocp-103980">!</pc>
+         <c> </c>
+         <w xml:id="rocp-103990">quel</w>
+         <c> </c>
+         <w xml:id="rocp-104000">miel</w>
+         <c> </c>
+         <w xml:id="rocp-104010">jamais</w>
+         <c> </c>
+         <w xml:id="rocp-104020">n’a</w>
+         <c> </c>
+         <w xml:id="rocp-104030">laissé</w>
+         <c> </c>
+         <w xml:id="rocp-104040">de</w>
+         <c> </c>
+         <w xml:id="rocp-104050">dégoûts</w>
+         <pc xml:id="rocp-104060" unit="sentence">?</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01855">
+         <w xml:id="rocp-104070">Quelle</w>
+         <c> </c>
+         <w xml:id="rocp-104080">mer</w>
+         <c> </c>
+         <w xml:id="rocp-104090">n’a</w>
+         <c> </c>
+         <w xml:id="rocp-104100">point</w>
+         <c> </c>
+         <w xml:id="rocp-104110">de</w>
+         <c> </c>
+         <w xml:id="rocp-104120">tempête</w>
+         <pc xml:id="rocp-104130" unit="sentence">?</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01205">
+      <l xml:id="rocp-l01860">
+         <w xml:id="rocp-104160">L’illusion</w>
+         <c> </c>
+         <w xml:id="rocp-104170">féconde</w>
+         <c> </c>
+         <w xml:id="rocp-104180">habite</w>
+         <c> </c>
+         <w xml:id="rocp-104190">dans</w>
+         <c> </c>
+         <w xml:id="rocp-104200">mon</w>
+         <c> </c>
+         <w xml:id="rocp-104210">sein</w>
+         <pc xml:id="rocp-104220" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01865">
+         <w xml:id="rocp-104230">D’une</w>
+         <c> </c>
+         <w xml:id="rocp-104240">prison</w>
+         <c> </c>
+         <w xml:id="rocp-104250">sur</w>
+         <c> </c>
+         <w xml:id="rocp-104260">moi</w>
+         <c> </c>
+         <w xml:id="rocp-104270">les</w>
+         <c> </c>
+         <w xml:id="rocp-104280">murs</w>
+         <c> </c>
+         <w xml:id="rocp-104290">pèsent</w>
+         <c> </c>
+         <w xml:id="rocp-104300">en</w>
+         <c> </c>
+         <w xml:id="rocp-104310">vain</w>
+         <pc xml:id="rocp-104320">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01870">
+         <w xml:id="rocp-104330">J’ai</w>
+         <c> </c>
+         <w xml:id="rocp-104340">les</w>
+         <c> </c>
+         <w xml:id="rocp-104350">ailes</w>
+         <c> </c>
+         <w xml:id="rocp-104360">de</w>
+         <c> </c>
+         <w xml:id="rocp-104370">l’espérance</w>
+         <pc xml:id="rocp-104380">:</pc>
+      </l>
+      <l xml:id="rocp-l01875">
+         <w xml:id="rocp-104390">Échappée</w>
+         <c> </c>
+         <w xml:id="rocp-104400">aux</w>
+         <c> </c>
+         <w xml:id="rocp-104410">réseaux</w>
+         <c> </c>
+         <w xml:id="rocp-104420">de</w>
+         <c> </c>
+         <w xml:id="rocp-104430">l’oiseleur</w>
+         <c> </c>
+         <w xml:id="rocp-104440">Cruel</w>
+         <pc xml:id="rocp-104450">,</pc>
+      </l>
+      <l xml:id="rocp-l01880">
+         <w xml:id="rocp-104460">Plus</w>
+         <c> </c>
+         <w xml:id="rocp-104470">vive</w>
+         <pc xml:id="rocp-104480">,</pc>
+         <c> </c>
+         <w xml:id="rocp-104490">plus</w>
+         <c> </c>
+         <w xml:id="rocp-104500">heureuse</w>
+         <pc xml:id="rocp-104510">,</pc>
+         <c> </c>
+         <w xml:id="rocp-104520">aux</w>
+         <c> </c>
+         <w xml:id="rocp-104530">campagnes</w>
+         <c> </c>
+         <w xml:id="rocp-104540">du</w>
+         <c> </c>
+         <w xml:id="rocp-104550">ciel</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01885">
+         <w xml:id="rocp-104560">Philomèle</w>
+         <c> </c>
+         <w xml:id="rocp-104570">chante</w>
+         <c> </c>
+         <w xml:id="rocp-104580">et</w>
+         <c> </c>
+         <w xml:id="rocp-104590">s’élance</w>
+         <pc xml:id="rocp-104600" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01210">
+      <l xml:id="rocp-l01890">
+         <w xml:id="rocp-104630">Est-ce</w>
+         <c> </c>
+         <w xml:id="rocp-104640">à</w>
+         <c> </c>
+         <w xml:id="rocp-104650">moi</w>
+         <c> </c>
+         <w xml:id="rocp-104660">de</w>
+         <c> </c>
+         <w xml:id="rocp-104670">mourir</w>
+         <pc xml:id="rocp-104680" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="rocp-104690">Tranquille</w>
+         <c> </c>
+         <w xml:id="rocp-104700">je</w>
+         <c> </c>
+         <w xml:id="rocp-104710">m’endors</w>
+         <pc xml:id="rocp-104720">,</pc>
+      </l>
+      <l xml:id="rocp-l01895">
+         <w xml:id="rocp-104730">Et</w>
+         <c> </c>
+         <w xml:id="rocp-104740">tranquille</w>
+         <c> </c>
+         <w xml:id="rocp-104750">je</w>
+         <c> </c>
+         <w xml:id="rocp-104760">veille</w>
+         <pc xml:id="rocp-104770">;</pc>
+         <c> </c>
+         <w xml:id="rocp-104780">et</w>
+         <c> </c>
+         <w xml:id="rocp-104790">ma</w>
+         <c> </c>
+         <w xml:id="rocp-104800">veille</w>
+         <c> </c>
+         <w xml:id="rocp-104810">aux</w>
+         <c> </c>
+         <w xml:id="rocp-104820">remords</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01900">
+         <w xml:id="rocp-104830">Ni</w>
+         <c> </c>
+         <w xml:id="rocp-104840">mon</w>
+         <c> </c>
+         <w xml:id="rocp-104850">sommeil</w>
+         <c> </c>
+         <w xml:id="rocp-104860">ne</w>
+         <c> </c>
+         <w xml:id="rocp-104870">sont</w>
+         <c> </c>
+         <w xml:id="rocp-104880">en</w>
+         <c> </c>
+         <w xml:id="rocp-104890">proie</w>
+         <pc xml:id="rocp-104900" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01905">
+         <w xml:id="rocp-104910">Ma</w>
+         <c> </c>
+         <w xml:id="rocp-104920">bien-venue</w>
+         <c> </c>
+         <w xml:id="rocp-104930">au</w>
+         <c> </c>
+         <w xml:id="rocp-104940">jour</w>
+         <c> </c>
+         <w xml:id="rocp-104950">me</w>
+         <c> </c>
+         <w xml:id="rocp-104960">rit</w>
+         <c> </c>
+         <w xml:id="rocp-104970">dans</w>
+         <c> </c>
+         <w xml:id="rocp-104980">tous</w>
+         <c> </c>
+         <w xml:id="rocp-104990">les</w>
+         <c> </c>
+         <w xml:id="rocp-105000">yeux</w>
+         <pc xml:id="rocp-105010">;</pc>
+      </l>
+      <l xml:id="rocp-l01910">
+         <w xml:id="rocp-105020">Sur</w>
+         <c> </c>
+         <w xml:id="rocp-105030">des</w>
+         <c> </c>
+         <w xml:id="rocp-105040">fronts</w>
+         <c> </c>
+         <w xml:id="rocp-105050">abattus</w>
+         <pc xml:id="rocp-105060">,</pc>
+         <c> </c>
+         <w xml:id="rocp-105070">mon</w>
+         <c> </c>
+         <w xml:id="rocp-105080">aspect</w>
+         <c> </c>
+         <w xml:id="rocp-105090">dans</w>
+         <c> </c>
+         <w xml:id="rocp-105100">ces</w>
+         <c> </c>
+         <w xml:id="rocp-105110">lieux</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01915">
+         <w xml:id="rocp-105120">Ranime</w>
+         <c> </c>
+         <w xml:id="rocp-105130">presque</w>
+         <c> </c>
+         <w xml:id="rocp-105140">de</w>
+         <c> </c>
+         <w xml:id="rocp-105150">la</w>
+         <c> </c>
+         <w xml:id="rocp-105160">joie</w>
+         <pc xml:id="rocp-105170" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01215">
+      <l xml:id="rocp-l01920">
+         <w xml:id="rocp-105200">Mon</w>
+         <c> </c>
+         <w xml:id="rocp-105210">beau</w>
+         <c> </c>
+         <w xml:id="rocp-105220">voyage</w>
+         <c> </c>
+         <w xml:id="rocp-105230">encore</w>
+         <c> </c>
+         <w xml:id="rocp-105240">est</w>
+         <c> </c>
+         <w xml:id="rocp-105250">si</w>
+         <c> </c>
+         <w xml:id="rocp-105260">loin</w>
+         <c> </c>
+         <w xml:id="rocp-105270">de</w>
+         <c> </c>
+         <w xml:id="rocp-105280">sa</w>
+         <c> </c>
+         <w xml:id="rocp-105290">fin</w>
+         <pc xml:id="rocp-105300" unit="sentence">!</pc>
+      </l>
+      <l xml:id="rocp-l01925">
+         <w xml:id="rocp-105310">Je</w>
+         <c> </c>
+         <w xml:id="rocp-105320">pars</w>
+         <pc xml:id="rocp-105330">,</pc>
+         <c> </c>
+         <w xml:id="rocp-105340">et</w>
+         <c> </c>
+         <w xml:id="rocp-105350">des</w>
+         <c> </c>
+         <w xml:id="rocp-105360">ormeaux</w>
+         <c> </c>
+         <w xml:id="rocp-105370">qui</w>
+         <c> </c>
+         <w xml:id="rocp-105380">bordent</w>
+         <c> </c>
+         <w xml:id="rocp-105390">le</w>
+         <c> </c>
+         <w xml:id="rocp-105400">chemin</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01930">
+         <w xml:id="rocp-105410">J’ai</w>
+         <c> </c>
+         <w xml:id="rocp-105420">passé</w>
+         <c> </c>
+         <w xml:id="rocp-105430">les</w>
+         <c> </c>
+         <w xml:id="rocp-105440">premiers</w>
+         <c> </c>
+         <w xml:id="rocp-105450">à</w>
+         <c> </c>
+         <w xml:id="rocp-105460">peine</w>
+         <pc xml:id="rocp-105470" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01935">
+         <w xml:id="rocp-105480">Au</w>
+         <c> </c>
+         <w xml:id="rocp-105490">banquet</w>
+         <c> </c>
+         <w xml:id="rocp-105500">de</w>
+         <c> </c>
+         <w xml:id="rocp-105510">la</w>
+         <c> </c>
+         <w xml:id="rocp-105520">vie</w>
+         <c> </c>
+         <w xml:id="rocp-105530">à</w>
+         <c> </c>
+         <w xml:id="rocp-105540">peine</w>
+         <c> </c>
+         <w xml:id="rocp-105550">commencé</w>
+         <pc xml:id="rocp-105560">,</pc>
+      </l>
+      <l xml:id="rocp-l01940">
+         <w xml:id="rocp-105570">Un</w>
+         <c> </c>
+         <w xml:id="rocp-105580">instant</w>
+         <c> </c>
+         <w xml:id="rocp-105590">seulement</w>
+         <c> </c>
+         <w xml:id="rocp-105600">mes</w>
+         <c> </c>
+         <w xml:id="rocp-105610">lèvres</w>
+         <c> </c>
+         <w xml:id="rocp-105620">ont</w>
+         <c> </c>
+         <w xml:id="rocp-105630">pressé</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01945">
+         <w xml:id="rocp-105640">La</w>
+         <c> </c>
+         <w xml:id="rocp-105650">coupe</w>
+         <c> </c>
+         <w xml:id="rocp-105660">en</w>
+         <c> </c>
+         <w xml:id="rocp-105670">mes</w>
+         <c> </c>
+         <w xml:id="rocp-105680">mains</w>
+         <c> </c>
+         <w xml:id="rocp-105690">encor</w>
+         <c> </c>
+         <w xml:id="rocp-105700">pleine</w>
+         <pc xml:id="rocp-105710" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01220">
+      <l xml:id="rocp-l01950">
+         <w xml:id="rocp-105740">Je</w>
+         <c> </c>
+         <w xml:id="rocp-105750">ne</w>
+         <c> </c>
+         <w xml:id="rocp-105760">suis</w>
+         <c> </c>
+         <w xml:id="rocp-105770">qu’au</w>
+         <c> </c>
+         <w xml:id="rocp-105780">printemps</w>
+         <pc xml:id="rocp-105790">,</pc>
+         <c> </c>
+         <w xml:id="rocp-105800">je</w>
+         <c> </c>
+         <w xml:id="rocp-105810">veux</w>
+         <c> </c>
+         <w xml:id="rocp-105820">voir</w>
+         <c> </c>
+         <w xml:id="rocp-105830">la</w>
+         <c> </c>
+         <w xml:id="rocp-105840">moisson</w>
+         <pc xml:id="rocp-105850">;</pc>
+      </l>
+      <l xml:id="rocp-l01955">
+         <w xml:id="rocp-105860">Et</w>
+         <c> </c>
+         <w xml:id="rocp-105870">comme</w>
+         <c> </c>
+         <w xml:id="rocp-105880">le</w>
+         <c> </c>
+         <w xml:id="rocp-105890">soleil</w>
+         <pc xml:id="rocp-105900">,</pc>
+         <c> </c>
+         <w xml:id="rocp-105910">de</w>
+         <c> </c>
+         <w xml:id="rocp-105920">saison</w>
+         <c> </c>
+         <w xml:id="rocp-105930">en</w>
+         <c> </c>
+         <w xml:id="rocp-105940">saison</w>
+         <pc xml:id="rocp-105950">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01960">
+         <w xml:id="rocp-105960">Je</w>
+         <c> </c>
+         <w xml:id="rocp-105970">veux</w>
+         <c> </c>
+         <w xml:id="rocp-105980">achever</w>
+         <c> </c>
+         <w xml:id="rocp-105990">mon</w>
+         <c> </c>
+         <w xml:id="rocp-106000">année</w>
+         <pc xml:id="rocp-106010" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01965">
+         <w xml:id="rocp-106020">Brillante</w>
+         <c> </c>
+         <w xml:id="rocp-106030">sur</w>
+         <c> </c>
+         <w xml:id="rocp-106040">ma</w>
+         <c> </c>
+         <w xml:id="rocp-106050">tige</w>
+         <c> </c>
+         <w xml:id="rocp-106060">et</w>
+         <c> </c>
+         <w xml:id="rocp-106070">l’honneur</w>
+         <c> </c>
+         <w xml:id="rocp-106080">du</w>
+         <c> </c>
+         <w xml:id="rocp-106090">jardin</w>
+         <pc xml:id="rocp-106100">,</pc>
+      </l>
+      <l xml:id="rocp-l01970">
+         <w xml:id="rocp-106110">Je</w>
+         <c> </c>
+         <w xml:id="rocp-106120">n’ai</w>
+         <c> </c>
+         <w xml:id="rocp-106130">vu</w>
+         <c> </c>
+         <w xml:id="rocp-106140">luire</w>
+         <c> </c>
+         <w xml:id="rocp-106150">encor</w>
+         <c> </c>
+         <w xml:id="rocp-106160">que</w>
+         <c> </c>
+         <w xml:id="rocp-106170">les</w>
+         <c> </c>
+         <w xml:id="rocp-106180">feux</w>
+         <c> </c>
+         <w xml:id="rocp-106190">du</w>
+         <c> </c>
+         <w xml:id="rocp-106200">matin</w>
+         <pc xml:id="rocp-106210">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01975">
+         <w xml:id="rocp-106220">Je</w>
+         <c> </c>
+         <w xml:id="rocp-106230">veux</w>
+         <c> </c>
+         <w xml:id="rocp-106240">achever</w>
+         <c> </c>
+         <w xml:id="rocp-106250">ma</w>
+         <c> </c>
+         <w xml:id="rocp-106260">journée</w>
+         <pc xml:id="rocp-106270" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01225">
+      <l xml:id="rocp-l01980">
+         <w xml:id="rocp-106300">Ô</w>
+         <c> </c>
+         <w xml:id="rocp-106310">mort</w>
+         <pc xml:id="rocp-106320">!</pc>
+         <c> </c>
+         <w xml:id="rocp-106330">tu</w>
+         <c> </c>
+         <w xml:id="rocp-106340">peux</w>
+         <c> </c>
+         <w xml:id="rocp-106350">attendre</w>
+         <pc xml:id="rocp-106360">;</pc>
+         <c> </c>
+         <w xml:id="rocp-106370">éloigne</w>
+         <pc xml:id="rocp-106380">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106390">éloigne-toi</w>
+         <pc xml:id="rocp-106400">;</pc>
+      </l>
+      <l xml:id="rocp-l01985">
+         <w xml:id="rocp-106410">Va</w>
+         <c> </c>
+         <w xml:id="rocp-106420">consoler</w>
+         <c> </c>
+         <w xml:id="rocp-106430">les</w>
+         <c> </c>
+         <w xml:id="rocp-106440">cœurs</w>
+         <c> </c>
+         <w xml:id="rocp-106450">que</w>
+         <c> </c>
+         <w xml:id="rocp-106460">la</w>
+         <c> </c>
+         <w xml:id="rocp-106470">honte</w>
+         <pc xml:id="rocp-106480">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106490">l’effroi</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l01990">
+         <w xml:id="rocp-106500">Le</w>
+         <c> </c>
+         <w xml:id="rocp-106510">pâle</w>
+         <c> </c>
+         <w xml:id="rocp-106520">désespoir</w>
+         <c> </c>
+         <w xml:id="rocp-106530">dévore</w>
+         <pc xml:id="rocp-106540" unit="sentence">.</pc>
+      </l>
+      <l xml:id="rocp-l01995">
+         <w xml:id="rocp-106550">Pour</w>
+         <c> </c>
+         <w xml:id="rocp-106560">moi</w>
+         <c> </c>
+         <w xml:id="rocp-106570">Palès</w>
+         <c> </c>
+         <w xml:id="rocp-106580">encore</w>
+         <c> </c>
+         <w xml:id="rocp-106590">a</w>
+         <c> </c>
+         <w xml:id="rocp-106600">des</w>
+         <c> </c>
+         <w xml:id="rocp-106610">asiles</w>
+         <c> </c>
+         <w xml:id="rocp-106620">verts</w>
+         <pc xml:id="rocp-106630">;</pc>
+      </l>
+      <l xml:id="rocp-l02000">
+         <w xml:id="rocp-106640">Les</w>
+         <c> </c>
+         <w xml:id="rocp-106650">amours</w>
+         <c> </c>
+         <w xml:id="rocp-106660">des</w>
+         <c> </c>
+         <w xml:id="rocp-106670">baisers</w>
+         <pc xml:id="rocp-106680">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106690">les</w>
+         <c> </c>
+         <w xml:id="rocp-106700">Muses</w>
+         <c> </c>
+         <w xml:id="rocp-106710">des</w>
+         <c> </c>
+         <w xml:id="rocp-106720">concerts</w>
+         <pc xml:id="rocp-106730">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l02005">
+         <w xml:id="rocp-106740">Je</w>
+         <c> </c>
+         <w xml:id="rocp-106750">ne</w>
+         <c> </c>
+         <w xml:id="rocp-106760">veux</w>
+         <c> </c>
+         <w xml:id="rocp-106770">pas</w>
+         <c> </c>
+         <w xml:id="rocp-106780">mourir</w>
+         <c> </c>
+         <w xml:id="rocp-106790">encore</w>
+         <pc xml:id="rocp-106800" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01230">
+      <l xml:id="rocp-l02010">
+         <w xml:id="rocp-106830">Ainsi</w>
+         <pc xml:id="rocp-106840">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106850">triste</w>
+         <c> </c>
+         <w xml:id="rocp-106860">et</w>
+         <c> </c>
+         <w xml:id="rocp-106870">captif</w>
+         <pc xml:id="rocp-106880">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106890">ma</w>
+         <c> </c>
+         <w xml:id="rocp-106900">lyre</w>
+         <pc xml:id="rocp-106910">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106920">toutefois</w>
+      </l>
+      <l xml:id="rocp-l02015">
+         <w xml:id="rocp-106930">S’éveillait</w>
+         <pc xml:id="rocp-106940">;</pc>
+         <c> </c>
+         <w xml:id="rocp-106950">écoutant</w>
+         <c> </c>
+         <w xml:id="rocp-106960">ces</w>
+         <c> </c>
+         <w xml:id="rocp-106970">plaintes</w>
+         <pc xml:id="rocp-106980">,</pc>
+         <c> </c>
+         <w xml:id="rocp-106990">cette</w>
+         <c> </c>
+         <w xml:id="rocp-107000">voix</w>
+         <pc xml:id="rocp-107010">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l02020">
+         <w xml:id="rocp-107020">Ces</w>
+         <c> </c>
+         <w xml:id="rocp-107030">vœux</w>
+         <c> </c>
+         <w xml:id="rocp-107040">d’une</w>
+         <c> </c>
+         <w xml:id="rocp-107050">jeune</w>
+         <c> </c>
+         <w xml:id="rocp-107060">captive</w>
+         <pc xml:id="rocp-107070">;</pc>
+      </l>
+      <l xml:id="rocp-l02025">
+         <w xml:id="rocp-107080">Et</w>
+         <c> </c>
+         <w xml:id="rocp-107090">secouant</w>
+         <c> </c>
+         <w xml:id="rocp-107100">le</w>
+         <c> </c>
+         <w xml:id="rocp-107110">joug</w>
+         <c> </c>
+         <w xml:id="rocp-107120">de</w>
+         <c> </c>
+         <w xml:id="rocp-107130">mes</w>
+         <c> </c>
+         <w xml:id="rocp-107140">jours</w>
+         <c> </c>
+         <w xml:id="rocp-107150">languissans</w>
+         <pc xml:id="rocp-107160">,</pc>
+      </l>
+      <l xml:id="rocp-l02030">
+         <w xml:id="rocp-107170">Aux</w>
+         <c> </c>
+         <w xml:id="rocp-107180">douces</w>
+         <c> </c>
+         <w xml:id="rocp-107190">lois</w>
+         <c> </c>
+         <w xml:id="rocp-107200">des</w>
+         <c> </c>
+         <w xml:id="rocp-107210">vers</w>
+         <c> </c>
+         <w xml:id="rocp-107220">je</w>
+         <c> </c>
+         <w xml:id="rocp-107230">pliais</w>
+         <c> </c>
+         <w xml:id="rocp-107240">les</w>
+         <c> </c>
+         <w xml:id="rocp-107250">accens</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l02035">
+         <w xml:id="rocp-107260">De</w>
+         <c> </c>
+         <w xml:id="rocp-107270">sa</w>
+         <c> </c>
+         <w xml:id="rocp-107280">bouche</w>
+         <c> </c>
+         <w xml:id="rocp-107290">aimable</w>
+         <c> </c>
+         <w xml:id="rocp-107300">et</w>
+         <c> </c>
+         <w xml:id="rocp-107310">naïve</w>
+         <pc xml:id="rocp-107320" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="rocp-s01235">
+      <l xml:id="rocp-l02040">
+         <w xml:id="rocp-107350">Ces</w>
+         <c> </c>
+         <w xml:id="rocp-107360">chants</w>
+         <pc xml:id="rocp-107370">,</pc>
+         <c> </c>
+         <w xml:id="rocp-107380">de</w>
+         <c> </c>
+         <w xml:id="rocp-107390">ma</w>
+         <c> </c>
+         <w xml:id="rocp-107400">prison</w>
+         <c> </c>
+         <w xml:id="rocp-107410">témoins</w>
+         <c> </c>
+         <w xml:id="rocp-107420">harmonieux</w>
+         <pc xml:id="rocp-107430">,</pc>
+      </l>
+      <l xml:id="rocp-l02045">
+         <w xml:id="rocp-107440">Feront</w>
+         <c> </c>
+         <w xml:id="rocp-107450">à</w>
+         <c> </c>
+         <w xml:id="rocp-107460">quelque</w>
+         <c> </c>
+         <w xml:id="rocp-107470">amant</w>
+         <c> </c>
+         <w xml:id="rocp-107480">des</w>
+         <c> </c>
+         <w xml:id="rocp-107490">loisirs</w>
+         <c> </c>
+         <w xml:id="rocp-107500">studieux</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l02050">
+         <w xml:id="rocp-107510">Chercher</w>
+         <c> </c>
+         <w xml:id="rocp-107520">quelle</w>
+         <c> </c>
+         <w xml:id="rocp-107530">fut</w>
+         <c> </c>
+         <w xml:id="rocp-107540">cette</w>
+         <c> </c>
+         <w xml:id="rocp-107550">belle</w>
+         <pc xml:id="rocp-107560">:</pc>
+      </l>
+      <l xml:id="rocp-l02055">
+         <w xml:id="rocp-107570">La</w>
+         <c> </c>
+         <w xml:id="rocp-107580">grâce</w>
+         <c> </c>
+         <w xml:id="rocp-107590">décorait</w>
+         <c> </c>
+         <w xml:id="rocp-107600">son</w>
+         <c> </c>
+         <w xml:id="rocp-107610">front</w>
+         <c> </c>
+         <w xml:id="rocp-107620">et</w>
+         <c> </c>
+         <w xml:id="rocp-107630">ses</w>
+         <c> </c>
+         <w xml:id="rocp-107640">discours</w>
+         <pc xml:id="rocp-107650">,</pc>
+      </l>
+      <l xml:id="rocp-l02060">
+         <w xml:id="rocp-107660">Et</w>
+         <c> </c>
+         <w xml:id="rocp-107670">comme</w>
+         <c> </c>
+         <w xml:id="rocp-107680">elle</w>
+         <c> </c>
+         <w xml:id="rocp-107690">craindront</w>
+         <c> </c>
+         <w xml:id="rocp-107700">de</w>
+         <c> </c>
+         <w xml:id="rocp-107710">voir</w>
+         <c> </c>
+         <w xml:id="rocp-107720">finir</w>
+         <c> </c>
+         <w xml:id="rocp-107730">leurs</w>
+         <c> </c>
+         <w xml:id="rocp-107740">jours</w>
+      </l>
+      <l rendition="#h_3" xml:id="rocp-l02065">
+         <w xml:id="rocp-107750">Ceux</w>
+         <c> </c>
+         <w xml:id="rocp-107760">qui</w>
+         <c> </c>
+         <w xml:id="rocp-107770">les</w>
+         <c> </c>
+         <w xml:id="rocp-107780">passeront</w>
+         <c> </c>
+         <w xml:id="rocp-107790">près</w>
+         <c> </c>
+         <w xml:id="rocp-107800">d’elle</w>
+         <pc xml:id="rocp-107810" unit="sentence">.</pc>
+      </l>
+   </lg>
+</div>

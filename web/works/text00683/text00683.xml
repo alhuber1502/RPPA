@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#original"
+     corresp="#work00538"
+     rhyme="irregular"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text00683"
+     xml:lang="eng">
+   <link target="#pers00119" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="parr-n00280">
+      <date type="publ" when="1831">
+         <w xml:id="parr-0390810">1831</w>
+      </date>
+      <bibl xml:id="parr-div00250">
+         <title level="m">
+            <w xml:id="parr-0390840">Poems</w>
+            <c> </c>
+            <w xml:id="parr-0390850">of</w>
+            <c> </c>
+            <w xml:id="parr-0390860">Edgar</w>
+            <c> </c>
+            <w xml:id="parr-0390870">A.</w>
+            <c> </c>
+            <w xml:id="parr-0390880">Poe</w>
+         </title>
+         <c> </c>
+         <pc xml:id="parr-0390890">(</pc>
+         <date>
+            <w xml:id="parr-0390910">1831</w>
+         </date>
+         <pc xml:id="parr-0390930" unit="sentence">)</pc>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="eng" xml:id="parr-h00450">
+      <w xml:id="parr-0386940">The</w>
+      <c> </c>
+      <w xml:id="parr-0386950">City</w>
+      <c> </c>
+      <w xml:id="parr-0386960">in</w>
+      <c> </c>
+      <w xml:id="parr-0386970">the</w>
+      <c> </c>
+      <w xml:id="parr-0386980">Sea</w>
+   </head>
+   <lg xml:id="parr-s04540">
+      <l xml:id="parr-l17640">
+         <w xml:id="parr-0387010">Lo</w>
+         <pc xml:id="parr-0387020" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="parr-0387030">Death</w>
+         <c> </c>
+         <w xml:id="parr-0387040">has</w>
+         <c> </c>
+         <w xml:id="parr-0387050">reared</w>
+         <c> </c>
+         <w xml:id="parr-0387060">himself</w>
+         <c> </c>
+         <w xml:id="parr-0387070">a</w>
+         <c> </c>
+         <w xml:id="parr-0387080">throne</w>
+      </l>
+      <l xml:id="parr-l17645">
+         <w xml:id="parr-0387090">In</w>
+         <c> </c>
+         <w xml:id="parr-0387100">a</w>
+         <c> </c>
+         <w xml:id="parr-0387110">strange</w>
+         <c> </c>
+         <w xml:id="parr-0387120">city</w>
+         <c> </c>
+         <w xml:id="parr-0387130">lying</w>
+         <c> </c>
+         <w xml:id="parr-0387140">alone</w>
+      </l>
+      <l xml:id="parr-l17650">
+         <w xml:id="parr-0387150">Far</w>
+         <c> </c>
+         <w xml:id="parr-0387160">down</w>
+         <c> </c>
+         <w xml:id="parr-0387170">within</w>
+         <c> </c>
+         <w xml:id="parr-0387180">the</w>
+         <c> </c>
+         <w xml:id="parr-0387190">dim</w>
+         <c> </c>
+         <w xml:id="parr-0387200">West</w>
+         <pc xml:id="parr-0387210">,</pc>
+      </l>
+      <l xml:id="parr-l17655">
+         <w xml:id="parr-0387220">Where</w>
+         <c> </c>
+         <w xml:id="parr-0387230">the</w>
+         <c> </c>
+         <w xml:id="parr-0387240">good</w>
+         <c> </c>
+         <w xml:id="parr-0387250">and</w>
+         <c> </c>
+         <w xml:id="parr-0387260">the</w>
+         <c> </c>
+         <w xml:id="parr-0387270">bad</w>
+         <c> </c>
+         <w xml:id="parr-0387280">and</w>
+         <c> </c>
+         <w xml:id="parr-0387290">the</w>
+         <c> </c>
+         <w xml:id="parr-0387300">worst</w>
+         <c> </c>
+         <w xml:id="parr-0387310">and</w>
+         <c> </c>
+         <w xml:id="parr-0387320">the</w>
+         <c> </c>
+         <w xml:id="parr-0387330">best</w>
+      </l>
+      <l xml:id="parr-l17660">
+         <w xml:id="parr-0387340">Have</w>
+         <c> </c>
+         <w xml:id="parr-0387350">gone</w>
+         <c> </c>
+         <w xml:id="parr-0387360">to</w>
+         <c> </c>
+         <w xml:id="parr-0387370">their</w>
+         <c> </c>
+         <w xml:id="parr-0387380">eternal</w>
+         <c> </c>
+         <w xml:id="parr-0387390">rest</w>
+         <pc xml:id="parr-0387400" unit="sentence">.</pc>
+      </l>
+      <l xml:id="parr-l17665">
+         <w xml:id="parr-0387410">There</w>
+         <c> </c>
+         <w xml:id="parr-0387420">shrines</w>
+         <c> </c>
+         <w xml:id="parr-0387430">and</w>
+         <c> </c>
+         <w xml:id="parr-0387440">palaces</w>
+         <c> </c>
+         <w xml:id="parr-0387450">and</w>
+         <c> </c>
+         <w xml:id="parr-0387460">towers</w>
+      </l>
+      <l xml:id="parr-l17670">
+         <pc xml:id="parr-0387470">(</pc>
+         <w xml:id="parr-0387480">Time-eaten</w>
+         <c> </c>
+         <w xml:id="parr-0387490">towers</w>
+         <c> </c>
+         <w xml:id="parr-0387500">that</w>
+         <c> </c>
+         <w xml:id="parr-0387510">tremble</w>
+         <c> </c>
+         <w xml:id="parr-0387520">not</w>
+         <pc xml:id="parr-0387530">!</pc>
+         <pc xml:id="parr-0387540" unit="sentence">)</pc>
+      </l>
+      <l xml:id="parr-l17675">
+         <w xml:id="parr-0387550">Resemble</w>
+         <c> </c>
+         <w xml:id="parr-0387560">nothing</w>
+         <c> </c>
+         <w xml:id="parr-0387570">that</w>
+         <c> </c>
+         <w xml:id="parr-0387580">is</w>
+         <c> </c>
+         <w xml:id="parr-0387590">ours</w>
+         <pc xml:id="parr-0387600" unit="sentence">.</pc>
+      </l>
+      <l xml:id="parr-l17680">
+         <w xml:id="parr-0387610">Around</w>
+         <pc xml:id="parr-0387620">,</pc>
+         <c> </c>
+         <w xml:id="parr-0387630">by</w>
+         <c> </c>
+         <w xml:id="parr-0387640">lifting</w>
+         <c> </c>
+         <w xml:id="parr-0387650">winds</w>
+         <c> </c>
+         <w xml:id="parr-0387660">forgot</w>
+         <pc xml:id="parr-0387670">,</pc>
+      </l>
+      <l xml:id="parr-l17685">
+         <w xml:id="parr-0387680">Resignedly</w>
+         <c> </c>
+         <w xml:id="parr-0387690">beneath</w>
+         <c> </c>
+         <w xml:id="parr-0387700">the</w>
+         <c> </c>
+         <w xml:id="parr-0387710">sky</w>
+      </l>
+      <l xml:id="parr-l17690">
+         <w xml:id="parr-0387720">The</w>
+         <c> </c>
+         <w xml:id="parr-0387730">melancholy</w>
+         <c> </c>
+         <w xml:id="parr-0387740">waters</w>
+         <c> </c>
+         <w xml:id="parr-0387750">lie</w>
+         <pc xml:id="parr-0387760" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="parr-s04545">
+      <l xml:id="parr-l17695">
+         <w xml:id="parr-0387790">No</w>
+         <c> </c>
+         <w xml:id="parr-0387800">rays</w>
+         <c> </c>
+         <w xml:id="parr-0387810">from</w>
+         <c> </c>
+         <w xml:id="parr-0387820">the</w>
+         <c> </c>
+         <w xml:id="parr-0387830">holy</w>
+         <c> </c>
+         <w xml:id="parr-0387840">heaven</w>
+         <c> </c>
+         <w xml:id="parr-0387850">come</w>
+         <c> </c>
+         <w xml:id="parr-0387860">down</w>
+      </l>
+      <l xml:id="parr-l17700">
+         <w xml:id="parr-0387870">On</w>
+         <c> </c>
+         <w xml:id="parr-0387880">the</w>
+         <c> </c>
+         <w xml:id="parr-0387890">long</w>
+         <c> </c>
+         <w xml:id="parr-0387900">night-time</w>
+         <c> </c>
+         <w xml:id="parr-0387910">of</w>
+         <c> </c>
+         <w xml:id="parr-0387920">that</w>
+         <c> </c>
+         <w xml:id="parr-0387930">town</w>
+         <pc xml:id="parr-0387940">;</pc>
+      </l>
+      <l xml:id="parr-l17705">
+         <w xml:id="parr-0387950">But</w>
+         <c> </c>
+         <w xml:id="parr-0387960">light</w>
+         <c> </c>
+         <w xml:id="parr-0387970">from</w>
+         <c> </c>
+         <w xml:id="parr-0387980">out</w>
+         <c> </c>
+         <w xml:id="parr-0387990">the</w>
+         <c> </c>
+         <w xml:id="parr-0388000">lurid</w>
+         <c> </c>
+         <w xml:id="parr-0388010">sea</w>
+      </l>
+      <l xml:id="parr-l17710">
+         <w xml:id="parr-0388020">Streams</w>
+         <c> </c>
+         <w xml:id="parr-0388030">up</w>
+         <c> </c>
+         <w xml:id="parr-0388040">the</w>
+         <c> </c>
+         <w xml:id="parr-0388050">turrets</w>
+         <c> </c>
+         <w xml:id="parr-0388060">silently</w>
+         <c> </c>
+         <pc xml:id="parr-0388070">—</pc>
+      </l>
+      <l xml:id="parr-l17715">
+         <w xml:id="parr-0388080">Gleams</w>
+         <c> </c>
+         <w xml:id="parr-0388090">up</w>
+         <c> </c>
+         <w xml:id="parr-0388100">the</w>
+         <c> </c>
+         <w xml:id="parr-0388110">pinnacles</w>
+         <c> </c>
+         <w xml:id="parr-0388120">far</w>
+         <c> </c>
+         <w xml:id="parr-0388130">and</w>
+         <c> </c>
+         <w xml:id="parr-0388140">free</w>
+         <c> </c>
+         <pc xml:id="parr-0388150">—</pc>
+      </l>
+      <l xml:id="parr-l17720">
+         <w xml:id="parr-0388160">Up</w>
+         <c> </c>
+         <w xml:id="parr-0388170">domes</w>
+         <c> </c>
+         <pc xml:id="parr-0388180">—</pc>
+         <c> </c>
+         <w xml:id="parr-0388190">up</w>
+         <c> </c>
+         <w xml:id="parr-0388200">spires</w>
+         <c> </c>
+         <pc xml:id="parr-0388210">—</pc>
+         <c> </c>
+         <w xml:id="parr-0388220">up</w>
+         <c> </c>
+         <w xml:id="parr-0388230">kingly</w>
+         <c> </c>
+         <w xml:id="parr-0388240">halls</w>
+         <c> </c>
+         <pc xml:id="parr-0388250">—</pc>
+      </l>
+      <l xml:id="parr-l17725">
+         <w xml:id="parr-0388260">Up</w>
+         <c> </c>
+         <w xml:id="parr-0388270">fanes</w>
+         <c> </c>
+         <pc xml:id="parr-0388280">—</pc>
+         <c> </c>
+         <w xml:id="parr-0388290">up</w>
+         <c> </c>
+         <w xml:id="parr-0388300">Babylon-like</w>
+         <c> </c>
+         <w xml:id="parr-0388310">walls</w>
+         <c> </c>
+         <pc xml:id="parr-0388320">—</pc>
+      </l>
+      <l xml:id="parr-l17730">
+         <w xml:id="parr-0388330">Up</w>
+         <c> </c>
+         <w xml:id="parr-0388340">shadowy</w>
+         <c> </c>
+         <w xml:id="parr-0388350">long-forgotten</w>
+         <c> </c>
+         <w xml:id="parr-0388360">bowers</w>
+      </l>
+      <l xml:id="parr-l17735">
+         <w xml:id="parr-0388370">Of</w>
+         <c> </c>
+         <w xml:id="parr-0388380">sculptured</w>
+         <c> </c>
+         <w xml:id="parr-0388390">ivy</w>
+         <c> </c>
+         <w xml:id="parr-0388400">and</w>
+         <c> </c>
+         <w xml:id="parr-0388410">stone</w>
+         <c> </c>
+         <w xml:id="parr-0388420">flowers</w>
+         <c> </c>
+         <pc xml:id="parr-0388430">—</pc>
+      </l>
+      <l xml:id="parr-l17740">
+         <w xml:id="parr-0388440">Up</w>
+         <c> </c>
+         <w xml:id="parr-0388450">many</w>
+         <c> </c>
+         <w xml:id="parr-0388460">and</w>
+         <c> </c>
+         <w xml:id="parr-0388470">many</w>
+         <c> </c>
+         <w xml:id="parr-0388480">a</w>
+         <c> </c>
+         <w xml:id="parr-0388490">marvellous</w>
+         <c> </c>
+         <w xml:id="parr-0388500">shrine</w>
+      </l>
+      <l xml:id="parr-l17745">
+         <w xml:id="parr-0388510">Whose</w>
+         <c> </c>
+         <w xml:id="parr-0388520">wreathéd</w>
+         <c> </c>
+         <w xml:id="parr-0388530">friezes</w>
+         <c> </c>
+         <w xml:id="parr-0388540">intertwine</w>
+      </l>
+      <l xml:id="parr-l17750">
+         <w xml:id="parr-0388550">The</w>
+         <c> </c>
+         <w xml:id="parr-0388560">viol</w>
+         <pc xml:id="parr-0388570">,</pc>
+         <c> </c>
+         <w xml:id="parr-0388580">the</w>
+         <c> </c>
+         <w xml:id="parr-0388590">violet</w>
+         <pc xml:id="parr-0388600">,</pc>
+         <c> </c>
+         <w xml:id="parr-0388610">and</w>
+         <c> </c>
+         <w xml:id="parr-0388620">the</w>
+         <c> </c>
+         <w xml:id="parr-0388630">vine</w>
+         <pc xml:id="parr-0388640" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="parr-s04550">
+      <l xml:id="parr-l17755">
+         <w xml:id="parr-0388670">Resignedly</w>
+         <c> </c>
+         <w xml:id="parr-0388680">beneath</w>
+         <c> </c>
+         <w xml:id="parr-0388690">the</w>
+         <c> </c>
+         <w xml:id="parr-0388700">sky</w>
+      </l>
+      <l xml:id="parr-l17760">
+         <w xml:id="parr-0388710">The</w>
+         <c> </c>
+         <w xml:id="parr-0388720">melancholy</w>
+         <c> </c>
+         <w xml:id="parr-0388730">waters</w>
+         <c> </c>
+         <w xml:id="parr-0388740">lie</w>
+         <pc xml:id="parr-0388750" unit="sentence">.</pc>
+      </l>
+      <l xml:id="parr-l17765">
+         <w xml:id="parr-0388760">So</w>
+         <c> </c>
+         <w xml:id="parr-0388770">blend</w>
+         <c> </c>
+         <w xml:id="parr-0388780">the</w>
+         <c> </c>
+         <w xml:id="parr-0388790">turrets</w>
+         <c> </c>
+         <w xml:id="parr-0388800">and</w>
+         <c> </c>
+         <w xml:id="parr-0388810">shadows</w>
+         <c> </c>
+         <w xml:id="parr-0388820">there</w>
+      </l>
+      <l xml:id="parr-l17770">
+         <w xml:id="parr-0388830">That</w>
+         <c> </c>
+         <w xml:id="parr-0388840">all</w>
+         <c> </c>
+         <w xml:id="parr-0388850">seem</w>
+         <c> </c>
+         <w xml:id="parr-0388860">pendulous</w>
+         <c> </c>
+         <w xml:id="parr-0388870">in</w>
+         <c> </c>
+         <w xml:id="parr-0388880">air</w>
+         <pc xml:id="parr-0388890">,</pc>
+      </l>
+      <l xml:id="parr-l17775">
+         <w xml:id="parr-0388900">While</w>
+         <c> </c>
+         <w xml:id="parr-0388910">from</w>
+         <c> </c>
+         <w xml:id="parr-0388920">a</w>
+         <c> </c>
+         <w xml:id="parr-0388930">proud</w>
+         <c> </c>
+         <w xml:id="parr-0388940">tower</w>
+         <c> </c>
+         <w xml:id="parr-0388950">in</w>
+         <c> </c>
+         <w xml:id="parr-0388960">the</w>
+         <c> </c>
+         <w xml:id="parr-0388970">town</w>
+      </l>
+      <l xml:id="parr-l17780">
+         <w xml:id="parr-0388980">Death</w>
+         <c> </c>
+         <w xml:id="parr-0388990">looks</w>
+         <c> </c>
+         <w xml:id="parr-0389000">gigantically</w>
+         <c> </c>
+         <w xml:id="parr-0389010">down</w>
+         <pc xml:id="parr-0389020" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="parr-s04555">
+      <l xml:id="parr-l17785">
+         <w xml:id="parr-0389050">There</w>
+         <c> </c>
+         <w xml:id="parr-0389060">open</w>
+         <c> </c>
+         <w xml:id="parr-0389070">fanes</w>
+         <c> </c>
+         <w xml:id="parr-0389080">and</w>
+         <c> </c>
+         <w xml:id="parr-0389090">gaping</w>
+         <c> </c>
+         <w xml:id="parr-0389100">graves</w>
+      </l>
+      <l xml:id="parr-l17790">
+         <w xml:id="parr-0389110">Yawn</w>
+         <c> </c>
+         <w xml:id="parr-0389120">level</w>
+         <c> </c>
+         <w xml:id="parr-0389130">with</w>
+         <c> </c>
+         <w xml:id="parr-0389140">the</w>
+         <c> </c>
+         <w xml:id="parr-0389150">luminous</w>
+         <c> </c>
+         <w xml:id="parr-0389160">waves</w>
+         <pc xml:id="parr-0389170">;</pc>
+      </l>
+      <l xml:id="parr-l17795">
+         <w xml:id="parr-0389180">But</w>
+         <c> </c>
+         <w xml:id="parr-0389190">not</w>
+         <c> </c>
+         <w xml:id="parr-0389200">the</w>
+         <c> </c>
+         <w xml:id="parr-0389210">riches</w>
+         <c> </c>
+         <w xml:id="parr-0389220">there</w>
+         <c> </c>
+         <w xml:id="parr-0389230">that</w>
+         <c> </c>
+         <w xml:id="parr-0389240">lie</w>
+      </l>
+      <l xml:id="parr-l17800">
+         <w xml:id="parr-0389250">In</w>
+         <c> </c>
+         <w xml:id="parr-0389260">each</w>
+         <c> </c>
+         <w xml:id="parr-0389270">idol’s</w>
+         <c> </c>
+         <w xml:id="parr-0389280">diamond</w>
+         <c> </c>
+         <w xml:id="parr-0389290">eye</w>
+         <c> </c>
+         <pc xml:id="parr-0389300">—</pc>
+      </l>
+      <l xml:id="parr-l17805">
+         <w xml:id="parr-0389310">Not</w>
+         <c> </c>
+         <w xml:id="parr-0389320">the</w>
+         <c> </c>
+         <w xml:id="parr-0389330">gaily-jewelled</w>
+         <c> </c>
+         <w xml:id="parr-0389340">dead</w>
+      </l>
+      <l xml:id="parr-l17810">
+         <w xml:id="parr-0389350">Tempt</w>
+         <c> </c>
+         <w xml:id="parr-0389360">the</w>
+         <c> </c>
+         <w xml:id="parr-0389370">waters</w>
+         <c> </c>
+         <w xml:id="parr-0389380">from</w>
+         <c> </c>
+         <w xml:id="parr-0389390">their</w>
+         <c> </c>
+         <w xml:id="parr-0389400">bed</w>
+         <pc xml:id="parr-0389410">;</pc>
+      </l>
+      <l xml:id="parr-l17815">
+         <w xml:id="parr-0389420">For</w>
+         <c> </c>
+         <w xml:id="parr-0389430">no</w>
+         <c> </c>
+         <w xml:id="parr-0389440">ripples</w>
+         <c> </c>
+         <w xml:id="parr-0389450">curl</w>
+         <pc xml:id="parr-0389460">,</pc>
+         <c> </c>
+         <w xml:id="parr-0389470">alas</w>
+         <pc xml:id="parr-0389480" unit="sentence">!</pc>
+      </l>
+      <l xml:id="parr-l17820">
+         <w xml:id="parr-0389490">Along</w>
+         <c> </c>
+         <w xml:id="parr-0389500">that</w>
+         <c> </c>
+         <w xml:id="parr-0389510">wilderness</w>
+         <c> </c>
+         <w xml:id="parr-0389520">of</w>
+         <c> </c>
+         <w xml:id="parr-0389530">glass</w>
+         <c> </c>
+         <pc xml:id="parr-0389540">—</pc>
+      </l>
+      <l xml:id="parr-l17825">
+         <w xml:id="parr-0389550">No</w>
+         <c> </c>
+         <w xml:id="parr-0389560">swellings</w>
+         <c> </c>
+         <w xml:id="parr-0389570">tell</w>
+         <c> </c>
+         <w xml:id="parr-0389580">that</w>
+         <c> </c>
+         <w xml:id="parr-0389590">winds</w>
+         <c> </c>
+         <w xml:id="parr-0389600">may</w>
+         <c> </c>
+         <w xml:id="parr-0389610">be</w>
+      </l>
+      <l xml:id="parr-l17830">
+         <w xml:id="parr-0389620">Upon</w>
+         <c> </c>
+         <w xml:id="parr-0389630">some</w>
+         <c> </c>
+         <w xml:id="parr-0389640">far-off</w>
+         <c> </c>
+         <w xml:id="parr-0389650">happier</w>
+         <c> </c>
+         <w xml:id="parr-0389660">sea</w>
+         <c> </c>
+         <pc xml:id="parr-0389670">—</pc>
+      </l>
+      <l xml:id="parr-l17835">
+         <w xml:id="parr-0389680">No</w>
+         <c> </c>
+         <w xml:id="parr-0389690">heavings</w>
+         <c> </c>
+         <w xml:id="parr-0389700">hint</w>
+         <c> </c>
+         <w xml:id="parr-0389710">that</w>
+         <c> </c>
+         <w xml:id="parr-0389720">winds</w>
+         <c> </c>
+         <w xml:id="parr-0389730">have</w>
+         <c> </c>
+         <w xml:id="parr-0389740">been</w>
+      </l>
+      <l xml:id="parr-l17840">
+         <w xml:id="parr-0389750">On</w>
+         <c> </c>
+         <w xml:id="parr-0389760">seas</w>
+         <c> </c>
+         <w xml:id="parr-0389770">less</w>
+         <c> </c>
+         <w xml:id="parr-0389780">hideously</w>
+         <c> </c>
+         <w xml:id="parr-0389790">serene</w>
+         <pc xml:id="parr-0389800" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="parr-s04560">
+      <l xml:id="parr-l17845">
+         <w xml:id="parr-0389830">But</w>
+         <c> </c>
+         <w xml:id="parr-0389840">lo</w>
+         <pc xml:id="parr-0389850">,</pc>
+         <c> </c>
+         <w xml:id="parr-0389860">a</w>
+         <c> </c>
+         <w xml:id="parr-0389870">stir</w>
+         <c> </c>
+         <w xml:id="parr-0389880">is</w>
+         <c> </c>
+         <w xml:id="parr-0389890">in</w>
+         <c> </c>
+         <w xml:id="parr-0389900">the</w>
+         <c> </c>
+         <w xml:id="parr-0389910">air</w>
+         <pc xml:id="parr-0389920" unit="sentence">!</pc>
+      </l>
+      <l xml:id="parr-l17850">
+         <w xml:id="parr-0389930">The</w>
+         <c> </c>
+         <w xml:id="parr-0389940">wave</w>
+         <c> </c>
+         <pc xml:id="parr-0389950">—</pc>
+         <c> </c>
+         <w xml:id="parr-0389960">there</w>
+         <c> </c>
+         <w xml:id="parr-0389970">is</w>
+         <c> </c>
+         <w xml:id="parr-0389980">a</w>
+         <c> </c>
+         <w xml:id="parr-0389990">movement</w>
+         <c> </c>
+         <w xml:id="parr-0390000">there</w>
+         <pc xml:id="parr-0390010" unit="sentence">!</pc>
+      </l>
+      <l xml:id="parr-l17855">
+         <w xml:id="parr-0390020">As</w>
+         <c> </c>
+         <w xml:id="parr-0390030">if</w>
+         <c> </c>
+         <w xml:id="parr-0390040">the</w>
+         <c> </c>
+         <w xml:id="parr-0390050">towers</w>
+         <c> </c>
+         <w xml:id="parr-0390060">had</w>
+         <c> </c>
+         <w xml:id="parr-0390070">thrust</w>
+         <c> </c>
+         <w xml:id="parr-0390080">aside</w>
+         <pc xml:id="parr-0390090">,</pc>
+      </l>
+      <l xml:id="parr-l17860">
+         <w xml:id="parr-0390100">In</w>
+         <c> </c>
+         <w xml:id="parr-0390110">slightly</w>
+         <c> </c>
+         <w xml:id="parr-0390120">sinking</w>
+         <pc xml:id="parr-0390130">,</pc>
+         <c> </c>
+         <w xml:id="parr-0390140">the</w>
+         <c> </c>
+         <w xml:id="parr-0390150">dull</w>
+         <c> </c>
+         <w xml:id="parr-0390160">tide</w>
+         <c> </c>
+         <pc xml:id="parr-0390170">—</pc>
+      </l>
+      <l xml:id="parr-l17865">
+         <w xml:id="parr-0390180">As</w>
+         <c> </c>
+         <w xml:id="parr-0390190">if</w>
+         <c> </c>
+         <w xml:id="parr-0390200">their</w>
+         <c> </c>
+         <w xml:id="parr-0390210">tops</w>
+         <c> </c>
+         <w xml:id="parr-0390220">had</w>
+         <c> </c>
+         <w xml:id="parr-0390230">feebly</w>
+         <c> </c>
+         <w xml:id="parr-0390240">given</w>
+      </l>
+      <l xml:id="parr-l17870">
+         <w xml:id="parr-0390250">A</w>
+         <c> </c>
+         <w xml:id="parr-0390260">void</w>
+         <c> </c>
+         <w xml:id="parr-0390270">within</w>
+         <c> </c>
+         <w xml:id="parr-0390280">the</w>
+         <c> </c>
+         <w xml:id="parr-0390290">filmy</w>
+         <c> </c>
+         <w xml:id="parr-0390300">Heaven</w>
+         <pc xml:id="parr-0390310" unit="sentence">.</pc>
+      </l>
+      <l xml:id="parr-l17875">
+         <w xml:id="parr-0390320">The</w>
+         <c> </c>
+         <w xml:id="parr-0390330">waves</w>
+         <c> </c>
+         <w xml:id="parr-0390340">have</w>
+         <c> </c>
+         <w xml:id="parr-0390350">now</w>
+         <c> </c>
+         <w xml:id="parr-0390360">a</w>
+         <c> </c>
+         <w xml:id="parr-0390370">redder</w>
+         <c> </c>
+         <w xml:id="parr-0390380">glow</w>
+         <c> </c>
+         <pc xml:id="parr-0390390">—</pc>
+      </l>
+      <l xml:id="parr-l17880">
+         <w xml:id="parr-0390400">The</w>
+         <c> </c>
+         <w xml:id="parr-0390410">hours</w>
+         <c> </c>
+         <w xml:id="parr-0390420">are</w>
+         <c> </c>
+         <w xml:id="parr-0390430">breathing</w>
+         <c> </c>
+         <w xml:id="parr-0390440">faint</w>
+         <c> </c>
+         <w xml:id="parr-0390450">and</w>
+         <c> </c>
+         <w xml:id="parr-0390460">low</w>
+         <c> </c>
+         <pc xml:id="parr-0390470">—</pc>
+      </l>
+      <l xml:id="parr-l17885">
+         <w xml:id="parr-0390480">And</w>
+         <c> </c>
+         <w xml:id="parr-0390490">when</w>
+         <pc xml:id="parr-0390500">,</pc>
+         <c> </c>
+         <w xml:id="parr-0390510">amid</w>
+         <c> </c>
+         <w xml:id="parr-0390520">no</w>
+         <c> </c>
+         <w xml:id="parr-0390530">earthly</w>
+         <c> </c>
+         <w xml:id="parr-0390540">moans</w>
+         <pc xml:id="parr-0390550">,</pc>
+      </l>
+      <l xml:id="parr-l17890">
+         <w xml:id="parr-0390560">Down</w>
+         <pc xml:id="parr-0390570">,</pc>
+         <c> </c>
+         <w xml:id="parr-0390580">down</w>
+         <c> </c>
+         <w xml:id="parr-0390590">that</w>
+         <c> </c>
+         <w xml:id="parr-0390600">town</w>
+         <c> </c>
+         <w xml:id="parr-0390610">shall</w>
+         <c> </c>
+         <w xml:id="parr-0390620">settle</w>
+         <c> </c>
+         <w xml:id="parr-0390630">hence</w>
+         <pc xml:id="parr-0390640" unit="sentence">.</pc>
+      </l>
+      <l xml:id="parr-l17895">
+         <w xml:id="parr-0390650">Hell</w>
+         <pc xml:id="parr-0390660">,</pc>
+         <c> </c>
+         <w xml:id="parr-0390670">rising</w>
+         <c> </c>
+         <w xml:id="parr-0390680">from</w>
+         <c> </c>
+         <w xml:id="parr-0390690">a</w>
+         <c> </c>
+         <w xml:id="parr-0390700">thousand</w>
+         <c> </c>
+         <w xml:id="parr-0390710">thrones</w>
+         <pc xml:id="parr-0390720">,</pc>
+      </l>
+      <l xml:id="parr-l17900">
+         <w xml:id="parr-0390730">Shall</w>
+         <c> </c>
+         <w xml:id="parr-0390740">do</w>
+         <c> </c>
+         <w xml:id="parr-0390750">it</w>
+         <c> </c>
+         <w xml:id="parr-0390760">reverence</w>
+         <pc xml:id="parr-0390770" unit="sentence">.</pc>
+      </l>
+   </lg>
+</div>
