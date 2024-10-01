@@ -1,0 +1,2732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#original"
+     corresp="#work00917"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text01247"
+     xml:lang="rus">
+   <link target="#pers00134" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erpa-n01415">
+      <date from="1808" to="1812" type="comp">
+         <w xml:id="erpa-1239130">1808</w>
+         <c> </c>
+         <pc xml:id="erpa-1239140">—</pc>
+         <c> </c>
+         <w xml:id="erpa-1239150">12</w>
+      </date>
+   </note>
+   <head type="main" xml:lang="rus" xml:id="erpa-h01870">
+      <w xml:id="erpa-1225310">Светлана</w>
+   </head>
+   <p ana="#dedication" xml:id="erpa-s09770">
+      <c> </c>
+      <pc xml:id="erpa-1225340">"</pc>
+      <c> </c>
+      <pc xml:id="erpa-1225360">'</pc>
+      <w xml:id="erpa-1225370">А</w>
+      <pc xml:id="erpa-1225380" unit="sentence">.</pc>
+      <c> </c>
+      <w xml:id="erpa-1225390">А</w>
+      <pc xml:id="erpa-1225400">.</pc>
+      <c> </c>
+      <w xml:id="erpa-1225410">Воейковой</w>
+      <pc xml:id="erpa-1225420">'</pc>
+      <c> </c>
+      <pc xml:id="erpa-1225440" unit="sentence">"</pc>
+   </p>
+   <lg xml:id="erpa-s09775">
+      <l xml:id="erpa-l64715">
+         <w xml:id="erpa-1225470">Раз</w>
+         <c> </c>
+         <w xml:id="erpa-1225480">в</w>
+         <c> </c>
+         <w xml:id="erpa-1225490">крещенский</w>
+         <c> </c>
+         <w xml:id="erpa-1225500">вечерок</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64720">
+         <w xml:id="erpa-1225510">Девушки</w>
+         <c> </c>
+         <w xml:id="erpa-1225520">гадали</w>
+         <pc xml:id="erpa-1225530">:</pc>
+      </l>
+      <l xml:id="erpa-l64725">
+         <w xml:id="erpa-1225540">За</w>
+         <c> </c>
+         <w xml:id="erpa-1225550">ворота</w>
+         <c> </c>
+         <w xml:id="erpa-1225560">башмачок</w>
+         <pc xml:id="erpa-1225570">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64730">
+         <w xml:id="erpa-1225580">Сняв</w>
+         <c> </c>
+         <w xml:id="erpa-1225590">с</w>
+         <c> </c>
+         <w xml:id="erpa-1225600">ноги</w>
+         <pc xml:id="erpa-1225610">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1225620">бросали</w>
+         <pc xml:id="erpa-1225630">;</pc>
+      </l>
+      <l xml:id="erpa-l64735">
+         <w xml:id="erpa-1225640">Снег</w>
+         <c> </c>
+         <w xml:id="erpa-1225650">пололи</w>
+         <pc xml:id="erpa-1225660">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1225670">под</w>
+         <c> </c>
+         <w xml:id="erpa-1225680">окном</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64740">
+         <w xml:id="erpa-1225690">Слушали</w>
+         <pc xml:id="erpa-1225700">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1225710">кормили</w>
+      </l>
+      <l xml:id="erpa-l64745">
+         <w xml:id="erpa-1225720">Счетным</w>
+         <c> </c>
+         <w xml:id="erpa-1225730">курицу</w>
+         <c> </c>
+         <w xml:id="erpa-1225740">зерном</w>
+         <pc xml:id="erpa-1225750">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64750">
+         <w xml:id="erpa-1225760">Ярый</w>
+         <c> </c>
+         <w xml:id="erpa-1225770">воск</w>
+         <c> </c>
+         <w xml:id="erpa-1225780">топили</w>
+         <pc xml:id="erpa-1225790">;</pc>
+      </l>
+      <l xml:id="erpa-l64755">
+         <w xml:id="erpa-1225800">В</w>
+         <c> </c>
+         <w xml:id="erpa-1225810">чашу</w>
+         <c> </c>
+         <w xml:id="erpa-1225820">с</w>
+         <c> </c>
+         <w xml:id="erpa-1225830">чистою</w>
+         <c> </c>
+         <w xml:id="erpa-1225840">водой</w>
+      </l>
+      <l xml:id="erpa-l64760">
+         <w xml:id="erpa-1225850">Клали</w>
+         <c> </c>
+         <w xml:id="erpa-1225860">перстень</w>
+         <c> </c>
+         <w xml:id="erpa-1225870">золотой</w>
+         <pc xml:id="erpa-1225880">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64765">
+         <w xml:id="erpa-1225890">Серьги</w>
+         <c> </c>
+         <w xml:id="erpa-1225900">изумрудны</w>
+         <pc xml:id="erpa-1225910">;</pc>
+      </l>
+      <l xml:id="erpa-l64770">
+         <w xml:id="erpa-1225920">Расстилали</w>
+         <c> </c>
+         <w xml:id="erpa-1225930">белый</w>
+         <c> </c>
+         <w xml:id="erpa-1225940">плат</w>
+      </l>
+      <l xml:id="erpa-l64775">
+         <w xml:id="erpa-1225950">И</w>
+         <c> </c>
+         <w xml:id="erpa-1225960">над</w>
+         <c> </c>
+         <w xml:id="erpa-1225970">чашей</w>
+         <c> </c>
+         <w xml:id="erpa-1225980">пели</w>
+         <c> </c>
+         <w xml:id="erpa-1225990">в</w>
+         <c> </c>
+         <w xml:id="erpa-1226000">лад</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64780">
+         <w xml:id="erpa-1226010">Песенки</w>
+         <c> </c>
+         <w xml:id="erpa-1226020">подблюдны</w>
+         <pc xml:id="erpa-1226030" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09780">
+      <l xml:id="erpa-l64785">
+         <w xml:id="erpa-1226060">Тускло</w>
+         <c> </c>
+         <w xml:id="erpa-1226070">светится</w>
+         <c> </c>
+         <w xml:id="erpa-1226080">луна</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64790">
+         <w xml:id="erpa-1226090">В</w>
+         <c> </c>
+         <w xml:id="erpa-1226100">сумраке</w>
+         <c> </c>
+         <w xml:id="erpa-1226110">тумана</w>
+         <c> </c>
+         <pc xml:id="erpa-1226120">-</pc>
+      </l>
+      <l xml:id="erpa-l64795">
+         <w xml:id="erpa-1226130">Молчалива</w>
+         <c> </c>
+         <w xml:id="erpa-1226140">и</w>
+         <c> </c>
+         <w xml:id="erpa-1226150">грустна</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64800">
+         <w xml:id="erpa-1226160">Милая</w>
+         <c> </c>
+         <w xml:id="erpa-1226170">Светлана</w>
+         <pc xml:id="erpa-1226180" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l64805">
+         <pc xml:id="erpa-1226190">"</pc>
+         <w xml:id="erpa-1226200">Что</w>
+         <pc xml:id="erpa-1226210">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1226220">подруженька</w>
+         <pc xml:id="erpa-1226230">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1226240">с</w>
+         <c> </c>
+         <w xml:id="erpa-1226250">тобой</w>
+         <pc xml:id="erpa-1226260" unit="sentence">?</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64810">
+         <w xml:id="erpa-1226270">Вымолви</w>
+         <c> </c>
+         <w xml:id="erpa-1226280">словечко</w>
+         <pc xml:id="erpa-1226290">;</pc>
+      </l>
+      <l xml:id="erpa-l64815">
+         <w xml:id="erpa-1226300">Слушай</w>
+         <c> </c>
+         <w xml:id="erpa-1226310">песни</w>
+         <c> </c>
+         <w xml:id="erpa-1226320">круговой</w>
+         <pc xml:id="erpa-1226330">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64820">
+         <w xml:id="erpa-1226340">Вынь</w>
+         <c> </c>
+         <w xml:id="erpa-1226350">себе</w>
+         <c> </c>
+         <w xml:id="erpa-1226360">колечко</w>
+         <pc xml:id="erpa-1226370" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l64825">
+         <w xml:id="erpa-1226380">Пой</w>
+         <pc xml:id="erpa-1226390">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1226400">красавица</w>
+         <pc xml:id="erpa-1226410">:</pc>
+         <pc xml:id="erpa-1226420">"</pc>
+         <c> </c>
+         <w xml:id="erpa-1226430">Кузнец</w>
+         <pc xml:id="erpa-1226440">,</pc>
+      </l>
+      <l xml:id="erpa-l64830">
+         <w xml:id="erpa-1226450">Скуй</w>
+         <c> </c>
+         <w xml:id="erpa-1226460">мне</w>
+         <c> </c>
+         <w xml:id="erpa-1226470">злат</w>
+         <c> </c>
+         <w xml:id="erpa-1226480">и</w>
+         <c> </c>
+         <w xml:id="erpa-1226490">нов</w>
+         <c> </c>
+         <w xml:id="erpa-1226500">венец</w>
+         <pc xml:id="erpa-1226510">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64835">
+         <w xml:id="erpa-1226520">Скуй</w>
+         <c> </c>
+         <w xml:id="erpa-1226530">кольцо</w>
+         <c> </c>
+         <w xml:id="erpa-1226540">златое</w>
+         <pc xml:id="erpa-1226550">;</pc>
+      </l>
+      <l xml:id="erpa-l64840">
+         <w xml:id="erpa-1226560">Мне</w>
+         <c> </c>
+         <w xml:id="erpa-1226570">венчаться</w>
+         <c> </c>
+         <w xml:id="erpa-1226580">тем</w>
+         <c> </c>
+         <w xml:id="erpa-1226590">венцом</w>
+         <pc xml:id="erpa-1226600">,</pc>
+      </l>
+      <l xml:id="erpa-l64845">
+         <w xml:id="erpa-1226610">Обручаться</w>
+         <c> </c>
+         <w xml:id="erpa-1226620">тем</w>
+         <c> </c>
+         <w xml:id="erpa-1226630">кольцом</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64850">
+         <w xml:id="erpa-1226640">При</w>
+         <c> </c>
+         <w xml:id="erpa-1226650">святом</w>
+         <c> </c>
+         <w xml:id="erpa-1226660">налое</w>
+         <c> </c>
+         <pc xml:id="erpa-1226670">"</pc>
+         <pc xml:id="erpa-1226680" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09785">
+      <l xml:id="erpa-l64855">
+         <pc xml:id="erpa-1226710">"</pc>
+         <w xml:id="erpa-1226720">Как</w>
+         <c> </c>
+         <w xml:id="erpa-1226730">могу</w>
+         <pc xml:id="erpa-1226740">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1226750">подружки</w>
+         <pc xml:id="erpa-1226760">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1226770">петь</w>
+         <pc xml:id="erpa-1226780" unit="sentence">?</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64860">
+         <w xml:id="erpa-1226790">Милый</w>
+         <c> </c>
+         <w xml:id="erpa-1226800">друг</w>
+         <c> </c>
+         <w xml:id="erpa-1226810">далєко</w>
+         <pc xml:id="erpa-1226820">;</pc>
+      </l>
+      <l xml:id="erpa-l64865">
+         <w xml:id="erpa-1226830">Мне</w>
+         <c> </c>
+         <w xml:id="erpa-1226840">судьбина</w>
+         <c> </c>
+         <w xml:id="erpa-1226850">умереть</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64870">
+         <w xml:id="erpa-1226860">В</w>
+         <c> </c>
+         <w xml:id="erpa-1226870">грусти</w>
+         <c> </c>
+         <w xml:id="erpa-1226880">одинокой</w>
+         <pc xml:id="erpa-1226890" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l64875">
+         <w xml:id="erpa-1226900">Год</w>
+         <c> </c>
+         <w xml:id="erpa-1226910">промчался</w>
+         <c> </c>
+         <pc xml:id="erpa-1226920">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1226930">вести</w>
+         <c> </c>
+         <w xml:id="erpa-1226940">нет</w>
+         <pc xml:id="erpa-1226950">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64880">
+         <w xml:id="erpa-1226960">Он</w>
+         <c> </c>
+         <w xml:id="erpa-1226970">ко</w>
+         <c> </c>
+         <w xml:id="erpa-1226980">мне</w>
+         <c> </c>
+         <w xml:id="erpa-1226990">не</w>
+         <c> </c>
+         <w xml:id="erpa-1227000">пишет</w>
+         <pc xml:id="erpa-1227010">;</pc>
+      </l>
+      <l xml:id="erpa-l64885">
+         <w xml:id="erpa-1227020">Ах</w>
+         <pc xml:id="erpa-1227030" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1227040">а</w>
+         <c> </c>
+         <w xml:id="erpa-1227050">им</w>
+         <c> </c>
+         <w xml:id="erpa-1227060">лишь</w>
+         <c> </c>
+         <w xml:id="erpa-1227070">красен</w>
+         <c> </c>
+         <w xml:id="erpa-1227080">свет</w>
+         <pc xml:id="erpa-1227090">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64890">
+         <w xml:id="erpa-1227100">Им</w>
+         <c> </c>
+         <w xml:id="erpa-1227110">лишь</w>
+         <c> </c>
+         <w xml:id="erpa-1227120">сердце</w>
+         <c> </c>
+         <w xml:id="erpa-1227130">дышит</w>
+         <pc xml:id="erpa-1227140" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l64895">
+         <w xml:id="erpa-1227150">Иль</w>
+         <c> </c>
+         <w xml:id="erpa-1227160">не</w>
+         <c> </c>
+         <w xml:id="erpa-1227170">вспомнишь</w>
+         <c> </c>
+         <w xml:id="erpa-1227180">обо</w>
+         <c> </c>
+         <w xml:id="erpa-1227190">мне</w>
+         <pc xml:id="erpa-1227200" unit="sentence">?</pc>
+      </l>
+      <l xml:id="erpa-l64900">
+         <w xml:id="erpa-1227210">Где</w>
+         <pc xml:id="erpa-1227220">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1227230">в</w>
+         <c> </c>
+         <w xml:id="erpa-1227240">какой</w>
+         <c> </c>
+         <w xml:id="erpa-1227250">ты</w>
+         <c> </c>
+         <w xml:id="erpa-1227260">стороне</w>
+         <pc xml:id="erpa-1227270" unit="sentence">?</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64905">
+         <w xml:id="erpa-1227280">Где</w>
+         <c> </c>
+         <w xml:id="erpa-1227290">твоя</w>
+         <c> </c>
+         <w xml:id="erpa-1227300">обитель</w>
+         <pc xml:id="erpa-1227310" unit="sentence">?</pc>
+      </l>
+      <l xml:id="erpa-l64910">
+         <w xml:id="erpa-1227320">Я</w>
+         <c> </c>
+         <w xml:id="erpa-1227330">молюсь</w>
+         <c> </c>
+         <w xml:id="erpa-1227340">и</w>
+         <c> </c>
+         <w xml:id="erpa-1227350">слезы</w>
+         <c> </c>
+         <w xml:id="erpa-1227360">лью</w>
+         <pc xml:id="erpa-1227370" unit="sentence">!</pc>
+      </l>
+      <l xml:id="erpa-l64915">
+         <w xml:id="erpa-1227380">Утоли</w>
+         <c> </c>
+         <w xml:id="erpa-1227390">печаль</w>
+         <c> </c>
+         <w xml:id="erpa-1227400">мою</w>
+         <pc xml:id="erpa-1227410">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64920">
+         <w xml:id="erpa-1227420">Ангел-утешитель</w>
+         <pc xml:id="erpa-1227430">"</pc>
+         <pc xml:id="erpa-1227440" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09790">
+      <l xml:id="erpa-l64925">
+         <w xml:id="erpa-1227470">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1227480">в</w>
+         <c> </c>
+         <w xml:id="erpa-1227490">светлице</w>
+         <c> </c>
+         <w xml:id="erpa-1227500">стол</w>
+         <c> </c>
+         <w xml:id="erpa-1227510">накрыт</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64930">
+         <w xml:id="erpa-1227520">Белой</w>
+         <c> </c>
+         <w xml:id="erpa-1227530">пеленою</w>
+         <pc xml:id="erpa-1227540">;</pc>
+      </l>
+      <l xml:id="erpa-l64935">
+         <w xml:id="erpa-1227550">И</w>
+         <c> </c>
+         <w xml:id="erpa-1227560">на</w>
+         <c> </c>
+         <w xml:id="erpa-1227570">том</w>
+         <c> </c>
+         <w xml:id="erpa-1227580">столе</w>
+         <c> </c>
+         <w xml:id="erpa-1227590">стоит</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64940">
+         <w xml:id="erpa-1227600">Зеркало</w>
+         <c> </c>
+         <w xml:id="erpa-1227610">с</w>
+         <c> </c>
+         <w xml:id="erpa-1227620">свечою</w>
+         <pc xml:id="erpa-1227630">;</pc>
+      </l>
+      <l xml:id="erpa-l64945">
+         <w xml:id="erpa-1227640">Два</w>
+         <c> </c>
+         <w xml:id="erpa-1227650">прибора</w>
+         <c> </c>
+         <w xml:id="erpa-1227660">на</w>
+         <c> </c>
+         <w xml:id="erpa-1227670">столе</w>
+         <pc xml:id="erpa-1227680" unit="sentence">.</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64950">
+         <pc xml:id="erpa-1227690">"</pc>
+         <w xml:id="erpa-1227700">Загадай</w>
+         <pc xml:id="erpa-1227710">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1227720">Светлана</w>
+         <pc xml:id="erpa-1227730">;</pc>
+      </l>
+      <l xml:id="erpa-l64955">
+         <w xml:id="erpa-1227740">В</w>
+         <c> </c>
+         <w xml:id="erpa-1227750">чистом</w>
+         <c> </c>
+         <w xml:id="erpa-1227760">зеркала</w>
+         <c> </c>
+         <w xml:id="erpa-1227770">стекле</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64960">
+         <w xml:id="erpa-1227780">В</w>
+         <c> </c>
+         <w xml:id="erpa-1227790">полночь</w>
+         <pc xml:id="erpa-1227800">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1227810">без</w>
+         <c> </c>
+         <w xml:id="erpa-1227820">обмана</w>
+      </l>
+      <l xml:id="erpa-l64965">
+         <w xml:id="erpa-1227830">Ты</w>
+         <c> </c>
+         <w xml:id="erpa-1227840">узнаешь</w>
+         <c> </c>
+         <w xml:id="erpa-1227850">жребий</w>
+         <c> </c>
+         <w xml:id="erpa-1227860">свой</w>
+         <pc xml:id="erpa-1227870">:</pc>
+      </l>
+      <l xml:id="erpa-l64970">
+         <w xml:id="erpa-1227880">Стукнет</w>
+         <c> </c>
+         <w xml:id="erpa-1227890">в</w>
+         <c> </c>
+         <w xml:id="erpa-1227900">двери</w>
+         <c> </c>
+         <w xml:id="erpa-1227910">милый</w>
+         <c> </c>
+         <w xml:id="erpa-1227920">твой</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64975">
+         <w xml:id="erpa-1227930">Легкою</w>
+         <c> </c>
+         <w xml:id="erpa-1227940">рукою</w>
+         <pc xml:id="erpa-1227950">;</pc>
+      </l>
+      <l xml:id="erpa-l64980">
+         <w xml:id="erpa-1227960">Упадет</w>
+         <c> </c>
+         <w xml:id="erpa-1227970">с</w>
+         <c> </c>
+         <w xml:id="erpa-1227980">дверей</w>
+         <c> </c>
+         <w xml:id="erpa-1227990">запор</w>
+         <pc xml:id="erpa-1228000">;</pc>
+      </l>
+      <l xml:id="erpa-l64985">
+         <w xml:id="erpa-1228010">Сядет</w>
+         <c> </c>
+         <w xml:id="erpa-1228020">он</w>
+         <c> </c>
+         <w xml:id="erpa-1228030">за</w>
+         <c> </c>
+         <w xml:id="erpa-1228040">свой</w>
+         <c> </c>
+         <w xml:id="erpa-1228050">прибор</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l64990">
+         <w xml:id="erpa-1228060">Ужинать</w>
+         <c> </c>
+         <w xml:id="erpa-1228070">с</w>
+         <c> </c>
+         <w xml:id="erpa-1228080">тобою</w>
+         <pc xml:id="erpa-1228090">"</pc>
+         <pc xml:id="erpa-1228100" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09795">
+      <l xml:id="erpa-l64995">
+         <w xml:id="erpa-1228130">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1228140">красавица</w>
+         <c> </c>
+         <w xml:id="erpa-1228150">одна</w>
+         <pc xml:id="erpa-1228160">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65000">
+         <w xml:id="erpa-1228170">К</w>
+         <c> </c>
+         <w xml:id="erpa-1228180">зеркалу</w>
+         <c> </c>
+         <w xml:id="erpa-1228190">садится</w>
+         <pc xml:id="erpa-1228200">;</pc>
+      </l>
+      <l xml:id="erpa-l65005">
+         <w xml:id="erpa-1228210">С</w>
+         <c> </c>
+         <w xml:id="erpa-1228220">тайной</w>
+         <c> </c>
+         <w xml:id="erpa-1228230">робостью</w>
+         <c> </c>
+         <w xml:id="erpa-1228240">она</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65010">
+         <w xml:id="erpa-1228250">В</w>
+         <c> </c>
+         <w xml:id="erpa-1228260">зеркало</w>
+         <c> </c>
+         <w xml:id="erpa-1228270">глядится</w>
+         <pc xml:id="erpa-1228280">;</pc>
+      </l>
+      <l xml:id="erpa-l65015">
+         <w xml:id="erpa-1228290">Темно</w>
+         <c> </c>
+         <w xml:id="erpa-1228300">в</w>
+         <c> </c>
+         <w xml:id="erpa-1228310">зеркале</w>
+         <pc xml:id="erpa-1228320">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1228330">кругом</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65020">
+         <w xml:id="erpa-1228340">Мертвое</w>
+         <c> </c>
+         <w xml:id="erpa-1228350">молчанье</w>
+         <pc xml:id="erpa-1228360">;</pc>
+      </l>
+      <l xml:id="erpa-l65025">
+         <w xml:id="erpa-1228370">Свечка</w>
+         <c> </c>
+         <w xml:id="erpa-1228380">трепетным</w>
+         <c> </c>
+         <w xml:id="erpa-1228390">огнем</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65030">
+         <w xml:id="erpa-1228400">Чуть</w>
+         <c> </c>
+         <w xml:id="erpa-1228410">лиет</w>
+         <c> </c>
+         <w xml:id="erpa-1228420">сиянье</w>
+         <c> </c>
+         <pc xml:id="erpa-1228430" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65035">
+         <w xml:id="erpa-1228440">Робость</w>
+         <c> </c>
+         <w xml:id="erpa-1228450">в</w>
+         <c> </c>
+         <w xml:id="erpa-1228460">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1228470">волнует</w>
+         <c> </c>
+         <w xml:id="erpa-1228480">грудь</w>
+         <pc xml:id="erpa-1228490">,</pc>
+      </l>
+      <l xml:id="erpa-l65040">
+         <w xml:id="erpa-1228500">Страшно</w>
+         <c> </c>
+         <w xml:id="erpa-1228510">ей</w>
+         <c> </c>
+         <w xml:id="erpa-1228520">назад</w>
+         <c> </c>
+         <w xml:id="erpa-1228530">взглянуть</w>
+         <pc xml:id="erpa-1228540">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65045">
+         <w xml:id="erpa-1228550">Страх</w>
+         <c> </c>
+         <w xml:id="erpa-1228560">туманит</w>
+         <c> </c>
+         <w xml:id="erpa-1228570">очи</w>
+         <c> </c>
+         <pc xml:id="erpa-1228580" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65050">
+         <w xml:id="erpa-1228590">С</w>
+         <c> </c>
+         <w xml:id="erpa-1228600">треском</w>
+         <c> </c>
+         <w xml:id="erpa-1228610">пыхнул</w>
+         <c> </c>
+         <w xml:id="erpa-1228620">огонек</w>
+         <pc xml:id="erpa-1228630">,</pc>
+      </l>
+      <l xml:id="erpa-l65055">
+         <w xml:id="erpa-1228640">Крикнул</w>
+         <c> </c>
+         <w xml:id="erpa-1228650">жалобно</w>
+         <c> </c>
+         <w xml:id="erpa-1228660">сверчок</w>
+         <pc xml:id="erpa-1228670">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65060">
+         <w xml:id="erpa-1228680">Вестник</w>
+         <c> </c>
+         <w xml:id="erpa-1228690">полуночи</w>
+         <pc xml:id="erpa-1228700" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09800">
+      <l xml:id="erpa-l65065">
+         <w xml:id="erpa-1228730">Подпершися</w>
+         <c> </c>
+         <w xml:id="erpa-1228740">локотком</w>
+         <pc xml:id="erpa-1228750">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65070">
+         <w xml:id="erpa-1228760">Чуть</w>
+         <c> </c>
+         <w xml:id="erpa-1228770">Светлана</w>
+         <c> </c>
+         <w xml:id="erpa-1228780">дышит</w>
+         <c> </c>
+         <pc xml:id="erpa-1228790" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65075">
+         <w xml:id="erpa-1228800">Вот</w>
+         <c> </c>
+         <pc xml:id="erpa-1228810">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1228820">легохонько</w>
+         <c> </c>
+         <w xml:id="erpa-1228830">замком</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65080">
+         <w xml:id="erpa-1228840">Кто-то</w>
+         <c> </c>
+         <w xml:id="erpa-1228850">стукнул</w>
+         <pc xml:id="erpa-1228860">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1228870">слышит</w>
+         <pc xml:id="erpa-1228880">;</pc>
+      </l>
+      <l xml:id="erpa-l65085">
+         <w xml:id="erpa-1228890">Робко</w>
+         <c> </c>
+         <w xml:id="erpa-1228900">в</w>
+         <c> </c>
+         <w xml:id="erpa-1228910">зеркало</w>
+         <c> </c>
+         <w xml:id="erpa-1228920">глядит</w>
+         <pc xml:id="erpa-1228930">:</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65090">
+         <w xml:id="erpa-1228940">За</w>
+         <c> </c>
+         <w xml:id="erpa-1228950">ее</w>
+         <c> </c>
+         <w xml:id="erpa-1228960">плечами</w>
+      </l>
+      <l xml:id="erpa-l65095">
+         <w xml:id="erpa-1228970">Кто-то</w>
+         <pc xml:id="erpa-1228980">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1228990">чудилось</w>
+         <pc xml:id="erpa-1229000">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1229010">блестит</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65100">
+         <w xml:id="erpa-1229020">Яркими</w>
+         <c> </c>
+         <w xml:id="erpa-1229030">глазами</w>
+         <c> </c>
+         <pc xml:id="erpa-1229040" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65105">
+         <w xml:id="erpa-1229050">Занялся</w>
+         <c> </c>
+         <w xml:id="erpa-1229060">от</w>
+         <c> </c>
+         <w xml:id="erpa-1229070">страха</w>
+         <c> </c>
+         <w xml:id="erpa-1229080">дух</w>
+         <c> </c>
+         <pc xml:id="erpa-1229090" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65110">
+         <w xml:id="erpa-1229100">Вдруг</w>
+         <c> </c>
+         <w xml:id="erpa-1229110">в</w>
+         <c> </c>
+         <w xml:id="erpa-1229120">ее</w>
+         <c> </c>
+         <w xml:id="erpa-1229130">влетает</w>
+         <c> </c>
+         <w xml:id="erpa-1229140">слух</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65115">
+         <w xml:id="erpa-1229150">Тихий</w>
+         <pc xml:id="erpa-1229160">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1229170">легкий</w>
+         <c> </c>
+         <w xml:id="erpa-1229180">шепот</w>
+         <pc xml:id="erpa-1229190">:</pc>
+      </l>
+      <l xml:id="erpa-l65120">
+         <pc xml:id="erpa-1229200">"</pc>
+         <w xml:id="erpa-1229210">Я</w>
+         <c> </c>
+         <w xml:id="erpa-1229220">с</w>
+         <c> </c>
+         <w xml:id="erpa-1229230">тобой</w>
+         <pc xml:id="erpa-1229240">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1229250">моя</w>
+         <c> </c>
+         <w xml:id="erpa-1229260">краса</w>
+         <pc xml:id="erpa-1229270">;</pc>
+      </l>
+      <l xml:id="erpa-l65125">
+         <w xml:id="erpa-1229280">Укротились</w>
+         <c> </c>
+         <w xml:id="erpa-1229290">небеса</w>
+         <pc xml:id="erpa-1229300">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65130">
+         <w xml:id="erpa-1229310">Твой</w>
+         <c> </c>
+         <w xml:id="erpa-1229320">услышан</w>
+         <c> </c>
+         <w xml:id="erpa-1229330">ропот</w>
+         <pc xml:id="erpa-1229340">!</pc>
+         <pc xml:id="erpa-1229350" unit="sentence">"</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09805">
+      <l xml:id="erpa-l65135">
+         <w xml:id="erpa-1229380">Оглянулась</w>
+         <c> </c>
+         <pc xml:id="erpa-1229390">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1229400">милый</w>
+         <c> </c>
+         <w xml:id="erpa-1229410">к</w>
+         <c> </c>
+         <w xml:id="erpa-1229420">ней</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65140">
+         <w xml:id="erpa-1229430">Простирает</w>
+         <c> </c>
+         <w xml:id="erpa-1229440">руки</w>
+         <pc xml:id="erpa-1229450" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65145">
+         <pc xml:id="erpa-1229460">"</pc>
+         <w xml:id="erpa-1229470">Радость</w>
+         <pc xml:id="erpa-1229480">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1229490">свет</w>
+         <c> </c>
+         <w xml:id="erpa-1229500">моих</w>
+         <c> </c>
+         <w xml:id="erpa-1229510">очей</w>
+         <pc xml:id="erpa-1229520">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65150">
+         <w xml:id="erpa-1229530">Нет</w>
+         <c> </c>
+         <w xml:id="erpa-1229540">для</w>
+         <c> </c>
+         <w xml:id="erpa-1229550">нас</w>
+         <c> </c>
+         <w xml:id="erpa-1229560">разлуки</w>
+         <pc xml:id="erpa-1229570" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65155">
+         <w xml:id="erpa-1229580">Едем</w>
+         <pc xml:id="erpa-1229590" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1229600">Поп</w>
+         <c> </c>
+         <w xml:id="erpa-1229610">уж</w>
+         <c> </c>
+         <w xml:id="erpa-1229620">в</w>
+         <c> </c>
+         <w xml:id="erpa-1229630">церкви</w>
+         <c> </c>
+         <w xml:id="erpa-1229640">ждет</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65160">
+         <w xml:id="erpa-1229650">С</w>
+         <c> </c>
+         <w xml:id="erpa-1229660">дьяконом</w>
+         <pc xml:id="erpa-1229670">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1229680">дьячками</w>
+         <pc xml:id="erpa-1229690">;</pc>
+      </l>
+      <l xml:id="erpa-l65165">
+         <w xml:id="erpa-1229700">Хор</w>
+         <c> </c>
+         <w xml:id="erpa-1229710">венчальну</w>
+         <c> </c>
+         <w xml:id="erpa-1229720">песнь</w>
+         <c> </c>
+         <w xml:id="erpa-1229730">поет</w>
+         <pc xml:id="erpa-1229740">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65170">
+         <w xml:id="erpa-1229750">Храм</w>
+         <c> </c>
+         <w xml:id="erpa-1229760">блестит</w>
+         <c> </c>
+         <w xml:id="erpa-1229770">свечами</w>
+         <pc xml:id="erpa-1229780">"</pc>
+         <pc xml:id="erpa-1229790" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65175">
+         <w xml:id="erpa-1229800">Был</w>
+         <c> </c>
+         <w xml:id="erpa-1229810">в</w>
+         <c> </c>
+         <w xml:id="erpa-1229820">ответ</w>
+         <c> </c>
+         <w xml:id="erpa-1229830">умильный</w>
+         <c> </c>
+         <w xml:id="erpa-1229840">взор</w>
+         <pc xml:id="erpa-1229850">;</pc>
+      </l>
+      <l xml:id="erpa-l65180">
+         <w xml:id="erpa-1229860">Идут</w>
+         <c> </c>
+         <w xml:id="erpa-1229870">на</w>
+         <c> </c>
+         <w xml:id="erpa-1229880">широкий</w>
+         <c> </c>
+         <w xml:id="erpa-1229890">двор</w>
+         <pc xml:id="erpa-1229900">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65185">
+         <w xml:id="erpa-1229910">В</w>
+         <c> </c>
+         <w xml:id="erpa-1229920">ворота</w>
+         <c> </c>
+         <w xml:id="erpa-1229930">тесовы</w>
+         <pc xml:id="erpa-1229940">;</pc>
+      </l>
+      <l xml:id="erpa-l65190">
+         <w xml:id="erpa-1229950">У</w>
+         <c> </c>
+         <w xml:id="erpa-1229960">ворот</w>
+         <c> </c>
+         <w xml:id="erpa-1229970">их</w>
+         <c> </c>
+         <w xml:id="erpa-1229980">санки</w>
+         <c> </c>
+         <w xml:id="erpa-1229990">ждут</w>
+         <pc xml:id="erpa-1230000">;</pc>
+      </l>
+      <l xml:id="erpa-l65195">
+         <w xml:id="erpa-1230010">С</w>
+         <c> </c>
+         <w xml:id="erpa-1230020">нетерпеньем</w>
+         <c> </c>
+         <w xml:id="erpa-1230030">кони</w>
+         <c> </c>
+         <w xml:id="erpa-1230040">рвут</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65200">
+         <w xml:id="erpa-1230050">Повода</w>
+         <c> </c>
+         <w xml:id="erpa-1230060">шелковы</w>
+         <pc xml:id="erpa-1230070" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09810">
+      <l xml:id="erpa-l65205">
+         <w xml:id="erpa-1230100">Сели</w>
+         <c> </c>
+         <pc xml:id="erpa-1230110">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1230120">кони</w>
+         <c> </c>
+         <w xml:id="erpa-1230130">с</w>
+         <c> </c>
+         <w xml:id="erpa-1230140">места</w>
+         <c> </c>
+         <w xml:id="erpa-1230150">враз</w>
+         <pc xml:id="erpa-1230160">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65210">
+         <w xml:id="erpa-1230170">Пышут</w>
+         <c> </c>
+         <w xml:id="erpa-1230180">дым</w>
+         <c> </c>
+         <w xml:id="erpa-1230190">ноздрями</w>
+         <pc xml:id="erpa-1230200">;</pc>
+      </l>
+      <l xml:id="erpa-l65215">
+         <w xml:id="erpa-1230210">От</w>
+         <c> </c>
+         <w xml:id="erpa-1230220">копыт</w>
+         <c> </c>
+         <w xml:id="erpa-1230230">их</w>
+         <c> </c>
+         <w xml:id="erpa-1230240">поднялась</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65220">
+         <w xml:id="erpa-1230250">Вьюга</w>
+         <c> </c>
+         <w xml:id="erpa-1230260">над</w>
+         <c> </c>
+         <w xml:id="erpa-1230270">санями</w>
+         <pc xml:id="erpa-1230280" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65225">
+         <w xml:id="erpa-1230290">Скачут</w>
+         <c> </c>
+         <pc xml:id="erpa-1230300">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1230310">пусто</w>
+         <c> </c>
+         <w xml:id="erpa-1230320">все</w>
+         <c> </c>
+         <w xml:id="erpa-1230330">вокруг</w>
+         <pc xml:id="erpa-1230340">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65230">
+         <w xml:id="erpa-1230350">Степь</w>
+         <c> </c>
+         <w xml:id="erpa-1230360">в</w>
+         <c> </c>
+         <w xml:id="erpa-1230370">очах</w>
+         <c> </c>
+         <w xml:id="erpa-1230380">Светланы</w>
+         <pc xml:id="erpa-1230390">:</pc>
+      </l>
+      <l xml:id="erpa-l65235">
+         <w xml:id="erpa-1230400">На</w>
+         <c> </c>
+         <w xml:id="erpa-1230410">луне</w>
+         <c> </c>
+         <w xml:id="erpa-1230420">туманный</w>
+         <c> </c>
+         <w xml:id="erpa-1230430">круг</w>
+         <pc xml:id="erpa-1230440">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65240">
+         <w xml:id="erpa-1230450">Чуть</w>
+         <c> </c>
+         <w xml:id="erpa-1230460">блестят</w>
+         <c> </c>
+         <w xml:id="erpa-1230470">поляны</w>
+         <pc xml:id="erpa-1230480" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65245">
+         <w xml:id="erpa-1230490">Сердце</w>
+         <c> </c>
+         <w xml:id="erpa-1230500">вещее</w>
+         <c> </c>
+         <w xml:id="erpa-1230510">дрожит</w>
+         <pc xml:id="erpa-1230520">;</pc>
+      </l>
+      <l xml:id="erpa-l65250">
+         <w xml:id="erpa-1230530">Робко</w>
+         <c> </c>
+         <w xml:id="erpa-1230540">дева</w>
+         <c> </c>
+         <w xml:id="erpa-1230550">говорит</w>
+         <pc xml:id="erpa-1230560">:</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65255">
+         <pc xml:id="erpa-1230570">"</pc>
+         <w xml:id="erpa-1230580">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1230590">ты</w>
+         <c> </c>
+         <w xml:id="erpa-1230600">смолкнул</w>
+         <pc xml:id="erpa-1230610">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1230620">милый</w>
+         <pc xml:id="erpa-1230630">?</pc>
+         <pc xml:id="erpa-1230640" unit="sentence">"</pc>
+      </l>
+      <l xml:id="erpa-l65260">
+         <w xml:id="erpa-1230650">Ни</w>
+         <c> </c>
+         <w xml:id="erpa-1230660">полслова</w>
+         <c> </c>
+         <w xml:id="erpa-1230670">ей</w>
+         <c> </c>
+         <w xml:id="erpa-1230680">в</w>
+         <c> </c>
+         <w xml:id="erpa-1230690">ответ</w>
+         <pc xml:id="erpa-1230700">:</pc>
+      </l>
+      <l xml:id="erpa-l65265">
+         <w xml:id="erpa-1230710">Он</w>
+         <c> </c>
+         <w xml:id="erpa-1230720">глядит</w>
+         <c> </c>
+         <w xml:id="erpa-1230730">на</w>
+         <c> </c>
+         <w xml:id="erpa-1230740">лунный</w>
+         <c> </c>
+         <w xml:id="erpa-1230750">свет</w>
+         <pc xml:id="erpa-1230760">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65270">
+         <w xml:id="erpa-1230770">Бледен</w>
+         <c> </c>
+         <w xml:id="erpa-1230780">и</w>
+         <c> </c>
+         <w xml:id="erpa-1230790">унылый</w>
+         <pc xml:id="erpa-1230800" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09815">
+      <l xml:id="erpa-l65275">
+         <w xml:id="erpa-1230830">Кони</w>
+         <c> </c>
+         <w xml:id="erpa-1230840">мчатся</w>
+         <c> </c>
+         <w xml:id="erpa-1230850">по</w>
+         <c> </c>
+         <w xml:id="erpa-1230860">буграм</w>
+         <pc xml:id="erpa-1230870">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65280">
+         <w xml:id="erpa-1230880">Топчут</w>
+         <c> </c>
+         <w xml:id="erpa-1230890">снег</w>
+         <c> </c>
+         <w xml:id="erpa-1230900">глубокий</w>
+         <c> </c>
+         <pc xml:id="erpa-1230910" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65285">
+         <w xml:id="erpa-1230920">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1230930">в</w>
+         <c> </c>
+         <w xml:id="erpa-1230940">сторонке</w>
+         <c> </c>
+         <w xml:id="erpa-1230950">божий</w>
+         <c> </c>
+         <w xml:id="erpa-1230960">храм</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65290">
+         <w xml:id="erpa-1230970">Виден</w>
+         <c> </c>
+         <w xml:id="erpa-1230980">одинокий</w>
+         <pc xml:id="erpa-1230990">;</pc>
+      </l>
+      <l xml:id="erpa-l65295">
+         <w xml:id="erpa-1231000">Двери</w>
+         <c> </c>
+         <w xml:id="erpa-1231010">вихорь</w>
+         <c> </c>
+         <w xml:id="erpa-1231020">отворил</w>
+         <pc xml:id="erpa-1231030">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65300">
+         <w xml:id="erpa-1231040">Тьма</w>
+         <c> </c>
+         <w xml:id="erpa-1231050">людей</w>
+         <c> </c>
+         <w xml:id="erpa-1231060">во</w>
+         <c> </c>
+         <w xml:id="erpa-1231070">храме</w>
+         <pc xml:id="erpa-1231080">;</pc>
+      </l>
+      <l xml:id="erpa-l65305">
+         <w xml:id="erpa-1231090">Яркий</w>
+         <c> </c>
+         <w xml:id="erpa-1231100">свет</w>
+         <c> </c>
+         <w xml:id="erpa-1231110">паникадил</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65310">
+         <w xml:id="erpa-1231120">Тускнет</w>
+         <c> </c>
+         <w xml:id="erpa-1231130">в</w>
+         <c> </c>
+         <w xml:id="erpa-1231140">фимиаме</w>
+         <pc xml:id="erpa-1231150">;</pc>
+      </l>
+      <l xml:id="erpa-l65315">
+         <w xml:id="erpa-1231160">На</w>
+         <c> </c>
+         <w xml:id="erpa-1231170">средине</w>
+         <c> </c>
+         <w xml:id="erpa-1231180">черный</w>
+         <c> </c>
+         <w xml:id="erpa-1231190">гроб</w>
+         <pc xml:id="erpa-1231200">;</pc>
+      </l>
+      <l xml:id="erpa-l65320">
+         <w xml:id="erpa-1231210">И</w>
+         <c> </c>
+         <w xml:id="erpa-1231220">гласит</w>
+         <c> </c>
+         <w xml:id="erpa-1231230">протяжно</w>
+         <c> </c>
+         <w xml:id="erpa-1231240">поп</w>
+         <pc xml:id="erpa-1231250">:</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65325">
+         <pc xml:id="erpa-1231260">"</pc>
+         <w xml:id="erpa-1231270">Буди</w>
+         <c> </c>
+         <w xml:id="erpa-1231280">взят</w>
+         <c> </c>
+         <w xml:id="erpa-1231290">могилой</w>
+         <pc xml:id="erpa-1231300">!</pc>
+         <pc xml:id="erpa-1231310" unit="sentence">"</pc>
+      </l>
+      <l xml:id="erpa-l65330">
+         <w xml:id="erpa-1231320">Пуще</w>
+         <c> </c>
+         <w xml:id="erpa-1231330">девица</w>
+         <c> </c>
+         <w xml:id="erpa-1231340">дрожит</w>
+         <pc xml:id="erpa-1231350">,</pc>
+      </l>
+      <l xml:id="erpa-l65335">
+         <w xml:id="erpa-1231360">Кони</w>
+         <c> </c>
+         <w xml:id="erpa-1231370">мимо</w>
+         <pc xml:id="erpa-1231380">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1231390">друг</w>
+         <c> </c>
+         <w xml:id="erpa-1231400">молчит</w>
+         <pc xml:id="erpa-1231410">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65340">
+         <w xml:id="erpa-1231420">Бледен</w>
+         <c> </c>
+         <w xml:id="erpa-1231430">и</w>
+         <c> </c>
+         <w xml:id="erpa-1231440">унылый</w>
+         <pc xml:id="erpa-1231450" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09820">
+      <l xml:id="erpa-l65345">
+         <w xml:id="erpa-1231480">Вдруг</w>
+         <c> </c>
+         <w xml:id="erpa-1231490">метелица</w>
+         <c> </c>
+         <w xml:id="erpa-1231500">кругом</w>
+         <pc xml:id="erpa-1231510">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65350">
+         <w xml:id="erpa-1231520">Снег</w>
+         <c> </c>
+         <w xml:id="erpa-1231530">валит</w>
+         <c> </c>
+         <w xml:id="erpa-1231540">клоками</w>
+         <pc xml:id="erpa-1231550">;</pc>
+      </l>
+      <l xml:id="erpa-l65355">
+         <w xml:id="erpa-1231560">Черный</w>
+         <c> </c>
+         <w xml:id="erpa-1231570">вран</w>
+         <pc xml:id="erpa-1231580">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1231590">свистя</w>
+         <c> </c>
+         <w xml:id="erpa-1231600">крылом</w>
+         <pc xml:id="erpa-1231610">,</pc>
+      </l>
+      <l xml:id="erpa-l65360">
+         <w xml:id="erpa-1231620">Вьется</w>
+         <c> </c>
+         <w xml:id="erpa-1231630">над</w>
+         <c> </c>
+         <w xml:id="erpa-1231640">санями</w>
+         <pc xml:id="erpa-1231650">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65365">
+         <w xml:id="erpa-1231660">Ворон</w>
+         <c> </c>
+         <w xml:id="erpa-1231670">каркает</w>
+         <pc xml:id="erpa-1231680">:</pc>
+         <c> </c>
+         <w xml:id="erpa-1231690">печаль</w>
+         <pc xml:id="erpa-1231700" unit="sentence">!</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65370">
+         <w xml:id="erpa-1231710">Кони</w>
+         <c> </c>
+         <w xml:id="erpa-1231720">торопливы</w>
+      </l>
+      <l xml:id="erpa-l65375">
+         <w xml:id="erpa-1231730">Чутко</w>
+         <c> </c>
+         <w xml:id="erpa-1231740">смотрят</w>
+         <c> </c>
+         <w xml:id="erpa-1231750">в</w>
+         <c> </c>
+         <w xml:id="erpa-1231760">черну</w>
+         <c> </c>
+         <w xml:id="erpa-1231770">даль</w>
+         <pc xml:id="erpa-1231780">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65380">
+         <w xml:id="erpa-1231790">Подымая</w>
+         <c> </c>
+         <w xml:id="erpa-1231800">гривы</w>
+         <pc xml:id="erpa-1231810">;</pc>
+      </l>
+      <l xml:id="erpa-l65385">
+         <w xml:id="erpa-1231820">Брезжит</w>
+         <c> </c>
+         <w xml:id="erpa-1231830">в</w>
+         <c> </c>
+         <w xml:id="erpa-1231840">поле</w>
+         <c> </c>
+         <w xml:id="erpa-1231850">огонек</w>
+         <pc xml:id="erpa-1231860">;</pc>
+      </l>
+      <l xml:id="erpa-l65390">
+         <w xml:id="erpa-1231870">Виден</w>
+         <c> </c>
+         <w xml:id="erpa-1231880">мирный</w>
+         <c> </c>
+         <w xml:id="erpa-1231890">уголок</w>
+         <pc xml:id="erpa-1231900">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65395">
+         <w xml:id="erpa-1231910">Хижинка</w>
+         <c> </c>
+         <w xml:id="erpa-1231920">под</w>
+         <c> </c>
+         <w xml:id="erpa-1231930">снегом</w>
+         <pc xml:id="erpa-1231940" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65400">
+         <w xml:id="erpa-1231950">Кони</w>
+         <c> </c>
+         <w xml:id="erpa-1231960">борзые</w>
+         <c> </c>
+         <w xml:id="erpa-1231970">быстрей</w>
+         <pc xml:id="erpa-1231980">,</pc>
+      </l>
+      <l xml:id="erpa-l65405">
+         <w xml:id="erpa-1231990">Снег</w>
+         <c> </c>
+         <w xml:id="erpa-1232000">взрывая</w>
+         <pc xml:id="erpa-1232010">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1232020">прямо</w>
+         <c> </c>
+         <w xml:id="erpa-1232030">к</w>
+         <c> </c>
+         <w xml:id="erpa-1232040">ней</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65410">
+         <w xml:id="erpa-1232050">Мчатся</w>
+         <c> </c>
+         <w xml:id="erpa-1232060">дружным</w>
+         <c> </c>
+         <w xml:id="erpa-1232070">бегом</w>
+         <pc xml:id="erpa-1232080" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09825">
+      <l xml:id="erpa-l65415">
+         <w xml:id="erpa-1232110">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1232120">примчалися</w>
+         <c> </c>
+         <pc xml:id="erpa-1232130">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1232140">и</w>
+         <c> </c>
+         <w xml:id="erpa-1232150">вмиг</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65420">
+         <w xml:id="erpa-1232160">Из</w>
+         <c> </c>
+         <w xml:id="erpa-1232170">очей</w>
+         <c> </c>
+         <w xml:id="erpa-1232180">пропали</w>
+         <pc xml:id="erpa-1232190">:</pc>
+      </l>
+      <l xml:id="erpa-l65425">
+         <w xml:id="erpa-1232200">Кони</w>
+         <pc xml:id="erpa-1232210">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1232220">сани</w>
+         <c> </c>
+         <w xml:id="erpa-1232230">и</w>
+         <c> </c>
+         <w xml:id="erpa-1232240">жених</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65430">
+         <w xml:id="erpa-1232250">Будто</w>
+         <c> </c>
+         <w xml:id="erpa-1232260">не</w>
+         <c> </c>
+         <w xml:id="erpa-1232270">бывали</w>
+         <pc xml:id="erpa-1232280" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65435">
+         <w xml:id="erpa-1232290">Одинокая</w>
+         <pc xml:id="erpa-1232300">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1232310">впотьмах</w>
+         <pc xml:id="erpa-1232320">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65440">
+         <w xml:id="erpa-1232330">Брошена</w>
+         <c> </c>
+         <w xml:id="erpa-1232340">от</w>
+         <c> </c>
+         <w xml:id="erpa-1232350">друга</w>
+         <pc xml:id="erpa-1232360">,</pc>
+      </l>
+      <l xml:id="erpa-l65445">
+         <w xml:id="erpa-1232370">В</w>
+         <c> </c>
+         <w xml:id="erpa-1232380">страшных</w>
+         <c> </c>
+         <w xml:id="erpa-1232390">девица</w>
+         <c> </c>
+         <w xml:id="erpa-1232400">местах</w>
+         <pc xml:id="erpa-1232410">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65450">
+         <w xml:id="erpa-1232420">Вкруг</w>
+         <c> </c>
+         <w xml:id="erpa-1232430">метель</w>
+         <c> </c>
+         <w xml:id="erpa-1232440">и</w>
+         <c> </c>
+         <w xml:id="erpa-1232450">вьюга</w>
+         <pc xml:id="erpa-1232460" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65455">
+         <w xml:id="erpa-1232470">Возвратиться</w>
+         <c> </c>
+         <pc xml:id="erpa-1232480">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1232490">следу</w>
+         <c> </c>
+         <w xml:id="erpa-1232500">нет</w>
+         <c> </c>
+         <pc xml:id="erpa-1232510" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65460">
+         <w xml:id="erpa-1232520">Виден</w>
+         <c> </c>
+         <w xml:id="erpa-1232530">ей</w>
+         <c> </c>
+         <w xml:id="erpa-1232540">в</w>
+         <c> </c>
+         <w xml:id="erpa-1232550">избушке</w>
+         <c> </c>
+         <w xml:id="erpa-1232560">свет</w>
+         <pc xml:id="erpa-1232570">:</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65465">
+         <w xml:id="erpa-1232580">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1232590">перекрестилась</w>
+         <pc xml:id="erpa-1232600">;</pc>
+      </l>
+      <l xml:id="erpa-l65470">
+         <w xml:id="erpa-1232610">В</w>
+         <c> </c>
+         <w xml:id="erpa-1232620">дверь</w>
+         <c> </c>
+         <w xml:id="erpa-1232630">с</w>
+         <c> </c>
+         <w xml:id="erpa-1232640">молитвою</w>
+         <c> </c>
+         <w xml:id="erpa-1232650">стучит</w>
+         <c> </c>
+         <pc xml:id="erpa-1232660" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65475">
+         <w xml:id="erpa-1232670">Дверь</w>
+         <c> </c>
+         <w xml:id="erpa-1232680">шатнулася</w>
+         <c> </c>
+         <pc xml:id="erpa-1232690">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1232700">скрыпит</w>
+         <c> </c>
+         <pc xml:id="erpa-1232710" unit="sentence">...</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65480">
+         <w xml:id="erpa-1232720">Тихо</w>
+         <c> </c>
+         <w xml:id="erpa-1232730">растворилась</w>
+         <pc xml:id="erpa-1232740" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09830">
+      <l xml:id="erpa-l65485">
+         <w xml:id="erpa-1232770">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1232780">ж</w>
+         <pc xml:id="erpa-1232790" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="erpa-1232800">В</w>
+         <c> </c>
+         <w xml:id="erpa-1232810">избушке</w>
+         <c> </c>
+         <w xml:id="erpa-1232820">гроб</w>
+         <pc xml:id="erpa-1232830">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1232840">накрыт</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65490">
+         <w xml:id="erpa-1232850">Белою</w>
+         <c> </c>
+         <w xml:id="erpa-1232860">запоной</w>
+         <pc xml:id="erpa-1232870">;</pc>
+      </l>
+      <l xml:id="erpa-l65495">
+         <w xml:id="erpa-1232880">Спасов</w>
+         <c> </c>
+         <w xml:id="erpa-1232890">лик</w>
+         <c> </c>
+         <w xml:id="erpa-1232900">в</w>
+         <c> </c>
+         <w xml:id="erpa-1232910">ногах</w>
+         <c> </c>
+         <w xml:id="erpa-1232920">стоит</w>
+         <pc xml:id="erpa-1232930">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65500">
+         <w xml:id="erpa-1232940">Свечка</w>
+         <c> </c>
+         <w xml:id="erpa-1232950">пред</w>
+         <c> </c>
+         <w xml:id="erpa-1232960">иконой</w>
+         <c> </c>
+         <pc xml:id="erpa-1232970" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65505">
+         <w xml:id="erpa-1232980">Ах</w>
+         <pc xml:id="erpa-1232990" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1233000">Светлана</w>
+         <pc xml:id="erpa-1233010">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1233020">что</w>
+         <c> </c>
+         <w xml:id="erpa-1233030">с</w>
+         <c> </c>
+         <w xml:id="erpa-1233040">тобой</w>
+         <pc xml:id="erpa-1233050" unit="sentence">?</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65510">
+         <w xml:id="erpa-1233060">В</w>
+         <c> </c>
+         <w xml:id="erpa-1233070">чью</w>
+         <c> </c>
+         <w xml:id="erpa-1233080">зашла</w>
+         <c> </c>
+         <w xml:id="erpa-1233090">обитель</w>
+         <pc xml:id="erpa-1233100" unit="sentence">?</pc>
+      </l>
+      <l xml:id="erpa-l65515">
+         <w xml:id="erpa-1233110">Страшен</w>
+         <c> </c>
+         <w xml:id="erpa-1233120">хижины</w>
+         <c> </c>
+         <w xml:id="erpa-1233130">пустой</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65520">
+         <w xml:id="erpa-1233140">Безответный</w>
+         <c> </c>
+         <w xml:id="erpa-1233150">житель</w>
+         <pc xml:id="erpa-1233160" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65525">
+         <w xml:id="erpa-1233170">Входит</w>
+         <c> </c>
+         <w xml:id="erpa-1233180">с</w>
+         <c> </c>
+         <w xml:id="erpa-1233190">трепетом</w>
+         <pc xml:id="erpa-1233200">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1233210">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233220">слезах</w>
+         <pc xml:id="erpa-1233230">;</pc>
+      </l>
+      <l xml:id="erpa-l65530">
+         <w xml:id="erpa-1233240">Пред</w>
+         <c> </c>
+         <w xml:id="erpa-1233250">иконой</w>
+         <c> </c>
+         <w xml:id="erpa-1233260">пала</w>
+         <c> </c>
+         <w xml:id="erpa-1233270">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233280">прах</w>
+         <pc xml:id="erpa-1233290">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65535">
+         <w xml:id="erpa-1233300">Спасу</w>
+         <c> </c>
+         <w xml:id="erpa-1233310">помолилась</w>
+         <pc xml:id="erpa-1233320">;</pc>
+      </l>
+      <l xml:id="erpa-l65540">
+         <w xml:id="erpa-1233330">И</w>
+         <c> </c>
+         <w xml:id="erpa-1233340">с</w>
+         <c> </c>
+         <w xml:id="erpa-1233350">крестом</w>
+         <c> </c>
+         <w xml:id="erpa-1233360">своим</w>
+         <c> </c>
+         <w xml:id="erpa-1233370">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233380">руке</w>
+      </l>
+      <l xml:id="erpa-l65545">
+         <w xml:id="erpa-1233390">Под</w>
+         <c> </c>
+         <w xml:id="erpa-1233400">святыми</w>
+         <c> </c>
+         <w xml:id="erpa-1233410">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233420">уголке</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65550">
+         <w xml:id="erpa-1233430">Робко</w>
+         <c> </c>
+         <w xml:id="erpa-1233440">притаилась</w>
+         <pc xml:id="erpa-1233450" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09835">
+      <l xml:id="erpa-l65555">
+         <w xml:id="erpa-1233480">Все</w>
+         <c> </c>
+         <w xml:id="erpa-1233490">утихло</w>
+         <c> </c>
+         <pc xml:id="erpa-1233500">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1233510">вьюги</w>
+         <c> </c>
+         <w xml:id="erpa-1233520">нет</w>
+         <c> </c>
+         <pc xml:id="erpa-1233530" unit="sentence">...</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65560">
+         <w xml:id="erpa-1233540">Слабо</w>
+         <c> </c>
+         <w xml:id="erpa-1233550">свечка</w>
+         <c> </c>
+         <w xml:id="erpa-1233560">тлится</w>
+         <pc xml:id="erpa-1233570">,</pc>
+      </l>
+      <l xml:id="erpa-l65565">
+         <w xml:id="erpa-1233580">То</w>
+         <c> </c>
+         <w xml:id="erpa-1233590">прольет</w>
+         <c> </c>
+         <w xml:id="erpa-1233600">дрожащий</w>
+         <c> </c>
+         <w xml:id="erpa-1233610">свет</w>
+         <pc xml:id="erpa-1233620">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65570">
+         <w xml:id="erpa-1233630">То</w>
+         <c> </c>
+         <w xml:id="erpa-1233640">опять</w>
+         <c> </c>
+         <w xml:id="erpa-1233650">затмится</w>
+         <c> </c>
+         <pc xml:id="erpa-1233660" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65575">
+         <w xml:id="erpa-1233670">Все</w>
+         <c> </c>
+         <w xml:id="erpa-1233680">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233690">глубоком</w>
+         <pc xml:id="erpa-1233700">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1233710">мертвом</w>
+         <c> </c>
+         <w xml:id="erpa-1233720">сне</w>
+         <pc xml:id="erpa-1233730">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65580">
+         <w xml:id="erpa-1233740">Страшное</w>
+         <c> </c>
+         <w xml:id="erpa-1233750">молчанье</w>
+         <c> </c>
+         <pc xml:id="erpa-1233760" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65585">
+         <w xml:id="erpa-1233770">Чу</w>
+         <pc xml:id="erpa-1233780">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1233790">Светлана</w>
+         <pc xml:id="erpa-1233800">!</pc>
+         <c> </c>
+         <pc xml:id="erpa-1233810">..</pc>
+         <c> </c>
+         <w xml:id="erpa-1233820">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233830">тишине</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65590">
+         <w xml:id="erpa-1233840">Легкое</w>
+         <c> </c>
+         <w xml:id="erpa-1233850">журчанье</w>
+         <c> </c>
+         <pc xml:id="erpa-1233860" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65595">
+         <w xml:id="erpa-1233870">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1233880">глядит</w>
+         <pc xml:id="erpa-1233890">:</pc>
+         <c> </c>
+         <w xml:id="erpa-1233900">к</w>
+         <c> </c>
+         <w xml:id="erpa-1233910">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1233920">в</w>
+         <c> </c>
+         <w xml:id="erpa-1233930">уголок</w>
+      </l>
+      <l xml:id="erpa-l65600">
+         <w xml:id="erpa-1233940">Белоснежный</w>
+         <c> </c>
+         <w xml:id="erpa-1233950">голубок</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65605">
+         <w xml:id="erpa-1233960">С</w>
+         <c> </c>
+         <w xml:id="erpa-1233970">светлыми</w>
+         <c> </c>
+         <w xml:id="erpa-1233980">глазами</w>
+         <pc xml:id="erpa-1233990">,</pc>
+      </l>
+      <l xml:id="erpa-l65610">
+         <w xml:id="erpa-1234000">Тихо</w>
+         <c> </c>
+         <w xml:id="erpa-1234010">вея</w>
+         <pc xml:id="erpa-1234020">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1234030">прилетел</w>
+         <pc xml:id="erpa-1234040">,</pc>
+      </l>
+      <l xml:id="erpa-l65615">
+         <w xml:id="erpa-1234050">К</w>
+         <c> </c>
+         <w xml:id="erpa-1234060">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1234070">на</w>
+         <c> </c>
+         <w xml:id="erpa-1234080">перси</w>
+         <c> </c>
+         <w xml:id="erpa-1234090">тихо</w>
+         <c> </c>
+         <w xml:id="erpa-1234100">сел</w>
+         <pc xml:id="erpa-1234110">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65620">
+         <w xml:id="erpa-1234120">Обнял</w>
+         <c> </c>
+         <w xml:id="erpa-1234130">их</w>
+         <c> </c>
+         <w xml:id="erpa-1234140">крылами</w>
+         <pc xml:id="erpa-1234150" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09840">
+      <l xml:id="erpa-l65625">
+         <w xml:id="erpa-1234180">Смолкло</w>
+         <c> </c>
+         <w xml:id="erpa-1234190">все</w>
+         <c> </c>
+         <w xml:id="erpa-1234200">опять</w>
+         <c> </c>
+         <w xml:id="erpa-1234210">кругом</w>
+         <c> </c>
+         <pc xml:id="erpa-1234220" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65630">
+         <w xml:id="erpa-1234230">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1234240">Светлане</w>
+         <c> </c>
+         <w xml:id="erpa-1234250">мнится</w>
+         <pc xml:id="erpa-1234260">,</pc>
+      </l>
+      <l xml:id="erpa-l65635">
+         <w xml:id="erpa-1234270">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1234280">под</w>
+         <c> </c>
+         <w xml:id="erpa-1234290">белым</w>
+         <c> </c>
+         <w xml:id="erpa-1234300">полотном</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65640">
+         <w xml:id="erpa-1234310">Мертвец</w>
+         <c> </c>
+         <w xml:id="erpa-1234320">шевелится</w>
+         <c> </c>
+         <pc xml:id="erpa-1234330" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65645">
+         <w xml:id="erpa-1234340">Сорвался</w>
+         <c> </c>
+         <w xml:id="erpa-1234350">покров</w>
+         <pc xml:id="erpa-1234360">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1234370">мертвец</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65650">
+         <pc xml:id="erpa-1234380">(</pc>
+         <w xml:id="erpa-1234390">Лик</w>
+         <c> </c>
+         <w xml:id="erpa-1234400">мрачнее</w>
+         <c> </c>
+         <w xml:id="erpa-1234410">ночи</w>
+         <pc xml:id="erpa-1234420">)</pc>
+      </l>
+      <l xml:id="erpa-l65655">
+         <w xml:id="erpa-1234430">Виден</w>
+         <c> </c>
+         <w xml:id="erpa-1234440">весь</w>
+         <c> </c>
+         <pc xml:id="erpa-1234450">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1234460">на</w>
+         <c> </c>
+         <w xml:id="erpa-1234470">лбу</w>
+         <c> </c>
+         <w xml:id="erpa-1234480">венец</w>
+         <pc xml:id="erpa-1234490">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65660">
+         <w xml:id="erpa-1234500">Затворены</w>
+         <c> </c>
+         <w xml:id="erpa-1234510">очи</w>
+         <pc xml:id="erpa-1234520" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65665">
+         <w xml:id="erpa-1234530">Вдруг</w>
+         <c> </c>
+         <pc xml:id="erpa-1234540">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1234550">в</w>
+         <c> </c>
+         <w xml:id="erpa-1234560">устах</w>
+         <c> </c>
+         <w xml:id="erpa-1234570">сомкнутых</w>
+         <c> </c>
+         <w xml:id="erpa-1234580">стон</w>
+         <pc xml:id="erpa-1234590">;</pc>
+      </l>
+      <l xml:id="erpa-l65670">
+         <w xml:id="erpa-1234600">Силится</w>
+         <c> </c>
+         <w xml:id="erpa-1234610">раздвинуть</w>
+         <c> </c>
+         <w xml:id="erpa-1234620">он</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65675">
+         <w xml:id="erpa-1234630">Руки</w>
+         <c> </c>
+         <w xml:id="erpa-1234640">охладелы</w>
+         <c> </c>
+         <pc xml:id="erpa-1234650" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65680">
+         <w xml:id="erpa-1234660">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1234670">же</w>
+         <c> </c>
+         <w xml:id="erpa-1234680">девица</w>
+         <pc xml:id="erpa-1234690">?</pc>
+         <c> </c>
+         <pc xml:id="erpa-1234700" unit="sentence">..</pc>
+         <c> </c>
+         <w xml:id="erpa-1234710">Дрожит</w>
+         <c> </c>
+         <pc xml:id="erpa-1234720" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65685">
+         <w xml:id="erpa-1234730">Гибель</w>
+         <c> </c>
+         <w xml:id="erpa-1234740">близко</w>
+         <c> </c>
+         <pc xml:id="erpa-1234750">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1234760">но</w>
+         <c> </c>
+         <w xml:id="erpa-1234770">не</w>
+         <c> </c>
+         <w xml:id="erpa-1234780">спит</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65690">
+         <w xml:id="erpa-1234790">Голубочек</w>
+         <c> </c>
+         <w xml:id="erpa-1234800">белый</w>
+         <pc xml:id="erpa-1234810" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09845">
+      <l xml:id="erpa-l65695">
+         <w xml:id="erpa-1234840">Встрепенулся</w>
+         <pc xml:id="erpa-1234850">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1234860">развернул</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65700">
+         <w xml:id="erpa-1234870">Легкие</w>
+         <c> </c>
+         <w xml:id="erpa-1234880">он</w>
+         <c> </c>
+         <w xml:id="erpa-1234890">крилы</w>
+         <pc xml:id="erpa-1234900">;</pc>
+      </l>
+      <l xml:id="erpa-l65705">
+         <w xml:id="erpa-1234910">К</w>
+         <c> </c>
+         <w xml:id="erpa-1234920">мертвецу</w>
+         <c> </c>
+         <w xml:id="erpa-1234930">на</w>
+         <c> </c>
+         <w xml:id="erpa-1234940">грудь</w>
+         <c> </c>
+         <w xml:id="erpa-1234950">вспорхнул</w>
+         <c> </c>
+         <pc xml:id="erpa-1234960" unit="sentence">..</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65710">
+         <w xml:id="erpa-1234970">Всей</w>
+         <c> </c>
+         <w xml:id="erpa-1234980">лишенный</w>
+         <c> </c>
+         <w xml:id="erpa-1234990">силы</w>
+         <pc xml:id="erpa-1235000">,</pc>
+      </l>
+      <l xml:id="erpa-l65715">
+         <w xml:id="erpa-1235010">Простонав</w>
+         <pc xml:id="erpa-1235020">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1235030">заскрежетал</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65720">
+         <w xml:id="erpa-1235040">Страшно</w>
+         <c> </c>
+         <w xml:id="erpa-1235050">он</w>
+         <c> </c>
+         <w xml:id="erpa-1235060">зубами</w>
+      </l>
+      <l xml:id="erpa-l65725">
+         <w xml:id="erpa-1235070">И</w>
+         <c> </c>
+         <w xml:id="erpa-1235080">на</w>
+         <c> </c>
+         <w xml:id="erpa-1235090">деву</w>
+         <c> </c>
+         <w xml:id="erpa-1235100">засверкал</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65730">
+         <w xml:id="erpa-1235110">Грозными</w>
+         <c> </c>
+         <w xml:id="erpa-1235120">очами</w>
+         <c> </c>
+         <pc xml:id="erpa-1235130" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65735">
+         <w xml:id="erpa-1235140">Снова</w>
+         <c> </c>
+         <w xml:id="erpa-1235150">бледность</w>
+         <c> </c>
+         <w xml:id="erpa-1235160">на</w>
+         <c> </c>
+         <w xml:id="erpa-1235170">устах</w>
+         <pc xml:id="erpa-1235180">;</pc>
+      </l>
+      <l xml:id="erpa-l65740">
+         <w xml:id="erpa-1235190">В</w>
+         <c> </c>
+         <w xml:id="erpa-1235200">закатившихся</w>
+         <c> </c>
+         <w xml:id="erpa-1235210">глазах</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65745">
+         <w xml:id="erpa-1235220">Смерть</w>
+         <c> </c>
+         <w xml:id="erpa-1235230">изобразилась</w>
+         <c> </c>
+         <pc xml:id="erpa-1235240" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65750">
+         <w xml:id="erpa-1235250">Глядь</w>
+         <pc xml:id="erpa-1235260">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1235270">Светлана</w>
+         <c> </c>
+         <pc xml:id="erpa-1235280">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1235290">о</w>
+         <c> </c>
+         <w xml:id="erpa-1235300">творец</w>
+         <pc xml:id="erpa-1235310" unit="sentence">!</pc>
+      </l>
+      <l xml:id="erpa-l65755">
+         <w xml:id="erpa-1235320">Милый</w>
+         <c> </c>
+         <w xml:id="erpa-1235330">друг</w>
+         <c> </c>
+         <w xml:id="erpa-1235340">ее</w>
+         <c> </c>
+         <pc xml:id="erpa-1235350">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1235360">мертвец</w>
+         <pc xml:id="erpa-1235370" unit="sentence">!</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65760">
+         <w xml:id="erpa-1235380">Ах</w>
+         <pc xml:id="erpa-1235390">!</pc>
+         <c> </c>
+         <pc xml:id="erpa-1235400">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1235410">и</w>
+         <c> </c>
+         <w xml:id="erpa-1235420">пробудилась</w>
+         <pc xml:id="erpa-1235430" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09850">
+      <l xml:id="erpa-l65765">
+         <w xml:id="erpa-1235460">Где</w>
+         <c> </c>
+         <w xml:id="erpa-1235470">ж</w>
+         <pc xml:id="erpa-1235480">?</pc>
+         <c> </c>
+         <pc xml:id="erpa-1235490" unit="sentence">..</pc>
+         <c> </c>
+         <w xml:id="erpa-1235500">У</w>
+         <c> </c>
+         <w xml:id="erpa-1235510">зеркала</w>
+         <pc xml:id="erpa-1235520">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1235530">одна</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65770">
+         <w xml:id="erpa-1235540">Посреди</w>
+         <c> </c>
+         <w xml:id="erpa-1235550">светлицы</w>
+         <pc xml:id="erpa-1235560">;</pc>
+      </l>
+      <l xml:id="erpa-l65775">
+         <w xml:id="erpa-1235570">В</w>
+         <c> </c>
+         <w xml:id="erpa-1235580">тонкий</w>
+         <c> </c>
+         <w xml:id="erpa-1235590">занавес</w>
+         <c> </c>
+         <w xml:id="erpa-1235600">окна</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65780">
+         <w xml:id="erpa-1235610">Светит</w>
+         <c> </c>
+         <w xml:id="erpa-1235620">луч</w>
+         <c> </c>
+         <w xml:id="erpa-1235630">денницы</w>
+         <pc xml:id="erpa-1235640">;</pc>
+      </l>
+      <l xml:id="erpa-l65785">
+         <w xml:id="erpa-1235650">Шумным</w>
+         <c> </c>
+         <w xml:id="erpa-1235660">бьет</w>
+         <c> </c>
+         <w xml:id="erpa-1235670">крылом</w>
+         <c> </c>
+         <w xml:id="erpa-1235680">петух</w>
+         <pc xml:id="erpa-1235690">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65790">
+         <w xml:id="erpa-1235700">День</w>
+         <c> </c>
+         <w xml:id="erpa-1235710">встречая</w>
+         <c> </c>
+         <w xml:id="erpa-1235720">пеньем</w>
+         <pc xml:id="erpa-1235730">;</pc>
+      </l>
+      <l xml:id="erpa-l65795">
+         <w xml:id="erpa-1235740">Все</w>
+         <c> </c>
+         <w xml:id="erpa-1235750">блестит</w>
+         <c> </c>
+         <pc xml:id="erpa-1235760" unit="sentence">...</pc>
+         <c> </c>
+         <w xml:id="erpa-1235770">Светланин</w>
+         <c> </c>
+         <w xml:id="erpa-1235780">дух</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65800">
+         <w xml:id="erpa-1235790">Смутен</w>
+         <c> </c>
+         <w xml:id="erpa-1235800">сновиденьем</w>
+         <pc xml:id="erpa-1235810" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65805">
+         <pc xml:id="erpa-1235820">"</pc>
+         <w xml:id="erpa-1235830">Ах</w>
+         <pc xml:id="erpa-1235840">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1235850">ужасный</w>
+         <pc xml:id="erpa-1235860">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1235870">грозный</w>
+         <c> </c>
+         <w xml:id="erpa-1235880">сон</w>
+         <pc xml:id="erpa-1235890" unit="sentence">!</pc>
+      </l>
+      <l xml:id="erpa-l65810">
+         <w xml:id="erpa-1235900">Не</w>
+         <c> </c>
+         <w xml:id="erpa-1235910">довро</w>
+         <c> </c>
+         <w xml:id="erpa-1235920">вещает</w>
+         <c> </c>
+         <w xml:id="erpa-1235930">он</w>
+         <c> </c>
+         <pc xml:id="erpa-1235940">-</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65815">
+         <w xml:id="erpa-1235950">Горькую</w>
+         <c> </c>
+         <w xml:id="erpa-1235960">судьбину</w>
+         <pc xml:id="erpa-1235970">;</pc>
+      </l>
+      <l xml:id="erpa-l65820">
+         <w xml:id="erpa-1235980">Тайный</w>
+         <c> </c>
+         <w xml:id="erpa-1235990">мрак</w>
+         <c> </c>
+         <w xml:id="erpa-1236000">грядущих</w>
+         <c> </c>
+         <w xml:id="erpa-1236010">дней</w>
+         <pc xml:id="erpa-1236020">,</pc>
+      </l>
+      <l xml:id="erpa-l65825">
+         <w xml:id="erpa-1236030">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1236040">сулишь</w>
+         <c> </c>
+         <w xml:id="erpa-1236050">душе</w>
+         <c> </c>
+         <w xml:id="erpa-1236060">моей</w>
+         <pc xml:id="erpa-1236070">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65830">
+         <w xml:id="erpa-1236080">Радость</w>
+         <c> </c>
+         <w xml:id="erpa-1236090">иль</w>
+         <c> </c>
+         <w xml:id="erpa-1236100">кручину</w>
+         <pc xml:id="erpa-1236110">?</pc>
+         <pc xml:id="erpa-1236120" unit="sentence">"</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09855">
+      <l xml:id="erpa-l65835">
+         <w xml:id="erpa-1236150">Села</w>
+         <c> </c>
+         <pc xml:id="erpa-1236160">(</pc>
+         <w xml:id="erpa-1236170">тяжко</w>
+         <c> </c>
+         <w xml:id="erpa-1236180">ноет</w>
+         <c> </c>
+         <w xml:id="erpa-1236190">грудь</w>
+         <pc xml:id="erpa-1236200">)</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65840">
+         <w xml:id="erpa-1236210">Под</w>
+         <c> </c>
+         <w xml:id="erpa-1236220">окном</w>
+         <c> </c>
+         <w xml:id="erpa-1236230">Светлана</w>
+         <pc xml:id="erpa-1236240">;</pc>
+      </l>
+      <l xml:id="erpa-l65845">
+         <w xml:id="erpa-1236250">Из</w>
+         <c> </c>
+         <w xml:id="erpa-1236260">окна</w>
+         <c> </c>
+         <w xml:id="erpa-1236270">широкий</w>
+         <c> </c>
+         <w xml:id="erpa-1236280">путь</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65850">
+         <w xml:id="erpa-1236290">Виден</w>
+         <c> </c>
+         <w xml:id="erpa-1236300">сквозь</w>
+         <c> </c>
+         <w xml:id="erpa-1236310">тумана</w>
+         <pc xml:id="erpa-1236320">;</pc>
+      </l>
+      <l xml:id="erpa-l65855">
+         <w xml:id="erpa-1236330">Снег</w>
+         <c> </c>
+         <w xml:id="erpa-1236340">на</w>
+         <c> </c>
+         <w xml:id="erpa-1236350">солнышке</w>
+         <c> </c>
+         <w xml:id="erpa-1236360">блестит</w>
+         <pc xml:id="erpa-1236370">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65860">
+         <w xml:id="erpa-1236380">Пар</w>
+         <c> </c>
+         <w xml:id="erpa-1236390">алеет</w>
+         <c> </c>
+         <w xml:id="erpa-1236400">тонкий</w>
+         <c> </c>
+         <pc xml:id="erpa-1236410" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l65865">
+         <w xml:id="erpa-1236420">Чу</w>
+         <pc xml:id="erpa-1236430">!</pc>
+         <c> </c>
+         <pc xml:id="erpa-1236440">..</pc>
+         <c> </c>
+         <w xml:id="erpa-1236450">в</w>
+         <c> </c>
+         <w xml:id="erpa-1236460">дали</w>
+         <c> </c>
+         <w xml:id="erpa-1236470">пустой</w>
+         <c> </c>
+         <w xml:id="erpa-1236480">гремит</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65870">
+         <w xml:id="erpa-1236490">Колокольчик</w>
+         <c> </c>
+         <w xml:id="erpa-1236500">звонкий</w>
+         <pc xml:id="erpa-1236510">;</pc>
+      </l>
+      <l xml:id="erpa-l65875">
+         <w xml:id="erpa-1236520">На</w>
+         <c> </c>
+         <w xml:id="erpa-1236530">дороге</w>
+         <c> </c>
+         <w xml:id="erpa-1236540">снежный</w>
+         <c> </c>
+         <w xml:id="erpa-1236550">прах</w>
+         <pc xml:id="erpa-1236560">;</pc>
+      </l>
+      <l xml:id="erpa-l65880">
+         <w xml:id="erpa-1236570">Мчат</w>
+         <pc xml:id="erpa-1236580">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1236590">как</w>
+         <c> </c>
+         <w xml:id="erpa-1236600">будто</w>
+         <c> </c>
+         <w xml:id="erpa-1236610">на</w>
+         <c> </c>
+         <w xml:id="erpa-1236620">крылах</w>
+         <pc xml:id="erpa-1236630">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65885">
+         <w xml:id="erpa-1236640">Санки</w>
+         <c> </c>
+         <w xml:id="erpa-1236650">кони</w>
+         <c> </c>
+         <w xml:id="erpa-1236660">рьяны</w>
+         <pc xml:id="erpa-1236670">;</pc>
+      </l>
+      <l xml:id="erpa-l65890">
+         <w xml:id="erpa-1236680">Ближе</w>
+         <pc xml:id="erpa-1236690">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1236700">вот</w>
+         <c> </c>
+         <w xml:id="erpa-1236710">уж</w>
+         <c> </c>
+         <w xml:id="erpa-1236720">у</w>
+         <c> </c>
+         <w xml:id="erpa-1236730">ворот</w>
+         <pc xml:id="erpa-1236740">;</pc>
+      </l>
+      <l xml:id="erpa-l65895">
+         <w xml:id="erpa-1236750">Статный</w>
+         <c> </c>
+         <w xml:id="erpa-1236760">гость</w>
+         <c> </c>
+         <w xml:id="erpa-1236770">к</w>
+         <c> </c>
+         <w xml:id="erpa-1236780">крыльцу</w>
+         <c> </c>
+         <w xml:id="erpa-1236790">идет</w>
+         <c> </c>
+         <pc xml:id="erpa-1236800" unit="sentence">..</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65900">
+         <w xml:id="erpa-1236810">Кто</w>
+         <pc xml:id="erpa-1236820">?</pc>
+         <c> </c>
+         <pc xml:id="erpa-1236830" unit="sentence">..</pc>
+         <c> </c>
+         <w xml:id="erpa-1236840">Жених</w>
+         <c> </c>
+         <w xml:id="erpa-1236850">Светланы</w>
+         <pc xml:id="erpa-1236860" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09860">
+      <l xml:id="erpa-l65905">
+         <w xml:id="erpa-1236890">Что</w>
+         <c> </c>
+         <w xml:id="erpa-1236900">же</w>
+         <c> </c>
+         <w xml:id="erpa-1236910">твой</w>
+         <pc xml:id="erpa-1236920">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1236930">Светлана</w>
+         <pc xml:id="erpa-1236940">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1236950">сон</w>
+         <pc xml:id="erpa-1236960">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65910">
+         <w xml:id="erpa-1236970">Прорицатель</w>
+         <c> </c>
+         <w xml:id="erpa-1236980">муки</w>
+         <pc xml:id="erpa-1236990" unit="sentence">?</pc>
+      </l>
+      <l xml:id="erpa-l65915">
+         <w xml:id="erpa-1237000">Друг</w>
+         <c> </c>
+         <w xml:id="erpa-1237010">с</w>
+         <c> </c>
+         <w xml:id="erpa-1237020">тобой</w>
+         <pc xml:id="erpa-1237030">;</pc>
+         <c> </c>
+         <w xml:id="erpa-1237040">все</w>
+         <c> </c>
+         <w xml:id="erpa-1237050">тот</w>
+         <c> </c>
+         <w xml:id="erpa-1237060">же</w>
+         <c> </c>
+         <w xml:id="erpa-1237070">он</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65920">
+         <w xml:id="erpa-1237080">В</w>
+         <c> </c>
+         <w xml:id="erpa-1237090">опыте</w>
+         <c> </c>
+         <w xml:id="erpa-1237100">разлуки</w>
+         <pc xml:id="erpa-1237110">;</pc>
+      </l>
+      <l xml:id="erpa-l65925">
+         <w xml:id="erpa-1237120">Та</w>
+         <c> </c>
+         <w xml:id="erpa-1237130">ж</w>
+         <c> </c>
+         <w xml:id="erpa-1237140">любовь</w>
+         <c> </c>
+         <w xml:id="erpa-1237150">в</w>
+         <c> </c>
+         <w xml:id="erpa-1237160">его</w>
+         <c> </c>
+         <w xml:id="erpa-1237170">очах</w>
+         <pc xml:id="erpa-1237180">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65930">
+         <w xml:id="erpa-1237190">Те</w>
+         <c> </c>
+         <w xml:id="erpa-1237200">ж</w>
+         <c> </c>
+         <w xml:id="erpa-1237210">приятны</w>
+         <c> </c>
+         <w xml:id="erpa-1237220">взоры</w>
+         <pc xml:id="erpa-1237230">;</pc>
+      </l>
+      <l xml:id="erpa-l65935">
+         <w xml:id="erpa-1237240">Те</w>
+         <c> </c>
+         <w xml:id="erpa-1237250">ж</w>
+         <c> </c>
+         <w xml:id="erpa-1237260">на</w>
+         <c> </c>
+         <w xml:id="erpa-1237270">сладостных</w>
+         <c> </c>
+         <w xml:id="erpa-1237280">устах</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65940">
+         <w xml:id="erpa-1237290">Милы</w>
+         <c> </c>
+         <w xml:id="erpa-1237300">разговоры</w>
+         <pc xml:id="erpa-1237310" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65945">
+         <w xml:id="erpa-1237320">Отворяйся</w>
+         <c> </c>
+         <w xml:id="erpa-1237330">ж</w>
+         <pc xml:id="erpa-1237340">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1237350">божий</w>
+         <c> </c>
+         <w xml:id="erpa-1237360">храм</w>
+         <pc xml:id="erpa-1237370">;</pc>
+      </l>
+      <l xml:id="erpa-l65950">
+         <w xml:id="erpa-1237380">Вы</w>
+         <c> </c>
+         <w xml:id="erpa-1237390">летите</w>
+         <c> </c>
+         <w xml:id="erpa-1237400">к</w>
+         <c> </c>
+         <w xml:id="erpa-1237410">небесам</w>
+         <pc xml:id="erpa-1237420">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65955">
+         <w xml:id="erpa-1237430">Верные</w>
+         <c> </c>
+         <w xml:id="erpa-1237440">обеты</w>
+         <pc xml:id="erpa-1237450">;</pc>
+      </l>
+      <l xml:id="erpa-l65960">
+         <w xml:id="erpa-1237460">Соберитесь</w>
+         <pc xml:id="erpa-1237470">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1237480">стар</w>
+         <c> </c>
+         <w xml:id="erpa-1237490">и</w>
+         <c> </c>
+         <w xml:id="erpa-1237500">млад</w>
+         <pc xml:id="erpa-1237510">;</pc>
+      </l>
+      <l xml:id="erpa-l65965">
+         <w xml:id="erpa-1237520">Сдвинув</w>
+         <c> </c>
+         <w xml:id="erpa-1237530">звонки</w>
+         <c> </c>
+         <w xml:id="erpa-1237540">чаши</w>
+         <pc xml:id="erpa-1237550">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1237560">в</w>
+         <c> </c>
+         <w xml:id="erpa-1237570">лад</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65970">
+         <w xml:id="erpa-1237580">Пойте</w>
+         <pc xml:id="erpa-1237590">:</pc>
+         <c> </c>
+         <w xml:id="erpa-1237600">многи</w>
+         <c> </c>
+         <w xml:id="erpa-1237610">леты</w>
+         <pc xml:id="erpa-1237620" unit="sentence">!</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09865">
+      <l xml:id="erpa-l65975">
+         <w xml:id="erpa-1237650">Улыбнись</w>
+         <pc xml:id="erpa-1237660">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1237670">моя</w>
+         <c> </c>
+         <w xml:id="erpa-1237680">краса</w>
+         <pc xml:id="erpa-1237690">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65980">
+         <w xml:id="erpa-1237700">На</w>
+         <c> </c>
+         <w xml:id="erpa-1237710">мою</w>
+         <c> </c>
+         <w xml:id="erpa-1237720">балладу</w>
+         <pc xml:id="erpa-1237730">;</pc>
+      </l>
+      <l xml:id="erpa-l65985">
+         <w xml:id="erpa-1237740">В</w>
+         <c> </c>
+         <w xml:id="erpa-1237750">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1237760">большие</w>
+         <c> </c>
+         <w xml:id="erpa-1237770">чудеса</w>
+         <pc xml:id="erpa-1237780">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l65990">
+         <w xml:id="erpa-1237790">Очень</w>
+         <c> </c>
+         <w xml:id="erpa-1237800">мало</w>
+         <c> </c>
+         <w xml:id="erpa-1237810">складу</w>
+         <pc xml:id="erpa-1237820" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l65995">
+         <w xml:id="erpa-1237830">Взором</w>
+         <c> </c>
+         <w xml:id="erpa-1237840">счастливый</w>
+         <c> </c>
+         <w xml:id="erpa-1237850">твоим</w>
+         <pc xml:id="erpa-1237860">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66000">
+         <w xml:id="erpa-1237870">Не</w>
+         <c> </c>
+         <w xml:id="erpa-1237880">хочу</w>
+         <c> </c>
+         <w xml:id="erpa-1237890">и</w>
+         <c> </c>
+         <w xml:id="erpa-1237900">славы</w>
+         <pc xml:id="erpa-1237910">;</pc>
+      </l>
+      <l xml:id="erpa-l66005">
+         <w xml:id="erpa-1237920">Слава</w>
+         <c> </c>
+         <pc xml:id="erpa-1237930">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1237940">нас</w>
+         <c> </c>
+         <w xml:id="erpa-1237950">учили</w>
+         <c> </c>
+         <pc xml:id="erpa-1237960">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1237970">дым</w>
+         <pc xml:id="erpa-1237980">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66010">
+         <w xml:id="erpa-1237990">Свет</w>
+         <c> </c>
+         <pc xml:id="erpa-1238000">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1238010">судья</w>
+         <c> </c>
+         <w xml:id="erpa-1238020">лукавый</w>
+         <pc xml:id="erpa-1238030" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l66015">
+         <w xml:id="erpa-1238040">Вот</w>
+         <c> </c>
+         <w xml:id="erpa-1238050">баллады</w>
+         <c> </c>
+         <w xml:id="erpa-1238060">толк</w>
+         <c> </c>
+         <w xml:id="erpa-1238070">моей</w>
+         <pc xml:id="erpa-1238080">:</pc>
+      </l>
+      <l xml:id="erpa-l66020">
+         <pc xml:id="erpa-1238090">"</pc>
+         <w xml:id="erpa-1238100">Лучший</w>
+         <c> </c>
+         <w xml:id="erpa-1238110">друг</w>
+         <c> </c>
+         <w xml:id="erpa-1238120">нам</w>
+         <c> </c>
+         <w xml:id="erpa-1238130">в</w>
+         <c> </c>
+         <w xml:id="erpa-1238140">жизни</w>
+         <c> </c>
+         <w xml:id="erpa-1238150">сей</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66025">
+         <w xml:id="erpa-1238160">Вера</w>
+         <c> </c>
+         <w xml:id="erpa-1238170">в</w>
+         <c> </c>
+         <w xml:id="erpa-1238180">провиденье</w>
+         <pc xml:id="erpa-1238190" unit="sentence">.</pc>
+      </l>
+      <l xml:id="erpa-l66030">
+         <w xml:id="erpa-1238200">Благ</w>
+         <c> </c>
+         <w xml:id="erpa-1238210">зиждителя</w>
+         <c> </c>
+         <w xml:id="erpa-1238220">закон</w>
+         <pc xml:id="erpa-1238230">:</pc>
+      </l>
+      <l xml:id="erpa-l66035">
+         <w xml:id="erpa-1238240">Здесь</w>
+         <c> </c>
+         <w xml:id="erpa-1238250">несчастье</w>
+         <c> </c>
+         <pc xml:id="erpa-1238260">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1238270">лживый</w>
+         <c> </c>
+         <w xml:id="erpa-1238280">сон</w>
+         <pc xml:id="erpa-1238290">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66040">
+         <w xml:id="erpa-1238300">Счастье</w>
+         <c> </c>
+         <pc xml:id="erpa-1238310">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1238320">пробужденье</w>
+         <pc xml:id="erpa-1238330">"</pc>
+         <pc xml:id="erpa-1238340" unit="sentence">.</pc>
+      </l>
+   </lg>
+   <lg xml:id="erpa-s09870">
+      <l xml:id="erpa-l66045">
+         <w xml:id="erpa-1238370">О</w>
+         <pc xml:id="erpa-1238380">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1238390">не</w>
+         <c> </c>
+         <w xml:id="erpa-1238400">знай</w>
+         <c> </c>
+         <w xml:id="erpa-1238410">сих</w>
+         <c> </c>
+         <w xml:id="erpa-1238420">страшных</w>
+         <c> </c>
+         <w xml:id="erpa-1238430">снов</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66050">
+         <w xml:id="erpa-1238440">Ты</w>
+         <pc xml:id="erpa-1238450">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1238460">моя</w>
+         <c> </c>
+         <w xml:id="erpa-1238470">Светлана</w>
+         <c> </c>
+         <pc xml:id="erpa-1238480" unit="sentence">...</pc>
+      </l>
+      <l xml:id="erpa-l66055">
+         <w xml:id="erpa-1238490">Будь</w>
+         <pc xml:id="erpa-1238500">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1238510">создатель</w>
+         <pc xml:id="erpa-1238520">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1238530">ей</w>
+         <c> </c>
+         <w xml:id="erpa-1238540">покров</w>
+         <pc xml:id="erpa-1238550" unit="sentence">!</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66060">
+         <w xml:id="erpa-1238560">Ни</w>
+         <c> </c>
+         <w xml:id="erpa-1238570">печали</w>
+         <c> </c>
+         <w xml:id="erpa-1238580">рана</w>
+         <pc xml:id="erpa-1238590">,</pc>
+      </l>
+      <l xml:id="erpa-l66065">
+         <w xml:id="erpa-1238600">Ни</w>
+         <c> </c>
+         <w xml:id="erpa-1238610">минутной</w>
+         <c> </c>
+         <w xml:id="erpa-1238620">грусти</w>
+         <c> </c>
+         <w xml:id="erpa-1238630">тень</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66070">
+         <w xml:id="erpa-1238640">К</w>
+         <c> </c>
+         <w xml:id="erpa-1238650">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1238660">да</w>
+         <c> </c>
+         <w xml:id="erpa-1238670">не</w>
+         <c> </c>
+         <w xml:id="erpa-1238680">коснется</w>
+         <pc xml:id="erpa-1238690">;</pc>
+      </l>
+      <l xml:id="erpa-l66075">
+         <w xml:id="erpa-1238700">В</w>
+         <c> </c>
+         <w xml:id="erpa-1238710">ней</w>
+         <c> </c>
+         <w xml:id="erpa-1238720">душа</w>
+         <c> </c>
+         <w xml:id="erpa-1238730">как</w>
+         <c> </c>
+         <w xml:id="erpa-1238740">ясный</w>
+         <c> </c>
+         <w xml:id="erpa-1238750">день</w>
+         <pc xml:id="erpa-1238760">;</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66080">
+         <w xml:id="erpa-1238770">Ах</w>
+         <pc xml:id="erpa-1238780">!</pc>
+         <c> </c>
+         <w xml:id="erpa-1238790">да</w>
+         <c> </c>
+         <w xml:id="erpa-1238800">пронесется</w>
+      </l>
+      <l xml:id="erpa-l66085">
+         <w xml:id="erpa-1238810">Мимо</w>
+         <c> </c>
+         <pc xml:id="erpa-1238820">-</pc>
+         <c> </c>
+         <w xml:id="erpa-1238830">бедствия</w>
+         <c> </c>
+         <w xml:id="erpa-1238840">рука</w>
+         <pc xml:id="erpa-1238850">;</pc>
+      </l>
+      <l xml:id="erpa-l66090">
+         <w xml:id="erpa-1238860">Как</w>
+         <c> </c>
+         <w xml:id="erpa-1238870">приятный</w>
+         <c> </c>
+         <w xml:id="erpa-1238880">ручейка</w>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66095">
+         <w xml:id="erpa-1238890">Блеск</w>
+         <c> </c>
+         <w xml:id="erpa-1238900">на</w>
+         <c> </c>
+         <w xml:id="erpa-1238910">лоне</w>
+         <c> </c>
+         <w xml:id="erpa-1238920">луга</w>
+         <pc xml:id="erpa-1238930">,</pc>
+      </l>
+      <l xml:id="erpa-l66100">
+         <w xml:id="erpa-1238940">Будь</w>
+         <c> </c>
+         <w xml:id="erpa-1238950">вся</w>
+         <c> </c>
+         <w xml:id="erpa-1238960">жизнь</w>
+         <c> </c>
+         <w xml:id="erpa-1238970">ее</w>
+         <c> </c>
+         <w xml:id="erpa-1238980">светла</w>
+         <pc xml:id="erpa-1238990">,</pc>
+      </l>
+      <l xml:id="erpa-l66105">
+         <w xml:id="erpa-1239000">Будь</w>
+         <c> </c>
+         <w xml:id="erpa-1239010">веселость</w>
+         <pc xml:id="erpa-1239020">,</pc>
+         <c> </c>
+         <w xml:id="erpa-1239030">как</w>
+         <c> </c>
+         <w xml:id="erpa-1239040">была</w>
+         <pc xml:id="erpa-1239050">,</pc>
+      </l>
+      <l rendition="#h_3" xml:id="erpa-l66110">
+         <w xml:id="erpa-1239060">Дней</w>
+         <c> </c>
+         <w xml:id="erpa-1239070">ее</w>
+         <c> </c>
+         <w xml:id="erpa-1239080">подруга</w>
+         <pc xml:id="erpa-1239090" unit="sentence">.</pc>
+      </l>
+   </lg>
+</div>

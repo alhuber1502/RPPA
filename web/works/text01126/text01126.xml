@@ -1,0 +1,1451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#original"
+     corresp="#work00858"
+     rhyme="aabccb"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text01126"
+     xml:lang="fra">
+   <link target="#pers00064" type="author"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="erpa-n00810">
+      <date type="comp" when="1823-08">
+         <w xml:id="erpa-0714040">Août</w>
+         <c> </c>
+         <w xml:id="erpa-0714050">1823</w>
+      </date>
+      <date type="publ" when="1824">
+         <w xml:id="erpa-0714080">1824</w>
+      </date>
+   </note>
+   <head type="main" xml:lang="fra" xml:id="erpa-h01135">
+      <w xml:id="erpa-0706530">Le</w>
+      <c> </c>
+      <w xml:id="erpa-0706540">Poëte</w>
+   </head>
+   <epigraph xml:id="erpa-div00195">
+      <l xml:id="erpa-l34060">
+         <w xml:id="erpa-0706570">Muse</w>
+         <pc xml:id="erpa-0706580">!</pc>
+         <c> </c>
+         <w xml:id="erpa-0706590">contemple</w>
+         <c> </c>
+         <w xml:id="erpa-0706600">ta</w>
+         <c> </c>
+         <w xml:id="erpa-0706610">victime</w>
+         <pc xml:id="erpa-0706620" unit="sentence">!</pc>
+      </l>
+      <bibl xml:id="erpa-div00200">
+         <w xml:id="erpa-0706640">Lamartine</w>
+         <pc xml:id="erpa-0706650">,</pc>
+         <c> </c>
+         <hi>
+            <w xml:id="erpa-0706660">L’enthousiasme</w>
+         </hi>
+         <pc xml:id="erpa-0706670" unit="sentence">.</pc>
+      </bibl>
+   </epigraph>
+   <lg xml:id="erpa-s05420">
+      <head xml:id="erpa-h01140">
+         <w xml:id="erpa-0706710">I</w>
+      </head>
+      <lg xml:id="erpa-s05425">
+         <l xml:id="erpa-l34065">
+            <w xml:id="erpa-0706740">Qu’il</w>
+            <c> </c>
+            <w xml:id="erpa-0706750">passe</w>
+            <c> </c>
+            <w xml:id="erpa-0706760">en</w>
+            <c> </c>
+            <w xml:id="erpa-0706770">paix</w>
+            <pc xml:id="erpa-0706780">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0706790">au</w>
+            <c> </c>
+            <w xml:id="erpa-0706800">sein</w>
+            <c> </c>
+            <w xml:id="erpa-0706810">d’un</w>
+            <c> </c>
+            <w xml:id="erpa-0706820">monde</w>
+            <c> </c>
+            <w xml:id="erpa-0706830">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0706840">l’ignore</w>
+            <pc xml:id="erpa-0706850">,</pc>
+         </l>
+         <l xml:id="erpa-l34070">
+            <w xml:id="erpa-0706860">L’auguste</w>
+            <c> </c>
+            <w xml:id="erpa-0706870">infortuné</w>
+            <c> </c>
+            <w xml:id="erpa-0706880">que</w>
+            <c> </c>
+            <w xml:id="erpa-0706890">son</w>
+            <c> </c>
+            <w xml:id="erpa-0706900">âme</w>
+            <c> </c>
+            <w xml:id="erpa-0706910">dévore</w>
+            <pc xml:id="erpa-0706920">!</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34075">
+            <w xml:id="erpa-0706930">﻿</w>
+            <pc unit="sentence" xml:id="erpa-0706930-eos"/>
+            <c> </c>
+            <w xml:id="erpa-0706940">Respectez</w>
+            <c> </c>
+            <w xml:id="erpa-0706950">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0706960">nobles</w>
+            <c> </c>
+            <w xml:id="erpa-0706970">malheurs</w>
+            <pc xml:id="erpa-0706980">;</pc>
+         </l>
+         <l xml:id="erpa-l34080">
+            <w xml:id="erpa-0706990">Fuyez</w>
+            <pc xml:id="erpa-0707000">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707010">ô</w>
+            <c> </c>
+            <w xml:id="erpa-0707020">plaisirs</w>
+            <c> </c>
+            <w xml:id="erpa-0707030">vains</w>
+            <pc xml:id="erpa-0707040">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707050">son</w>
+            <c> </c>
+            <w xml:id="erpa-0707060">existence</w>
+            <c> </c>
+            <w xml:id="erpa-0707070">austère</w>
+            <pc xml:id="erpa-0707080">;</pc>
+         </l>
+         <l xml:id="erpa-l34085">
+            <w xml:id="erpa-0707090">Sa</w>
+            <c> </c>
+            <w xml:id="erpa-0707100">palme</w>
+            <c> </c>
+            <w xml:id="erpa-0707110">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0707120">grandit</w>
+            <pc xml:id="erpa-0707130">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707140">jalouse</w>
+            <c> </c>
+            <w xml:id="erpa-0707150">et</w>
+            <c> </c>
+            <w xml:id="erpa-0707160">solitaire</w>
+            <pc xml:id="erpa-0707170">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34090">
+            <w xml:id="erpa-0707180">﻿Ne</w>
+            <c> </c>
+            <w xml:id="erpa-0707190">peut</w>
+            <c> </c>
+            <w xml:id="erpa-0707200">croître</w>
+            <c> </c>
+            <w xml:id="erpa-0707210">parmi</w>
+            <c> </c>
+            <w xml:id="erpa-0707220">vos</w>
+            <c> </c>
+            <w xml:id="erpa-0707230">fleurs</w>
+            <pc xml:id="erpa-0707240" unit="sentence">.</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05430">
+         <l xml:id="erpa-l34095">
+            <w xml:id="erpa-0707270">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0707280">souffre</w>
+            <c> </c>
+            <w xml:id="erpa-0707290">assez</w>
+            <c> </c>
+            <w xml:id="erpa-0707300">de</w>
+            <c> </c>
+            <w xml:id="erpa-0707310">maux</w>
+            <pc xml:id="erpa-0707320">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707330">sans</w>
+            <c> </c>
+            <w xml:id="erpa-0707340">y</w>
+            <c> </c>
+            <w xml:id="erpa-0707350">joindre</w>
+            <c> </c>
+            <w xml:id="erpa-0707360">vos</w>
+            <c> </c>
+            <w xml:id="erpa-0707370">joies</w>
+            <pc xml:id="erpa-0707380" unit="sentence">!</pc>
+         </l>
+         <l xml:id="erpa-l34100">
+            <w xml:id="erpa-0707390">Chaque</w>
+            <c> </c>
+            <w xml:id="erpa-0707400">pas</w>
+            <c> </c>
+            <w xml:id="erpa-0707410">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0707420">l’enfonce</w>
+            <c> </c>
+            <w xml:id="erpa-0707430">en</w>
+            <c> </c>
+            <w xml:id="erpa-0707440">de</w>
+            <c> </c>
+            <w xml:id="erpa-0707450">sublimes</w>
+            <c> </c>
+            <w xml:id="erpa-0707460">voies</w>
+            <pc xml:id="erpa-0707470">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34105">
+            <w xml:id="erpa-0707480">Par</w>
+            <c> </c>
+            <w xml:id="erpa-0707490">une</w>
+            <c> </c>
+            <w xml:id="erpa-0707500">douleur</w>
+            <c> </c>
+            <w xml:id="erpa-0707510">est</w>
+            <c> </c>
+            <w xml:id="erpa-0707520">compté</w>
+            <pc xml:id="erpa-0707530" unit="sentence">.</pc>
+         </l>
+         <l xml:id="erpa-l34110">
+            <w xml:id="erpa-0707540">﻿</w>
+            <pc unit="sentence" xml:id="erpa-0707540-eos"/>
+            <c> </c>
+            <w xml:id="erpa-0707550">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0707560">pleure</w>
+            <c> </c>
+            <w xml:id="erpa-0707570">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0707580">jeunesse</w>
+            <c> </c>
+            <w xml:id="erpa-0707590">avant</w>
+            <c> </c>
+            <w xml:id="erpa-0707600">l’âge</w>
+            <c> </c>
+            <w xml:id="erpa-0707610">envolée</w>
+            <pc xml:id="erpa-0707620">,</pc>
+         </l>
+         <l xml:id="erpa-l34115">
+            <w xml:id="erpa-0707630">Sa</w>
+            <c> </c>
+            <w xml:id="erpa-0707640">vie</w>
+            <pc xml:id="erpa-0707650">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707660">humble</w>
+            <c> </c>
+            <w xml:id="erpa-0707670">roseau</w>
+            <pc xml:id="erpa-0707680">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707690">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0707700">se</w>
+            <c> </c>
+            <w xml:id="erpa-0707710">courbe</w>
+            <c> </c>
+            <w xml:id="erpa-0707720">accablée</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34120">
+            <w xml:id="erpa-0707730">﻿Du</w>
+            <c> </c>
+            <w xml:id="erpa-0707740">poids</w>
+            <c> </c>
+            <w xml:id="erpa-0707750">de</w>
+            <c> </c>
+            <w xml:id="erpa-0707760">l’immortalité</w>
+            <pc xml:id="erpa-0707770" unit="sentence">.</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05435">
+         <l xml:id="erpa-l34125">
+            <w xml:id="erpa-0707800">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0707810">pleure</w>
+            <pc xml:id="erpa-0707820">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707830">ô</w>
+            <c> </c>
+            <w xml:id="erpa-0707840">belle</w>
+            <c> </c>
+            <w xml:id="erpa-0707850">enfance</w>
+            <pc xml:id="erpa-0707860">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0707870">et</w>
+            <c> </c>
+            <w xml:id="erpa-0707880">ta</w>
+            <c> </c>
+            <w xml:id="erpa-0707890">grâce</w>
+            <c> </c>
+            <w xml:id="erpa-0707900">et</w>
+            <c> </c>
+            <w xml:id="erpa-0707910">tes</w>
+            <c> </c>
+            <w xml:id="erpa-0707920">charmes</w>
+            <pc xml:id="erpa-0707930">,</pc>
+         </l>
+         <l xml:id="erpa-l34130">
+            <w xml:id="erpa-0707940">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0707950">ton</w>
+            <c> </c>
+            <w xml:id="erpa-0707960">rire</w>
+            <c> </c>
+            <w xml:id="erpa-0707970">innocent</w>
+            <c> </c>
+            <w xml:id="erpa-0707980">et</w>
+            <c> </c>
+            <w xml:id="erpa-0707990">tes</w>
+            <c> </c>
+            <w xml:id="erpa-0708000">naïves</w>
+            <c> </c>
+            <w xml:id="erpa-0708010">larmes</w>
+            <pc xml:id="erpa-0708020">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34135">
+            <w xml:id="erpa-0708030">﻿Ton</w>
+            <c> </c>
+            <w xml:id="erpa-0708040">bonheur</w>
+            <c> </c>
+            <w xml:id="erpa-0708050">doux</w>
+            <c> </c>
+            <w xml:id="erpa-0708060">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708070">turbulent</w>
+            <pc xml:id="erpa-0708080">,</pc>
+         </l>
+         <l xml:id="erpa-l34140">
+            <w xml:id="erpa-0708090">Et</w>
+            <pc xml:id="erpa-0708100">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708110">loin</w>
+            <c> </c>
+            <w xml:id="erpa-0708120">des</w>
+            <c> </c>
+            <w xml:id="erpa-0708130">vastes</w>
+            <c> </c>
+            <w xml:id="erpa-0708140">cieux</w>
+            <pc xml:id="erpa-0708150">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708160">l’aile</w>
+            <c> </c>
+            <w xml:id="erpa-0708170">que</w>
+            <c> </c>
+            <w xml:id="erpa-0708180">tu</w>
+            <c> </c>
+            <w xml:id="erpa-0708190">reposes</w>
+            <pc xml:id="erpa-0708200">,</pc>
+         </l>
+         <l xml:id="erpa-l34145">
+            <w xml:id="erpa-0708210">Et</w>
+            <pc xml:id="erpa-0708220">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708230">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0708240">les</w>
+            <c> </c>
+            <w xml:id="erpa-0708250">jeux</w>
+            <c> </c>
+            <w xml:id="erpa-0708260">bruyants</w>
+            <pc xml:id="erpa-0708270">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708280">ta</w>
+            <c> </c>
+            <w xml:id="erpa-0708290">couronne</w>
+            <c> </c>
+            <w xml:id="erpa-0708300">de</w>
+            <c> </c>
+            <w xml:id="erpa-0708310">roses</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34150">
+            <w xml:id="erpa-0708320">﻿Que</w>
+            <c> </c>
+            <w xml:id="erpa-0708330">flétrirait</w>
+            <c> </c>
+            <w xml:id="erpa-0708340">son</w>
+            <c> </c>
+            <w xml:id="erpa-0708350">front</w>
+            <c> </c>
+            <w xml:id="erpa-0708360">brûlant</w>
+            <pc xml:id="erpa-0708370" unit="sentence">!</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05440">
+         <l xml:id="erpa-l34155">
+            <w xml:id="erpa-0708400">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0708410">accuse</w>
+            <c> </c>
+            <w xml:id="erpa-0708420">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708430">son</w>
+            <c> </c>
+            <w xml:id="erpa-0708440">siècle</w>
+            <pc xml:id="erpa-0708450">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708460">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708470">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0708480">chants</w>
+            <pc xml:id="erpa-0708490">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708500">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708510">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0708520">lyre</w>
+            <pc xml:id="erpa-0708530">,</pc>
+         </l>
+         <l xml:id="erpa-l34160">
+            <w xml:id="erpa-0708540">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0708550">la</w>
+            <c> </c>
+            <w xml:id="erpa-0708560">coupe</w>
+            <c> </c>
+            <w xml:id="erpa-0708570">enivrante</w>
+            <c> </c>
+            <w xml:id="erpa-0708580">où</w>
+            <pc xml:id="erpa-0708590">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708600">trompant</w>
+            <c> </c>
+            <w xml:id="erpa-0708610">son</w>
+            <c> </c>
+            <w xml:id="erpa-0708620">délire</w>
+            <pc xml:id="erpa-0708630">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34165">
+            <w xml:id="erpa-0708640">﻿La</w>
+            <c> </c>
+            <w xml:id="erpa-0708650">gloire</w>
+            <c> </c>
+            <w xml:id="erpa-0708660">verse</w>
+            <c> </c>
+            <w xml:id="erpa-0708670">tant</w>
+            <c> </c>
+            <w xml:id="erpa-0708680">de</w>
+            <c> </c>
+            <w xml:id="erpa-0708690">fiel</w>
+            <pc xml:id="erpa-0708700">,</pc>
+         </l>
+         <l xml:id="erpa-l34170">
+            <w xml:id="erpa-0708710">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0708720">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0708730">vœux</w>
+            <pc xml:id="erpa-0708740">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708750">poursuivant</w>
+            <c> </c>
+            <w xml:id="erpa-0708760">des</w>
+            <c> </c>
+            <w xml:id="erpa-0708770">promesses</w>
+            <c> </c>
+            <w xml:id="erpa-0708780">funestes</w>
+            <pc xml:id="erpa-0708790">,</pc>
+         </l>
+         <l xml:id="erpa-l34175">
+            <w xml:id="erpa-0708800">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0708810">son</w>
+            <c> </c>
+            <w xml:id="erpa-0708820">cœur</w>
+            <pc xml:id="erpa-0708830">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708840">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708850">la</w>
+            <c> </c>
+            <w xml:id="erpa-0708860">Muse</w>
+            <pc xml:id="erpa-0708870">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0708880">et</w>
+            <c> </c>
+            <w xml:id="erpa-0708890">tous</w>
+            <c> </c>
+            <w xml:id="erpa-0708900">ces</w>
+            <c> </c>
+            <w xml:id="erpa-0708910">dons</w>
+            <c> </c>
+            <w xml:id="erpa-0708920">célestes</w>
+            <pc xml:id="erpa-0708930">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34180">
+            <w xml:id="erpa-0708940">﻿Hélas</w>
+            <pc xml:id="erpa-0708950">!</pc>
+            <c> </c>
+            <w xml:id="erpa-0708960">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0708970">ne</w>
+            <c> </c>
+            <w xml:id="erpa-0708980">sont</w>
+            <c> </c>
+            <w xml:id="erpa-0708990">pas</w>
+            <c> </c>
+            <w xml:id="erpa-0709000">le</w>
+            <c> </c>
+            <w xml:id="erpa-0709010">ciel</w>
+            <pc xml:id="erpa-0709020" unit="sentence">!</pc>
+         </l>
+      </lg>
+   </lg>
+   <lg xml:id="erpa-s05445">
+      <head xml:id="erpa-h01145">
+         <w xml:id="erpa-0709060">II</w>
+      </head>
+      <lg xml:id="erpa-s05450">
+         <l xml:id="erpa-l34185">
+            <w xml:id="erpa-0709090">Ah</w>
+            <pc xml:id="erpa-0709095">!</pc>
+            <c> </c>
+            <w xml:id="erpa-0709100">si</w>
+            <c> </c>
+            <w xml:id="erpa-0709110">du</w>
+            <c> </c>
+            <w xml:id="erpa-0709120">moins</w>
+            <pc xml:id="erpa-0709130">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0709140">couché</w>
+            <c> </c>
+            <w xml:id="erpa-0709150">sur</w>
+            <c> </c>
+            <w xml:id="erpa-0709160">le</w>
+            <c> </c>
+            <w xml:id="erpa-0709170">char</w>
+            <c> </c>
+            <w xml:id="erpa-0709180">de</w>
+            <c> </c>
+            <w xml:id="erpa-0709190">la</w>
+            <c> </c>
+            <w xml:id="erpa-0709200">vie</w>
+            <pc xml:id="erpa-0709210">,</pc>
+         </l>
+         <l xml:id="erpa-l34190">
+            <w xml:id="erpa-0709220">L’hymne</w>
+            <c> </c>
+            <w xml:id="erpa-0709230">de</w>
+            <c> </c>
+            <w xml:id="erpa-0709240">son</w>
+            <c> </c>
+            <w xml:id="erpa-0709250">triomphe</w>
+            <c> </c>
+            <w xml:id="erpa-0709260">et</w>
+            <c> </c>
+            <w xml:id="erpa-0709270">les</w>
+            <c> </c>
+            <w xml:id="erpa-0709280">cris</w>
+            <c> </c>
+            <w xml:id="erpa-0709290">de</w>
+            <c> </c>
+            <w xml:id="erpa-0709300">l’envie</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34195">
+            <w xml:id="erpa-0709310">﻿Passaient</w>
+            <c> </c>
+            <w xml:id="erpa-0709320">sans</w>
+            <c> </c>
+            <w xml:id="erpa-0709330">troubler</w>
+            <c> </c>
+            <w xml:id="erpa-0709340">son</w>
+            <c> </c>
+            <w xml:id="erpa-0709350">sommeil</w>
+            <pc xml:id="erpa-0709360" unit="sentence">!</pc>
+         </l>
+         <l xml:id="erpa-l34200">
+            <w xml:id="erpa-0709370">S’il</w>
+            <c> </c>
+            <w xml:id="erpa-0709380">pouvait</w>
+            <c> </c>
+            <w xml:id="erpa-0709390">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0709400">l’oubli</w>
+            <c> </c>
+            <w xml:id="erpa-0709410">préparer</w>
+            <c> </c>
+            <w xml:id="erpa-0709420">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0709430">mémoire</w>
+            <pc xml:id="erpa-0709440" unit="sentence">!</pc>
+         </l>
+         <l xml:id="erpa-l34205">
+            <w xml:id="erpa-0709450">Ou</w>
+            <pc xml:id="erpa-0709460">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0709470">voilé</w>
+            <c> </c>
+            <w xml:id="erpa-0709480">de</w>
+            <c> </c>
+            <w xml:id="erpa-0709490">rayons</w>
+            <pc xml:id="erpa-0709500">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0709510">se</w>
+            <c> </c>
+            <w xml:id="erpa-0709520">cacher</w>
+            <c> </c>
+            <w xml:id="erpa-0709530">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0709540">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0709550">gloire</w>
+            <pc xml:id="erpa-0709560">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34210">
+            <w xml:id="erpa-0709570">﻿Comme</w>
+            <c> </c>
+            <w xml:id="erpa-0709580">un</w>
+            <c> </c>
+            <w xml:id="erpa-0709590">ange</w>
+            <c> </c>
+            <w xml:id="erpa-0709600">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0709610">le</w>
+            <c> </c>
+            <w xml:id="erpa-0709620">soleil</w>
+            <pc xml:id="erpa-0709630" unit="sentence">!</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05455">
+         <l xml:id="erpa-l34215">
+            <w xml:id="erpa-0709660">Mais</w>
+            <c> </c>
+            <w xml:id="erpa-0709670">sans</w>
+            <c> </c>
+            <w xml:id="erpa-0709680">cesse</w>
+            <c> </c>
+            <w xml:id="erpa-0709690">il</w>
+            <c> </c>
+            <w xml:id="erpa-0709700">faut</w>
+            <c> </c>
+            <w xml:id="erpa-0709710">suivre</w>
+            <pc xml:id="erpa-0709720">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0709730">en</w>
+            <c> </c>
+            <w xml:id="erpa-0709740">la</w>
+            <c> </c>
+            <w xml:id="erpa-0709750">commune</w>
+            <c> </c>
+            <w xml:id="erpa-0709760">arène</w>
+            <pc xml:id="erpa-0709770">,</pc>
+         </l>
+         <l xml:id="erpa-l34220">
+            <w xml:id="erpa-0709780">Le</w>
+            <c> </c>
+            <w xml:id="erpa-0709790">flot</w>
+            <c> </c>
+            <w xml:id="erpa-0709800">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0709810">le</w>
+            <c> </c>
+            <w xml:id="erpa-0709820">repousse</w>
+            <c> </c>
+            <w xml:id="erpa-0709830">et</w>
+            <c> </c>
+            <w xml:id="erpa-0709840">le</w>
+            <c> </c>
+            <w xml:id="erpa-0709850">flot</w>
+            <c> </c>
+            <w xml:id="erpa-0709860">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0709870">l’entraîne</w>
+            <pc xml:id="erpa-0709880">!</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34225">
+            <w xml:id="erpa-0709890">﻿</w>
+            <pc unit="sentence" xml:id="erpa-0709890-eos"/>
+            <c> </c>
+            <w xml:id="erpa-0709900">Les</w>
+            <c> </c>
+            <w xml:id="erpa-0709910">hommes</w>
+            <c> </c>
+            <w xml:id="erpa-0709920">troublent</w>
+            <c> </c>
+            <w xml:id="erpa-0709930">son</w>
+            <c> </c>
+            <w xml:id="erpa-0709940">chemin</w>
+            <pc xml:id="erpa-0709950" unit="sentence">!</pc>
+         </l>
+         <l xml:id="erpa-l34230">
+            <w xml:id="erpa-0709960">Sa</w>
+            <c> </c>
+            <w xml:id="erpa-0709970">voix</w>
+            <c> </c>
+            <w xml:id="erpa-0709980">grave</w>
+            <c> </c>
+            <w xml:id="erpa-0709990">se</w>
+            <c> </c>
+            <w xml:id="erpa-0710000">perd</w>
+            <c> </c>
+            <w xml:id="erpa-0710010">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0710020">leurs</w>
+            <c> </c>
+            <w xml:id="erpa-0710030">vaines</w>
+            <c> </c>
+            <w xml:id="erpa-0710040">paroles</w>
+            <pc xml:id="erpa-0710050">,</pc>
+         </l>
+         <l xml:id="erpa-l34235">
+            <w xml:id="erpa-0710060">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0710070">leur</w>
+            <c> </c>
+            <w xml:id="erpa-0710080">fol</w>
+            <c> </c>
+            <w xml:id="erpa-0710090">orgueil</w>
+            <c> </c>
+            <w xml:id="erpa-0710100">mêle</w>
+            <c> </c>
+            <w xml:id="erpa-0710110">à</w>
+            <c> </c>
+            <w xml:id="erpa-0710120">leurs</w>
+            <c> </c>
+            <w xml:id="erpa-0710130">jouets</w>
+            <c> </c>
+            <w xml:id="erpa-0710140">frivoles</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34240">
+            <w xml:id="erpa-0710150">﻿Le</w>
+            <c> </c>
+            <w xml:id="erpa-0710160">sceptre</w>
+            <c> </c>
+            <w xml:id="erpa-0710170">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0710180">pèse</w>
+            <c> </c>
+            <w xml:id="erpa-0710190">à</w>
+            <c> </c>
+            <w xml:id="erpa-0710200">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0710210">main</w>
+            <pc xml:id="erpa-0710220" unit="sentence">!</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05460">
+         <l xml:id="erpa-l34245">
+            <w xml:id="erpa-0710250">Pourquoi</w>
+            <c> </c>
+            <w xml:id="erpa-0710260">traîner</w>
+            <c> </c>
+            <w xml:id="erpa-0710270">ce</w>
+            <c> </c>
+            <w xml:id="erpa-0710280">roi</w>
+            <c> </c>
+            <w xml:id="erpa-0710290">si</w>
+            <c> </c>
+            <w xml:id="erpa-0710300">loin</w>
+            <c> </c>
+            <w xml:id="erpa-0710310">de</w>
+            <c> </c>
+            <w xml:id="erpa-0710320">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0710330">royaumes</w>
+            <pc xml:id="erpa-0710340" unit="sentence">?</pc>
+         </l>
+         <l xml:id="erpa-l34250">
+            <w xml:id="erpa-0710350">Qu’importe</w>
+            <c> </c>
+            <w xml:id="erpa-0710360">à</w>
+            <c> </c>
+            <w xml:id="erpa-0710370">ce</w>
+            <c> </c>
+            <w xml:id="erpa-0710380">géant</w>
+            <c> </c>
+            <w xml:id="erpa-0710390">un</w>
+            <c> </c>
+            <w xml:id="erpa-0710400">cortège</w>
+            <c> </c>
+            <w xml:id="erpa-0710410">d’atomes</w>
+            <pc xml:id="erpa-0710420">?</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34255">
+            <w xml:id="erpa-0710430">﻿</w>
+            <pc unit="sentence" xml:id="erpa-0710430-eos"/>
+            <c> </c>
+            <w xml:id="erpa-0710440">Fils</w>
+            <c> </c>
+            <w xml:id="erpa-0710450">du</w>
+            <c> </c>
+            <w xml:id="erpa-0710460">monde</w>
+            <pc xml:id="erpa-0710470">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0710480">c’est</w>
+            <c> </c>
+            <w xml:id="erpa-0710490">vous</w>
+            <c> </c>
+            <w xml:id="erpa-0710500">qu’il</w>
+            <c> </c>
+            <w xml:id="erpa-0710510">fuit</w>
+            <pc xml:id="erpa-0710520" unit="sentence">.</pc>
+         </l>
+         <l xml:id="erpa-l34260">
+            <w xml:id="erpa-0710530">Que</w>
+            <c> </c>
+            <w xml:id="erpa-0710540">fait</w>
+            <c> </c>
+            <w xml:id="erpa-0710550">à</w>
+            <c> </c>
+            <w xml:id="erpa-0710560">l’immortel</w>
+            <c> </c>
+            <w xml:id="erpa-0710570">votre</w>
+            <c> </c>
+            <w xml:id="erpa-0710580">éphémère</w>
+            <c> </c>
+            <w xml:id="erpa-0710590">empire</w>
+            <pc xml:id="erpa-0710600" unit="sentence">?</pc>
+         </l>
+         <l xml:id="erpa-l34265">
+            <w xml:id="erpa-0710610">Sans</w>
+            <c> </c>
+            <w xml:id="erpa-0710620">les</w>
+            <c> </c>
+            <w xml:id="erpa-0710630">chants</w>
+            <c> </c>
+            <w xml:id="erpa-0710640">de</w>
+            <c> </c>
+            <w xml:id="erpa-0710650">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0710660">voix</w>
+            <pc xml:id="erpa-0710670">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0710680">sans</w>
+            <c> </c>
+            <w xml:id="erpa-0710690">les</w>
+            <c> </c>
+            <w xml:id="erpa-0710700">sons</w>
+            <c> </c>
+            <w xml:id="erpa-0710710">de</w>
+            <c> </c>
+            <w xml:id="erpa-0710720">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0710730">lyre</w>
+            <pc xml:id="erpa-0710740">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34270">
+            <w xml:id="erpa-0710750">﻿N’avez-vous</w>
+            <c> </c>
+            <w xml:id="erpa-0710760">point</w>
+            <c> </c>
+            <w xml:id="erpa-0710770">assez</w>
+            <c> </c>
+            <w xml:id="erpa-0710780">de</w>
+            <c> </c>
+            <w xml:id="erpa-0710790">bruit</w>
+            <pc xml:id="erpa-0710800" unit="sentence">?</pc>
+         </l>
+      </lg>
+   </lg>
+   <lg xml:id="erpa-s05465">
+      <head xml:id="erpa-h01150">
+         <w xml:id="erpa-0710840">III</w>
+      </head>
+      <lg xml:id="erpa-s05470">
+         <l xml:id="erpa-l34275">
+            <w xml:id="erpa-0710870">Laissez-le</w>
+            <c> </c>
+            <w xml:id="erpa-0710880">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0710890">son</w>
+            <c> </c>
+            <w xml:id="erpa-0710900">ombre</w>
+            <c> </c>
+            <w xml:id="erpa-0710910">où</w>
+            <c> </c>
+            <w xml:id="erpa-0710920">descend</w>
+            <c> </c>
+            <w xml:id="erpa-0710930">la</w>
+            <c> </c>
+            <w xml:id="erpa-0710940">lumière</w>
+            <pc xml:id="erpa-0710950" unit="sentence">.</pc>
+            <c> </c>
+            <pc xml:id="erpa-0710960">—</pc>
+         </l>
+         <l xml:id="erpa-l34280">
+            <w xml:id="erpa-0710970">Savez-vous</w>
+            <c> </c>
+            <w xml:id="erpa-0710980">qu’une</w>
+            <c> </c>
+            <w xml:id="erpa-0710990">Muse</w>
+            <pc xml:id="erpa-0711000">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711010">épurant</w>
+            <c> </c>
+            <w xml:id="erpa-0711020">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0711030">poussière</w>
+            <pc xml:id="erpa-0711040">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34285">
+            <w xml:id="erpa-0711050">﻿Y</w>
+            <c> </c>
+            <w xml:id="erpa-0711060">charme</w>
+            <c> </c>
+            <w xml:id="erpa-0711070">en</w>
+            <c> </c>
+            <w xml:id="erpa-0711080">secret</w>
+            <c> </c>
+            <w xml:id="erpa-0711090">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0711100">ennuis</w>
+            <pc xml:id="erpa-0711110" unit="sentence">?</pc>
+         </l>
+         <l xml:id="erpa-l34290">
+            <w xml:id="erpa-0711120">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0711130">que</w>
+            <pc xml:id="erpa-0711140">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711150">laissant</w>
+            <c> </c>
+            <w xml:id="erpa-0711160">pour</w>
+            <c> </c>
+            <w xml:id="erpa-0711170">lui</w>
+            <c> </c>
+            <w xml:id="erpa-0711180">les</w>
+            <c> </c>
+            <w xml:id="erpa-0711190">éternelles</w>
+            <c> </c>
+            <w xml:id="erpa-0711200">fêtes</w>
+            <pc xml:id="erpa-0711210">,</pc>
+         </l>
+         <l xml:id="erpa-l34295">
+            <w xml:id="erpa-0711220">La</w>
+            <c> </c>
+            <w xml:id="erpa-0711230">colombe</w>
+            <c> </c>
+            <w xml:id="erpa-0711240">du</w>
+            <c> </c>
+            <w xml:id="erpa-0711250">Christ</w>
+            <c> </c>
+            <w xml:id="erpa-0711260">et</w>
+            <c> </c>
+            <w xml:id="erpa-0711270">l’aigle</w>
+            <c> </c>
+            <w xml:id="erpa-0711280">des</w>
+            <c> </c>
+            <w xml:id="erpa-0711290">Prophètes</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34300">
+            <w xml:id="erpa-0711300">﻿Souvent</w>
+            <c> </c>
+            <w xml:id="erpa-0711310">y</w>
+            <c> </c>
+            <w xml:id="erpa-0711320">visitent</w>
+            <c> </c>
+            <w xml:id="erpa-0711330">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0711340">nuits</w>
+            <pc xml:id="erpa-0711350" unit="sentence">?</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05475">
+         <l xml:id="erpa-l34305">
+            <w xml:id="erpa-0711380">Sa</w>
+            <c> </c>
+            <w xml:id="erpa-0711390">veille</w>
+            <c> </c>
+            <w xml:id="erpa-0711400">redoutable</w>
+            <pc xml:id="erpa-0711410">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711420">en</w>
+            <c> </c>
+            <w xml:id="erpa-0711430">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0711440">visions</w>
+            <c> </c>
+            <w xml:id="erpa-0711450">saintes</w>
+            <pc xml:id="erpa-0711460">,</pc>
+         </l>
+         <l xml:id="erpa-l34310">
+            <w xml:id="erpa-0711470">Voit</w>
+            <c> </c>
+            <w xml:id="erpa-0711480">les</w>
+            <c> </c>
+            <w xml:id="erpa-0711490">soleils</w>
+            <c> </c>
+            <w xml:id="erpa-0711500">naissants</w>
+            <c> </c>
+            <w xml:id="erpa-0711510">et</w>
+            <c> </c>
+            <w xml:id="erpa-0711520">les</w>
+            <c> </c>
+            <w xml:id="erpa-0711530">sphères</w>
+            <c> </c>
+            <w xml:id="erpa-0711540">éteintes</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34315">
+            <w xml:id="erpa-0711550">﻿Passer</w>
+            <c> </c>
+            <w xml:id="erpa-0711560">en</w>
+            <c> </c>
+            <w xml:id="erpa-0711570">foule</w>
+            <c> </c>
+            <w xml:id="erpa-0711580">au</w>
+            <c> </c>
+            <w xml:id="erpa-0711590">fond</w>
+            <c> </c>
+            <w xml:id="erpa-0711600">du</w>
+            <c> </c>
+            <w xml:id="erpa-0711610">ciel</w>
+            <pc xml:id="erpa-0711620">;</pc>
+         </l>
+         <l xml:id="erpa-l34320">
+            <w xml:id="erpa-0711630">Et</w>
+            <pc xml:id="erpa-0711640">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711650">suivant</w>
+            <c> </c>
+            <w xml:id="erpa-0711660">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0711670">l’espace</w>
+            <c> </c>
+            <w xml:id="erpa-0711680">un</w>
+            <c> </c>
+            <w xml:id="erpa-0711690">chœur</w>
+            <c> </c>
+            <w xml:id="erpa-0711700">brûlant</w>
+            <c> </c>
+            <w xml:id="erpa-0711710">d’archanges</w>
+            <pc xml:id="erpa-0711720">,</pc>
+         </l>
+         <l xml:id="erpa-l34325">
+            <w xml:id="erpa-0711730">Cherche</w>
+            <pc xml:id="erpa-0711740">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711750">aux</w>
+            <c> </c>
+            <w xml:id="erpa-0711760">mondes</w>
+            <c> </c>
+            <w xml:id="erpa-0711770">lointains</w>
+            <pc xml:id="erpa-0711780">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0711790">quelles</w>
+            <c> </c>
+            <w xml:id="erpa-0711800">formes</w>
+            <c> </c>
+            <w xml:id="erpa-0711810">étranges</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34330">
+            <w xml:id="erpa-0711820">﻿Y</w>
+            <c> </c>
+            <w xml:id="erpa-0711830">revêt</w>
+            <c> </c>
+            <w xml:id="erpa-0711840">l’Être</w>
+            <c> </c>
+            <w xml:id="erpa-0711850">universel</w>
+            <pc xml:id="erpa-0711860" unit="sentence">.</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05480">
+         <l xml:id="erpa-l34335">
+            <w xml:id="erpa-0711890">Savez-vous</w>
+            <c> </c>
+            <w xml:id="erpa-0711900">que</w>
+            <c> </c>
+            <w xml:id="erpa-0711910">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0711920">yeux</w>
+            <c> </c>
+            <w xml:id="erpa-0711930">ont</w>
+            <c> </c>
+            <w xml:id="erpa-0711940">des</w>
+            <c> </c>
+            <w xml:id="erpa-0711950">regards</w>
+            <c> </c>
+            <w xml:id="erpa-0711960">de</w>
+            <c> </c>
+            <w xml:id="erpa-0711970">flamme</w>
+            <pc xml:id="erpa-0711980" unit="sentence">?</pc>
+         </l>
+         <l xml:id="erpa-l34340">
+            <w xml:id="erpa-0711990">Savez-vous</w>
+            <c> </c>
+            <w xml:id="erpa-0712000">que</w>
+            <c> </c>
+            <w xml:id="erpa-0712010">le</w>
+            <c> </c>
+            <w xml:id="erpa-0712020">voile</w>
+            <pc xml:id="erpa-0712030">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712040">étendu</w>
+            <c> </c>
+            <w xml:id="erpa-0712050">sur</w>
+            <c> </c>
+            <w xml:id="erpa-0712060">son</w>
+            <c> </c>
+            <w xml:id="erpa-0712070">âme</w>
+            <pc xml:id="erpa-0712080">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34345">
+            <w xml:id="erpa-0712090">﻿Ne</w>
+            <c> </c>
+            <w xml:id="erpa-0712100">se</w>
+            <c> </c>
+            <w xml:id="erpa-0712110">lève</w>
+            <c> </c>
+            <w xml:id="erpa-0712120">jamais</w>
+            <c> </c>
+            <w xml:id="erpa-0712130">en</w>
+            <c> </c>
+            <w xml:id="erpa-0712140">vain</w>
+            <pc xml:id="erpa-0712150" unit="sentence">?</pc>
+         </l>
+         <l xml:id="erpa-l34350">
+            <w xml:id="erpa-0712160">De</w>
+            <c> </c>
+            <w xml:id="erpa-0712170">lumière</w>
+            <c> </c>
+            <w xml:id="erpa-0712180">dorée</w>
+            <c> </c>
+            <w xml:id="erpa-0712190">et</w>
+            <c> </c>
+            <w xml:id="erpa-0712200">de</w>
+            <c> </c>
+            <w xml:id="erpa-0712210">flammes</w>
+            <c> </c>
+            <w xml:id="erpa-0712220">rougie</w>
+            <pc xml:id="erpa-0712230">,</pc>
+         </l>
+         <l xml:id="erpa-l34355">
+            <w xml:id="erpa-0712240">Son</w>
+            <c> </c>
+            <w xml:id="erpa-0712250">aile</w>
+            <pc xml:id="erpa-0712260">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712270">en</w>
+            <c> </c>
+            <w xml:id="erpa-0712280">un</w>
+            <c> </c>
+            <w xml:id="erpa-0712290">instant</w>
+            <pc xml:id="erpa-0712300">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712310">de</w>
+            <c> </c>
+            <w xml:id="erpa-0712320">l’infernale</w>
+            <c> </c>
+            <w xml:id="erpa-0712330">orgie</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34360">
+            <w xml:id="erpa-0712340">﻿Peut</w>
+            <c> </c>
+            <w xml:id="erpa-0712350">monter</w>
+            <c> </c>
+            <w xml:id="erpa-0712360">au</w>
+            <c> </c>
+            <w xml:id="erpa-0712370">banquet</w>
+            <c> </c>
+            <w xml:id="erpa-0712380">divin</w>
+            <pc xml:id="erpa-0712390" unit="sentence">.</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05485">
+         <l xml:id="erpa-l34365">
+            <w xml:id="erpa-0712420">Laissez</w>
+            <c> </c>
+            <w xml:id="erpa-0712430">donc</w>
+            <c> </c>
+            <w xml:id="erpa-0712440">loin</w>
+            <c> </c>
+            <w xml:id="erpa-0712450">de</w>
+            <c> </c>
+            <w xml:id="erpa-0712460">vous</w>
+            <pc xml:id="erpa-0712470">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712480">ô</w>
+            <c> </c>
+            <w xml:id="erpa-0712490">mortels</w>
+            <c> </c>
+            <w xml:id="erpa-0712500">téméraires</w>
+            <pc xml:id="erpa-0712510">,</pc>
+         </l>
+         <l xml:id="erpa-l34370">
+            <w xml:id="erpa-0712520">Celui</w>
+            <c> </c>
+            <w xml:id="erpa-0712530">que</w>
+            <c> </c>
+            <w xml:id="erpa-0712540">le</w>
+            <c> </c>
+            <w xml:id="erpa-0712550">Seigneur</w>
+            <c> </c>
+            <w xml:id="erpa-0712560">marqua</w>
+            <pc xml:id="erpa-0712570">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712580">parmi</w>
+            <c> </c>
+            <w xml:id="erpa-0712590">ses</w>
+            <c> </c>
+            <w xml:id="erpa-0712600">frères</w>
+            <pc xml:id="erpa-0712610">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34375">
+            <w xml:id="erpa-0712620">﻿De</w>
+            <c> </c>
+            <w xml:id="erpa-0712630">ce</w>
+            <c> </c>
+            <w xml:id="erpa-0712640">signe</w>
+            <c> </c>
+            <w xml:id="erpa-0712650">funeste</w>
+            <c> </c>
+            <w xml:id="erpa-0712660">et</w>
+            <c> </c>
+            <w xml:id="erpa-0712670">beau</w>
+            <pc xml:id="erpa-0712680">,</pc>
+         </l>
+         <l xml:id="erpa-l34380">
+            <w xml:id="erpa-0712690">Et</w>
+            <c> </c>
+            <w xml:id="erpa-0712700">dont</w>
+            <c> </c>
+            <w xml:id="erpa-0712710">l’œil</w>
+            <c> </c>
+            <w xml:id="erpa-0712720">entrevoit</w>
+            <c> </c>
+            <w xml:id="erpa-0712730">plus</w>
+            <c> </c>
+            <w xml:id="erpa-0712740">de</w>
+            <c> </c>
+            <w xml:id="erpa-0712750">mystères</w>
+            <c> </c>
+            <w xml:id="erpa-0712760">sombres</w>
+         </l>
+         <l xml:id="erpa-l34385">
+            <w xml:id="erpa-0712770">Que</w>
+            <c> </c>
+            <w xml:id="erpa-0712780">les</w>
+            <c> </c>
+            <w xml:id="erpa-0712790">morts</w>
+            <c> </c>
+            <w xml:id="erpa-0712800">effrayés</w>
+            <c> </c>
+            <w xml:id="erpa-0712810">n’en</w>
+            <c> </c>
+            <w xml:id="erpa-0712820">lisent</w>
+            <pc xml:id="erpa-0712830">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0712840">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0712850">les</w>
+            <c> </c>
+            <w xml:id="erpa-0712860">ombres</w>
+            <pc xml:id="erpa-0712870">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34390">
+            <w xml:id="erpa-0712880">﻿Sous</w>
+            <c> </c>
+            <w xml:id="erpa-0712890">la</w>
+            <c> </c>
+            <w xml:id="erpa-0712900">pierre</w>
+            <c> </c>
+            <w xml:id="erpa-0712910">de</w>
+            <c> </c>
+            <w xml:id="erpa-0712920">leur</w>
+            <c> </c>
+            <w xml:id="erpa-0712930">tombeau</w>
+            <pc xml:id="erpa-0712940" unit="sentence">!</pc>
+         </l>
+      </lg>
+   </lg>
+   <lg xml:id="erpa-s05490">
+      <head xml:id="erpa-h01155">
+         <w xml:id="erpa-0712980">IV</w>
+      </head>
+      <lg xml:id="erpa-s05495">
+         <l xml:id="erpa-l34395">
+            <w xml:id="erpa-0713010">Un</w>
+            <c> </c>
+            <w xml:id="erpa-0713020">jour</w>
+            <c> </c>
+            <w xml:id="erpa-0713030">vient</w>
+            <c> </c>
+            <w xml:id="erpa-0713040">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0713050">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0713060">vie</w>
+            <pc xml:id="erpa-0713070">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0713080">où</w>
+            <c> </c>
+            <w xml:id="erpa-0713090">la</w>
+            <c> </c>
+            <w xml:id="erpa-0713100">Muse</w>
+            <c> </c>
+            <w xml:id="erpa-0713110">elle-même</w>
+            <pc xml:id="erpa-0713120">,</pc>
+         </l>
+         <l xml:id="erpa-l34400">
+            <w xml:id="erpa-0713130">D’un</w>
+            <c> </c>
+            <w xml:id="erpa-0713140">sacerdoce</w>
+            <c> </c>
+            <w xml:id="erpa-0713150">auguste</w>
+            <c> </c>
+            <w xml:id="erpa-0713160">armant</w>
+            <c> </c>
+            <w xml:id="erpa-0713170">son</w>
+            <c> </c>
+            <w xml:id="erpa-0713180">luth</w>
+            <c> </c>
+            <w xml:id="erpa-0713190">suprême</w>
+            <pc xml:id="erpa-0713200">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34405">
+            <w xml:id="erpa-0713210">﻿L’envoie</w>
+            <c> </c>
+            <w xml:id="erpa-0713220">au</w>
+            <c> </c>
+            <w xml:id="erpa-0713230">monde</w>
+            <c> </c>
+            <w xml:id="erpa-0713240">ivre</w>
+            <c> </c>
+            <w xml:id="erpa-0713250">de</w>
+            <c> </c>
+            <w xml:id="erpa-0713260">sang</w>
+            <pc xml:id="erpa-0713270">,</pc>
+         </l>
+         <l xml:id="erpa-l34410">
+            <w xml:id="erpa-0713280">Afin</w>
+            <c> </c>
+            <w xml:id="erpa-0713290">que</w>
+            <pc xml:id="erpa-0713300">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0713310">nous</w>
+            <c> </c>
+            <w xml:id="erpa-0713320">sauvant</w>
+            <c> </c>
+            <w xml:id="erpa-0713330">de</w>
+            <c> </c>
+            <w xml:id="erpa-0713340">notre</w>
+            <c> </c>
+            <w xml:id="erpa-0713350">propre</w>
+            <c> </c>
+            <w xml:id="erpa-0713360">audace</w>
+            <pc xml:id="erpa-0713370">,</pc>
+         </l>
+         <l xml:id="erpa-l34415">
+            <w xml:id="erpa-0713380">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0713390">apporte</w>
+            <c> </c>
+            <w xml:id="erpa-0713400">d’en</w>
+            <c> </c>
+            <w xml:id="erpa-0713410">haut</w>
+            <c> </c>
+            <w xml:id="erpa-0713420">à</w>
+            <c> </c>
+            <w xml:id="erpa-0713430">l’homme</w>
+            <c> </c>
+            <w xml:id="erpa-0713440">qui</w>
+            <c> </c>
+            <w xml:id="erpa-0713450">menace</w>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34420">
+            <w xml:id="erpa-0713460">﻿La</w>
+            <c> </c>
+            <w xml:id="erpa-0713470">prière</w>
+            <c> </c>
+            <w xml:id="erpa-0713480">du</w>
+            <c> </c>
+            <w xml:id="erpa-0713490">Tout-Puissant</w>
+            <pc xml:id="erpa-0713500" unit="sentence">.</pc>
+         </l>
+      </lg>
+      <lg xml:id="erpa-s05500">
+         <l xml:id="erpa-l34425">
+            <w xml:id="erpa-0713530">Un</w>
+            <c> </c>
+            <w xml:id="erpa-0713540">formidable</w>
+            <c> </c>
+            <w xml:id="erpa-0713550">esprit</w>
+            <c> </c>
+            <w xml:id="erpa-0713560">descend</w>
+            <c> </c>
+            <w xml:id="erpa-0713570">dans</w>
+            <c> </c>
+            <w xml:id="erpa-0713580">sa</w>
+            <c> </c>
+            <w xml:id="erpa-0713590">pensée</w>
+            <pc xml:id="erpa-0713600" unit="sentence">.</pc>
+         </l>
+         <l xml:id="erpa-l34430">
+            <w xml:id="erpa-0713610">Il</w>
+            <c> </c>
+            <w xml:id="erpa-0713620">paraît</w>
+            <pc xml:id="erpa-0713630">;</pc>
+            <c> </c>
+            <w xml:id="erpa-0713640">et</w>
+            <c> </c>
+            <w xml:id="erpa-0713650">soudain</w>
+            <pc xml:id="erpa-0713660">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0713670">en</w>
+            <c> </c>
+            <w xml:id="erpa-0713680">éclairs</w>
+            <c> </c>
+            <w xml:id="erpa-0713690">élancée</w>
+            <pc xml:id="erpa-0713700">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34435">
+            <w xml:id="erpa-0713710">﻿Sa</w>
+            <c> </c>
+            <w xml:id="erpa-0713720">parole</w>
+            <c> </c>
+            <w xml:id="erpa-0713730">luit</w>
+            <c> </c>
+            <w xml:id="erpa-0713740">comme</w>
+            <c> </c>
+            <w xml:id="erpa-0713750">un</w>
+            <c> </c>
+            <w xml:id="erpa-0713760">feu</w>
+            <pc xml:id="erpa-0713770" unit="sentence">.</pc>
+         </l>
+         <l xml:id="erpa-l34440">
+            <w xml:id="erpa-0713780">Les</w>
+            <c> </c>
+            <w xml:id="erpa-0713790">peuples</w>
+            <c> </c>
+            <w xml:id="erpa-0713800">prosternés</w>
+            <c> </c>
+            <w xml:id="erpa-0713810">en</w>
+            <c> </c>
+            <w xml:id="erpa-0713820">foule</w>
+            <c> </c>
+            <w xml:id="erpa-0713830">l’environnent</w>
+            <pc xml:id="erpa-0713840">;</pc>
+         </l>
+         <l xml:id="erpa-l34445">
+            <w xml:id="erpa-0713850">Sina</w>
+            <c> </c>
+            <w xml:id="erpa-0713860">mystérieux</w>
+            <pc xml:id="erpa-0713870">,</pc>
+            <c> </c>
+            <w xml:id="erpa-0713880">les</w>
+            <c> </c>
+            <w xml:id="erpa-0713890">foudres</w>
+            <c> </c>
+            <w xml:id="erpa-0713900">le</w>
+            <c> </c>
+            <w xml:id="erpa-0713910">couronnent</w>
+            <pc xml:id="erpa-0713920">,</pc>
+         </l>
+         <l rendition="#h_6" xml:id="erpa-l34450">
+            <w xml:id="erpa-0713930">﻿Et</w>
+            <c> </c>
+            <w xml:id="erpa-0713940">son</w>
+            <c> </c>
+            <w xml:id="erpa-0713950">front</w>
+            <c> </c>
+            <w xml:id="erpa-0713960">porte</w>
+            <c> </c>
+            <w xml:id="erpa-0713970">tout</w>
+            <c> </c>
+            <w xml:id="erpa-0713980">un</w>
+            <c> </c>
+            <w xml:id="erpa-0713990">Dieu</w>
+            <pc xml:id="erpa-0714000" unit="sentence">!</pc>
+         </l>
+      </lg>
+   </lg>
+</div>
