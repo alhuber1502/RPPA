@@ -1,0 +1,2069 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#translation_pol"
+     corresp="#work01000"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text01410"
+     xml:lang="eng">
+   <link target="#pers00463" type="author"/>
+   <link target="#pers00832" type="translator"/>
+   <link target="#pers00857" type="translator"/>
+   <link target="#text01409" type="translation"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="pftm-n00510"/>
+   <head type="main" xml:lang="eng" xml:id="pftm-h00485">
+      <w xml:id="pftm-140300">Chopin’s</w>
+      <c> </c>
+      <w xml:id="pftm-140310">piano</w>
+   </head>
+   <epigraph xml:id="pftm-div00210">
+      <p xml:id="pftm-s01050">
+         <hi rend="italic">
+            <w xml:id="pftm-140350">La</w>
+            <c> </c>
+            <w xml:id="pftm-140360">musique</w>
+            <c> </c>
+            <w xml:id="pftm-140370">est</w>
+            <c> </c>
+            <w xml:id="pftm-140380">une</w>
+            <c> </c>
+            <w xml:id="pftm-140390">chose</w>
+            <c> </c>
+            <w xml:id="pftm-140400">étrange</w>
+            <pc xml:id="pftm-140410" unit="sentence">!</pc>
+            <c> </c>
+         </hi>
+      </p>
+      <bibl xml:id="pftm-div00215">
+         <pc xml:id="pftm-140440">—</pc>
+         <c> </c>
+         <w xml:id="pftm-140450">BYRON</w>
+         <pc unit="sentence" xml:id="pftm-140450-eos"/>
+      </bibl>
+   </epigraph>
+   <epigraph xml:id="pftm-div00220">
+      <p xml:id="pftm-s01055">
+         <hi rend="italic">
+            <w xml:id="pftm-140490">L’arte</w>
+            <pc xml:id="pftm-140500">?</pc>
+            <c> </c>
+            <pc xml:id="pftm-140510">...</pc>
+            <c> </c>
+            <w xml:id="pftm-140520">c’est</w>
+            <c> </c>
+            <w xml:id="pftm-140530">l’art</w>
+            <c> </c>
+            <pc xml:id="pftm-140540">—</pc>
+            <c> </c>
+            <w xml:id="pftm-140550">et</w>
+            <c> </c>
+            <w xml:id="pftm-140560">puis</w>
+            <pc xml:id="pftm-140570">,</pc>
+            <c> </c>
+            <w xml:id="pftm-140580">Voilà</w>
+            <c> </c>
+            <w xml:id="pftm-140590">tout</w>
+            <pc xml:id="pftm-140600" unit="sentence">.</pc>
+            <c> </c>
+         </hi>
+      </p>
+      <bibl xml:id="pftm-div00225">
+         <pc xml:id="pftm-140630">—</pc>
+         <c> </c>
+         <w xml:id="pftm-140640">BÉRANGER</w>
+         <pc unit="sentence" xml:id="pftm-140640-eos"/>
+      </bibl>
+   </epigraph>
+   <lg xml:id="pftm-s01060">
+      <head xml:id="pftm-h00490">
+         <w xml:id="pftm-140680">1</w>
+      </head>
+      <l xml:id="pftm-l07745">
+         <w xml:id="pftm-140700">Bound</w>
+         <c> </c>
+         <w xml:id="pftm-140710">to</w>
+         <c> </c>
+         <w xml:id="pftm-140720">your</w>
+         <c> </c>
+         <w xml:id="pftm-140730">place</w>
+         <c> </c>
+         <w xml:id="pftm-140740">those</w>
+         <c> </c>
+         <w xml:id="pftm-140750">penultimate</w>
+         <c> </c>
+         <w xml:id="pftm-140760">days</w>
+      </l>
+      <l xml:id="pftm-l07750">
+         <c> </c>
+         <w xml:id="pftm-140770">Whose</w>
+         <c> </c>
+         <w xml:id="pftm-140780">plot</w>
+         <c> </c>
+         <w xml:id="pftm-140790">was</w>
+         <c> </c>
+         <w xml:id="pftm-140800">impenetrable</w>
+         <c> </c>
+         <pc xml:id="pftm-140810">—</pc>
+      </l>
+      <l xml:id="pftm-l07755">
+         <c> </c>
+         <pc xml:id="pftm-140820">—</pc>
+         <c> </c>
+         <w xml:id="pftm-140830">Myth-full</w>
+         <pc xml:id="pftm-140840">,</pc>
+      </l>
+      <l xml:id="pftm-l07760">
+         <c> </c>
+         <w xml:id="pftm-140850">Dawn-pallid</w>
+         <c> </c>
+         <pc xml:id="pftm-140860">...</pc>
+      </l>
+      <l xml:id="pftm-l07765">
+         <c> </c>
+         <pc xml:id="pftm-140870">—</pc>
+         <c> </c>
+         <w xml:id="pftm-140880">Life’s</w>
+         <c> </c>
+         <w xml:id="pftm-140890">end</w>
+         <c> </c>
+         <w xml:id="pftm-140900">a</w>
+         <c> </c>
+         <w xml:id="pftm-140910">whisper</w>
+         <c> </c>
+         <w xml:id="pftm-140920">summons</w>
+         <c> </c>
+         <w xml:id="pftm-140930">its</w>
+         <c> </c>
+         <w xml:id="pftm-140940">start</w>
+         <pc xml:id="pftm-140950">:</pc>
+      </l>
+      <l xml:id="pftm-l07770">
+         <c> </c>
+         <pc xml:id="pftm-140960">“</pc>
+         <w xml:id="pftm-140970">I</w>
+         <c> </c>
+         <w xml:id="pftm-140980">will</w>
+         <c> </c>
+         <w xml:id="pftm-140990">not</w>
+         <c> </c>
+         <w xml:id="pftm-141000">render</w>
+         <c> </c>
+         <w xml:id="pftm-141010">you</w>
+         <c> </c>
+         <pc xml:id="pftm-141020">—</pc>
+         <c> </c>
+         <w xml:id="pftm-141030">no</w>
+         <pc xml:id="pftm-141035">!</pc>
+         <c> </c>
+         <w xml:id="pftm-141040">I</w>
+         <c> </c>
+         <w xml:id="pftm-141050">will</w>
+         <c> </c>
+         <w xml:id="pftm-141060">raise</w>
+         <c> </c>
+         <w xml:id="pftm-141070">you</w>
+         <pc xml:id="pftm-141080">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-141090">...</pc>
+         <pc xml:id="pftm-141100" unit="sentence">”</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01065">
+      <head xml:id="pftm-h00495">
+         <w xml:id="pftm-141140">2</w>
+      </head>
+      <l xml:id="pftm-l07775">
+         <w xml:id="pftm-141160">Bound</w>
+         <c> </c>
+         <w xml:id="pftm-141170">to</w>
+         <c> </c>
+         <w xml:id="pftm-141180">your</w>
+         <c> </c>
+         <w xml:id="pftm-141190">place</w>
+         <pc xml:id="pftm-141200">,</pc>
+         <c> </c>
+         <w xml:id="pftm-141210">those</w>
+         <c> </c>
+         <w xml:id="pftm-141220">days</w>
+         <c> </c>
+         <w xml:id="pftm-141230">so</w>
+         <c> </c>
+         <w xml:id="pftm-141240">penultimate</w>
+      </l>
+      <l xml:id="pftm-l07780">
+         <c> </c>
+         <w xml:id="pftm-141250">Once</w>
+         <c> </c>
+         <w xml:id="pftm-141260">when</w>
+         <c> </c>
+         <w xml:id="pftm-141270">you</w>
+         <c> </c>
+         <w xml:id="pftm-141280">mirrored</w>
+         <c> </c>
+         <pc xml:id="pftm-141290">—</pc>
+         <c> </c>
+         <w xml:id="pftm-141300">each</w>
+         <c> </c>
+         <w xml:id="pftm-141310">moment</w>
+         <pc xml:id="pftm-141320">,</pc>
+         <c> </c>
+         <w xml:id="pftm-141330">each</w>
+         <c> </c>
+         <w xml:id="pftm-141340">moment</w>
+         <c> </c>
+         <pc xml:id="pftm-141350">—</pc>
+      </l>
+      <l xml:id="pftm-l07785">
+         <c> </c>
+         <w xml:id="pftm-141360">That</w>
+         <c> </c>
+         <w xml:id="pftm-141370">lyre</w>
+         <c> </c>
+         <w xml:id="pftm-141380">that</w>
+         <c> </c>
+         <w xml:id="pftm-141390">Orpheus</w>
+         <c> </c>
+         <w xml:id="pftm-141400">lent</w>
+         <c> </c>
+         <w xml:id="pftm-141410">us</w>
+         <pc xml:id="pftm-141420">,</pc>
+      </l>
+      <l xml:id="pftm-l07790">
+         <c> </c>
+         <w xml:id="pftm-141430">Whose</w>
+         <c> </c>
+         <w xml:id="pftm-141440">force</w>
+         <c> </c>
+         <w xml:id="pftm-141450">like</w>
+         <c> </c>
+         <w xml:id="pftm-141460">a</w>
+         <c> </c>
+         <w xml:id="pftm-141470">missile</w>
+         <c> </c>
+         <w xml:id="pftm-141480">struggles</w>
+         <c> </c>
+         <w xml:id="pftm-141490">with</w>
+         <c> </c>
+         <w xml:id="pftm-141500">song</w>
+         <pc xml:id="pftm-141510">,</pc>
+      </l>
+      <l xml:id="pftm-l07795">
+         <c> </c>
+         <w xml:id="pftm-141520">And</w>
+         <c> </c>
+         <w xml:id="pftm-141530">its</w>
+         <c> </c>
+         <w xml:id="pftm-141540">four</w>
+         <c> </c>
+         <w xml:id="pftm-141550">strings</w>
+         <c> </c>
+         <w xml:id="pftm-141560">commune</w>
+         <c> </c>
+         <w xml:id="pftm-141570">with</w>
+      </l>
+      <l xml:id="pftm-l07800">
+         <c> </c>
+         <w xml:id="pftm-141580">Each</w>
+         <pc xml:id="pftm-141590">,</pc>
+         <c> </c>
+         <w xml:id="pftm-141600">striking</w>
+         <c> </c>
+         <w xml:id="pftm-141610">each</w>
+         <c> </c>
+         <w xml:id="pftm-141620">other</w>
+         <pc xml:id="pftm-141630">,</pc>
+      </l>
+      <l xml:id="pftm-l07805">
+         <c> </c>
+         <w xml:id="pftm-141640">By</w>
+         <c> </c>
+         <w xml:id="pftm-141650">twos</w>
+         <c> </c>
+         <pc xml:id="pftm-141660">—</pc>
+         <c> </c>
+         <w xml:id="pftm-141670">and</w>
+         <c> </c>
+         <w xml:id="pftm-141680">by</w>
+         <c> </c>
+         <w xml:id="pftm-141690">twos</w>
+         <c> </c>
+         <pc xml:id="pftm-141700">—</pc>
+      </l>
+      <l xml:id="pftm-l07810">
+         <c> </c>
+         <w xml:id="pftm-141710">A</w>
+         <c> </c>
+         <w xml:id="pftm-141720">murmur</w>
+         <c> </c>
+         <w xml:id="pftm-141730">slipping</w>
+         <c> </c>
+         <w xml:id="pftm-141740">toward</w>
+         <c> </c>
+         <w xml:id="pftm-141750">silence</w>
+         <pc xml:id="pftm-141760">:</pc>
+      </l>
+      <l xml:id="pftm-l07815">
+         <c> </c>
+         <pc xml:id="pftm-141770">“</pc>
+         <w xml:id="pftm-141780">Did</w>
+         <c> </c>
+         <w xml:id="pftm-141790">he</w>
+         <c> </c>
+         <w xml:id="pftm-141800">begin</w>
+      </l>
+      <l xml:id="pftm-l07820">
+         <c> </c>
+         <w xml:id="pftm-141810">To</w>
+         <c> </c>
+         <w xml:id="pftm-141820">pound</w>
+         <c> </c>
+         <w xml:id="pftm-141830">out</w>
+         <c> </c>
+         <w xml:id="pftm-141840">a</w>
+         <c> </c>
+         <w xml:id="pftm-141850">note</w>
+         <pc xml:id="pftm-141860">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-141870" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l07825">
+         <w xml:id="pftm-141880">Of</w>
+         <c> </c>
+         <w xml:id="pftm-141890">what</w>
+         <c> </c>
+         <w xml:id="pftm-141900">sound</w>
+         <c> </c>
+         <w xml:id="pftm-141910">was</w>
+         <c> </c>
+         <w xml:id="pftm-141920">he</w>
+         <c> </c>
+         <w xml:id="pftm-141930">Maestro</w>
+         <pc xml:id="pftm-141940">!</pc>
+         <c> </c>
+         <w xml:id="pftm-141950">whose</w>
+         <c> </c>
+         <w xml:id="pftm-141960">playing’s</w>
+         <c> </c>
+         <w xml:id="pftm-141970">repelling</w>
+         <pc xml:id="pftm-141980">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-141990">...</pc>
+         <pc xml:id="pftm-142000" unit="sentence">”</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01070">
+      <head xml:id="pftm-h00500">
+         <w xml:id="pftm-142040">3</w>
+      </head>
+      <l xml:id="pftm-l07830">
+         <w xml:id="pftm-142060">Bound</w>
+         <c> </c>
+         <w xml:id="pftm-142070">to</w>
+         <c> </c>
+         <w xml:id="pftm-142080">your</w>
+         <c> </c>
+         <w xml:id="pftm-142090">place</w>
+         <c> </c>
+         <w xml:id="pftm-142100">in</w>
+         <c> </c>
+         <w xml:id="pftm-142110">those</w>
+         <c> </c>
+         <w xml:id="pftm-142120">days</w>
+         <pc xml:id="pftm-142130">,</pc>
+         <c> </c>
+         <w xml:id="pftm-142140">oh</w>
+         <c> </c>
+         <w xml:id="pftm-142150">Frederic</w>
+         <pc xml:id="pftm-142160" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l07835">
+         <w xml:id="pftm-142170">You</w>
+         <c> </c>
+         <w xml:id="pftm-142180">with</w>
+         <c> </c>
+         <w xml:id="pftm-142190">your</w>
+         <c> </c>
+         <w xml:id="pftm-142200">hand</w>
+         <c> </c>
+         <w xml:id="pftm-142210">alabastered</w>
+      </l>
+      <l xml:id="pftm-l07840">
+         <c> </c>
+         <w xml:id="pftm-142220">In</w>
+         <c> </c>
+         <w xml:id="pftm-142230">whiteness</w>
+         <c> </c>
+         <pc xml:id="pftm-142240">—</pc>
+         <c> </c>
+         <w xml:id="pftm-142250">possessing</w>
+         <c> </c>
+         <pc xml:id="pftm-142260">—</pc>
+         <c> </c>
+         <w xml:id="pftm-142270">and</w>
+         <c> </c>
+         <w xml:id="pftm-142280">shuffling</w>
+         <c> </c>
+         <pc xml:id="pftm-142290">—</pc>
+      </l>
+      <l xml:id="pftm-l07845">
+         <c> </c>
+         <w xml:id="pftm-142300">Your</w>
+         <c> </c>
+         <w xml:id="pftm-142310">touch</w>
+         <c> </c>
+         <w xml:id="pftm-142320">scarce</w>
+         <c> </c>
+         <w xml:id="pftm-142330">a</w>
+         <c> </c>
+         <w xml:id="pftm-142340">touch</w>
+         <c> </c>
+         <pc xml:id="pftm-142350">—</pc>
+         <c> </c>
+         <w xml:id="pftm-142360">ostrich</w>
+         <c> </c>
+         <w xml:id="pftm-142370">feather</w>
+         <c> </c>
+         <w xml:id="pftm-142380">like</w>
+         <c> </c>
+         <pc xml:id="pftm-142390">—</pc>
+      </l>
+      <l xml:id="pftm-l07850">
+         <c> </c>
+         <w xml:id="pftm-142400">Brushing</w>
+         <c> </c>
+         <w xml:id="pftm-142410">me</w>
+         <c> </c>
+         <w xml:id="pftm-142420">blurred</w>
+         <c> </c>
+         <w xml:id="pftm-142430">in</w>
+         <c> </c>
+         <w xml:id="pftm-142440">my</w>
+         <c> </c>
+         <w xml:id="pftm-142450">eyes</w>
+         <c> </c>
+         <w xml:id="pftm-142460">with</w>
+         <c> </c>
+         <w xml:id="pftm-142470">your</w>
+         <c> </c>
+         <w xml:id="pftm-142480">ivory</w>
+      </l>
+      <l xml:id="pftm-l07855">
+         <c> </c>
+         <w xml:id="pftm-142490">Keyboard</w>
+         <c> </c>
+         <pc xml:id="pftm-142500" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l07860">
+         <w xml:id="pftm-142510">And</w>
+         <c> </c>
+         <w xml:id="pftm-142520">you</w>
+         <c> </c>
+         <w xml:id="pftm-142530">like</w>
+         <c> </c>
+         <w xml:id="pftm-142540">that</w>
+         <c> </c>
+         <w xml:id="pftm-142550">figure</w>
+      </l>
+      <l xml:id="pftm-l07865">
+         <c> </c>
+         <w xml:id="pftm-142560">From</w>
+         <c> </c>
+         <w xml:id="pftm-142570">marble’s</w>
+         <c> </c>
+         <w xml:id="pftm-142580">own</w>
+         <c> </c>
+         <w xml:id="pftm-142590">womb</w>
+      </l>
+      <l xml:id="pftm-l07870">
+         <c> </c>
+         <w xml:id="pftm-142600">As</w>
+         <c> </c>
+         <w xml:id="pftm-142610">if</w>
+         <c> </c>
+         <w xml:id="pftm-142620">hammered</w>
+      </l>
+      <l xml:id="pftm-l07875">
+         <c> </c>
+         <w xml:id="pftm-142630">Would</w>
+         <c> </c>
+         <w xml:id="pftm-142640">pull</w>
+         <c> </c>
+         <w xml:id="pftm-142650">back</w>
+         <c> </c>
+         <w xml:id="pftm-142660">your</w>
+         <c> </c>
+         <w xml:id="pftm-142670">chisel</w>
+      </l>
+      <l xml:id="pftm-l07880">
+         <c> </c>
+         <w xml:id="pftm-142680">Your</w>
+         <c> </c>
+         <w xml:id="pftm-142690">genius</w>
+         <c> </c>
+         <pc xml:id="pftm-142700">—</pc>
+         <c> </c>
+         <w xml:id="pftm-142710">eternal</w>
+         <c> </c>
+         <w xml:id="pftm-142720">Pygmalion</w>
+         <pc xml:id="pftm-142730" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01075">
+      <head xml:id="pftm-h00505">
+         <w xml:id="pftm-142770">4</w>
+      </head>
+      <l xml:id="pftm-l07885">
+         <w xml:id="pftm-142790">What</w>
+         <c> </c>
+         <w xml:id="pftm-142800">in</w>
+         <c> </c>
+         <w xml:id="pftm-142810">that</w>
+         <pc xml:id="pftm-142820">,</pc>
+         <c> </c>
+         <w xml:id="pftm-142830">in</w>
+         <c> </c>
+         <w xml:id="pftm-142840">what</w>
+         <c> </c>
+         <w xml:id="pftm-142850">you</w>
+         <c> </c>
+         <w xml:id="pftm-142860">have</w>
+         <c> </c>
+         <w xml:id="pftm-142870">played</w>
+         <pc xml:id="pftm-142880">,</pc>
+         <c> </c>
+         <w xml:id="pftm-142890">and</w>
+         <c> </c>
+         <w xml:id="pftm-142900">then</w>
+         <c> </c>
+         <w xml:id="pftm-142910">what</w>
+         <pc xml:id="pftm-142920">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-142930">—</pc>
+      </l>
+      <l xml:id="pftm-l07890">
+         <c> </c>
+         <w xml:id="pftm-142940">A</w>
+         <c> </c>
+         <w xml:id="pftm-142950">first</w>
+         <c> </c>
+         <w xml:id="pftm-142960">note</w>
+         <c> </c>
+         <w xml:id="pftm-142970">recited</w>
+         <c> </c>
+         <pc xml:id="pftm-142980">—</pc>
+         <c> </c>
+         <w xml:id="pftm-142990">and</w>
+         <c> </c>
+         <w xml:id="pftm-143000">what</w>
+         <pc xml:id="pftm-143010">?</pc>
+         <c> </c>
+         <w xml:id="pftm-143020">he’ll</w>
+         <c> </c>
+         <w xml:id="pftm-143030">express</w>
+         <c> </c>
+         <w xml:id="pftm-143040">it</w>
+      </l>
+      <l xml:id="pftm-l07895">
+         <c> </c>
+         <w xml:id="pftm-143050">However</w>
+         <c> </c>
+         <w xml:id="pftm-143060">its</w>
+         <c> </c>
+         <w xml:id="pftm-143070">echoes</w>
+         <c> </c>
+         <w xml:id="pftm-143080">set</w>
+         <c> </c>
+         <w xml:id="pftm-143090">themselves</w>
+         <c> </c>
+         <w xml:id="pftm-143100">up</w>
+         <pc xml:id="pftm-143110">,</pc>
+         <c> </c>
+         <w xml:id="pftm-143120">will</w>
+         <c> </c>
+         <w xml:id="pftm-143130">be</w>
+         <c> </c>
+         <w xml:id="pftm-143140">different</w>
+      </l>
+      <l xml:id="pftm-l07900">
+         <c> </c>
+         <w xml:id="pftm-143150">From</w>
+         <c> </c>
+         <w xml:id="pftm-143160">when</w>
+         <c> </c>
+         <w xml:id="pftm-143170">with</w>
+         <c> </c>
+         <w xml:id="pftm-143180">your</w>
+         <c> </c>
+         <w xml:id="pftm-143190">own</w>
+         <c> </c>
+         <w xml:id="pftm-143200">hand</w>
+         <c> </c>
+         <w xml:id="pftm-143210">you</w>
+         <c> </c>
+         <w xml:id="pftm-143220">blessed</w>
+      </l>
+      <l xml:id="pftm-l07905">
+         <c> </c>
+         <w xml:id="pftm-143230">Every</w>
+         <c> </c>
+         <w xml:id="pftm-143240">chord</w>
+         <c> </c>
+         <pc xml:id="pftm-143250">—</pc>
+      </l>
+      <l xml:id="pftm-l07910">
+         <c> </c>
+         <w xml:id="pftm-143260">And</w>
+         <c> </c>
+         <w xml:id="pftm-143270">played</w>
+         <c> </c>
+         <w xml:id="pftm-143280">it</w>
+         <c> </c>
+         <w xml:id="pftm-143290">through</w>
+         <pc xml:id="pftm-143300">,</pc>
+         <c> </c>
+         <w xml:id="pftm-143310">simple</w>
+      </l>
+      <l xml:id="pftm-l07915">
+         <c> </c>
+         <w xml:id="pftm-143320">And</w>
+         <c> </c>
+         <w xml:id="pftm-143330">perfect</w>
+         <c> </c>
+         <w xml:id="pftm-143340">like</w>
+         <c> </c>
+         <w xml:id="pftm-143350">Pericles</w>
+         <pc xml:id="pftm-143360">,</pc>
+      </l>
+      <l xml:id="pftm-l07920">
+         <c> </c>
+         <w xml:id="pftm-143370">Like</w>
+         <c> </c>
+         <w xml:id="pftm-143380">a</w>
+         <c> </c>
+         <w xml:id="pftm-143390">virtue</w>
+         <c> </c>
+         <w xml:id="pftm-143400">drawn</w>
+         <c> </c>
+         <w xml:id="pftm-143410">from</w>
+         <c> </c>
+         <w xml:id="pftm-143420">a</w>
+         <c> </c>
+         <w xml:id="pftm-143430">deep</w>
+         <c> </c>
+         <w xml:id="pftm-143440">past</w>
+         <pc xml:id="pftm-143450">,</pc>
+      </l>
+      <l xml:id="pftm-l07925">
+         <c> </c>
+         <w xml:id="pftm-143460">Set</w>
+         <c> </c>
+         <w xml:id="pftm-143470">foot</w>
+         <c> </c>
+         <w xml:id="pftm-143480">in</w>
+         <c> </c>
+         <w xml:id="pftm-143490">a</w>
+         <c> </c>
+         <w xml:id="pftm-143500">village</w>
+         <pc xml:id="pftm-143510">,</pc>
+         <c> </c>
+         <w xml:id="pftm-143520">a</w>
+         <c> </c>
+         <w xml:id="pftm-143530">log</w>
+         <c> </c>
+         <w xml:id="pftm-143540">cabin</w>
+         <c> </c>
+         <w xml:id="pftm-143550">home</w>
+         <pc xml:id="pftm-143560">,</pc>
+      </l>
+      <l xml:id="pftm-l07930">
+         <c> </c>
+         <w xml:id="pftm-143570">Told</w>
+         <c> </c>
+         <w xml:id="pftm-143580">herself</w>
+         <c> </c>
+         <w xml:id="pftm-143590">as</w>
+         <c> </c>
+         <w xml:id="pftm-143600">she</w>
+         <c> </c>
+         <w xml:id="pftm-143610">entered</w>
+         <pc xml:id="pftm-143620">:</pc>
+      </l>
+      <l xml:id="pftm-l07935">
+         <c> </c>
+         <hi rend="italic">
+            <w xml:id="pftm-143630">I</w>
+            <c> </c>
+            <w xml:id="pftm-143640">was</w>
+            <c> </c>
+            <w xml:id="pftm-143650">reborn</w>
+            <c> </c>
+            <w xml:id="pftm-143660">in</w>
+            <c> </c>
+            <w xml:id="pftm-143670">heaven</w>
+            <pc xml:id="pftm-143680">,</pc>
+         </hi>
+      </l>
+      <l xml:id="pftm-l07940">
+         <c> </c>
+         <hi rend="italic">
+            <w xml:id="pftm-143690">Whose</w>
+            <c> </c>
+            <w xml:id="pftm-143700">gate</w>
+            <c> </c>
+            <w xml:id="pftm-143710">changed</w>
+            <c> </c>
+            <w xml:id="pftm-143720">into</w>
+            <c> </c>
+            <w xml:id="pftm-143730">my</w>
+            <c> </c>
+            <w xml:id="pftm-143740">harp</w>
+            <pc xml:id="pftm-143750">,</pc>
+         </hi>
+      </l>
+      <l xml:id="pftm-l07945">
+         <c> </c>
+         <hi rend="italic">
+            <w xml:id="pftm-143760">A</w>
+            <c> </c>
+            <w xml:id="pftm-143770">ribbon</w>
+            <c> </c>
+            <pc xml:id="pftm-143780">—</pc>
+            <c> </c>
+            <w xml:id="pftm-143790">a</w>
+            <c> </c>
+            <w xml:id="pftm-143800">path</w>
+            <c> </c>
+            <pc xml:id="pftm-143810" unit="sentence">...</pc>
+            <c> </c>
+         </hi>
+      </l>
+      <l xml:id="pftm-l07950">
+         <hi rend="italic">
+            <w xml:id="pftm-143820">Where</w>
+            <c> </c>
+            <w xml:id="pftm-143830">the</w>
+            <c> </c>
+            <w xml:id="pftm-143840">Host</w>
+            <c> </c>
+            <pc xml:id="pftm-143850">—</pc>
+            <c> </c>
+            <w xml:id="pftm-143860">I</w>
+            <c> </c>
+            <w xml:id="pftm-143870">could</w>
+            <c> </c>
+            <w xml:id="pftm-143880">spy</w>
+            <c> </c>
+            <w xml:id="pftm-143890">through</w>
+            <c> </c>
+            <w xml:id="pftm-143900">pale</w>
+            <c> </c>
+            <w xml:id="pftm-143910">wheatblades</w>
+            <c> </c>
+            <pc xml:id="pftm-143920">—</pc>
+         </hi>
+      </l>
+      <l xml:id="pftm-l07955">
+         <c> </c>
+         <hi rend="italic">
+            <w xml:id="pftm-143930">Emanuel</w>
+            <c> </c>
+            <w xml:id="pftm-143940">he</w>
+            <c> </c>
+            <w xml:id="pftm-143950">who</w>
+            <c> </c>
+            <w xml:id="pftm-143960">now</w>
+            <c> </c>
+            <w xml:id="pftm-143970">dwells</w>
+         </hi>
+      </l>
+      <l xml:id="pftm-l07960">
+         <c> </c>
+         <hi rend="italic">
+            <w xml:id="pftm-143980">On</w>
+            <c> </c>
+            <w xml:id="pftm-143990">Mount</w>
+            <c> </c>
+            <w xml:id="pftm-144000">Tabor</w>
+            <pc xml:id="pftm-144010" unit="sentence">!</pc>
+            <c> </c>
+         </hi>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01080">
+      <head xml:id="pftm-h00510">
+         <w xml:id="pftm-144050">5</w>
+      </head>
+      <l xml:id="pftm-l07965">
+         <w xml:id="pftm-144070">And</w>
+         <c> </c>
+         <w xml:id="pftm-144080">Poland</w>
+         <c> </c>
+         <w xml:id="pftm-144090">within</w>
+         <pc xml:id="pftm-144100">,</pc>
+         <c> </c>
+         <w xml:id="pftm-144110">from</w>
+         <c> </c>
+         <w xml:id="pftm-144120">that</w>
+         <c> </c>
+         <w xml:id="pftm-144130">zenith</w>
+      </l>
+      <l xml:id="pftm-l07970">
+         <c> </c>
+         <w xml:id="pftm-144140">Perfections</w>
+         <c> </c>
+         <w xml:id="pftm-144150">of</w>
+         <c> </c>
+         <w xml:id="pftm-144160">history</w>
+         <pc xml:id="pftm-144170">,</pc>
+         <c> </c>
+         <w xml:id="pftm-144180">ancient</w>
+         <pc xml:id="pftm-144190">,</pc>
+         <c> </c>
+         <w xml:id="pftm-144200">arrayed</w>
+      </l>
+      <l xml:id="pftm-l07975">
+         <c> </c>
+         <w xml:id="pftm-144210">Rainbow’s</w>
+         <c> </c>
+         <w xml:id="pftm-144220">ravishment</w>
+         <c> </c>
+         <pc xml:id="pftm-144230">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144240">Poland</w>
+         <c> </c>
+         <pc xml:id="pftm-144250">—</pc>
+      </l>
+      <l xml:id="pftm-l07980">
+         <c> </c>
+         <w xml:id="pftm-144260">Wheelwrights</w>
+         <c> </c>
+         <w xml:id="pftm-144270">transformed</w>
+         <pc xml:id="pftm-144280" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l07985">
+         <w xml:id="pftm-144290">Selfsame</w>
+         <pc xml:id="pftm-144300">,</pc>
+         <c> </c>
+         <w xml:id="pftm-144310">certain</w>
+         <pc xml:id="pftm-144320">,</pc>
+      </l>
+      <l xml:id="pftm-l07990">
+         <c> </c>
+         <w xml:id="pftm-144330">Gold</w>
+         <c> </c>
+         <w xml:id="pftm-144340">bee</w>
+         <pc xml:id="pftm-144350" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01085">
+      <head xml:id="pftm-h00515">
+         <w xml:id="pftm-144390">6</w>
+      </head>
+      <l xml:id="pftm-l07995">
+         <w xml:id="pftm-144410">And</w>
+         <c> </c>
+         <pc xml:id="pftm-144420">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144430">now</w>
+         <c> </c>
+         <pc xml:id="pftm-144440">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144450">you’ve</w>
+         <c> </c>
+         <w xml:id="pftm-144460">ended</w>
+         <c> </c>
+         <w xml:id="pftm-144470">the</w>
+         <c> </c>
+         <w xml:id="pftm-144480">song</w>
+         <c> </c>
+         <pc xml:id="pftm-144490">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144500">And</w>
+         <c> </c>
+         <w xml:id="pftm-144510">I</w>
+      </l>
+      <l xml:id="pftm-l08000">
+         <c> </c>
+         <w xml:id="pftm-144520">No</w>
+         <c> </c>
+         <w xml:id="pftm-144530">longer</w>
+         <c> </c>
+         <w xml:id="pftm-144540">can</w>
+         <c> </c>
+         <w xml:id="pftm-144550">see</w>
+         <c> </c>
+         <w xml:id="pftm-144560">you</w>
+         <c> </c>
+         <pc xml:id="pftm-144570">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144580">only</w>
+         <c> </c>
+         <pc xml:id="pftm-144590">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144600">can</w>
+         <c> </c>
+         <w xml:id="pftm-144610">hear</w>
+      </l>
+      <l xml:id="pftm-l08005">
+         <c> </c>
+         <w xml:id="pftm-144620">Hearing</w>
+         <c> </c>
+         <w xml:id="pftm-144630">what</w>
+         <pc xml:id="pftm-144640">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-144650">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144660">like</w>
+         <c> </c>
+         <w xml:id="pftm-144670">when</w>
+         <c> </c>
+         <w xml:id="pftm-144680">boys</w>
+         <c> </c>
+         <w xml:id="pftm-144690">baffle</w>
+         <c> </c>
+         <w xml:id="pftm-144700">boys</w>
+         <c> </c>
+         <pc xml:id="pftm-144710">—</pc>
+      </l>
+      <l xml:id="pftm-l08010">
+         <c> </c>
+         <pc xml:id="pftm-144720">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144730">The</w>
+         <c> </c>
+         <w xml:id="pftm-144740">keys</w>
+         <c> </c>
+         <w xml:id="pftm-144750">still</w>
+         <c> </c>
+         <w xml:id="pftm-144760">resisting</w>
+      </l>
+      <l xml:id="pftm-l08015">
+         <c> </c>
+         <w xml:id="pftm-144770">The</w>
+         <c> </c>
+         <w xml:id="pftm-144780">source</w>
+         <c> </c>
+         <w xml:id="pftm-144790">of</w>
+         <c> </c>
+         <w xml:id="pftm-144800">their</w>
+         <c> </c>
+         <w xml:id="pftm-144810">yearnings</w>
+         <c> </c>
+         <w xml:id="pftm-144820">unsung</w>
+      </l>
+      <l xml:id="pftm-l08020">
+         <c> </c>
+         <w xml:id="pftm-144830">They</w>
+         <c> </c>
+         <w xml:id="pftm-144840">softly</w>
+         <c> </c>
+         <w xml:id="pftm-144850">push</w>
+         <c> </c>
+         <w xml:id="pftm-144860">back</w>
+         <c> </c>
+         <w xml:id="pftm-144870">on</w>
+         <c> </c>
+         <w xml:id="pftm-144880">their</w>
+         <c> </c>
+         <w xml:id="pftm-144890">own</w>
+      </l>
+      <l xml:id="pftm-l08025">
+         <c> </c>
+         <w xml:id="pftm-144900">By</w>
+         <c> </c>
+         <w xml:id="pftm-144910">eighths</w>
+         <c> </c>
+         <pc xml:id="pftm-144920">—</pc>
+         <c> </c>
+         <w xml:id="pftm-144930">then</w>
+         <c> </c>
+         <w xml:id="pftm-144940">by</w>
+         <c> </c>
+         <w xml:id="pftm-144950">fifths</w>
+         <c> </c>
+         <pc xml:id="pftm-144960">—</pc>
+      </l>
+      <l xml:id="pftm-l08030">
+         <c> </c>
+         <w xml:id="pftm-144970">And</w>
+         <c> </c>
+         <w xml:id="pftm-144980">murmuring</w>
+         <pc xml:id="pftm-144990">:</pc>
+         <c> </c>
+         <pc xml:id="pftm-145000">“</pc>
+         <w xml:id="pftm-145010">He</w>
+         <c> </c>
+         <pc xml:id="pftm-145020">—</pc>
+         <c> </c>
+         <w xml:id="pftm-145030">has</w>
+         <c> </c>
+         <w xml:id="pftm-145040">he</w>
+         <c> </c>
+         <w xml:id="pftm-145050">started</w>
+         <c> </c>
+         <w xml:id="pftm-145060">to</w>
+         <c> </c>
+         <w xml:id="pftm-145070">play</w>
+         <pc xml:id="pftm-145080" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08035">
+         <w xml:id="pftm-145090">Or</w>
+         <c> </c>
+         <w xml:id="pftm-145100">uncaring</w>
+         <c> </c>
+         <pc xml:id="pftm-145110">—</pc>
+         <c> </c>
+         <w xml:id="pftm-145120">cast</w>
+         <c> </c>
+         <w xml:id="pftm-145130">us</w>
+         <c> </c>
+         <w xml:id="pftm-145140">aside</w>
+         <pc xml:id="pftm-145150">?</pc>
+         <pc xml:id="pftm-145160" unit="sentence">”</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01090">
+      <head xml:id="pftm-h00520">
+         <w xml:id="pftm-145200">7</w>
+      </head>
+      <l xml:id="pftm-l08040">
+         <w xml:id="pftm-145220">Oh</w>
+         <c> </c>
+         <w xml:id="pftm-145230">You</w>
+         <pc xml:id="pftm-145240" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="pftm-145250">Love’s</w>
+         <c> </c>
+         <w xml:id="pftm-145260">profile</w>
+      </l>
+      <l xml:id="pftm-l08045">
+         <c> </c>
+         <w xml:id="pftm-145270">Fulfillment</w>
+         <c> </c>
+         <w xml:id="pftm-145280">your</w>
+         <c> </c>
+         <w xml:id="pftm-145290">name</w>
+         <pc xml:id="pftm-145300">:</pc>
+      </l>
+      <l xml:id="pftm-l08050">
+         <c> </c>
+         <w xml:id="pftm-145310">These</w>
+         <c> </c>
+         <pc xml:id="pftm-145320">—</pc>
+         <c> </c>
+         <w xml:id="pftm-145330">Art</w>
+         <c> </c>
+         <w xml:id="pftm-145340">dubs</w>
+         <c> </c>
+         <w xml:id="pftm-145350">them</w>
+         <c> </c>
+         <w xml:id="pftm-145360">style</w>
+         <pc xml:id="pftm-145370">,</pc>
+      </l>
+      <l xml:id="pftm-l08055">
+         <c> </c>
+         <w xml:id="pftm-145380">Who</w>
+         <c> </c>
+         <w xml:id="pftm-145390">penetrate</w>
+         <c> </c>
+         <w xml:id="pftm-145400">song</w>
+         <pc xml:id="pftm-145410">,</pc>
+         <c> </c>
+         <w xml:id="pftm-145420">who</w>
+         <c> </c>
+         <w xml:id="pftm-145430">shape</w>
+         <c> </c>
+         <w xml:id="pftm-145440">stones</w>
+         <c> </c>
+         <pc xml:id="pftm-145450" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08060">
+         <w xml:id="pftm-145460">Oh</w>
+         <pc xml:id="pftm-145465">!</pc>
+         <c> </c>
+         <w xml:id="pftm-145470">You</w>
+         <c> </c>
+         <pc xml:id="pftm-145480">—</pc>
+         <c> </c>
+         <w xml:id="pftm-145490">who</w>
+         <c> </c>
+         <w xml:id="pftm-145500">in</w>
+         <c> </c>
+         <w xml:id="pftm-145510">chronicles</w>
+         <c> </c>
+         <w xml:id="pftm-145520">sign</w>
+         <c> </c>
+         <w xml:id="pftm-145530">yourself</w>
+         <c> </c>
+         <w xml:id="pftm-145540">Era</w>
+         <pc xml:id="pftm-145550">,</pc>
+      </l>
+      <l xml:id="pftm-l08065">
+         <c> </c>
+         <w xml:id="pftm-145560">Where</w>
+         <c> </c>
+         <w xml:id="pftm-145570">you</w>
+         <c> </c>
+         <w xml:id="pftm-145580">are</w>
+         <pc xml:id="pftm-145590">,</pc>
+         <c> </c>
+         <w xml:id="pftm-145600">aren’t</w>
+         <pc xml:id="pftm-145610">,</pc>
+         <c> </c>
+         <w xml:id="pftm-145620">history’s</w>
+         <c> </c>
+         <w xml:id="pftm-145630">Zenith</w>
+         <pc xml:id="pftm-145640">,</pc>
+      </l>
+      <l xml:id="pftm-l08070">
+         <c> </c>
+         <w xml:id="pftm-145650">Are</w>
+         <c> </c>
+         <w xml:id="pftm-145660">Spirit</w>
+         <c> </c>
+         <w xml:id="pftm-145670">and</w>
+         <c> </c>
+         <w xml:id="pftm-145680">Letter</w>
+         <c> </c>
+         <w xml:id="pftm-145690">in</w>
+         <c> </c>
+         <w xml:id="pftm-145700">one</w>
+         <pc xml:id="pftm-145710">,</pc>
+      </l>
+      <l xml:id="pftm-l08075">
+         <c> </c>
+         <pc xml:id="pftm-145720">“</pc>
+         <w xml:id="pftm-145730">Consumatum</w>
+         <c> </c>
+         <w xml:id="pftm-145740">Est</w>
+         <pc xml:id="pftm-145750">”</pc>
+         <c> </c>
+         <pc xml:id="pftm-145760" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08080">
+         <w xml:id="pftm-145770">You</w>
+         <pc xml:id="pftm-145780" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="pftm-145790">Oh</w>
+         <c> </c>
+         <pc xml:id="pftm-145800">—</pc>
+         <c> </c>
+         <w xml:id="pftm-145810">Exquisite</w>
+         <c> </c>
+         <w xml:id="pftm-145820">fulfillment</w>
+         <pc xml:id="pftm-145830">,</pc>
+      </l>
+      <l xml:id="pftm-l08085">
+         <c> </c>
+         <w xml:id="pftm-145840">Whichever</w>
+         <c> </c>
+         <w xml:id="pftm-145850">you</w>
+         <c> </c>
+         <w xml:id="pftm-145860">are</w>
+         <pc xml:id="pftm-145870">,</pc>
+         <c> </c>
+         <w xml:id="pftm-145880">And</w>
+         <c> </c>
+         <w xml:id="pftm-145890">where</w>
+         <pc xml:id="pftm-145900">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-145910" unit="sentence">...</pc>
+         <c> </c>
+         <w xml:id="pftm-145920">Are</w>
+         <c> </c>
+         <w xml:id="pftm-145930">a</w>
+         <c> </c>
+         <w xml:id="pftm-145940">sign</w>
+         <c> </c>
+         <pc xml:id="pftm-145950" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08090">
+         <w xml:id="pftm-145960">In</w>
+         <c> </c>
+         <w xml:id="pftm-145970">Phidias</w>
+         <pc xml:id="pftm-145980" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="pftm-145990">David</w>
+         <pc xml:id="pftm-146000" unit="sentence">?</pc>
+         <c> </c>
+         <w xml:id="pftm-146010">Or</w>
+         <c> </c>
+         <w xml:id="pftm-146020">Chopin</w>
+         <pc xml:id="pftm-146030" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08095">
+         <w xml:id="pftm-146040">Or</w>
+         <c> </c>
+         <w xml:id="pftm-146050">a</w>
+         <c> </c>
+         <w xml:id="pftm-146060">scene</w>
+         <c> </c>
+         <w xml:id="pftm-146070">out</w>
+         <c> </c>
+         <w xml:id="pftm-146080">of</w>
+         <c> </c>
+         <w xml:id="pftm-146090">Aeschylus</w>
+         <pc xml:id="pftm-146100">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-146110" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08100">
+         <w xml:id="pftm-146120">Evermore</w>
+         <c> </c>
+         <pc xml:id="pftm-146130">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146140">vengeance</w>
+         <c> </c>
+         <w xml:id="pftm-146150">upon</w>
+         <c> </c>
+         <w xml:id="pftm-146160">you</w>
+         <pc xml:id="pftm-146170">:</pc>
+         <c> </c>
+         <w xml:id="pftm-146180">PRIVATION</w>
+         <pc xml:id="pftm-146190">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-146200" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08105">
+         <w xml:id="pftm-146210">Globe’s</w>
+         <c> </c>
+         <w xml:id="pftm-146220">Stigma</w>
+         <c> </c>
+         <pc xml:id="pftm-146230">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146240">penury</w>
+         <pc xml:id="pftm-146250">:</pc>
+      </l>
+      <l xml:id="pftm-l08110">
+         <c> </c>
+         <w xml:id="pftm-146260">How</w>
+         <c> </c>
+         <w xml:id="pftm-146270">it</w>
+         <c> </c>
+         <w xml:id="pftm-146280">hurts</w>
+         <c> </c>
+         <w xml:id="pftm-146290">him</w>
+         <pc xml:id="pftm-146300">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-146310" unit="sentence">...</pc>
+         <c> </c>
+         <w xml:id="pftm-146320">Fulfillment</w>
+         <pc xml:id="pftm-146330">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-146340" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08115">
+         <w xml:id="pftm-146350">He</w>
+         <c> </c>
+         <pc xml:id="pftm-146360">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146370">who</w>
+         <c> </c>
+         <w xml:id="pftm-146380">prefers</w>
+         <c> </c>
+         <w xml:id="pftm-146390">to</w>
+         <c> </c>
+         <w xml:id="pftm-146400">begin</w>
+      </l>
+      <l xml:id="pftm-l08120">
+         <c> </c>
+         <w xml:id="pftm-146410">Forever</w>
+         <c> </c>
+         <w xml:id="pftm-146420">to</w>
+         <c> </c>
+         <w xml:id="pftm-146430">throw</w>
+         <c> </c>
+         <w xml:id="pftm-146440">out</w>
+         <c> </c>
+         <w xml:id="pftm-146450">before</w>
+         <c> </c>
+         <w xml:id="pftm-146460">him</w>
+         <c> </c>
+         <pc xml:id="pftm-146470">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146480">down</w>
+         <c> </c>
+         <w xml:id="pftm-146490">payed</w>
+         <pc xml:id="pftm-146500">!</pc>
+      </l>
+      <l xml:id="pftm-l08125">
+         <c> </c>
+         <pc xml:id="pftm-146510">—</pc>
+         <c> </c>
+         <pc xml:id="pftm-146520">“</pc>
+         <w xml:id="pftm-146530">Ear</w>
+         <c> </c>
+         <w xml:id="pftm-146540">of</w>
+         <c> </c>
+         <w xml:id="pftm-146550">Corn</w>
+         <pc xml:id="pftm-146560">”</pc>
+         <pc xml:id="pftm-146570">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-146580">...</pc>
+         <c> </c>
+         <w xml:id="pftm-146590">like</w>
+         <c> </c>
+         <w xml:id="pftm-146600">a</w>
+         <c> </c>
+         <w xml:id="pftm-146610">gold</w>
+         <c> </c>
+         <w xml:id="pftm-146620">comet</w>
+         <c> </c>
+         <w xml:id="pftm-146630">ripened</w>
+         <pc xml:id="pftm-146640">,</pc>
+      </l>
+      <l xml:id="pftm-l08130">
+         <c> </c>
+         <w xml:id="pftm-146650">Wind’s</w>
+         <c> </c>
+         <w xml:id="pftm-146660">breath</w>
+         <c> </c>
+         <w xml:id="pftm-146670">barely</w>
+         <c> </c>
+         <w xml:id="pftm-146680">stirs</w>
+         <c> </c>
+         <w xml:id="pftm-146690">it</w>
+         <pc xml:id="pftm-146700">,</pc>
+      </l>
+      <l xml:id="pftm-l08135">
+         <c> </c>
+         <w xml:id="pftm-146710">A</w>
+         <c> </c>
+         <w xml:id="pftm-146720">rain</w>
+         <c> </c>
+         <w xml:id="pftm-146730">of</w>
+         <c> </c>
+         <w xml:id="pftm-146740">wheat</w>
+         <c> </c>
+         <w xml:id="pftm-146750">sprinkles</w>
+         <c> </c>
+         <w xml:id="pftm-146760">down</w>
+         <c> </c>
+         <w xml:id="pftm-146770">grains</w>
+      </l>
+      <l xml:id="pftm-l08140">
+         <c> </c>
+         <w xml:id="pftm-146780">Perfection</w>
+         <c> </c>
+         <w xml:id="pftm-146790">alone</w>
+         <c> </c>
+         <w xml:id="pftm-146800">sweeps</w>
+         <c> </c>
+         <w xml:id="pftm-146810">away</w>
+         <c> </c>
+         <pc xml:id="pftm-146820" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01095">
+      <head xml:id="pftm-h00525">
+         <w xml:id="pftm-146860">8</w>
+      </head>
+      <l xml:id="pftm-l08145">
+         <w xml:id="pftm-146880">Over</w>
+         <c> </c>
+         <w xml:id="pftm-146890">here</w>
+         <c> </c>
+         <pc xml:id="pftm-146900">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146910">Frederic</w>
+         <pc xml:id="pftm-146920">,</pc>
+         <c> </c>
+         <w xml:id="pftm-146930">look</w>
+         <pc xml:id="pftm-146940">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-146950" unit="sentence">...</pc>
+         <c> </c>
+         <w xml:id="pftm-146960">This</w>
+         <c> </c>
+         <w xml:id="pftm-146970">is</w>
+         <c> </c>
+         <pc xml:id="pftm-146980">—</pc>
+         <c> </c>
+         <w xml:id="pftm-146990">Warsaw</w>
+         <pc xml:id="pftm-147000">:</pc>
+      </l>
+      <l xml:id="pftm-l08150">
+         <c> </c>
+         <w xml:id="pftm-147010">Under</w>
+         <c> </c>
+         <w xml:id="pftm-147020">a</w>
+         <c> </c>
+         <w xml:id="pftm-147030">star</w>
+         <c> </c>
+         <w xml:id="pftm-147040">blazing</w>
+         <c> </c>
+         <w xml:id="pftm-147050">forth</w>
+      </l>
+      <l xml:id="pftm-l08155">
+         <c> </c>
+         <w xml:id="pftm-147060">A</w>
+         <c> </c>
+         <w xml:id="pftm-147070">crazed</w>
+         <c> </c>
+         <w xml:id="pftm-147080">brightness</w>
+         <c> </c>
+         <pc xml:id="pftm-147090">—</pc>
+      </l>
+      <l xml:id="pftm-l08160">
+         <c> </c>
+         <pc xml:id="pftm-147100">—</pc>
+         <c> </c>
+         <w xml:id="pftm-147110">Attend</w>
+         <c> </c>
+         <w xml:id="pftm-147120">to</w>
+         <c> </c>
+         <w xml:id="pftm-147130">it</w>
+         <pc xml:id="pftm-147140">,</pc>
+         <c> </c>
+         <w xml:id="pftm-147150">organs</w>
+         <c> </c>
+         <w xml:id="pftm-147160">in</w>
+         <c> </c>
+         <w xml:id="pftm-147170">parish</w>
+         <c> </c>
+         <w xml:id="pftm-147180">halls</w>
+         <pc xml:id="pftm-147190">;</pc>
+         <c> </c>
+         <w xml:id="pftm-147200">look</w>
+         <pc xml:id="pftm-147210">!</pc>
+         <c> </c>
+         <w xml:id="pftm-147220">it’s</w>
+         <c> </c>
+         <w xml:id="pftm-147230">Your</w>
+         <c> </c>
+         <w xml:id="pftm-147240">nest</w>
+         <pc xml:id="pftm-147250">:</pc>
+      </l>
+      <l xml:id="pftm-l08165">
+         <c> </c>
+         <w xml:id="pftm-147260">It’s</w>
+         <c> </c>
+         <w xml:id="pftm-147270">elsewhere</w>
+         <c> </c>
+         <pc xml:id="pftm-147280">—</pc>
+         <c> </c>
+         <w xml:id="pftm-147290">old</w>
+         <c> </c>
+         <w xml:id="pftm-147300">houses</w>
+         <c> </c>
+         <w xml:id="pftm-147310">patrician</w>
+      </l>
+      <l xml:id="pftm-l08170">
+         <c> </c>
+         <w xml:id="pftm-147320">As</w>
+         <c> </c>
+         <w xml:id="pftm-147330">commonwealths</w>
+         <pc xml:id="pftm-147340">,</pc>
+      </l>
+      <l xml:id="pftm-l08175">
+         <c> </c>
+         <w xml:id="pftm-147350">Pavements</w>
+         <c> </c>
+         <w xml:id="pftm-147360">of</w>
+         <c> </c>
+         <w xml:id="pftm-147370">squares</w>
+         <c> </c>
+         <w xml:id="pftm-147380">deaf</w>
+         <c> </c>
+         <w xml:id="pftm-147390">and</w>
+         <c> </c>
+         <w xml:id="pftm-147400">grey</w>
+         <pc xml:id="pftm-147410">,</pc>
+      </l>
+      <l xml:id="pftm-l08180">
+         <c> </c>
+         <w xml:id="pftm-147420">And</w>
+         <c> </c>
+         <w xml:id="pftm-147430">Sigismund’s</w>
+         <c> </c>
+         <w xml:id="pftm-147440">sword</w>
+         <c> </c>
+         <w xml:id="pftm-147450">in</w>
+         <c> </c>
+         <w xml:id="pftm-147460">a</w>
+         <c> </c>
+         <w xml:id="pftm-147470">cloud</w>
+         <pc xml:id="pftm-147480" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01100">
+      <head xml:id="pftm-h00530">
+         <w xml:id="pftm-147520">9</w>
+      </head>
+      <l xml:id="pftm-l08185">
+         <w xml:id="pftm-147540">Look</w>
+         <pc xml:id="pftm-147550">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-147560">...</pc>
+         <c> </c>
+         <w xml:id="pftm-147570">from</w>
+         <c> </c>
+         <w xml:id="pftm-147580">alley</w>
+         <c> </c>
+         <w xml:id="pftm-147590">to</w>
+         <c> </c>
+         <w xml:id="pftm-147600">alley</w>
+      </l>
+      <l xml:id="pftm-l08190">
+         <c> </c>
+         <w xml:id="pftm-147610">Caucasian</w>
+         <c> </c>
+         <w xml:id="pftm-147620">horses</w>
+         <c> </c>
+         <w xml:id="pftm-147630">break</w>
+         <c> </c>
+         <w xml:id="pftm-147640">forth</w>
+      </l>
+      <l xml:id="pftm-l08195">
+         <c> </c>
+         <w xml:id="pftm-147650">Like</w>
+         <c> </c>
+         <w xml:id="pftm-147660">swallows</w>
+         <c> </c>
+         <w xml:id="pftm-147670">ahead</w>
+         <c> </c>
+         <w xml:id="pftm-147680">of</w>
+         <c> </c>
+         <w xml:id="pftm-147690">a</w>
+         <c> </c>
+         <w xml:id="pftm-147700">storm</w>
+         <pc xml:id="pftm-147710">,</pc>
+      </l>
+      <l xml:id="pftm-l08200">
+         <c> </c>
+         <w xml:id="pftm-147720">Ahead</w>
+         <c> </c>
+         <w xml:id="pftm-147730">of</w>
+         <c> </c>
+         <w xml:id="pftm-147740">their</w>
+         <c> </c>
+         <w xml:id="pftm-147750">regiments</w>
+         <pc xml:id="pftm-147760">,</pc>
+         <c> </c>
+         <w xml:id="pftm-147770">darting</w>
+         <pc xml:id="pftm-147780">,</pc>
+      </l>
+      <l xml:id="pftm-l08205">
+         <c> </c>
+         <w xml:id="pftm-147790">By</w>
+         <c> </c>
+         <w xml:id="pftm-147800">hundreds</w>
+         <c> </c>
+         <pc xml:id="pftm-147810">—</pc>
+         <c> </c>
+         <w xml:id="pftm-147820">by</w>
+         <c> </c>
+         <w xml:id="pftm-147830">hundreds</w>
+         <c> </c>
+         <pc xml:id="pftm-147840">—</pc>
+      </l>
+      <l xml:id="pftm-l08210">
+         <c> </c>
+         <pc xml:id="pftm-147850">—</pc>
+         <c> </c>
+         <w xml:id="pftm-147860">The</w>
+         <c> </c>
+         <w xml:id="pftm-147870">town</w>
+         <c> </c>
+         <w xml:id="pftm-147880">house</w>
+         <c> </c>
+         <w xml:id="pftm-147890">caught</w>
+         <c> </c>
+         <w xml:id="pftm-147900">fire</w>
+         <pc xml:id="pftm-147910">,</pc>
+         <c> </c>
+         <w xml:id="pftm-147920">died</w>
+         <c> </c>
+         <w xml:id="pftm-147930">down</w>
+         <pc xml:id="pftm-147940">,</pc>
+      </l>
+      <l xml:id="pftm-l08215">
+         <c> </c>
+         <w xml:id="pftm-147950">Then</w>
+         <c> </c>
+         <w xml:id="pftm-147960">flared</w>
+         <c> </c>
+         <w xml:id="pftm-147970">up</w>
+         <c> </c>
+         <w xml:id="pftm-147980">again</w>
+         <c> </c>
+         <pc xml:id="pftm-147990">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148000">And</w>
+         <c> </c>
+         <w xml:id="pftm-148010">there</w>
+         <c> </c>
+         <pc xml:id="pftm-148020">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148030">Under</w>
+         <c> </c>
+         <w xml:id="pftm-148040">the</w>
+         <c> </c>
+         <w xml:id="pftm-148050">wall</w>
+      </l>
+      <l xml:id="pftm-l08220">
+         <c> </c>
+         <w xml:id="pftm-148060">Saw</w>
+         <c> </c>
+         <w xml:id="pftm-148070">the</w>
+         <c> </c>
+         <w xml:id="pftm-148080">foreheads</w>
+         <c> </c>
+         <w xml:id="pftm-148090">of</w>
+         <c> </c>
+         <w xml:id="pftm-148100">widows</w>
+         <c> </c>
+         <w xml:id="pftm-148110">in</w>
+         <c> </c>
+         <w xml:id="pftm-148120">mourning</w>
+      </l>
+      <l xml:id="pftm-l08225">
+         <c> </c>
+         <w xml:id="pftm-148130">Pushed</w>
+         <c> </c>
+         <w xml:id="pftm-148140">back</w>
+         <c> </c>
+         <w xml:id="pftm-148150">by</w>
+         <c> </c>
+         <w xml:id="pftm-148160">rifle</w>
+         <c> </c>
+         <w xml:id="pftm-148170">butts</w>
+         <c> </c>
+         <pc xml:id="pftm-148180">—</pc>
+      </l>
+      <l xml:id="pftm-l08230">
+         <c> </c>
+         <w xml:id="pftm-148190">And</w>
+         <c> </c>
+         <w xml:id="pftm-148200">again</w>
+         <pc xml:id="pftm-148210">,</pc>
+         <c> </c>
+         <w xml:id="pftm-148220">smokeblinded</w>
+         <pc xml:id="pftm-148230">,</pc>
+         <c> </c>
+         <w xml:id="pftm-148240">I</w>
+         <c> </c>
+         <w xml:id="pftm-148250">saw</w>
+         <pc xml:id="pftm-148260">,</pc>
+      </l>
+      <l xml:id="pftm-l08235">
+         <c> </c>
+         <w xml:id="pftm-148270">As</w>
+         <c> </c>
+         <w xml:id="pftm-148280">it</w>
+         <c> </c>
+         <w xml:id="pftm-148290">moved</w>
+         <c> </c>
+         <w xml:id="pftm-148300">past</w>
+         <c> </c>
+         <w xml:id="pftm-148310">the</w>
+         <c> </c>
+         <w xml:id="pftm-148320">portal</w>
+         <pc xml:id="pftm-148330">,</pc>
+         <c> </c>
+         <w xml:id="pftm-148340">the</w>
+         <c> </c>
+         <w xml:id="pftm-148350">pillars</w>
+         <pc xml:id="pftm-148360">,</pc>
+      </l>
+      <l xml:id="pftm-l08240">
+         <c> </c>
+         <w xml:id="pftm-148370">A</w>
+         <c> </c>
+         <w xml:id="pftm-148380">contraption</w>
+         <c> </c>
+         <w xml:id="pftm-148390">that</w>
+         <c> </c>
+         <w xml:id="pftm-148400">looked</w>
+         <c> </c>
+         <w xml:id="pftm-148410">like</w>
+         <c> </c>
+         <w xml:id="pftm-148420">a</w>
+         <c> </c>
+         <w xml:id="pftm-148430">coffin</w>
+      </l>
+      <l xml:id="pftm-l08245">
+         <c> </c>
+         <w xml:id="pftm-148440">They</w>
+         <c> </c>
+         <w xml:id="pftm-148450">were</w>
+         <c> </c>
+         <w xml:id="pftm-148460">heaving</w>
+         <c> </c>
+         <w xml:id="pftm-148470">out</w>
+         <c> </c>
+         <pc xml:id="pftm-148480">...</pc>
+         <c> </c>
+         <w xml:id="pftm-148490">crashing</w>
+         <c> </c>
+         <w xml:id="pftm-148500">and</w>
+         <c> </c>
+         <w xml:id="pftm-148510">crushing</w>
+         <c> </c>
+         <pc xml:id="pftm-148520">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148530">your</w>
+         <c> </c>
+         <w xml:id="pftm-148540">piano</w>
+         <pc xml:id="pftm-148550" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="pftm-s01105">
+      <head xml:id="pftm-h00535">
+         <w xml:id="pftm-148590">10</w>
+      </head>
+      <l xml:id="pftm-l08250">
+         <w xml:id="pftm-148610">That</w>
+         <c> </c>
+         <w xml:id="pftm-148620">one</w>
+         <pc xml:id="pftm-148630">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-148640">...</pc>
+         <c> </c>
+         <w xml:id="pftm-148650">that</w>
+         <c> </c>
+         <w xml:id="pftm-148660">championed</w>
+         <c> </c>
+         <w xml:id="pftm-148670">Poland</w>
+         <pc xml:id="pftm-148680">,</pc>
+         <c> </c>
+         <w xml:id="pftm-148690">he</w>
+         <c> </c>
+         <w xml:id="pftm-148700">from</w>
+         <c> </c>
+         <w xml:id="pftm-148710">the</w>
+         <c> </c>
+         <w xml:id="pftm-148720">heights</w>
+      </l>
+      <l xml:id="pftm-l08255">
+         <c> </c>
+         <w xml:id="pftm-148730">All-Perfections</w>
+         <c> </c>
+         <w xml:id="pftm-148740">of</w>
+         <c> </c>
+         <w xml:id="pftm-148750">history</w>
+      </l>
+      <l xml:id="pftm-l08260">
+         <c> </c>
+         <w xml:id="pftm-148760">People-bound</w>
+         <pc xml:id="pftm-148770">,</pc>
+         <c> </c>
+         <w xml:id="pftm-148780">anthem</w>
+         <c> </c>
+         <w xml:id="pftm-148790">ecstatic</w>
+         <c> </c>
+         <pc xml:id="pftm-148800">—</pc>
+      </l>
+      <l xml:id="pftm-l08265">
+         <c> </c>
+         <w xml:id="pftm-148810">O</w>
+         <c> </c>
+         <w xml:id="pftm-148820">Poland</w>
+         <c> </c>
+         <pc xml:id="pftm-148830">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148840">of</w>
+         <c> </c>
+         <w xml:id="pftm-148850">wheelwrights</w>
+         <c> </c>
+         <w xml:id="pftm-148860">transformed</w>
+         <pc xml:id="pftm-148870">;</pc>
+      </l>
+      <l xml:id="pftm-l08270">
+         <c> </c>
+         <w xml:id="pftm-148880">That</w>
+         <c> </c>
+         <w xml:id="pftm-148890">same</w>
+         <c> </c>
+         <w xml:id="pftm-148900">one</w>
+         <c> </c>
+         <pc xml:id="pftm-148910">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148920">crushed</w>
+         <c> </c>
+         <w xml:id="pftm-148930">on</w>
+         <c> </c>
+         <w xml:id="pftm-148940">the</w>
+         <c> </c>
+         <w xml:id="pftm-148950">granite</w>
+         <c> </c>
+         <w xml:id="pftm-148960">squares</w>
+         <pc xml:id="pftm-148970">!</pc>
+      </l>
+      <l xml:id="pftm-l08275">
+         <c> </c>
+         <pc xml:id="pftm-148980">—</pc>
+         <c> </c>
+         <w xml:id="pftm-148990">Over</w>
+         <c> </c>
+         <w xml:id="pftm-149000">there</w>
+         <pc xml:id="pftm-149010">:</pc>
+         <c> </c>
+         <w xml:id="pftm-149020">as</w>
+         <c> </c>
+         <w xml:id="pftm-149030">the</w>
+         <c> </c>
+         <w xml:id="pftm-149040">thoughts</w>
+         <c> </c>
+         <w xml:id="pftm-149050">of</w>
+         <c> </c>
+         <w xml:id="pftm-149060">the</w>
+         <c> </c>
+         <w xml:id="pftm-149070">just</w>
+         <c> </c>
+         <w xml:id="pftm-149080">man</w>
+      </l>
+      <l xml:id="pftm-l08280">
+         <c> </c>
+         <w xml:id="pftm-149090">Are</w>
+         <c> </c>
+         <w xml:id="pftm-149100">drowned</w>
+         <c> </c>
+         <w xml:id="pftm-149110">in</w>
+         <c> </c>
+         <w xml:id="pftm-149120">the</w>
+         <c> </c>
+         <w xml:id="pftm-149130">popular</w>
+         <c> </c>
+         <w xml:id="pftm-149140">anger</w>
+      </l>
+      <l xml:id="pftm-l08285">
+         <c> </c>
+         <w xml:id="pftm-149150">Or</w>
+         <c> </c>
+         <w xml:id="pftm-149160">as</w>
+         <pc xml:id="pftm-149170">,</pc>
+         <c> </c>
+         <w xml:id="pftm-149180">from</w>
+         <c> </c>
+         <w xml:id="pftm-149190">age</w>
+         <c> </c>
+         <w xml:id="pftm-149200">unto</w>
+         <c> </c>
+         <w xml:id="pftm-149210">age</w>
+         <pc xml:id="pftm-149220">,</pc>
+      </l>
+      <l xml:id="pftm-l08290">
+         <c> </c>
+         <w xml:id="pftm-149230">All</w>
+         <c> </c>
+         <w xml:id="pftm-149240">its</w>
+         <c> </c>
+         <w xml:id="pftm-149250">angers</w>
+         <c> </c>
+         <w xml:id="pftm-149260">awaken</w>
+         <pc xml:id="pftm-149270" unit="sentence">!</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08295">
+         <w xml:id="pftm-149280">And</w>
+         <c> </c>
+         <w xml:id="pftm-149290">right</w>
+         <c> </c>
+         <w xml:id="pftm-149300">there</w>
+         <c> </c>
+         <pc xml:id="pftm-149310">—</pc>
+         <c> </c>
+         <w xml:id="pftm-149320">like</w>
+         <c> </c>
+         <w xml:id="pftm-149330">Orpheus</w>
+         <pc xml:id="pftm-149340">’</pc>
+         <c> </c>
+         <w xml:id="pftm-149350">body</w>
+         <pc xml:id="pftm-149360">,</pc>
+      </l>
+      <l xml:id="pftm-l08300">
+         <c> </c>
+         <w xml:id="pftm-149370">A</w>
+         <c> </c>
+         <w xml:id="pftm-149380">thousand</w>
+         <c> </c>
+         <w xml:id="pftm-149390">nailed</w>
+         <c> </c>
+         <w xml:id="pftm-149400">passions</w>
+         <c> </c>
+         <w xml:id="pftm-149410">tear</w>
+         <c> </c>
+         <w xml:id="pftm-149420">him</w>
+         <c> </c>
+         <w xml:id="pftm-149430">to</w>
+         <c> </c>
+         <w xml:id="pftm-149440">shreds</w>
+      </l>
+      <l xml:id="pftm-l08305">
+         <c> </c>
+         <w xml:id="pftm-149450">And</w>
+         <c> </c>
+         <w xml:id="pftm-149460">each</w>
+         <c> </c>
+         <w xml:id="pftm-149470">one</w>
+         <c> </c>
+         <w xml:id="pftm-149480">howling</w>
+         <pc xml:id="pftm-149490">:</pc>
+         <c> </c>
+         <pc xml:id="pftm-149500">“</pc>
+         <w xml:id="pftm-149510">Not</w>
+         <c> </c>
+         <w xml:id="pftm-149520">me</w>
+         <pc xml:id="pftm-149530">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-149540" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08310">
+         <w xml:id="pftm-149550">Not</w>
+         <c> </c>
+         <w xml:id="pftm-149560">me</w>
+         <pc xml:id="pftm-149570">!</pc>
+         <pc xml:id="pftm-149580">”</pc>
+         <c> </c>
+         <pc xml:id="pftm-149590">—</pc>
+         <c> </c>
+         <w xml:id="pftm-149600">with</w>
+         <c> </c>
+         <w xml:id="pftm-149610">a</w>
+         <c> </c>
+         <w xml:id="pftm-149620">clatter</w>
+         <c> </c>
+         <w xml:id="pftm-149630">and</w>
+         <c> </c>
+         <w xml:id="pftm-149640">chatter</w>
+         <c> </c>
+         <w xml:id="pftm-149650">of</w>
+         <c> </c>
+         <w xml:id="pftm-149660">teeth</w>
+         <c> </c>
+         <pc xml:id="pftm-149670">—</pc>
+         <c> </c>
+         <pc xml:id="pftm-149680">—</pc>
+      </l>
+      <l xml:id="pftm-l08315">
+         <c> </c>
+         <w xml:id="pftm-149690">Is</w>
+         <c> </c>
+         <w xml:id="pftm-149700">it</w>
+         <c> </c>
+         <w xml:id="pftm-149710">you</w>
+         <pc xml:id="pftm-149720">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-149730">—</pc>
+         <c> </c>
+         <w xml:id="pftm-149740">is</w>
+         <c> </c>
+         <w xml:id="pftm-149750">it</w>
+         <c> </c>
+         <w xml:id="pftm-149760">me</w>
+         <pc xml:id="pftm-149770">?</pc>
+         <c> </c>
+         <pc xml:id="pftm-149780">—</pc>
+         <c> </c>
+         <w xml:id="pftm-149790">then</w>
+         <c> </c>
+         <w xml:id="pftm-149800">let’s</w>
+         <c> </c>
+         <w xml:id="pftm-149810">strike</w>
+         <c> </c>
+         <w xml:id="pftm-149820">up</w>
+         <c> </c>
+         <w xml:id="pftm-149830">a</w>
+         <c> </c>
+         <w xml:id="pftm-149840">Judgment</w>
+         <c> </c>
+         <w xml:id="pftm-149850">Day</w>
+         <c> </c>
+         <w xml:id="pftm-149860">song</w>
+         <pc xml:id="pftm-149870">,</pc>
+      </l>
+      <l xml:id="pftm-l08320">
+         <c> </c>
+         <w xml:id="pftm-149880">Urge</w>
+         <c> </c>
+         <w xml:id="pftm-149890">them</w>
+         <c> </c>
+         <w xml:id="pftm-149900">on</w>
+         <pc xml:id="pftm-149910">:</pc>
+         <c> </c>
+         <pc xml:id="pftm-149920">“</pc>
+         <w xml:id="pftm-149930">Rejoice</w>
+         <pc xml:id="pftm-149940">,</pc>
+         <c> </c>
+         <w xml:id="pftm-149950">o</w>
+         <c> </c>
+         <w xml:id="pftm-149960">you</w>
+         <c> </c>
+         <w xml:id="pftm-149970">child</w>
+         <c> </c>
+         <w xml:id="pftm-149980">who</w>
+         <c> </c>
+         <w xml:id="pftm-149990">will</w>
+         <c> </c>
+         <w xml:id="pftm-150000">be</w>
+         <pc xml:id="pftm-150010">!</pc>
+         <c> </c>
+         <pc xml:id="pftm-150020" unit="sentence">...</pc>
+         <c> </c>
+      </l>
+      <l xml:id="pftm-l08325">
+         <w xml:id="pftm-150030">With</w>
+         <c> </c>
+         <w xml:id="pftm-150040">groaning</w>
+         <c> </c>
+         <pc xml:id="pftm-150050">—</pc>
+         <c> </c>
+         <w xml:id="pftm-150060">stories</w>
+         <c> </c>
+         <w xml:id="pftm-150070">gone</w>
+         <c> </c>
+         <w xml:id="pftm-150080">deaf</w>
+         <pc xml:id="pftm-150090">:</pc>
+      </l>
+      <l xml:id="pftm-l08330">
+         <c> </c>
+         <w xml:id="pftm-150100">The</w>
+         <c> </c>
+         <w xml:id="pftm-150110">Ideal</w>
+         <c> </c>
+         <pc xml:id="pftm-150120">—</pc>
+         <c> </c>
+         <w xml:id="pftm-150130">now</w>
+         <c> </c>
+         <w xml:id="pftm-150140">brought</w>
+         <c> </c>
+         <w xml:id="pftm-150150">low</w>
+         <c> </c>
+         <w xml:id="pftm-150160">on</w>
+         <c> </c>
+         <w xml:id="pftm-150170">the</w>
+         <c> </c>
+         <w xml:id="pftm-150180">pavement</w>
+         <pc xml:id="pftm-150190">”</pc>
+         <c> </c>
+         <pc xml:id="pftm-150200">—</pc>
+         <c> </c>
+         <pc xml:id="pftm-150210">—</pc>
+      </l>
+   </lg>
+</div>

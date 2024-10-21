@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
+     ana="#translation_bul"
+     corresp="#work01005"
+     subtype="rppatext"
+     type="poem"
+     xml:id="text01419"
+     xml:lang="eng">
+   <link target="#pers00829" type="author"/>
+   <link target="#pers00860" type="translator"/>
+   <link target="#nott" type="nott"/>
+   <note type="source" xml:id="dcie-n00020">
+      <bibl xml:id="dcie-div00025">
+         <w xml:id="dcie-17110">Hristo</w>
+         <c> </c>
+         <w xml:id="dcie-17120">Botev</w>
+         <pc xml:id="dcie-17130" unit="sentence">.</pc>
+         <c> </c>
+         <title level="m">
+            <w xml:id="dcie-17140">Poems</w>
+         </title>
+         <pc xml:id="dcie-17150">,</pc>
+         <c> </c>
+         <w xml:id="dcie-17160">translated</w>
+         <c> </c>
+         <w xml:id="dcie-17170">by</w>
+         <c> </c>
+         <w xml:id="dcie-17180">Kevin</w>
+         <c> </c>
+         <w xml:id="dcie-17190">Ireland</w>
+         <pc xml:id="dcie-17200" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="dcie-17210">Sofia</w>
+         <pc xml:id="dcie-17220">:</pc>
+         <c> </c>
+         <w xml:id="dcie-17230">Sofia</w>
+         <c> </c>
+         <w xml:id="dcie-17240">Press</w>
+         <pc xml:id="dcie-17250">,</pc>
+         <c> </c>
+         <w xml:id="dcie-17260">1982.</w>
+         <pc unit="sentence" xml:id="dcie-17260-eos"/>
+      </bibl>
+   </note>
+   <head type="main" xml:lang="eng" xml:id="dcie-h00025">
+      <w xml:id="dcie-12830">Hadji</w>
+      <c> </c>
+      <w xml:id="dcie-12840">Dimiter</w>
+   </head>
+   <lg xml:id="dcie-s00155">
+      <l xml:id="dcie-l00845">
+         <w xml:id="dcie-12870">He</w>
+         <c> </c>
+         <w xml:id="dcie-12880">lives</w>
+         <pc xml:id="dcie-12890">,</pc>
+         <c> </c>
+         <w xml:id="dcie-12900">still</w>
+         <c> </c>
+         <w xml:id="dcie-12910">he</w>
+         <c> </c>
+         <w xml:id="dcie-12920">lives</w>
+         <pc xml:id="dcie-12930" unit="sentence">!</pc>
+         <c> </c>
+         <w xml:id="dcie-12940">In</w>
+         <c> </c>
+         <w xml:id="dcie-12950">the</w>
+         <c> </c>
+         <w xml:id="dcie-12960">mountain</w>
+         <c> </c>
+         <w xml:id="dcie-12970">fast</w>
+         <pc xml:id="dcie-12980">,</pc>
+      </l>
+      <l xml:id="dcie-l00850">
+         <c> </c>
+         <w xml:id="dcie-12990">soaked</w>
+         <c> </c>
+         <w xml:id="dcie-13000">in</w>
+         <c> </c>
+         <w xml:id="dcie-13010">blood</w>
+         <pc xml:id="dcie-13020">,</pc>
+         <c> </c>
+         <w xml:id="dcie-13030">he</w>
+         <c> </c>
+         <w xml:id="dcie-13040">lies</w>
+         <c> </c>
+         <w xml:id="dcie-13050">and</w>
+         <c> </c>
+         <w xml:id="dcie-13060">groans</w>
+         <pc xml:id="dcie-13070">,</pc>
+      </l>
+      <l xml:id="dcie-l00855">
+         <c> </c>
+         <w xml:id="dcie-13080">a</w>
+         <c> </c>
+         <w xml:id="dcie-13090">rebel</w>
+         <pc xml:id="dcie-13100">,</pc>
+         <c> </c>
+         <w xml:id="dcie-13110">wounded</w>
+         <c> </c>
+         <w xml:id="dcie-13120">in</w>
+         <c> </c>
+         <w xml:id="dcie-13130">the</w>
+         <c> </c>
+         <w xml:id="dcie-13140">chest</w>
+         <pc xml:id="dcie-13150">,</pc>
+      </l>
+      <l xml:id="dcie-l00860">
+         <c> </c>
+         <w xml:id="dcie-13160">a</w>
+         <c> </c>
+         <w xml:id="dcie-13170">rebel</w>
+         <pc xml:id="dcie-13180">,</pc>
+         <c> </c>
+         <w xml:id="dcie-13190">young</w>
+         <c> </c>
+         <w xml:id="dcie-13200">and</w>
+         <c> </c>
+         <w xml:id="dcie-13210">with</w>
+         <c> </c>
+         <w xml:id="dcie-13220">a</w>
+         <c> </c>
+         <w xml:id="dcie-13230">manly</w>
+         <c> </c>
+         <w xml:id="dcie-13240">strength</w>
+         <pc xml:id="dcie-13250" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00160">
+      <l xml:id="dcie-l00865">
+         <w xml:id="dcie-13280">To</w>
+         <c> </c>
+         <w xml:id="dcie-13290">one</w>
+         <c> </c>
+         <w xml:id="dcie-13300">side</w>
+         <c> </c>
+         <w xml:id="dcie-13310">he</w>
+         <c> </c>
+         <w xml:id="dcie-13320">has</w>
+         <c> </c>
+         <w xml:id="dcie-13330">thrown</w>
+         <c> </c>
+         <w xml:id="dcie-13340">a</w>
+         <c> </c>
+         <w xml:id="dcie-13350">gun</w>
+         <pc xml:id="dcie-13360">,</pc>
+      </l>
+      <l xml:id="dcie-l00870">
+         <c> </c>
+         <w xml:id="dcie-13370">to</w>
+         <c> </c>
+         <w xml:id="dcie-13380">the</w>
+         <c> </c>
+         <w xml:id="dcie-13390">other</w>
+         <c> </c>
+         <w xml:id="dcie-13400">a</w>
+         <c> </c>
+         <w xml:id="dcie-13410">sword</w>
+         <c> </c>
+         <w xml:id="dcie-13420">in</w>
+         <c> </c>
+         <w xml:id="dcie-13430">broken</w>
+         <c> </c>
+         <w xml:id="dcie-13440">pieces</w>
+         <pc xml:id="dcie-13450">,</pc>
+      </l>
+      <l xml:id="dcie-l00875">
+         <c> </c>
+         <w xml:id="dcie-13460">his</w>
+         <c> </c>
+         <w xml:id="dcie-13470">head</w>
+         <c> </c>
+         <w xml:id="dcie-13480">rolls</w>
+         <pc xml:id="dcie-13490">,</pc>
+         <c> </c>
+         <w xml:id="dcie-13500">his</w>
+         <c> </c>
+         <w xml:id="dcie-13510">eyes</w>
+         <c> </c>
+         <w xml:id="dcie-13520">are</w>
+         <c> </c>
+         <w xml:id="dcie-13530">dulled</w>
+         <pc xml:id="dcie-13540">,</pc>
+      </l>
+      <l xml:id="dcie-l00880">
+         <c> </c>
+         <w xml:id="dcie-13550">his</w>
+         <c> </c>
+         <w xml:id="dcie-13560">mouth</w>
+         <c> </c>
+         <w xml:id="dcie-13570">describes</w>
+         <c> </c>
+         <w xml:id="dcie-13580">the</w>
+         <c> </c>
+         <w xml:id="dcie-13590">universe</w>
+         <c> </c>
+         <w xml:id="dcie-13600">with</w>
+         <c> </c>
+         <w xml:id="dcie-13610">curses</w>
+         <pc xml:id="dcie-13620" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00165">
+      <l xml:id="dcie-l00885">
+         <w xml:id="dcie-13650">The</w>
+         <c> </c>
+         <w xml:id="dcie-13660">rebel</w>
+         <c> </c>
+         <w xml:id="dcie-13670">lies</w>
+         <pc xml:id="dcie-13680">,</pc>
+         <c> </c>
+         <w xml:id="dcie-13690">and</w>
+         <c> </c>
+         <w xml:id="dcie-13700">in</w>
+         <c> </c>
+         <w xml:id="dcie-13710">the</w>
+         <c> </c>
+         <w xml:id="dcie-13720">sky</w>
+      </l>
+      <l xml:id="dcie-l00890">
+         <c> </c>
+         <w xml:id="dcie-13730">there</w>
+         <c> </c>
+         <w xml:id="dcie-13740">burns</w>
+         <c> </c>
+         <w xml:id="dcie-13750">a</w>
+         <c> </c>
+         <w xml:id="dcie-13760">motionless</w>
+         <c> </c>
+         <w xml:id="dcie-13770">and</w>
+         <c> </c>
+         <w xml:id="dcie-13780">angry</w>
+         <c> </c>
+         <w xml:id="dcie-13790">sun</w>
+         <pc xml:id="dcie-13800">;</pc>
+      </l>
+      <l xml:id="dcie-l00895">
+         <c> </c>
+         <w xml:id="dcie-13810">a</w>
+         <c> </c>
+         <w xml:id="dcie-13820">harvester</w>
+         <c> </c>
+         <w xml:id="dcie-13830">sings</w>
+         <c> </c>
+         <w xml:id="dcie-13840">in</w>
+         <c> </c>
+         <w xml:id="dcie-13850">fields</w>
+         <c> </c>
+         <w xml:id="dcie-13860">near</w>
+         <c> </c>
+         <w xml:id="dcie-13870">by</w>
+         <pc xml:id="dcie-13880">,</pc>
+      </l>
+      <l xml:id="dcie-l00900">
+         <c> </c>
+         <w xml:id="dcie-13890">and</w>
+         <c> </c>
+         <w xml:id="dcie-13900">faster</w>
+         <c> </c>
+         <w xml:id="dcie-13910">still</w>
+         <c> </c>
+         <w xml:id="dcie-13920">his</w>
+         <c> </c>
+         <w xml:id="dcie-13930">lifeblood</w>
+         <c> </c>
+         <w xml:id="dcie-13940">runs</w>
+         <pc xml:id="dcie-13950" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00170">
+      <l xml:id="dcie-l00905">
+         <w xml:id="dcie-13980">It’s</w>
+         <c> </c>
+         <w xml:id="dcie-13990">harvest</w>
+         <c> </c>
+         <w xml:id="dcie-14000">now</w>
+         <pc xml:id="dcie-14010" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="dcie-14020">Slave</w>
+         <c> </c>
+         <w xml:id="dcie-14030">girls</w>
+         <c> </c>
+         <pc xml:id="dcie-14040">–</pc>
+         <c> </c>
+         <w xml:id="dcie-14050">chant</w>
+      </l>
+      <l xml:id="dcie-l00910">
+         <c> </c>
+         <w xml:id="dcie-14060">your</w>
+         <c> </c>
+         <w xml:id="dcie-14070">songs</w>
+         <c> </c>
+         <w xml:id="dcie-14080">of</w>
+         <c> </c>
+         <w xml:id="dcie-14090">grief</w>
+         <pc xml:id="dcie-14100" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="dcie-14110">And</w>
+         <c> </c>
+         <w xml:id="dcie-14120">you</w>
+         <pc xml:id="dcie-14130">,</pc>
+         <c> </c>
+         <w xml:id="dcie-14140">sun</w>
+         <pc xml:id="dcie-14150">,</pc>
+         <c> </c>
+         <w xml:id="dcie-14160">shine</w>
+      </l>
+      <l xml:id="dcie-l00915">
+         <c> </c>
+         <w xml:id="dcie-14170">upon</w>
+         <c> </c>
+         <w xml:id="dcie-14180">this</w>
+         <c> </c>
+         <w xml:id="dcie-14190">land</w>
+         <c> </c>
+         <w xml:id="dcie-14200">of</w>
+         <c> </c>
+         <w xml:id="dcie-14210">slaves</w>
+         <pc xml:id="dcie-14220" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="dcie-14230">My</w>
+         <c> </c>
+         <w xml:id="dcie-14240">heart</w>
+      </l>
+      <l xml:id="dcie-l00920">
+         <c> </c>
+         <w xml:id="dcie-14250">be</w>
+         <c> </c>
+         <w xml:id="dcie-14260">hushed</w>
+         <pc xml:id="dcie-14270" unit="sentence">.</pc>
+         <c> </c>
+         <w xml:id="dcie-14280">One</w>
+         <c> </c>
+         <w xml:id="dcie-14290">rebel</w>
+         <c> </c>
+         <w xml:id="dcie-14300">more</w>
+         <c> </c>
+         <w xml:id="dcie-14310">will</w>
+         <c> </c>
+         <w xml:id="dcie-14320">die</w>
+         <pc xml:id="dcie-14330" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00175">
+      <l xml:id="dcie-l00925">
+         <w xml:id="dcie-14360">He</w>
+         <c> </c>
+         <w xml:id="dcie-14370">who</w>
+         <c> </c>
+         <w xml:id="dcie-14380">falls</w>
+         <c> </c>
+         <w xml:id="dcie-14390">while</w>
+         <c> </c>
+         <w xml:id="dcie-14400">fighting</w>
+         <c> </c>
+         <w xml:id="dcie-14410">to</w>
+         <c> </c>
+         <w xml:id="dcie-14420">be</w>
+         <c> </c>
+         <w xml:id="dcie-14430">free</w>
+      </l>
+      <l xml:id="dcie-l00930">
+         <c> </c>
+         <w xml:id="dcie-14440">can</w>
+         <c> </c>
+         <w xml:id="dcie-14450">never</w>
+         <c> </c>
+         <w xml:id="dcie-14460">die</w>
+         <pc xml:id="dcie-14470">:</pc>
+         <c> </c>
+         <w xml:id="dcie-14480">for</w>
+         <c> </c>
+         <w xml:id="dcie-14490">him</w>
+         <c> </c>
+         <w xml:id="dcie-14500">the</w>
+         <c> </c>
+         <w xml:id="dcie-14510">sky</w>
+      </l>
+      <l xml:id="dcie-l00935">
+         <c> </c>
+         <w xml:id="dcie-14520">and</w>
+         <c> </c>
+         <w xml:id="dcie-14530">earth</w>
+         <pc xml:id="dcie-14540">,</pc>
+         <c> </c>
+         <w xml:id="dcie-14550">the</w>
+         <c> </c>
+         <w xml:id="dcie-14560">trees</w>
+         <c> </c>
+         <w xml:id="dcie-14570">and</w>
+         <c> </c>
+         <w xml:id="dcie-14580">beasts</w>
+         <c> </c>
+         <w xml:id="dcie-14590">shall</w>
+         <c> </c>
+         <w xml:id="dcie-14600">keen</w>
+         <pc xml:id="dcie-14610">,</pc>
+      </l>
+      <l xml:id="dcie-l00940">
+         <c> </c>
+         <w xml:id="dcie-14620">to</w>
+         <c> </c>
+         <w xml:id="dcie-14630">him</w>
+         <c> </c>
+         <w xml:id="dcie-14640">the</w>
+         <c> </c>
+         <w xml:id="dcie-14650">minstrel’s</w>
+         <c> </c>
+         <w xml:id="dcie-14660">song</w>
+         <c> </c>
+         <w xml:id="dcie-14670">shall</w>
+         <c> </c>
+         <w xml:id="dcie-14680">rise</w>
+         <c> </c>
+         <pc xml:id="dcie-14690">…</pc>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00180">
+      <l xml:id="dcie-l00945">
+         <w xml:id="dcie-14720">By</w>
+         <c> </c>
+         <w xml:id="dcie-14730">day</w>
+         <c> </c>
+         <w xml:id="dcie-14740">he’s</w>
+         <c> </c>
+         <w xml:id="dcie-14750">shaded</w>
+         <c> </c>
+         <w xml:id="dcie-14760">by</w>
+         <c> </c>
+         <w xml:id="dcie-14770">an</w>
+         <c> </c>
+         <w xml:id="dcie-14780">eagle</w>
+         <pc xml:id="dcie-14790">,</pc>
+      </l>
+      <l xml:id="dcie-l00950">
+         <c> </c>
+         <w xml:id="dcie-14800">a</w>
+         <c> </c>
+         <w xml:id="dcie-14810">wolf</w>
+         <c> </c>
+         <w xml:id="dcie-14820">licks</w>
+         <c> </c>
+         <w xml:id="dcie-14830">gently</w>
+         <c> </c>
+         <w xml:id="dcie-14840">at</w>
+         <c> </c>
+         <w xml:id="dcie-14850">his</w>
+         <c> </c>
+         <w xml:id="dcie-14860">wounds</w>
+         <pc xml:id="dcie-14870">,</pc>
+      </l>
+      <l xml:id="dcie-l00955">
+         <c> </c>
+         <w xml:id="dcie-14880">above</w>
+         <pc xml:id="dcie-14890">,</pc>
+         <c> </c>
+         <w xml:id="dcie-14900">a</w>
+         <c> </c>
+         <w xml:id="dcie-14910">falcon</w>
+         <c> </c>
+         <pc xml:id="dcie-14920">–</pc>
+         <c> </c>
+         <w xml:id="dcie-14930">bird</w>
+         <c> </c>
+         <w xml:id="dcie-14940">of</w>
+         <c> </c>
+         <w xml:id="dcie-14950">rebels</w>
+         <c> </c>
+         <pc xml:id="dcie-14960">–</pc>
+      </l>
+      <l xml:id="dcie-l00960">
+         <c> </c>
+         <w xml:id="dcie-14970">tends</w>
+         <c> </c>
+         <w xml:id="dcie-14980">to</w>
+         <c> </c>
+         <w xml:id="dcie-14990">this</w>
+         <c> </c>
+         <w xml:id="dcie-15000">rebel</w>
+         <c> </c>
+         <w xml:id="dcie-15010">as</w>
+         <c> </c>
+         <w xml:id="dcie-15020">a</w>
+         <c> </c>
+         <w xml:id="dcie-15030">brother</w>
+         <c> </c>
+         <w xml:id="dcie-15040">would</w>
+         <pc xml:id="dcie-15050" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00185">
+      <l xml:id="dcie-l00965">
+         <w xml:id="dcie-15080">The</w>
+         <c> </c>
+         <w xml:id="dcie-15090">moon</w>
+         <c> </c>
+         <w xml:id="dcie-15100">comes</w>
+         <c> </c>
+         <w xml:id="dcie-15110">out</w>
+         <c> </c>
+         <w xml:id="dcie-15120">and</w>
+         <c> </c>
+         <w xml:id="dcie-15130">day</w>
+         <c> </c>
+         <w xml:id="dcie-15140">grows</w>
+         <c> </c>
+         <w xml:id="dcie-15150">dim</w>
+         <pc xml:id="dcie-15160">,</pc>
+      </l>
+      <l xml:id="dcie-l00970">
+         <c> </c>
+         <w xml:id="dcie-15170">on</w>
+         <c> </c>
+         <w xml:id="dcie-15180">heaven’s</w>
+         <c> </c>
+         <w xml:id="dcie-15190">vault</w>
+         <c> </c>
+         <w xml:id="dcie-15200">the</w>
+         <c> </c>
+         <w xml:id="dcie-15210">stars</w>
+         <c> </c>
+         <w xml:id="dcie-15220">now</w>
+         <c> </c>
+         <w xml:id="dcie-15230">throng</w>
+         <pc xml:id="dcie-15240">,</pc>
+      </l>
+      <l xml:id="dcie-l00975">
+         <c> </c>
+         <w xml:id="dcie-15250">the</w>
+         <c> </c>
+         <w xml:id="dcie-15260">forest</w>
+         <c> </c>
+         <w xml:id="dcie-15270">rustles</w>
+         <pc xml:id="dcie-15280">,</pc>
+         <c> </c>
+         <w xml:id="dcie-15290">quiet</w>
+         <c> </c>
+         <w xml:id="dcie-15300">stirs</w>
+         <c> </c>
+         <w xml:id="dcie-15310">the</w>
+         <c> </c>
+         <w xml:id="dcie-15320">wind</w>
+         <pc xml:id="dcie-15330">,</pc>
+      </l>
+      <l xml:id="dcie-l00980">
+         <c> </c>
+         <w xml:id="dcie-15340">the</w>
+         <c> </c>
+         <w xml:id="dcie-15350">mountains</w>
+         <c> </c>
+         <w xml:id="dcie-15360">sing</w>
+         <c> </c>
+         <w xml:id="dcie-15370">an</w>
+         <c> </c>
+         <w xml:id="dcie-15380">outlaw</w>
+         <c> </c>
+         <w xml:id="dcie-15390">song</w>
+         <pc xml:id="dcie-15400" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00190">
+      <l xml:id="dcie-l00985">
+         <w xml:id="dcie-15430">Wood-sprites</w>
+         <pc xml:id="dcie-15440">,</pc>
+         <c> </c>
+         <w xml:id="dcie-15450">in</w>
+         <c> </c>
+         <w xml:id="dcie-15460">their</w>
+         <c> </c>
+         <w xml:id="dcie-15470">white-hued</w>
+         <c> </c>
+         <w xml:id="dcie-15480">dress</w>
+         <pc xml:id="dcie-15490">,</pc>
+      </l>
+      <l xml:id="dcie-l00990">
+         <c> </c>
+         <w xml:id="dcie-15500">fair</w>
+         <c> </c>
+         <w xml:id="dcie-15510">and</w>
+         <c> </c>
+         <w xml:id="dcie-15520">beautiful</w>
+         <pc xml:id="dcie-15530">,</pc>
+         <c> </c>
+         <w xml:id="dcie-15540">take</w>
+         <c> </c>
+         <w xml:id="dcie-15550">up</w>
+         <c> </c>
+         <w xml:id="dcie-15560">the</w>
+         <c> </c>
+         <w xml:id="dcie-15570">tune</w>
+         <pc xml:id="dcie-15580">,</pc>
+      </l>
+      <l xml:id="dcie-l00995">
+         <c> </c>
+         <w xml:id="dcie-15590">hushed</w>
+         <c> </c>
+         <w xml:id="dcie-15600">their</w>
+         <c> </c>
+         <w xml:id="dcie-15610">footfall</w>
+         <c> </c>
+         <w xml:id="dcie-15620">in</w>
+         <c> </c>
+         <w xml:id="dcie-15630">the</w>
+         <c> </c>
+         <w xml:id="dcie-15640">grass</w>
+         <pc xml:id="dcie-15650">,</pc>
+      </l>
+      <l xml:id="dcie-l01000">
+         <c> </c>
+         <w xml:id="dcie-15660">as</w>
+         <c> </c>
+         <w xml:id="dcie-15670">all</w>
+         <c> </c>
+         <w xml:id="dcie-15680">about</w>
+         <c> </c>
+         <w xml:id="dcie-15690">him</w>
+         <c> </c>
+         <w xml:id="dcie-15700">then</w>
+         <c> </c>
+         <w xml:id="dcie-15710">sit</w>
+         <c> </c>
+         <w xml:id="dcie-15720">down</w>
+         <pc xml:id="dcie-15730" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00195">
+      <l xml:id="dcie-l01005">
+         <w xml:id="dcie-15760">One</w>
+         <c> </c>
+         <w xml:id="dcie-15770">sprinkles</w>
+         <c> </c>
+         <w xml:id="dcie-15780">coolness</w>
+         <c> </c>
+         <w xml:id="dcie-15790">over</w>
+         <c> </c>
+         <w xml:id="dcie-15800">him</w>
+         <pc xml:id="dcie-15810">,</pc>
+      </l>
+      <l xml:id="dcie-l01010">
+         <c> </c>
+         <w xml:id="dcie-15820">another</w>
+         <c> </c>
+         <w xml:id="dcie-15830">binds</w>
+         <c> </c>
+         <w xml:id="dcie-15840">his</w>
+         <c> </c>
+         <w xml:id="dcie-15850">wound</w>
+         <c> </c>
+         <w xml:id="dcie-15860">with</w>
+         <c> </c>
+         <w xml:id="dcie-15870">herbs</w>
+         <pc xml:id="dcie-15880">,</pc>
+      </l>
+      <l xml:id="dcie-l01015">
+         <c> </c>
+         <w xml:id="dcie-15890">a</w>
+         <c> </c>
+         <w xml:id="dcie-15900">third’s</w>
+         <c> </c>
+         <w xml:id="dcie-15910">quick</w>
+         <c> </c>
+         <w xml:id="dcie-15920">kisses</w>
+         <c> </c>
+         <w xml:id="dcie-15930">touch</w>
+         <c> </c>
+         <w xml:id="dcie-15940">his</w>
+         <c> </c>
+         <w xml:id="dcie-15950">lips</w>
+      </l>
+      <l xml:id="dcie-l01020">
+         <c> </c>
+         <w xml:id="dcie-15960">and</w>
+         <c> </c>
+         <w xml:id="dcie-15970">softly</w>
+         <c> </c>
+         <w xml:id="dcie-15980">smiles</w>
+         <c> </c>
+         <w xml:id="dcie-15990">as</w>
+         <c> </c>
+         <w xml:id="dcie-16000">he</w>
+         <c> </c>
+         <w xml:id="dcie-16010">looks</w>
+         <c> </c>
+         <w xml:id="dcie-16020">up</w>
+         <c> </c>
+         <w xml:id="dcie-16030">at</w>
+         <c> </c>
+         <w xml:id="dcie-16040">her</w>
+         <pc xml:id="dcie-16050" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00200">
+      <l xml:id="dcie-l01025">
+         <w xml:id="dcie-16080">Where</w>
+         <c> </c>
+         <w xml:id="dcie-16090">is</w>
+         <c> </c>
+         <w xml:id="dcie-16100">Karadja</w>
+         <pc xml:id="dcie-16110">?</pc>
+         <c> </c>
+         <pc xml:id="dcie-16120">–</pc>
+         <c> </c>
+         <w xml:id="dcie-16130">sister</w>
+         <pc xml:id="dcie-16140">,</pc>
+         <c> </c>
+         <w xml:id="dcie-16150">say</w>
+         <pc xml:id="dcie-16160" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+      <l xml:id="dcie-l01030">
+         <w xml:id="dcie-16170">Where</w>
+         <c> </c>
+         <w xml:id="dcie-16180">is</w>
+         <c> </c>
+         <w xml:id="dcie-16190">my</w>
+         <c> </c>
+         <w xml:id="dcie-16200">faithful</w>
+         <c> </c>
+         <w xml:id="dcie-16210">company</w>
+         <pc xml:id="dcie-16220" unit="sentence">?</pc>
+         <c> </c>
+      </l>
+      <l xml:id="dcie-l01035">
+         <w xml:id="dcie-16230">Tell</w>
+         <c> </c>
+         <w xml:id="dcie-16240">me</w>
+         <pc xml:id="dcie-16250">,</pc>
+         <c> </c>
+         <w xml:id="dcie-16260">then</w>
+         <c> </c>
+         <w xml:id="dcie-16270">bear</w>
+         <c> </c>
+         <w xml:id="dcie-16280">my</w>
+         <c> </c>
+         <w xml:id="dcie-16290">soul</w>
+         <c> </c>
+         <w xml:id="dcie-16300">away</w>
+         <c> </c>
+         <pc xml:id="dcie-16310">–</pc>
+      </l>
+      <l xml:id="dcie-l01040">
+         <c> </c>
+         <w xml:id="dcie-16320">sister</w>
+         <pc xml:id="dcie-16330">,</pc>
+         <c> </c>
+         <w xml:id="dcie-16340">this</w>
+         <c> </c>
+         <w xml:id="dcie-16350">is</w>
+         <c> </c>
+         <w xml:id="dcie-16360">where</w>
+         <c> </c>
+         <w xml:id="dcie-16370">I</w>
+         <c> </c>
+         <w xml:id="dcie-16380">want</w>
+         <c> </c>
+         <w xml:id="dcie-16390">to</w>
+         <c> </c>
+         <w xml:id="dcie-16400">die</w>
+         <pc xml:id="dcie-16410" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00205">
+      <l xml:id="dcie-l01045">
+         <w xml:id="dcie-16440">Enraptured</w>
+         <c> </c>
+         <w xml:id="dcie-16450">then</w>
+         <c> </c>
+         <w xml:id="dcie-16460">they</w>
+         <c> </c>
+         <w xml:id="dcie-16470">all</w>
+         <c> </c>
+         <w xml:id="dcie-16480">embrace</w>
+      </l>
+      <l xml:id="dcie-l01050">
+         <c> </c>
+         <w xml:id="dcie-16490">and</w>
+         <c> </c>
+         <w xml:id="dcie-16500">heavenwards</w>
+         <c> </c>
+         <w xml:id="dcie-16510">fly</w>
+         <pc xml:id="dcie-16520">,</pc>
+         <c> </c>
+         <w xml:id="dcie-16530">still</w>
+         <c> </c>
+         <w xml:id="dcie-16540">singing</w>
+         <c> </c>
+         <w xml:id="dcie-16550">on</w>
+      </l>
+      <l xml:id="dcie-l01055">
+         <c> </c>
+         <w xml:id="dcie-16560">they</w>
+         <c> </c>
+         <w xml:id="dcie-16570">fly</w>
+         <c> </c>
+         <w xml:id="dcie-16580">and</w>
+         <c> </c>
+         <w xml:id="dcie-16590">sing</w>
+         <c> </c>
+         <w xml:id="dcie-16600">till</w>
+         <c> </c>
+         <w xml:id="dcie-16610">morning</w>
+         <c> </c>
+         <w xml:id="dcie-16620">overtakes</w>
+      </l>
+      <l xml:id="dcie-l01060">
+         <c> </c>
+         <w xml:id="dcie-16630">their</w>
+         <c> </c>
+         <w xml:id="dcie-16640">quest</w>
+         <c> </c>
+         <w xml:id="dcie-16650">to</w>
+         <c> </c>
+         <w xml:id="dcie-16660">find</w>
+         <c> </c>
+         <w xml:id="dcie-16670">Karadja’s</w>
+         <c> </c>
+         <w xml:id="dcie-16680">soul</w>
+         <c> </c>
+         <pc xml:id="dcie-16690">…</pc>
+      </l>
+   </lg>
+   <lg xml:id="dcie-s00210">
+      <l xml:id="dcie-l01065">
+         <w xml:id="dcie-16720">On</w>
+         <c> </c>
+         <w xml:id="dcie-16730">the</w>
+         <c> </c>
+         <w xml:id="dcie-16740">mountainside</w>
+         <c> </c>
+         <pc xml:id="dcie-16750">–</pc>
+         <c> </c>
+         <w xml:id="dcie-16760">as</w>
+         <c> </c>
+         <w xml:id="dcie-16770">day</w>
+         <c> </c>
+         <w xml:id="dcie-16780">has</w>
+         <c> </c>
+         <w xml:id="dcie-16790">dawned</w>
+         <c> </c>
+         <pc xml:id="dcie-16800">–</pc>
+      </l>
+      <l xml:id="dcie-l01070">
+         <c> </c>
+         <w xml:id="dcie-16810">the</w>
+         <c> </c>
+         <w xml:id="dcie-16820">rebel</w>
+         <c> </c>
+         <w xml:id="dcie-16830">lies</w>
+         <pc xml:id="dcie-16840">,</pc>
+         <c> </c>
+         <w xml:id="dcie-16850">his</w>
+         <c> </c>
+         <w xml:id="dcie-16860">lifeblood</w>
+         <c> </c>
+         <w xml:id="dcie-16870">runs</w>
+         <pc xml:id="dcie-16880">,</pc>
+      </l>
+      <l xml:id="dcie-l01075">
+         <c> </c>
+         <w xml:id="dcie-16890">the</w>
+         <c> </c>
+         <w xml:id="dcie-16900">wolf</w>
+         <c> </c>
+         <w xml:id="dcie-16910">licks</w>
+         <c> </c>
+         <w xml:id="dcie-16920">at</w>
+         <c> </c>
+         <w xml:id="dcie-16930">his</w>
+         <c> </c>
+         <w xml:id="dcie-16940">bitter</w>
+         <c> </c>
+         <w xml:id="dcie-16950">wound</w>
+      </l>
+      <l xml:id="dcie-l01080">
+         <c> </c>
+         <w xml:id="dcie-16960">and</w>
+         <c> </c>
+         <w xml:id="dcie-16970">the</w>
+         <c> </c>
+         <w xml:id="dcie-16980">sun</w>
+         <pc xml:id="dcie-16990">,</pc>
+         <c> </c>
+         <w xml:id="dcie-17000">again</w>
+         <pc xml:id="dcie-17010">,</pc>
+         <c> </c>
+         <w xml:id="dcie-17020">now</w>
+         <c> </c>
+         <w xml:id="dcie-17030">burns</w>
+         <c> </c>
+         <pc xml:id="dcie-17040">–</pc>
+         <c> </c>
+         <w xml:id="dcie-17050">and</w>
+         <c> </c>
+         <w xml:id="dcie-17060">burns</w>
+         <pc xml:id="dcie-17070" unit="sentence">.</pc>
+         <c> </c>
+      </l>
+   </lg>
+</div>
