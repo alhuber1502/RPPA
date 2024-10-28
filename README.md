@@ -18,9 +18,10 @@ newspapers, and many more relevant contexts.
 * transcription and descriptive markup
 * multilingual DH
 * poetic analysis
-* contexts, similarity and foreignness
+* contexts, similarity and contrast
 * comparative literary studies
-* knowledge modelling
+* ontologically-underpinned knowledge modelling
+* linked open data (LOD/RDF)
 * mapping
 
 ## Web Technologies
