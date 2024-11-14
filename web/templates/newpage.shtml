@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="... / ..." -->
+    <!--#set var="bodyid" value="..." -->
+    <!--#set var="..." value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+    
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>
