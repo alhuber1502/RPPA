@@ -25,3 +25,8 @@ Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
 
 RewriteEngine On
 RewriteRule   ^(.*?)/rppaid.*?/(.*)$	/$1/$2	[L]
+
+# make pages extension-less
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.shtml -f
+RewriteRule ^(.*)$ $1.shtml [L]

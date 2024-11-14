@@ -30,3 +30,8 @@ RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 
 RewriteRule ^(.*?)/rppaid.*?/(.*)$ /$1/$2 [L]
+
+# make pages extension-less
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.shtml -f
+RewriteRule ^(.*)$ $1.shtml [L]
