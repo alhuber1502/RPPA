@@ -31,6 +31,14 @@ a.bg-rppa
 [data-bs-theme=light] .nav.nav-pills {
   background: #eee;
 }
+
+[data-bs-theme=dark] .globaltext {
+  background: #212529;
+}
+[data-bs-theme=light] .globaltext {
+  background: #fff;
+}
+
 a {
   color:#e07012;
 }
@@ -141,6 +149,9 @@ nav.navbar {
 [data-bs-theme=dark] footer {
     background-color: #555 !important;
 }
+[data-bs-theme=dark] footer img[title~="Huber"] {
+ filter: invert(.75);
+}
 @media (min-width: 450px) and (max-width: 1399px) {
   .mb-md-0 {
       margin-bottom: 0!important;
@@ -178,14 +189,29 @@ div[data-app="share_buttons"] {
   height: calc(100vh - 95px);
   background-color: #f1e4cf;
 }
-#map_tool main > .container-fluid {
+
+#world .map, #country .map, #continent .map {
+  width: 100%;
+  height: calc(100vh - 115px);
+  background-color: unset;
+}
+
+.world #navigation ul, .country #navigation ul, .continent #navigation ul {
+  columns: 3 auto;
+}
+.world #navigation, .country #navigation, .continent #navigation {
+  max-height: calc(100vh - 115px);
+  overflow: scroll;
+}
+
+#home main > .container-fluid {
   padding-top: 55px;
   padding-left: 0;
   padding-right: 0;
   max-width: none;
   padding-bottom: 0px;
 }
-#map_tool input {
+#home input {
     accent-color: #cd6711;
 }
 @media (min-width:768px) {
@@ -410,10 +436,21 @@ img[src='/images/female.png'],
 .context .attribution {
   font-size:.85em;
   float:right;
-  width: 80%;
+  /*width: 80%;*/
   text-align: right;
   margin-right: 15px;
 }
+
+[data-bs-theme=light] .globaltext .attribution, 
+[data-bs-theme=light] .context .attribution {
+  background-color: #eee;
+}
+
+[data-bs-theme=dark] .globaltext .attribution, 
+[data-bs-theme=dark] .context .attribution {
+  background-color: #444;
+}
+
 .globaltext .attribution div, 
 .context .attribution div {
   display: inline-block;

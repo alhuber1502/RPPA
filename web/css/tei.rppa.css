@@ -217,7 +217,7 @@ span.w, span.pc {
 
 .text div.note {
     border-width: 1px;
-    border-style: dotted none;
+    /*border-style: dotted none;*/
     font-size: 13px;
     line-height: 16px;
     padding: 2px;
@@ -225,6 +225,7 @@ span.w, span.pc {
     font-style: normal;
     font-weight: normal;
     text-align: left;
+    display: inline-flex;
 }
 
 .text div.note[id^="app_"] {
