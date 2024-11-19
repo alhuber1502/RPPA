@@ -218,7 +218,7 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto ms-3 mb-2 mb-md-0 flex-row flex-wrap">
               <li class="nav-item">
-                <a class="nav-link <!--#echo var='home' -->" aria-disabled="true" href="/">Home</a>
+                <a class="nav-link disabled <!--#echo var='home' -->" aria-disabled="true" href="/">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled <!--#echo var='authors' -->" aria-disabled="true" href="/authors/">Authors</a>
@@ -230,7 +230,7 @@
                 <a class="nav-link disabled <!--#echo var='network' -->" href="/networks/">Networks</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='map_tool' -->" href="/maps/">Maps</a>
+                <a class="nav-link <!--#echo var='map_tool' -->" href="/maps/">Maps</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled <!--#echo var='search' -->" aria-disabled="true" href="/search/">Search</a>
