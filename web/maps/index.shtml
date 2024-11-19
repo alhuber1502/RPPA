@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Home" -->
+    <!--#set var="bodyid" value="home" -->
+    <!--#set var="home" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+        
+<audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
+
+<!-- main -->
+<main class="h-100 flex-shrink-0">
+  <div class="container-fluid h-100">
+    <div class="map" id="map"></div>
+  </div>
+</main>
+
+<!-- Content of the menu -->
+<div id="sidebar" class="leaflet-sidebar collapsed">
+  <!-- Nav tabs -->
+  <div class="leaflet-sidebar-tabs">
+      <ul role="tablist">
+          <li><a href="#welcome"><i class="fas fa-door-open"></i><span class="sr-only">[Welcome]</span></a></li>
+          <li><a href="#home" role="tab"><i class="fas fa-globe"></i><span class="sr-only">[Home]</span></a></li>
+          <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i><span class="sr-only">[Location]</span></a></li>
+          <li><a href="#profile" role="tab"><i class="fa fa-user"></i><span class="sr-only">[Profile]</span></a></li>
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <li><a href="#about" role="tab"><i class="fas fa-info"></i><span class="sr-only">[About]</span></a></li>
+          <li><a href="#help" role="tab"><i class="fas fa-question-circle"></i><span class="sr-only">[Help]</span></a></li>
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <li><a href="#feed" role="tab"><i class="fas fa-rss"></i><span class="sr-only">[News/Updates]</span></a></li>
+          <li><a href="#contact" role="tab"><i class="fas fa-envelope-open"></i><span class="sr-only">[Contact]</span></a></li>
+          <!--
+          <li class="disabled"><a href="#messages" role="tab"><i class="far fa-envelope"></i></a></li>
+          <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fab fa-github"></i></a></li>
+          -->
+      </ul>
+      <!--
+      <ul role="tablist">
+          <li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
+      </ul>
+      -->
+  </div>
+  <!-- Tab panes -->
+  <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="welcome">
+        <h1 class="leaflet-sidebar-header">
+          Welcome to RPPA<sup>alpha</sup>
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <div style="text-align:center;margin-top:25px;">
+            <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
+              <span class="h2">Romantic Period Poetry Archive</span><br><small><b>Alexander Huber, Editor.</b></small><br>
+            <p style="text-align:left;">The Romantic Period Poetry Archive—or RPPA <a href="#"
+            onclick="document.getElementById('player').play()"><i class="fas
+            fa-volume-up"></i><span class="sr-only">[Listen]</span></a> for
+            short—is a new, open access digital platform for global
+            Romantic-period poetry — start your journey (almost) anywhere in the
+            world!  To fully participate in RPPA, i.e. to be able to create
+            and attach contexts to texts, you need to be signed in. </p>
+            <button type="button" class="btn sso-sign-in" style="background-color:
+            var(--bs-orange);color:#fff;float:right;margin-left:10px;">Sign in</button>
+            <button type="button" class="btn" onclick="sidebar.open( 'home' );"
+            style="background-color:
+            var(--bs-orange);color:#fff;float:right;">Start exploring</button>
+            <p class="small" style="clear:both;text-align:left; margin-top:65px;">RPPA is a rapidly prototyped and openly developed
+              DH project, currently in public <span style="font-variant:small-caps;">alpha</span>. It will run from late 2020 to 2025, 
+                when it will have reached <span style="font-variant:small-caps;">beta</span> stage.</p>
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="home">
+          <h1 class="leaflet-sidebar-header">
+              The Romantic-period world
+              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+          <div>
+            <h2>Filter by years</h2>
+            <div style="margin-top:15px;" id="slider-range"></div>
+            <div>
+              <label for="year-range">Date range:</label>
+              <input type="text" id="year-range" readonly style="border:0; color:var(--bs-orange); font-weight:bold; max-width: 85px;">
+            </div>
+          </div>
+          <div class="controls gender" style="margin-top:15px;">
+            <h2>Filter by gender</h2>
+            <input id="male" value="m" class="checkbox" type="checkbox" checked/>
+            <label for="male"><i class="fa fa-male"></i><span class="sr-only">Male</span></label>
+            <input id="female" value="f" class="checkbox" type="checkbox" checked/>
+            <label for="female"><i class="fa fa-female"></i><span class="sr-only">Female</span></label>
+          </div>
+          <div class="controls continents" style="margin-top:15px;">
+            <h2>Filter by locations</h2>
+            <input id="AF" value="AF" class="checkbox cont" type="checkbox" checked/>
+            <label for="AF">Africa &nbsp;<a href="#continent/AF" class='cont-focus' data-cont="AF" data-name="Africa" data-coord="Point(16 1)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Africa</span></a></label>
+            <div data-id="AF"></div>
+            <input id="NA" value="NA" class="checkbox cont" type="checkbox" checked/>
+            <label for="NA">North America &nbsp;<a href="#continent/NA" class='cont-focus' data-cont="NA" data-name="North America" data-coord="Point(-95 40)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">North America</span></a></label>
+            <div data-id="NA"></div>
+            <input id="SA" value="SA" class="checkbox cont" type="checkbox" checked/>
+            <label for="SA">South America &nbsp;<a href="#continent/SA" class='cont-focus' data-cont="SA" data-name="South America" data-coord="Point(-60 -26)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">South America</span></a></label>
+            <div data-id="SA"></div>
+            <input id="AS" value="AS" class="checkbox cont" type="checkbox" checked/>
+            <label for="AS">Asia &nbsp;<a href="#continent/AS" class='cont-focus' data-cont="AS" data-name="Asia" data-coord="Point(78 35)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Asia</span></a></label>
+            <div data-id="AS"></div>
+            <input id="EU" value="EU" class="checkbox cont" type="checkbox" checked/>
+            <label for="EU">Europe &nbsp;<a href="#continent/EU" class='cont-focus' data-cont="EU" data-name="Europe" data-coord="Point(25 55)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Europe</span></a></label>    
+            <div data-id="EU"></div>     
+            <input id="OC" value="OC" class="checkbox cont" type="checkbox" checked/>
+            <label for="OC">Oceania &nbsp;<a href="#continent/OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Oceania</span></a></label>  
+            <div data-id="OC"></div>   
+          </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="location">
+        <h1 class="leaflet-sidebar-header">Poets at this location<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <div class="results"></div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="profile">
+          <h1 class="leaflet-sidebar-header">Poet overview<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+          <div class="results"></div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="about">
+        <h1 class="leaflet-sidebar-header">About RPPA<sup>alpha</sup>
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <div class="results">
+          <blockquote style="text-align:right;font-weight:600;width:93%;margin:10px 0px 10px 30px;">
+            To do full justice to Romanticism as a periodic category [...], one must <em>de facto</em>
+            be a comparatist 
+            <cite style="font-size:13px;font-weight:initial;">—Ben Hutchinson<sup>1</sup></cite>
+          </blockquote>
+          <h2>Introduction</h2>
+          <p>The Romantic Period Poetry Archive, or RPPA 
+            <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
+            for short, is a new open access digital platform of
+            global Romantic-period poetry.<sup>2</sup> 
+            Global here in the sense of Felicity Nussbaum's definition of the "Global 18th-c Century", namely as a spatially and conceptually expanded paradigm in which dialogue and exchange rather than influence and reception are the dominant categories. 
+            RPPA comprises a <em>full-text poetry database</em> and
+            an <em>open scholarship</em> platform.  It embraces both
+            traditional modes of scholarly research and output, such as the
+            creation of scholarly editions, and digital modes of research
+            and publication, such as computationally-augmented analysis,
+            visualizations, network analysis, knowledge modelling, and more.
+          </p>
+          <h2>Approach</h2>
+          <p>Comparative in nature, RPPA conceptualizes Romanticism as
+            a global, deeply interconnected phenomenon.  
+            It embraces a <em>Romantic Weltliteratur</em> by
+            bringing well- and lesser-known poets, their poems and
+            contexts from all parts of the world into conversation,
+            and thus encourages the telling of bigger stories.
+            This “zooming out” not only brings texts, authors,
+            languages, and cultures into conversation, but also
+            highlights the (frequently non-linear) modes of transmission,
+            circulation, and reception of
+            literature (understood here in global terms as the 
+            expressions of a culture in a variety of forms).  
+            These matters will be considered alongside the
+            conversations the texts enter into with each other, 
+            directly, or much more frequently, indirectly.
+          </p>
+          <h2>Scope</h2>
+          <p>
+            RPPA participates in movements that aim to address
+            issues of scale in academic Romanticism by expanding the
+            Romantic literary canon.  Unrestrained by the
+            limitations of traditional print publications, RPPA
+            comprises various literary and non-literary genres of
+            Romanticism from all nations throughout the long
+            <em>Romantic century</em>.<sup>3</sup>  As a
+            networked effort, RPPA links the literary practices,
+            interrelations, and contexts of Romantic-period poetry.
+            It connects these nodes reflexively as well as to 
+            various internal and external contexts.
+          </p>
+          <h2>Features</h2>
+          <ul>
+            <li>RPPA will assemble an extensive and open-ended archive of
+              TEI/XML-encoded full-text poems (both original and in
+              translation) and their contexts;
+            <li>RPPA is transdisciplinary and intermedial, transcending
+              literature, and embracing wider cultural production;
+            <li>RPPA considers Romanticism in global, transnational
+              contexts and foregrounds its multi-lingualism and -culturalism;
+            <li>RPPA adopts a positive conceptualization of translation as
+              the “closest” form of reading, one that many Romantics
+              considered a vital part of their literary labours;
+            <li>RPPA facilitates and supports comparison as a method by
+              providing tools that situate Romantic-period poetry in its
+              international and interdisciplinary contexts;
+            <li>RPPA fosters collaboration and participation to
+              turn obstacles to the study of global Romantic-period
+              poetry (such as “distant” reading and, unavoidably, limited 
+              contextual knowledge) into opportunities for learning;
+            <li>RPPA encourages new research into global Romantic-period
+              poetry and showcases ways to integrate RPPA into the
+              curriculum;
+            <li>RPPA incorporates digital humanities approaches as a
+              form of comparative literary study.
+          </ul>
+          <h2>Implementation</h2>
+          <p>RPPA employs digital methods from the multilingual Digital
+          Humanities and the Semantic Web.
+          <ul>
+            <li><em>Multilingual DH:</em> A combination of ML- and
+              NLP-approaches is our starting point for the detection of formal
+              poetic features and points of contact more generally (shared poetic
+              genres and devices, semantic features such as motifs, themes,
+              plots, topics, characters, and types of intertextuality) within and
+              across literatures.  It is however through inviting input from and
+              seeking collaboration with domain experts from various traditions,
+              that we hope to address some of the main challenges of "distant
+              reading". 
+            </li>
+            <li><em>Semantic Web:</em> RPPA is built on the <a
+              href="https://www.w3.org/standards/semanticweb/" target="_blank"
+              class="external">Semantic Web</a>, it embraces Linked Open Data (LOD)
+              standards and methodologies.  RPPA is powered by an ontologically
+              underpinned, ever-expanding knowledge base called <a
+              href="https://www.prisms.digital/" 
+            class="external" target="_blank">PRISMS</a>, drawing on both general
+            (e.g. <a target="_blank" class="external" href="https://www.cidoc-crm.org/">CIDOC-CRM</a>)
+              and domain-specific ontologies (e.g. <a target="_blank" class="external" href="https://postdata.linhd.uned.es/results/ontopoetry-v2-0/">OntoPoetry</a>, <a target="_blank" class="external" href="https://github.com/BOberreither/INTRO#whatisintro">INTRO</a>).  This shared framework
+              provides a unified mechanism for the cross-linguistic representation
+              of the poems while maintaining the ability to describe them
+              adequately within their cultures and poetic traditions.  It also
+              facilitates the modelling of poetic networks, circles, and schools.
+            </li>
+          </ul>
+          <h2>Presentations</h2>
+          <ul>
+            <li>Huber, Alexander. <a target="_blank" href="/about/presentations/RPPA talk – Old Books, New Media – Digital Humanities Showcase.docx">"The Romantic Period Poetry Archive project"</a>.
+              <em>Libraries, Lives and Legacies</em>, 'Old Books, New
+              Media'–Digital Humanities Showcase, University of Liverpool and
+              online, 13-14 April 2023.</li>
+            <li>Huber, Alexander. <a class="external" target="_blank" href="https://www.youtube.com/watch?v=jqYvCjkktns">"Modelling Contextuality in Poetry Corpora
+              ontologically"</a>. <em>Fugitive Poetry / poésie fugitive in 18th-century
+              Europe: Genre, Media and Networks</em> workshop, Voltaire
+              Foundation, St. Edmund Hall, University of Oxford, 11-12 April 2024.</li>
+          </ul>
+          <h2>Timeline</h2>
+          <p>RPPA is a 5-year, independently-funded research project.  It 
+            will run from late 2020-2025.  As with other projects conceived
+            as long-term <em>archival</em> endeavours, all research outputs of
+            the project will be preserved and made accessible indefinitely.  
+            RPPA is designed to be a networked effort: expressions of interest
+            to connect with and participate in the project are welcome at any 
+            time. As of late 2021, RPPA has adopted rapid prototyping and open 
+            development methodologies. The project phase remains unchanged and
+            will end in 2025, when the project will have reached <span 
+            style="font-variant:small-caps;">beta</span> stage.
+            Regular updates about work packages, milestones, and the
+            overall progress of the project will be posted on this
+            website.
+          </p> 
+          <h2>Outcome</h2>
+          <p>
+            The expected outcome of this project is a fuller
+            understanding, appreciation, and engagement with the
+            poetry of the global Romantic period.  As a project, RPPA
+            prioritizes the idea of “wholeness” of an archival
+            approach over analytical accounts of established
+            narratives.  Wholeness not in the sense of <em>one</em>
+            grand or better narrative or history, but rather in
+            acknowledging, collecting, and aggregating <em>many</em> individual
+            stories in one bigger space.  A space for the exploration
+            of new contexts and the construction of new global texts<sup>4</sup>
+            that cast a fresh light on the seemingly familiar.  This project
+            provides that space.</p>
+          <div class="small" style="border-top:1px solid #999;">
+            <sup>1</sup> Hutchinson, Ben. <em>Comparative Literature: A Very Short Introduction</em>. 
+            Oxford: OUP, 2018. 22.<br>
+            <sup>2</sup> The term "global" is used here in the sense of Felicity A. Nussbaum's
+            concept of "critical global studies" first introduced in her edited collection
+            <em>The Global Eighteenth Century</em>, Baltimore and London: JHUP, 2003, 1. 
+            This research focuses on Romanticism as a period in international literary history, i.e. a global 
+            artistic phenomenon.
+            <!--
+            , less on "Global Romanticism" as current disciplinary practice. 
+            For a discussion of latter see e.g. Jacob Edmond, <a href="https://doi.org/10.1515/ngs-2021-0028" 
+            class="external" target="_blank">"Against Global Literary Studies"</a> 
+            <em>New Global Studies</em> 15(2–3) (2021): 193–226, or Katherine 
+            Bergren, <a href="https://doi.org/10.1111/lic3.12615" 
+            class="external" target="_blank">"Global Romanticism: Out of bounds in the transnational 19th century"</a>
+            <em>Literature Compass</em> 18(2) (2021): 1-15.
+            -->
+            <br>
+            <sup>3</sup> The "Romantic century" was first proposed for the study of British 
+            Romanticism by William Galperin and Susan Wolfson in their NASSR 1996 conference 
+            paper <a 
+            href="https://romantic-circles.org/reference/misc/confarchive/crisis/crisisa.html"
+            class="external" target="_blank">"'Romanticism' in Crisis: The Romantic Century"</a>. 
+            For the global context of this project, the qualifier <em>long</em> has been added.<br>
+            <sup>4</sup> The construct of a source text with all of its contexts was termed
+            "global text" by Angelika Corbineau-Hoffmann in her book <em>Kontextualität</em>,
+            Berlin: Erich Schmidt Verlag, 2017, 242.
+          </div>
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="help">
+        <h1 class="leaflet-sidebar-header">Help
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <div class="results">
+          <h2>The map</h2>
+          <p>The historical map used in this visualization is John Arrowsmith's <em><a 
+            href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002"
+            class="external" target="_blank">The World, on Mercators Projection</a></em>
+             (London: J. Arrowsmith, 1844).  While the original map centres on the
+             Pacific region, it is Western/Northern-centric in other ways, not least with regard 
+             to its place of manufacture and its Mercartor projection.  For georeferencing
+             purposes the map has been aligned with the Web mercator 
+             projection, the de facto standard for maps on the web.  
+          </p>
+          <p>Poets are shown at their place of birth, unless it is unknown or the poet 
+            is generally associated with a country other than their birth country, in which
+            case they are shown at the country's geographical centre.  Images of the poets
+            have been sourced from <a class="external" target="_blank" 
+            href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
+          </p>
+          <h2>Mapping global Romantic-period poetry</h2>
+          <p>
+            While little more than a visual access point at the moment, our aim is to use
+            maps and mapping as an analytical tool that facilitates multi-perspectival 
+            approaches, mitigates ambiguity and uncertainty, helps to consider and appreciate
+            the evolution of national literatures and literary spaces alongside the 
+            world literary space portrayed on the world canvas, and benefits from the 
+            participatory nature of RPPA to arrive at more useful representations.
+          </p>
+          <p>
+            Over time, as the networks of contextuality on the world canvas become more 
+            apparent, we envision the emergence of dynamic maps at a higher 
+            levels of detail.  We expect these to reveal more contexts and the inner- 
+            as well as extra-literary structures that underpin and facilitate the construction 
+            of global texts and will allow for a more detailed representation and analysis
+            of their components and evolution.
+          </p>
+          <p>
+            As we map out, literally and figuratively spoken, the poetry of the
+            global Romantic period, we address not only its temporal challenges, 
+            but also embrace the geographic, linguistic, and 
+            cultural diversity of the various stages of a global artistic phenomenon.
+            We hope that by virtue of the project's historical focus on the Romantic
+            period, its comparative focus on contextuality and the building of global
+            texts, and its collaborative and participatory nature, the map can be 
+            useful as an emerging historical canvas for the 
+            poetry of the global Romantic period.
+          </p>
+          <h2>Known issues</h2>
+          <p>Despite every effort to include the most relevant figures of the 
+          Romantic period, a disclaimer needs to be issued regarding the 
+          inclusion or omission of poets.  While "Romantic" itself is a notoriously 
+          "elastic" label (Michael Ferber's term) that includes "pre"-, "early"-,
+          "proto"-, "high"-, "late"-, and "post"-Romantic incarnations, the 
+          scholarship that underlies much of the selection process is largely 
+          Western/Northern-centric and may have been superseeded within national 
+          contexts.  In such cases, the 
+          <a href="mailto:huber@romanticperiodpoetry.org">editor</a>
+          would be grateful for any corrections and suggestions for additions and
+          improvements.</p>
+          <p>Also, regretfully, for navigational purposes, country names and borders
+          used in the map navigation correspond to present-day denominations and 
+          historical reality.  We apologize for the resulting distortion
+          and historical inaccuracy, and hope to improve this over time with the 
+          help of projects like 
+          <a href="https://openhistoricalmap.org/" class="external" 
+          target="_blank">OpenHistoricalMap</a> as they evolve and mature. 
+          </p>
+          <h2>Further reading</h2>
+          <ul style="font-size:14px;">
+            <li>
+              Casanova, Pascale. <a href="https://newleftreview.org/issues/ii31/articles/pascale-casanova-literature-as-a-world" 
+              class="external" target="_blank">"Literature as a World"</a>. <em>New Left Review</em> 31 (Jan/Feb 2005): 71-90.
+            </li>
+            <li>
+              D'haen, Theo. <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9780203806494-49" class="external" 
+              target="_blank">"Mapping World Literature"</a>. <em>The Routledge Companion to World Literature</em>, ed.
+              Theo D'haen, David Damrosch, Djelal Kadir. London: Routledge, 2011. 413-422.
+            </li>
+            <li>
+              Hewitt, Rachel. <a href="https://www.jstor.org/stable/24045852" class="external" 
+              target="_blank">"Mapping and Romanticism"</a>. <em>The Wordsworth Circle</em> 42(2) (Spring 2011): 157-165.
+            </li>
+            <li>
+              Presner, Todd and David Shepard. <a href="https://doi.org/10.1002/9781118680605.ch14" class="external" 
+              target="_blank">"Mapping the Geospatial Turn"</a>. <em>A New Companion to Digital Humanities</em>,
+              ed. Susan Schreibman, Ray Siemens, John Unsworth. Chichester: Wiley-Blackwell, 2016. 199-212.
+            </li>
+            <li>
+              Tanoukhi, Nirvana. <a href="https://www.jstor.org/stable/20533104" class="external" target="_blank">"The 
+                Scale of World Literature"</a>. <em>New Literary History</em> 39(3) (Summer 2008): 599-617.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="feed">
+        <h1 class="leaflet-sidebar-header">News/Updates
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <div id="twitter-updates" data-theme="dark" style="margin-bottom:25px; max-width:359px;">
+            <!--#include virtual="/updates.shtml" -->
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="contact">
+        <h1 class="leaflet-sidebar-header">Contact
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <div class="results">
+          <h2>Get in touch</h2>
+          <p>This is an open invitation to academics, research
+            projects, digital archives and repositories, and anyone with
+            an interest in the literature of the Romantic period
+            in any discipline to <em>collaborate on RPPA</em>.  The project looks forward
+            to welcoming partners at any stage to discuss
+            collaboration or other forms of participation.  Please do
+            not hesitate to reach out:
+          </p>
+          <p style="margin-left:15px;">
+            <b>Romantic Period Poetry Archive (RPPA)</b><br>
+            Alexander Huber, Editor<br>
+          <ul style="list-style:none;">
+            <li style="text-indent:-15px;"><span>E-mail:</span> <a href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
+            <li style="text-indent:-15px;"><span>Facebook:</span> <a target="_blank" href="https://www.facebook.com/RomanticPeriodPoetryArchive" class="external">@RomanticPeriodPoetryArchive</a>
+            <li style="text-indent:-15px;"><span>Twitter:</span> <a target="_blank" href="https://twitter.com/C18AH" class="external">@C18AH</a> <code>#RomanticPeriodPoetryArchive</code>
+            <li style="text-indent:-15px;"><span>GitHub:</span> <a target="_blank" href="https://github.com/alhuber1502/RPPA"
+              class="external">https://github.com/alhuber1502/RPPA</a>
+            <li style="text-indent:-15px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
+              class="external">http://users.ox.ac.uk/~bodl0153/</a>
+            <li style="margin-left:-15px;"><span>Share:</span> 
+              <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33106436"></div>
+              <!--
+              <span style="display:inline-block;vertical-align:middle;" class="addthis_inline_share_toolbox"></span>
+              -->
+          </ul>
+        </div>
+      </div>
+      <!--
+      <div class="leaflet-sidebar-pane" id="messages">
+          <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+      -->
+      <!--
+      <div class="leaflet-sidebar-pane" id="settings">
+          <h1 class="leaflet-sidebar-header">Settings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+      -->
+  </div>
+</div>
+
+<script>
+
+  // initialize
+  var oms, sidebar, markerLayer, map, continents = {}, markers = {};
+  var theme = document.documentElement.getAttribute('data-bs-theme');
+
+  // establish continents
+  continents[ "AF" ] = { id: "AF", name: "Africa", coord: "Point(16 1)" };
+  continents[ "NA" ] = { id: "NA", name: "North America", coord: "Point(-95 40)" };
+  continents[ "SA" ] = { id: "SA", name: "South America", coord: "Point(-60 -26)" };
+  continents[ "AS" ] = { id: "AS", name: "Asia", coord: "Point(78 35)" };
+  continents[ "EU" ] = { id: "EU", name: "Europe", coord: "Point(25 55)" };
+  continents[ "OC" ] = { id: "OC", name: "Oceania", coord: "Point(145 -30)" };
+  
+  document.addEventListener("DOMContentLoaded", function() {
+
+    // start with whole network
+    var startyr = 1770;
+    var endyr = 1900;
+
+    // initialize map view
+    var lat = Math.floor(Math.random() *  (80  - -50  + 1)) + -50;  // max 80,  min -50
+    var lon = Math.floor(Math.random() *  (180 - -180 + 1)) + -180; // max 180, min -180
+    var zoom = Math.floor(Math.random() * (4   - 4    + 1)) + 4;    // max 4,   min 4
+
+    // map layers
+    /*
+    var baseMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      noWrap: true,
+      minzoom: 3,
+      maxZoom: 10
+    });
+    */
+    /* map layers */
+    var baseMapDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd'
+    });
+    var baseMapLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd'
+    });
+    var overlayMap = L.tileLayer('/data/map/worldmap/{z}/{x}/{y}.png', {
+      attribution: '&copy; David Rumsey map collection',
+      minZoom: 3,
+      maxZoom: 5
+    });
+
+    var baseMap = (theme == 'dark') ? baseMapDark : baseMapLight ;
+    // map
+    map = new L.Map('map', {
+      worldCopyJump: true,
+      zoomSnap: 0.5,
+      zoomDelta: 0.5,
+      minZoom: 3,
+      maxZoom: 10,
+      //
+      //maxBounds: [
+      //  [-78,-180],
+      //  [90,180]
+      //],
+      layers: [
+        baseMap,
+        overlayMap
+      ]
+    }).setView([lat, lon], zoom);
+
+    // start with overlayMap
+    baseMap.setOpacity(0);
+    $( ".map").css( "background-color", "#ede0cb" );
+
+    // visualization layers
+    markerLayer = L.layerGroup().addTo( map );
+    // Spiderfy overlapping markers
+    oms = new OverlappingMarkerSpiderfier( map, {keepSpiderfied: true} );
+    var hash = new L.Hash(map);
+
+    // initialize
+    var loadPlaces = function() {
+      return $.ajax({ url: "/data/map/data/places.min.json", dataType: 'json',
+        success: function(data) {
+          places = data;
+        }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
+      });
+    }
+    var loadPersons = function() {
+      return $.ajax({ url: "/data/map/data/persons.min.json", dataType: 'json',
+        success: function(data) { 
+          persons = data;
+        }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
+      });
+    }
+    var loadNations = function() {
+      return $.ajax({ url: "/data/map/data/nations.min.json", dataType: 'json',
+        success: function(data) { 
+          nations = data;          
+        }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
+      });
+    }
+    // load all required data before processing
+    $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts() ).done( function() {
+      draw_viz( persons );
+      var natbycont = _.groupBy( _.filter( nations, function(record){ return record.name } ) , function( record ) { 
+        return record.cont; 
+      });
+      $.each( natbycont , function( i,v ) {
+        var cont = "<ul style='columns:3;margin-bottom:.5rem;'>";
+        $.each( _.sortBy( v, 'name' ), function( i2,v2 ) {
+          cont += "<li><a href='#country/"+v2.id+"' class='country-focus' data-cont='"+v2.cont+"' data-count='"+v2.id+"' data-coord='"+v2.coord+"'>"+v2.name.split(',')[0]+"</a></li>";
+        });
+        cont += "</ul>";
+        $( "#home .continents div[data-id='"+i+"']" ).html( cont )
+      });
+    });
+
+    // switch base/overlay (to hide hist map "flaw")
+    map.on('overlayadd', function() {
+      baseMap.setOpacity(0);
+      $( ".map").css( "background-color", "#ede0cb" );
+    });
+    map.on('overlayremove', function() {
+      if (theme == 'dark') {
+        $( ".map").css( "background-color", "#000" );
+      } else {
+        $( ".map").css( "background-color", "#fff" );
+      }
+      baseMap.setOpacity(1);
+    });
+    // zoom base/overlay
+    map.on('zoomend', function() {
+      var zoomlevel = map.getZoom();
+      if (zoomlevel > 5) {
+        if (theme == 'dark') {
+          $( ".map").css( "background-color", "#000" );
+        } else {
+          $( ".map").css( "background-color", "#fff" );
+        }
+        baseMap.setOpacity(1);
+      } else {
+        if ( map.hasLayer( overlayMap) ) {
+          baseMap.setOpacity(0);
+          $( ".map").css( "background-color", "#ede0cb" );
+        } else {
+          if (theme == 'dark') {
+            $( ".map").css( "background-color", "#000" );
+          } else {
+            $( ".map").css( "background-color", "#fff" );
+          }  
+          baseMap.setOpacity(1);
+        }
+      }
+    });
+
+    // controls
+    L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap } ).addTo(map);
+    // Create additional Control placeholders
+    function addControlPlaceholders(map) {
+      var corners = map._controlCorners,
+        l = 'leaflet-',
+        container = map._controlContainer;
+      function createCorner(vSide, hSide) {
+        var className = l + vSide + ' ' + l + hSide;
+        corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+      }
+      createCorner('verticalcenter', 'left');
+      createCorner('verticalcenter', 'right');
+    }
+    addControlPlaceholders(map);
+    // Change the position of the Zoom Control to a newly created placeholder.
+    map.zoomControl.setPosition('topright');
+
+    // "Center" map in a good starting position and add reset button next to zoom
+    L.easyButton( '<i class="fas fa-undo-alt reset_map"></i><span class="sr-only">Reset map</span>', function(){
+      map.setView([17,20], 3);
+    }).setPosition('topright').addTo( map );
+
+    sidebar = L.control.sidebar({
+      autopan: false,       // whether to maintain the centered map point when opening the sidebar
+      closeButton: true,    // whether to add a close button to the panes
+      container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
+      position: 'left',     // left or right
+    }).addTo(map);
+    sidebar.open('welcome');
+
+    $('.gender .checkbox').change(function () {
+      showYrRange( startyr,endyr );
+    });
+    $('.continents .checkbox').change(function () {
+      showYrRange( startyr,endyr );
+    });
+    $( document ).on( 'click', '.poet-focus', function(e) {
+      var id = $(e.currentTarget).data( "id" );
+      markers[ id ].fire('click');
+      poet_profile( id );
+    });
+    $( document ).on( 'click', '.country-focus,.cont-focus', function(e) {
+      var focus_type = $(e.currentTarget)[0].className, overview = '';
+      // generate and switch to continent or country overview
+      if (focus_type == 'cont-focus') {
+        overview += update_continent( $(e.currentTarget).data( "cont" ) );
+      } else {
+        overview += update_country( $(e.currentTarget).data( "count" ) );
+      }
+      $( "#location .results" ).html( overview );
+      sidebar.open('location');
+      // refresh markers
+      $( "#"+$(e.currentTarget).data( "cont" ) ).prop('checked', true);
+      showYrRange( startyr,endyr );
+      // pan to target
+      var coords = [];
+      $(e.currentTarget).data('coord').replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
+      map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?4:5) );
+    });
+
+    $( "#slider-range" ).slider({
+    range: true,
+    min: parseInt(startyr),
+    max: parseInt(endyr),
+    values: [ parseInt(startyr),parseInt(endyr) ],
+    slide: function( event, ui ) {
+        $( "#year-range" ).val( ui.values[ 0 ] + "–" + ui.values[ 1 ] );
+        setTimeout(function() {
+          showYrRange( ui.values[ 0 ],ui.values[ 1 ] );
+        }, 10);
+      }
+    });
+    $( "#year-range" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+        "–" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    oms.addListener('click', function(marker) {
+      poet_profile( marker._icon.id );
+      window.location.hash = "#id/"+marker._icon.id;
+    });
+    oms.addListener('spiderfy', function(markers) {
+      $.each( markers, function(i,v) {
+        var popup = v.getPopup();
+        if ( popup.isOpen() ) {
+          poet_profile( v._icon.id );
+          window.location.hash = "#id/"+v._icon.id;
+          return false;
+        }
+      });
+    });
+
+    $.get('/updates.shtml', function (data) {
+      var lines = data.split("\n");
+      var updates = '';
+      $.each(lines, function (n, elem) {
+          updates += '<blockquote class="twitter-tweet" '+((theme == 'dark') ? 'data-theme="dark" ' : '' )+'data-partner="tweetdeck"><a href="' + elem + '"><span class="sr-only">[Post]</span></a></blockquote>';
+          if ( n == 5 ) { return false; }
+      });
+      $('#twitter-updates').html( updates );
+      twttr.widgets.load(document.getElementById("twitter-updates"))
+    });
+    $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts() ).done( function() {
+      checkPath();
+    });
+  
+  });
+  document.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("hashchange", checkHash, false);
+  });
+  
+</script>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

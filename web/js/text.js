@@ -97,7 +97,7 @@ $(document ).on('click', ".text .pagebreak a,.image_link a", async function(e) {
     e.preventDefault();
     var id = $(e.currentTarget).closest( ".tab-content" ).find( "[id*='/imageset/']").attr( "id" );
     var page = parseInt( $(e.currentTarget).data("id") );
-    $(e.currentTarget).closest( ".modal-body" ).find( "button:contains(Facsimile)" ).trigger('click');
+    $(e.currentTarget).closest( ".globaltext" ).find( "button:contains(Facsimile)" ).trigger('click');
     viewer[ id ].goToPage( page );
 });
 
@@ -108,55 +108,63 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
     ids.forEach(function(part, index) {
         ids[index] = "#"+part.replace( /\\./g,"\\\\." );
     });
-    var W3Canno = `{
-        "@context": "http://www.w3.org/ns/anno.jsonld",
-        "id": "`+id+`",
-        "type": "Annotation",
-        "creator": "`+user+`",
-        "created": "`+date.toISOString()+`",
-        "dcterms:identifier": "`+obj_id+`",
-        "dcterms:relation": "`+work+`",
-        "dcterms:source": "`+expr+`",
-        "motivation": "highlighting",
-        "target": [
-          { "source": "`+obj_id+`",
-            "type": "Text",
-            "format": "lct:txt",
-            "language": "`+$( ".text .tab-content .active" ).attr( "lang" )+`",
-            "selector": [
-            {
-                "type": "CssSelector",
-                "value": "`+ids.join( "," )+`"
-            }`;
-        if( target != '' ) { W3Canno += `
-            ,{
-                "type": "TextQuoteSelector",
-                "exact": "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`"
-            }`;
-        }
-        W3Canno += `
-            ]
-          }
-        ]
-    }`;
     // add annotation
     var update = namespaces+"insert data {\n";
-    update += `GRAPH `+user+` { <`+id+`> a rppa:BuildingBlock, cnt:ContentAsText ;\n`;
-    update += `dcterm:identifier """`+obj_id+`""" ;\n`;
-    update += `dcterm:relation """`+work+`""" ;\n`;
-    update += `dcterm:source """`+expr+`""" ;\n`;
-    update += `cnt:characterEncoding "UTF-8" ;\n`;
-    update += `crm:P2_has_type lct:txt ;\n`;
-    update += `cnt:bytes """`+JSON.stringify(JSON.parse( W3Canno ))+`""" ;\n`;
-    update += `dcterm:created """`+date.toISOString()+`""" ;\n`;
-    update += `. }\n}`;
+    update += `GRAPH `+user+` \n{` 
+    var quads = `<`+id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
+    quads += `dcterms:relation <`+work+`> ;\n`;
+    quads += `dcterms:isPartOf <`+expr+`> ;\n`;
+    quads += `crm:P2_has_type lct:txt ;\n`;
+    quads += `dcterms:contributor `+user+` ;\n`;
+    quads += `dcterms:created "`+date.toISOString()+`" ;\n`;
+    quads += `as:generator <`+domain+`> ;\n`;
+    quads += `skos:prefLabel "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`" ;\n`;
+    quads += `oa:motivatedBy oa:highlighting ;\n` ;
+    quads += `oa:hasTarget [
+        dcterms:type dctypes:Text ;
+        dc:format lct:txt ;
+        dc:language "`+$( ".globaltext .tab-content .active" ).attr( "lang" )+`" ;
+        oa:hasSelector [
+            rdf:type oa:CssSelector ;
+            rdf:value "`+ids.join( "," )+`" ;
+        ] ;
+        `;
+    /*
+    if ( target != '' ) {
+        quads += `oa:hasSelector [
+                rdf:type oa:TextQuoteSelector ;
+                oa:exact "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`" ;
+            ] ;
+            `;        
+    }
+    */
+    quads += `oa:hasSource <`+obj_id+`> ;
+    ] ;\n.` ;
+    update += quads;
+    update += `}\n}`;
     await putTRIPLES( update );
-    $( ".workbench .bb" ).append( processW3Canno( JSON.parse( W3Canno ) ) );
+    var liveanno = {};
+    liveanno.id = id;
+    liveanno["oa:hasTarget"] = [];
+    liveanno["oa:hasTarget"][0] = {};
+    liveanno["oa:hasTarget"][0]["oa:hasSelector"] = {};
+    liveanno["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] = ids.join( "," );
+    /*
+    if ( target != '' ) {
+        liveanno["oa:hasTarget"][0]["oa:hasSelector"][1] = {}
+        liveanno["oa:hasTarget"][0]["oa:hasSelector"][1]["oa:exact"] = target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n");
+    }
+    */
+    liveanno['dcterms:isPartOf'] = {};
+    liveanno['dcterms:isPartOf'].id = expr;
+    liveanno['skos:prefLabel'] = target;
+    $( ".workbench .bb" ).append( processW3Canno( liveanno ) );
 }
+
 // create annotaion display and anchor
 function processW3Canno( annotation ) {
     // format annotation
-    var ids = annotation.target[0].selector[0].value.split( "," ); // => [ "#K060422_000-02650","#K060422_000-02660.1","#K060422_000-02670","#K060422_000-02680" ]
+    var ids = annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," ); // => [ "#K060422_000-02650","#K060422_000-02660.1","#K060422_000-02670","#K060422_000-02680" ]
     // highlight annotation
     var sel = rangy.getSelection();
     var range = rangy.createRange();
@@ -169,35 +177,44 @@ function processW3Canno( annotation ) {
     sel.collapseToEnd();
     sel.detach();
     bb_id = annotation.id;
-    if ( annotation.target[0].selector[1] ) {
-        return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
+    $( jqu(ids[0]) ).addClass( "highlight-bb-start" )
+    $( jqu(ids[ids.length-1]) ).addClass( "highlight-bb-end" )
+    /*
+    if ( annotation["oa:hasTarget"][0]["oa:hasSelector"][1] ) {
+        return `<li class="bb-item txt" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"][0]["rdf:value"].split( "," )+`" data-expr="`+annotation['dcterms:isPartOf'].id+`">
             <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
             <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
-            <label for="`+bb_id+`">`+annotation.target[0].selector[1].exact.replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
+            <label for="`+bb_id+`">`+annotation["oa:hasTarget"][0]["oa:hasSelector"][1]["oa:exact"].replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
     } else {
+    */
         var sel_text = '';
-        if ( $( jqu(annotation.target[0].selector[0].value) ).find( ".w,.pc" ).length > 0 ) {
-            sel_text = $( $( jqu(annotation.target[0].selector[0].value) ).find( ".w,.pc" ) )[0].innerText+" ...";
+        if ( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length > 0 ) {
+            sel_text = $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[0].innerText+" ... "+
+                $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[$( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length-1].innerText;
         } else {
-            sel_text = $( jqu(annotation.target[0].selector[0].value) )[0].innerText;
+            if ( ids.length > 1 ) {
+                sel_text = $( ids[0] )[0].innerText + " ... " + $( ids[ids.length-1] )[0].innerText;
+            } else {
+                sel_text = $( ids[0] )[0].innerText //+ " ... " + $( ids[ids.length-1] )[0].innerText;
+            }
         }
-        if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'lg' ) ) {
+        if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'lg' ) ) {
             sel_text = "<em>Stanza:</em> "+sel_text;
-        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'l' ) ) {
+        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'l' ) ) {
             sel_text = "<em>Line:</em> "+sel_text;
-        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'head' ) ) {
+        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'head' ) ) {
             sel_text = "<em>Heading:</em> "+sel_text;
-        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'w' ) ) {
-        } else if ( $( $( jqu(annotation.target[0].selector[0].value) ) ).hasClass( 'text' ) ) {
+        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
+        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
             sel_text = "<em>Whole poem:</em> "+sel_text;
         } else {
             sel_text = "<em>Segment:</em> "+sel_text;
         }
-        return `<li class="bb-item txt" data-ids="`+annotation.target[0].selector[0].value.split( "," )+`" data-expr="`+annotation['dcterms:source']+`">
+        return `<li class="bb-item txt" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," )+`" data-expr="`+annotation['dcterms:isPartOf'].id+`">
             <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
             <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
             <label for="`+bb_id+`">`+sel_text+`</label></li>` ;        
-    }
+    /*}*/
 }
 
 // delete annotation
@@ -211,7 +228,7 @@ $( document ).on( "click", ".bb-item.txt .trash", async function(e) {
     // unhighlight annotation and detach popovers
     $.each( ids, function( i,v ) {
         _this.parent().remove();
-        $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
+        $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "highlight-bb-start" ).removeClass( "highlight-bb-end" ).removeClass( "pulse-bb" );
         $( jqu(v) ).next( ".highlight-bb" ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
     });
     processGlobalText( "", wid );
@@ -220,9 +237,11 @@ $( document ).on( "click", ".bb-item.txt .trash", async function(e) {
 function processBuildingBlocks( bb ) {
     $( ".workbench" ).html( `<h2>Current selections</h2><ul class="bb"></ul>` );
     $( ".highlight-bb" ).removeClass( "highlight-bb" );
+    $( ".highlight-bb-start" ).removeClass( "highlight-bb-start" );
+    $( ".highlight-bb-end" ).removeClass( "highlight-bb-end" );
     for (var j = 0; j < bb.length; j++ ) {
         try {
-            $( ".workbench .bb" ).append( processW3Canno( JSON.parse( bb[ j ][ "cnt:bytes" ].replace(/&quot;/g,'"').replace(/(\r\n|\n|\r|\t|\f)/gm," / ") ) ) );
+            $( ".workbench .bb" ).append( processW3Canno( bb[ j ] ) );
         } catch(err) {
             console.log( err )
         }
@@ -244,7 +263,7 @@ function processTxtContexts( tc ) {
     $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
     $( ".highlight-tc" ).removeClass( "highlight-tc" );
     for (var j = 0; j < tc.length; j++ ) {
-        processW3Ccontext( JSON.parse( tc[ j ][ "cnt:bytes" ] ) );
+        processW3Ccontext( tc[ j ] );
     }
 }
 // create annotaion display and anchor
@@ -253,25 +272,27 @@ function processW3Ccontext( annotation ) {
     // could be shown when a work with only fragments is displayed, therefore
     // we simply check if the context target exists before we show it (may need
     // a more sophisticated implementation)
-    if ( $( annotation.target.selector[0].value ).length ) {
+    console.log( annotation );
+    if ( annotation["rppa:consistsOf"][0]["oa:hasTarget"][0].hasOwnProperty( "oa:hasSelector" ) ) {
         var header, sub, footer;
         // determine action
-        switch ( annotation.body[0][ "dcterms:type" ] ) {
+        switch ( annotation["rppa:hasAction"].id ) {
             case "rppa:Alignment":
-                fetch( annotation.body[0].items[0] )
+                fetch( annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["as:items"][0].id )
                 .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                     return response.text();
                 }).then(data => {
-                    header = `Translation Alignment Context: `+annotation.body[0][ "dcterms:title" ];
-                    sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation.body[0].creator+`</span></div>`;
+                    header = `Translation Alignment Context: `+annotation[ "skos:prefLabel" ];
+                    sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation["as:generator"].id+`</span></div>`;
                     footer = ``;
-                    footer += `<div>Contributed by `+annotation.creator.name+` on `+new Date( annotation.created ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
-                    $( ".contexts" ).append( make_context( annotation.id, header+sub, data, footer, annotation.target.selector[0].value ) );
-                    return fetch( annotation.body[0].items[1] )
-                }).then(response => {
+                    footer += `<div>Contributed by `+contributors[ annotation["dcterms:contributor"].id ]["foaf:name"]+` on `+new Date( annotation["dcterms:created"] ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
+                    $( ".globaltext-container" ).append( make_context( annotation.id, header+sub, data, footer, annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ) );
+                    return fetch( annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["as:items"][1].id )
+                }).then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                     return response.json();
                 }).then( data => {
                     alignment[ annotation.id ] = {};
+                    // reverse alignment JSON to allow triggering from context
                     for ( var prop in data ) {
                         $.each( data[ prop ], function( index, item ) {
                             // if alignment[ annotation.id ][ item ].length == 0
@@ -281,6 +302,7 @@ function processW3Ccontext( annotation ) {
                             alignment[ annotation.id ][ item ].push( prop );
                         });
                     }
+                    // TODO
                     $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
                         if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
                             var hovered = $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).text();
@@ -326,17 +348,33 @@ function processW3Ccontext( annotation ) {
                     tc_id = annotation.id;
                     $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
                         //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
-                        ((user == annotation.creator.id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
+                        ((user == annotation["dcterms:contributor"].id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
                         +` <label for="`+tc_id+`" style="display:inline">`+header+`</label></li>` );
                     clearInterval( t );
                     t = setInterval(updateDOM(),500);
                 }).catch((e) => {});
             break;
+            case "rppa:Annotation":
+                header = `Interpretative Context: `+annotation[ "skos:prefLabel" ];
+                sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation["as:generator"].id+`</span></div>`;
+                footer = ``;
+                footer += `<div>Contributed by `+contributors[ annotation["dcterms:creator"].id ]["foaf:name"]+` on `+new Date( annotation["dcterms:created"] ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
+                $( ".globaltext-container" ).append( make_context( annotation.id, header+sub, annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["rdf:value"], footer, annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ) );
+                tc_id = annotation.id;
+                header = `Interpretative Context: `+annotation[ "skos:prefLabel" ];
+                $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
+                    //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
+                    ((user == annotation["dcterms:creator"].id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
+                    +` <label for="`+tc_id+`" style="display:inline">`+header+`</label></li>` );
+                $( annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ).addClass( "idsSelected" );
+                clearInterval( t );
+                t = setInterval(updateDOM(),500);
+            break;
         }
     }
 }
 function make_context( id, header, data, footer, ids ) {
-    return `<div class="card context" id="`+id+`" data-ids="`+ids+`"><div class="card-header">`+header+`</div><div class="card-body">`+data+`</div><div class="card-footer">`+footer+`</div></div>`;
+    return `<div class="card context resizable draggable" id="`+id+`" data-ids="`+ids+`"><div class="card-header">`+header+`</div><div class="card-body">`+data+`</div><div class="card-footer">`+footer+`</div></div>`;
 }
 
 $(document).on('mouseenter', '.context', function () {
@@ -347,6 +385,8 @@ $(document).on('mouseenter', '.context', function () {
     $( jqu(ids[0]) ).addClass( "highlight-gbl-start" )
     $( jqu(ids[[ids.length-1]]) ).addClass( "highlight-gbl-end" )
     // highlight annotation
+    // TODO: needs some sort of classification whether it's a continuous range
+    // or a set of discontinuous IDs
     if ( !ids[0].startsWith( "#text" ) ) {
         var sel = rangy.getSelection();
         var range = rangy.createRange();
@@ -367,7 +407,7 @@ $(document).on('mouseenter', '.context', function () {
         $( jqu(v) ).next( ".highlight-tc" ).removeClass( "highlight-tc" );
     });    
 });
-
+/*
 $(document ).on('mouseenter', '.tc-item.txt', function ( e ) {
     var id = $( e.currentTarget ).data( "ids" ) || '';
     if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
@@ -378,7 +418,7 @@ $(document ).on('mouseenter', '.tc-item.txt', function ( e ) {
 }).on('mouseleave', '.tc-item.txt', function ( e ) {
     $( "[id='"+$( e.currentTarget ).data( "ids" )+"']" ).removeClass("pulse-tc");
 });
-
+*/
 // Function for a specific context-type, here highlighting @corresp-onding
 // entities  
 

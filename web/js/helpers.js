@@ -72,7 +72,7 @@ String.prototype.escapeSpecialChars = function() {
 function updateDOM() {
     var genericCloseBtnHtml = '<button type="button" class="btn-close" aria-hidden="true" style="float:right;"></button>';
     // initialize tooltips and popovers
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     tooltipTriggerList2 = _.difference( tooltipTriggerList, done_tooltipTriggerList );
     done_tooltipTriggerList = tooltipTriggerList;
     var tooltipList = [...tooltipTriggerList2].map(function (tooltipTriggerEl) {
@@ -84,18 +84,20 @@ function updateDOM() {
             trigger: 'hover click',
             customClass: 'authorial note',
             title: function() {
+                //https://github.com/twbs/bootstrap/issues/38720
                 return "Authorial note"+genericCloseBtnHtml
             },
-            content: function() {
-                if ( $(this).next(".footy").length ) {
-                    return $(this).next().clone().removeClass("hidden");
+            content: function(e) {
+                //https://github.com/twbs/bootstrap/issues/38720
+                if ( $(e).next(".footy").length ) {
+                    return $(e).next().clone().removeClass("hidden");
                 } else {
-                    return $(this).parent().next().clone().removeClass("hidden");
+                    return $(e).parent().next().clone().removeClass("hidden");
                 }
             }
         });
     });
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     popoverTriggerList2 = _.difference( popoverTriggerList, done_popoverTriggerList );
     done_popoverTriggerList = popoverTriggerList;
     var popoverList = [...popoverTriggerList2].map(function (popoverTriggerEl) {
@@ -107,18 +109,33 @@ function updateDOM() {
             trigger: 'click',
             customClass: 'editorial note',
             title: function() {
+                //https://github.com/twbs/bootstrap/issues/38720
                 return "Editorial note"+genericCloseBtnHtml
                 //$(this).attr("data-type")[0].toUpperCase() +
                 //$(this).attr("data-type").slice(1)+
             },
-            content: function() {
-                if ( $(this).next(".footy").length ) {
-                    return $(this).next().clone().removeClass("hidden");
+            content: function(e) {
+                //https://github.com/twbs/bootstrap/issues/38720
+                if ( $(e).next(".footy").length ) {
+                    return $(e).next().clone().removeClass("hidden");
                 } else {
-                    return $(this).parent().next().clone().removeClass("hidden");
+                    return $(e).parent().next().clone().removeClass("hidden");
                 }
             }
         });
+    });
+    $( ".resizable" ).resizable({
+        containment: ".globaltext-container",
+        handles: "n, e, s, w, se"
+        /*
+        minWidth:500,
+        minHeight:800
+        */
+    });
+    $( ".draggable" ).draggable({
+        handle: $('.nav-pills,.card-header'),
+        containment: ".globaltext-container", 
+        scroll: false 
     });
 }
 
@@ -176,7 +193,7 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                     <h5 class="modal-title">Please sign into RPPA</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center" style="background-color:whitesmoke;">
+                <div class="modal-body text-center">
                     <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>
 
                     <!-- ORCiD SSO -->
@@ -286,6 +303,7 @@ function testAPI() {                      // Testing Graph API after login.  See
             } BIND( foaf:name AS ?p )
         }`;
         var usergraph = await getJSONLD( q, "quads" );
+        console.log( usergraph );
         if ( usergraph.hasOwnProperty( 'id' ) ) {
             user = usergraph.id;
             username = usergraph["foaf:name"];
@@ -346,6 +364,7 @@ async function handleCredentialResponse(response) {
             } BIND( foaf:name AS ?p )
         }`;
     var usergraph = await getJSONLD( q, "quads" );
+    console.log( usergraph );
     if ( usergraph.hasOwnProperty( 'id' ) ) {
         user = usergraph.id;
         username = usergraph["foaf:name"];

@@ -1,16 +1,16 @@
 // RPPA
 
 // global settings
-var user = undefined, username = undefined;
-var workbench = {}, provider_img = '', contexts;
+var user = undefined, username = undefined, t;
+var workbench = {}, provider_img = '', contexts, contributors;
 var domain = "https://www.romanticperiodpoetry.org";
 
-var SOLR_RPPA, BG_RPPA;
+var SOLR_RPPA, SPARQL_RPPA;
 if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
-    BG_RPPA = "https://data.prisms.digital/query/rppa/";
+    SPARQL_RPPA = "https://data.prisms.digital/query/rppa/";
     SOLR_RPPA = "https://data.prisms.digital/solr/rppa/select";
 } else {
-    BG_RPPA = "http://192.168.1.2:3030/rppa/";
+    SPARQL_RPPA = "http://192.168.1.2:3030/rppa/";
     SOLR_RPPA = "http://192.168.1.2:8983/solr/rppa/select";
 }
 
@@ -28,39 +28,51 @@ $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
 	}
 });
 
-var t, myModalGT, myModalGTEl, zInd = 1054, wavesurfer = undefined, viewer = {}, mode = 'read';
+// global variables
+var t, myModalGT, myModalGTEl, zInd = 1054, player = {}, viewer = {}, mode = 'read';
 var done_tooltipTriggerList = [], done_popoverTriggerList = [];
 var loadTexts = function() {
     return $.ajax({ url: "/data/texts.min.json", dataType: 'json',
-      success: function(data) {
-        texts = data;
-      }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
+        success: function(data) {
+            texts = data;
+        }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
     });
 }
 
-// display a global text
+//  display a global text
+/*  This function 
+    - retrieves all expression - manifestation/excerpt information for a work
+    - creates the globaltext-workbench
+    - draws the globaltext onto the globaltext-workbench (drawGlobalText)
+    - retrieves and processes contexts/building blocks for the globaltext (reading/editing mode)
+    - attaches event handlers to the globaltext-workbench
+*/
 async function display_globaltext( tid, wid ) {
 
-    // load work and author(s)
-    var work = await load_work_overview( wid );
-    var separator = "", author = "";
-    if ( work.aut != '' ) {
-        for (var i = 0; i < work.aut.split(';').length; ++i) {
-            var tmp = await load_poet_overview( work.aut.split(';')[i] );
-            author += separator + tmp[ work.aut.split(';')[i] ].name;
-            separator = " and ";
-        }
-    }
     // retrieve RDF in JSON-LD
-    var q = namespaces+`SELECT *
-    WHERE {
-        ?s ?p ?o
-        FILTER (
-            (CONTAINS (STR(?s), ?searchString)) ||
-            (CONTAINS (STR(?o), ?searchString))
-        )
-        BIND("`+wid+`" AS ?searchString)
-        BIND(<default> AS ?g)
+    // get work, expression, manifestation/excerpt, and master/deliverables
+    var q = namespaces+`SELECT DISTINCT ?s ?p ?o ?g
+	WHERE {
+        {
+  			<https://www.romanticperiodpoetry.org/id/`+wid+`/work> ?p ?o .
+            BIND(<https://www.romanticperiodpoetry.org/id/`+wid+`/work> AS ?s)
+        } UNION {
+      		<https://www.romanticperiodpoetry.org/id/`+wid+`/work> lrmoo:R3_is_realised_in ?o2 .
+        	?o2 ?p ?o.
+            BIND(?o2 AS ?s)
+        } UNION {
+      		<https://www.romanticperiodpoetry.org/id/`+wid+`/work> lrmoo:R3_is_realised_in ?o2 .
+  			?o2 (lrmoo:R4i_is_embodied_in|lrmoo:R15_has_fragment) ?o3 .
+    		?o3 ?p ?o.
+            BIND(?o3 AS ?s)
+        } UNION {
+      		<https://www.romanticperiodpoetry.org/id/`+wid+`/work> lrmoo:R3_is_realised_in ?o2 .
+  			?o2 (lrmoo:R4i_is_embodied_in|lrmoo:R15_has_fragment) ?o3 .
+    		?o3 <http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of> ?o4.
+    		?o4 ?p ?o .
+            BIND(?o4 AS ?s)
+        }
+    	BIND(<default> AS ?g)
     }
     ORDER BY ?s`;
     var r = await getJSONLD( q );
@@ -75,67 +87,34 @@ async function display_globaltext( tid, wid ) {
     }
     // create global text modal
     var text = `<!-- Modal -->
-        <style>
-        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-            color: #fff;
-            background-color: var(--bs-orange);
-        }
-        .nav-link {
-            color: #333;
-        }
-        .nav-link:focus, .nav-link:hover {
-            color: #000;
-        }
-        </style>
-        <div style="z-index:`+zInd+`" class="modal fade" id="`+wid+`" data-wid="`+wid+`" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="row" style="width:100%;">
-                            <div class="col-sm-4" style="margin:auto auto;">
-                                <h5 class="modal-title" id="ModalLabel" style="display:inline">`+truncateString(work.tit,50)+` / `+author+`</h5>
-                            </div>
-                            <div class="col-sm-4" style="margin:auto auto;">
-                                <div class="tools">
-                                    <a role="button" class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" data-mode="read" aria-disabled="false" style="height:36px;width:123px;background-color:var(--bs-orange);color:#fff;"><span class=""><i class="fas fa-book-open"></i> Read</span></a>
-                                    <a`+((user != undefined && username != 'undefined')?' role="button" style="height:36px;background-color:#2a9d8f;color:#fff;"':' style="height:36px;background-color:#2a9d8f;color:#fff;opacity:.5;cursor:not-allowed;"')+` class="btn changeMode" data-wid="`+wid+`" data-tid="`+tid+`" style="" data-mode="edit" aria-disabled="`+((user != undefined && username != 'undefined')?'false':'true')+`"><span class=""><i class="fas fa-edit"></i> Contribute</span></a>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" style=margin:auto auto;">
-                                Logged in as: <em><span id="username">`+((user != undefined && username != 'undefined')?username:'Not logged in')+`</span></em> <span id="provider">`+((user != undefined && username != 'undefined')?provider_img:'')+`</span>`+
-                                    ((user != undefined && username != 'undefined')?'':' <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button>')
-                                +`
-                            </div>
+        <div style="z-index:`+zInd+`;overflow:inherit;" class="modal fade globaltext-workbench" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width:95vw;min-height:95vh;height:95vh;width:95vw;">
+                <div class="modal-content rounded-0" style="min-width:inherit;min-height:inherit;">
+                    <div class="modal-body globaltext-container">
+                        <button type="button" class="btn-close" style="float:right;" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="tools" style="float:right;">
+                            <input `+((user == undefined && username == undefined)?'disabled':'')+` style="height:36px;width:123px;" class="tgl-btn changeMode" type="checkbox" checked data-toggle="toggle" data-wid="`+wid+`" data-tid="`+tid+`" id="changeMode-flip" data-mode="edit" data-onlabel="Reading" data-offlabel="Editing" data-onstyle="warning" data-offstyle="success">
+                            `+((user == undefined && username == undefined)?'<label> <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button></label>':'')+`
                         </div>
-                        <button type="button" class="btn-close" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-4 text">
+
+                                <div class="globaltext">
                                 </div>
+                                
                                 <div class="col-sm-4 contexts">
                                 </div>
                                 <div class="col-sm-4 workbench">
                                 </div>
-                            </div>
-                        </div>
+                                
+                    
                     </div>
-                    <!--
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                    -->
                 </div>
             </div>
         </div>`;
     $( "body" ).prepend( text );
-    $( ".sso-sign-in" ).remove(); // TODO: remove when ready
     drawGlobalText( tid, wid );
     processGlobalText( tid, wid );
 
-    myModalGTEl = document.getElementById(wid);
+    myModalGTEl = document.getElementsByClassName( "globaltext-workbench" )[0];
     myModalGT = new bootstrap.Modal(myModalGTEl, {
         backdrop: 'static',
         keyboard: false
@@ -143,7 +122,12 @@ async function display_globaltext( tid, wid ) {
 
     // on showing modal
     myModalGTEl.addEventListener('shown.bs.modal', function (event) {
-
+        $('input[data-toggle="toggle"]').bootstrapToggle();
+        $( ".globaltext" ).position({
+            my: "center",
+            at: "center",
+            of: ".globaltext-container"
+        });
     });
     // on closing modal
     myModalGTEl.addEventListener('hide.bs.modal', function (event) {
@@ -152,7 +136,7 @@ async function display_globaltext( tid, wid ) {
         $(".popover").remove();
         $(this).remove();
         zInd = 1054;
-        location.href = "#id/"+work.aut.split(';')[0]; // reset location to work's author
+        history.back(); // location.href = "#id/"+work.aut.split(';')[0]; // reset location to work's author
         done_tooltipTriggerList = [];
         done_popoverTriggerList = [];
         clearInterval( t );
@@ -161,8 +145,14 @@ async function display_globaltext( tid, wid ) {
     });
 }
 
+/*  This function creates the globaltext DOM for all expressions available for
+    the work. It
+    - initializes all tools (Openseadragon, Wavesurfer, ...)
+    - genetrates the tabbable view for each of the available expressions
+    - adds the globaltext in a darggable/resizable "window" to the DOM
+*/
 function drawGlobalText( tid, wid ) {
-    var imgset_id = undefined;
+    var imgset_id = undefined, prfset_id = undefined;
     var openseadragonOptions = {
         showNavigator: true,
         showRotationControl: true,
@@ -182,9 +172,9 @@ function drawGlobalText( tid, wid ) {
         // navigation
         if ( i == 0 ) {
             if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) {
-                nav_name = 'Original text (excerpt)';
+                nav_name = 'Text (excerpt)';
             } else {
-                nav_name = 'Original text';
+                nav_name = 'Text';
             }
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:txt' }) != -1 ) {
             nav_name = 'Translation (<code>'+cnt_lang+'</code>)';
@@ -192,9 +182,9 @@ function drawGlobalText( tid, wid ) {
             nav_name = 'Facsimile';
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:aud' || typ.id == 'lct:mov' }) != -1) {
             if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) {
-                nav_name = 'Reading (excerpt)';
+                nav_name = 'Performance (excerpt)';
             } else {
-                nav_name = 'Reading';
+                nav_name = 'Performance';
             }
         } else {
             console.log( 'Error: unknown content type' );
@@ -213,7 +203,7 @@ function drawGlobalText( tid, wid ) {
             if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) { // fragments
                 if ( i == 0 && tid != '' ) {                                                                                                                         // text (one fragment)
                     excerpt = _.findIndex( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ], function(typ) { 
-                        return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].includes( '/'+tid+'/' );
+                        return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].id.includes( '/'+tid+'/' );
                     });
                 } else if ( tid == '' ) {                                                                                                                            // work (all fragments)
                     tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">`;
@@ -237,7 +227,7 @@ function drawGlobalText( tid, wid ) {
                 tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`"> 
                     <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                     data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
-                        function () { var tmp = null; $.ajax({ 'async': false, 'type': "POST", 'dataType': 'html', 'url': workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0], 
+                        function () { var tmp = null; $.ajax({ 'async': false, 'type': "POST", 'dataType': 'html', 'url': workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0].id, 
                             'success': function (data) { tmp = data; } }); return tmp; }()
                     +`</div></div>`;
             }
@@ -245,15 +235,15 @@ function drawGlobalText( tid, wid ) {
             cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ]
             tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
                 <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
-                data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
-                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: calc( 100vh - 150px);'></div>`
+                data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`" style="height:inherit;">`+
+                    `<div id='openseadragon_`+tid+`' style='overflow: auto; height: inherit;'></div>`
                 +`</div></div>`;
             imgset_id = cnt_loc[0].id;
             sources = [];
             $.each(workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ].sort(), function(i,v) {
                 var tilesource = {
                     type: "image",
-                    url: v // (( component["crm:P2_has_type"]["id"] == "prisms:unavailable")?"/images/notavailable.jpg":v)
+                    url: v.id // (( component["crm:P2_has_type"]["id"] == "prisms:unavailable")?"/images/notavailable.jpg":v)
                 };
                 sources.push( tilesource );
             });
@@ -265,39 +255,41 @@ function drawGlobalText( tid, wid ) {
             } else {
                 cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ];
             }
+            prfset_id = cnt_loc[0].id;
             tab_content += `<div class="tab-pane fade show`+((i==0)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
                 <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                     data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`">`+
-                `<div id="waveform_`+tid+`" class="waveform" data-load="`+workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0]+`"></div>`+
-                `<div id="wavetimeline"></div>`+
+                `<div id="waveform_`+tid+`" class="waveform" data-load="`+workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0].id+`"></div>`+
+                `<div id="wavetimeline_`+tid+`"></div>`+
                 `<div class="controls" style="text-align:center;margin-top:20px;">
-                    <button class="btn" onclick="wavesurfer.stop()">
+                    <button class="btn" onclick="player[ '`+prfset_id+`' ].stop()">
                         <i class="fa fa-step-backward"></i>
                     </button>
-                    <button class="btn" onclick="wavesurfer.skipBackward()">
+                    <button class="btn" onclick="player[ '`+prfset_id+`' ].skipBackward()">
                         <i class="fa fa-backward"></i> 
                     </button>
-                    <button class="btn" onclick="wavesurfer.playPause()">
+                    <button class="btn" onclick="player[ '`+prfset_id+`' ].playPause()">
                         <i class="fa fa-play"></i> <i class="fa fa-pause"></i> 
                     </button>
-                    <button class="btn" onclick="wavesurfer.skipForward()">
+                    <button class="btn" onclick="player[ '`+prfset_id+`' ].skipForward()">
                         <i class="fa fa-forward"></i>
                     </button>
-                    <button class="btn" onclick="wavesurfer.toggleMute()">
+                    <button class="btn" onclick="player[ '`+prfset_id+`' ].toggleMute()">
                         <i class="fa fa-volume-off"></i>
                     </button>
+                    Zoom: <input type="range" min="1" max="100" value="20" style="vertical-align:middle;"/>
                 </div><br/>`+
-                `<div class="attribution"><div><span>Performance:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:contributor" ]+`</span></div>
-                 <div><span>Source:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:source" ]+`</span>
-                    <span><a href="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:identifier" ].id+`">`+
-                    workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterm:identifier" ].id+`</a></span></div>
+                `<div class="attribution"><div><span>Performance:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterms:contributor" ]+`</span></div>
+                 <div><span>Source:</span><span>`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterms:source" ]+`</span>
+                    <span><a href="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterms:identifier" ].id+`">`+
+                    workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "dcterms:identifier" ].id+`</a></span></div>
                  </div>`
                 +`</div></div>`;
         }
         // ... other content types ...
     }
     // create DOM
-    $( "#"+wid+" .text" ).html( `<ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div>` );
+    $( ".globaltext-container .globaltext" ).replaceWith( `<div class="globaltext resizable draggable"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
     clearInterval( t );
     t = setInterval(updateDOM(),500);
 
@@ -329,8 +321,8 @@ function drawGlobalText( tid, wid ) {
     })
     // audio/video
     if ( $( "#waveform_"+tid ).length ) {
-        if ( wavesurfer && !wavesurfer.isDestroyed ) { wavesurfer.unAll(); wavesurfer.destroy(); }
-        wavesurfer = WaveSurfer.create({
+        if ( player[ prfset_id ] && !player[ prfset_id ].isDestroyed ) { player[ prfset_id ].unAll(); player[ prfset_id ].destroy(); }
+        player[ prfset_id ] = WaveSurfer.create({
             container: '#waveform_'+tid,
             partialRender: true,
             scrollParent: true,
@@ -341,6 +333,7 @@ function drawGlobalText( tid, wid ) {
             backend: 'MediaElement',
             regionsMinLength: .25,
             normalize: true,
+            minPxPerSec: 10,
             plugins: [
                 WaveSurfer.regions.create(),
                 WaveSurfer.minimap.create({
@@ -349,8 +342,8 @@ function drawGlobalText( tid, wid ) {
                     progressColor: '#999',
                     cursorColor: '#333'
                 }),
-                WaveSurfer.timeline.create({
-                    container: "#wavetimeline"
+              WaveSurfer.timeline.create({
+                    container: "#wavetimeline_"+tid
                 })
             ]
         });
@@ -358,52 +351,33 @@ function drawGlobalText( tid, wid ) {
             fetch( $( "#waveform_"+tid ).data( "load" ).replace(/\.[^/.]+$/, "")+".json" )
             .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                 return response.json();
-            }).then(peaks => { wavesurfer.load($( "#waveform_"+tid ).data( "load" ), peaks.data); 
+            }).then(peaks => { player[ prfset_id ].load($( "#waveform_"+tid ).data( "load" ), peaks.data); 
             }).catch((e) => {});            
         } else {
-            wavesurfer.load( $( "#waveform_"+tid ).data( "load" ) );
+            player[ prfset_id ].load( $( "#waveform_"+tid ).data( "load" ) );
         }
-        wavesurfer.on('ready', function() {
+        // Update the zoom level on slider change
+        player[ prfset_id ].on('waveform-ready', function() {
             // default region
             if ( $( "#waveform_"+tid ).data( "load" ).includes( '#t=') ) {
                 var default_region = $( "#waveform_"+tid ).data( "load" ).split( '#t=' )[1].split(',');
-                wavesurfer.addRegion( {"drag":false,"resize":false,"start":default_region[0],"end":default_region[1]} );
-                wavesurfer.drawBuffer();
+                player[ prfset_id ].addRegion( {"drag":false,"resize":false,"start":default_region[0],"end":default_region[1]} );
             }
+            player[ prfset_id ].zoom(20);
         });
+        $( document ).on('change input', 'input[type="range"]', function(e) {
+            const minPxPerSec = e.target.value;
+            player[ prfset_id ].zoom(minPxPerSec)
+        })
     }
 }
 
-// retrieve a RPPA object
-async function getRPPAobject( id ) {
-	var node_seen = [], ids = [], total = [];
-	ids.push( id );
-	node_seen[ id ] = 1;
-	while( ids.length > 0 ) {
-		var q = namespaces+"SELECT * WHERE { <"+ids[ 0 ]+"> ?p ?o . BIND (<"+ids[ 0 ]+"> AS ?s) BIND (<default> AS ?g)}";
-		var graph = await getJSONLD( q, "raw" );
-		for (var j = 0; j < graph.length; j++ ) {
-			var v = graph[ j ];
-			total.push( v );
-			// nodes will be counted only once and must be part of RPPA, and single- or multi-volume object
-			if ( !node_seen[ v.o.value ] && v.o.type == 'uri' && 
-				( v.o.value.startsWith( id ) || v.o.value.startsWith( domain + "/id/" ) )
-			) {
-				ids.push( v.o.value );
-				node_seen[ v.o.value ] = 1;
-			}
-		}
-		ids.shift();
-	}
-	return( total );
-}
-
-// retrieve JSON-LD version of BLZG query
+// retrieve JSON-LD version of SPARQL query
 function getJSONLD( BGquery, mode ) {
     return new Promise(function(resolve, reject) {
         $.ajax({
             type: "POST",
-            url: BG_RPPA+"sparql",
+            url: SPARQL_RPPA+"sparql",
             data: { query: BGquery },
             headers: {
                 Accept : "application/json"
@@ -413,12 +387,8 @@ function getJSONLD( BGquery, mode ) {
             if ( result.results ) {
             // SELECT
                 $.each( result.results.bindings, function( i,v ) {
-//                    if ( v.g.value.startsWith( context["@context"]["rppa"] ) ) {
-//                        if ( v.g.value.substr(GetSubstringIndex(v.g.value,"/",4)+1) != user.split(":")[1] ) { return; }
-//                        else { user_ids.push( v.o.value ); }
-//                    }
                     results.push( v );
-                    quads += "<"+v.s.value+"> <"+v.p.value+"> "+((v.o.type == 'uri')?"<"+v.o.value+">":((v.o.type == 'bnode')?"_:"+v.o.value:'"'+v.o.value.replace(/"/g,'\\"')+'"') )+" .\n";
+                    quads += ((v.s.type == 'uri')?"<"+v.s.value+">":"_:"+v.s.value ) + " <"+v.p.value+"> "+((v.o.type == 'uri')?"<"+v.o.value+">":((v.o.type == 'bnode')?"_:"+v.o.value:'"'+v.o.value.replace(/"/g,'\\"').replace(/\n/g,'\\n')+'"') )+" .\n";
                 });
                 if ( mode == "raw" ) {
                     resolve( results ); 
@@ -437,13 +407,14 @@ function getJSONLD( BGquery, mode ) {
     })
 }
 
-// update BLZG store
+// update RDF store
 function putTRIPLES( BGupdate ) {
+    console.log( BGupdate );
     if ( user.startsWith( "rppa:" ) ) {
         return new Promise(function(resolve, reject) {
             $.ajax({
                 type: "POST",
-                url: BG_RPPA+"update",
+                url: SPARQL_RPPA+"update",
                 data: { update: BGupdate },
                 headers: {
                     Accept : "application/json"
@@ -455,7 +426,7 @@ function putTRIPLES( BGupdate ) {
             });
         })
     } else {
-        show_alert_mod( "We could not process your request and have logged this incident. If this error persists, please restart your browser. Thank you!", "danger", false, 0 );        
+        show_alert_mod( "We could not process your request and have logged this incident. If this error persists, please restart your browser. Thank you!", "danger", false, 0 );
         throw 'FATAL UPDATE error!';
     }
 }
@@ -488,109 +459,229 @@ $( document ).on('click', '.popover-header button.btn-close', function() {
 });
 
 // switch between reading/editing
-$( document ).on('click', '.changeMode:not([aria-disabled="true"])', function() {
+$( document ).on('change', '.changeMode', function() {
     var modeC = {}
     modeC[ 'edit' ] = '#2a9d8f';
     modeC[ 'read' ] = 'var(--bs-orange)';
     $( "#mode" ).remove();
-    $( "head" ).append( `<style type="text/css" id="mode">a,a:hover,a:visited,a:active{color: `+modeC[$(this).data("mode")]+`;}.nav-pills .nav-link.active,.bg-rppa,.controls .btn{background-color:`+modeC[$(this).data("mode")]+` !important;}</style>` );
-    switch ( $(this).data("mode") ) {
-        case "read":
-            if ( mode == "edit" ) {
-                mode = "read";
-                drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
-                processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
-            }
-        break;
-        case "edit":
-            if ( mode == "read" ) {
-                mode = "edit";
-                drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
-                processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
-            }
-        break;
+    if ( mode == "edit" ) {
+        mode = "read";
+    } else {
+        mode = "edit";
     }
+    $( "head" ).append( `<style type="text/css" id="mode">.globaltext-container a,.globaltext-container a:hover,.globaltext-container a:visited,.globaltext-container a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-container .nav-pills .nav-link.active,.globaltext-container .bg-rppa,.globaltext-container .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-container a.bg-rppa{color:white !important;}.globaltext-container input{accent-color: `+modeC[ mode ]+` !important;}</style>` );
+    drawGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
+    processGlobalText( $( this ).data( "tid" ), $( this ).data( "wid" ) );
 });
 
 // update UI on expression selection
-$(document).on('click','button[data-bs-toggle="pill"]',function(){
-    if ( $( "[id^=waveform_]" ).length ) {
-        wavesurfer.drawBuffer();
-    }
+$(document).on('click','button[data-bs-toggle="pill"],.tgl-btn',function(){
     $(".popover").hide();
     if ( mode == "edit" ) {
         processGlobalText( "", $( this ).closest( "[data-wid]" ).data( "wid" ) );
     } else {
         initializeContexts( contexts[ $( this ).data( "expr" ) ], mode );
     }
+    if ( $( "[id^=waveform_]" ).length ) {
+        player[ Object.keys( player ) ].drawBuffer();
+    }
     clearInterval( t );
     t = setInterval(updateDOM(),500);
 });
 
 var dismiss_region = undefined;
+/*  This function retrieves and processes the available contexts or
+    buildingblocks.  It
+    - queries and retrieves avaialble contexts (reading view) or
+    - queries and retrieves avaialble buildingblocks (editing view)
+    - retrieves and processes any blank nodes for the body and target of the
+      context or building block
+    - initializes tools (Openseadragon, Wavesufer) for reading or editing mode
+*/
 async function processGlobalText( tid, wid ) {
     var work = domain+"/id/"+wid+"/work";
     if ( mode == "read" ) {
         // load all (i.e. <default>) contexts
-        var q = namespaces+`SELECT *
+        var q = namespaces+`SELECT ?s ?p ?o ?g
         WHERE {
-            ?s dcterm:relation """`+work+`""" .\n
-            ?s ?p ?o .
+        {
+            {
+                ?s a rppa:Context .
+                ?s intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s ?p ?o .
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+    			?s2 rppa:consistsOf ?w .
+    			?w ?p ?o . 
+          		BIND (?w AS ?s)
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s2 rppa:consistsOf ?w .
+                ?w <http://www.w3.org/ns/oa#hasBody> ?body .
+                ?body ?p ?o .
+                BIND(?body AS ?s)
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s2 rppa:consistsOf ?w .
+                ?w <http://www.w3.org/ns/oa#hasTarget> ?body .
+                ?body ?p ?o .
+                BIND(?body AS ?s)
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s2 rppa:consistsOf ?w .
+                ?w <http://www.w3.org/ns/oa#hasBody> ?body .
+                ?body <http://www.w3.org/ns/activitystreams#items> ?list .
+                ?list rdf:rest*/rdf:first ?items .
+                BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
+                BIND(?items as ?o)
+                BIND(?list as ?s)
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s2 rppa:consistsOf ?w .
+                ?w <http://www.w3.org/ns/oa#hasTarget> ?body .
+                ?body oa:hasSelector ?items .
+                ?items ?p ?o .
+                BIND(?items as ?s)
+            }
             BIND(<default> AS ?g)
+            } UNION {
+                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                ?s2 (<http://purl.org/dc/terms/contributor>|<http://purl.org/dc/terms/creator>) ?o2 .
+                ?o2 a foaf:Agent .
+                ?o2 ?p ?o .
+                BIND(?o2 AS ?s)
+                BIND(<default> AS ?g)                
+            }
         }`;
         var r = await getJSONLD( q );
-        if ( r.hasOwnProperty( "graph" ) ) {
-            contexts = _.groupBy( r.graph, 'dcterm:source' );
+        if (r.hasOwnProperty( "graph" )) {
+            // insert blank nodes into JSON-LD structure
+            ckeys = _.keyBy( r.graph, 'id' ); // create blank node IDs
+            for (let i = 0; i < r.graph.length; i++) {
+                let obj = r.graph[i];
+                if (obj.id.startsWith( 'http' )) {
+                    if ( obj.hasOwnProperty( "oa:hasBody" ) ) {
+                        var hasBody = obj['oa:hasBody'].id ;
+                        obj['oa:hasBody'] = [];
+                        obj['oa:hasBody'].push( ckeys[ hasBody ] );
+                        if ( obj['oa:hasBody'][0].hasOwnProperty( 'as:items' ) ) {
+                            var asItems = obj['oa:hasBody'][0]['as:items'].id;
+                            obj['oa:hasBody'][0]['as:items'] = ckeys[ asItems ][ 'as:items' ];
+                        }    
+                    }
+                    if ( obj.hasOwnProperty( "oa:hasTarget" ) ) {
+                        var hasTarget = obj['oa:hasTarget'].id ;
+                        obj['oa:hasTarget'] = [];
+                        obj['oa:hasTarget'].push( ckeys[ hasTarget ] ); 
+                        var hasSelector = obj['oa:hasTarget'][0]['oa:hasSelector'].id;
+                        obj['oa:hasTarget'][0]['oa:hasSelector'] = ckeys[ hasSelector ];
+                    }
+                    if (obj.id.startsWith( 'http' )) {
+                        if ( obj.hasOwnProperty( "rppa:consistsOf" ) ) {
+                            var consistsOf = obj['rppa:consistsOf'].id ;
+                            obj['rppa:consistsOf'] = [];
+                            obj['rppa:consistsOf'].push( ckeys[ consistsOf ] ); 
+                        }
+                    }
+                }
+            }
         } else {
-            var mine = {}
-            mine[ "@context" ] = r[ "@context" ];
-            mine[ "graph" ] = [];
-            mine[ "graph" ].push( r );
-            contexts = _.groupBy( mine.graph, 'dcterm:source' );
+            r.graph = [];
         }
+        contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
+        contributors = _.keyBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
         // tool settings
         if ( Object.keys(annotorious).length > 0 ) {
             annotorious[ Object.keys(annotorious) ].readOnly = true; // image
         }
         if ( $( ".waveform" ).length ) {
-            wavesurfer.disableDragSelection(); // sound
-            wavesurfer.setProgressColor( '#BD7E46' );
+            player[ Object.keys( player ) ].disableDragSelection(); // sound
+            player[ Object.keys( player ) ].setProgressColor( '#BD7E46' );
         }
     } else if ( mode == "edit" ) {
         // load user contributions
         var q = namespaces+`SELECT *
         WHERE {
+            {
             GRAPH `+user+` {
-                ?s dcterm:relation """`+work+`""" .\n
-                ?s ?p ?o .
+                {
+                    ?s a rppa:BuildingBlock .
+                    ?s dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                    ?s ?p ?o .
+                } UNION {
+                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                    ?s2 <http://www.w3.org/ns/oa#hasBody> ?body .
+                    ?body ?p ?o .
+                    BIND(?body AS ?s)
+                } UNION {
+                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                    ?s2 <http://www.w3.org/ns/oa#hasTarget> ?body .
+                    ?body ?p ?o .
+                    BIND(?body AS ?s)
+                } UNION {
+                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                    ?s2 <http://www.w3.org/ns/oa#hasBody> ?body .
+                    ?body <http://www.w3.org/ns/activitystreams#items> ?list .
+                    ?list rdf:rest*/rdf:first ?items .
+                    BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
+                    BIND(?items as ?o)
+                    BIND(?list as ?s)
+                } UNION {
+                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
+                    ?s2 <http://www.w3.org/ns/oa#hasTarget> ?body .
+                    ?body oa:hasSelector ?items .
+                    ?items ?p ?o .
+                    BIND(?items as ?s)
+                }
                 BIND(`+user+` AS ?g)
+            }
             }
         }`;
         var r = await getJSONLD( q );
-        if ( r.hasOwnProperty( "graph" ) ) {
-            contexts = _.groupBy( r.graph, 'dcterm:source' );
+        if (r.hasOwnProperty( "graph" )) {
+            // insert blank nodes into JSON-LD structure
+            ckeys = _.keyBy( r.graph, 'id' ); // create blank node IDs
+            for (let i = 0; i < r.graph.length; i++) {
+                let obj = r.graph[i];
+                if (obj.id.startsWith( 'http' )) {
+                    if ( obj.hasOwnProperty( "oa:hasBody" ) ) {
+                        var hasBody = obj['oa:hasBody'].id ;
+                        obj['oa:hasBody'] = [];
+                        obj['oa:hasBody'].push( ckeys[ hasBody ] );
+                        if ( obj['oa:hasBody'][0].hasOwnProperty( 'as:items' ) ) {
+                            var asItems = obj['oa:hasBody'][0]['as:items'].id;
+                            obj['oa:hasBody'][0]['as:items'] = ckeys[ asItems ][ 'as:items' ];
+                        }    
+                    }
+                    if ( obj.hasOwnProperty( "oa:hasTarget" ) ) {
+                        var hasTarget = obj['oa:hasTarget'].id ;
+                        obj['oa:hasTarget'] = [];
+                        obj['oa:hasTarget'].push( ckeys[ hasTarget ] ); 
+                        var hasSelector = obj['oa:hasTarget'][0]['oa:hasSelector'].id;
+                        obj['oa:hasTarget'][0]['oa:hasSelector'] = ckeys[ hasSelector ];
+                    }
+                }
+            }
         } else {
-            var mine = {}
-            mine[ "@context" ] = r[ "@context" ];
-            mine[ "graph" ] = [];
-            mine[ "graph" ].push( r );
-            contexts = _.groupBy( mine.graph, 'dcterm:source' );
+            r.graph = [];
         }
+        console.log( r.graph );
+        contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
         // tool settings
         if ( Object.keys(annotorious).length > 0 ) {
             annotorious[ Object.keys(annotorious) ].readOnly = false; // image
         }
         if ( $( ".waveform" ).length ) {
-            wavesurfer.disableDragSelection();
-            wavesurfer.enableDragSelection({
+            player[ Object.keys( player ) ].disableDragSelection();
+            player[ Object.keys( player ) ].enableDragSelection({
                 color: 'rgb(74, 186, 159,.2)',
                 resize: false,
                 drag: false
             }); // sound
-            wavesurfer.setProgressColor( '#358078' );
-            wavesurfer.un('region-update-end');
-            wavesurfer.on('region-update-end', function( region ) {
-                wavesurfer.disableDragSelection();
+            player[ Object.keys( player ) ].setProgressColor( '#358078' );
+            player[ Object.keys( player ) ].un('region-update-end');
+            player[ Object.keys( player ) ].on('region-update-end', function( region ) {
+                player[ Object.keys( player ) ].disableDragSelection();
                 var target = secondsToTime(region.start) + "–" + secondsToTime(region.end);
                 var id = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
                 var work = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
@@ -601,7 +692,7 @@ async function processGlobalText( tid, wid ) {
                         <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
                     html: true,
                     placement: 'auto',
-                    container: '.text',
+                    container: '.globaltext',
                     template: `<div class="popover popover-dismiss-select med" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
                         <div class="popover-arrow"></div>
                         <div class="popover-body"></div>
@@ -614,9 +705,12 @@ async function processGlobalText( tid, wid ) {
         }
     }
     // initialize
-    initializeContexts( contexts[ $( ".text button.active" ).data( "expr" ) ], mode );
+    initializeContexts( contexts[ $( ".globaltext button.active" ).data( "expr" ) ], mode );
 }
 
+/*  This function takes a list of contexts and hands them over to specialized
+    functions for display
+*/
 function initializeContexts( exprContexts, mode ) {
     $( ".contexts" ).html( "" );
     $( ".workbench" ).html( "" );
@@ -640,7 +734,7 @@ function initializeContexts( exprContexts, mode ) {
         }
     } else {
         var tc = _.filter( exprContexts, function(o) {
-            return o["type"].includes( "rppa:Context" ) && o["crm:P2_has_type"][0].id == "lct:txt";
+            return o["type"].includes( "rppa:Context" ) //&& o["crm:P2_has_type"][0].id == "lct:txt";
         });
         processTxtContexts( tc );
     }
@@ -650,9 +744,13 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
     display_globaltext( e.currentTarget.dataset.tid,e.currentTarget.dataset.wid );
 });
 
+function reTheme() {
+    location.reload();
+}
+
 $( document ).ready(function() {
 
-    $( ".sso-sign-in" ).remove(); // TODO: remove when ready
+    //$( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;
@@ -673,5 +771,9 @@ $( document ).ready(function() {
             provider_img = ` <i class="fas fa-user-circle"></i>`
         }
     }
+    $( ".sso" ).append(
+        `Signed in as: <em><span id="username">`+((user != undefined && username != 'undefined')?username:'Not signed in')+`</span></em> <span id="provider">`+((user != undefined && username != 'undefined')?provider_img:'')+`</span>`+
+        ((user != undefined && username != 'undefined')?'':' <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button>' )
+    );
 
 });
