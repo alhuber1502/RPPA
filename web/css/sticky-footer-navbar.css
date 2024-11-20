@@ -152,10 +152,18 @@ nav.navbar {
 [data-bs-theme=dark] footer img[title~="Huber"] {
  filter: invert(.75);
 }
-@media (min-width: 450px) and (max-width: 1399px) {
+
+/* Custom behavior for screens smaller than 1600px */
+@media (max-width: 1599.98px) {
+  .navbar-expand-xxl .navbar-collapse {
+    display: none !important; /* Collapse the navbar */
+  }
+  .navbar-expand-xxl .navbar-toggler {
+    display: block !important; /* Show the toggler */
+  }
   .mb-md-0 {
-      margin-bottom: 0!important;
-      flex-direction: column !important;
+    margin-bottom: 0!important;
+    flex-direction: column !important;
   }
   .navbar-collapse.collapsing,
   .navbar-collapse.show
@@ -164,20 +172,35 @@ nav.navbar {
       z-index: 0;
       background-color: rgb(51, 51, 51);
       opacity: 0.95;
-      display: block;
+      display: block !important;
       top: 55px;
       position: absolute;
       width: calc(100vw - 30px);
+      margin-left: calc(100vw - 350px);
   }
 }
-@media (min-width: 1400px) {
-  .navbar-expand-xl .navbar-nav {
-      flex-direction: row !important;
+/* Default behavior for screens 1600px and wider */
+@media (min-width: 1600px) {
+  .navbar-expand-xxl .navbar-collapse {
+    display: flex !important; /* Keep the navbar expanded */
+  }
+  .navbar-expand-xxl .navbar-toggler {
+    display: none !important; /* Hide the toggler */
+  }
+  .navbar-expand-xxl .navbar-collapse {
+    flex-direction: row !important;
   }
   .leaflet-sidebar-pane {
       min-width: unset;
   }
 }
+@media (max-width: 1600px) {
+  .navbar-expand-xxl .navbar-nav .dropdown-menu {
+      position: static;
+  }
+}
+
+
 div[data-app="share_buttons"] {
   display:inline-block;
   vertical-align:middle;
