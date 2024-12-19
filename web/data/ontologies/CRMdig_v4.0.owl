@@ -1,0 +1,959 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:crmdig="http://www.cidoc-crm.org/extensions/crmdig/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:base="http://www.cidoc-crm.org/extensions/crmdig/">
+  <!--
+OWL implementation of CRMdig v4.0 December, 2022 (https://www.cidoc-crm.org/crmdig/ModelVersion/version-4.0)).
+
+Created by FORTH-ICS - February, 2024
+CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
+
+-->
+  <owl:Ontology rdf:about="">
+    <rdfs:label xml:lang="en">CRMdig 4.0 (DRAFT) / OWL</rdfs:label>
+    <owl:versionInfo xml:lang="en">CRMdig 4.0 (DRAFT) (December, 2022) including references to CIDOC-CRM 7.1.1. Current encoding (February, 2024) references Cidoc-CRM 7.1.3.</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:about="D1_Digital_Object">
+    <rdfs:label xml:lang="en">D1 Digital Object</rdfs:label>
+    <skos:notation>D1</skos:notation>
+    <skos:prefLabel xml:lang="en">Digital Object</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises identifiable immaterial items that can be represented as sets of bit sequences, such as data sets, e-texts, images, audio or video items, software, etc., and are documented as single units.
+Any aggregation of instances of D1 Digital Object into a whole treated as single unit is also regarded as an instance of D1 Digital Object.
+This means that for instance, the content of a DVD, an XML file on it, and an element of this file, are regarded as distinct instances of D1 Digital Object, mutually related by the P106 is composed of (forms part of) property.
+A D1 Digital Object does not depend on a specific physical carrier, and it can exist on one or more carriers simultaneously.
+
+In First Order Logic:
+- D1(x) ⇒ E73(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D2_Digitization_Process">
+    <rdfs:label xml:lang="en">D2 Digitization Process</rdfs:label>
+    <skos:notation>D2</skos:notation>
+    <skos:prefLabel xml:lang="en">Digitization Process</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D11_Digital_Measurement_Event"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events that result in the creation of instances of D9 Data Object that represent the appearance and/or form of an instance of E18 Physical Thing such as paper documents, statues, buildings, paintings, etc.
+A particular case is the analogue-to-digital conversion of audiovisual material.
+This class represents the transition from a material thing to an immaterial representation of it.
+The characteristic subsequent processing steps on digital objects are regarded as instances of D3 Formal Derivation.
+
+In First Order Logic:
+- D2(x) ⇒ D11(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D3_Formal_Derivation">
+    <rdfs:label xml:lang="en">D3 Formal Derivation</rdfs:label>
+    <skos:notation>D3</skos:notation>
+    <skos:prefLabel xml:lang="en">Formal Derivation</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events that result in the creation of a D1 Digital Object from another one following a deterministic algorithm, such that the resulting instance of digital object shares representative properties with the original object.
+In other words, this class describes the transition from an immaterial object referred to by property L21 used as derivation source (was derivation source for) to another immaterial object referred to by property L22 created derivative (was derivative created by) preserving the representation of some things but in a different form. Characteristic examples are colour corrections, contrast changes and resizing of images.
+
+In First Order Logic:
+- D3(x) ⇒ D10(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D7_Digital_Machine_Event">
+    <rdfs:label xml:lang="en">D7 Digital Machine Event</rdfs:label>
+    <skos:notation>D7</skos:notation>
+    <skos:prefLabel xml:lang="en">Digital Machine Event</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E11_Modification"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E65_Creation"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events that happen on physical digital devices following a human activity that intentionally caused its immediate or delayed initiation and results in the creation of a new instance of D1 Digital Object on behalf of the human actor.
+The input of a D7 Digital Machine Event may be parameter settings and/or data to be processed. Some D7 Digital Machine Events may form part of a wider E65 Creation event. In this case, all machine output of the partial events is regarded as creation of the overall activity.
+
+In First Order Logic:
+- D7(x) ⇒ E11(x)
+- D7(x) ⇒ E65(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D8_Digital_Device">
+    <rdfs:label xml:lang="en">D8 Digital Device</rdfs:label>
+    <skos:notation>D8</skos:notation>
+    <skos:prefLabel xml:lang="en">Digital Device</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises identifiable material items such as computers, scanners, cameras, etc. that have the capability to process or produce instances of D1 Digital Object.
+
+In First Order Logic:
+- D8(x) ⇒ E22(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D9_Data_Object">
+    <rdfs:label xml:lang="en">D9 Data Object</rdfs:label>
+    <skos:notation>D9</skos:notation>
+    <skos:prefLabel xml:lang="en">Data Object</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E54_Dimension"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises instances of D1 Digital Object that are the direct result of a digital measurement or a formal derivative of it, containing quantitative properties of some physical things or other constellations of matter.
+
+In First Order Logic:
+- D9(x) ⇒ D1(x)
+- D9(x) ⇒ E54(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D10_Software_Execution">
+    <rdfs:label xml:lang="en">D10 Software Execution</rdfs:label>
+    <skos:notation>D10</skos:notation>
+    <skos:prefLabel xml:lang="en">Software Execution</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events by which a digital device runs a software program or a series of computing operations on a digital object as a single task, which is completely determined by its digital input, the software and the generic properties of the device.
+
+In First Order Logic:
+- D10(x) ⇒ D7(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D11_Digital_Measurement_Event">
+    <rdfs:label xml:lang="en">D11 Digital Measurement Event</rdfs:label>
+    <skos:notation>D11</skos:notation>
+    <skos:prefLabel xml:lang="en">Digital Measurement Event</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E16_Measurement"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises actions measuring physical properties using a digital device, that are determined by a systematic procedure and creates an instance of D9 Data Object, which is stored on an instance of D13 Digital Information Carrier.
+In contrast to instances of D10 Software Execution, environmental factors have an intended influence on the outcome of an instance of D11 Digital Measurement Event.
+Measurement devices may include running distinct software, such as the RAW to JPEG conversion in digital cameras.
+In this case, the event is regarded as instance of both classes, D10 Software Execution and D11 Digital Measurement Event.
+
+In First Order Logic:
+- D11(x) ⇒ D7(x)
+- D11(x) ⇒ E16(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D12_Data_Transfer_Event">
+    <rdfs:label xml:lang="en">D12 Data Transfer Event</rdfs:label>
+    <skos:notation>D12</skos:notation>
+    <skos:prefLabel xml:lang="en">Data Transfer Event</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events that transfer a digital object from one digital carrier to another. Normally, the digital object remains the same. If in general or by observation the transfer implies or has implied some data corruption, the change of the digital objects may be documented distinguishing input and output rather than instantiating the property L14 transferred (was transferred by).
+
+In First Order Logic:
+- D12(x) ⇒ D7(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D13_Digital_Information_Carrier">
+    <rdfs:label xml:lang="en">D13 Digital Information Carrier</rdfs:label>
+    <skos:notation>D13</skos:notation>
+    <skos:prefLabel xml:lang="en">Digital Information Carrier</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises all instances of E84 Information Carrier that are explicitly designed to be used as persistent digital physical carriers of instances of D1 Digital Object. A D13 Digital Information Carrier may or may not contain information, e.g., an empty diskette.
+
+In First Order Logic:
+- D13(x) ⇒ E1(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D14_Software">
+    <rdfs:label xml:lang="en">D14 Software</rdfs:label>
+    <skos:notation>D14</skos:notation>
+    <skos:prefLabel xml:lang="en">Software</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises software codes, computer programs, procedures and functions that are used to operate a system of digital objects.
+
+In First Order Logic:
+- D14(x) ⇒ D1(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D29_Annotation_Object">
+    <rdfs:label xml:lang="en">D29 Annotation Object</rdfs:label>
+    <skos:notation>D29</skos:notation>
+    <skos:prefLabel xml:lang="en">Annotation Object</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises objects that make propositions about other artefacts.
+Instances of this class are not the attributes themselves, by which things are annotated, but represent the connection between the concepts related in a proposition, and the activities of creation, modification and deletion.
+This class is specialized by appropriate subclasses to express more specific relationships between annotated things, such as knowledge object, same as etc.
+
+In First Order Logic:
+- D29(x) ⇒ E89(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D30_Annotation_Event">
+    <rdfs:label xml:lang="en">D30 Annotation Event</rdfs:label>
+    <skos:notation>D30</skos:notation>
+    <skos:prefLabel xml:lang="en">Annotation Event</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E65_Creation"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class comprises events that describe the creation of associations (âAnnotation Objectsâ) between objects or areas of objects of the Repository, with other objects or regions or persons, places, events. It is the event that creates the Annotation Object.
+
+In First Order Logic:
+- D30(x) ⇒ E65(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="D35_Area">
+    <rdfs:label xml:lang="en">D35 Area</rdfs:label>
+    <skos:notation>D35</skos:notation>
+    <skos:prefLabel xml:lang="en">Area</skos:prefLabel>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E26_Physical_Feature"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This class describes a part (of any shape or size) of interest in basically any media object stored in the Object Repository, i.e., a text, an image, a video or a 3D model. It points to content consisting of just a portion or area of a file. In some contexts, however, the area can also point to content represented by an integral (i.e., proper) file. It is equal to the METS AREA element.
+
+In First Order Logic:
+- D35(x) ⇒ D1(x)
+- D35(x) ⇒ E26(x)
+</rdfs:comment>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="L1_digitized">
+    <rdfs:label xml:lang="en">L1 digitized</rdfs:label>
+    <skos:notation>L1</skos:notation>
+    <skos:prefLabel xml:lang="en">digitized</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D2_Digitization_Process"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L1i_was_digitized_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P39_measured"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D2 Digitization Process with an instance of E18 Physical Thing which is a material thing.
+
+In First Order Logic:
+- L1(x,y) ⇒ D2(x)
+- L1(x,y) ⇒ E18(y)
+- L1(x,y) ⇒ P39(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L1i_was_digitized_by">
+    <rdfs:label xml:lang="en">L1i was digitized by</rdfs:label>
+    <skos:notation>L1i</skos:notation>
+    <skos:prefLabel xml:lang="en">was digitized by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D2_Digitization_Process"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L1_digitized"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P39i_was_measured_by"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D2 Digitization Process with an instance of E18 Physical Thing which is a material thing.
+
+In First Order Logic of the inverse property:
+- L1(x,y) ⇒ D2(x)
+- L1(x,y) ⇒ E18(y)
+- L1(x,y) ⇒ P39(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L2_used_as_source">
+    <rdfs:label xml:lang="en">L2 used as source</rdfs:label>
+    <skos:notation>L2</skos:notation>
+    <skos:prefLabel xml:lang="en">used as source</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L2i_was_source_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10_had_input"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D10 Software Execution with an instance of D1 Digital Object which is used as a source, software essential for the performance.
+
+In First Order Logic:
+- L2(x,y) ⇒ D10(x)
+- L2(x,y) ⇒ D1(y)
+- L2(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L2i_was_source_for">
+    <rdfs:label xml:lang="en">L2i was source for</rdfs:label>
+    <skos:notation>L2i</skos:notation>
+    <skos:prefLabel xml:lang="en">was source for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L2_used_as_source"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10i_was_input_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D10 Software Execution with an instance of D1 Digital Object which is used as a source, software essential for the performance.
+
+In First Order Logic of the inverse property:
+- L2(x,y) ⇒ D10(x)
+- L2(x,y) ⇒ D1(y)
+- L2(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L10_had_input">
+    <rdfs:label xml:lang="en">L10 had input</rdfs:label>
+    <skos:notation>L10</skos:notation>
+    <skos:prefLabel xml:lang="en">had input</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10i_was_input_of"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the input used to specify the machine action.
+
+In First Order Logic:
+- L10(x,y) ⇒ D7(x)
+- L10(x,y) ⇒ D1(y)
+- L10(x,y) ⇒ P16(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L10i_was_input_of">
+    <rdfs:label xml:lang="en">L10i was input of</rdfs:label>
+    <skos:notation>L10i</skos:notation>
+    <skos:prefLabel xml:lang="en">was input of</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10_had_input"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the input used to specify the machine action.
+
+In First Order Logic of the inverse property:
+- L10(x,y) ⇒ D7(x)
+- L10(x,y) ⇒ D1(y)
+- L10(x,y) ⇒ P16(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L11_had_output">
+    <rdfs:label xml:lang="en">L11 had output</rdfs:label>
+    <skos:notation>L11</skos:notation>
+    <skos:prefLabel xml:lang="en">had output</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11i_was_output_of"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94_has_created"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the output of the activity.
+
+In First Order Logic:
+- L11(x,y) ⇒ D7(x)
+- L11(x,y) ⇒ D1(y)
+- L11(x,y) ⇒ P94(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L11i_was_output_of">
+    <rdfs:label xml:lang="en">L11i was output of</rdfs:label>
+    <skos:notation>L11i</skos:notation>
+    <skos:prefLabel xml:lang="en">was output of</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11_had_output"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the output of the activity.
+
+In First Order Logic of the inverse property:
+- L11(x,y) ⇒ D7(x)
+- L11(x,y) ⇒ D1(y)
+- L11(x,y) ⇒ P94(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L12_happened_on_device">
+    <rdfs:label xml:lang="en">L12 happened on device</rdfs:label>
+    <skos:notation>L12</skos:notation>
+    <skos:prefLabel xml:lang="en">happened on device</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12i_was_device_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D7 Digital Machine Event with an object, the D8 Digital Device, which happened with, e.g a capturing event that happened on/with a digital camera, etc.
+
+In First Order Logic:
+- L12(x,y) ⇒ D7(x)
+- L12(x,y) ⇒ D8(y)
+- L12(x,y) ⇒ P12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L12i_was_device_for">
+    <rdfs:label xml:lang="en">L12i was device for</rdfs:label>
+    <skos:notation>L12i</skos:notation>
+    <skos:prefLabel xml:lang="en">was device for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12_happened_on_device"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D7 Digital Machine Event with an object, the D8 Digital Device, which happened with, e.g a capturing event that happened on/with a digital camera, etc.
+
+In First Order Logic of the inverse property:
+- L12(x,y) ⇒ D7(x)
+- L12(x,y) ⇒ D8(y)
+- L12(x,y) ⇒ P12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L13_used_parameters">
+    <rdfs:label xml:lang="en">L13 used parameters</rdfs:label>
+    <skos:notation>L13</skos:notation>
+    <skos:prefLabel xml:lang="en">used parameters</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L13i_parameters_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10_had_input"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D10 Software Execution with a digital object used as a parameter during the process.
+
+In First Order Logic:
+- L13(x,y) ⇒ D10(x)
+- L13(x,y) ⇒ D1(y)
+- L13(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L13i_parameters_for">
+    <rdfs:label xml:lang="en">L13i parameters for</rdfs:label>
+    <skos:notation>L13i</skos:notation>
+    <skos:prefLabel xml:lang="en">parameters for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L13_used_parameters"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10i_was_input_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D10 Software Execution with a digital object used as a parameter during the process.
+
+In First Order Logic of the inverse property:
+- L13(x,y) ⇒ D10(x)
+- L13(x,y) ⇒ D1(y)
+- L13(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L14_transferred">
+    <rdfs:label xml:lang="en">L14 transferred</rdfs:label>
+    <skos:notation>L14</skos:notation>
+    <skos:prefLabel xml:lang="en">transferred</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L14i_was_transferred_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10_had_input"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies a digital object transferred by a D12 Data Transfer Event.
+
+In First Order Logic:
+- L14(x,y) ⇒ D12(x)
+- L14(x,y) ⇒ D1(y)
+- L14(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L14i_was_transferred_by">
+    <rdfs:label xml:lang="en">L14i was transferred by</rdfs:label>
+    <skos:notation>L14i</skos:notation>
+    <skos:prefLabel xml:lang="en">was transferred by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L14_transferred"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L10i_was_input_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies a digital object transferred by a D12 Data Transfer Event.
+
+In First Order Logic of the inverse property:
+- L14(x,y) ⇒ D12(x)
+- L14(x,y) ⇒ D1(y)
+- L14(x,y) ⇒ L10(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L15_has_sender">
+    <rdfs:label xml:lang="en">L15 has sender</rdfs:label>
+    <skos:notation>L15</skos:notation>
+    <skos:prefLabel xml:lang="en">has sender</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L15i_was_sender_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12_happened_on_device"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies a digital device used as a medium on which data are transferred through a D12 Data Transfer Event.
+
+In First Order Logic:
+- L15(x,y) ⇒ D12(x)
+- L15(x,y) ⇒ D8(y)
+- L15(x,y) ⇒ L12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L15i_was_sender_for">
+    <rdfs:label xml:lang="en">L15i was sender for</rdfs:label>
+    <skos:notation>L15i</skos:notation>
+    <skos:prefLabel xml:lang="en">was sender for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L15_has_sender"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12i_was_device_for"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies a digital device used as a medium on which data are transferred through a D12 Data Transfer Event.
+
+In First Order Logic of the inverse property:
+- L15(x,y) ⇒ D12(x)
+- L15(x,y) ⇒ D8(y)
+- L15(x,y) ⇒ L12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L16_has_receiver">
+    <rdfs:label xml:lang="en">L16 has receiver</rdfs:label>
+    <skos:notation>L16</skos:notation>
+    <skos:prefLabel xml:lang="en">has receiver</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L16i_was_sender_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12_happened_on_device"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies a digital device used as a medium to receive data through a D12 Data Transfer Event.
+
+In First Order Logic:
+- L16(x,y) ⇒ D12(x)
+- L16(x,y) ⇒ D8(y)
+- L16(x,y) ⇒ L12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L16i_was_sender_for">
+    <rdfs:label xml:lang="en">L16i was sender for</rdfs:label>
+    <skos:notation>L16i</skos:notation>
+    <skos:prefLabel xml:lang="en">was sender for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D8_Digital_Device"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D12_Data_Transfer_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L16_has_receiver"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L12i_was_device_for"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies a digital device used as a medium to receive data through a D12 Data Transfer Event.
+
+In First Order Logic of the inverse property:
+- L16(x,y) ⇒ D12(x)
+- L16(x,y) ⇒ D8(y)
+- L16(x,y) ⇒ L12(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L17_measured_thing_of_type">
+    <rdfs:label xml:lang="en">L17 measured thing of type</rdfs:label>
+    <skos:notation>L17</skos:notation>
+    <skos:prefLabel xml:lang="en">measured thing of type</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D11_Digital_Measurement_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E55_Type"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L17i_was_type_of_thing_measured_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P125_used_object_of_type"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D11 Digital Measurement Event with the instance of E55Type of object to which it applied.
+
+In First Order Logic:
+- L17(x,y) ⇒ D11(x)
+- L17(x,y) ⇒ E55(y)
+- L17(x,y) ⇒ P125(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L17i_was_type_of_thing_measured_by">
+    <rdfs:label xml:lang="en">L17i was type of thing measured by</rdfs:label>
+    <skos:notation>L17i</skos:notation>
+    <skos:prefLabel xml:lang="en">was type of thing measured by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E55_Type"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D11_Digital_Measurement_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L17_measured_thing_of_type"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P125i_was_type_of_object_used_in"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D11 Digital Measurement Event with the instance of E55Type of object to which it applied.
+
+In First Order Logic of the inverse property:
+- L17(x,y) ⇒ D11(x)
+- L17(x,y) ⇒ E55(y)
+- L17(x,y) ⇒ P125(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L18_has_modified">
+    <rdfs:label xml:lang="en">L18 has modified</rdfs:label>
+    <skos:notation>L18</skos:notation>
+    <skos:prefLabel xml:lang="en">has modified</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D13_Digital_Information_Carrier"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L18i_was_modified_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P31_has_modified"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies a Digital Information Carrier modified in a Digital Machine Event.
+
+In First Order Logic:
+- L18(x,y) ⇒ D7(x)
+- L18(x,y) ⇒ D13(y)
+- L18(x,y) ⇒ P31(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L18i_was_modified_by">
+    <rdfs:label xml:lang="en">L18i was modified by</rdfs:label>
+    <skos:notation>L18i</skos:notation>
+    <skos:prefLabel xml:lang="en">was modified by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D13_Digital_Information_Carrier"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L18_has_modified"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies a Digital Information Carrier modified in a Digital Machine Event.
+
+In First Order Logic of the inverse property:
+- L18(x,y) ⇒ D7(x)
+- L18(x,y) ⇒ D13(y)
+- L18(x,y) ⇒ P31(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L19_stores">
+    <rdfs:label xml:lang="en">L19 stores</rdfs:label>
+    <skos:notation>L19</skos:notation>
+    <skos:prefLabel xml:lang="en">stores</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D13_Digital_Information_Carrier"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L19i_is_stored_on"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P128_carries"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of a D13 Digital Information Carrier with the instance of Digital Object that is stored on it.
+
+In First Order Logic:
+- L19(x,y) ⇒ D13(x)
+- L19(x,y) ⇒ D1(y)
+- L19(x,y) ⇒ P128(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L19i_is_stored_on">
+    <rdfs:label xml:lang="en">L19i is stored on</rdfs:label>
+    <skos:notation>L19i</skos:notation>
+    <skos:prefLabel xml:lang="en">is stored on</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D13_Digital_Information_Carrier"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L19_stores"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P128i_is_carried_by"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of a D13 Digital Information Carrier with the instance of Digital Object that is stored on it.
+
+In First Order Logic of the inverse property:
+- L19(x,y) ⇒ D13(x)
+- L19(x,y) ⇒ D1(y)
+- L19(x,y) ⇒ P128(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L20_has_created">
+    <rdfs:label xml:lang="en">L20 has created</rdfs:label>
+    <skos:notation>L20</skos:notation>
+    <skos:prefLabel xml:lang="en">has created</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D11_Digital_Measurement_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D9_Data_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L20i_was_created_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11_had_output"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies a Data Object that came into existence as a result of a D11 Digital Measurement Event.
+
+In First Order Logic:
+- L20(x,y) ⇒ D11(x)
+- L20(x,y) ⇒ D9(y)
+- L20(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L20i_was_created_by">
+    <rdfs:label xml:lang="en">L20i was created by</rdfs:label>
+    <skos:notation>L20i</skos:notation>
+    <skos:prefLabel xml:lang="en">was created by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D9_Data_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D11_Digital_Measurement_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L20_has_created"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11i_was_output_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies a Data Object that came into existence as a result of a D11 Digital Measurement Event.
+
+In First Order Logic of the inverse property:
+- L20(x,y) ⇒ D11(x)
+- L20(x,y) ⇒ D9(y)
+- L20(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L21_used_as_derivation_source">
+    <rdfs:label xml:lang="en">L21 used as derivation source</rdfs:label>
+    <skos:notation>L21</skos:notation>
+    <skos:prefLabel xml:lang="en">used as derivation source</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D3_Formal_Derivation"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L21i_was_derivation_source_for"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L2_used_as_source"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of a D3 Formal Derivation with the instance of D1 Digital Object that is used as a derivation source.
+
+In First Order Logic:
+- L21(x,y) ⇒ D3(x)
+- L21(x,y) ⇒ D1(y)
+- L21(x,y) ⇒ L2(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L21i_was_derivation_source_for">
+    <rdfs:label xml:lang="en">L21i was derivation source for</rdfs:label>
+    <skos:notation>L21i</skos:notation>
+    <skos:prefLabel xml:lang="en">was derivation source for</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D3_Formal_Derivation"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L21_used_as_derivation_source"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L2i_was_source_for"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of a D3 Formal Derivation with the instance of D1 Digital Object that is used as a derivation source.
+
+In First Order Logic of the inverse property:
+- L21(x,y) ⇒ D3(x)
+- L21(x,y) ⇒ D1(y)
+- L21(x,y) ⇒ L2(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L22_created_derivative">
+    <rdfs:label xml:lang="en">L22 created derivative</rdfs:label>
+    <skos:notation>L22</skos:notation>
+    <skos:prefLabel xml:lang="en">created derivative</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D3_Formal_Derivation"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L22i_was_derivative_created_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11_had_output"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D3 Formal Derivation with the Digital Object it used to create a version of.
+
+In First Order Logic:
+- L22(x,y) ⇒ D3(x)
+- L22(x,y) ⇒ D1(y)
+- L22(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L22i_was_derivative_created_by">
+    <rdfs:label xml:lang="en">L22i was derivative created by</rdfs:label>
+    <skos:notation>L22i</skos:notation>
+    <skos:prefLabel xml:lang="en">was derivative created by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D3_Formal_Derivation"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L22_created_derivative"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11i_was_output_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D3 Formal Derivation with the Digital Object it used to create a version of.
+
+In First Order Logic of the inverse property:
+- L22(x,y) ⇒ D3(x)
+- L22(x,y) ⇒ D1(y)
+- L22(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L23_used_software_or_firmware">
+    <rdfs:label xml:lang="en">L23 used software or firmware</rdfs:label>
+    <skos:notation>L23</skos:notation>
+    <skos:prefLabel xml:lang="en">used software or firmware</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D14_Software"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L23i_was_software_or_firmware_used_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property associates an instance of D7 Digital Machine Event with the instance of D14 Software that had used.
+
+In First Order Logic:
+- L23(x,y) ⇒ D7(x)
+- L23(x,y) ⇒ D14(y)
+- L23(x,y) ⇒ P16(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L23i_was_software_or_firmware_used_by">
+    <rdfs:label xml:lang="en">L23i was software or firmware used by</rdfs:label>
+    <skos:notation>L23i</skos:notation>
+    <skos:prefLabel xml:lang="en">was software or firmware used by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D14_Software"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D7_Digital_Machine_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L23_used_software_or_firmware"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property associates an instance of D7 Digital Machine Event with the instance of D14 Software that had used.
+
+In First Order Logic of the inverse property:
+- L23(x,y) ⇒ D7(x)
+- L23(x,y) ⇒ D14(y)
+- L23(x,y) ⇒ P16(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L24_created_logfile">
+    <rdfs:label xml:lang="en">L24 created logfile</rdfs:label>
+    <skos:notation>L24</skos:notation>
+    <skos:prefLabel xml:lang="en">created logfile</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L24i_was_logfile_created_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11_had_output"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies the logfile that was created by a D10 Software Execution in order to record all the activities in the system.
+
+In First Order Logic:
+- L24(x,y) ⇒ D10(x)
+- L24(x,y) ⇒ D1(y)
+- L24(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L24i_was_logfile_created_by">
+    <rdfs:label xml:lang="en">L24i was logfile created by</rdfs:label>
+    <skos:notation>L24i</skos:notation>
+    <skos:prefLabel xml:lang="en">was logfile created by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D10_Software_Execution"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L24_created_logfile"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L11i_was_output_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies the logfile that was created by a D10 Software Execution in order to record all the activities in the system.
+
+In First Order Logic of the inverse property:
+- L24(x,y) ⇒ D10(x)
+- L24(x,y) ⇒ D1(y)
+- L24(x,y) ⇒ L11(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L43_annotates">
+    <rdfs:label xml:lang="en">L43 annotates</rdfs:label>
+    <skos:notation>L43</skos:notation>
+    <skos:prefLabel xml:lang="en">annotates</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D29_Annotation_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L43i_is_annotated_by"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property describes the associations between objects or areas of objects of the RI, with other objects or regions or persons, places, events.
+
+In First Order Logic:
+- L43(x,y) ⇒ D29(x)
+- L43(x,y) ⇒ E1(y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L43i_is_annotated_by">
+    <rdfs:label xml:lang="en">L43i is annotated by</rdfs:label>
+    <skos:notation>L43i</skos:notation>
+    <skos:prefLabel xml:lang="en">is annotated by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D29_Annotation_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L43_annotates"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property describes the associations between objects or areas of objects of the RI, with other objects or regions or persons, places, events.
+
+In First Order Logic of the inverse property:
+- L43(x,y) ⇒ D29(x)
+- L43(x,y) ⇒ E1(y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L48_created_annotation">
+    <rdfs:label xml:lang="en">L48 created annotation</rdfs:label>
+    <skos:notation>L48</skos:notation>
+    <skos:prefLabel xml:lang="en">created annotation</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D30_Annotation_Event"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D29_Annotation_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L48i_was_annotation_created_by"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94_has_created"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property identifies the D29 Annotation Object (associations) that came into existence as a result of a D30 Annotation Event.
+
+In First Order Logic:
+- L48(x,y) ⇒ D30(x)
+- L48(x,y) ⇒ D29(y)
+- L48(x,y) ⇒ P94(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L48i_was_annotation_created_by">
+    <rdfs:label xml:lang="en">L48i was annotation created by</rdfs:label>
+    <skos:notation>L48i</skos:notation>
+    <skos:prefLabel xml:lang="en">was annotation created by</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D29_Annotation_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D30_Annotation_Event"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L48_created_annotation"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property identifies the D29 Annotation Object (associations) that came into existence as a result of a D30 Annotation Event.
+
+In First Order Logic of the inverse property:
+- L48(x,y) ⇒ D30(x)
+- L48(x,y) ⇒ D29(y)
+- L48(x,y) ⇒ P94(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L49_is_primary_area_of">
+    <rdfs:label xml:lang="en">L49 is primary area of</rdfs:label>
+    <skos:notation>L49</skos:notation>
+    <skos:prefLabel xml:lang="en">is primary area of</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D35_Area"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L49i_has_primary_area"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property describes the association between a particular area declared in an original digital object.
+
+In First Order Logic:
+- L49(x,y) ⇒ D35(x)
+- L49(x,y) ⇒ D1(y)
+- L49(x,y) ⇒ P106(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L49i_has_primary_area">
+    <rdfs:label xml:lang="en">L49i has primary area</rdfs:label>
+    <skos:notation>L49i</skos:notation>
+    <skos:prefLabel xml:lang="en">has primary area</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D35_Area"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L49_is_primary_area_of"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106i_forms_part_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property describes the association between a particular area declared in an original digital object.
+
+In First Order Logic of the inverse property:
+- L49(x,y) ⇒ D35(x)
+- L49(x,y) ⇒ D1(y)
+- L49(x,y) ⇒ P106(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L50_is_propagated_area_of">
+    <rdfs:label xml:lang="en">L50 is propagated area of</rdfs:label>
+    <skos:notation>L50</skos:notation>
+    <skos:prefLabel xml:lang="en">is propagated area of</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D35_Area"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L50i_has_propagated_area"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property describes the association between an area and the digital object to which it is propagated.
+
+In First Order Logic:
+- L50(x,y) ⇒ D35(x)
+- L50(x,y) ⇒ D1(y)
+- L50(x,y) ⇒ P106(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L50i_has_propagated_area">
+    <rdfs:label xml:lang="en">L50i has propagated area</rdfs:label>
+    <skos:notation>L50i</skos:notation>
+    <skos:prefLabel xml:lang="en">has propagated area</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D1_Digital_Object"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D35_Area"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L50_is_propagated_area_of"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106i_forms_part_of"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property describes the association between an area and the digital object to which it is propagated.
+
+In First Order Logic of the inverse property:
+- L50(x,y) ⇒ D35(x)
+- L50(x,y) ⇒ D1(y)
+- L50(x,y) ⇒ P106(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L54_is_same-as">
+    <rdfs:label xml:lang="en">L54 is same-as</rdfs:label>
+    <skos:notation>L54</skos:notation>
+    <skos:prefLabel xml:lang="en">is same-as</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L54i_is_same-as"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property describes a non unique identification applied to E1 CRM Entity.
+
+In First Order Logic:
+- L54(x,y) ⇒ E1(x)
+- L54(x,y) ⇒ E1(y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L54i_is_same-as">
+    <rdfs:label xml:lang="en">L54i is same-as</rdfs:label>
+    <skos:notation>L54i</skos:notation>
+    <skos:prefLabel xml:lang="en">is same-as</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <owl:inverseOf rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/L54_is_same-as"/>
+    <rdfs:comment xml:lang="en">Scope note of the inverse property:
+This property describes a non unique identification applied to E1 CRM Entity.
+
+In First Order Logic of the inverse property:
+- L54(x,y) ⇒ E1(x)
+- L54(x,y) ⇒ E1(y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="L60_documents">
+    <rdfs:label xml:lang="en">L60 documents</rdfs:label>
+    <skos:notation>L60</skos:notation>
+    <skos:prefLabel xml:lang="en">documents</skos:prefLabel>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/extensions/crmdig/D2_Digitization_Process"/>
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P140_assigned_attribute_to"/>
+    <rdfs:comment xml:lang="en">Scope note:
+This property describes the CRM Entities documented by instances of Digitization Processes.
+
+In First Order Logic:
+- L60(x,y) ⇒ D2(x)
+- L60(x,y) ⇒ E1(y)
+- L60(x,y) ⇒ P140(x,y)
+</rdfs:comment>
+  </owl:ObjectProperty>
+</rdf:RDF>
