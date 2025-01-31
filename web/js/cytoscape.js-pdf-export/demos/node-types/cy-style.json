@@ -1,0 +1,19 @@
+[{
+  "selector": "node",
+  "style": {
+    "shape": "data(type)",
+    "label": "data(type)",
+    "height": 40,
+    "width": 40,
+    "border-color": "red",
+    "border-style": "solid",
+    "border-width": 2
+  }
+}, {
+  "selector": "node[points]",
+  "style": {
+    "shape-polygon-points": "data(points)",
+    "label": "polygon\n(custom points)",
+    "text-wrap": "wrap"
+  }
+}]

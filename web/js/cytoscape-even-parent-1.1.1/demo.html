@@ -1,0 +1,360 @@
+<!DOCTYPE>
+
+<html>
+
+	<head>
+		<title>cytoscape-even-parent.js demo</title>
+
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+		<script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+
+		<!-- for testing with local version of cytoscape.js -->
+		<!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
+
+		<script src="cytoscape-even-parent.js"></script>
+
+		<style>
+			body {
+				font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
+				font-size: 14px;
+			}
+
+			#cy {
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				z-index: 999;
+			}
+
+			h1 {
+				opacity: 0.5;
+				font-size: 1em;
+				font-weight: bold;
+			}
+
+			.sliders {
+				z-index: 9999;
+				position: absolute;
+				right: 10px;
+				width: 300px;
+			}
+
+			.line {
+				display: flex;
+			}
+
+			label {
+				width: 125px;
+				text-align: right;
+			}
+
+			.node-controller {
+				z-index: 9999;
+				position: absolute;
+				left: 10px;
+				width: 300px;
+				display: flex;
+				flex-direction: column;
+
+
+			}
+
+			.node-controller .line {
+				padding-bottom: 5px;
+			}
+
+			button {
+				width: 125px;
+			}
+
+			#buttonRemove {
+				width: 78px;
+			}
+
+			#nodes-select {
+				width: 85px;
+			}
+
+			#nodes-select-remove {
+				width: 131px;
+			}
+
+			label[for="root-node"] {
+				text-align: left;
+			}
+
+			hr {
+				width: 100%;
+			}
+		</style>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function(){
+			    let nodes = [
+                    { data: { id: 'Jerry', name: 'Jerry' } },
+                    { data: { id: 'Elaine', name: 'Elaine'} },
+                    { data: { id: 'Kramer', name: 'Kramer'} },
+                    { data: { id: 'George', name: 'George'} },
+                    { data: { id: 'Martin', name: 'Martin'} },
+                    { data: { id: 'Philippe', name: 'Philippe'} },
+                    { data: { id: 'Louis', name: 'Louis'} },
+                    { data: { id: 'Genevieve', name: 'Genevieve'} },
+                    { data: { id: 'Leo', name: 'Leo'} },
+                    { data: { id: 'Larry', name: 'Larry'} },
+                    { data: { id: 'Logaina', name: 'Logaina'} },
+                    { data: { id: 'Julien', name: 'Julien'} },
+                    { data: { id: 'Sebastian', name: 'Sebastian'} },
+                    { data: { id: 'Denis', name: 'Denis'} },
+                    { data: { id: 'Joseph', name: 'Joseph'} },
+                    { data: { id: 'Fadi', name: 'Fadi'} }
+                ];
+				let edges = [
+                    { data: { source: 'Jerry', target: 'Elaine' } },
+                    { data: { source: 'Jerry', target: 'Kramer' } },
+                    { data: { source: 'Jerry', target: 'George' } },
+                    { data: { source: 'Elaine', target: 'Martin' } },
+                    { data: { source: 'Elaine', target: 'Philippe' } },
+                    { data: { source: 'Elaine', target: 'Louis' } },
+                    { data: { source: 'Elaine', target: 'Genevieve' } },
+                    { data: { source: 'Elaine', target: 'Leo' } },
+                    { data: { source: 'Kramer', target: 'Larry' } },
+                    { data: { source: 'Kramer', target: 'Logaina' } },
+                    { data: { source: 'Martin', target: 'Julien' } },
+                    { data: { source: 'Martin', target: 'Sebastian' } },
+                    { data: { source: 'Martin', target: 'Denis' } },
+                    { data: { source: 'Martin', target: 'Joseph' } },
+                    { data: { source: 'Martin', target: 'Fadi' } }
+                ];
+
+				var cy = window.cy = cytoscape({
+					container: document.getElementById('cy'),
+
+					// demo your layout
+					layout: {
+						name: 'evenParent',
+                        horizontalPadding: 1000,
+                        verticalPadding: 2000,
+                        fontSize: 1000,
+                        edgeSize: 200
+					},
+
+					style: [
+						{
+							selector: 'node',
+							style: {
+								'content': 'data(name)',
+								'text-valign': 'center'
+							}
+						},
+
+						{
+							selector: 'edge',
+							style: {
+								'curve-style': 'bezier',
+								'target-arrow-shape': 'triangle'
+							}
+						}
+					],
+
+					elements: {
+						nodes: nodes,
+						edges: edges
+					}
+				});
+                let changeableAttributes = ["childrenSize", "hpadding", "vpadding", "edgeSize", "fontSize"]
+                changeableAttributes.forEach((aCheangableAttribute) => {
+                    modifyInput(aCheangableAttribute);
+				});
+				function modifyInput (attrName) {
+                    let anAttr = document.getElementById(attrName)
+                    anAttr.oninput = function () {
+                        document.getElementById(`${attrName}Value`).innerHTML = this.value;
+                        runLayout();
+                    };
+                    document.getElementById(`${attrName}Value`).innerHTML = anAttr.value;
+				}
+                function runLayout () {
+                    let layout = cy.layout({
+                        name: 'evenParent',
+                        edgeSize: document.getElementById("edgeSize").value,
+                        horizontalPadding: document.getElementById("hpadding").value,
+                        verticalPadding: document.getElementById("vpadding").value,
+                        fontSize: document.getElementById("fontSize").value,
+                        childrenSize: document.getElementById("childrenSize").value,
+                        horizontalSpread: document.getElementById("horizontal-spread").checked,
+                        smart: document.getElementById("smart").checked
+                    });
+                    layout.run();
+				}
+                let horizontalSpread = document.getElementById('horizontal-spread')
+                horizontalSpread.onchange = function () {
+                    runLayout();
+                };
+                let smart = document.getElementById('smart')
+                smart.onchange = function () {
+                    runLayout();
+                };
+                smart
+				function addOptionToSelect (selectID, name, id) {
+                    let nodeSelector = document.getElementById(selectID);
+                    nodeSelector.options[nodeSelector.options.length] = new Option(name, id);
+				}
+				function resetCheckboxes (name) {
+                    document.getElementById("nodes-select").options.length = 0;
+                    document.getElementById("nodes-select-remove").options.length = 0;
+                    nodes.forEach((aNode) => {
+                        addOptionToSelect("nodes-select", aNode.data.name, aNode.data.id)
+                        addOptionToSelect("nodes-select-remove", aNode.data.name, aNode.data.id);
+                    });
+                    if (name) {
+                        document.getElementById("nodes-select").value = name;
+					}
+				};
+                resetCheckboxes();
+
+				// Populate select boxes
+                let parentSelector = document.getElementById("nodes-select")
+                parentSelector.onchange = function () {
+                    document.getElementById("nodes-select-remove").options.length = 0;
+                    let cytoParent = cy.elements(`node#${parentSelector.value}`)
+                    cytoParent.outgoers("node").forEach((aChild) => {
+                        addOptionToSelect("nodes-select-remove", aChild.data().name, aChild.id());
+					})
+				};
+
+				// Add actions
+                let buttonAdd = document.getElementById("buttonAdd");
+                buttonAdd.onclick = function () {
+                    let parent = document.getElementById("nodes-select");
+                    let inputAdd = document.getElementById("inputAdd");
+                    let isRootNode = document.getElementById("root-node");
+
+                    // Verify if the id already exists
+					let alreadyExists = nodes.some((aNode) => {
+					    return aNode.data.id === inputAdd.value;
+					});
+
+					if (!inputAdd.value) {
+                        alert('Please choose a valid name.');
+                        return;
+					}
+					if (alreadyExists) {
+					    alert('Please choose a name that does not exist already.');
+					    return;
+					}
+
+					// Add new value to cytoscape
+					cy.add([
+						{ group: 'nodes', data: { id: inputAdd.value, name: inputAdd.value }},
+					]);
+					if (!isRootNode.checked) {
+                        cy.add([
+                            { group: 'edges', data: { id: `${inputAdd.value}${parent.value}`, source: parent.value, target: inputAdd.value}}
+                        ]);
+					}
+
+                    runLayout();
+
+                    // Add new value to DOM
+                    nodes.push({data: { id: inputAdd.value, name: inputAdd.value }});
+                    if (!isRootNode.checked) {
+                    	edges.push({ data: { source: parent.value, target: inputAdd.value } });
+                    }
+					resetCheckboxes(parent.value);
+				};
+
+                // Remove action
+                let buttonRemove = document.getElementById("buttonRemove");
+                buttonRemove.onclick = function () {
+                    let parent = document.getElementById("nodes-select");
+                    let inputRemove = document.getElementById("nodes-select-remove");
+
+                    // Remove value from cytoscape
+					let elementToRemove = cy.elements(`node#${inputRemove.value}`);
+                    let edgesToRemove = elementToRemove.connectedEdges();
+                    cy.remove(edgesToRemove);
+                    cy.remove(elementToRemove);
+
+                    runLayout();
+
+                    // Remove value from DOM
+                    nodes = nodes.filter((aNode) => {
+                        return aNode.data.id !== inputAdd.value;
+					});
+                    edges = edges.filter((anEdge) => {
+                        return anEdge.data.target !== inputAdd.value || anEdge.data.source !== inputAdd.value
+                    });
+                    resetCheckboxes();
+                };
+			});
+
+		</script>
+	</head>
+
+	<body>
+		<h1>cytoscape-even-parent demo</h1>
+
+		<div id="cy"></div>
+		<div class="node-controller">
+			<hr>
+			<div class="line">
+				<label for="nodes-select">Parent: </label>
+				<select name="nodes-select" id="nodes-select"></select>
+			</div>
+			<div class="line">
+				<button id="buttonAdd" class="add">Add</button>
+				<input id="inputAdd" name="inputAdd" type="text" />
+				<input type="checkbox" id="root-node" />
+				<label for="root-node">Is root?</label>
+			</div>
+			<hr>
+			<div class="line">
+				<button id="buttonRemove">Remove</button>
+				<select name="nodes-select" id="nodes-select-remove"></select>
+			</div>
+			<hr>
+		</div>
+		<div class="sliders">
+			<hr>
+			<div class="line">
+				<label for="childrenSize">childrenSize: </label>
+				<input id="childrenSize" name="childrenSize" type="range" min="1" max="5" step=".01" value="1" />
+				<div id="childrenSizeValue" class="value"></div>
+			</div>
+			<div class="line">
+				<label for="hpadding">horizontalPadding: </label>
+				<input id="hpadding" name="hpadding" type="range" min="0" max="100000" step="1" value="0" />
+				<div id="hpaddingValue" class="value"></div>
+			</div>
+			<div class="line">
+				<label for="vpadding">verticalPadding: </label>
+				<input id="vpadding" name="vpadding" type="range" min="0" max="100000" step="1" value="2000" />
+				<div id="vpaddingValue" class="value"></div>
+			</div>
+			<div class="line">
+				<label for="edgeSize">edgeSize: </label>
+				<input id="edgeSize" name="edgeSize" type="range" min="0" max="1000" step="1" value="200" />
+				<div id="edgeSizeValue" class="value"></div>
+			</div>
+			<div class="line">
+				<label for="fontSize">fontSize: </label>
+				<input id="fontSize" name="fontSize" type="range" min="100" max="10000" step="1" value="1000" />
+				<div id="fontSizeValue" class="value"></div>
+			</div>
+			<div class="line">
+				<label for="fontSize">smart: </label>
+				<input id="smart" name="smart" type="checkbox" />
+			</div>
+			<div class="line">
+				<label for="horizontal-spread">horizontalSpread: </label>
+				<input id="horizontal-spread" name="horizontal-spread" type="checkbox" />
+			</div>
+			<hr>
+		</div>
+
+	</body>
+
+</html>

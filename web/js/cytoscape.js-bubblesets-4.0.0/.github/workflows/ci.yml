@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i -g yarn
+      - run: yarn config set checksumBehavior ignore
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ./.yarn/cache
+            ./.yarn/unplugged
+          key: ${{ runner.os }}-yarn2-v4-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn2-v4
+      - run: yarn install
+      - run: yarn build
+      - run: yarn lint
+      - run: yarn test:coverage
+      # - run: yarn docs
+      # - name: Deploy
+      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./docs
+      #     enable_jekyll: false
