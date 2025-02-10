@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100 dark" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="About" -->
+    <!--#set var="bodyid" value="about" -->
+    <!--#set var="about" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+    <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <div class="row">
+          <div class="col-md-9">
+
+        <!-- content: insert here -->
+        <div>
+            <blockquote style="float:right;text-align:right;font-weight:600;width:52%;margin:10px 10px 10px 30px;">
+              To do full justice to Romanticism as a periodic category [...], one must <em>de facto</em>
+              be a comparatist 
+              <cite style="font-size:13px;font-weight:initial;">—Ben Hutchinson<sup>1</sup></cite>
+            </blockquote>
+          <h1 style="clear:both;">About RPPA<sup>alpha</sup></h1>
+          <div class="results">
+
+            <h2>Introduction</h2>
+            <p>The Romantic Period Poetry Archive, or RPPA 
+              <a href="#" onclick="document.getElementById('player').play()"><i class="fas fa-volume-up"></i><span class="sr-only">[Listen]</span></a>
+              for short, is a new open access digital platform of
+              global Romantic-period poetry.
+              Global here in the sense of Felicity Nussbaum's definition of the
+              "Global 18th century", namely as a spatially and conceptually
+              expanded paradigm in which dialogue and exchange rather than
+              influence and reception are the dominant categories.<sup>2</sup> 
+              RPPA comprises a <em>full-text poetry database</em> and
+              an <em>open scholarship</em> platform.  It embraces both
+              traditional modes of scholarly research and output, such as the
+              creation of scholarly editions, and digital modes of research
+              and publication, such as computationally-augmented analysis,
+              visualizations, network analysis, knowledge modelling, and more.
+            </p>
+            <h2>Approach</h2>
+            <p>Comparative in nature, RPPA conceptualizes Romanticism as
+              a global, deeply interconnected phenomenon.  
+              It embraces a <em>Romantic Weltliteratur</em> by
+              bringing well- and lesser-known poets, their poems and
+              contexts from all parts of the world into conversation,
+              and thus encourages the telling of bigger stories.
+              This “zooming out” not only brings texts, authors,
+              languages, and cultures into conversation, but also
+              highlights the (frequently non-linear) modes of transmission,
+              circulation, and reception of
+              literature (understood here in global terms as the 
+              expressions of a culture in a variety of forms).  
+              These matters will be considered alongside the
+              conversations the texts enter into with each other, 
+              directly, or much more frequently, indirectly.
+            </p>
+            <h2>Scope</h2>
+            <p>
+              RPPA participates in movements that aim to address
+              issues of scale in academic Romanticism by expanding the
+              Romantic literary canon.  Unrestrained by the
+              limitations of traditional print publications, RPPA
+              comprises various literary and non-literary genres of
+              Romanticism from all nations throughout the long
+              <em>Romantic century</em>.<sup>3</sup>  As a
+              networked effort, RPPA links the literary practices,
+              interrelations, and contexts of Romantic-period poetry.
+              It connects these nodes reflexively as well as to 
+              various internal and external contexts.
+            </p>
+            <h2>Features</h2>
+            <ul>
+              <li>RPPA will assemble an extensive and open-ended archive of
+                TEI/XML-encoded full-text poems (both original and in
+                translation) and their contexts;
+              <li>RPPA is transdisciplinary and intermedial, transcending
+                literature, and embracing wider cultural production;
+              <li>RPPA considers Romanticism in global, transnational
+                contexts and foregrounds its multi-lingualism and -culturalism;
+              <li>RPPA adopts a positive conceptualization of translation as
+                the “closest” form of reading, one that many Romantics
+                considered a vital part of their literary labours;
+              <li>RPPA facilitates and supports comparison as a method by
+                providing tools that situate Romantic-period poetry in its
+                international and interdisciplinary contexts;
+              <li>RPPA fosters collaboration and participation to
+                turn obstacles to the study of global Romantic-period
+                poetry (such as “distant” reading and, unavoidably, limited 
+                contextual knowledge) into opportunities for learning;
+              <li>RPPA encourages new research into global Romantic-period
+                poetry and showcases ways to integrate RPPA into the
+                curriculum;
+              <li>RPPA incorporates digital humanities approaches as a
+                form of comparative literary study.
+            </ul>
+            <h2>Implementation</h2>
+            <p>RPPA employs digital methods from the multilingual Digital
+            Humanities and the Semantic Web.
+            <ul>
+              <li><em>Multilingual DH:</em> A combination of ML/AI- and
+                NLP-approaches is our starting point for the detection of formal
+                poetic features and points of contact more generally (shared poetic
+                genres and devices, semantic features such as motifs, themes,
+                plots, topics, characters, and types of intertextuality) within and
+                across literatures.  It is however through inviting input from and
+                seeking collaboration with domain experts from various traditions,
+                that we hope to address some of the main challenges of "distant
+                reading". 
+              </li>
+              <li><em>Semantic Web:</em> RPPA is built on the <a
+                href="https://www.w3.org/standards/semanticweb/" target="_blank"
+                class="external">Semantic Web</a>, it embraces Linked Open Data (LOD)
+                standards and methodologies.  RPPA is powered by an ontologically
+                underpinned, ever-expanding knowledge base called <a
+                href="https://www.prisms.digital/" 
+              class="external" target="_blank">PRISMS</a>, drawing on a number
+              of domain-specific ontologies (<a target="_blank"
+              class="external" href="https://www.cidoc-crm.org/">CIDOC-CRM</a>,
+              <a target="_blank" class="external"
+              href="https://postdata.linhd.uned.es/results/ontopoetry-v2-0/">OntoPoetry</a>,
+             and <a target="_blank" class="external"
+              href="https://github.com/BOberreither/INTRO#whatisintro">INTRO</a>).
+              This shared framework
+                provides a unified mechanism for the cross-linguistic representation
+                of the poems while maintaining the ability to describe them
+                adequately within their cultures and poetic traditions.  It also
+                facilitates the modelling of poetic networks, circles, and schools.
+              </li>
+            </ul>
+            <h2>Presentations</h2>
+            <ul>
+              <li>Huber, Alexander. <a target="_blank" href="/about/presentations/RPPA talk – Old Books, New Media – Digital Humanities Showcase.docx">"The Romantic Period Poetry Archive project"</a>.
+                <em>Libraries, Lives and Legacies</em>, 'Old Books, New
+                Media'–Digital Humanities Showcase, University of Liverpool and
+                online, 13-14 April 2023.</li>
+              <li>Huber, Alexander. <a class="external" target="_blank" href="https://www.youtube.com/watch?v=jqYvCjkktns">"Modelling Contextuality in Poetry Corpora
+                ontologically"</a>. <em>Fugitive Poetry / poésie fugitive in 18th-century
+                Europe: Genre, Media and Networks</em> workshop, Voltaire
+                Foundation, St. Edmund Hall, University of Oxford, 11-12 April 2024.</li>
+            </ul>
+            <h2>Timeline</h2>
+            <p>RPPA is a 5-year, independently-funded research project.  It 
+              will run from late 2020-2025.  As with other projects conceived
+              as long-term <em>archival</em> endeavours, all research outputs of
+              the project will be preserved and made accessible indefinitely.  
+              RPPA is designed to be a networked effort: expressions of interest
+              to connect with and participate in the project are welcome at any 
+              time. As of late 2021, RPPA has adopted rapid prototyping and open 
+              development methodologies. The project phase remains unchanged and
+              will end in 2025, when the project will have reached <span 
+              style="font-variant:small-caps;">beta</span> stage.
+              Regular updates about work packages, milestones, and the
+              overall progress of the project will be posted on this
+              website.
+            </p> 
+            <h2>Outcome</h2>
+            <p>
+              The expected outcome of this project is a fuller
+              understanding, appreciation, and engagement with the
+              poetry of the global Romantic period.  As a project, RPPA
+              prioritizes the idea of “wholeness” of an archival
+              approach over analytical accounts of established
+              narratives.  Wholeness not in the sense of <em>one</em>
+              grand or better narrative or history, but rather in
+              acknowledging, collecting, and aggregating <em>many</em> individual
+              stories in one bigger space.  A space for the exploration
+              of new contexts and the construction of new global texts<sup>4</sup>
+              that cast a fresh light on the seemingly familiar.  This project
+              provides that space.</p>
+            <div class="small" style="border-top:1px solid #999;padding:20px 0 10px 0;">
+              <sup>1</sup> Hutchinson, Ben. <em>Comparative Literature: A Very Short Introduction</em>. 
+              Oxford: OUP, 2018. 22.<br>
+              <sup>2</sup> Felicity A. Nussbaum's
+              concept of "critical global studies" was first introduced in her edited collection
+              <em>The Global Eighteenth Century</em>, Baltimore and London: JHUP, 2003, 1. 
+              This research focuses on Romanticism as a period in international literary history, i.e. a global 
+              artistic phenomenon.
+              <!--
+              , less on "Global Romanticism" as current disciplinary practice. 
+              For a discussion of latter see e.g. Jacob Edmond, <a href="https://doi.org/10.1515/ngs-2021-0028" 
+              class="external" target="_blank">"Against Global Literary Studies"</a> 
+              <em>New Global Studies</em> 15(2–3) (2021): 193–226, or Katherine 
+              Bergren, <a href="https://doi.org/10.1111/lic3.12615" 
+              class="external" target="_blank">"Global Romanticism: Out of bounds in the transnational 19th century"</a>
+              <em>Literature Compass</em> 18(2) (2021): 1-15.
+              -->
+              <br>
+              <sup>3</sup> The "Romantic century" was first proposed for the study of British 
+              Romanticism by William Galperin and Susan Wolfson in their NASSR 1996 conference 
+              paper <a 
+              href="https://romantic-circles.org/reference/misc/confarchive/crisis/crisisa.html"
+              class="external" target="_blank">"'Romanticism' in Crisis: The Romantic Century"</a>. 
+              For the global context of this project, the qualifier <em>long</em> has been added.<br>
+              <sup>4</sup> The construct of a source text with all of its contexts was termed
+              "global text" by Angelika Corbineau-Hoffmann in her book <em>Kontextualität</em>,
+              Berlin: Erich Schmidt Verlag, 2017, 242.
+            </div>
+          </div>
+        </div>
+
+        </div>
+        <div class="col-md-3">
+        
+          <div id="feed">
+            <h2>News/Updates</h2>
+
+            <div id="blusky-updates"
+            style="margin-bottom:5px;max-height:1715px;overflow:auto;width:100%;">
+              <blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:tm2lxqukh53tuzu32o33fs3w/app.bsky.feed.post/3lhtddya3qs27" data-bluesky-cid="bafyreigcs2qicw2h3tkzponwpqqdjjxh2ey2qrv5uiz3w7o2ygll4z7wpy"><p lang="en">Very pleased to announce the first in a series of updates to the #RomanticPeriodPoetryArchive as we approach public beta!
+
+              www.romanticperiodpoetry.org
+              
+              Stay tuned for new features, enhancements, and expanded content.
+              
+              #GlobalRomanticism #RPPA #poetry #DigitalHumanities #SemanticWeb #KnowledgeGraph<br><br><a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3lhtddya3qs27?ref_src=embed">[image or embed]</a></p>&mdash; Alexander Huber (<a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w?ref_src=embed">@c18ah.bsky.social</a>) <a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3lhtddya3qs27?ref_src=embed">February 10, 2025 at 2:14 PM</a></blockquote><script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>  
+
+              <blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:tm2lxqukh53tuzu32o33fs3w/app.bsky.feed.post/3lcd5jzj4ek2a" data-bluesky-cid="bafyreic7eptccptu5jldglimxdoxyssslq4ov7dx2tmarq6gdxyfxzwirm"><p lang="en">Excited to announce the #RomanticPeriodPoetryArchive now holds 1,058 poems by 219 poets (with a total of 610 poets from 71 countries).  The ontology-driven #RPPA knowledge base interconnects Romantic-period poems globally.
+
+                www.romanticperiodpoetry.org
+                
+                #DayofDH2024 #GlobalRomanticism #SemanticWeb<br><br><a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3lcd5jzj4ek2a?ref_src=embed">[image or embed]</a></p>&mdash; Alexander Huber (<a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w?ref_src=embed">@c18ah.bsky.social</a>) <a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3lcd5jzj4ek2a?ref_src=embed">December 2, 2024 at 12:42 PM</a></blockquote>
+
+              <blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:tm2lxqukh53tuzu32o33fs3w/app.bsky.feed.post/3l3ipvr6abs26" data-bluesky-cid="bafyreiaovgrk44ch4duxwehbkif3o4vn572lm4p2liwpdpx3n4fa6p7oay"><p lang="en">The #RomanticPeriodPoetryArchive website has been updated with details of two presentations given at workshops organized by Liverpool and Oxford universities.
+
+                www.romanticperiodpoetry.org
+                  
+                #RPPA #contextuality #Romanticism #poetry #GlobalRomanticism #DigitalHumanities #SemanticWeb<br><br><a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3l3ipvr6abs26?ref_src=embed">[image or embed]</a></p>&mdash; Alexander Huber (<a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w?ref_src=embed">@c18ah.bsky.social</a>) <a href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3l3ipvr6abs26?ref_src=embed">September 6, 2024 at 4:57 PM</a></blockquote>
+
+              <blockquote class="bluesky-embed"
+              data-bluesky-uri="at://did:plc:tm2lxqukh53tuzu32o33fs3w/app.bsky.feed.post/3kpmx7ff2gk25"
+              data-bluesky-cid="bafyreicapoajjcjlcmzabotdzt5jjm5wi3yctqxvi7soxconbhwnspjimm"><p
+              lang="en">Delighted to have been invited to participate in the
+              &#x27;Fugitive Poetry in 18th-century Europe&#x27; workshop.  I
+              will be speaking about the #RomanticPeriodPoetryArchive, a new
+              #DigitalHumanities project exploring the poetry of the global
+              Romantic period using #SemanticWeb technologies.<br><br><a
+              href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3kpmx7ff2gk25?ref_src=embed">[image
+              or embed]</a></p>&mdash; Alexander Huber (<a
+              href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w?ref_src=embed">@c18ah.bsky.social</a>)
+              <a
+              href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3kpmx7ff2gk25?ref_src=embed">April
+              8, 2024 at 4:16 PM</a></blockquote>
+                  
+              <blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:tm2lxqukh53tuzu32o33fs3w/app.bsky.feed.post/3kdjtnvuiwo2v" data-bluesky-cid="bafyreif35tiitntcy72n5i3mjn45ydy4gva6zjpccbllkw7zbivubzafpq"><p lang="en">Very pleased to announce the adoption of the #INTRO ontology to model contextuality in the poetry corpus of the #RomanticPeriodPoetryArchive.  Read more about the project here:
+
+                www.romanticperiodpoetry.org
+                
+                #RPPA #intertextuality #Romanticism #poetry #GlobalRomanticism
+                #c19th #digitalhumanities #DH<br><br><a
+                href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3kdjtnvuiwo2v?ref_src=embed">[image
+                or embed]</a></p>&mdash; Alexander Huber (<a
+                href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w?ref_src=embed">@c18ah.bsky.social</a>)
+                <a
+                href="https://bsky.app/profile/did:plc:tm2lxqukh53tuzu32o33fs3w/post/3kdjtnvuiwo2v?ref_src=embed">November
+                6, 2023 at 4:32 PM</a></blockquote>
+                  
+            </div>
+            <!--
+            <div id="twitter-updates" style="margin-bottom:25px;max-width:359px;max-height:1685px;overflow:auto;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            -->
+          </div>
+
+        </div>
+    
+        </div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

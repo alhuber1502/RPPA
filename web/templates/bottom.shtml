@@ -1,19 +1,20 @@
-
+    <!-- Framework -->
     <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="/js/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.jquery.min.js"></script>
 
-    <script src="/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/js/lodash.min.js" crossorigin="anonymous"></script>
     <script src="/js/jsonld.js-8.2.0/dist/jsonld.min.js" crossorigin="anonymous"></script>
-
+    
+    <!-- Mapping-->
     <script src="/js/leaflet/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     <script src="/js/leaflet-sidebar-v2-master/js/leaflet-sidebar.min.js"></script>
     <script src="/js/OverlappingMarkerSpiderfier-Leaflet-0.2.6/bin/oms.min.js"></script>
     <script src="/js/leaflet-hash/leaflet-hash.js"></script>
 
+    <!-- Media -->
     <script src="/js//openseadragon-bin-3.1.0/openseadragon.min.js"></script>
     <script src="/js/annotorious-openseadragon-2.7.8/openseadragon-annotorious.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js@6"></script>
@@ -21,9 +22,13 @@
     <script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.regions.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.minimap.js"></script>
 
+    <!-- Helpers -->
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
     <script src="/js/js.cookie.min.js"></script>
     <script src="/js/uuidv4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
+
+    <script src="/js/DataTables/datatables.min.js"></script>
 
     <script src="/js/rangy-1.3.1/rangy-core.js" crossorigin="anonymous"></script>
     <script src="/js/rangy-1.3.1/rangy-classapplier.js" crossorigin="anonymous"></script>
@@ -32,12 +37,38 @@
     <script src="/js/rangy-1.3.1/rangy-textrange.js" crossorigin="anonymous"></script>
     <script src="/js/rangy-1.3.1/rangy-selectionsaverestore.js" crossorigin="anonymous"></script>
 
-    <!-- PRISMS JavaScript -->
+    <script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
+
+    <!-- Network -->
+    <script src="/js/cytoscape.js-3.31.0/dist/cytoscape.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/enums.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js"></script>
+    <script src="/js/cytoscape.js-popper-4.0.0/cytoscape-popper.js"></script>
+    <script src="/js/cytoscape.js-panzoom-2.5.3/cytoscape-panzoom.js"></script>
+    <script src="/js/cytoscape.js-navigator-2.0.2/cytoscape-navigator.js"></script>
+    <script src="/js/cytoscape.js-edgehandles-4.0.1/cytoscape-edgehandles.js"></script>
+    <script src="https://unpkg.com/klayjs@0.4.1/klay.js"></script>
+    <script src="/js/cytoscape.js-klay-3.1.4/cytoscape-klay.js"></script>
+    
+    <!-- RPPA JavaScript -->
     <script src="/js/helpers.js" crossorigin="anonymous"></script>
+    <script src="/js/graph.js" crossorigin="anonymous"></script>
     <script src="/js/text.js" crossorigin="anonymous"></script>
     <script src="/js/image.js" crossorigin="anonymous"></script>
     <script src="/js/media.js" crossorigin="anonymous"></script>
     <script src="/js/map.js" crossorigin="anonymous"></script>
     <script src="/js/rppa.js" crossorigin="anonymous"></script>
 
-    <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    
+    <!-- CAN BE DELETED -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+    <script src="js/cytoscape.js-dagre-2.5.0/cytoscape-dagre.js"></script>
+    <script src="/js/cytoscape.js-layout-utilities-1.1.1/cytoscape-layout-utilities.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/layout-base@2.0.1/layout-base.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cose-base@2.2.0/cose-base.min.js"></script>
+    <script src="/js/cytoscape.js-fcose-2.2.0/cytoscape-fcose.js"></script>
+    -->

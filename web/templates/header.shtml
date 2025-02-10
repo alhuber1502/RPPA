@@ -218,16 +218,16 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto ms-3 mb-2 mb-md-0 flex-row flex-wrap">
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='home' -->" aria-disabled="true" href="/">Home</a>
+                <a class="nav-link <!--#echo var='home' -->" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='authors' -->" aria-disabled="true" href="/authors/">Authors</a>
+                <a class="nav-link <!--#echo var='authors' -->" href="/authors/">Authors</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='works' -->" aria-disabled="true" href="/works/">Works</a>
+                <a class="nav-link <!--#echo var='works' -->" href="/works/">Works</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='network' -->" href="/networks/">Networks</a>
+                <a class="nav-link disabled <!--#echo var='networks' -->" aria-disabled="true" href="/networks/">Networks</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link <!--#echo var='map_tool' -->" href="/maps/">Maps</a>
@@ -236,13 +236,17 @@
                 <a class="nav-link disabled <!--#echo var='search' -->" aria-disabled="true" href="/search/">Search</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='about' -->" aria-disabled="true" href="/about/">About</a>
+                <a class="nav-link <!--#echo var='about' -->" href="/about/">About</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle disabled <!--#echo var='help' -->" data-bs-toggle="dropdown" aria-disabled="true" href="/help/">Help</a>
+                <a class="nav-link dropdown-toggle <!--#echo var='help' -->" data-bs-toggle="dropdown" href="/help/">Help</a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" aria-disabled="true" href="/help/#contact">Contact</a>
+                    <a class="dropdown-item disabled" aria-disabled="true" href="/help/#networks">Networks</a>
+                  </li><li>
+                    <a class="dropdown-item" href="/help/#maps">Maps</a>
+                  </li><li>
+                    <a class="dropdown-item" href="/help/#contact">Contact</a>
                   </li>
                 </ul>
               </li>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Help" -->
+    <!--#set var="bodyid" value="help" -->
+    <!--#set var="help" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+        <div >
+          <h1>Help</h1>
+          <div class="results">
+            <h2 id="maps">Maps</h2>
+            <p>The historical map used in the visualization is John Arrowsmith's <em><a 
+              href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002"
+              class="external" target="_blank">The World, on Mercators Projection</a></em>
+               (London: J. Arrowsmith, 1844).  While the original map centres on the
+               Pacific region, it is Western/Northern-centric in other ways, not least with regard 
+               to its place of manufacture and its Mercartor projection.  For geo-referencing
+               purposes the map has been aligned with the Web Mercator 
+               projection, the de facto standard for maps on the web.  
+            </p>
+            <p>Poets are shown at their place of birth, unless it is unknown or the poet 
+              is generally associated with a country other than their birth country, in which
+              case they are shown at the country's geographical centre.  Images of the poets
+              have been sourced from <a class="external" target="_blank" 
+              href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
+            </p>
+            <h3>Mapping global Romantic-period poetry</h3>
+            <p>
+              While little more than a visual access point at the moment, our aim is to use
+              maps and mapping as an analytical tool that facilitates multi-perspectival 
+              approaches, mitigates ambiguity and uncertainty, helps to consider and appreciate
+              the evolution of national literatures and literary spaces alongside the 
+              world literary space portrayed on the world canvas, and benefits from the 
+              participatory nature of RPPA to arrive at more useful representations.
+            </p>
+            <p>
+              Over time, as the networks of contextuality on the world canvas become more 
+              apparent, we envision the emergence of dynamic maps at a higher 
+              levels of detail.  We expect these to reveal more contexts and the inner- 
+              as well as extra-literary structures that underpin and facilitate the construction 
+              of global texts and will allow for a more detailed representation and analysis
+              of their components and evolution.
+            </p>
+            <p>
+              As we map out, literally and figuratively spoken, the poetry of the
+              global Romantic period, we address not only its temporal challenges, 
+              but also embrace the geographic, linguistic, and 
+              cultural diversity of the various stages of a global artistic phenomenon.
+              We hope that by virtue of the project's historical focus on the Romantic
+              period, its comparative focus on contextuality and the building of global
+              texts, and its collaborative and participatory nature, the map can be 
+              useful as an emerging historical canvas for the 
+              poetry of the global Romantic period.
+            </p>
+            <h3>Known issues</h3>
+            <p>Despite every effort to include the most relevant figures of the 
+            Romantic period, a disclaimer needs to be issued regarding the 
+            inclusion or omission of poets.  While "Romantic" itself is a notoriously 
+            "elastic" label (Michael Ferber's term) that includes "pre"-, "early"-,
+            "proto"-, "high"-, "late"-, and "post"-Romantic incarnations, the 
+            scholarship that underlies much of the selection process is largely 
+            Western/Northern-centric and may have been superseeded within national 
+            contexts.  In such cases, the 
+            <a href="mailto:huber@romanticperiodpoetry.org">editor</a>
+            would be grateful for any corrections and suggestions for additions and
+            improvements.</p>
+            <p>Also, regretfully, for navigational purposes, country names and borders
+            used in the map navigation correspond to present-day denominations and 
+            historical reality.  We <em>apologize</em> for the resulting distortion
+            and historical inaccuracy, and hope to improve this over time with the 
+            help of projects like 
+            <a href="https://openhistoricalmap.org/" class="external" 
+            target="_blank">OpenHistoricalMap</a> as they evolve and mature. 
+            </p>
+            <h3>Further reading</h3>
+            <ul>
+              <li>
+                Casanova, Pascale. <a href="https://newleftreview.org/issues/ii31/articles/pascale-casanova-literature-as-a-world" 
+                class="external" target="_blank">"Literature as a World"</a>. <em>New Left Review</em> 31 (Jan/Feb 2005): 71-90.
+              </li>
+              <li>
+                D'haen, Theo. <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9780203806494-49" class="external" 
+                target="_blank">"Mapping World Literature"</a>. <em>The Routledge Companion to World Literature</em>, ed.
+                Theo D'haen, David Damrosch, Djelal Kadir. London: Routledge, 2011. 413-422.
+              </li>
+              <li>
+                Hewitt, Rachel. <a href="https://www.jstor.org/stable/24045852" class="external" 
+                target="_blank">"Mapping and Romanticism"</a>. <em>The Wordsworth Circle</em> 42(2) (Spring 2011): 157-165.
+              </li>
+              <li>
+                Presner, Todd and David Shepard. <a href="https://doi.org/10.1002/9781118680605.ch14" class="external" 
+                target="_blank">"Mapping the Geospatial Turn"</a>. <em>A New Companion to Digital Humanities</em>,
+                ed. Susan Schreibman, Ray Siemens, John Unsworth. Chichester: Wiley-Blackwell, 2016. 199-212.
+              </li>
+              <li>
+                Tanoukhi, Nirvana. <a href="https://www.jstor.org/stable/20533104" class="external" target="_blank">"The 
+                  Scale of World Literature"</a>. <em>New Literary History</em> 39(3) (Summer 2008): 599-617.
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div>
+          <h2 id="contact">Contact</h2>
+          <div class="results">
+            <h3>Get in touch</h3>
+            <p>This is an open invitation to academics, research
+              projects, digital archives and repositories, and anyone with
+              an interest in the literature of the Romantic period
+              in any discipline to <em>collaborate on RPPA</em>.  The project looks forward
+              to welcoming partners at any stage to discuss
+              collaboration or other forms of participation.  Please do
+              not hesitate to reach out:
+            </p>
+            <p style="margin-left:15px;">
+              <b>Romantic Period Poetry Archive (RPPA)</b><br>
+              Alexander Huber, Editor<br>
+            <ul style="list-style:none;">
+              <li style="text-indent:-15px;"><span>E-mail:</span> <a href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
+              <li style="text-indent:-15px;"><span>Facebook:</span> <a target="_blank" href="https://www.facebook.com/RomanticPeriodPoetryArchive" class="external">@RomanticPeriodPoetryArchive</a>
+
+              <li style="text-indent:-15px;"><span>Bluesky:</span> <a target="_blank" href="https://bsky.app/profile/c18ah.bsky.social" class="external">@c18ah.bsky.social</a> <code>#RomanticPeriodPoetryArchive</code>
+              <li style="text-indent:-15px;"><span>Mastodon:</span> <a target="_blank" href="https://hcommons.social/@c18ah" class="external">https://hcommons.social/@c18ah</a> <code>#RomanticPeriodPoetryArchive</code>
+              <li style="text-indent:-15px;"><span>X:</span> <a target="_blank" href="https://twitter.com/C18AH" class="external">@C18AH</a> <code>#RomanticPeriodPoetryArchive</code>
+              
+              <li style="text-indent:-15px;"><span>GitHub:</span> <a target="_blank" href="https://github.com/alhuber1502/RPPA"
+                class="external">https://github.com/alhuber1502/RPPA</a>
+              <li style="text-indent:-15px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
+                class="external">http://users.ox.ac.uk/~bodl0153/</a>
+              <li style="margin-left:-15px;"><span>Share:</span> 
+                <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33106436"></div>
+                <!--
+                <span style="display:inline-block;vertical-align:middle;" class="addthis_inline_share_toolbox"></span>
+                -->
+            </ul>
+          </div>
+        </div>        
+
+    
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

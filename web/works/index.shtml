@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Works" -->
+    <!--#set var="bodyid" value="works" -->
+    <!--#set var="works" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+        <div class="row layout_wrapper">
+          <div class="col-12 layout_navigation">
+
+            <div class="spinner d-flex align-items-center justify-content-center" style="top:55px;position:sticky;height:calc(100vh - 100px) !important;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div class="dtsp-verticalContainer">
+              <div class="container">
+                <table id="worksDT" class="table table-striped">
+                  <thead style="visibility:collapse;">
+                    <tr>
+                      <th rowspan="2" style="vertical-align:top;">Work ID</th>
+                      <th rowspan="2" style="vertical-align:top;">Text ID</th>
+                      <th rowspan="2" style="vertical-align:top;">Work Title</th>
+                      <th rowspan="2" style="vertical-align:top;">Language</th>
+                      <th colspan="2" style="min-width:175px;">Dates</th>
+                      <th rowspan="2" style="vertical-align:top;">Extent</th>
+                      <th rowspan="2" style="vertical-align:top;min-width:225px;">First Line</th>
+                      <th colspan="3">Author</th>
+                    </tr>
+                    <tr>
+                      <th colspan="1">Comp.</th>
+                      <th colspan="1">Publ.</th>
+                      <th colspan="1">Author Name</th>
+                      <th colspan="1" style="min-width:110px;">Author Country</th>
+                      <th colspan="1">Author Continent</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="dtsp-verticalPanes"></div>
+            </div>    
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

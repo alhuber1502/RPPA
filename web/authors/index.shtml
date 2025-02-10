@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Authors" -->
+    <!--#set var="bodyid" value="authors" -->
+    <!--#set var="authors" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+        <div class="row layout_wrapper">
+          <div class="col-12 layout_navigation">
+
+            <div class="spinner d-flex align-items-center justify-content-center" style="top:55px;position:sticky;height:calc(100vh - 100px) !important;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div class="dtsp-verticalContainer">
+              <div class="container">
+                <table id="authorsDT" class="table table-striped">
+                  <thead style="visibility:collapse;">
+                    <tr>
+                      <th rowspan="2" style="vertical-align:top;">ID</th>
+                      <th rowspan="2" style="vertical-align:top;" data-dt-order="disable">Portrait</th>
+                      <th rowspan="2" style="vertical-align:top;">Author Name</th>
+                      <th rowspan="2" style="vertical-align:top;">Gender</th>
+                      <th colspan="2">Birth</th>
+                      <th colspan="2">Death</th>
+                      <th colspan="2">Nationality</th>
+                    </tr>
+                    <tr>
+                      <th colspan="1" style="min-width:125px;">Birth Date</th>
+                      <th colspan="1">Birth Place</th>
+                      <th colspan="1" style="min-width:125px;">Death Date</th>
+                      <th colspan="1">Death Place</th>
+                      <th colspan="1">Country</th>
+                      <th colspan="1">Continent</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="dtsp-verticalPanes"></div>
+            </div>    
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

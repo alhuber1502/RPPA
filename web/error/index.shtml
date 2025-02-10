@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Help" -->
+    <!--#set var="bodyid" value="help" -->
+    <!--#set var="help" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Help</h1>
+            <p>Many apologies, but RPPA cannot seem to serve the content you requested.</p>
+            <p>Please do not hesitate to contact <a href="mailto:help@romanticperiodpoetry.org">help@romanticperiodpoetry.org</a> for further assistance.</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>
