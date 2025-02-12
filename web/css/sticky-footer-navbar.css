@@ -19,13 +19,6 @@ body#home {
     background-position: center; 
 }
 
-[data-bs-theme=dark] a {
-  color: #e07012;
-}
-[data-bs-theme=light] a
-{
-  color: #c66a1b;
-}
 a.bg-rppa
 {
   color: #fff;
@@ -111,7 +104,7 @@ a.nav-link:visited {
   color: var(--bs-navbar-brand-color) !important;
 }
 .nav-link {
-  color: var(--bs-navbar-hover-color) !important;
+/*  color: var(--bs-navbar-hover-color) !important;*/
 }
 .nav-link:hover {
   color: var(--bs-navbar-hover-color) !important;
