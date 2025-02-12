@@ -103,8 +103,8 @@ a.nav-link:visited {
 .navbar-brand {
   color: var(--bs-navbar-brand-color) !important;
 }
-.nav-link {
-/*  color: var(--bs-navbar-hover-color) !important;*/
+[data-bs-theme="dark"] button.nav-link {
+  color: var(--bs-navbar-color);
 }
 .nav-link:hover {
   color: var(--bs-navbar-hover-color) !important;
