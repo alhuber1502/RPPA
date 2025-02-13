@@ -3,43 +3,41 @@
 
 var annos = {}, annotorious = {};
 
-// dismiss target
+// Editing popover: dismiss target and re-enable UI
 $( document ).on( "click", ".popover-dismiss-select.img .cancel", async function(e) {
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    annotorious[ Object.keys(annotorious) ].cancelSelected();
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchRotate = true;
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].cancelSelected();
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dragToPan = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchRotate = true;
 });
-// save target
+// Editing popover: save target (pass to createW3Cannotorious) and re-enable UI
 $( document ).on( "click", ".popover-dismiss-select.img .save", async function(e) {
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    createW3Cannotorious( Object.keys( viewer ), viewer[ Object.keys( viewer ) ].currentPage(), dismiss_annotation );
-    annotorious[ Object.keys( viewer ) ].saveSelected();
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchRotate = true;
+    createW3Cannotorious( "viewer_"+(mode == 'edit'?'editing_'+tid:tid), viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].currentPage(), dismiss_annotation );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].saveSelected();
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dragToPan = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchRotate = true;
 });
 
 var dismiss_annotation = undefined;
-// main
+// Reading/Editing view: initialize image tools
+/*  This function:
+    - intitializes the Annotorious OpenSeadragon plugin
+    - adds a handler that displays a popover on creation of a selection and disables UI
+    - adds a handler that populates the selected page with any available
+      annotations (from annos Array, see below)
+*/
 async function add_image_tools( id, hasStartPage ) {
-    /*
-    $( "[id='"+jqu( id )+"'] .slide-in-tool" ).append( `<div class="tools"><h1 class="info">Pages/Images</h1></div>` );
-    viewer[ id ].addHandler( "page", function (data) {
-    	$( "[id='"+jqu( id )+"'] .slide-in-tool .myImageCount" ).html( "Image #" + ( data.page + 1 ) + " of " + viewer[ id ].tileSources.length );
-    });
-    $( "[id='"+jqu( id )+"'] .slide-in-tool .tools" ).append( `<div class="bibl image"><span class="label">Navigation</span><p><span class="k-icon k-i-arrow-end-left"></span><span class="k-icon k-i-arrow-double-60-left"></span><span class="k-icon k-i-arrow-60-left"></span><span class="myImageCount"></span><span class="k-icon k-i-arrow-60-right"></span><span class="k-icon k-i-arrow-double-60-right"></span><span class="k-icon k-i-arrow-end-right"></span></p></div>` );
-    $( "[id='"+jqu( id )+"'] .slide-in-tool .myImageCount" ).html( "Image #1 of " + viewer[ id ].tileSources.length );
-
-    $( "[id='"+jqu( id )+"'] .slide-in-tool .tools" ).append( `<h1 class="info">Annotations</h1><div class="bibl"><p>Draw a <i class="fas fa-draw-polygon"></i> polygon (hold <code>SHIFT</code> while clicking and dragging; double-click to complete) on any image to add an <span style="border-bottom:2px solid #333;">annotation</span>.</p></div>` );
-    */
     // Initialize the Annotorious plugin
     annos[ id ] = {};
     annotorious[ id ] = OpenSeadragon.Annotorious( viewer[ id ], { disableSelect: true, disableEditor:true, allowEmpty: true} );
@@ -52,17 +50,17 @@ async function add_image_tools( id, hasStartPage ) {
     // handlers
     // create annotation
     
-//    annotorious[ id ].on('createAnnotation', function(annotation) {
-//        createW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
-//        annotorious[ id ].saveSelected();
-//    });
+    //    annotorious[ id ].on('createAnnotation', function(annotation) {
+    //        createW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
+    //        annotorious[ id ].saveSelected();
+    //    });
     annotorious[ id ].on('createSelection', function(annotation) {
-        var id = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
+        var anid = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
         var work = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
         var expr = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).data( 'expr' );
         $( ".tab-pane.active g[data-id='"+annotation.id+"']" ).popover({
             sanitize: false,
-            content: `<a role="button" class="save" data-ids='`+annotation.id+`' data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+            content: `<a role="button" class="save" data-ids='`+annotation.id+`' data-id="`+anid+`" data-work="`+work+`" data-expr="`+expr+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
                 <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
             html: true,
             placement: 'auto',
@@ -75,28 +73,28 @@ async function add_image_tools( id, hasStartPage ) {
         dismiss_select = $( ".tab-pane.active g[data-id='"+annotation.id+"']" ).popover('show');
         dismiss_select.popover('toggleEnabled'); // disable toggling
         dismiss_annotation = annotation;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dragToPan = false;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.scrollToZoom = false;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.clickToZoom = false;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.dblClickToZoom = false;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchToZoom = false;
-        viewer[ Object.keys( viewer ) ].gestureSettingsMouse.pinchRotate = false;
+        viewer[ id ].gestureSettingsMouse.dragToPan = false;
+        viewer[ id ].gestureSettingsMouse.scrollToZoom = false;
+        viewer[ id ].gestureSettingsMouse.clickToZoom = false;
+        viewer[ id ].gestureSettingsMouse.dblClickToZoom = false;
+        viewer[ id ].gestureSettingsMouse.pinchToZoom = false;
+        viewer[ id ].gestureSettingsMouse.pinchRotate = false;
     });
     // handle updated annotation
-//    annotorious[ id ].on('updateAnnotation', function(annotation) {
-//        createW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
-//        annotorious[ id ].saveSelected();
-//    });
+    //    annotorious[ id ].on('updateAnnotation', function(annotation) {
+    //        createW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
+    //        annotorious[ id ].saveSelected();
+    //    });
     // delete annotation
-//    annotorious[ id ].on('deleteAnnotation', function(annotation) {
-//        deleteW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
-//        annotorious[ id ].removeAnnotation( annotation );
-//    });
+    //    annotorious[ id ].on('deleteAnnotation', function(annotation) {
+    //        deleteW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
+    //        annotorious[ id ].removeAnnotation( annotation );
+    //    });
     // add notes in readonly or editable mode
     viewer[ id ].addHandler('page', function (viewer) {
         // close open notes
         annotorious[ id ].setAnnotations( [] );
-        if ( $( "button.active:contains(Facsimile)" ).length ) { $( ".workbench .bb" ).html( "" ); }
+        //if ( $( "button.active:contains(Facsimile)" ).length ) { $( ".workbench .bb" ).html( "" ); }
         if ( annos[ id ][ viewer.page ] ) {
             // we have notes for this page
             setTimeout(function done() {
@@ -121,6 +119,7 @@ async function add_image_tools( id, hasStartPage ) {
                     }
                     annotorious[ id ].addAnnotation( annotation, true ); // true = readonly, false = editable
                     const { snippet, transform } = annotorious[ id ].getImageSnippetById( annotation.id );
+                    // (snippet will be useful to keep!)
                     $( ".workbench .bb" ).append( `<li class="bb-item img" data-ids="`+annotation.target.selector.value.replace(/\"/g,'\\"')+`" data-expr="`+annotation['dcterms:isPartOf']+`">
                             <input type="checkbox" id="`+annotation.id+`" name="`+annotation.id+`">
                             <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>` );
@@ -137,27 +136,38 @@ async function add_image_tools( id, hasStartPage ) {
     }
 }
 
-// delete annotation
+// Editing view: delete a building block from interface and graph, and reload
+// building blocks (processGlobalText)
 $( document ).on( "click", ".bb-item.img .trash", async function(e) {
     var wid = $( this ).closest( "[data-wid]" ).data( "wid" );
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     var id = $( this ).prev().attr( "id" );
-//    var ids = $( this ).parent().data( "ids" ).split( "," );
-    var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
-    await putTRIPLES( update );
-//    annotorious[ Object.keys(annotorious) ].removeAnnotation( id );
-//    $( this ).parent().remove();
-    processGlobalText( "", wid );
+    //    var ids = $( this ).parent().data( "ids" ).split( "," );
+    // TODO: replace with delete just from the annos buildingblock array and in
+    //       DOM, below is not needed!
+    //var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
+    //await putTRIPLES( update );
+    //    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].removeAnnotation( id );
+    //    $( this ).parent().remove();
+    //processGlobalText( tid, wid );
 });
 // delete an annotation
 /*
 async function deleteW3Cannotorious( id, page, annotation ) {
     var update = namespaces+`\nWITH `+user+` DELETE { <`+annotation.id+`> ?p ?o . } WHERE { <`+annotation.id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+annotation.id+`> . } WHERE { ?s ?p <`+annotation.id+`> . } `;
     await putTRIPLES( update );
-    processImageAnnotations( id );
+    processImageBuildingBlocks( id );
 }
 */
-// process a new or update an existing annotation
+
+// Editing view: process a new or update an existing annotation
+/*  This function
+    - creates a building-block (RDF) and stores it in the graph
+    - pushes it into the annos Array for the page o be picked up on page change
+      by handler
+*/
 async function createW3Cannotorious( id, page, annotation ) {
+    console.log( id, page, annotation );
     // enhance Annotorious W3C annotation
     if ( annotation.hasOwnProperty( "id" ) ) {
         if ( annotation.id.startsWith( '#' ) ) {
@@ -167,9 +177,10 @@ async function createW3Cannotorious( id, page, annotation ) {
         annotation.id = domain+`/id/`+uuidv4()+`/buildingblock`;        
     }
     // add annotation
-    var update = namespaces+`\nWITH `+user+` DELETE { <`+annotation.id+`> ?p ?o . } WHERE { <`+annotation.id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+annotation.id+`> . } WHERE { ?s ?p <`+annotation.id+`> . } `;
-    await putTRIPLES( update );
+    //var update = namespaces+`\nWITH `+user+` DELETE { <`+annotation.id+`> ?p ?o . } WHERE { <`+annotation.id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+annotation.id+`> . } WHERE { ?s ?p <`+annotation.id+`> . } `;
+    //await putTRIPLES( update );
     // add annotation
+    /*
     var update = namespaces+"insert data {\n";
     update += `GRAPH `+user+` \n{` 
     var quads = `<`+annotation.id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
@@ -197,6 +208,8 @@ async function createW3Cannotorious( id, page, annotation ) {
     update += quads;
     update += `}\n}`;
     await putTRIPLES( update );
+    */
+    // maybe ALL I need from this part this the below few lines:
     if ( !annos[ id ][ page ] ) { annos[ id ][ page ] = []; }
     annos[ id ][ page ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
 //    $( "button.active:contains(Facsimile)" ).trigger( "click" );
@@ -204,16 +217,20 @@ async function createW3Cannotorious( id, page, annotation ) {
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
 
-// highlight 
+// Editing view: highlight image annotation on hover on list 
 $(document ).on('mouseenter', '.bb-item.img', function ( e ) {
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     var id = $( e.currentTarget ).find( "input" ).attr( "id" );
-    annotorious[ Object.keys(annotorious) ].selectAnnotation( id );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].selectAnnotation( id );
 }).on('mouseleave', '.bb-item.img', function ( e ) {
-    annotorious[ Object.keys(annotorious) ].cancelSelected();
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].cancelSelected();
 });
 
-// retrieve and populate annotations in pages
-function processImageAnnotations( id, bb ) {
+// Editing view: process an array of image annotations in pages by populating an
+// annos Array which is processed on page change
+/*
+function processImageBuildingBlocks( id, bb ) {
     annos[ id ] = {};
     for (var j = 0; j < bb.length; j++ ) {
         var v = bb[ j ];
@@ -222,3 +239,4 @@ function processImageAnnotations( id, bb ) {
     }
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
+*/

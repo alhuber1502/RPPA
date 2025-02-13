@@ -1,13 +1,8 @@
 // RPPA
 // Map tools
 
-let url = new URL( window.location.href );
-if ( url['pathname'].includes( '/poets/' ) && $("#map").length ) {
-  // initialize
-  var oms, sidebar, markerLayer, map, continents = {}, markers = {};
-  var theme = document.documentElement.getAttribute('data-bs-theme');
-
   // establish continents
+  var continents = {}
   continents[ "AF" ] = { id: "AF", name: "Africa", coord: "Point(16 1)" };
   continents[ "NA" ] = { id: "NA", name: "North America", coord: "Point(-95 40)" };
   continents[ "SA" ] = { id: "SA", name: "South America", coord: "Point(-60 -26)" };
@@ -15,6 +10,36 @@ if ( url['pathname'].includes( '/poets/' ) && $("#map").length ) {
   continents[ "EU" ] = { id: "EU", name: "Europe", coord: "Point(25 55)" };
   continents[ "OC" ] = { id: "OC", name: "Oceania", coord: "Point(145 -30)" };
 
+  // languages
+  var language = {}
+  language["ben"] = { 'id': 'ben', 'name': 'Bengali' }
+  language["bul"] = { 'id': 'bul', 'name': 'Bulgarian' }
+  language["ces"] = { 'id': 'ces', 'name': 'Czech' }
+  language["dan"] = { 'id': 'dan', 'name': 'Danish' }
+  language["deu"] = { 'id': 'deu', 'name': 'German' }
+  language["ell"] = { 'id': 'ell', 'name': 'Greek' }
+  language["eng"] = { 'id': 'eng', 'name': 'English' }
+  language["fas"] = { 'id': 'fas', 'name': 'Persian' }
+  language["fin"] = { 'id': 'fin', 'name': 'Finnish' }
+  language["fra"] = { 'id': 'fra', 'name': 'French' }
+  language["gle"] = { 'id': 'gle', 'name': 'Irish' }
+  language["heb"] = { 'id': 'heb', 'name': 'Hebrew' }
+  language["hun"] = { 'id': 'hun', 'name': 'Hungarian' }
+  language["ita"] = { 'id': 'ita', 'name': 'Italian' }
+  language["jpn"] = { 'id': 'jpn', 'name': 'Japanese' }
+  language["nor"] = { 'id': 'nor', 'name': 'Norwegian' }
+  language["pol"] = { 'id': 'pol', 'name': 'Polish' }
+  language["por"] = { 'id': 'por', 'name': 'Portuguese' }
+  language["ron"] = { 'id': 'ron', 'name': 'Romanian' }
+  language["rus"] = { 'id': 'rus', 'name': 'Russian' }
+  language["spa"] = { 'id': 'spa', 'name': 'Spanish' }
+  language["srp"] = { 'id': 'srp', 'name': 'Serbian' }
+  language["swe"] = { 'id': 'swe', 'name': 'Swedish' }
+  language["urd"] = { 'id': 'urd', 'name': 'Urdu' }
+  language["vie"] = { 'id': 'vie', 'name': 'Vietnamese' }
+  language["zho"] = { 'id': 'zho', 'name': 'Chinese' }
+
+  // good default zoomlevels for 50% width displays (other 50% might be list of poets/works)
   zoomlvl = {}
   zoomlvl[ "AS" ] = 3.5;
   zoomlvl[ "RU" ] = 3.5;
@@ -35,69 +60,8 @@ if ( url['pathname'].includes( '/poets/' ) && $("#map").length ) {
   zoomlvl[ "GB" ] = 6;
   zoomlvl[ "NZ" ] = 6;
 
-  // start with whole network
-  var startyr = 1770;
-  var endyr = 1900;
 
-  // initialize map view
-  var lat = Math.floor(Math.random() *  (80  - -50  + 1)) + -50;  // max 80,  min -50
-  var lon = Math.floor(Math.random() *  (180 - -180 + 1)) + -180; // max 180, min -180
-  var zoom = Math.floor(Math.random() * (4   - 4    + 1)) + 4;    // max 4,   min 4
-
-  // map layers
-  /*
-  var baseMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    noWrap: true,
-    minzoom: 3,
-    maxZoom: 10
-  });
-  */
-  /* map layers */
-  var baseMapDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd'
-  });
-  var baseMapLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd'
-  });
-  var overlayMap = L.tileLayer('/data/map/worldmap/{z}/{x}/{y}.png', {
-    attribution: '&copy; David Rumsey map collection',
-    minZoom: 2,
-    maxZoom: 5
-  });
-
-  var baseMap = (theme == 'dark') ? baseMapDark : baseMapLight ;
-  // map
-  map = new L.Map('map', {
-    worldCopyJump: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5,
-    minZoom: 2,
-    maxZoom: 12,
-    //
-    //maxBounds: [
-    //  [-78,-180],
-    //  [90,180]
-    //],
-    layers: [
-      baseMap,
-      overlayMap
-    ]
-  });//.setView([lat, lon], zoom);
-
-  // start with overlayMap
-  baseMap.setOpacity(0);
-  $( ".map").css( "background-color", "#ede0cb" );
-
-  // visualization layers
-  markerLayer = L.layerGroup().addTo( map );
-  // Spiderfy overlapping markers
-  oms = new OverlappingMarkerSpiderfier( map, {keepSpiderfied: true} );
-  //var hash = new L.Hash(map);
-
-  // initialize
+  // load places/persons/nations JSON files to power interface
   var loadPlaces = function() {
     return $.ajax({ url: "/data/map/data/places.min.json", dataType: 'json',
       success: function(data) {
@@ -119,209 +83,9 @@ if ( url['pathname'].includes( '/poets/' ) && $("#map").length ) {
       }, error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); }
     });
   }
-  
-  // switch base/overlay (to hide hist map "flaw")
-  map.on('overlayadd', function() {
-    //baseMap.setOpacity(0);
-    //$( ".map").css( "background-color", "#ede0cb" );
-  });
-  map.on('overlayremove', function() {
-    if (theme == 'dark') {
-      $( ".map").css( "background-color", "#000" );
-    } else {
-      $( ".map").css( "background-color", "#fff" );
-    }
-    baseMap.setOpacity(1);
-  });
-  // zoom base/overlay
-  map.on('zoomend', function() {
-    var zoomlevel = map.getZoom();
-    if (zoomlevel > 5 ) {
-      if (theme == 'dark') {
-        $( ".map").css( "background-color", "#000" );
-      } else {
-        $( ".map").css( "background-color", "#fff" );
-      }
-      baseMap.setOpacity(1);
-    } else {
-      if ( map.hasLayer( overlayMap) ) {
-        baseMap.setOpacity(0);
-        $( ".map").css( "background-color", "#ede0cb" );
-      } else {
-        if (theme == 'dark') {
-          $( ".map").css( "background-color", "#000" );
-        } else {
-          $( ".map").css( "background-color", "#fff" );
-        }  
-        baseMap.setOpacity(1);
-      }
-    }
-  });
 
-  // controls
-  L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap } ).addTo(map);
-  // Create additional Control placeholders
-  function addControlPlaceholders(map) {
-    var corners = map._controlCorners,
-      l = 'leaflet-',
-      container = map._controlContainer;
-    function createCorner(vSide, hSide) {
-      var className = l + vSide + ' ' + l + hSide;
-      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
-    }
-    createCorner('verticalcenter', 'left');
-    createCorner('verticalcenter', 'right');
-  }
-  addControlPlaceholders(map);
-  // Change the position of the Zoom Control to a newly created placeholder.
-  map.zoomControl.setPosition('topright');
-
-  // "Center" map in a good starting position and add reset button next to zoom
-  L.easyButton( '<i class="fas fa-undo-alt reset_map"></i><span class="sr-only">Reset map</span>', function(){
-    map.setView([17,20], 3);
-  }).setPosition('topright').addTo( map );
-  /*
-    sidebar = L.control.sidebar({
-      autopan: false,       // whether to maintain the centered map point when opening the sidebar
-      closeButton: true,    // whether to add a close button to the panes
-      container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
-      position: 'left',     // left or right
-    }).addTo(map);
-  */
-  /* sidebar.open('welcome');*/
-
-  $('.gender .checkbox').change(function () {
-    showYrRange( startyr,endyr );
-  });
-  $('.continents .checkbox').change(function () {
-    showYrRange( startyr,endyr );
-  });
-  $( document ).on( 'click', '.poet-focus', function(e) {
-    var id = $(e.currentTarget).data( "id" );
-    markers[ id ].fire('click');
-    poet_profile( id );
-  });
-  $( document ).on( 'click', '.country-focus,.cont-focus', function(e) {
-    var focus_type = $(e.currentTarget)[0].className, overview = '';
-    // generate and switch to continent or country overview
-    if (focus_type == 'cont-focus') {
-      overview += update_continent( $(e.currentTarget).data( "cont" ) );
-    } else {
-      overview += update_country( $(e.currentTarget).data( "count" ) );
-    }
-    $( "#location .results" ).html( overview );
-    //sidebar.open('location');
-    // refresh markers
-    $( "#"+$(e.currentTarget).data( "cont" ) ).prop('checked', true);
-    showYrRange( startyr,endyr );
-    // pan to target
-    var coords = [];
-    $(e.currentTarget).data('coord').replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
-    map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?4:5) );
-  });
-
-  $( "#slider-range" ).slider({
-  range: true,
-  min: parseInt(startyr),
-  max: parseInt(endyr),
-  values: [ parseInt(startyr),parseInt(endyr) ],
-  slide: function( event, ui ) {
-      $( "#year-range" ).val( ui.values[ 0 ] + "–" + ui.values[ 1 ] );
-      setTimeout(function() {
-        showYrRange( ui.values[ 0 ],ui.values[ 1 ] );
-      }, 10);
-    }
-  });
-  $( "#year-range" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-      "–" + $( "#slider-range" ).slider( "values", 1 ) );
-
-  oms.addListener('click', function(marker) {
-    poet_profile( marker._icon.id );
-    window.location.hash = "#id/"+marker._icon.id;
-  });
-  oms.addListener('spiderfy', function(markers) {
-    $.each( markers, function(i,v) {
-      var popup = v.getPopup();
-      if ( popup.isOpen() ) {
-        poet_profile( v._icon.id );
-        window.location.hash = "#id/"+v._icon.id;
-        return false;
-      }
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    $.when( loadPlaces(), loadPersons(), loadNations() ).done( function() {
-      checkBrowsePath();
-      var newPersons = _.filter( persons, function ( v ) {
-        if ( url['pathname'].includes( '/continent/' ) && 
-          nations[ v["nat"].substring(0,2) ].cont == location.pathname.substring( location.pathname.lastIndexOf("/")+1 )) {
-            return v;
-          } else if ( url['pathname'].includes( '/country/' ) && v["nat"].substring(0,2) == location.pathname.substring( location.pathname.lastIndexOf("/")+1 )) {
-            return v;
-          } else if ( url['pathname'].includes( '/world/' ) ) {
-            return v;
-          }
-      });
-      draw_viz( newPersons );
-    });
-  });
-}
-
-async function checkBrowsePath() {
-  var hash = location.pathname.substring( location.pathname.lastIndexOf("/")+1 ), source;
-  switch ( location.pathname.substring( location.pathname.indexOf("browse/"), location.pathname.lastIndexOf("/")+1 ) ) {
-    case "browse/id/":
-      poet_profile( hash );
-      source = nations[ persons[ hash ].nat.substring(0, 2) ].coord;
-      markers[ hash ].fire('click');
-      break;
-    case "browse/world/":
-//      $( "#location .results" ).html( update_continent( hash ) );
-//      sidebar.open('location');
-      source = 'Point(15 25)';
-      break;
-    case "browse/continent/":
-      $( "#location .results" ).html( update_continent( hash ) );
-//      sidebar.open('location');
-      source = continents[ hash ].coord;
-    break;
-    case "browse/country/":
-      $( "#location .results" ).html( update_country( hash ) );
-//      sidebar.open('location');
-      source = nations[ hash ].coord;
-      map.removeLayer( overlayMap );
-    break;
-    case "broswe/text/":
-      var work = await load_work_overview( texts[ hash ][ "work" ] );
-      if ( work.aut != '' ) {
-        var aut = work.aut.split(';');
-        poet_profile( aut[0] );
-        source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
-      }
-      display_globaltext( hash, texts[ hash ][ "work" ] );
-    break;
-    case "browse/work/":
-      var work = await load_work_overview( hash );
-      if ( work.aut != '' ) {
-        var aut = work.aut.split(';');
-        poet_profile( aut[0] );
-        source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
-      }
-      display_globaltext( "", hash );
-    break;
-  }
-  console.log( source );
-  if ( source ) {
-    // pan to target
-    var coords = [];
-    source.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
-    map.setView( [coords[1], coords[0]], (location.pathname.substring( location.pathname.indexOf("browse/"), location.pathname.lastIndexOf("/")+1 ).includes( "continent/" )?(zoomlvl[ hash ]?zoomlvl[ hash ]:4):(location.pathname.substring( location.pathname.indexOf("browse/"), location.pathname.lastIndexOf("/")+1 ).includes( "world/" )?1:(zoomlvl[ hash ]?zoomlvl[ hash ]:6.5))) );
-  }
-}
-
-
-function showYrRange( start, end ) {
+  // filter persons visualiztion based on timespan selected
+  function showYrRange( start, end ) {
     startyr = start;
     endyr = end;
     var male = $( "#male" ).is( ":checked" );
@@ -374,6 +138,7 @@ function showYrRange( start, end ) {
     draw_viz( newPersons );
   }
 
+  // create a new person marker layer based on person selection
   function draw_viz( new_persons ) {
     markers = {};
     oms.clearMarkers();
@@ -413,6 +178,7 @@ function showYrRange( start, end ) {
     });
   }
 
+  // return a poet profile page
   async function poet_profile( id ) {
     var poet = await load_poet_overview( id );
     var birthDate = new Date( persons[ id ].dob.replace("T00:00:00Z","").split('-') );
@@ -494,14 +260,18 @@ function showYrRange( start, end ) {
       });
       works += `</ul>`;
     }
-    $( "#profile .results" ).html( 
-      `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
+    try { sidebar.open('profile'); } catch(err) {}
+    // update country in background
+    $( "#location .results" ).html( update_country( persons[ id ].nat.substring(0,2) ) );
+    return `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
         ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="/data/map/data/img/thumb/`+id+`.jpg"/>`:``)+
         //+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
-        `<h3>Biographical details</h3><ul><li><span>Country:</span> 
-        <a href='#country/`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
-        data-count='`+persons[ id ].nat.substring(0,2)+`' data-coord='`+nations[ persons[ id ].nat.substring(0,2) ].coord+`'>`+
-        nations[ persons[ id ].nat.substring(0,2) ].name.split(',')[0]+`</a></li>`+
+        `<h3>Biographical details</h3><ul><li><span>Country:</span> `+
+        ((location.href.includes( '/maps/' ))?`<a href='#country/`+persons[ id ].nat.substring(0,2)+`' class='country-focus' data-cont='`+nations[ persons[ id ].nat.substring(0,2) ].cont+`' 
+        data-count='`+persons[ id ].nat.substring(0,2)+`' data-coord='`+nations[ persons[ id ].nat.substring(0,2) ].coord+`'>`:'')+
+        nations[ persons[ id ].nat.substring(0,2) ].name.split(',')[0]+
+        ((location.href.includes( '/maps/' ))?`</a>`:'')+
+        `</li>`+
         (persons[ id ].sex?`<li><span>Gender:</span> `+(persons[ id ].sex == 'm'?`male`:`female`):``)+`</li>`+
         (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
           `<li><span>Birth:</span> `+ 
@@ -524,17 +294,14 @@ function showYrRange( start, end ) {
         +`</ul>`+
         `<h3>Poems</h3>`+((poet[id].texts && poet[id].texts.poems.length > 0)?poems:`<ul><li>[forthcoming]</li></ul>`)+
         ((poet[id].otw  || poet[id].bibl)?`<h3>Select bibliography</h3>`+works:``)+
-        ((links != '<ul style="columns:2;"></ul>')?`<h3>Links</h3>`+links:``)
-    );
-    sidebar.open('profile');
-    // update country in background
-    $( "#location .results" ).html( update_country( persons[ id ].nat.substring(0,2) ) );
+        ((links != '<ul style="columns:2;"></ul>')?`<h3>Links</h3>`+links:``);
   }
 
+  // format a RPPA poem as a clickable citation
   function print_work( work ) {
     var formatted_work = '';
     formatted_work += 
-      `<a class="show_globaltext" href="#text/`+work.text+`" data-tid="`+work.text+`" data-wid="`+work.work+`">`+
+      `<a href="/works/#text/`+work.text+`" data-tid="`+work.text+`" data-wid="`+work.work+`">`+
       `<em>`+work.title+`</em>`+
       '</a>'+
       ((work["type"].startsWith('trans_'))?' (<code>'+work.type.split('_')[1]+'</code>)':'')+
@@ -542,6 +309,7 @@ function showYrRange( start, end ) {
     return( formatted_work );
   }
 
+  // return a list of poems for the selected country
   function update_country( country ) {
     var overview = `<h2>`+nations[ country ].name.split(',')[0]+`, `+
       `<a href="#continent/`+continents[ nations[ country ].cont ].id+`" class='cont-focus' data-cont="`+continents[ nations[ country ].cont ].id+`" 
@@ -554,6 +322,7 @@ function showYrRange( start, end ) {
     return( overview );
   }
 
+  // return a list of countries with a list of poets for each for the selected continent
   function update_continent( cont ) {
     var name = continents[ cont ].name;
     var countries = _.filter( nations, function(record){ return record.cont == cont } );
@@ -573,6 +342,7 @@ function showYrRange( start, end ) {
     return( overview );
   }
 
+  // return a list of poets for the selected country
   function poets_by_country( country ) {
     var return_poets = '';
     var poets = _.filter( persons, function(record){ return record.nat.substring(0,2) == country } );
@@ -588,11 +358,12 @@ function showYrRange( start, end ) {
     return( return_poets );
   }
 
+  // select map visualization type based on hash value
   async function checkPath() {
     var hash = location.hash.substring( location.hash.indexOf("/")+1 ), source;
     switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
       case "#id/":
-        poet_profile( hash );
+        $( "#profile .results" ).html( await poet_profile( hash ) );
         source = nations[ persons[ hash ].nat.substring(0, 2) ].coord;
         markers[ hash ].fire('click');
         break;
@@ -606,11 +377,13 @@ function showYrRange( start, end ) {
         sidebar.open('location');
         source = nations[ hash ].coord;
       break;
+      // TODO: these should be links to /works/#text/...
+      /*
       case "#text/":
         var work = await load_work_overview( texts[ hash ][ "work" ] );
         if ( work.aut != '' ) {
           var aut = work.aut.split(';');
-          poet_profile( aut[0] );
+          $( "#profile .results" ).html( await poet_profile( aut[0] ) );
           source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
         }
         display_globaltext( hash, texts[ hash ][ "work" ] );
@@ -619,11 +392,13 @@ function showYrRange( start, end ) {
         var work = await load_work_overview( hash );
         if ( work.aut != '' ) {
           var aut = work.aut.split(';');
-          poet_profile( aut[0] );
+          $( "#profile .results" ).html( await poet_profile( aut[0] ) );
           source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
         }
-        display_globaltext( "", hash );
+        var textsByWork = _.groupBy( texts, "work" );
+        display_globaltext( textsByWork[ hash ][0]['text'], hash );
       break;
+      */
     }
     if ( source ) {
       // pan to target
@@ -633,6 +408,7 @@ function showYrRange( start, end ) {
     }
   }
 
+  // update map visualization's sidebar based on hash value
   function checkHash() {
     switch( window.location.hash ) {
       case "#home":

@@ -35,3 +35,9 @@ RewriteRule ^(.*?)/rppaid.*?/(.*)$ /$1/$2 [L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.shtml -f
 RewriteRule ^(.*)$ $1.shtml [L]
+
+ErrorDocument 400 /error/index.shtml
+ErrorDocument 401 /error/index.shtml
+ErrorDocument 403 /error/index.shtml
+ErrorDocument 404 /error/index.shtml
+ErrorDocument 500 /error/index.shtml

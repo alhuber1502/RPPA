@@ -1,8 +1,8 @@
 // RPPA
 // Text tools
 
-// annotation/relations module
-// get id from rangy.js selection
+// Editing view: annotation/relations module: get and return id from rangy.js
+// selection 
 function getHTML(who, deep) {
     if (!who || !who.tagName) return '';
     var txt, ax, el = document.createElement("div");
@@ -15,7 +15,8 @@ function getHTML(who, deep) {
     el = null;
     return txt;
 }
-// filter ids to exclude all but w/pc ids which end in - followed by digits and . only
+// Editing view: filter IDs to exclude all but w/pc ids which end in - followed
+// by digits and . only 
 function w_and_pc_only( id ) {
     if ( id.includes( "index.xml-" )
         || id.endsWith( "_return" )
@@ -24,7 +25,10 @@ function w_and_pc_only( id ) {
     ) return;
     return id;
 }
-// offer user save/cancel options
+// Editing view: text selection
+// - determine range of selected text (IDs)
+// - create a popover offering user save/cancel options
+// - hide/show page numbers during text selection mode
 var dismiss_select = undefined, alignment = {};
 $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text", function(e) {
     e.stopPropagation();
@@ -32,7 +36,7 @@ $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane
         var sel = rangy.getSelection();
         var target, ids = [], id, work, expr;
         if ( dismiss_select ) dismiss_select.popover( 'dispose' );
-        if ( sel.text() != "" ) { // text segment selection
+        if ( sel.text() != "" ) {   // text segment selection
             target = sel.text();
             if ( sel.toHtml().includes(" id=") ) {
                 ids = Array.from( sel.toHtml().matchAll( /span.*?id="(.*?)"/gsi ), m => m[1]);
@@ -43,13 +47,14 @@ $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane
             id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
             work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
             expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
-        } else {            // structure selection
+        } else {                    // structure selection
             target = '';
             ids.push( $( jq( $( e.currentTarget ).attr( "id" ) ) ).closest( "[id]" ).attr( 'id' ) );
             id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
             work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
             expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
         }
+        // create popover close to selection end
         $( jq(ids[ids.length-1]) ).popover({
             sanitize: false,
             content: `<a role="button" class="save" data-ids="`+ids+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
@@ -71,6 +76,8 @@ $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane
         $( ".pagebreak,.numbering" ).css( "visibility","hidden" );
     }
 });
+
+// Editing view: highlight selectable text sections on hover
 $(document ).on('mouseenter', '.tab-pane.active .text *:not(.pagebreak),.tab-pane.active .text', function ( e ) {
     if ( mode == "edit" ) {
         var id = $( e.currentTarget ).attr( "id" );
@@ -83,32 +90,39 @@ $(document ).on('mouseenter', '.tab-pane.active .text *:not(.pagebreak),.tab-pan
     }
 });
 
-// dismiss target
+// Editing popover: dismiss target (remove popover)
 $( document ).on( "click", ".popover-dismiss-select.txt .cancel", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
 });
-// save target
+// Editing popover: save target (passed to createW3Canno)
 $( document ).on( "click", ".popover-dismiss-select.txt .save", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
     createW3Canno( $( this ).data("sel"), $( this ).data("ids").split( "," ), $( this ).data("id"), $( this ).data("work"), $( this ).data("expr") );
 });
-// open facsimile display and/or jump to new page
+
+// UI: on pagebreak click, open facsimile display and jump to selected page
 $(document ).on('click', ".text .pagebreak a,.image_link a", async function(e) {
     e.preventDefault();
-    var id = $(e.currentTarget).closest( ".tab-content" ).find( "[id*='/imageset/']").attr( "id" );
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     var page = parseInt( $(e.currentTarget).data("id") );
     $(e.currentTarget).closest( ".globaltext" ).find( "button:contains(Facsimile)" ).trigger('click');
-    viewer[ id ].goToPage( page );
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].goToPage( page );
 });
 
-// create, store, and process annotation
+// Editing view: create, store, and process annotation
+/*  This function 
+    - creates a building-block (RDF) and stores it in the graph
+    - creates a minimal live version of the building-block to list/highlight (processW3Canno)
+*/
 async function createW3Canno( target, ids, obj_id, work, expr ) {
+    // again this section is obsolete
     var date = new Date();
     var id = domain+`/id/`+uuidv4()+`/buildingblock`;
     ids.forEach(function(part, index) {
         ids[index] = "#"+part.replace( /\\./g,"\\\\." );
     });
     // add annotation
+    /*
     var update = namespaces+"insert data {\n";
     update += `GRAPH `+user+` \n{` 
     var quads = `<`+id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
@@ -138,11 +152,14 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
             `;        
     }
     */
+    /*
     quads += `oa:hasSource <`+obj_id+`> ;
     ] ;\n.` ;
     update += quads;
     update += `}\n}`;
     await putTRIPLES( update );
+    */
+    // this is the only required section
     var liveanno = {};
     liveanno.id = id;
     liveanno["oa:hasTarget"] = [];
@@ -161,7 +178,7 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
     $( ".workbench .bb" ).append( processW3Canno( liveanno ) );
 }
 
-// create annotaion display and anchor
+// Editing view: create annotation display/list text 
 function processW3Canno( annotation ) {
     // format annotation
     var ids = annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," ); // => [ "#K060422_000-02650","#K060422_000-02660.1","#K060422_000-02670","#K060422_000-02680" ]
@@ -217,23 +234,30 @@ function processW3Canno( annotation ) {
     /*}*/
 }
 
-// delete annotation
+// Editing view: delete annotation from list and graph 
 $( document ).on( "click", ".bb-item.txt .trash", async function(e) {
     var _this = $( this );
     var wid = $( this ).closest( "[data-wid]" ).data( "wid" );
+    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     var id = $( this ).prev().attr( "id" );
     var ids = $( this ).parent().data( "ids" ).split( "," );
+    // obsolete
+    /*
     var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
     await putTRIPLES( update );
+    */
+    // TODO: needs removing from DOM
     // unhighlight annotation and detach popovers
     $.each( ids, function( i,v ) {
         _this.parent().remove();
         $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "highlight-bb-start" ).removeClass( "highlight-bb-end" ).removeClass( "pulse-bb" );
         $( jqu(v) ).next( ".highlight-bb" ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
     });
-    processGlobalText( "", wid );
+    //processGlobalText( tid, wid );
 });
-// retrieve and display annotations
+// Editing view: retrieve and display list of building blocks
+// obsolete!
+/*
 function processBuildingBlocks( bb ) {
     $( ".workbench" ).html( `<h2>Current selections</h2><ul class="bb"></ul>` );
     $( ".highlight-bb" ).removeClass( "highlight-bb" );
@@ -247,6 +271,9 @@ function processBuildingBlocks( bb ) {
         }
     }
 }
+*/
+// Editing view: highlight the building block in the text on hover in the list
+// TODO: possibly keep (might still be useful)
 $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
     var id = $( e.currentTarget ).data( "ids" ).split( "," )[0] || '';
     if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
@@ -258,6 +285,9 @@ $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
     $( $( e.currentTarget ).data( "ids" ) ).removeClass("pulse-bb");
 });
 
+
+// Reading view: create a list of contexts
+// TODO: probably obsolete, since network view (and Info panels will supersede this!)
 function processTxtContexts( tc ) {
     $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
     $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
@@ -266,19 +296,33 @@ function processTxtContexts( tc ) {
         processW3Ccontext( tc[ j ] );
     }
 }
-// create annotaion display and anchor
+
+// Reading view: create annotation display and anchors (this is
+// the /#context/... view, i.e. focus is on one context actualization)
+/*  This function processes a context, it:
+    - selects the type of context display to choose based on the indicated
+      action (tool)
+    - runs through a tool-specific workflow (e.g. load associated files, add
+      event handlers for UI actions)
+    - wraps context in a uniform context-card (header/body/footer) for
+      display: make_context
+*/
+// TODO: this will be the key function that will process arrays of
+//       actualizations in the contexts retrieved!  Is still based on hasAction
+//       and types from the old monoluthic contextWork object!
 function processW3Ccontext( annotation ) {
     // all contexts for a work expression are retrieved by default, so that they
     // could be shown when a work with only fragments is displayed, therefore
     // we simply check if the context target exists before we show it (may need
     // a more sophisticated implementation)
     console.log( annotation );
-    if ( annotation["rppa:consistsOf"][0]["oa:hasTarget"][0].hasOwnProperty( "oa:hasSelector" ) ) {
+    if ( annotation["intro:R21_identifies"][0]["oa:hasTarget"][0].hasOwnProperty( "oa:hasSelector" ) ) {
         var header, sub, footer;
         // determine action
-        switch ( annotation["rppa:hasAction"].id ) {
-            case "rppa:Alignment":
-                fetch( annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["as:items"][0].id )
+        switch ( annotation["intro:R21_identifies"][0]["dcterms:requires"].id ) {
+            // translation alignment
+            case "https://www.romanticperiodpoetry.org/id/tool00001/tool":
+                fetch( annotation["intro:R21_identifies"]["oa:hasBody"]["as:items"][0].id )
                 .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                     return response.text();
                 }).then(data => {
@@ -354,7 +398,8 @@ function processW3Ccontext( annotation ) {
                     t = setInterval(updateDOM(),500);
                 }).catch((e) => {});
             break;
-            case "rppa:Annotation":
+            // annotation
+            case "https://www.romanticperiodpoetry.org/id/tool00002/tool":
                 header = `Interpretative Context: `+annotation[ "skos:prefLabel" ];
                 sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation["as:generator"].id+`</span></div>`;
                 footer = ``;
@@ -370,13 +415,17 @@ function processW3Ccontext( annotation ) {
                 clearInterval( t );
                 t = setInterval(updateDOM(),500);
             break;
+            // connections
+            case "https://www.romanticperiodpoetry.org/id/tool00003/tool":
+            break;
         }
     }
 }
 function make_context( id, header, data, footer, ids ) {
     return `<div class="card context resizable draggable" id="`+id+`" data-ids="`+ids+`"><div class="card-header">`+header+`</div><div class="card-body">`+data+`</div><div class="card-footer">`+footer+`</div></div>`;
 }
-
+// Reading view: highlight target of the selected context on hover
+// TODO: might still be useful to keep
 $(document).on('mouseenter', '.context', function () {
     $( $(this) ).addClass("active");
     // format annotation
@@ -419,10 +468,11 @@ $(document ).on('mouseenter', '.tc-item.txt', function ( e ) {
     $( "[id='"+$( e.currentTarget ).data( "ids" )+"']" ).removeClass("pulse-tc");
 });
 */
-// Function for a specific context-type, here highlighting @corresp-onding
-// entities  
 
-// highlight equivalence (where marked up)
+// Reading view: highlight equivalence (where marked up as data-corresp)
+// Function for a specific context-type, here highlighting @corresp-onding
+// entities 
+// (TODO: not sure where I have used this? what is it for?)
 $(document ).on('mouseenter', '[data-corresp]', function ( e ) {
     var d = this;
     $( d ).parent().addClass("idsSelected");
