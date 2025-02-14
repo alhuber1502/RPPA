@@ -944,7 +944,7 @@ function drawGlobalText( tid, wid ) {
                                 excerpt_saved = excerpt;
                             } else {
                                 excerpt = excerpt_saved;
-                                tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                                try { tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" ` } catch(e) {}
                             }
                         } else {
                             tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
@@ -973,7 +973,7 @@ function drawGlobalText( tid, wid ) {
                     cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ]
                 } else {
                     excerpt = excerpt_saved;
-                    cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ]
+                    try { cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ] } catch(e) {}
                 }
             } else {                                                                                                                                                 // manifestations
                 try { 
@@ -997,7 +997,7 @@ function drawGlobalText( tid, wid ) {
                                 excerpt_saved = excerpt;
                             } else {
                                 excerpt = excerpt_saved;
-                                tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                                try { tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `} catch(e) {}
                             }
                         } else {
                             tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
@@ -1023,7 +1023,7 @@ function drawGlobalText( tid, wid ) {
                             excerpt_saved = excerpt;
                         } else {
                             excerpt = excerpt_saved;
-                            tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                            try { tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `} catch(e) {}
                         }
                     } else {
                         tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
@@ -1069,7 +1069,7 @@ function drawGlobalText( tid, wid ) {
                             excerpt_saved = excerpt;
                         } else {
                             excerpt = excerpt_saved;
-                            tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                            try { tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `} catch(e) {}
                         }
                     } else {
                         tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
