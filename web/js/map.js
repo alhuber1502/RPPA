@@ -206,7 +206,7 @@
       poems += `<ul>`;
       // groups everything by work, giving each one item, i.e. e.g. grouping all
       // extracts under one heading
-      var work_ids = _.groupBy( _.sortBy( poet[id].texts.poems, 'title' ), 'work' );
+      var work_ids = _.groupBy( poet[id].texts.poems.sort((a,b) => a.title.localeCompare(b.title)), 'work' );
       $.each( work_ids, function(i,v) {
         poems += `<li>`;
         var orig_ids = _.filter( v, function(o) { return o.type == 'orig'; } );
