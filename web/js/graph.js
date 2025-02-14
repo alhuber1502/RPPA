@@ -367,6 +367,8 @@ async function createCYJSON( graph, view ) {
 				|| p.value.includes( 'P106_' )
 				|| p.value.includes( '/skos/core#note' )
 				|| p.value.includes( '/prisms/' )
+				|| p.value.includes( '/skos/core#topConceptOf' )
+				|| p.value.includes( '/skos/core#inScheme' )
 			) { continue; }
 		}
 		// process PRISMS elements
