@@ -834,6 +834,7 @@ async function display_globaltext( tid, wid ) {
     }
     // create global text
     drawGlobalText( tid, wid );
+    $( '#'+$( $("#"+tid).closest( ".tab-pane" )[0] ).attr( 'id' )+'-tab' )[0].click();
     // process contexts/building-blocks
     processGlobalText( tid, wid );
     

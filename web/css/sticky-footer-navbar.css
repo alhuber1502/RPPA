@@ -740,7 +740,7 @@ ul.bb li canvas {
 .waveform {
   margin-top: 15px;
 }
-[data-bs-theme=dark] #wavetimeline timeline {
+[data-bs-theme=dark] [id^='wavetimeline'] timeline {
   background: #555;
 }
 
