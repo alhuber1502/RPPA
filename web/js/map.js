@@ -206,8 +206,10 @@
       poems += `<ul>`;
       // groups everything by work, giving each one item, i.e. e.g. grouping all
       // extracts under one heading
-      var work_ids = _.groupBy( poet[id].texts.poems.sort((a,b) => a.title.localeCompare(b.title)), 'work' );
+      var work_ids = _.groupBy( _.filter( poet[id].texts.poems, function(item) { return item.type=='orig'}).sort((a,b) => a.title.localeCompare(b.title)), 'work' );
+      var work_ids_all = _.groupBy( poet[id].texts.poems.sort((a,b) => a.title.localeCompare(b.title)), 'work' );
       $.each( work_ids, function(i,v) {
+        v = work_ids_all[ i ];
         poems += `<li>`;
         var orig_ids = _.filter( v, function(o) { return o.type == 'orig'; } );
         var trans_ids =  _.filter( v, function(o) { return o.type.startsWith( 'trans_' ); } );
