@@ -892,7 +892,7 @@ function drawGlobalText( tid, wid ) {
     };
     // populate global text
     // load work's realization(s)
-    var tab_content = "", tab_nav = "", excerpt = null, sources = [], texts = [], madeActive = false;
+    var tab_content = "", tab_nav = "", excerpt = null, excerpt_saved = null, sources = [], texts = [], madeActive = false;
     for (i=0; i<workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ].length; i++ ) { // expressions
         var nav_name = '', cnt_lang = '';
         cnt_lang = workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P72_has_language" ];
@@ -940,6 +940,10 @@ function drawGlobalText( tid, wid ) {
                             });
                             if ( excerpt != -1 ) {
                                 tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                                excerpt_saved = excerpt;
+                            } else {
+                                excerpt = excerpt_saved;
+                                tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
                             }
                         } else {
                             tab_nav += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
@@ -966,6 +970,9 @@ function drawGlobalText( tid, wid ) {
                 }
                 if ( tid != '' && excerpt != -1 ) {
                     cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ]
+                } else {
+                    excerpt = excerpt_saved;
+                    cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R15_has_fragment" ][excerpt].id ][ "crm:P106_is_composed_of" ]
                 }
             } else {                                                                                                                                                 // manifestations
                 try { 
@@ -985,6 +992,10 @@ function drawGlobalText( tid, wid ) {
                                 return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].id.includes( '/'+tid+'/' );
                             });
                             if ( excerpt != -1 ) {
+                                tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                                excerpt_saved = excerpt;
+                            } else {
+                                excerpt = excerpt_saved;
                                 tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
                             }
                         } else {
@@ -1007,6 +1018,10 @@ function drawGlobalText( tid, wid ) {
                             return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].id.includes( '/'+tid+'/' );
                         });
                         if ( excerpt != -1 ) {
+                            tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                            excerpt_saved = excerpt;
+                        } else {
+                            excerpt = excerpt_saved;
                             tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
                         }
                     } else {
@@ -1049,6 +1064,10 @@ function drawGlobalText( tid, wid ) {
                             return workbench[ wid ][ workbench[ wid ][ typ.id ][ "crm:P106_is_composed_of" ][0]["id"]][ "crm:P106_is_composed_of" ][0].id.includes( '/'+tid+'/' );
                         });
                         if ( excerpt != -1 ) {
+                            tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
+                            excerpt_saved = excerpt;
+                        } else {
+                            excerpt = excerpt_saved;
                             tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R15_has_fragment'][excerpt].id+`" `
                         }
                     } else {
@@ -1635,7 +1654,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const offcanvasList = [...offcanvasElementList].map(offcanvasEl => new bootstrap.Offcanvas(offcanvasEl))
 
     // SSO
-    //$( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
+    $( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;

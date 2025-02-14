@@ -341,7 +341,7 @@ async function getPRISMSobject( id ) {
 
 // create CY-JSON from graph
 async function createCYJSON( graph, view ) {
-	var jsonObj = [], nodes_seen = [];
+	var jsonObj = [], nodes_seen = [], local_col = {};
 
     // process triples in the graph object
 	for ( var i=0; i<graph.length; i++ ) {
@@ -388,10 +388,12 @@ async function createCYJSON( graph, view ) {
 			node["data"]["shape"] = ((skp(graph, s.value, "rdf:type").filter(s => s.includes("http://www.ics.forth.gr/isl/CRMdig/")).length > 0 || skp(graph, s.value, "rdf:type").filter(s => s.includes("https://www.prisms.digital")).length > 0)?"round-rectangle": (nsv(skp(graph, s.value, "rdf:type")[0]) == "lrmoo:F1_Work" || nsv(skp(graph, s.value, "rdf:type")[0]) == "lrmoo:F2_Expression" || s.value.includes( "/expression/" ))?"round-hexagon":"ellipse" );
 			node["data"]["bgcolor"] = (function() {
 				if ( s.value.includes( "/expression/" ) || s.value.includes( "/manifestation/" ) ) {
-					if (s.value.endsWith( "/1" )) { return graph_col["expression1"]; }
-					else if (s.value.endsWith( "/2" )) { return graph_col["expression2"]; }
-					else if (s.value.endsWith( "/3" )) { return graph_col["expression3"]; }
-					else if (s.value.endsWith( "/4" )) { return graph_col["expression4"]; }
+					if (s.value.endsWith( "/1" )) { local_col[ s.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+					else if (s.value.endsWith( "/2" )) { local_col[ s.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+					else if (s.value.endsWith( "/3" )) { local_col[ s.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+					else if (s.value.endsWith( "/4" )) { local_col[ s.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+				} else if ( s.value.includes( "/excerpt/" ) ) {
+					return local_col[ skp( graph, s.value, "lrmoo:R15i_is_fragment_of") ]
 				} else return graph_col[nsv(skp(graph, s.value, "rdf:type")[0])];
 			})();
 			jsonObj.push(node);
@@ -415,10 +417,12 @@ async function createCYJSON( graph, view ) {
 				edge["data"]["class"] = p.value;
 				edge["data"]["bgcolor"] =  (function() {
 					if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
-						if (o.value.endsWith( "/1" )) { return graph_col["expression1"]; }
-						else if (o.value.endsWith( "/2" )) { return graph_col["expression2"]; }
-						else if (o.value.endsWith( "/3" )) { return graph_col["expression3"]; }
-						else if (o.value.endsWith( "/4" )) { return graph_col["expression4"]; }
+						if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+						else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+						else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+						else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+					} else if ( o.value.includes( "/excerpt/" ) ) {
+						return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
 					} else return graph_col[nsv(skp(graph, o.value, "rdf:type")[0])];
 				})();	
 				jsonObj.push(edge);
@@ -435,10 +439,12 @@ async function createCYJSON( graph, view ) {
 				node["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
 				node["data"]["bgcolor"] = (function() {
 					if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
-						if (o.value.endsWith( "/1" )) { return graph_col["expression1"]; }
-						else if (o.value.endsWith( "/2" )) { return graph_col["expression2"]; }
-						else if (o.value.endsWith( "/3" )) { return graph_col["expression3"]; }
-						else if (o.value.endsWith( "/4" )) { return graph_col["expression4"]; }
+						if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+						else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+						else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+						else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+					} else if ( o.value.includes( "/excerpt/" ) ) {
+						return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
 					} else return graph_col[nsv(skp(graph, o.value, "rdf:type")[0])];
 				})();
 				jsonObj.push(node);
