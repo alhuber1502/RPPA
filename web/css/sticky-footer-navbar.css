@@ -507,6 +507,11 @@ img[src='/images/female.png'],
 .globaltext .tab-content {
   border: 1px dotted #999;
 }
+.globaltext-workbench {
+  top: 55px !important;
+  width: 100vw !important;
+  height: calc(100vh - 96px);
+}
 
 .globaltext .attribution, 
 .context .attribution {
@@ -865,7 +870,7 @@ ul.bb li canvas {
 .add_context {
   font-size: x-large;
   position: absolute;
-  right: 20px;
+  right: 10px;
   padding-top:2px;
 }
 .add_context .fa-plus-circle {
@@ -1098,10 +1103,11 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 .cytoscape-navigator {
   position: absolute;
   width: 300px;
-  height: 301px;
-  border: 1px solid #ddd;
+  height: 300px;
+  border: 1px solid #ccc;
   border-right-width: 0;
   z-index:1053;
+  bottom: 1px;
 }
 .cy-panzoom {
   left: 10px;

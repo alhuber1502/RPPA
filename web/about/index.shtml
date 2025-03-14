@@ -211,7 +211,7 @@
 
         </div>
         <div class="col-md-3">
-        
+          <!--#set var="mode" value=""-->
           <div id="feed">
             <h2>News/Updates</h2>
 
@@ -303,7 +303,13 @@
 
       </div>
     </main>
-
+    <script>
+      var posts = document.getElementsByClassName('bluesky-embed');
+      for (var i = 0; i < posts.length; i++) {
+          posts[i].setAttribute('data-bluesky-embed-color-mode', document.documentElement.getAttribute('data-bs-theme'));
+      }
+    </script>
+    
     <!--#include virtual="/templates/footer.shtml" -->
     <!--#include virtual="/templates/bottom.shtml" -->
   </body>
