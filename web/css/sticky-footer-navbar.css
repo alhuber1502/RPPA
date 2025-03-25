@@ -491,9 +491,11 @@ img[src='/images/female.png'],
   list-style-type: none;
 }
 */
-.globaltext-container {
+.globaltext-container,.context-container {
   min-height: inherit;
   min-width: inherit;
+  overflow: inherit;
+  padding: 0;
 }
 .globaltext {
   overflow: hidden;
@@ -507,7 +509,7 @@ img[src='/images/female.png'],
 .globaltext .tab-content {
   border: 1px dotted #999;
 }
-.globaltext-workbench {
+.globaltext-workbench,.context-workbench {
   top: 55px !important;
   width: 100vw !important;
   height: calc(100vh - 96px);
@@ -869,9 +871,11 @@ ul.bb li canvas {
 
 .add_context {
   font-size: x-large;
-  position: absolute;
-  right: 10px;
-  padding-top:2px;
+  position: sticky;
+  color:#3aad9f;
+}
+.add_context:hover {
+  color:#2a9d8f;
 }
 .add_context .fa-plus-circle {
   background-color: white;
@@ -1149,6 +1153,9 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 }
 .tippy-popper {
   pointer-events: auto;
+}
+.tippy-content {
+  overflow: auto;
 }
 
 button[data-expr$='/expression/4'].nav-link.active,
