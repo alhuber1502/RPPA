@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "outDir": "_build_es6",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "declaration":true,
+    "declarationMap": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "lib": [ "esnext", "dom" ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowJs":false,
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": "./ts",
+    "paths": {
+      "@jsplumb/*": ["*"]
+    }
+  },
+  "include": ["ts/**/*"],
+  "exclude":["node_modules", "**/*.d.ts", "_build_es6/**/*", "dist/**/*"]
+}
