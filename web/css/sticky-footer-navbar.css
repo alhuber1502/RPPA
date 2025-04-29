@@ -512,14 +512,14 @@ img[src='/images/female.png'],
 .globaltext-workbench,.context-workbench {
   top: 55px !important;
   width: 100vw !important;
-  height: calc(100vh - 96px);
+  height: calc(100vh - 95px);
 }
 
 .globaltext .attribution, 
 .context .attribution {
   font-size:.85em;
-  float:right;
-  /*width: 80%;*/
+  /*float:right;
+  width: 80%;*/
   text-align: right;
   margin-right: 15px;
 }
@@ -767,17 +767,19 @@ ul.bb li canvas {
   font-size: small;
 }
 .context .card-body {
-  max-height:730px;
+/*  max-height:730px;*/
   overflow:auto;
 }
 .context.active {
   border-color: var(--bs-orange);
 }
+.context {
+  height: calc(100vh - 95px);
+}
 
 .idsSelected {
-  border-bottom: 2px solid var(--bs-orange);
-  background-color: rgba(255,244,202,1);
-  font-weight:bold;
+  background-color: hwb(26 10% 19%);
+  cursor: pointer;
 }
 .outline-seg {
   outline: 1px solid black;
@@ -880,6 +882,9 @@ ul.bb li canvas {
 .add_context .fa-plus-circle {
   background-color: white;
   border-radius: 50%;
+}
+.context-container .add_context {
+  display: none;
 }
 
 /* DataTables */
@@ -1208,4 +1213,69 @@ a.bg-rppa {
 [data-expr$='/expression/1'] a {
   color: #cd6711;
   filter: brightness(1.5);
+}
+
+
+dl, dt, dd {
+  margin: 0;
+  padding: 0;
+}
+  
+dl {
+  color: #eee;
+  background-color: #666;
+  border-radius: 5px;
+  padding: 1rem;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
+  grid-template-columns: auto 5px auto;
+  grid-template-rows: auto [last-line];
+  grid-auto-rows: min-content;
+  
+  grid-gap: 1rem;
+  
+  /* This is to allow the `dl > dt:first-child::after` to fill the height */
+  position: relative;
+}
+
+/* Using this to make a vertical line won't work, see https://stackoverflow.com/questions/44052336/make-a-grid-item-span-to-the-last-row-column-in-implicit-grid
+dl::before {
+  content: '';
+  display: block;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: -1;
+  grid-row-end: last-line;
+  
+  background-color: red;
+  border-left: 1px solid white;
+  width: 1px;
+}
+*/
+
+.context dl {
+  display: flex;
+  flex-flow: row wrap;
+  border: solid #333;
+  border-width: 1px 1px 0 0;
+  grid-gap: 0;
+  background-color: #444;
+  padding: 0;
+}
+.context dt {
+  flex-basis: 20%;
+  padding: 2px 4px;
+  background: #333;
+  text-align: right;
+  color: #fff;
+}
+.context dd {
+  flex-basis: 70%;
+  flex-grow: 1;
+  margin: 0;
+  padding: 2px 4px;
+  border-bottom: 1px solid #333;
 }

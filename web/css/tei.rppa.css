@@ -58,7 +58,7 @@
 .text div.lgvspace {
     margin-bottom: 1em;
 }
-.text div.lg, .text p, .text .epigraph, .text div.gap, .text div.opener, .text div.closer {
+.text div.lg, .text p, .text .epigraph, .text div.gap, .text div.opener, .text div.closer, .text div.dateline {
 /*    margin-bottom: 1em;*/
     padding: 10px;
 }
@@ -147,7 +147,7 @@ li span.bibl {
 
 span.w, span.pc {
     display: inline-block;
-    transition: all 0.5s ease;
+/*    transition: all 0.5s ease;*/
 }
 
 .highlight {
