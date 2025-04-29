@@ -33,4 +33,6 @@ newspapers, and many more relevant contexts.
 ## Contact
 * ORCID: [Alexander Huber](http://orcid.org/0000-0002-2151-6415)
 * E-mail: [huber@romanticperiodpoetry.org](mailto:huber@romanticperiodpoetry.org)
-* Twitter: [@C18AH](https://twitter.com/C18AH)
+* Bluesky: [@C18AH](https://bsky.app/profile/c18ah.bsky.social)
+* Mastodon: [@C18AH](https://hcommons.social/@c18ah)
+* X: [@C18AH](https://twitter.com/C18AH)
