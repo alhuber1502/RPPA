@@ -21,7 +21,7 @@ newspapers, and many more relevant contexts.
 * contexts, similarity and contrast
 * comparative literary studies
 * ontologically-underpinned knowledge modelling
-* linked open data (LOD/RDF)
+* Semantic Web technologies (LOD/RDF/ontologies/SKOS...)
 * mapping
 
 ## Web Technologies
