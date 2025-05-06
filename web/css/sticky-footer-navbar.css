@@ -1215,7 +1215,7 @@ a.bg-rppa {
   filter: brightness(1.5);
 }
 
-
+/*
 dl, dt, dd {
   margin: 0;
   padding: 0;
@@ -1237,9 +1237,9 @@ dl {
   grid-gap: 1rem;
   
   /* This is to allow the `dl > dt:first-child::after` to fill the height */
-  position: relative;
+  /* position: relative;
 }
-
+*/
 /* Using this to make a vertical line won't work, see https://stackoverflow.com/questions/44052336/make-a-grid-item-span-to-the-last-row-column-in-implicit-grid
 dl::before {
   content: '';
@@ -1262,15 +1262,32 @@ dl::before {
   border: solid #333;
   border-width: 1px 1px 0 0;
   grid-gap: 0;
-  background-color: #444;
+  background-color: unset;
+  color: unset;
   padding: 0;
+}
+[data-bs-theme="dark"] .context dl {
+  background-color: #444;
+}
+[data-bs-theme="light"] .context dl {
+  background-color: #eee;
 }
 .context dt {
   flex-basis: 20%;
   padding: 2px 4px;
-  background: #333;
   text-align: right;
+  /*
+  background: #333;
   color: #fff;
+  */
+}
+[data-bs-theme="dark"] .context dt {
+  background: #333;
+  color: #fff;
+}
+[data-bs-theme="light"] .context dt {
+  background: #ddd;
+  color: #333;
 }
 .context dd {
   flex-basis: 70%;
