@@ -8,7 +8,7 @@ $.ajax({url: "/data/graphs/onto.json", dataType: 'json', async: false,
 
 // PRISMS graph view
 
-var cy, eh, ontofcr = [], graph_icon = {}, graph_uuid = {}, graph_col = {};
+var cy, eh, ontofcr = [], graph_icon = {}, graph_uuid = {}, graph_col = {}, previousState = null;
 // node colours
 
 graph_col["crm:E53_Place"] = '#90A583';//Cambridge blue
@@ -619,8 +619,8 @@ function tippyNodes( nodes, graph, all ) {
 					contentP += `<li data-s="` + s.value + `" data-p="` + p.value + `" data-o="` + o.value + `"` + `><span style="font-style:italic;">`
 					+ (onto[nsv(p.value)] ? onto[nsv(p.value)].label : (nsv(p.value) ? nsv(p.value) : p.value))
 					+ `</span> &nbsp; <span>` +
-					((o.value.startsWith( 'http') && nsv(p.value) != "rdf:type" )?`<a href="`+o.value+`" style="color:`+cy.$id( node.id() )["_private"].data.color
-					+`"`+addition:``)+
+					((o.value.startsWith( 'http') && nsv(p.value) != "rdf:type" )?`<a href="`+o.value+`" ` //style="color:`+cy.$id( node.id() )["_private"].data.color
+					+``+addition:``)+
 							(onto[nsv(o.value)] ? truncateString(onto[nsv(o.value)].label, 50) :
 							(skp(graph, o.value, "crm:P1_is_identified_by") ? truncateString(skp(graph, o.value, "crm:P1_is_identified_by"),50) :
 							( nsv( o.value )?truncateString(nsv( o.value ),50):
@@ -636,8 +636,8 @@ function tippyNodes( nodes, graph, all ) {
 						if ( nsv( v.p.value) == "dcterm:creator" ) { return; }
 						contentR += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `"><span style="font-style:italic;">`
 						+ (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
-						+ `</span> &nbsp; <span><a `+((v.o.type == "uri")?`data-component="`+v.o.value+`"`:``)+` href="`+v.o.value+`" class="nodejump add_ent_wb" style="color:`+cy.$id( node.id() )["_private"].data.color
-						+`">` +
+						+ `</span> &nbsp; <span><a `+((v.o.type == "uri")?`data-component="`+v.o.value+`"`:``)+` href="`+v.o.value+`" class="nodejump add_ent_wb" ` //style="color:`+cy.$id( node.id() )["_private"].data.color
+						+`>` +
 							//(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
 							((v.qp)?truncateString(v.qp.value,35) + ((v.qa)?` (`+v.qa.value+`)`:``):truncateString(v.o.value,35))
 						+ `</a></span></li>`;
@@ -645,8 +645,8 @@ function tippyNodes( nodes, graph, all ) {
 						 // incoming
 						contentL += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `"><span style="font-style:italic;">`
 						+ (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
-						+ `</span> &nbsp; <span><a `+((v.s.type == "uri")?`data-component="`+v.s.value+`"`:``)+` href="`+v.s.value+`" class="nodejump add_ent_wb" style="color:`+cy.$id( node.id() )["_private"].data.color
-						+`">` +
+						+ `</span> &nbsp; <span><a `+((v.s.type == "uri")?`data-component="`+v.s.value+`"`:``)+` href="`+v.s.value+`" class="nodejump add_ent_wb" ` //style="color:`+cy.$id( node.id() )["_private"].data.color
+						+`>` +
 							 //(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
 							 ((v.qp)?truncateString(v.qp.value,35) + ((v.qa)?` (`+v.qa.value+`)`:``):truncateString(v.s.value,35))
 						+ `</a></span></li>`;
@@ -660,8 +660,8 @@ function tippyNodes( nodes, graph, all ) {
 						if ( v.o.type == 'literal' && !contentP.includes( "<li" ) ) {
 							contentL += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `"><span style="font-style:italic;">`
 							+ (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
-							+ `</span> &nbsp; <span><a `+((v.s.type == "uri")?`data-component="`+v.s.value+`"`:``)+` href="`+v.s.value+`" class="nodejump add_ent_wb" style="color:`+cy.$id( node.id() )["_private"].data.bgcolor
-							+`">` +
+							+ `</span> &nbsp; <span><a `+((v.s.type == "uri")?`data-component="`+v.s.value+`"`:``)+` href="`+v.s.value+`" class="nodejump add_ent_wb" ` //style="color:`+cy.$id( node.id() )["_private"].data.bgcolor
+							+`>` +
 								 //(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
 								 ((v.qp)?truncateString(v.qp.value,35) + ((v.qa)?` (`+v.qa.value+`)`:``):v.s.value)
 							+ `</a></span></li>`;	
@@ -672,9 +672,9 @@ function tippyNodes( nodes, graph, all ) {
 						// outgoing
 						contentR += `<li data-s="` + v["_private"].data.source + `" data-p="` + v["_private"].data.class + `" data-o="` + v["_private"].data.target + `"` + `"><span style="font-style:italic;">`
 						+ (onto[nsv(v["_private"].data.class)] ? onto[nsv(v["_private"].data.class)].label : (nsv(v["_private"].data.class) ? nsv(v["_private"].data.class) : v["_private"].data.class))
-						+ `</span> &nbsp; <span style="color:`+v["_private"].data.color
-						+`"><a href="`+v["_private"].data.target+`" class="nodejump" style="color:`+v["_private"].data.color
-						+`">` +
+						+ `</span> &nbsp; <span `//style="color:`+v["_private"].data.color
+						+`><a href="`+v["_private"].data.target+`" class="nodejump" `//style="color:`+v["_private"].data.color
+						+`>` +
 							//(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
 							((cy.$id( v["_private"].data.target )["_private"].data.name.split("\n")[1])?cy.$id( v["_private"].data.target )["_private"].data.name.split("\n")[1]:cy.$id( v["_private"].data.target )["_private"].data.name.split("\n")[0])
 						+ `</a></span></li>`;
@@ -682,8 +682,8 @@ function tippyNodes( nodes, graph, all ) {
 						// incoming
 						contentL += `<li data-s="` + v["_private"].data.source + `" data-p="` + v["_private"].data.class + `" data-o="` + v["_private"].data.target + `"` + `><span style="font-style:italic;">`
 						+ (onto[nsv(v["_private"].data.class)] ? onto[nsv(v["_private"].data.class)].label : (nsv(v["_private"].data.class) ? nsv(v["_private"].data.class) : v["_private"].data.class))
-						+ `</span> &nbsp; <span><a href="`+v["_private"].data.source+`" class="nodejump" style="color:`+v["_private"].data.color
-						+`">` +
+						+ `</span> &nbsp; <span><a href="`+v["_private"].data.source+`" class="nodejump"` //style="color:`+v["_private"].data.color
+						+`>` +
 							//(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
 							((cy.$id( v["_private"].data.source )["_private"].data.name.split("\n")[1])?cy.$id( v["_private"].data.source )["_private"].data.name.split("\n")[1]:cy.$id( v["_private"].data.source )["_private"].data.name.split("\n")[0])
 						+ `</a></span></li>`;
@@ -843,7 +843,7 @@ function createCYgraph(data, graph, layout) {
 			},
 			{
 				selector: 'edge.highlight',
-				style: { 'target-arrow-color': function (e) { return e.data().bgcolor || '#cd6711' }
+				style: { 'target-arrow-color': function (e) { if ("bgcolor" in e.data()) { return e.data().bgcolor } else { return (theme == 'dark')?"white":"#000" } }
 				}
 			},
 			{
@@ -1159,12 +1159,22 @@ function createCYgraph(data, graph, layout) {
 		// new node
 		//cy.dblclick();
 		cy.on('dblclick', function(evt) {
-//			console.log( evt );
+			console.log( "double click: ", evt["target"]["_private"].data.context );
+			if ( evt["target"]["_private"].data.context !== undefined ) {
+				display_context( evt["target"]["_private"].data.context );
+				var regex = /.*?\/id\/(.*?)$/;
+				previousState = location.href;
+				history.replaceState(null,null,'/works/#context/'+evt["target"]["_private"].data.context.match( regex )[1]);
+//				location.href = "/works/#context/"+evt["target"]["_private"].data.context;
+//				display_context(evt["target"]["_private"].data.context);
+			}
+			/*
 			if ( evt["target"]["_private"].data.class.includes( "http://iflastandards.info/ns/lrm/lrmoo/F1_Work") ) {
 				window.location.href = '/works/';
 				// this patterns return the "first" expression of a work, e.g. "text01234":
 				// _.groupBy( texts, 'work')["work00932"][0].text
 			}
+			*/
 			// TODO: double click on empty bakground =
 			//addModelling();
 			// TODO: double click on node = reveal neighborhood -> graph traversal
@@ -1182,12 +1192,16 @@ function createCYgraph(data, graph, layout) {
 	cy.on('click', 'node,edge', async function (e) {
 		var ele = e.target, q;
 		var j = cy.$id( ele.id() );
+		// double-clicking is impossible if node/edge moves on first click
+		/*
 		cy.animate({
 			center: { eles: cy.filter( j ) },
 			zoom: 0.9
 		}, {
 			duration: 500
 		});
+		*/
+		/*
 		if ( $( "[id='cy']" )[0].parentNode.className != "modal-body" ) {
 			if (!$( "#details-tab" ).hasClass( "active" ) ) { $( "#details-tab" ).click() }
 			var q;
@@ -1259,6 +1273,7 @@ function createCYgraph(data, graph, layout) {
 			var statementsInfo = tippyNodes( ele, graph, true );
 			$( ".graph-about #tabDetails" ). html( statementsInfo );
 		}
+		*/
 	});
 	// highlight connections
 	cy.on('mouseover', 'node', function (e) {
@@ -1272,12 +1287,6 @@ function createCYgraph(data, graph, layout) {
 			.outgoers()
 			.union(sel.incomers())
 			.addClass('highlight');
-		var bgcol = ((sel["_private"].data.shape == "round-diamond")?sel["_private"].data.color:sel["_private"].data.bgcolor);
-		$( "#objects .k-card-header" ).css("background-color","");
-		$( "#objects [id='"+domain+"/item/"+sel["_private"].data.origin+"'] .k-card-header" ).css("background-color",String( bgcol ));
-		if ( $( "#objects [id='"+domain+"/item/"+sel["_private"].data.origin+"']" )[0] ) {
-			$( "#objects [id='"+domain+"/item/"+sel["_private"].data.origin+"']" )[0].scrollIntoView({behavior: "smooth", block: "center"});
-		}
 	}).on('mouseout', 'node', function (e) {
 		var sel = e.target;
 		cy.elements()
@@ -1286,7 +1295,6 @@ function createCYgraph(data, graph, layout) {
 			.outgoers()
 			.union(sel.incomers())
 			.removeClass('highlight');
-		$( "#objects .k-card-header" ).css("background-color","");
 	});
 }
 
@@ -1347,21 +1355,23 @@ function updateGraphInfo( level ) {
 async function loadLayout() {
     var hash = location.hash.substring( location.hash.indexOf("/")+1 ), source;
     regex = /(?<=^\/)[^\/]+/;
-    switch ( location.pathname.match( regex )[0] ) {
+    switch ( location.pathname.match( regex ) && location.pathname.match( regex )[0] ) {
         case "authors":
             switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
                 case "#id/":
                     $( ".layout_navigation" ).hide();
-                    $( ".layout_wrapper" ).append(`<div class="col col-graph" style="flex:unset;"></div><div class="col col-content" style="flex:unset;padding-right:0;"><div id="content"></div></div>`);
-                    // load poet profile
-                    $( "#content" ).html( await poet_profile( hash ) );
-                    // load poet graph
-                    initializeGraph( "https://www.romanticperiodpoetry.org/id/"+hash+"/person", "authors" );
-                    $( ".layout_wrapper" ).css( "flex-wrap", "unset" );
-                    Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+					if (!$(".col-graph").length) {
+	                    $( ".layout_wrapper" ).append(`<div class="col col-graph" style="flex:unset;"></div><div class="col col-content" style="flex:unset;padding-right:0;"><div id="content"></div></div>`);
+    	                // load poet profile
+        	            $( "#content" ).html( await poet_profile( hash ) );
+            	        // load poet graph
+                	    initializeGraph( "https://www.romanticperiodpoetry.org/id/"+hash+"/person", "authors" );
+                    	$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
+	                    Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+					}
                     break;
-                default:
-                    if ( $( ".layout_navigation" ).is(":hidden") ) {
+                case "":
+                    if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
                         $( ".col-graph,.col-content,.gutter" ).remove();
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );
                         $( ".layout_navigation" ).show();
@@ -1372,23 +1382,30 @@ async function loadLayout() {
         case "works":
             switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
                 case "#text/":
+					if ( $('.offcanvas.show').length ) { 
+						myCanvasGT.hide(); // close any open texts if a new one is requested
+						$(".popover").hide(); // hide if new text was called from a popover
+					}
                     $( ".layout_navigation" ).hide();
-                    $( ".layout_wrapper" ).append(`<div class="col col-graph" style="flex:unset;"></div><div class="col col-content" style="flex:unset;padding-right:0;"><div id="content" class="globaltext"></div></div>`);
-                    $( ".layout_wrapper" ).addClass( "globaltext-container" );
-                    $( ".layout_wrapper" ).attr( 'data-tid', hash );
-                    $( ".layout_wrapper" ).attr( 'data-wid', texts[ hash ][ "work" ] );
-                    // load global text
-                    $( "#content" ).html( display_globaltext( hash, texts[ hash ][ "work" ] ) );
-                    // load global text graph
-                    initializeGraph( "https://www.romanticperiodpoetry.org/id/"+texts[ hash ][ "work" ]+"/work", "works" );
-                    $( ".layout_wrapper" ).css( "flex-wrap", "unset" );
-                    Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+					if (!$(".col-graph").length) {
+						$( ".layout_wrapper" ).append(`<div class="col col-graph" style="flex:unset;"></div><div class="col col-content" style="flex:unset;padding-right:0;"><div id="content" class="globaltext"></div></div>`);
+						$( ".layout_wrapper" ).addClass( "globaltext-container" );
+						$( ".layout_wrapper" ).attr( 'data-tid', hash );
+						$( ".layout_wrapper" ).attr( 'data-wid', texts[ hash ][ "work" ] );
+						// load global text
+						$( "#content" ).html(''); 
+						display_globaltext( hash, texts[ hash ][ "work" ] );
+						// load global text graph
+						initializeGraph( "https://www.romanticperiodpoetry.org/id/"+texts[ hash ][ "work" ]+"/work", "works" );
+						$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
+						Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+					}
                     break;
-                case "/#context/":
-                    // TODO
+                case "#context/":
+	                    display_context( domain+"/id/"+location.hash.substring( location.hash.indexOf("/")+1 ) );
                     break;
-                default:
-                    if ( $( ".layout_navigation" ).is(":hidden") ) {
+                case "":
+                    if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
                         $( ".col-graph,.col-content,.gutter" ).remove();
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );
                         $( ".layout_navigation" ).show();
@@ -1401,7 +1418,6 @@ async function loadLayout() {
                 case "#id/":
                     // TODO
                     break;
-
             }
             break;
 

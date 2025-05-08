@@ -3,10 +3,10 @@
 
 // Editing popover: dismiss target and re-enable selectability
 $( document ).on( "click", ".popover-dismiss-select.med .cancel", async function(e) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
     if ( dismiss_region ) { dismiss_region.remove(); }
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].enableDragSelection({
+    player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].enableDragSelection({
         color: 'rgb(74, 186, 159,.2)',
         resize: false,
         drag: false
@@ -15,9 +15,10 @@ $( document ).on( "click", ".popover-dismiss-select.med .cancel", async function
 // Editing popover: save target and re-enable selectability
 $( document ).on( "click", ".popover-dismiss-select.med .save", async function(e) {
     var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    createW3CannoMedia( tid, $( this ).data("sel"), $( this ).data("ids"), $( this ).data("id"), $( this ).data("work"), $( this ).data("expr"), $( this ).data("start"), $( this ).data("end") );
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].enableDragSelection({
+    createW3CannoMedia( iid, tid, $( this ).data("sel"), $( this ).data("ids"), $( this ).data("id"), $( this ).data("work"), $( this ).data("expr"), $( this ).data("start"), $( this ).data("end") );
+    player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].enableDragSelection({
         color: 'rgb(74, 186, 159,.2)',
         resize: false,
         drag: false
@@ -26,13 +27,13 @@ $( document ).on( "click", ".popover-dismiss-select.med .save", async function(e
 
 // Editing view: highlight building-block (i.e. play it)
 $(document ).on('mouseenter', '.bb-item.med label', function ( e ) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     var id = $( e.currentTarget ).prevAll( "input" ).attr( "id" );
-    if (!player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].isPlaying()) {
-        player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].regions.list[ id ].play()
+    if (!player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].isPlaying()) {
+        player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].regions.list[ id ].play()
     }
     }).on('mouseleave', '.bb-item.med label', function ( e ) {
-//    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].stop()
+//    player[ "player_"+(mode == 'edit'?'editing_'+iid:iid) ].stop()
 });
 
 // Editing view: create, store, and process annotation
@@ -41,11 +42,10 @@ $(document ).on('mouseenter', '.bb-item.med label', function ( e ) {
     - creates a building-block (RDF) and stores it in the graph
     - creates a minimal live version of the building-block to list/highlight
 */
-async function createW3CannoMedia( tid, target, ids, obj_id, work, expr, start, end ) {
+async function createW3CannoMedia( iid, tid, target, ids, obj_id, work, expr, start, end ) {
     // this is obsolete, except for liveanno part below
-    console.log( tid, target, ids, obj_id, work, expr, start, end );
     var date = new Date();
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].regions.list[ ids ].remove();
+    player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].regions.list[ ids ].remove();
     var id = domain+`/id/`+uuidv4()+`/buildingblock`;
     // add annotation
     /*
@@ -78,6 +78,7 @@ async function createW3CannoMedia( tid, target, ids, obj_id, work, expr, start, 
     // only relevant part 
     var liveanno = {};
     liveanno.id = id;
+    liveanno.iid = iid;
     liveanno.tid = tid;
     liveanno["oa:hasTarget"] = [];
     liveanno["oa:hasTarget"][0] = {};
@@ -91,21 +92,21 @@ async function createW3CannoMedia( tid, target, ids, obj_id, work, expr, start, 
 
 // Editing view: create annotation list display and basic UI buttons
 function processW3CannoMedia( annotation ) {
-    console.log( annotation );
+    var iid = annotation.iid;
     var tid = annotation.tid;
     // TODO: this is probably still needed for context target selections
     bb_id = annotation.id;
-    if ( !player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].regions.list.hasOwnProperty( bb_id ) ) {
+    if ( !player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].regions.list.hasOwnProperty( bb_id ) ) {
         var default_region = annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( 't=' )[1].split(',');
-        player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].addRegion( {"id":bb_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":randomColor(0.1)} );
+        player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].addRegion( {"id":bb_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":randomColor(0.1)} );
     }
     return `<li class="bb-item med" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," )+`" data-expr="`+annotation['dcterms:isPartOf'].id+`">
         <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
         <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
-        <button class="btn btn-sm" style="--bs-btn-padding-y:.15rem;--bs-btn-padding-x:.45rem;--bs-btn-font-size:.75rem;vertical-align:top;" onclick="player[ '`+"player_"+(mode == 'edit'?'editing_'+tid:tid)+`' ].regions.list['`+annotation.id+`'].play()">
+        <button class="btn btn-sm" style="--bs-btn-padding-y:.15rem;--bs-btn-padding-x:.45rem;--bs-btn-font-size:.75rem;vertical-align:top;" onclick="player[ '`+"player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+`' ].regions.list['`+annotation.id+`'].play()">
             <i class="fa fa-play"></i>
         </button>
-        <button class="btn btn-sm" style="--bs-btn-padding-y:.15rem;--bs-btn-padding-x:.45rem;--bs-btn-font-size:.75rem;vertical-align:top;" onclick="player[ '`+"player_"+(mode == 'edit'?'editing_'+tid:tid)+`' ].stop()">
+        <button class="btn btn-sm" style="--bs-btn-padding-y:.15rem;--bs-btn-padding-x:.45rem;--bs-btn-font-size:.75rem;vertical-align:top;" onclick="player[ '`+"player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+`' ].stop()">
             <i class="fas fa-stop"></i>
         </button>
         <label for="`+bb_id+`">`+annotation['skos:prefLabel'].replace(/&quot;/g,'"').replace(/(\\r\\n|\\n|\\r|\\t|\\f)/gm," / ")+`</label></li>` ;
@@ -113,14 +114,13 @@ function processW3CannoMedia( annotation ) {
 
 // Editing view: delete annotation 
 $( document ).on( "click", ".bb-item.med .trash", async function(e) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
-    var wid = $( this ).closest( "[data-wid]" ).data( "wid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     var id = $( this ).prev().attr( "id" );
     // TODO: this is obsolete, just remove player regions below and update DOM
     //var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
     //await putTRIPLES( update );
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].regions.list[ id ].remove();
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].stop();
+    player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].regions.list[ id ].remove();
+    player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].stop();
     //    processGlobalText( "", wid );
 });
 

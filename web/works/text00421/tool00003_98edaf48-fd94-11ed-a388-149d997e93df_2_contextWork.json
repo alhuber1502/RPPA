@@ -1,0 +1,17 @@
+{
+  "groups": [
+    { "id":"group1", "name":"target1" }
+  ],
+  "nodes": [
+    { "id":"pcgd-4050", "name":"Dahin", "group":"group1"  },
+    { "id":"pcgd-4060", "name":",", "group":"group1"  },
+    { "id":"pcgd-4070", "name":"dahin", "group":"group1"  },
+    { "id":"pcgd-4080", "name":"!", "group":"group1" }
+  ],
+  "edges": [
+    { "source":"group1", "target":"pcgd-4400" },
+    { "source":"group1", "target":"pcgd-4810" },
+    { "source":"group1", "target":"pcgd-5190" },
+    { "source":"group1", "target":"pcgd-5450" }
+  ]
+}

@@ -1,6 +1,34 @@
 // PRISMS.digital
 // Helper functions
 
+// format a date to the correct level of detail
+function formatDate(input, locale = 'default', options = {}) {
+    const yearOnly = /^\d{4}$/;
+    const yearMonth = /^\d{4}-\d{2}$/;
+    const fullDate = /^\d{4}-\d{2}-\d{2}$/;
+    const isoDatetime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})?)?$/;
+  
+    if (yearOnly.test(input)) {
+      return input;
+    } else if (yearMonth.test(input)) {
+      const date = new Date(`${input}-01`);
+      return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', ...options });
+    } else if (fullDate.test(input)) {
+      const date = new Date(input);
+      return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric', ...options });
+    } else if (isoDatetime.test(input)) {
+      const date = new Date(input);
+      return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric', ...options });
+    } else {
+      // Try fallback parsing
+      const date = new Date(input);
+      if (!isNaN(date)) {
+        return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric', ...options });
+      }
+      return input; // Unknown format, return as-is
+    }
+}
+
 // get a substring starting at a specific position
 function GetSubstringIndex(str, substring, n) {
     var times = 0, index = null;
@@ -477,8 +505,10 @@ function updateDOM() {
             }
         });
     });
+    /*
     const offcanvasElementList = document.querySelectorAll('.offcanvas')
     const offcanvasList = [...offcanvasElementList].map(offcanvasEl => new bootstrap.Offcanvas(offcanvasEl))
+    */
     $( ".resizable" ).resizable({
         containment: ".globaltext-container",
         handles: "n, e, s, w, se"

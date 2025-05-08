@@ -103,10 +103,11 @@ $( document ).on( "click", ".popover-dismiss-select.txt .save", async function(e
 // UI: on pagebreak click, open facsimile display and jump to selected page
 $(document ).on('click', ".text .pagebreak a,.image_link a", async function(e) {
     e.preventDefault();
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).data( "imageset" );
     var page = parseInt( $(e.currentTarget).data("id") );
-    $(e.currentTarget).closest( ".globaltext" ).find( "button:contains(Facsimile)" ).trigger('click');
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].goToPage( page );
+//    $(e.currentTarget).closest( ".globaltext" ).find( "button:contains(Facsimile)" ).trigger('click');
+    $( "#"+$( $(e.currentTarget).closest( ".tab-content" ).find( "div[data-iid='"+iid+"']" )[0] ).parent( "[id]" ).attr("id")+'-tab' )[0].click();
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].goToPage( page );
 });
 
 // Editing view: create, store, and process annotation
@@ -285,147 +286,9 @@ $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
     $( $( e.currentTarget ).data( "ids" ) ).removeClass("pulse-bb");
 });
 
-
-// Reading view: create a list of contexts
-// TODO: probably obsolete, since network view (and Info panels will supersede this!)
-function processTxtContexts( tc ) {
-    $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
-    $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
-    $( ".highlight-tc" ).removeClass( "highlight-tc" );
-    for (var j = 0; j < tc.length; j++ ) {
-        processW3Ccontext( tc[ j ] );
-    }
-}
-
-// Reading view: create annotation display and anchors (this is
-// the /#context/... view, i.e. focus is on one context actualization)
-/*  This function processes a context, it:
-    - selects the type of context display to choose based on the indicated
-      action (tool)
-    - runs through a tool-specific workflow (e.g. load associated files, add
-      event handlers for UI actions)
-    - wraps context in a uniform context-card (header/body/footer) for
-      display: make_context
-*/
-// TODO: this will be the key function that will process arrays of
-//       actualizations in the contexts retrieved!  Is still based on hasAction
-//       and types from the old monoluthic contextWork object!
-function processW3Ccontext( annotation ) {
-    // all contexts for a work expression are retrieved by default, so that they
-    // could be shown when a work with only fragments is displayed, therefore
-    // we simply check if the context target exists before we show it (may need
-    // a more sophisticated implementation)
-    console.log( annotation );
-    if ( annotation["intro:R21_identifies"][0]["oa:hasTarget"][0].hasOwnProperty( "oa:hasSelector" ) ) {
-        var header, sub, footer;
-        // determine action
-        switch ( annotation["intro:R21_identifies"][0]["dcterms:requires"].id ) {
-            // translation alignment
-            case "https://www.romanticperiodpoetry.org/id/tool00001/tool":
-                fetch( annotation["intro:R21_identifies"]["oa:hasBody"]["as:items"][0].id )
-                .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
-                    return response.text();
-                }).then(data => {
-                    header = `Translation Alignment Context: `+annotation[ "skos:prefLabel" ];
-                    sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation["as:generator"].id+`</span></div>`;
-                    footer = ``;
-                    footer += `<div>Contributed by `+contributors[ annotation["dcterms:contributor"].id ]["foaf:name"]+` on `+new Date( annotation["dcterms:created"] ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
-                    $( ".globaltext-container" ).append( make_context( annotation.id, header+sub, data, footer, annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ) );
-                    return fetch( annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["as:items"][1].id )
-                }).then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
-                    return response.json();
-                }).then( data => {
-                    alignment[ annotation.id ] = {};
-                    // reverse alignment JSON to allow triggering from context
-                    for ( var prop in data ) {
-                        $.each( data[ prop ], function( index, item ) {
-                            // if alignment[ annotation.id ][ item ].length == 0
-                            if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
-                                alignment[ annotation.id ][ item ] = [];
-                            }
-                            alignment[ annotation.id ][ item ].push( prop );
-                        });
-                    }
-                    // TODO
-                    $(document).on('mouseenter', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
-                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                            var hovered = $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).text();
-                            var targeted = [];
-                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
-                                targeted.push( $( jq(v) ).text().toLowerCase() );
-                            });
-                            document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
-                            $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).addClass("idsSelected");       // text
-                            $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).addClass("idsSelected");    // context
-                            $( '.context[id="'+annotation.id+'"] .text .w').each(function( index ) {
-                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                                   $( $(this) ).addClass( "idsSelected" );
-                                }
-                            });
-                            $( '.tab-pane.active .text .w').each(function( index ) {
-                                if ( targeted.includes( $(this).text().toLowerCase() )) {
-                                   $( $(this) ).addClass( "idsSelected" );
-                                }
-                            });
-                        }
-                    }).on('mouseleave', '.context[id="'+annotation.id+'"] .w,.context[id="'+annotation.id+'"] .pc', function () {
-                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                            var hovered = $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).text();
-                            var targeted = [];
-                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
-                                targeted.push( $( jq(v) ).text().toLowerCase() );
-                            });
-                            $( '#'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',#' ) ).removeClass("idsSelected");    // text
-                            $( '.context[id="'+annotation.id+'"] #'+$(this).attr('id') ).removeClass("idsSelected"); // context
-                            $( '.context[id="'+annotation.id+'"] .text .w').each(function( index ) {
-                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                                   $( $(this) ).removeClass( "idsSelected" );
-                                }
-                            });
-                            $( '.tab-pane.active .text .w').each(function( index ) {
-                                if ( targeted.includes( $(this).text().toLowerCase() )) {
-                                   $( $(this) ).removeClass( "idsSelected" );
-                                }
-                            });                            
-                        }
-                    });
-                    tc_id = annotation.id;
-                    $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
-                        //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
-                        ((user == annotation["dcterms:contributor"].id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
-                        +` <label for="`+tc_id+`" style="display:inline">`+header+`</label></li>` );
-                    clearInterval( t );
-                    t = setInterval(updateDOM(),500);
-                }).catch((e) => {});
-            break;
-            // annotation
-            case "https://www.romanticperiodpoetry.org/id/tool00002/tool":
-                header = `Interpretative Context: `+annotation[ "skos:prefLabel" ];
-                sub = `<br><div class="creator"><em>Creator:</em> <span>`+annotation["as:generator"].id+`</span></div>`;
-                footer = ``;
-                footer += `<div>Contributed by `+contributors[ annotation["dcterms:creator"].id ]["foaf:name"]+` on `+new Date( annotation["dcterms:created"] ).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })+`.</div>`;
-                $( ".globaltext-container" ).append( make_context( annotation.id, header+sub, annotation["rppa:consistsOf"][0]["oa:hasBody"][0]["rdf:value"], footer, annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ) );
-                tc_id = annotation.id;
-                header = `Interpretative Context: `+annotation[ "skos:prefLabel" ];
-                $( ".workbench .tc" ).append( `<li class="tc-item txt" data-ids="`+annotation.id+`" data-expr="`+annotation['dcterms:source']+`">`+
-                    //<input type="checkbox" id="`+tc_id+`" name="`+tc_id+`"> `+
-                    ((user == annotation["dcterms:creator"].id)?`<i class="far fa-trash-alt trash" style="cursor:pointer;"></i>`:``)
-                    +` <label for="`+tc_id+`" style="display:inline">`+header+`</label></li>` );
-                $( annotation["rppa:consistsOf"][0]["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"] ).addClass( "idsSelected" );
-                clearInterval( t );
-                t = setInterval(updateDOM(),500);
-            break;
-            // connections
-            case "https://www.romanticperiodpoetry.org/id/tool00003/tool":
-            break;
-        }
-    }
-}
-function make_context( id, header, data, footer, ids ) {
-    return `<div class="card context resizable draggable" id="`+id+`" data-ids="`+ids+`"><div class="card-header">`+header+`</div><div class="card-body">`+data+`</div><div class="card-footer">`+footer+`</div></div>`;
-}
 // Reading view: highlight target of the selected context on hover
 // TODO: might still be useful to keep
+/*
 $(document).on('mouseenter', '.context', function () {
     $( $(this) ).addClass("active");
     // format annotation
@@ -456,6 +319,8 @@ $(document).on('mouseenter', '.context', function () {
         $( jqu(v) ).next( ".highlight-tc" ).removeClass( "highlight-tc" );
     });    
 });
+*/
+
 /*
 $(document ).on('mouseenter', '.tc-item.txt', function ( e ) {
     var id = $( e.currentTarget ).data( "ids" ) || '';

@@ -5,28 +5,28 @@ var annos = {}, annotorious = {};
 
 // Editing popover: dismiss target and re-enable UI
 $( document ).on( "click", ".popover-dismiss-select.img .cancel", async function(e) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].cancelSelected();
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchRotate = true;
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].cancelSelected();
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dragToPan = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchRotate = true;
 });
 // Editing popover: save target (pass to createW3Cannotorious) and re-enable UI
 $( document ).on( "click", ".popover-dismiss-select.img .save", async function(e) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    createW3Cannotorious( "viewer_"+(mode == 'edit'?'editing_'+tid:tid), viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].currentPage(), dismiss_annotation );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].saveSelected();
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].gestureSettingsMouse.pinchRotate = true;
+    createW3Cannotorious( "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid), viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].currentPage(), dismiss_annotation );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].saveSelected();
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dragToPan = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchRotate = true;
 });
 
 var dismiss_annotation = undefined;
@@ -94,7 +94,7 @@ async function add_image_tools( id, hasStartPage ) {
     viewer[ id ].addHandler('page', function (viewer) {
         // close open notes
         annotorious[ id ].setAnnotations( [] );
-        //if ( $( "button.active:contains(Facsimile)" ).length ) { $( ".workbench .bb" ).html( "" ); }
+        //if ( $( "button.active:contains(Facsimile)" ).length ) { $( ".workbench .bb" ).html( "" ); }// DO NOT USE THIS LINE!!!
         if ( annos[ id ][ viewer.page ] ) {
             // we have notes for this page
             setTimeout(function done() {
@@ -167,7 +167,7 @@ async function deleteW3Cannotorious( id, page, annotation ) {
       by handler
 */
 async function createW3Cannotorious( id, page, annotation ) {
-    console.log( id, page, annotation );
+    //console.log( id, page, annotation );
     // enhance Annotorious W3C annotation
     if ( annotation.hasOwnProperty( "id" ) ) {
         if ( annotation.id.startsWith( '#' ) ) {
@@ -212,19 +212,19 @@ async function createW3Cannotorious( id, page, annotation ) {
     // maybe ALL I need from this part this the below few lines:
     if ( !annos[ id ][ page ] ) { annos[ id ][ page ] = []; }
     annos[ id ][ page ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
-//    $( "button.active:contains(Facsimile)" ).trigger( "click" );
+//    $( "button.active:contains(Facsimile)" ).trigger( "click" ); // DO NOT USE THIS LINE!!!
 //    $( ".workbench .bb" ).append( processW3Cannotorious( id, JSON.parse( annotation ) ) );
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
 
 // Editing view: highlight image annotation on hover on list 
 $(document ).on('mouseenter', '.bb-item.img', function ( e ) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     var id = $( e.currentTarget ).find( "input" ).attr( "id" );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].selectAnnotation( id );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].selectAnnotation( id );
 }).on('mouseleave', '.bb-item.img', function ( e ) {
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].cancelSelected();
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
+    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].cancelSelected();
 });
 
 // Editing view: process an array of image annotations in pages by populating an

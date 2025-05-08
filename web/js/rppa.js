@@ -2,12 +2,13 @@
 
 // global settings
 var user = undefined, username = undefined;
-var workbench = {}, provider_img = '', contexts, contributors;
+var workbench = {}, provider_img = '', contexts, skos, contributors;
 var domain = "https://www.romanticperiodpoetry.org";
 var theme = document.documentElement.getAttribute('data-bs-theme');
+const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
 // global variables
-var t, myModalGT, myModalGTEl, zInd = 1054, player = {}, viewer = {}, mode = 'read';
+var t, myCanvasGT, myCanvasGTEl, zInd = 1054, player = {}, viewer = {}, mode = 'read';
 var done_tooltipTriggerList = [], done_popoverTriggerList = [];
 var SOLR_RPPA, SPARQL_RPPA;
 if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
@@ -759,10 +760,10 @@ var initDataWorks = function() {
 //  display a global text
 /*  This function 
     - retrieves all expression - manifestation/excerpt information for a work
-    - creates the .globaltext-workbench modal (only in editing mode)
+    - creates the .globaltext-workbench canvas (only in editing mode)
     - draws the globaltext onto the .globaltext-container (drawGlobalText)
     - retrieves and processes contexts/building blocks for the globaltext (processGlobalText) (reading/editing mode)
-    - attaches event handlers to the globaltext-workbench modal (only in editing mode)
+    - attaches event handlers to the globaltext-workbench canvas (only in editing mode)
 */
 async function display_globaltext( tid, wid ) {
 
@@ -797,66 +798,64 @@ async function display_globaltext( tid, wid ) {
     // add work to workbench
     workbench[ wid ] = _.keyBy( r.graph, 'id');
 
-    // create modal for editing mode
+    // create canvas for editing mode
     if ( mode == "edit" ) {
         zInd = zInd+1;
-        if ( $('.modal.show').length ) { 
-            myModalGT.hide(); // close any open texts if a new one is requested
+        if ( $('.offcanvas.show').length ) { 
+            myCanvasGT.hide(); // close any open texts if a new one is requested
             $(".popover").hide(); // hide if new text was called from a popover
         }
-        // create global text modal
-        var text = `<!-- Modal -->
-            <div style="z-index:`+zInd+`;overflow:inherit;" class="modal fade globaltext-workbench" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width:95vw;min-height:95vh;height:95vh;width:95vw;">
-                    <div class="modal-content rounded-0" style="min-width:inherit;min-height:inherit;">
-                        <div class="modal-body globaltext-container" data-wid="`+wid+`" data-tid="`+tid+`">
-                            <button type="button" class="btn-close" style="float:right;" data-mode="read" data-bs-dismiss="modal" aria-label="Close"></button>
-                            <!--
-                            <div class="tools" style="float:right;">
-                                <input `+((user == undefined && username == undefined)?'disabled':'')+` style="height:36px;width:123px;" class="changeMode" type="checkbox" checked data-toggle="toggle" data-wid="`+wid+`" data-tid="`+tid+`" id="changeMode-flip" data-mode="edit" data-onlabel="Reading" data-offlabel="Editing" data-onstyle="warning" data-offstyle="success">
-                                `+((user == undefined && username == undefined)?'<label> <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button></label>':'')+`
-                            </div>
-                            -->
-                                    <div class="globaltext">
-                                    </div>
-                            
-                                    <div class="col-sm-4 contexts">
-                                    </div>
-                                    <div class="col-sm-4 workbench">
-                                    <h2>Current selections</h2><ul class="bb"></ul>
-                                    </div>
-                            
-                        </div>
+        // create global text canvas
+        var genericCloseBtnHtml = '<button onclick="$(this).closest(\'div.offcanvas\').dispose();" type="button" class="btn-close" aria-hidden="true" style="float:right;"></button>';
+        var text = `<!-- Canvas -->
+            <div style="z-index:`+zInd+`;overflow:inherit;" class="offcanvas offcanvas-start globaltext-workbench" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+                <div class="offcanvas-body globaltext-container" data-wid="`+wid+`" data-tid="`+tid+`">`+
+//                    genericCloseBtnHtml+`
+                    `<button type="button" class="btn-close" style="float:right;" data-mode="read" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <!--
+                    <div class="tools" style="float:right;">
+                        <input `+((user == undefined && username == undefined)?'disabled':'')+` style="height:36px;width:123px;" class="changeMode" type="checkbox" checked data-toggle="toggle" data-wid="`+wid+`" data-tid="`+tid+`" id="changeMode-flip" data-mode="edit" data-onlabel="Reading" data-offlabel="Editing" data-onstyle="warning" data-offstyle="success">
+                        `+((user == undefined && username == undefined)?'<label> <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button></label>':'')+`
                     </div>
+                    -->
+                            <div class="globaltext">
+                            </div>
+                    
+                            <div class="col-sm-4 contexts">
+                            </div>
+                            <div class="col-sm-4 workbench">
+                            <h2>Current selections</h2><ul class="bb"></ul>
+                            </div>
+                    
                 </div>
             </div>`;
         $( "body" ).prepend( text );
     }
     // create global text
     drawGlobalText( tid, wid );
+    // activate text pane
     $( '#'+$( $("#"+tid).closest( ".tab-pane" )[0] ).attr( 'id' )+'-tab' )[0].click();
     // process contexts/building-blocks
     processGlobalText( tid, wid );
     
     // attach handlers for editing
     if ( mode == "edit" ) {
-        myModalGTEl = document.getElementsByClassName( "globaltext-workbench" )[0];
-        myModalGT = new bootstrap.Modal(myModalGTEl, {
+        myCanvasGTEl = document.getElementsByClassName( "globaltext-workbench" )[0];
+        myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
             backdrop: 'static',
             keyboard: false
         }).show();
 
-        // on showing modal
-        myModalGTEl.addEventListener('shown.bs.modal', function (event) {
-            $('input[data-toggle="toggle"]').bootstrapToggle();
+        // on showing canvas
+        myCanvasGTEl.addEventListener('shown.bs.offcanvas', function (event) {
             $( ".globaltext-workbench .globaltext" ).position({
                 my: "center",
                 at: "center",
                 of: ".globaltext-container"
             });
         });
-        // on closing modal
-        myModalGTEl.addEventListener('hide.bs.modal', function (event) {
+        // on closing canvas
+        myCanvasGTEl.addEventListener('hide.bs.offcanvas', function (event) {
             mode = 'read';
             $( "#mode" ).remove();
             $(".popover").remove();
@@ -868,7 +867,8 @@ async function display_globaltext( tid, wid ) {
             annos = {};
             annotorious = {};
             updateDOM();
-            processGlobalText( tid, wid )
+            // TODO: do this only on SUCCESSFUL contribution!
+            //processGlobalText( tid, wid )
         });
     }
 }
@@ -984,7 +984,7 @@ function drawGlobalText( tid, wid ) {
             }
             if ( tid != '' && cnt_loc != null ) {
                 tab_content += `<div class="tab-pane fade show`+((madeActive==false)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`"> 
-                    <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
+                    <div id="`+cnt_loc[0].id+`" data-iid="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                     data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`" `;
                     if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ||
                         workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R4i_is_embodied_in' ) ) {
@@ -1010,7 +1010,7 @@ function drawGlobalText( tid, wid ) {
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:img' }) != -1 ) {
             cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ]
             tab_content += `<div class="tab-pane fade show`+((madeActive==false)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
-                <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
+                <div id="`+cnt_loc[0].id+`" data-iid="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                 data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`" style="height:inherit;" `;
                 if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ||
                     workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R4i_is_embodied_in' ) ) {
@@ -1029,10 +1029,10 @@ function drawGlobalText( tid, wid ) {
                         tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
                     }
                 }
-                tab_content += `><div id='openseadragon_`+(mode == 'edit'?'editing_'+tid:tid)+`' style='overflow: auto; height: inherit;'></div>`
+                tab_content += `><div id='openseadragon_`+(mode == 'edit'?'editing_'+cnt_loc[0].id:(mode == 'view')?'viewing_'+cnt_loc[0].id:cnt_loc[0].id)+`' style='overflow: auto; height: inherit;'></div>`
                 +`</div></div>`;
             //imgset_id = cnt_loc[0].id;
-            imgset_id = "viewer_"+(mode == 'edit'?'editing_'+tid:tid);
+            imgset_id = "viewer_"+(mode == 'edit'?'editing_'+cnt_loc[0].id:(mode == 'view')?'viewing_'+cnt_loc[0].id:cnt_loc[0].id);
             sources = [];
             $.each(workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ].sort(), function(i,v) {
                 var tilesource = {
@@ -1042,9 +1042,11 @@ function drawGlobalText( tid, wid ) {
                 sources.push( tilesource );
             });
             if ( mode == 'edit') {
-                openseadragonOptions.id = "openseadragon_editing_"+tid;
+                openseadragonOptions.id = "openseadragon_editing_"+cnt_loc[0].id;
+            } else if ( mode == 'read') {
+                openseadragonOptions.id = "openseadragon_"+cnt_loc[0].id;
             } else {
-                openseadragonOptions.id = "openseadragon_"+tid;
+                openseadragonOptions.id = "openseadragon_viewing_"+cnt_loc[0].id;
             }
             openseadragonOptions.tileSources = sources;
         } else if ( _.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:aud' }) != -1 ) {
@@ -1054,9 +1056,9 @@ function drawGlobalText( tid, wid ) {
                 cnt_loc = workbench[ wid ][ workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "lrmoo:R4i_is_embodied_in" ].id ][ "crm:P106_is_composed_of" ];
             }
             //prfset_id = cnt_loc[0].id;
-            prfset_id = "player_"+(mode == 'edit'?'editing_'+tid:tid);
+            prfset_id = "player_"+(mode == 'edit'?'editing_'+cnt_loc[0].id:(mode == 'view')?'viewing_'+cnt_loc[0].id:cnt_loc[0].id);
             tab_content += `<div class="tab-pane fade show`+((madeActive==false)?' active':'')+`" id="pills-`+i+`" role="tabpanel" aria-labelledby="pills-`+i+`-tab" lang="`+cnt_lang+`">
-                <div id="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
+                <div id="`+cnt_loc[0].id+`" data-iid="`+cnt_loc[0].id+`" data-id="https://www.romanticperiodpoetry.org/id/`+wid+`/work"
                     data-expr="`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].id+`" `;
                 if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ||
                     workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R4i_is_embodied_in' ) ) {
@@ -1075,8 +1077,8 @@ function drawGlobalText( tid, wid ) {
                         tab_content += `data-digo = "`+workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ 'lrmoo:R3_is_realised_in'][i].id]['lrmoo:R4i_is_embodied_in'].id+`" `
                     }
                 }
-                tab_content += `><div id="waveform_`+(mode == 'edit'?'editing_'+tid:tid)+`" class="waveform" data-load="`+workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0].id+`"></div>`+
-                `<div id="wavetimeline_`+(mode == 'edit'?'editing_'+tid:tid)+`"></div>`+
+                tab_content += `><div id="waveform_`+(mode == 'edit'?'editing_'+cnt_loc[0].id:(mode == 'view')?'viewing_'+cnt_loc[0].id:cnt_loc[0].id)+`" class="waveform" data-load="`+workbench[ wid ][ cnt_loc[0].id ][ "crm:P106_is_composed_of" ][0].id+`"></div>`+
+                `<div id="wavetimeline_`+(mode == 'edit'?'editing_'+cnt_loc[0].id:(mode == 'view')?'viewing_'+cnt_loc[0].id:cnt_loc[0].id)+`"></div>`+
                 `<div class="controls" style="text-align:center;margin-top:20px;">
                     <button class="btn" onclick="player[ '`+prfset_id+`' ].stop()">
                         <i class="fa fa-step-backward"></i>
@@ -1111,8 +1113,10 @@ function drawGlobalText( tid, wid ) {
     }
     if ( mode == "read" ) {
         $( ".globaltext-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
-    } else {
+    } else if ( mode == "edit" ) {
         $( ".globaltext-workbench .globaltext-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
+    } else {
+        $( ".context-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );        
     }
     clearInterval( t );
     t = setInterval(updateDOM(),500);
@@ -1121,17 +1125,19 @@ function drawGlobalText( tid, wid ) {
     // facsimile
     if ( imgset_id !== undefined ) {
         var startPage = undefined, pages = [];
-        $.each( $( (mode == 'edit'?'.globaltext-workbench #'+tid:'.globaltext-container #'+tid)+" .pagebreak"), function (i,v) {
+        $.each( $( (mode == 'edit'?'.globaltext-workbench .text':(mode == 'read')?'.globaltext-container .text':'.context-container .text')+" .pagebreak"), function (i,v) {
             pages.push( $(v).data( "facs" ).split( '/' ).pop() );
-            $(v).append( ` <span class="image_link">[<a href="" data-imageset="`+imgset_id+`" data-id="`+ i +`">`+ (i+1).toString().padStart(3, "0") +`</a>]</span>` );
+            $(v).append( ` <span class="image_link">[<a href="" data-imageset="`+imgset_id.substring( imgset_id.lastIndexOf('_')+1 )+`" data-id="`+ i +`">`+ (i+1).toString().padStart(3, "0") +`</a>]</span>` );
             if ( i == 0 ) { startPage = i }
         });
         if ( openseadragonOptions.hasOwnProperty( "tileSources" ) ) {
-            var sources = [];
-            $.each( pages, function(i,v) {
-                sources.push( _.find( openseadragonOptions.tileSources, function(tile) { return tile.url.includes( v ); } ) )
-            });
-            openseadragonOptions.tileSources = sources;
+            if ( pages.length > 0 ) {
+                var sources = [];
+                $.each( pages, function(i,v) {
+                    sources.push( _.find( openseadragonOptions.tileSources, function(tile) { return tile.url.includes( v ); } ) )
+                });
+                openseadragonOptions.tileSources = sources;
+            }
             if( viewer[ imgset_id ] ) {
                 viewer[ imgset_id ].destroy(); viewer[ imgset_id ] = null;
             }
@@ -1144,10 +1150,11 @@ function drawGlobalText( tid, wid ) {
         
     })
     // audio/video
-    if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
+    var iid = prfset_id && prfset_id.substring( prfset_id.lastIndexOf('_')+1 );
+    if ( $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).length ) {
         if ( player[ prfset_id ] && !player[ prfset_id ].isDestroyed ) { player[ prfset_id ].unAll(); player[ prfset_id ].destroy(); }
         player[ prfset_id ] = WaveSurfer.create({
-            container: '#waveform_'+(mode == 'edit'?'editing_'+tid:tid),
+            container: '[id="waveform_'+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+'"]',
             partialRender: true,
             scrollParent: true,
             waveColor: '#ccc',
@@ -1167,24 +1174,24 @@ function drawGlobalText( tid, wid ) {
                     cursorColor: '#333'
                 }),
               WaveSurfer.timeline.create({
-                    container: "#wavetimeline_"+(mode == 'edit'?'editing_'+tid:tid)
+                    container: "[id='wavetimeline_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']"
                 })
             ]
         });
-        if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ).includes( domain ) ) {
-            fetch( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ).replace(/\.[^/.]+$/, "")+".json" )
+        if ( $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ).includes( domain ) ) {
+            fetch( $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ).replace(/\.[^/.]+$/, "")+".json" )
             .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); }
                 return response.json();
-            }).then(peaks => { player[ prfset_id ].load($( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ), peaks.data); 
+            }).then(peaks => { player[ prfset_id ].load($( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ), peaks.data); 
             }).catch((e) => {});            
         } else {
-            player[ prfset_id ].load( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ) );
+            player[ prfset_id ].load( $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ) );
         }
         // Update the zoom level on slider change
         player[ prfset_id ].on('waveform-ready', function() {
             // default region
-            if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ).includes( '#t=') ) {
-                var default_region = $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).data( "load" ).split( '#t=' )[1].split(',');
+            if ( $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ).includes( '#t=') ) {
+                var default_region = $( "[id='waveform_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid)+"']" ).data( "load" ).split( '#t=' )[1].split(',');
                 player[ prfset_id ].addRegion( {"drag":false,"resize":false,"start":default_region[0],"end":default_region[1]} );
             }
             player[ prfset_id ].zoom(20);
@@ -1292,6 +1299,7 @@ $( document ).on('click', '.add_context', function() {
     var modeC = {}
     modeC[ 'edit' ] = '#2a9d8f';
     modeC[ 'read' ] = 'var(--bs-orange)';
+    modeC[ 'view' ] = 'var(--bs-orange)';
     $( "#mode" ).remove();
     mode = "edit";
     $( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}</style>` );
@@ -1315,10 +1323,12 @@ $(document).on('click','button[data-bs-toggle="pill"]',function(){
                 duration: 500
             });
         }
-        initializeContexts( contexts[ $( this ).data( "expr" ) ], mode );
+        //initializeContexts( contexts[ $( this ).data( "expr" ) ], mode );
     }
-    if ( $( "[id^=waveform_]" ).length ) {
-        player[ "player_"+(mode == 'edit'?'editing_'+$( this ).closest( "[data-tid]" ).data( "tid" ):$( this ).closest( "[data-tid]" ).data( "tid" )) ].drawBuffer();
+    if ( !!Object.keys( player ).length ) {
+        Object.keys( player ).forEach(key => {
+            player[ key ].drawBuffer(); // buffer
+        });
     }
     clearInterval( t );
     t = setInterval(updateDOM(),500);
@@ -1339,8 +1349,9 @@ async function processGlobalText( tid, wid ) {
     var work = domain+"/id/"+wid+"/work";
     // only reading section should remain, contexts variable holds ALL
     // contexts (i.e. for ALL expressions!), edit section is obsolete
-    if ( mode == "read" ) {
+    if ( mode == "read" || mode == "view" ) {
         // load all contexts
+        /*
         var q = namespaces+`SELECT ?s ?p ?o ?g
         WHERE {
         {
@@ -1370,7 +1381,7 @@ async function processGlobalText( tid, wid ) {
                 ?s2 intro:R21_identifies+ ?w .
                 ?w <http://www.w3.org/ns/oa#hasBody> ?body .
                 ?body <http://www.w3.org/ns/activitystreams#items> ?list .
-                ?list rdf:rest*/rdf:first ?items .
+                ?list rdf:rest/rdf:first ?items .
                 BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
                 BIND(?items as ?o)
                 BIND(?list as ?s)
@@ -1387,7 +1398,7 @@ async function processGlobalText( tid, wid ) {
                 ?w <http://www.w3.org/ns/oa#hasTarget> ?target .
                 ?target oa:hasSelector+ ?items .
                 ?items <http://www.w3.org/ns/activitystreams#items> ?list .
-                ?list rdf:rest*/rdf:first ?composites .
+                ?list rdf:rest/rdf:first ?composites .
                 BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
                 BIND(?composites as ?o)
                 BIND(?list as ?s)
@@ -1402,13 +1413,74 @@ async function processGlobalText( tid, wid ) {
             BIND(<default> AS ?g)                
         }
         }`;
+        */
+        var q = namespaces+`SELECT DISTINCT ?s ?p ?o ?g WHERE {
+            {
+                {	# ALL actualizations and intertextual relations
+                    ?s2 a rppa:Context .
+                    ?s2 intro:R20_discusses ?work .
+                    ?s2 intro:R21_identifies+ ?w .
+                    ?w ?p ?o .
+                    BIND(?w AS ?s)
+                }	# ALL target locations of ALL actualizations and intertextual relations
+                UNION {
+                    ?s2 intro:R20_discusses ?work .
+                    ?s2 intro:R21_identifies+ ?w .
+                      ?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity|intro:R19_hasType) ?t .
+                      ?t ?p ?o .
+                      BIND (?t AS ?s)
+                }   # ALL actualization and intertextual relations SKOS entries
+                UNION {
+                    ?s2 intro:R20_discusses ?work .
+                    ?s2 intro:R21_identifies+ ?w .
+                    {
+                        ?w intro:R17_actualizesFeature ?f .
+                        ?f ?p ?o .
+                    } UNION
+                    {
+                        ?w intro:R19_hasType ?ty .
+                        ?ty intro:R4i_isDefinedIn ?f .
+                        ?f ?p ?o .
+                    }
+                    BIND( ?f AS ?s )
+    		    }   # ALL target locations in both the expressions and the OntoPoetry graph
+                UNION {
+                    ?s2 intro:R20_discusses ?work .
+                    ?s2 intro:R21_identifies+ ?w .
+                      ?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity) ?t .
+                    {
+                        ?t intro:R41_hasLocation [ ?p ?to ] .
+                        ?to rdf:rest*/rdf:first ?too .
+                      } UNION {
+                          ?t intro:R41_hasLocation ?to .
+                        ?to ?p ?too .		
+                      }
+                    BIND ( ?too AS ?o)
+                    BIND ( ?t AS ?s)
+                }
+                FILTER (?work = <https://www.romanticperiodpoetry.org/id/`+wid+`/work>)
+                BIND(<default> AS ?g)
+            } UNION {
+                ?s2 intro:R20_discusses ?work .
+                ?s2 (<http://purl.org/dc/terms/contributor>|<http://purl.org/dc/terms/creator>) ?o2 .
+                ?o2 a foaf:Agent .
+                ?o2 ?p ?o .
+                BIND(?o2 AS ?s)
+                BIND(<default> AS ?g)
+                FILTER (?work = <https://www.romanticperiodpoetry.org/id/`+wid+`/work>)
+            }
+            FILTER (!isBlank(?o))
+        }`
         var r = await getJSONLD( q );
-        if (r.hasOwnProperty( "graph" )) {
+        if (!r.hasOwnProperty( "graph" )) {
             // insert blank nodes into JSON-LD structure
-            ckeys = _.keyBy( r.graph, 'id' ); // create blank node IDs
-            contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
+            //console.log( r.graph );
+            //ckeys = _.keyBy( r.graph, 'id' ); // create blank node IDs
+            //contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
+            //console.log( ckeys, contexts );
             // TODO: this is almost working but not quite, all generic solutions
             // attempted have failed so far.
+            /*
             for (let i = 0; i < r.graph.length; i++) {
                 let obj = r.graph[i];
                 if (obj.id.startsWith( 'http' )) {
@@ -1437,22 +1509,40 @@ async function processGlobalText( tid, wid ) {
                     }
                 }
             }
-        } else {
+            */
             r.graph = [];
         }
-        contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
+        contexts = _.groupBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), function(o) { return o.id.match(uuidRegex) });
+        skos = _.keyBy( _.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
         contributors = _.keyBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
-        console.log( contexts, contributors );
+
         // tool settings
+        if ( !!Object.keys( annotorious ).length ) {
+            Object.keys( annotorious ).forEach(key => {
+                annotorious[ key ].readOnly = true; // image
+            });
+        }
+        /*
         if ( typeof annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ] != 'undefined' ) {
             annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].readOnly = true; // image
         }
+        */
+        if ( !!Object.keys( player ).length ) {
+            Object.keys( player ).forEach(key => {
+                player[ key ].disableDragSelection(); // sound
+                player[ key ].setProgressColor( '#666' );
+            });
+        }
+        /*
         if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
             player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].disableDragSelection(); // sound
             player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].setProgressColor( '#666' );
         }
+        */
+
         // initialize
-        initializeContexts( contexts[ $( ".globaltext button.active" ).data( "expr" ) ], mode );
+        r = await getJSONLD( q, "raw" );
+        initializeContexts( contexts, r, mode );
     // this section is obsolete!
     } else if ( mode == "edit" ) {
         /*    
@@ -1525,10 +1615,54 @@ async function processGlobalText( tid, wid ) {
         contexts = _.groupBy( _.filter( r.graph, function(o) { return
         o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
         */
+
         // tool settings
+        if ( !!Object.keys( annotorious ).length ) {
+            Object.keys( annotorious ).forEach(key => {
+                annotorious[ key ].readOnly = false; // image
+            });
+        }
+        /*
         if ( typeof annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ] != 'undefined' ) {
             annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].readOnly = false; // image
         }
+        */
+        if ( !!Object.keys( player ).length ) {
+            Object.keys( player ).forEach(key => {
+                player[ key ].disableDragSelection();
+                player[ key ].enableDragSelection({
+                    color: 'rgb(74, 186, 159,.2)',
+                    resize: false,
+                    drag: false
+                }); // sound
+                player[ key ].setProgressColor( '#358078' );
+                player[ key ].un('region-update-end');
+                player[ key ].on('region-update-end', function( region ) {
+                    player[ key ].disableDragSelection();
+                    var target = secondsToTime(region.start) + "–" + secondsToTime(region.end);
+                    var id = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
+                    var work = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
+                    var expr = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'expr' );
+                    var digo = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'digo' );
+                    $( ".tab-pane.active [data-id='"+region.id+"']" ).popover({
+                        sanitize: false,
+                        content: `<a role="button" class="save" data-start="`+region.start+`" data-end="`+region.end+`" data-ids="`+region.id+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-digo="`+digo+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+                            <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
+                        html: true,
+                        placement: 'auto',
+                        container: '.globaltext',
+                        template: `<div class="popover popover-dismiss-select med" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
+                            <div class="popover-arrow"></div>
+                            <div class="popover-body"></div>
+                        </div>`
+                    })
+                    dismiss_select = $( ".tab-pane.active [data-id='"+region.id+"']" ).popover('show');
+                    dismiss_select.popover('toggleEnabled'); // disable toggling
+                    dismiss_region = region;
+                });
+            });
+        }
+        /*
         if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
             player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].disableDragSelection();
             player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].enableDragSelection({
@@ -1562,6 +1696,7 @@ async function processGlobalText( tid, wid ) {
                 dismiss_region = region;
             });
         }
+        */
     }
 }
 
@@ -1570,7 +1705,7 @@ async function processGlobalText( tid, wid ) {
     - processes building-blocks (in editing mode) for lct:txt/lct:img/lct:aud
     - processes contexts (in reading mode)
 */
-function initializeContexts( exprContexts, mode ) {
+async function initializeContexts( exprContexts, graph, mode ) {
     // edit mode is obsolete, here will be NO buildingblocks in the graph!
     //$( ".contexts" ).html( "" );
     //$( ".workbench" ).html( "" );
@@ -1598,11 +1733,658 @@ function initializeContexts( exprContexts, mode ) {
         */
     // only this below part should remain!
     } else {
+//        $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
+//        $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
+//        $( ".highlight-tc" ).removeClass( "highlight-tc" );
+        var graphElements = [];
+        for ( var key in exprContexts ) {
+            var context = _.keyBy( exprContexts[key], 'id' )
+            graphElements = graphElements.concat( processGraphContext( context ) );
+//            processExprContext( context );
+        }
+        var added = cy.add( graphElements );
+        tippyNodes( added.nodes(), graph );
+        run_layout( 'cose' );
+        /*
         var tc = _.filter( exprContexts, function(o) {
             return o["type"].includes( "rppa:Context" ) //&& o["crm:P2_has_type"][0].id == "lct:txt";
         });
-        processTxtContexts( tc );
+        processW3Ccontexts( tc );
+        */
     }
+}
+
+// process contexts in the graph view
+function processGraphContext( context ) {
+    //console.log( context );
+    var added = [];
+    for (var [id, part] of Object.entries( context )) {
+        if ( part.type.includes( "intro:INT2_ActualizationOfFeature" ) ) {
+            added = added.concat([
+                { group: 'nodes', 
+                    classes: "node",
+                    data: {
+                        id: part.id,
+                        name: part["intro:R17_actualizesFeature"].id in skos?skos[ part["intro:R17_actualizesFeature"].id ]["skos:prefLabel"]:part["intro:R17_actualizesFeature"].id,
+                        pref: part["skos:prefLabel"],
+                        alt: part["skos:altLabel"],
+                        class: [ onto[ "intro:INT2_ActualizationOfFeature" ].about ],
+                        bgcolor: "#2a9d8f",
+                        shape: "concave-hexagon",
+                        context: part["intro:R21i_isIdentifiedBy"].id
+                    }
+                },
+                { group: 'edges', 
+                    classes: "edge",
+                    data: { 
+                        id: part.id+context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                        source: part.id,
+                        target: context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id, 
+                        name: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                        pref: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                        class: onto[ "intro:R18i_actualizationFoundOn" ].about
+                    }
+                }
+            ]);
+        } else if ( part.type.includes( "intro:INT3_Interrelation" )) {
+            added = added.concat([
+                { group: 'nodes', 
+                    classes: "node",
+                    data: {
+                        id: part.id,
+                        name: context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id in skos?skos[ context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:prefLabel"]:context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id,
+                        pref: part["skos:prefLabel"],
+                        alt: part["skos:altLabel"],
+                        class: [ onto[ "intro:INT3_Interrelation" ].about ],
+                        bgcolor: "#2a9d8f",
+                        shape: "concave-hexagon",
+                        context: part["intro:R21i_isIdentifiedBy"].id
+                    },
+                    //position: cy.getElementById( part.id ).position()
+                },
+                { group: 'edges', 
+                    classes: "edge",
+                    data: { 
+                        id: part.id+context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                        source: part.id, 
+                        target: context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id, 
+                        name: onto[ "intro:R12_hasReferredToEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                        pref: onto[ "intro:R12_hasReferredToEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                        class: onto[ "intro:R12_hasReferredToEntity" ].about
+                    }
+                },
+                { group: 'edges', 
+                    classes: "edge",
+                    data: { 
+                        id: part.id+context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                        source: part.id,
+                        target: context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,
+                        name: onto[ "intro:R13_hasReferringEntity" ].label,
+                        pref: onto[ "intro:R13_hasReferringEntity" ].label,
+                        class: onto[ "intro:R13_hasReferringEntity" ].about
+                    }
+                }
+            ]);
+        }
+    }
+    //console.log( added );
+    return added;
+}
+
+// process contexts in the expressions/manifestations view
+function processExprContext( context ) {
+
+}
+
+// Context display components
+function make_context( id, data, ids ) {
+    return `<div id="`+id+`" data-ids="`+ids+`" style="max-height:calc(100vh - 140px);overflow: auto;"><div>`+data+`</div></div>`;
+}
+
+// format user
+function print_user( contributors ) {
+    var formatted_users = '<div style="font-size:15px;"><h4><i class="fa-solid fa-user"></i> Contributor</h4><dl>';
+    $.each( contributors, function( i,v ) {
+        formatted_users += 
+            `<dt>Name</dt>`+
+            `<dd>`+v['foaf:name']+`</dd>`+
+            `<dt>Account</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['foaf:accountName'].id+`">`+v['foaf:accountName'].id+`</a></dd>`+
+            `<dt>E-mail</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['foaf:mbox'].id+`">`+v['foaf:mbox'].id.split('mailto:')[1]+`</a></dd>`+
+            `<dt>Web</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['foaf:homepage'].id+`">`+v['foaf:homepage'].id+`</a></dd>`
+            ;
+    });
+    formatted_users += `</dl></div>`
+    return( formatted_users );
+}
+
+// format tool
+function print_tool( tool ) {
+    if ( tool === undefined ) return '';
+    const tools = [].concat(tool);
+    var formatted_tools = '<div style="margin-left:35px;font-size:14px;"><h5><i class="fa-solid fa-toolbox"></i> Tool</h5><dl>';
+    $.each( tools, function( i,v ) {
+        formatted_tools += 
+            `<dt>Name</dt>`+
+            `<dd>`+v['skos:prefLabel']+`</dd>`+
+            `<dt>Function</dt>`+
+            `<dd>`+v['crm:P3_has_note']+`</dd>`+
+            `<dt>Web</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['foaf:homepage'].id+`">`+v['foaf:homepage'].id+`</a></dd>`+
+            (v.hasOwnProperty("dcterms:bibliographicCitation")?            
+            `<dt>Citation</dt>`+
+            `<dd>`+v['dcterms:bibliographicCitation']+`</dd>`:``)
+            ;
+    });
+    formatted_tools += `</dl></div>`
+    return( formatted_tools );
+}
+
+// format metadata
+function print_cxtmd( md, skos ) {
+    const metadata = [].concat( md );
+    var formatted_metadata = '<div style="font-size:15px;"><h4><i class="fa-solid fa-circle-info"></i> Metadata</h4><dl>';
+    $.each( metadata, function( i,v ) {
+        formatted_metadata += 
+            (v.hasOwnProperty("rdfs:isDefinedBy")?
+            `<dt>Context type</dt>`+
+            `<dd>`+skos[v['rdfs:isDefinedBy'].id]["skos:prefLabel"]+`</dd>`:``)+
+            (v.hasOwnProperty("rdfs:isDefinedBy") && skos[v['rdfs:isDefinedBy'].id].hasOwnProperty("skos:inScheme")?
+            `<dt>Context scheme</dt>`+
+            `<dd>`+skos[v['rdfs:isDefinedBy'].id]["skos:inScheme"].id+`</dd>`:``)+
+            (v.hasOwnProperty("dcterms:spatial")?
+            `<dt>Spatial dimension</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['dcterms:spatial'].id+`">`+v['dcterms:spatial'].id+`</a></dd>`:``)+
+            (v.hasOwnProperty("dcterms:temporal")?
+            `<dt>Temporal dimension</dt>`+
+            `<dd>`+formatDate(v['dcterms:temporal'])+`</dd>`:``)+
+            `<dt>Creation date</dt>`+
+            `<dd>`+formatDate(v['dcterms:created'])+`</dd>`+
+            `<dt>License</dt>`+
+            `<dd><a class="external" target="_blank" href="`+v['dcterms:license'].id+`">`+v['dcterms:license'].id+`</a></dd>`+
+            (v.hasOwnProperty("dcterms:bibliographicCitation")?            
+            `<dt>Citation</dt>`+
+            `<dd>`+v['dcterms:bibliographicCitation']+`</dd>`:``)
+            ;
+    });
+    formatted_metadata += `</dl></div>`
+    return( formatted_metadata );
+}
+
+// format context work
+function print_cxtwrk( md, content, skos ) {
+    console.log( md, content, skos );
+    const work = [].concat( md );
+    var formatted_metadata = '<div style="font-size:15px;"><h4><i class="fa-solid fa-right-left"></i> Contextualization</h4><dl>';
+    $.each( work, function( i,v ) {
+        formatted_metadata += 
+            `<dt style='word-break:break-word;'>Contextualization type</dt>`+
+            (v.hasOwnProperty("intro:R19_hasType")?
+            `<dd>`+skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:prefLabel"]+`</dd>`:
+            (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
+            `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:prefLabel"]+`</dd>`:
+            `<dd>`+v['intro:R17_actualizesFeature'].id+`</dd>`))+
+            `<dt style='word-break:break-word;'>Contextualization scheme</dt>`+
+            (v.hasOwnProperty("intro:R19_hasType")?
+            `<dd>`+skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id+`</dd>`:
+            (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
+            `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:inScheme"].id+`</dd>`:`<dd>—</dd>`))+
+            (v.hasOwnProperty("dcterms:format")?
+            `<dt>Format</dt>`+
+            `<dd><a class="external" target="_blank" href="`+context["@context"][v['dcterms:format'].id.split(":")[0]]+v['dcterms:format'].id.split(":")[1]+`">`+v['dcterms:format'].id+`</a></dd>`:``)+
+            (v.hasOwnProperty("dcterms:language")?
+            `<dt>Language</dt>`+
+            `<dd><code>`+v["dcterms:language"]+`</code></dd>`:``)+
+            (v.hasOwnProperty("oa:hasPurpose")?            
+            `<dt>Purpose</dt>`+
+            `<dd><a class="external" target="_blank" href="`+context["@context"][v['oa:hasPurpose'].id.split(":")[0]]+v['oa:hasPurpose'].id.split(":")[1]+`">`+v['oa:hasPurpose'].id+`</a></dd></dd>`:``)+
+            (v.hasOwnProperty("oa:motivatedBy")?            
+            `<dt>Motivation</dt>`+
+            `<dd><a class="external" target="_blank" href="`+context["@context"][v['oa:motivatedBy'].id.split(":")[0]]+v['oa:motivatedBy'].id.split(":")[1]+`">`+v['oa:motivatedBy'].id+`</a></dd></dd>`:``)
+            ;
+    });
+    formatted_metadata += `</dl></div>`
+    return( formatted_metadata );
+}
+
+
+// Reading view: create annotation display and anchors (this is
+// the /#context/... view, i.e. focus is on one context actualization)
+/*  This function processes a context, it:
+    - selects the type of context display to choose based on the indicated
+      action (tool)
+    - runs through a tool-specific workflow (e.g. load associated files, add
+      event handlers for UI actions)
+    - wraps context in a uniform context-card (header/body/footer) for
+      display: make_context
+*/
+// TODO: this will be the key function that will process arrays of
+//       actualizations in the contexts retrieved!  Is still based on hasAction
+//       and types from the old monolithic contextWork object!
+async function display_context( context ) {
+    var q = namespaces+`SELECT DISTINCT ?s ?p ?o WHERE {
+        {
+            {	# context metadata
+                ?context ?p ?o .
+                BIND(?context AS ?s)
+    		} 
+            UNION {	# identified contextual relation
+                ?context rdfs:isDefinedBy ?os .
+      			?os ?p ?o . 
+                BIND(?os AS ?s)
+    		} 
+            UNION {	# ALL actualizations and intertextual relations.
+                ?context intro:R21_identifies+ ?w .
+                ?w ?p ?o .
+                BIND(?w AS ?s)
+    		}	# ALL target locations of ALL actualizations and intertextual relations
+		    UNION {
+                ?context intro:R21_identifies+ ?w .
+      			?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity|intro:R19_hasType|dcterms:requires) ?t .
+      			?t ?p ?o .
+      			BIND (?t AS ?s)
+    		}
+    		UNION {
+                ?context intro:R21_identifies+ ?w .
+                {
+        			?w intro:R17_actualizesFeature ?f .
+        			?f ?p ?o .
+                } UNION
+                {
+        			?w intro:R19_hasType ?ty .
+        			?ty intro:R4i_isDefinedIn ?f .
+        			?f ?p ?o .
+      			}
+      			BIND( ?f AS ?s )
+    		}
+		    UNION {
+                ?context intro:R21_identifies+ ?w .
+      			?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity) ?t .
+        		{
+        			?t intro:R10i_isPassageOf ?do .
+        			?do ?p ?too .
+    			} UNION {
+				    ?t intro:R41_hasLocation [ ?p ?to ] .
+					?to rdf:rest*/rdf:first ?too .
+      			} UNION {
+      				?t intro:R41_hasLocation ?to .
+					?to ?p ?too .		
+      			}
+                BIND ( ?too AS ?o)
+                BIND ( ?t AS ?s)
+    		}
+    		UNION {
+                ?context intro:R21_identifies+ ?w .
+        		{
+				    ?w oa:hasBody [ ?p ?to ] .
+					?to rdf:rest*/rdf:first ?too .
+      			} UNION {
+      				?w oa:hasBody ?to .
+					?to ?p ?too .		
+      			}
+                BIND ( ?too AS ?o)
+                BIND ( ?w AS ?s)
+    		}
+            FILTER (?context = <`+context+`>)
+            BIND(<default> AS ?g)
+        } UNION {
+            ?context (<http://purl.org/dc/terms/contributor>|<http://purl.org/dc/terms/creator>) ?o2 .
+            ?o2 a foaf:Agent .
+            ?o2 ?p ?o .
+            BIND(?o2 AS ?s)
+		    BIND(<default> AS ?g)
+            FILTER (?context = <`+context+`>)
+        }
+	    FILTER (!isBlank(?o))
+    }`;
+    var r = await getJSONLD( q );
+    if (!r.hasOwnProperty( "graph" )) {
+        r.graph = [];
+    }
+    var cxtmd = _.keyBy( _.filter( r.graph, function(o) { return o["type"].includes("rppa:Context") && o.id.match(uuidRegex); }), 'id' );
+    var cxtcnt = _.keyBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'http' ) && o.id.match(uuidRegex); }), 'id' );
+    var skos = _.keyBy( _.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
+    var contributor = _.keyBy( _.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
+    var tools = _.keyBy( _.filter( r.graph, function(o) { return o["type"].includes( 'crmdig:D14_Software' ); }), 'id' );
+    console.log( cxtmd, cxtcnt, skos, contributor, tools );
+    mode = "view";
+    zInd = zInd+1;
+    if ( $('.offcanvas.show').length ) { 
+        myCanvasGT.hide(); // close any open texts if a new one is requested
+        $(".popover").hide(); // hide if new text was called from a popover
+    }
+    // create global text canvas
+    var context_win_id = uuidv4();
+    var context_win = `<div style="z-index:`+zInd+`;overflow:inherit;" class="offcanvas offcanvas-start context-workbench" data-bs-backdrop="static" tabindex="-1" id="win-`+context_win_id+`" aria-labelledby="staticBackdropLabel">
+            <div class="offcanvas-body context-container globaltext-container" data-cid="`+context+`">`+
+                `<button type="button" class="btn-close" style="float:right;" data-mode="read" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <!--
+                <div class="tools" style="float:right;">
+                    <input `+((user == undefined && username == undefined)?'disabled':'')+` style="height:36px;width:123px;" class="changeMode" type="checkbox" checked data-toggle="toggle" data-cid="`+context+`" id="changeMode-flip" data-mode="edit" data-onlabel="Reading" data-offlabel="Editing" data-onstyle="warning" data-offstyle="success">
+                    `+((user == undefined && username == undefined)?'<label> <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Sign in</button></label>':'')+`
+                </div>
+                -->
+                <div class="row">
+                    <div class="col-sm-4 globaltext">
+                    </div>
+                    <div class="col-sm-8 context" style="columns:2;column-fill:auto;overflow:hidden;">
+                    </div>
+                    <!--
+                    <div class="col-sm-2 workbench">
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>`;
+    $( "body" ).prepend( context_win );
+
+    const parts = [].concat( cxtcnt[context]["intro:R21_identifies"] );
+    // collect the targets of annotations
+    var target = [], target_tabs = [], target_locs = [];
+    for (var i in parts ) {
+        var annotation = cxtcnt[ parts[i].id ];
+        // show target globaltext
+        target.push( cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P48_has_preferred_identifier"] );
+        target_tabs = target_tabs.concat( _.filter( cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+        target_locs = target_locs.concat( cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] );
+    }
+    // show target globaltext
+    await display_globaltext( target[0],texts[target[0]]["work"] );
+    $( ".globaltext" ).addClass( "col-sm-4" );
+    // context label
+    $( ".context-container .context" ).append( `<h3><i class="fa-solid fa-layer-group"></i> Context: `+truncateString(cxtmd[context]["skos:prefLabel"],50)+`</h3>` );
+    // iterate through whatever was identified with intro:R21_identifies 
+    for (var i in parts ) {
+        // determine action
+        var annotation = cxtcnt[ parts[i].id ];
+        switch ( annotation["dcterms:requires"].id ) {
+
+            // translation alignment
+            case "https://www.romanticperiodpoetry.org/id/tool00001/tool":
+                const response1 = await fetch(annotation["as:items"][0].id);
+                if (!response1.ok) {
+                    throw new Error("HTTP error " + response1.status);
+                }
+                const data1 = await response1.text();
+                // part body
+                $( ".context-container .context" ).append( make_context( cxtcnt[context].id, data1, cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
+
+                const response2 = await fetch(annotation["as:items"][1].id);
+                if (!response2.ok) {
+                    throw new Error("HTTP error " + response2.status);
+                }
+                const data2 = await response2.json();
+                // process alignment JSON
+                alignment[ annotation.id ] = {};
+                alignment[ annotation.id+"/orig" ] = data2;
+                // reverse alignment JSON to allow triggering from context
+                for ( var prop in data2 ) {
+                    $.each( data2[ prop ], function( index, item ) {
+                        // if alignment[ annotation.id ][ item ].length == 0
+                        if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
+                            alignment[ annotation.id ][ item ] = [];
+                        }
+                        alignment[ annotation.id ][ item ].push( prop );
+                    });
+                }
+                //console.log( alignment[ annotation.id+"/orig" ], alignment[ annotation.id ] )
+                // alignment activation on context-side
+                $(document).on('mouseenter', '#win-'+context_win_id+' [id="'+context+'"] .w,#win-'+context_win_id+' [id="'+context+'"] .pc', function () {
+                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                        var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
+                        var targeted = [];
+                        $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                            targeted.push( $( jq(v) ).text().toLowerCase() );
+                        });
+                        document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                        $( '.context-container .globaltext .text #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).addClass("idsSelected");       // text
+                        $( '[id="'+context+'"] div.text #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                        /*
+                        $( '.context[id="'+context+'"] .text .w').each(function( index ) {
+                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                            $( $(this) ).addClass( "idsSelected" );
+                            }
+                        });
+                        $( '.tab-pane.active .text .w').each(function( index ) {
+                            if ( targeted.includes( $(this).text().toLowerCase() )) {
+                            $( $(this) ).addClass( "idsSelected" );
+                            }
+                        });
+                        */
+                    }
+                }).on('mouseleave', '#win-'+context_win_id+' [id="'+context+'"] .w,#win-'+context_win_id+' [id="'+context+'"] .pc', function () {
+                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                        var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
+                        var targeted = [];
+                        $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                            targeted.push( $( jq(v) ).text().toLowerCase() );
+                        });
+                        $( '.context-container .globaltext .text #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).removeClass("idsSelected");    // text
+                        $( '[id="'+context+'"] div.text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                        /*
+                        $( '.context[id="'+context+'"] .text .w').each(function( index ) {
+                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                            $( $(this) ).removeClass( "idsSelected" );
+                            }
+                        });
+                        $( '.tab-pane.active .text .w').each(function( index ) {
+                            if ( targeted.includes( $(this).text().toLowerCase() )) {
+                            $( $(this) ).removeClass( "idsSelected" );
+                            }
+                        });
+                        */                            
+                    }
+                });
+                // alignment activation on text-side
+                $(document).on('mouseenter', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
+                    if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
+                        var hovered = $( '.context-container #'+$(this).attr('id') ).text();
+                        var targeted = [];
+                        $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
+                            targeted.push( $( jq(v) ).text().toLowerCase() );
+                        });
+                        document.getElementById( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                        $( '[id="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).addClass("idsSelected");       // text
+                        $( '.context-container .globaltext .text #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                        /*
+                        $( '.context-container .globaltext .text .w').each(function( index ) {
+                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                            $( $(this) ).addClass( "idsSelected" );
+                            }
+                        });
+                        $( '.tab-pane.active .text .w').each(function( index ) {
+                            if ( targeted.includes( $(this).text().toLowerCase() )) {
+                            $( $(this) ).addClass( "idsSelected" );
+                            }
+                        });
+                        */
+                    }
+                }).on('mouseleave', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
+                    if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
+                        var hovered = $( '.context-container #'+$(this).attr('id') ).text();
+                        var targeted = [];
+                        $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
+                            targeted.push( $( jq(v) ).text().toLowerCase() );
+                        });
+                        $( '[id="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).removeClass("idsSelected");    // text
+                        $( '.context-container .globaltext .text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                        /*
+                        $( '.context-container .globaltext .text .w').each(function( index ) {
+                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                            $( $(this) ).removeClass( "idsSelected" );
+                            }
+                        });
+                        $( '.tab-pane.active .text .w').each(function( index ) {
+                            if ( targeted.includes( $(this).text().toLowerCase() )) {
+                            $( $(this) ).removeClass( "idsSelected" );
+                            }
+                        });
+                        */                            
+                    }
+                });
+
+                // contextualization
+                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                // tool info 
+                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+
+                clearInterval( t );
+                t = setInterval(updateDOM(),500);
+                break;
+
+            // ID highlighting
+            case "https://www.romanticperiodpoetry.org/id/tool00002/tool":
+
+                // part content
+                $( ".context-container .context" ).append( make_context( annotation.id, annotation["rdf:value"], cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
+                $( ".context-container .globaltext .text "+cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"].split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+
+                // contextualization
+                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                // tool info
+                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+
+                clearInterval( t );
+                t = setInterval(updateDOM(),500);
+                break;
+
+            // jsPlumb (connection drawing)
+            case "https://www.romanticperiodpoetry.org/id/tool00003/tool":
+                const response = await fetch(annotation["as:items"].id);
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+                const data = await response.json();
+                const conn_def = {
+                    "type": "Bezier",
+                    "options": {
+                        "curviness": 150
+                    }
+                };
+                const over_def =  
+                    { "type": "PlainArrow", "options": { "width": 10, "length":10, "location": 1} };
+                
+                const instance = jsPlumb.newInstance({
+                    container: $('.context-container .text')[0],
+                    endpoints: [ null, null ],
+                    paintStyle: { strokeWidth: 1, stroke: '#cd6711' },
+                    connectionsDetachable: false
+                });
+                
+                var groups = {}, nodes = {};
+                // iterate through nodes and group them if required
+                if (data.hasOwnProperty( "nodes" )) {                    
+                    data[ "nodes" ].forEach(function(obj) { 
+                        if (obj.group) {
+                            groups[ obj.group ] = obj.group;
+                            if ( nodes.hasOwnProperty( obj.group )) {
+                                nodes[ obj.group ].push( obj.id );
+                            } else {
+                                nodes[ obj.group ] = [];
+                                nodes[ obj.group ].push( obj.id );
+                            }
+                        }
+                    });
+                    Object.keys( nodes ).forEach(function (key) { 
+                        var value = nodes[key]
+                        var newArr = value.map(el => '.context-container .text #' + el);
+                        nodes[key] = key;
+                        $( newArr.join(',') ).wrapAll("<div style='display:inline-block;' id='"+key+"'/>");
+                        instance.addGroup({
+                            el: $( '#'+key )[0],
+                            id: 'grouped'
+                        });
+                    })
+                }
+                // iterate through edges taking account of possible groups
+                if (data.hasOwnProperty( "edges" )) {                    
+                    data[ "edges" ].forEach(function(obj) {
+                        var source;
+                        if (obj.source in nodes) { 
+                            source = nodes[ obj.source ];
+                        } else { 
+                            source = obj.source 
+                        }
+                        console.log( source );
+                        instance.connect({
+                            source: $( '#'+source )[0],
+                            target: $('.context-container .text #'+obj.target)[0],
+                            connector: conn_def,
+                            anchor: "AutoDefault",
+                            endpoints: ["Blank", "Blank"],
+                            overlays: [ over_def ]
+                        });
+                    });
+                }
+
+
+                // contextualization
+                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                // tool info
+                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+
+                break;
+
+            // no annotation beyond reference to SKOS
+            default:
+
+
+                // contextualization
+                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                // tool info
+                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+
+                break;
+        
+        }
+    }
+    // context metadata
+    $( ".context-container .context" ).append( print_cxtmd( cxtmd[context], skos ) );
+    // Add context data/metadata
+    $( ".context-container .context" ).append( print_user( contributor ) );
+    
+    // open canvas
+    myCanvasGTEl = document.getElementsByClassName( "context-workbench" )[0];
+    myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
+        backdrop: 'static',
+        keyboard: false
+    }).show();
+
+    // disable non-referenced targets and focus on referenced ones
+    $( ".context-container .globaltext .nav-pills button" ).addClass( "disabled" );
+    target_tabs.forEach(function(obj) {
+        $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).removeClass( "disabled" );
+        $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).click();
+    });
+    // jump to target location in globaltext
+    document.getElementById( target_locs[0].split(',')[0].substring(1) ).scrollIntoView( {behavior: "smooth", block: "center"} );
+    // on showing canvas
+    /*
+    myCanvasGTEl.addEventListener('shown.bs.offcanvas', function (event) {
+        $( ".context-workbench .context" ).position({
+            my: "center",
+            at: "center",
+            of: ".context-container"
+        });
+    });
+    */
+    // on closing canvas
+    myCanvasGTEl.addEventListener('hide.bs.offcanvas', function (event) {
+        $(".popover").remove();
+        $(this).remove();
+        mode = "read"; 
+        history.replaceState(null,null,previousState!=null?previousState:domain);// TODO
+//        location.href = "/works/#text/"+cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P48_has_preferred_identifier"];
+        zInd = 1054;
+        done_tooltipTriggerList = [];
+        done_popoverTriggerList = [];
+        clearInterval( t );
+        annos = {};
+        annotorious = {};
+        updateDOM();
+    });
 }
 
 /*
@@ -1613,7 +2395,7 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 
 // page re-load on theme switch
 function reTheme() {
-    if ( $( "#map" ).length || $( "#network" ).length || $( "#cy" ).length ) {
+    if ( $( "#map" ).length || $( "#network" ).length || $( "#cy" ).length || $( "body#about" ).length ) {
         location.reload();
     }
 }
@@ -1655,7 +2437,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const offcanvasList = [...offcanvasElementList].map(offcanvasEl => new bootstrap.Offcanvas(offcanvasEl))
 
     // SSO
-    $( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
+    //$( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;

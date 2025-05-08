@@ -499,8 +499,7 @@ img[src='/images/female.png'],
 }
 .globaltext {
   overflow: hidden;
-  min-width:500px;
-  max-width:650px;
+  min-width:550px;
   height:calc(100vh - 95px);
 }
 .globaltext .nav-pills {
@@ -548,6 +547,9 @@ img[src='/images/female.png'],
 .context .attribution div .bibl {
   margin-left: 0;
   text-indent: 0;
+}
+.text {
+  position: relative;
 }
 .text .head+br {
   display: none;
@@ -1273,9 +1275,10 @@ dl::before {
   background-color: #eee;
 }
 .context dt {
-  flex-basis: 20%;
+  flex-basis: 25%;
   padding: 2px 4px;
   text-align: right;
+  font-weight:400;
   /*
   background: #333;
   color: #fff;
