@@ -58,9 +58,12 @@
 .text div.lgvspace {
     margin-bottom: 1em;
 }
-.text div.lg, .text p, .text .epigraph, .text div.gap, .text div.opener, .text div.closer, .text div.dateline {
+.text div.lg, .text p, .text .epigraph, .text div.gap, .text div.opener, .text div.closer, .text div.dateline, .text div.refrain {
 /*    margin-bottom: 1em;*/
     padding: 10px;
+}
+.speaker ~ div {
+    padding-left: 10px;
 }
 
 #myScrollspy {
