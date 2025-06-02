@@ -2,7 +2,8 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #sestet #pair"
+     rhyme="aabbcc"
      corresp="#work00785"
      subtype="rppatext"
      type="poem"
@@ -90,7 +91,7 @@
          <w xml:id="erpa-0152830">steht</w>
          <pc xml:id="erpa-0152840">,</pc>
       </l>
-      <l xml:id="erpa-l04995">
+      <l xml:id="erpa-l04995" part="I">
          <w xml:id="erpa-0152850">Kennst</w>
          <c> </c>
          <w xml:id="erpa-0152860">du</w>
@@ -100,7 +101,7 @@
          <w xml:id="erpa-0152880">wohl</w>
          <pc xml:id="erpa-0152890" unit="sentence">?</pc>
       </l>
-      <l xml:id="erpa-l05000">
+      <l xml:id="erpa-l05000" rendition="#h_6" part="F">
          <w xml:id="erpa-0152900">Dahin</w>
          <pc xml:id="erpa-0152910" unit="sentence">!</pc>
          <c> </c>
@@ -204,7 +205,7 @@
          <w xml:id="erpa-0153440">getan</w>
          <pc xml:id="erpa-0153450" unit="sentence">?</pc>
       </l>
-      <l xml:id="erpa-l05030">
+      <l xml:id="erpa-l05030" part="I">
          <w xml:id="erpa-0153460">Kennst</w>
          <c> </c>
          <w xml:id="erpa-0153470">du</w>
@@ -214,7 +215,7 @@
          <w xml:id="erpa-0153490">wohl</w>
          <pc xml:id="erpa-0153500" unit="sentence">?</pc>
       </l>
-      <l xml:id="erpa-l05035">
+      <l xml:id="erpa-l05035" rendition="#h_6" part="F">
          <w xml:id="erpa-0153510">Dahin</w>
          <pc xml:id="erpa-0153520" unit="sentence">!</pc>
          <c> </c>
@@ -310,7 +311,7 @@
          <w xml:id="erpa-0153990">Flut</w>
          <pc xml:id="erpa-0154000">:</pc>
       </l>
-      <l xml:id="erpa-l05065">
+      <l xml:id="erpa-l05065" part="I">
          <w xml:id="erpa-0154010">Kennst</w>
          <c> </c>
          <w xml:id="erpa-0154020">du</w>
@@ -320,7 +321,7 @@
          <w xml:id="erpa-0154040">wohl</w>
          <pc xml:id="erpa-0154050" unit="sentence">?</pc>
       </l>
-      <l xml:id="erpa-l05070">
+      <l xml:id="erpa-l05070" rendition="#h_6" part="F">
          <w xml:id="erpa-0154060">Dahin</w>
          <pc xml:id="erpa-0154070" unit="sentence">!</pc>
          <c> </c>
