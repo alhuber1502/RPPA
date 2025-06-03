@@ -39,8 +39,6 @@
 
     <script src="/js/community-edition-6.2.10/dist/browser-ui/js/jsplumb.browser-ui.umd.js" crossorigin="anonymous"></script>
 
-    <script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
-
     <!-- Network -->
     <script src="/js/cytoscape.js-3.31.0/dist/cytoscape.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/enums.min.js"></script>
@@ -66,6 +64,7 @@
     
     <!-- CAN BE DELETED -->
     <!--
+    <script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
     <script src="js/cytoscape.js-dagre-2.5.0/cytoscape-dagre.js"></script>

@@ -215,6 +215,17 @@
           <div id="feed">
             <h2>News/Updates</h2>
 
+        <script type="module" src="https://cdn.jsdelivr.net/npm/bsky-embed/dist/bsky-embed.es.js" async></script>
+        <bsky-embed
+            search="#RomanticPeriodPoetryArchive"
+            mode=""
+            limit="10"
+            load-more="true"
+        custom-styles="section { max-height:1695px; overflow: scroll; }section a
+        {color: #e07012 !important;}"
+        >
+        </bsky-embed>
+<!--
             <div id="blusky-updates"
             style="margin-bottom:5px;max-height:1715px;overflow:auto;width:100%;">
 
@@ -307,13 +318,14 @@
                 6, 2023 at 4:32 PM</a></blockquote>
                   
             </div>
-            <!--
+            <!-
             <div id="twitter-updates" style="margin-bottom:25px;max-width:359px;max-height:1685px;overflow:auto;">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
-            -->
+            ->
+          -->
           </div>
 
         </div>
@@ -322,13 +334,14 @@
 
       </div>
     </main>
+    <!--
     <script>
       var posts = document.getElementsByClassName('bluesky-embed');
       for (var i = 0; i < posts.length; i++) {
           posts[i].setAttribute('data-bluesky-embed-color-mode', document.documentElement.getAttribute('data-bs-theme'));
       }
     </script>
-    
+    -->
     <!--#include virtual="/templates/footer.shtml" -->
     <!--#include virtual="/templates/bottom.shtml" -->
   </body>
