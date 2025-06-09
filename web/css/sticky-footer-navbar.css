@@ -657,10 +657,14 @@ a.note {
 .highlight-bb-start {
   border-left: 4px solid #0C80A1;
   padding-left:1px;
+  border-bottom: 1px dashed #0c80a1;
+  padding-bottom: 2px;
 }
 .highlight-bb-end {
   border-right: 2px solid #0C80A1;
   padding-right:1px;
+  border-bottom: 1px dashed #0c80a1;
+  padding-bottom: 2px;
 }
 
 .highlight-bb-m {
