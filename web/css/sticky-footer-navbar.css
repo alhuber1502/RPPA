@@ -499,7 +499,7 @@ img[src='/images/female.png'],
 }
 .globaltext {
   overflow: hidden;
-  min-width:550px;
+/*  min-width:550px;*/
   height:calc(100vh - 95px);
 }
 .globaltext .nav-pills {
@@ -514,9 +514,8 @@ img[src='/images/female.png'],
   height: calc(100vh - 95px);
 }
 .globaltext-workbench .globaltext {
-  width: 650px;
+  max-width: 650px;
 }
-
 .globaltext .attribution, 
 .context .attribution {
   font-size:.85em;
@@ -739,6 +738,9 @@ ul.bb {
 .bb-item input[type=checkbox]{
   accent-color: #2a9d8f;
 }
+.bb-item button {
+    padding: 2px 0px;
+}
 ul.bb li canvas {
   vertical-align: middle;
   max-height: 150px;
@@ -880,19 +882,19 @@ ul.bb li canvas {
   margin-top:5px;
 }
 
-.add_context {
+a.add_context {
   font-size: x-large;
   position: sticky;
   color:#3aad9f;
 }
-.add_context:hover {
+a.add_context:hover {
   color:#2a9d8f;
 }
-.add_context .fa-plus-circle {
+a.add_context .fa-plus-circle {
   background-color: white;
   border-radius: 50%;
 }
-.context-container .add_context {
+.context-container a.add_context {
   display: none;
 }
 
@@ -1306,3 +1308,77 @@ dl::before {
   padding: 2px 4px;
   border-bottom: 1px solid #333;
 }
+.offcanvas-backdrop.show {
+    opacity: .3;
+}
+
+.steps-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1800px;
+    position: relative;
+    padding: 0;
+}
+
+.steps-horizontal::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
+}
+
+.step-horizontal {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #2a9d8f;
+    border: 2px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 20px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.step-title {
+    font-size: 14px;
+/*    color: #aaa;*/
+    margin-bottom: 5px;
+}
+
+.step-description {
+    font-size: 16px;
+/*    color: #adb5bd;*/
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.step-horizontal.active .step-icon {
+/*    background: #4361ee;
+    border-color: #4361ee;
+    color: white;
+    box-shadow: 0 0 0 5px rgba(67, 97, 238, 0.2);
+*/
+}
+
+.step-horizontal.complete .step-icon {
+/*
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
+*/
+ }
