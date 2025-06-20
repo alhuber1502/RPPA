@@ -748,6 +748,9 @@ ul.bb li canvas {
 .workbench h2 {
   font-size:1.2em;
 }
+.workbench h3 {
+  font-size:1.15em;
+}
 .tab-content {
   overflow: auto;
   height: calc(100% - 42px);
@@ -1112,6 +1115,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
   margin: 25px 0 10px 0;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 /* PRISMS */
@@ -1363,7 +1367,7 @@ dl::before {
 .step-description {
     font-size: 16px;
 /*    color: #adb5bd;*/
-    max-width: 250px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
@@ -1382,3 +1386,17 @@ dl::before {
     color: white;
 */
  }
+.steps {
+  overflow: auto;
+  height: calc(100vh - 95px);
+}
+
+.connectedBB {
+  border: 1px dashed;
+  min-height: 25px;
+  padding-left: .5rem;
+}
+.connectedBB li {
+  min-height: 25px;
+  display: block;
+}
