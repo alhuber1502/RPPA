@@ -21,7 +21,7 @@
         <!-- content: insert here -->
         <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
         <div style="display:flex;align-items:center;justify-content:center;height:calc(100vh - 115px);">
-          <div style="padding:10px 15px;width:39%;height:43%;background-color:var(--bs-body-bg);border-radius:15px;overflow:auto;border: 1px solid #999;">
+          <div style="padding:10px 15px;width:39%;height:43%;min-width:300px;min-height:125px;background-color:var(--bs-body-bg);border-radius:15px;overflow:auto;border: 1px solid #999;">
             
             <div id="welcome">
               <!--
