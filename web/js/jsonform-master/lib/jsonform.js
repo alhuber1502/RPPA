@@ -251,7 +251,7 @@ var fileDisplayTemplate = '<div class="_jsonform-preview">' +
   '<a href="<%= value.url %>"><%= value.name %></a> (<%= Math.ceil(value.size/1024) %>kB)' +
   '<% } %>' +
   '</div>' +
-  '<a href="#" class="btn btn-default _jsonform-delete"><i class="glyphicon glyphicon-remove" title="Remove"></i></a> ';
+  '<a href="#" class="btn btn-default _jsonform-delete"><i class="fa-solid fa-xmark" title="Remove"></i></a> ';
 
 var inputFieldTemplate = function (type) {
   return {
@@ -661,7 +661,7 @@ jsonform.elementTypes = {
   },
   'select':{
     'template':'<select name="<%= node.name %>" id="<%= id %>"' +
-      'class=\'form-control<%= (fieldHtmlClass ? " " + fieldHtmlClass : "") %>\'' +
+      'class=\'form-select<%= (fieldHtmlClass ? " " + fieldHtmlClass : "") %>\'' +
       '<%= (node.schemaElement && node.schemaElement.disabled? " disabled" : "")%>' +
       '<%= (node.schemaElement && node.schemaElement.required ? " required=\'required\'" : "") %>' +
       '> ' +
@@ -873,8 +873,8 @@ jsonform.elementTypes = {
   'array': {
     'template': '<div id="<%= id %>"><ul class="_jsonform-array-ul" style="list-style-type:none;"><%= children %></ul>' +
       '<span class="_jsonform-array-buttons">' +
-        '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="glyphicon glyphicon-plus-sign" title="Add new"></i></a> ' +
-        '<a href="#" class="btn btn-default _jsonform-array-deletelast"><i class="glyphicon glyphicon-minus-sign" title="Delete last"></i></a>' +
+        '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="fa-solid fa-plus" title="Add new"></i></a> ' +
+        '<a href="#" class="btn btn-default _jsonform-array-deletelast"><i class="fa-solid fa-minus" title="Delete last"></i></a>' +
       '</span>' +
       '</div>',
     'fieldtemplate': true,
@@ -885,10 +885,10 @@ jsonform.elementTypes = {
         // floating to the left of the main element
         return '<li data-idx="<%= node.childPos %>">' +
           // only allow drag of children if enabled
-          (enableDrag ? '<span class="draggable line"><i class="glyphicon glyphicon-list" title="Move item"></i></span>' : '') +
+          (enableDrag ? '<span class="draggable line"><i class="fa-solid fa-list" title="Move item"></i></span>' : '') +
           inner +
           '<span class="_jsonform-array-buttons">' +
-            '<a href="#" class="btn btn-default _jsonform-array-deletecurrent"><i class="glyphicon glyphicon-minus-sign" title="Delete current"></i></a>' +
+            '<a href="#" class="btn btn-default _jsonform-array-deletecurrent"><i class="fa-solid fa-minus" title="Delete current"></i></a>' +
           '</span>' +
           '</li>';
       }
@@ -896,7 +896,7 @@ jsonform.elementTypes = {
         return '<li data-idx="<%= node.childPos %>">' +
           inner +
           '<span class="_jsonform-array-buttons">' +
-            '<a href="#" class="btn btn-default _jsonform-array-deletecurrent"><i class="glyphicon glyphicon-minus-sign" title="Delete current"></i></a>' +
+            '<a href="#" class="btn btn-default _jsonform-array-deletecurrent"><i class="fa-solid fa-minus" title="Delete current"></i></a>' +
           '</span>' +
           '</li>';
       }
@@ -1048,8 +1048,8 @@ jsonform.elementTypes = {
         '<%= children %>' +
       '</div>' +
       '</div>' +
-      '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="glyphicon glyphicon-plus-sign" title="Add new"></i></a> ' +
-      '<a href="#" class="btn btn-default _jsonform-array-deleteitem"><i class="glyphicon glyphicon-minus-sign" title="Delete item"></i></a></div>',
+      '<a href="#" class="btn btn-default _jsonform-array-addmore"><i class="fa-solid fa-plus" title="Add new"></i></a> ' +
+      '<a href="#" class="btn btn-default _jsonform-array-deleteitem"><i class="fa-solid fa-minus" title="Delete item"></i></a></div>',
     'fieldtemplate': true,
     'array': true,
     'childTemplate': function (inner) {
@@ -1272,7 +1272,7 @@ jsonform.elementTypes = {
     }
   },
   'submit':{
-    'template':'<input type="submit" <% if (id) { %> id="<%= id %>" <% } %> class="btn btn-primary <%= elt.htmlClass?elt.htmlClass:"" %>" value="<%= value || node.title %>"<%= (node.disabled? " disabled" : "")%>/>'
+    'template':'<input type="submit" <% if (id) { %> id="<%= id %>" <% } %> class="btn btn-rppa <%= elt.htmlClass?elt.htmlClass:"" %>" value="<%= value || node.title %>"<%= (node.disabled? " disabled" : "")%>/>'
   },
   'button':{
     'template':' <button type="button" <% if (id) { %> id="<%= id %>" <% } %> class="btn btn-default <%= elt.htmlClass?elt.htmlClass:"" %>"><%= node.title %></button> '
@@ -1430,7 +1430,7 @@ jsonform.elementTypes = {
       data.value = activeChild.value;
 
       var elt = node.formElement;
-      var tabs = '<select class="nav form-control"' +
+      var tabs = '<select class="nav form-select"' +
         (node.disabled ? ' disabled' : '') +
         '>';
       _.each(children, function (child, idx) {
