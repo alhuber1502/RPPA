@@ -142,6 +142,12 @@ nav.navbar {
     height:16px;
     width:16px;
 }
+nav button svg {
+    filter: invert(1);
+}
+[data-bs-theme=light] nav ul ul li:nth-of-type(2) button svg {
+    filter: invert(.75);
+}
 [data-bs-theme=dark] header > nav {
     color: var(--bs-light-text-subtle);
     background-color: #cd6711 !important;
@@ -740,6 +746,9 @@ ul.bb {
 }
 .bb-item button {
     padding: 2px 0px;
+}
+.bb-item {
+  overflow: auto;
 }
 ul.bb li canvas {
   vertical-align: middle;
@@ -1399,4 +1408,125 @@ dl::before {
 .connectedBB li {
   min-height: 25px;
   display: block;
+}
+
+/* JSONform */
+.expandable > legend:before {
+  content: '';
+  font-family: 'Font Awesome 6 Free';
+  padding-right: 10px;
+  font-weight: 600;
+}
+.expanded > legend:before {
+  content: '';
+  font-family: 'Font Awesome 6 Free';
+  font-weight:600;
+}
+
+#jForm fieldset#wd-image {
+    width: 305px;
+    float: right;
+    display: none;
+    margin-left: 15px;
+}
+#jForm fieldset {
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    border:1px solid #127A8C; 
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+[data-bs-theme=light] #jForm fieldset {
+    background-color: rgba(245,251,253,1);
+}
+[data-bs-theme=dark] #jForm fieldset {
+    background-color: rgba(45,51,53,1);
+}
+
+#jForm .btn-default {
+    border-color: #2a9d8f;
+    background-color: unset !important;
+    color: white !important;
+}
+[data-bs-theme=light] #jForm .btn-default {
+    color: black !important
+}
+
+#jForm .btn-rppa,#jForm .btn-rppa:hover {
+  color:#fff;
+  background-color: #2a9d8f;
+  border-color: #2a9d8f;
+}
+
+#jForm fieldset .help-block {
+    font-size: 14px;
+    font-style: italic;
+}
+#jForm .form-group label {
+    margin-bottom: 0.1rem;
+    font-size:16px;
+}
+#jForm .help-block {
+  font-size:14px;
+  color:#999;
+}
+#jForm fieldset legend {
+    margin-left:20px;
+    background-color:rgb(42, 157, 143);
+    padding-left:10px; 
+    padding-top:5px; 
+    padding-right:120px; 
+    padding-bottom:5px; 
+    color: rgba(245,251,253,1);
+    border-radius:15px;
+    font-size:16px;
+    width:80%;
+    float:none;
+}
+#jForm textarea {
+    height: 75px !important;
+}
+[class *= '---tanchors '] input[id], [class *= '---tanchors '] .trash,
+[class *= '---canchors '] input[id], [class *= '---canchors '] .trash
+{
+  display: none;
+}
+[class *= '---tanchors '], [class *= '---canchors '] {
+  width:50%;
+}
+[class *= '---tanchors '] .checkbox, [class *= '---canchors '] .checkbox {
+  overflow: auto;
+}
+[class *= '---canchors '] {
+  float:right;
+}
+[class *= '---tanchors '] {
+  display: inline-block;
+}
+#wd-search-results {
+    margin: 10px 0 10px 15px;
+    max-height: 155px;
+    overflow-y: auto;
+}
+#wd-image img {
+    max-width:100%;
+    max-height:100%;
+    margin-bottom: 15px;
+}
+#jForm[name='shortcut'] fieldset, #jForm[name='shortcut'] fieldset div[style] {
+    display: flex;
+    width:100%;
+    align-items:flex-end;
+}
+#jForm[name='shortcut'] fieldset .form-group {
+    width:33%;
+}
+#jForm > div > div:only-of-type {
+    height:45px;
+}
+.jsonform-error-reification, .jsonform-error-reification + div {
+    display: inline-block;
+    float: right;
+    margin-top: 22px;
 }
