@@ -1,9 +1,20 @@
-<!--#config timefmt="%d %b %Y" -->
-<!--#set var="map" value="active" -->
-<!--#include virtual="/header.shtml" -->
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
 
-<script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-<script src="/js/js.cookie.min.js"></script>
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Home" -->
+    <!--#set var="bodyid" value="home" -->
+    <!--#set var="home" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="/js/js.cookie.min.js"></script>
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
 
 <!-- main -->
 <main class="h-100 flex-shrink-0">
@@ -37,41 +48,48 @@
         if ($('#orcidId').length) {
           var q=namespaces+` 
             SELECT * WHERE {
-              GRAPH ?g {
                 ?s a foaf:Agent ;
-                   foaf:name ?o ;
-                   foaf:accountName """`+$( "#orcidId" ).val()+`""" .
-              } BIND( foaf:name AS ?p )
+                foaf:name ?o ;
+                foaf:accountName <`+$( "#orcidId" ).val()+`> .
+              BIND( foaf:name AS ?p )
             }`;
-            var usergraph = await getJSONLD( q, "quads" );
-	    console.log( usergraph );
-          if ( usergraph.hasOwnProperty( 'graph' ) ) {
-            user = usergraph.graph[0].id;
-            username = usergraph.graph[0]["foaf:name"];
+          var usergraph = await getJSONLD( q, "quads" );
+          if ( usergraph.id ) {
+            // existing user
+            user = usergraph.id;
+            username = usergraph["foaf:name"];
+            console.log( "existing user: ", user, username );
           } else {
             // new user
             user = "rppa:user-"+uuidv4();
             username = $( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val();
+            console.log( "new user:", user, username );
             if ( user == undefined || username.length < 2) { return };
             var update = namespaces+"insert data {\n";
-            update += `GRAPH `+user+` { `+user+` a foaf:Agent ;\n`;
+            update += user+` a foaf:Agent ;\n`;
             update += `foaf:name """`+$( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val()+`""" ;\n`;
-            update += `foaf:accountName """`+$( "#orcidId" ).val()+`""" ;\n`;
-            update += `. }\n}`;
+            update += `foaf:accountName <`+$( "#orcidId" ).val()+`> ;\n`;
+            update += `.\n}`;
 //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
 //            await putTRIPLES( updel );
             await putTRIPLES( update );
           }
           if ( user == undefined || username.length < 2 ) { return };
-          Cookies.set( 'RPPA-login-provider','orcid', { expires: 365 } );
+          Cookies.set('RPPA-login-provider','orcid', { expires: 365 } );
           Cookies.set('RPPA-login-user', user );
           Cookies.set('RPPA-login-username', username );
         }
-        document.location = Cookies.get( 'RPPA-login-redirect' ) || '/';
+        document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
       }
+    } else {
+      document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
     }
   });
 
 </script>
 
-<!--#include virtual="/footer.shtml" -->
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>
