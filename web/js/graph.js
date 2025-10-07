@@ -100,7 +100,7 @@ async function initializeGraph( id, view ) {
 		cy.add( data );
 		run_layout( view == 'authors'?'klay':'cose');
     } else {
-        $( ".col-graph" ).append( `<div id='cy' class="spinner"><div class="cytoscape-navigator" style="display:none;"></div></div>` );
+        $( ".col-graph" ).append( `<div id='cy'><div class="cytoscape-navigator" style="display:none;"></div></div>` );
 		createCYgraph( data, graph, cyLayouts[ "cose" ] );
     }
 }
@@ -1040,22 +1040,22 @@ function createCYgraph(data, graph, layout) {
                     trelsii.push( prels[3] );
                 });
                 var hitd = [], hiti = [];
-                $.each( _.uniq(_.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
+                $.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
                     $.each( targetNode["_private"].data.class, function( i2,v2 ) {
                         if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
                             hitd.push( v );
                         }
                     });
                 });
-                $.each( _.uniq(_.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
+                $.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
                     $.each( targetNode["_private"].data.class, function( i2,v2 ) {
                         crels = retrieve_class_relationships( nsv(v2) );
-                        if ( onto[ v ] && onto[ v ].range == nsv(v2) || _.uniq(_.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
+                        if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
                             hiti.push( v );
                         }
                     });
                 });
-                hiti = _.difference(hiti, hitd);
+                hiti = _l.difference(hiti, hitd);
                 addModelling( sourceNode, targetNode, addedEles, hitd, hiti ); 
             }
             },
@@ -1080,31 +1080,31 @@ function createCYgraph(data, graph, layout) {
 					trelsii.push( prels[3] );
 				});
 				var hitd = [], hiti = [];
-				$.each( _.uniq(_.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
+				$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
 					$.each( targetNode["_private"].data.class, function( i2,v2 ) {
 						if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
 							hitd.push( v );
 						}
 					});
 				});
-				$.each( _.uniq(_.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
+				$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
 					$.each( targetNode["_private"].data.class, function( i2,v2 ) {
 						crels = retrieve_class_relationships( nsv(v2) );
-						if ( onto[ v ] && onto[ v ].range == nsv(v2) || _.uniq(_.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
+						if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
 							hiti.push( v );
 						}
 					});
 				});
-				hiti = _.difference(hiti, hitd);
+				hiti = _l.difference(hiti, hitd);
 				var sonto = '<ul class="listBibl">', sonto2 = '<ul class="listBibl">';
-				$.each( _.uniq( _.flatten( hitd ) ), function(i,v) {
+				$.each( _l.uniq( _l.flatten( hitd ) ), function(i,v) {
 					sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
 				});
-				$.each( _.uniq( _.flatten( hiti ) ), function(i,v) {
+				$.each( _l.uniq( _l.flatten( hiti ) ), function(i,v) {
 					sonto2 += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
 				});
 				sonto += '</ul>'; sonto2 += '</ul>';
-				tippy = makeTippy( targetNode, "<p><b>"+_.uniq( _.flatten(hitd)).length+" direct relationships</b>"+sonto+"<p><b>"+_.uniq( _.flatten(hiti)).length+" inferred relationships</b>"+sonto2, 'right');
+				tippy = makeTippy( targetNode, "<p><b>"+_l.uniq( _l.flatten(hitd)).length+" direct relationships</b>"+sonto+"<p><b>"+_l.uniq( _l.flatten(hiti)).length+" inferred relationships</b>"+sonto2, 'right');
 				tippy.show();
 				if (tippy2) { tippy2.hide(); }
             },
@@ -1126,11 +1126,11 @@ function createCYgraph(data, graph, layout) {
                     trelsii.push( prels[3] );
                 });
                 var sonto = '<ul class="listBibl">';
-                $.each( _.uniq( _.flatten( trelsdd.concat( trelsdi ) ) ), function(i,v) {
+                $.each( _l.uniq( _l.flatten( trelsdd.concat( trelsdi ) ) ), function(i,v) {
                     sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
                 });
                 sonto += '</ul>';
-                tippy2 = makeTippy( sourceNode, "<p><b>"+_.uniq( _.flatten(trelsdd.concat(trelsdi))).length+" direct relationships</b></p>"+sonto+"<p>+ "+_.uniq( _.flatten(trelsid.concat(trelsii))).length+" inferred relationships</p>", 'left');
+                tippy2 = makeTippy( sourceNode, "<p><b>"+_l.uniq( _l.flatten(trelsdd.concat(trelsdi))).length+" direct relationships</b></p>"+sonto+"<p>+ "+_l.uniq( _l.flatten(trelsid.concat(trelsii))).length+" inferred relationships</p>", 'left');
                 tippy2.show();
             },
             stop: function( sourceNode ){
@@ -1172,7 +1172,7 @@ function createCYgraph(data, graph, layout) {
 			if ( evt["target"]["_private"].data.class.includes( "http://iflastandards.info/ns/lrm/lrmoo/F1_Work") ) {
 				window.location.href = '/works/';
 				// this patterns return the "first" expression of a work, e.g. "text01234":
-				// _.groupBy( texts, 'work')["work00932"][0].text
+				// _l.groupBy( texts, 'work')["work00932"][0].text
 			}
 			*/
 			// TODO: double click on empty bakground =
@@ -1304,7 +1304,7 @@ function updateGraphInfo( level ) {
 	$.each( cy.nodes(), function( i,v ) {
 		classes.push( v["_private"]["data"].class );
 	});
-	$.each( _.uniq( _.flatten( classes )) , function( i,v ) {
+	$.each( _l.uniq( _l.flatten( classes )) , function( i,v ) {
 		if ( v && onto[ nsv( v )] ) {
 			if ( !level || ( level == "digital" && (nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) ||
 				( level == "material" && !(nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) ||
@@ -1353,11 +1353,12 @@ function updateGraphInfo( level ) {
 
 // load layouts based on hash value
 async function loadLayout() {
-    var hash = location.hash.substring( location.hash.indexOf("/")+1 ), source;
+    var hash = location.hash.substring( location.hash.lastIndexOf("/")+1 ), source;
     regex = /(?<=^\/)[^\/]+/;
     switch ( location.pathname.match( regex ) && location.pathname.match( regex )[0] ) {
         case "authors":
-            switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
+			console.log( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) );
+            switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ) {
                 case "#id/":
                     $( ".layout_navigation" ).hide();
 					if (!$(".col-graph").length) {
@@ -1380,10 +1381,11 @@ async function loadLayout() {
             }
             break;
         case "works":
-            switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
+			console.log( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) );
+			switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ) {
                 case "#text/":
 					if ( $('.offcanvas.show').length ) { 
-						myCanvasGT.hide(); // close any open texts if a new one is requested
+						$( myCanvasGTEl ).offcanvas( "hide" ); // myCanvasGT.hide(); // close any open texts if a new one is requested
 						$(".popover").hide(); // hide if new text was called from a popover
 					}
                     $( ".layout_navigation" ).hide();
@@ -1399,12 +1401,112 @@ async function loadLayout() {
 						initializeGraph( "https://www.romanticperiodpoetry.org/id/"+texts[ hash ][ "work" ]+"/work", "works" );
 						$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
 						Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+						previousState = location.href;
 					}
                     break;
                 case "#context/":
-	                    display_context( domain+"/id/"+location.hash.substring( location.hash.indexOf("/")+1 ) );
-                    break;
-                case "":
+	                    await display_context( domain+"/id/"+location.hash.substring( location.hash.indexOf("/")+1 ) );
+						$( ".context-workbench .globaltext" ).addClass( "col-sm-4" );
+					break;
+				case "#contribute/1/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						contribute_step1( hash, texts[ hash ][ "work" ] );
+					} else {
+						contribute_step1( hash, texts[ hash ][ "work" ] );
+					}
+					break;
+				case "#contribute/3/genetic/2/":
+				case "#contribute/3/intratextual/":
+				case "#contribute/3/typological/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						contribute_step3( hash );
+					} else {
+						contribute_step3( hash );
+					}
+					break;
+				case "#contribute/2/intratextual/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+					}
+					intratextual_step2(hash, texts[ hash ][ "work" ]);
+					break;
+				case "#contribute/2/typological/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+					}
+					typological_step2(hash, texts[ hash ][ "work" ]);
+					break;
+				case "#contribute/2/genetic/2/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash.split( "-" )[0], texts[ hash.split( "-" )[0] ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						await genetic_step2(hash.split( "-" )[0], texts[ hash.split( "-" )[0] ][ "work" ]);
+					}
+					/*
+					if ($( ".steps #worksSearchDT_wrapper" ).length) {
+						$( ".steps #worksSearchDT_wrapper" ).closest( ".col-sm-6" ).addClass( "globalcontext" );
+    					$( ".steps #worksSearchDT_wrapper" ).remove();
+					}
+					*/
+					await display_globaltext( hash.split( "-" )[1], texts[ hash.split( "-" )[1] ][ "work" ] );
+					//genetic_step2a();
+					break;
+				case "#contribute/2/genetic/":
+					if ( !$( ".offcanvas" ).length ) {
+					    var modeC = {}
+						modeC[ 'edit' ] = '#2a9d8f';
+						modeC[ 'read' ] = 'var(--bs-orange)';
+						modeC[ 'view' ] = 'var(--bs-orange)';
+						$( "#mode" ).remove();
+						mode = "edit";
+						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+					}
+					genetic_step2(hash, texts[ hash ][ "work" ]);
+					break;
+				case "":
                     if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
                         $( ".col-graph,.col-content,.gutter" ).remove();
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );

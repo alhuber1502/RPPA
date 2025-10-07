@@ -454,7 +454,7 @@ function updateDOM() {
     var genericCloseBtnHtml = '<button type="button" class="btn-close" aria-hidden="true" style="float:right;"></button>';
     // initialize tooltips and popovers
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    tooltipTriggerList2 = _.difference( tooltipTriggerList, done_tooltipTriggerList );
+    tooltipTriggerList2 = _l.difference( tooltipTriggerList, done_tooltipTriggerList );
     done_tooltipTriggerList = tooltipTriggerList;
     var tooltipList = [...tooltipTriggerList2].map(function (tooltipTriggerEl) {
         return new bootstrap.Popover(tooltipTriggerEl, {
@@ -479,7 +479,7 @@ function updateDOM() {
         });
     });
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    popoverTriggerList2 = _.difference( popoverTriggerList, done_popoverTriggerList );
+    popoverTriggerList2 = _l.difference( popoverTriggerList, done_popoverTriggerList );
     done_popoverTriggerList = popoverTriggerList;
     var popoverList = [...popoverTriggerList2].map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl, {
@@ -590,14 +590,14 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                     data-size='lg' data-env='production'
                     data-clientid='APP-LOLR4JW8AREHAJ1I' data-redirecturi='https://www.romanticperiodpoetry.org/login/'></div>
 
-                    <!-- FB SSO -->
+                    <!-- FB SSO TODO -->
                     <script>
                     window.fbAsyncInit = function() {
                         FB.init({
                             appId      : '1289578978503896',
                             cookie     : true,
                             xfbml      : true,
-                            version    : 'v15.0'
+                            version    : 'v18.0'
                         });
                         FB.AppEvents.logPageView();
                     //    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
@@ -612,9 +612,9 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                     fjs.parentNode.insertBefore(js, fjs);
                     }(document, 'script', 'facebook-jssdk'));
                     </script>
-                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" 
+                    <div class="fb-login-button" config_id="1480790596480316" data-size="large" data-button-type="continue_with" data-layout="default" 
                         data-auto-logout-link="false" data-onlogin="checkLoginState();" data-scope="public_profile" data-use-continue-as="false"></div>
-
+                    
                     <!-- Google SSO -->
                     <script src="https://accounts.google.com/gsi/client"></script> 
                     <div id="g_id_onload"
@@ -626,14 +626,14 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                         data-auto_prompt="false">
                     </div>
                     <div class="g_id_signin" style="margin-top: 20px;
-                    margin-left: 110px;"
+                    margin-left: 120px;"
                         data-type="standard"
                         data-shape="rectangular"
                         data-theme="outline"
                         data-text="continue_with"
                         data-size="large"
                         data-logo_alignment="left"
-                        data-width="248">
+                        data-width="226">
                     </div>
 
                     <br/>
@@ -684,11 +684,10 @@ function testAPI() {                      // Testing Graph API after login.  See
     FB.api('/me', async function(response) {
         var q=namespaces+` 
         SELECT * WHERE {
-            GRAPH ?g {
             ?s a foaf:Agent ;
                 foaf:name ?o ;
-                foaf:accountName """https://www.facebook.com/`+response.id+`""" .
-            } BIND( foaf:name AS ?p )
+                foaf:accountName <https://www.facebook.com/`+response.id+`> .
+            BIND( foaf:name AS ?p )
         }`;
         var usergraph = await getJSONLD( q, "quads" );
         console.log( usergraph );
@@ -701,10 +700,10 @@ function testAPI() {                      // Testing Graph API after login.  See
             username = response.name;
             if ( user == undefined || username == 'undefined') { return; }
             var update = namespaces+"insert data {\n";
-            update += `GRAPH `+user+` { `+user+` a foaf:Agent ;\n`;
+            update += user+` a foaf:Agent ;\n`;
             update += `foaf:name """`+response.name+`""" ;\n`;
-            update += `foaf:accountName """https://www.facebook.com/`+response.id+`""" ;\n`;
-            update += `. }\n}`;
+            update += `foaf:accountName <https://www.facebook.com/`+response.id+`> ;\n`;
+            update += `.\n}`;
         //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
         //            await putTRIPLES( updel );
             await putTRIPLES( update );
@@ -745,11 +744,10 @@ async function handleCredentialResponse(response) {
 
     var q=namespaces+` 
         SELECT * WHERE {
-            GRAPH ?g {
             ?s a foaf:Agent ;
                 foaf:name ?o ;
-                foaf:accountName """https://www.google.com/`+response.sub+`""" .
-            } BIND( foaf:name AS ?p )
+                foaf:accountName <https://www.google.com/`+response.sub+`> .
+            BIND( foaf:name AS ?p )
         }`;
     var usergraph = await getJSONLD( q, "quads" );
     console.log( usergraph );
@@ -762,10 +760,10 @@ async function handleCredentialResponse(response) {
         username = response.name;
         if ( user == undefined || username == 'undefined') { return; }
         var update = namespaces+"insert data {\n";
-        update += `GRAPH `+user+` { `+user+` a foaf:Agent ;\n`;
+        update += user+` a foaf:Agent ;\n`;
         update += `foaf:name """`+response.name+`""" ;\n`;
-        update += `foaf:accountName """https://www.google.com/`+response.sub+`""" ;\n`;
-        update += `. }\n}`;
+        update += `foaf:accountName <https://www.google.com/`+response.sub+`> ;\n`;
+        update += `.\n}`;
     //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
     //            await putTRIPLES( updel );
         await putTRIPLES( update );

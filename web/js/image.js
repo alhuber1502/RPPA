@@ -7,26 +7,30 @@ var annos = {}, annotorious = {};
 $( document ).on( "click", ".popover-dismiss-select.img .cancel", async function(e) {
     var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].cancelSelected();
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchRotate = true;
+    annotorious[ iid ].cancelSelected();
+    viewer[ iid ].gestureSettingsMouse.dragToPan = true;
+    viewer[ iid ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.pinchRotate = true;
 });
 // Editing popover: save target (pass to createW3Cannotorious) and re-enable UI
 $( document ).on( "click", ".popover-dismiss-select.img .save", async function(e) {
+    var _this = $( this );
     var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
+    var expr = $( this ).closest( '[data-expr]' ).data( 'expr' );
+    var work = $( this ).closest( '[data-work]' ).data( 'work' );
+    var digo = $( this ).closest( '[data-digo]' ).data( 'digo' );
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    createW3Cannotorious( "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid), viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].currentPage(), dismiss_annotation );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].saveSelected();
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dragToPan = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.scrollToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.clickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.dblClickToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchToZoom = true;
-    viewer[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].gestureSettingsMouse.pinchRotate = true;
+    createW3Cannotorious( iid, viewer[ iid ].currentPage(), dismiss_annotation, digo, expr, work, _this );
+    annotorious[ iid ].saveSelected();
+    viewer[ iid ].gestureSettingsMouse.dragToPan = true;
+    viewer[ iid ].gestureSettingsMouse.scrollToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.clickToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.dblClickToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.pinchToZoom = true;
+    viewer[ iid ].gestureSettingsMouse.pinchRotate = true;
 });
 
 var dismiss_annotation = undefined;
@@ -58,14 +62,15 @@ async function add_image_tools( id, hasStartPage ) {
         var anid = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
         var work = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
         var expr = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-expr]' ).data( 'expr' );
+        var digo = $( "[data-id='"+annotation.id+"']" ).closest( 'div[data-digo]' ).data( 'digo' );
         $( ".tab-pane.active g[data-id='"+annotation.id+"']" ).popover({
             sanitize: false,
-            content: `<a role="button" class="save" data-ids='`+annotation.id+`' data-id="`+anid+`" data-work="`+work+`" data-expr="`+expr+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+            content: `<a role="button" class="save" data-ids="`+annotation.id+`" data-id="`+anid+`" data-work="`+work+`" data-digo="`+digo+`" data-expr="`+expr+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
                 <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
             html: true,
             placement: 'auto',
             container: '.globaltext',
-            template: `<div class="popover popover-dismiss-select img" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
+            template: `<div class="popover popover-dismiss-select img" data-iid="`+id+`" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
                 <div class="popover-arrow"></div>
                 <div class="popover-body"></div>
             </div>`
@@ -80,6 +85,10 @@ async function add_image_tools( id, hasStartPage ) {
         viewer[ id ].gestureSettingsMouse.pinchToZoom = false;
         viewer[ id ].gestureSettingsMouse.pinchRotate = false;
     });
+    // TODO: causes error in console, need to stop event propagation?
+    annotorious[ id ].on('changeSelectionTarget', function(target) {
+        $( ".popover-dismiss-select.img .cancel" ).trigger( "click" );
+    });
     // handle updated annotation
     //    annotorious[ id ].on('updateAnnotation', function(annotation) {
     //        createW3Cannotorious( id, viewer[ id ].currentPage(), annotation );
@@ -93,7 +102,9 @@ async function add_image_tools( id, hasStartPage ) {
     // add notes in readonly or editable mode
     viewer[ id ].addHandler('page', function (viewer) {
         // close open notes
-        annotorious[ id ].setAnnotations( [] );
+        if ( annotorious[ id ] ) {
+            annotorious[ id ].setAnnotations( [] );
+        }
         //if ( $( "button.active:contains(Facsimile)" ).length ) { $( ".workbench .bb" ).html( "" ); }// DO NOT USE THIS LINE!!!
         if ( annos[ id ][ viewer.page ] ) {
             // we have notes for this page
@@ -118,14 +129,8 @@ async function add_image_tools( id, hasStartPage ) {
                         annotation = a;
                     }
                     annotorious[ id ].addAnnotation( annotation, true ); // true = readonly, false = editable
-                    const { snippet, transform } = annotorious[ id ].getImageSnippetById( annotation.id );
-                    // (snippet will be useful to keep!)
-                    $( ".workbench .bb" ).append( `<li class="bb-item img" data-ids="`+annotation.target.selector.value.replace(/\"/g,'\\"')+`" data-expr="`+annotation['dcterms:isPartOf']+`">
-                            <input type="checkbox" id="`+annotation.id+`" name="`+annotation.id+`">
-                            <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>` );
-                    $( ".workbench .bb [id='"+annotation.id+"']" ).parent().append( snippet );
                 });
-            }, 250);
+            }, 50);
         }
     });
     // trigger notes display for first image
@@ -139,16 +144,15 @@ async function add_image_tools( id, hasStartPage ) {
 // Editing view: delete a building block from interface and graph, and reload
 // building blocks (processGlobalText)
 $( document ).on( "click", ".bb-item.img .trash", async function(e) {
-    var wid = $( this ).closest( "[data-wid]" ).data( "wid" );
-    var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
+    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
+    var page = $( this ).closest( "[data-page]" ).data( "page" );
     var id = $( this ).prev().attr( "id" );
     //    var ids = $( this ).parent().data( "ids" ).split( "," );
-    // TODO: replace with delete just from the annos buildingblock array and in
-    //       DOM, below is not needed!
     //var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
     //await putTRIPLES( update );
-    //    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].removeAnnotation( id );
-    //    $( this ).parent().remove();
+    annotorious[ iid ].removeAnnotation( id );
+    annos[ iid ][ page ] = annos[ iid ][ page ].filter(item => item.id !== id);
+    $( this ).parent().remove();
     //processGlobalText( tid, wid );
 });
 // delete an annotation
@@ -163,11 +167,10 @@ async function deleteW3Cannotorious( id, page, annotation ) {
 // Editing view: process a new or update an existing annotation
 /*  This function
     - creates a building-block (RDF) and stores it in the graph
-    - pushes it into the annos Array for the page o be picked up on page change
+    - pushes it into the annos Array for the page to be picked up on page change
       by handler
 */
-async function createW3Cannotorious( id, page, annotation ) {
-    //console.log( id, page, annotation );
+async function createW3Cannotorious( id, page, annotation, digo, expr, work, _this ) {
     // enhance Annotorious W3C annotation
     if ( annotation.hasOwnProperty( "id" ) ) {
         if ( annotation.id.startsWith( '#' ) ) {
@@ -211,20 +214,48 @@ async function createW3Cannotorious( id, page, annotation ) {
     */
     // maybe ALL I need from this part this the below few lines:
     if ( !annos[ id ][ page ] ) { annos[ id ][ page ] = []; }
+    annotation["dcterms:isPartOf"] = expr;
     annos[ id ][ page ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
 //    $( "button.active:contains(Facsimile)" ).trigger( "click" ); // DO NOT USE THIS LINE!!!
 //    $( ".workbench .bb" ).append( processW3Cannotorious( id, JSON.parse( annotation ) ) );
+
+    annotorious[ id ].addAnnotation( annotation, true ); // true = readonly, false = editable
+    const { snippet, transform } = annotorious[ id ].getImageSnippetById( annotation.id );
+    // (snippet will be useful to keep!)
+    if ( $( "[id='"+_this.data("id")+"']" ).closest( ".globalcontext" ).length ) {
+        bbs_context.append( `<li class="bb-item img" data-page="`+page+`" data-iid="`+id.split("viewer_editing_")[1]+`" data-ids="`+annotation.target.selector.value.replace(/\"/g,'\\"')+`" data-expr="`+annotation['dcterms:isPartOf']+`" data-wid="`+work+`" data-digo="`+digo+`">
+                <input type="checkbox" id="`+annotation.id+`" data-id="`+annotation.id+`" name="`+annotation.id+`">
+                <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+            </li>` );
+        bbs_context.find( "[id='"+annotation.id+"']" ).parent().append( snippet );
+    } else {
+        bbs_text.append( `<li class="bb-item img" data-page="`+page+`" data-iid="`+id.split("viewer_editing_")[1]+`" data-ids="`+annotation.target.selector.value.replace(/\"/g,'\\"')+`" data-expr="`+annotation['dcterms:isPartOf']+`" data-wid="`+work+`" data-digo="`+digo+`">
+                <input type="checkbox" id="`+annotation.id+`" data-id="`+annotation.id+`" name="`+annotation.id+`">
+                <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+            </li>` );
+        bbs_text.find( "[id='"+annotation.id+"']" ).parent().append( snippet );
+    }
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
 
 // Editing view: highlight image annotation on hover on list 
 $(document ).on('mouseenter', '.bb-item.img', function ( e ) {
-    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
+    var iid = "viewer_editing_"+$( this ).closest( "[data-iid]" ).data( "iid" );
     var id = $( e.currentTarget ).find( "input" ).attr( "id" );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].selectAnnotation( id );
+    if ( iid != null && id != null ) {
+        if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
+            $( "button[data-expr='"+$( e.currentTarget ).data( "expr" )+"']" ).trigger('click');
+        }
+        if ( viewer[ iid ].currentPage() != $(this).data( "page" ) ) {
+            viewer[ iid ].goToPage( $(this).data( "page" ) );
+        }
+        annotorious[ iid ].selectAnnotation( id );
+    }
 }).on('mouseleave', '.bb-item.img', function ( e ) {
-    var iid = $( this ).closest( "[data-iid]" ).data( "iid" );
-    annotorious[ "viewer_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].cancelSelected();
+    var iid = "viewer_editing_"+$( this ).closest( "[data-iid]" ).data( "iid" );
+    if (iid != null) {
+        annotorious[ iid ].cancelSelected();
+    }
 });
 
 // Editing view: process an array of image annotations in pages by populating an

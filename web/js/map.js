@@ -96,7 +96,7 @@
     var AS = $( "#AS" ).is( ":checked" );
     var EU = $( "#EU" ).is( ":checked" );
     var OC = $( "#OC" ).is( ":checked" );
-    var newPersons = _.filter( persons, function ( v ) {
+    var newPersons = _l.filter( persons, function ( v ) {
       var hide = false;
       if ( v["dob"].substring(0,4) > endyr || v["dod"].substring(0,4) < startyr ) {
         hide = true;
@@ -206,14 +206,14 @@
       poems += `<ul>`;
       // groups everything by work, giving each one item, i.e. e.g. grouping all
       // extracts under one heading
-      var work_ids = _.groupBy( _.filter( poet[id].texts.poems, function(item) { return item.type=='orig' ||  ( item.type.startsWith('trans') && _.groupBy( poet[id].texts.poems, 'work' )[ item.work ].length < 2 )  }).sort((a,b) => a.title.localeCompare(b.title)), 'work' );
-      var work_ids_all = _.groupBy( poet[id].texts.poems.sort((a,b) => a.title.localeCompare(b.title)), 'work' );
+      var work_ids = _l.groupBy( _l.filter( poet[id].texts.poems, function(item) { return item.type=='orig' ||  ( item.type.startsWith('trans') && _l.groupBy( poet[id].texts.poems, 'work' )[ item.work ].length < 2 )  }).sort((a,b) => a.title.localeCompare(b.title)), 'work' );
+      var work_ids_all = _l.groupBy( poet[id].texts.poems.sort((a,b) => a.title.localeCompare(b.title)), 'work' );
       $.each( work_ids, function(i,v) {
         v = work_ids_all[ i ];
         poems += `<li>`;
-        var orig_ids = _.filter( v, function(o) { return o.type == 'orig'; } );
-        var trans_ids =  _.filter( v, function(o) { return o.type.startsWith( 'trans_' ); } );
-        if ( !_.isEmpty( orig_ids) ) {
+        var orig_ids = _l.filter( v, function(o) { return o.type == 'orig'; } );
+        var trans_ids =  _l.filter( v, function(o) { return o.type.startsWith( 'trans_' ); } );
+        if ( !_l.isEmpty( orig_ids) ) {
           var j = 1;
           $.each( orig_ids, function(i,v) {
             poems += print_work( v );
@@ -221,8 +221,8 @@
             if ( Object.keys( orig_ids ).length > j++ ) { poems += " / "; }
           });
         }
-        trans_ids = _.groupBy( _.sortBy( trans_ids, 'type'), 'type' );
-        if ( !_.isEmpty( trans_ids) ) {
+        trans_ids = _l.groupBy( _l.sortBy( trans_ids, 'type'), 'type' );
+        if ( !_l.isEmpty( trans_ids) ) {
           poems += " [";
           var j = 1;
           $.each( trans_ids, function(i,v) {
@@ -241,7 +241,7 @@
     // select bibliography
     if ( poet[id].otw ) {
       works += `<ul>`;
-      $.each( _.sortBy( poet[id].otw, 'date' ), function(i,v) {
+      $.each( _l.sortBy( poet[id].otw, 'date' ), function(i,v) {
         works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
           `<em>`+v.title+`</em>`+
@@ -252,7 +252,7 @@
       works += `</ul>`;
     } else if ( poet[id].bibl ) {
       works += `<ul>`;
-      $.each( _.sortBy( poet[id].bibl, 'date' ), function(i,v) {
+      $.each( _l.sortBy( poet[id].bibl, 'date' ), function(i,v) {
         works += `<li>`+
           ((v.url)?'<a class="external" target="_blank" href="'+v.url+'">':'')+
           `<em>`+v.title+`</em>`+
@@ -275,7 +275,7 @@
         ((location.href.includes( '/maps/' ))?`</a>`:'')+
         `</li>`+
         (persons[ id ].sex?`<li><span>Gender:</span> `+(persons[ id ].sex == 'm'?`male`:`female`):``)+`</li>`+
-        (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
+        (poet[ id ].pseud?`<li><span>Pseudonym:</span> `+_l.uniq( poet[id].pseud ).join("; "):``)+`</li>`+
           `<li><span>Birth:</span> `+ 
         ((persons[ id ].dob.length == 20 && !persons[ id ].dob.includes("-01-01"))?birthDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }):birthDate.getFullYear())+
         (persons[ id ].pob && places[ persons[ id ].pob ] && places[ persons[ id ].pob ].name ?` (`+
@@ -292,7 +292,7 @@
             nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name.split(',')[0] != places[ persons[ id ].pod ].name)?
           `, `+nations[ places[ persons[ id ].pod ].nat.substring(0, 2) ].name.split(',')[0]
           :``):``)+(persons[ id ].pod?`)`:``)+`</li>`+
-        (poet[id].occ?`<li><span>Occupation:</span> `+_.uniq( poet[id].occ.sort() ).join("; ")+`</li>`:``)
+        (poet[id].occ?`<li><span>Occupation:</span> `+_l.uniq( poet[id].occ.sort() ).join("; ")+`</li>`:``)
         +`</ul>`+
         `<h3>Poems</h3>`+((poet[id].texts && poet[id].texts.poems.length > 0)?poems:`<ul><li>[forthcoming]</li></ul>`)+
         ((poet[id].otw  || poet[id].bibl)?`<h3>Select bibliography</h3>`+works:``)+
@@ -317,8 +317,8 @@
       `<a href="#continent/`+continents[ nations[ country ].cont ].id+`" class='cont-focus' data-cont="`+continents[ nations[ country ].cont ].id+`" 
       data-name="`+continents[ nations[ country ].cont ].name+`" data-coord="`+continents[ nations[ country ].cont ].coord+`">`+
       continents[ nations[ country ].cont ].name+`</a> (`+
-      _.filter( persons, function(record){ return record.nat.substring(0,2) == country } ).length+` `+
-      (_.filter( persons, function(record){ return record.nat.substring(0,2) == country } ).length > 1?`poets`:`poet`)
+      _l.filter( persons, function(record){ return record.nat.substring(0,2) == country } ).length+` `+
+      (_l.filter( persons, function(record){ return record.nat.substring(0,2) == country } ).length > 1?`poets`:`poet`)
       +`)</h2>`;
     overview += poets_by_country( country );
     return( overview );
@@ -327,17 +327,17 @@
   // return a list of countries with a list of poets for each for the selected continent
   function update_continent( cont ) {
     var name = continents[ cont ].name;
-    var countries = _.filter( nations, function(record){ return record.cont == cont } );
+    var countries = _l.filter( nations, function(record){ return record.cont == cont } );
     var overview = `<h2>`+name+
       ` (`+
-      _.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length+` `+
-      (_.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length > 1?`poets`:`poet`)         
+      _l.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length+` `+
+      (_l.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length > 1?`poets`:`poet`)         
       +`)`+
       `</h2>`;
-    $.each( _.sortBy( countries, 'name' ), function( i,v ) {
+    $.each( _l.sortBy( countries, 'name' ), function( i,v ) {
       overview += `<h3>`+v.name.split(',')[0]+` (`+
-        _.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length+` `+
-        (_.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length > 1?`poets`:`poet`)          
+        _l.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length+` `+
+        (_l.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length > 1?`poets`:`poet`)          
         +`)</h3>`;
       overview += poets_by_country( v.id );
     });
@@ -347,7 +347,7 @@
   // return a list of poets for the selected country
   function poets_by_country( country ) {
     var return_poets = '';
-    var poets = _.filter( persons, function(record){ return record.nat.substring(0,2) == country } );
+    var poets = _l.filter( persons, function(record){ return record.nat.substring(0,2) == country } );
     return_poets += "<ul>";
     const collator = new Intl.Collator();
     $.each( poets.sort((a, b) => collator.compare(a.name, b.name)), function( i,v ) {
@@ -397,7 +397,7 @@
           $( "#profile .results" ).html( await poet_profile( aut[0] ) );
           source = nations[ persons[ aut[0] ].nat.substring(0, 2) ].coord;
         }
-        var textsByWork = _.groupBy( texts, "work" );
+        var textsByWork = _l.groupBy( texts, "work" );
         display_globaltext( textsByWork[ hash ][0]['text'], hash );
       break;
       */

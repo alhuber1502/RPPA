@@ -47,17 +47,21 @@ $( document ).on( "mouseup", ".tab-pane.active .text *:not(.pagebreak),.tab-pane
             id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
             work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
             expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
+            digo = $( jq(ids[ids.length-1]) ).closest( 'div[data-digo]' ).data( 'digo' );
+            tid = $( jq(ids[ids.length-1]) ).closest( '.text' ).attr( 'id' );
         } else {                    // structure selection
             target = '';
             ids.push( $( jq( $( e.currentTarget ).attr( "id" ) ) ).closest( "[id]" ).attr( 'id' ) );
             id = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).attr( 'id' );
             work = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'id' );
             expr = $( jq(ids[ids.length-1]) ).closest( 'div[data-expr]' ).data( 'expr' );
+            digo = $( jq(ids[ids.length-1]) ).closest( 'div[data-digo]' ).data( 'digo' );
+            tid = $( jq(ids[ids.length-1]) ).closest( '.text' ).attr( 'id' );
         }
         // create popover close to selection end
         $( jq(ids[ids.length-1]) ).popover({
             sanitize: false,
-            content: `<a role="button" class="save" data-ids="`+ids+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
+            content: `<a role="button" class="save" data-ids="`+ids+`" data-id="`+id+`" data-tid="`+tid+`" data-digo="`+digo+`" data-work="`+work+`" data-expr="`+expr+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
                 <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
             html: true,
             placement: 'auto',
@@ -97,7 +101,7 @@ $( document ).on( "click", ".popover-dismiss-select.txt .cancel", async function
 // Editing popover: save target (passed to createW3Canno)
 $( document ).on( "click", ".popover-dismiss-select.txt .save", async function(e) {
     $( "[aria-describedby='"+$(this).closest('div.popover').attr( 'id')+"']" ).popover('dispose');
-    createW3Canno( $( this ).data("sel"), $( this ).data("ids").split( "," ), $( this ).data("id"), $( this ).data("work"), $( this ).data("expr") );
+    createW3Canno( $( this ).data("sel"), $( this ).data("ids").split( "," ), $( this ).data("id"), $( this ).data("digo"), $( this ).data("work"), $( this ).data("expr"), $(this) );
 });
 
 // UI: on pagebreak click, open facsimile display and jump to selected page
@@ -115,7 +119,7 @@ $(document ).on('click', ".text .pagebreak a,.image_link a", async function(e) {
     - creates a building-block (RDF) and stores it in the graph
     - creates a minimal live version of the building-block to list/highlight (processW3Canno)
 */
-async function createW3Canno( target, ids, obj_id, work, expr ) {
+async function createW3Canno( target, ids, obj_id, digo, work, expr, _this ) {
     // again this section is obsolete
     var date = new Date();
     var id = domain+`/id/`+uuidv4()+`/buildingblock`;
@@ -175,8 +179,16 @@ async function createW3Canno( target, ids, obj_id, work, expr ) {
     */
     liveanno['dcterms:isPartOf'] = {};
     liveanno['dcterms:isPartOf'].id = expr;
+    liveanno['dcterms:isPartOf'].wid = work;
+    liveanno['dcterms:isPartOf'].iid = obj_id;
+    liveanno['dcterms:isPartOf'].oid = digo;
+    liveanno['dcterms:isPartOf'].tid = _this.data( "tid" ); 
     liveanno['skos:prefLabel'] = target;
-    $( ".workbench .bb" ).append( processW3Canno( liveanno ) );
+    if ( $( "[id='"+_this.data("id")+"']" ).closest( ".globalcontext" ).length ) {
+        bbs_context.append( processW3Canno( liveanno ) );
+    } else {
+        bbs_text.append( processW3Canno( liveanno ) );
+    }
 }
 
 // Editing view: create annotation display/list text 
@@ -191,7 +203,7 @@ function processW3Canno( annotation ) {
     range.setStart( $( jqu(ids[0]) )[0], 0 );
     range.setEndAfter( $( jqu(ids[ids.length-1]) )[0], 0 );
     sel.setSingleRange(range);
-    high.highlightSelection("highlight-bb");
+//    high.highlightSelection("highlight-bb");
     sel.collapseToEnd();
     sel.detach();
     bb_id = annotation.id;
@@ -207,13 +219,22 @@ function processW3Canno( annotation ) {
     */
         var sel_text = '';
         if ( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length > 0 ) {
-            sel_text = $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[0].innerText+" ... "+
-                $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[$( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length-1].innerText;
-        } else {
-            if ( ids.length > 1 ) {
-                sel_text = $( ids[0] )[0].innerText + " ... " + $( ids[ids.length-1] )[0].innerText;
+            if ( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length > 2 ) {
+              sel_text = $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[0].innerText+" ... "+
+                    $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[$( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length-1].innerText;
+            } else if ( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length > 1 ) {
+                sel_text = $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[0].innerText+" "+
+                    $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[$( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ).length-1].innerText;
             } else {
-                sel_text = $( ids[0] )[0].innerText //+ " ... " + $( ids[ids.length-1] )[0].innerText;
+                sel_text = $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ).find( ".w,.pc" ) )[0].innerText;
+            }
+        } else {
+            if ( ids.length > 2 ) {
+                sel_text = $( ids[0] )[0].innerText + " ... " + $( ids[ids.length-1] )[0].innerText;
+            } else if (ids.length > 1) {
+                sel_text = $( ids[0] )[0].innerText + " " + $( ids[ids.length-1] )[0].innerText;
+            } else {
+                sel_text = $( ids[0] )[0].innerText;
             }
         }
         if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'lg' ) ) {
@@ -222,13 +243,14 @@ function processW3Canno( annotation ) {
             sel_text = "<em>Line:</em> "+sel_text;
         } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'head' ) ) {
             sel_text = "<em>Heading:</em> "+sel_text;
-        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
-        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
+        } //else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
+        //} 
+        else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
             sel_text = "<em>Whole poem:</em> "+sel_text;
         } else {
             sel_text = "<em>Segment:</em> "+sel_text;
         }
-        return `<li class="bb-item txt" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," )+`" data-expr="`+annotation['dcterms:isPartOf'].id+`">
+        return `<li class="bb-item txt" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," )+`" data-wid="`+annotation['dcterms:isPartOf'].wid+`" data-tid="`+annotation['dcterms:isPartOf'].tid+`" data-expr="`+annotation['dcterms:isPartOf'].id+`" data-digo="`+annotation['dcterms:isPartOf'].oid+`" data-iid="`+annotation['dcterms:isPartOf'].iid+`">
             <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
             <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
             <label for="`+bb_id+`">`+sel_text+`</label></li>` ;        
@@ -247,13 +269,16 @@ $( document ).on( "click", ".bb-item.txt .trash", async function(e) {
     var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
     await putTRIPLES( update );
     */
-    // TODO: needs removing from DOM
+    _this.parent().remove();
     // unhighlight annotation and detach popovers
+    $( jqu(ids[0]) ).removeClass( "highlight-bb-start" )
+    $( jqu(ids[ids.length-1]) ).removeClass( "highlight-bb-end" )
+    /*
     $.each( ids, function( i,v ) {
-        _this.parent().remove();
         $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "highlight-bb-start" ).removeClass( "highlight-bb-end" ).removeClass( "pulse-bb" );
         $( jqu(v) ).next( ".highlight-bb" ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
     });
+    */
     //processGlobalText( tid, wid );
 });
 // Editing view: retrieve and display list of building blocks
@@ -274,20 +299,19 @@ function processBuildingBlocks( bb ) {
 }
 */
 // Editing view: highlight the building block in the text on hover in the list
-// TODO: possibly keep (might still be useful)
 $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
     var id = $( e.currentTarget ).data( "ids" ).split( "," )[0] || '';
     if ( $( "button.active" ).data( "expr" ) != $( e.currentTarget ).data( "expr" ) ) {
         $( "button[data-expr='"+$( e.currentTarget ).data( "expr" )+"']" ).trigger('click');
     }
     document.getElementById( id.substring(1) ).scrollIntoView( {behavior: "smooth", block: "start"} );
-    $( $( e.currentTarget ).data( "ids" ) ).addClass("pulse-bb");
+    //$( $( e.currentTarget ).data( "ids" ) ).addClass("pulse-bb");
 }).on('mouseleave', '.bb-item.txt', function ( e ) {
-    $( $( e.currentTarget ).data( "ids" ) ).removeClass("pulse-bb");
+    //$( $( e.currentTarget ).data( "ids" ) ).removeClass("pulse-bb");
 });
 
 // Reading view: highlight target of the selected context on hover
-// TODO: might still be useful to keep
+
 /*
 $(document).on('mouseenter', '.context', function () {
     $( $(this) ).addClass("active");
@@ -297,7 +321,7 @@ $(document).on('mouseenter', '.context', function () {
     $( jqu(ids[0]) ).addClass( "highlight-gbl-start" )
     $( jqu(ids[[ids.length-1]]) ).addClass( "highlight-gbl-end" )
     // highlight annotation
-    // TODO: needs some sort of classification whether it's a continuous range
+    // needs some sort of classification whether it's a continuous range
     // or a set of discontinuous IDs
     if ( !ids[0].startsWith( "#text" ) ) {
         var sel = rangy.getSelection();
