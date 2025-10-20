@@ -41,10 +41,10 @@
 
   // good default zoomlevels for 50% width displays (other 50% might be list of poets/works)
   zoomlvl = {}
-  zoomlvl[ "AS" ] = 3.5;
-  zoomlvl[ "RU" ] = 3.5;
-  zoomlvl[ "CA" ] = 3.5;
-  zoomlvl[ "US" ] = 4.5;
+  zoomlvl[ "AS" ] = 4;
+  zoomlvl[ "RU" ] = 4;
+  zoomlvl[ "CA" ] = 4.5;
+  zoomlvl[ "US" ] = 5;
   zoomlvl[ "BR" ] = 5;
   zoomlvl[ "CN" ] = 5;
   zoomlvl[ "AU" ] = 5;
@@ -464,7 +464,7 @@
       // pan to target
       var coords = [];
       source.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
-      map.setView( [coords[1], coords[0]], (location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ).includes( "#continent/" )?4:5) );
+      map.setView( [coords[1], coords[0]], (location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ).includes( "#continent/" )?(zoomlvl[hash]?zoomlvl[hash]:4):(zoomlvl[hash]?zoomlvl[hash]:5)) );
     }
   }
 

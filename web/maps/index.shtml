@@ -354,7 +354,7 @@
       // pan to target
       var coords = [];
       $(e.currentTarget).data('coord').replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
-      map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?4:5) );
+      map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?(zoomlvl[ $(e.currentTarget).data( "cont" ) ]?zoomlvl[ $(e.currentTarget).data( "cont" ) ]:4):(zoomlvl[ $(e.currentTarget).data( "count" ) ]?zoomlvl[ $(e.currentTarget).data( "count" ) ]:5)) );
     });
     $( document ).on( 'click', '[href="#home"]', function(e) {
         showYrRange( startyr,endyr );
