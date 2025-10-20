@@ -61,7 +61,7 @@
             <div style="margin-top:15px;" id="slider-range"></div>
             <div>
               <label for="year-range">Date range:</label>
-              <input type="text" id="year-range" readonly style="border:0; color:var(--bs-orange); font-weight:bold; max-width: 85px;">
+              <input type="text" id="year-range" readonly style="border:0; color:var(--bs-orange); font-weight:bold; max-width: 90px;">
             </div>
           </div>
           <div class="controls gender" style="margin-top:15px;">
@@ -92,6 +92,13 @@
             <label for="OC">Oceania &nbsp;<a href="#continent/OC" class='cont-focus' data-cont="OC" data-name="Oceania" data-coord="Point(145 -30)"><i class="fas fa-map-marked-alt"></i><span class="sr-only">Oceania</span></a></label>  
             <div data-id="OC"></div>   
           </div>
+          <div class="controls birthdeath" style="margin-top:15px;">
+            <h2>Display options</h2>
+            <input id="birthdeath" class="checkbox" type="checkbox" style="display:inline-block"/>
+            <label for="birthdeath">Birth <i class="fa-solid fa-asterisk"></i>
+            &nbsp; <i class="fa fa-long-arrow-right"></i> &nbsp; Death <i
+            class="fa-solid fa-cross"></i></label>
+          </div>
       </div>
       <div class="leaflet-sidebar-pane" id="location">
         <h1 class="leaflet-sidebar-header">Poets at this location<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -117,8 +124,7 @@
 <script>
 
   // initialize
-  var oms, sidebar, markerLayer, map, markers = {};
-  
+  var oms, sidebar, markerLayer, lineLayer, markers = {}, lines = {}, popupLine = null;
   document.addEventListener("DOMContentLoaded", function() {
 
     // start with whole network
@@ -179,6 +185,7 @@
 
     // visualization layers
     markerLayer = L.layerGroup().addTo( map );
+    lineLayer = L.layerGroup().addTo( map );
     // Spiderfy overlapping markers
     oms = new OverlappingMarkerSpiderfier( map, {keepSpiderfied: true} );
     var hash = new L.Hash(map);
@@ -236,6 +243,54 @@
         }
       }
     });
+    map.on( 'popupopen', function(e) {
+      if (e.popup._source !== undefined) {
+        var persid;
+        if ( e.popup._source._icon !== undefined ) {
+          persid = e.popup._source._icon.id;
+        } else {
+          persid = e.popup._source.id;
+        }
+        if ( $( "#birthdeath" ).is( ":checked" ) && map.hasLayer( lineLayer ) ) {
+          map.removeLayer( lineLayer );
+          var bcoords = [], dcoords = [];
+          if ( persons[ persid ].pob && !persons[ persid ].gen && places[ persons[ persid ].pob ] && places[ persons[ persid ].pob ].coord && persons[ persid ].pod && places[ persons[ persid ].pod ] && places[ persons[ persid ].pod ].coord) {
+            var bcoords = [], dcoords = [];
+            var bsource = places[ persons[ persid ].pob ].coord;
+            bsource.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { bcoords.push(x); } });
+            var dsource = places[ persons[ persid ].pod ].coord;
+            dsource.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { dcoords.push(x); } });
+            const options = {
+                weight: 1,
+                opacity: 0.5,
+                color: ((theme == 'dark')?"#666":"#333"),
+                className: 'map-line links link '+persid,
+                steps: 8
+            };
+            popupLine = new L.Geodesic([ 
+              { lat: Number( bcoords[1] ), lng: Number( bcoords[0] ) }, 
+              { lat: Number( dcoords[1] ), lng: Number( dcoords[0] ) } 
+            ], options)
+            .addTo( map );
+            if ( e.popup._source._icon === undefined ) {
+              markers[ persid ].fire('click');
+            }
+          } else {
+            popupLine = null;
+          }
+        }
+      }
+    });
+    map.on( 'popupclose', function(e) {
+      if (e.popup._source._icon !== null) {
+        if ( $( "#birthdeath" ).is( ":checked" ) ) {
+          if ( popupLine !== null ) {
+            popupLine.remove();
+          }
+          map.addLayer( lineLayer );
+        }
+      }
+    });
 
     // controls
     L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap } ).addTo(map);
@@ -268,7 +323,11 @@
     }).addTo(map);
     sidebar.open('home');
 
-    $('.gender .checkbox').change(function () {
+    $('.gender .checkbox,.birthdeath .checkbox').change(function () {
+      map.closePopup();
+      if ( popupLine !== null ) {
+        popupLine.remove();
+      }
       showYrRange( startyr,endyr );
     });
     $('.continents .checkbox').change(function () {
@@ -291,23 +350,29 @@
       sidebar.open('location');
       // refresh markers
       $( "#"+$(e.currentTarget).data( "cont" ) ).prop('checked', true);
-      showYrRange( startyr,endyr );
+      //showYrRange( startyr,endyr );
       // pan to target
       var coords = [];
       $(e.currentTarget).data('coord').replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
       map.flyTo( [coords[1], coords[0]], (focus_type == 'cont-focus'?4:5) );
     });
-
+    $( document ).on( 'click', '[href="#home"]', function(e) {
+        showYrRange( startyr,endyr );
+        $( "#slider-range" ).slider({ values: [startyr,endyr] });
+        $( "#year-range" ).val( startyr + "–" + endyr );
+    });
+    var timeout;
     $( "#slider-range" ).slider({
     range: true,
     min: parseInt(startyr),
     max: parseInt(endyr),
     values: [ parseInt(startyr),parseInt(endyr) ],
     slide: function( event, ui ) {
+        timeout = clearTimeout(timeout);
         $( "#year-range" ).val( ui.values[ 0 ] + "–" + ui.values[ 1 ] );
-        setTimeout(function() {
+        timeout = setTimeout(function() {
           showYrRange( ui.values[ 0 ],ui.values[ 1 ] );
-        }, 10);
+        }, 300);
       }
     });
     $( "#year-range" ).val( $( "#slider-range" ).slider( "values", 0 ) +

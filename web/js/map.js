@@ -43,7 +43,7 @@
   zoomlvl = {}
   zoomlvl[ "AS" ] = 3.5;
   zoomlvl[ "RU" ] = 3.5;
-  zoomlvl[ "CA" ] = 4;
+  zoomlvl[ "CA" ] = 3.5;
   zoomlvl[ "US" ] = 4.5;
   zoomlvl[ "BR" ] = 5;
   zoomlvl[ "CN" ] = 5;
@@ -143,11 +143,13 @@
     markers = {};
     oms.clearMarkers();
     markerLayer.clearLayers();
+    lineLayer.clearLayers();
     $.each( new_persons, function ( i,v ) {
       var coords = [], POB = '';
       var source = (v.pob && !v.gen && places[ v.pob ] && places[ v.pob ].coord && places[ v.pob ].nat == v.nat.substring(0, 2))?places[ v.pob ].coord:nations[ v.nat.substring(0, 2) ].coord;
       source.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { coords.push(x); }  });
       POB += nations[ v.nat.substring(0, 2) ].name.split(',')[0];
+      /*
       if ( v.pob && places[ v.pob ] && places[ v.pob ].name && places[ v.pob ].name != nations[ v.nat.substring(0, 2) ].name.split(',')[0]) {
         POB += ' (born in '+(( places[ v.pob ].name )?places[ v.pob ].name:``)+
           ((places[ v.pob ].nat && nations[ places[ v.pob ].nat.substring(0, 2) ].name && nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0] != nations[ v.nat.substring(0, 2) ].name.split(',')[0] )?
@@ -155,6 +157,28 @@
           :``);
         POB += `)`
       }
+      */
+      if ( v.pob && places[ v.pob ] && places[ v.pob ].name && places[ v.pob ].name != nations[ v.nat.substring(0, 2) ].name.split(',')[0]) {
+        POB += ' (born in '+(( places[ v.pob ].name )?places[ v.pob ].name:``)
+//          +
+//            ((places[ v.pob ].nat && nations[ places[ v.pob ].nat.substring(0, 2) ].name && nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0] != nations[ v.nat.substring(0, 2) ].name.split(',')[0] )?
+//            `, `+nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0]
+//            :``);
+        POB += `, `
+      } else {
+        POB += ` (birthplace n/a, `
+      }
+      if ( v.pod && places[ v.pod ] && places[ v.pod ].name ) {
+        POB += ' died in '+(( places[ v.pod ].name )?places[ v.pod ].name:``)
+//          +
+//            ((places[ v.pob ].nat && nations[ places[ v.pob ].nat.substring(0, 2) ].name && nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0] != nations[ v.nat.substring(0, 2) ].name.split(',')[0] )?
+//            `, `+nations[ places[ v.pob ].nat.substring(0, 2) ].name.split(',')[0]
+//            :``);
+        POB += `)`
+      } else {
+        POB += ` deathplace n/a)`
+      }
+
       var icon = L.icon({
         className: "poet-marker",
         iconUrl: (v.img)?'/data/map/data/img/thumb/'+v.id+'.jpg':(v.sex == 'm')?'/images/male.png':'/images/female.png',
@@ -171,7 +195,35 @@
       markers[ v.id ]._icon.id = v.id;
       // spiderfy overlapping markers
       oms.addMarker( markers[ v.id ] );
+      // create edges
+      if (v.pob && !v.gen && places[ v.pob ] && places[ v.pob ].coord && v.pod && places[ v.pod ] && places[ v.pod ].coord) {
+        var bcoords = [], dcoords = [];
+        var bsource = places[ v.pob ].coord;
+        bsource.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { bcoords.push(x); } });
+        var dsource = places[ v.pod ].coord;
+        dsource.replace(/[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number(x); if (x == n) { dcoords.push(x); } });
+        const options = {
+            weight: 1,
+            opacity: 0.5,
+            color: ((theme == 'dark')?"#666":"#333"),
+            className: 'map-line links '+v.id,
+            steps: 8
+        };
+        lines[ v.id ] = new L.Geodesic([ 
+          { lat: Number( bcoords[1] ), lng: Number( bcoords[0] ) }, 
+          { lat: Number( dcoords[1] ), lng: Number( dcoords[0] ) } 
+        ], options)
+        .bindPopup()// `<div class='popup'><span class='name'>` + v["name"] + ` <a href="/authors/`+v["id"]+`.shtml" title="[go to author page]"><span style="display:initial;" class="glyphicon glyphicon-user"></span></a></span><span class='loc'>`+POB+`</span></div>` )
+        .addTo( lineLayer );
+        // click on line raises person popup
+        lines[ v.id ]._popup._source.id = v.id;
+      }
     });
+    if ( $( "#birthdeath" ).is( ":checked" ) ) {
+      map.addLayer( lineLayer );
+    } else {
+      map.removeLayer( lineLayer );
+    }
     // wait for helper functions to load
     document.addEventListener('DOMContentLoaded', function(event) {
       checkPath();
@@ -264,7 +316,7 @@
     }
     try { sidebar.open('profile'); } catch(err) {}
     // update country in background
-    $( "#location .results" ).html( update_country( persons[ id ].nat.substring(0,2) ) );
+    $( "#location .results" ).html( update_country( persons[ id ].nat.substring(0,2), true ) );
     return `<h2>`+persons[ id ].name+`</h2>`+(poet[id].desc?`<p style="font-size:14px;">`+poet[id].desc+`</p>`:``)+
         ((persons[ id ].img)?`<img width="175" style="float:right;margin-left:10px;" src="/data/map/data/img/thumb/`+id+`.jpg"/>`:``)+
         //+persons[ id ].img.replace('http://','https://')+`?width=250px" />`:``)+
@@ -312,7 +364,11 @@
   }
 
   // return a list of poems for the selected country
-  function update_country( country ) {
+  function update_country( country, isEmbedded ) {
+    if (!isEmbedded) {
+      var poets = _l.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].id == country } );
+      draw_viz( poets );
+    }
     var overview = `<h2>`+nations[ country ].name.split(',')[0]+`, `+
       `<a href="#continent/`+continents[ nations[ country ].cont ].id+`" class='cont-focus' data-cont="`+continents[ nations[ country ].cont ].id+`" 
       data-name="`+continents[ nations[ country ].cont ].name+`" data-coord="`+continents[ nations[ country ].cont ].coord+`">`+
@@ -326,19 +382,21 @@
 
   // return a list of countries with a list of poets for each for the selected continent
   function update_continent( cont ) {
+    var poets = _l.filter( persons, function(record){ return continents[ nations[ record.nat.substring(0,2) ].cont ].id == cont } );
+    draw_viz( poets );
     var name = continents[ cont ].name;
     var countries = _l.filter( nations, function(record){ return record.cont == cont } );
     var overview = `<h2>`+name+
       ` (`+
       _l.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length+` `+
       (_l.filter( persons, function(record){ return nations[ record.nat.substring(0,2) ].cont == cont } ).length > 1?`poets`:`poet`)         
-      +`)`+
+      +`), <a href="#home">World</a>`+
       `</h2>`;
     $.each( _l.sortBy( countries, 'name' ), function( i,v ) {
       overview += `<h3>`+v.name.split(',')[0]+` (`+
         _l.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length+` `+
         (_l.filter( persons, function(record){ return record.nat.substring(0,2) == v.id } ).length > 1?`poets`:`poet`)          
-        +`)</h3>`;
+        +`) <a href="#country/`+v.id+`" class="country-focus" data-cont="`+cont+`" data-count="`+v.id+`" data-coord="`+nations[ v.id ].coord+`"><i class="fas fa-map-marked-alt"></i></a></h3>`;
       overview += poets_by_country( v.id );
     });
     return( overview );
