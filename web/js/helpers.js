@@ -590,7 +590,7 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                     data-size='lg' data-env='production'
                     data-clientid='APP-LOLR4JW8AREHAJ1I' data-redirecturi='https://www.romanticperiodpoetry.org/login/'></div>
 
-                    <!-- FB SSO TODO -->
+                    <!-- FB SSO -->
                     <script>
                     window.fbAsyncInit = function() {
                         FB.init({
@@ -690,7 +690,6 @@ function testAPI() {                      // Testing Graph API after login.  See
             BIND( foaf:name AS ?p )
         }`;
         var usergraph = await getJSONLD( q, "quads" );
-        console.log( usergraph );
         if ( usergraph.hasOwnProperty( 'id' ) ) {
             user = usergraph.id;
             username = usergraph["foaf:name"];
@@ -750,7 +749,6 @@ async function handleCredentialResponse(response) {
             BIND( foaf:name AS ?p )
         }`;
     var usergraph = await getJSONLD( q, "quads" );
-    console.log( usergraph );
     if ( usergraph.hasOwnProperty( 'id' ) ) {
         user = usergraph.id;
         username = usergraph["foaf:name"];

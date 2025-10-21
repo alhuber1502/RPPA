@@ -1558,23 +1558,31 @@ async function drawGlobalText( tid, wid ) {
     if ( mode == "read" ) {
         tab_nav += `<li style="right: 5px;position: absolute;"><a href="#contribute/1/`+tid+`" class="add_context`+((user == undefined && username == undefined)?' pe-none':' pe-auto')+`" `+((user == undefined && username == undefined)?'tabindex="-1" aria-disabled="true"':'')+` title="add a new context" data-tid="`+tid+`" data-wid="`+wid+`"><i class="fas fa-plus-circle"></i></a></li>`;
     }
+    // reading view
     if ( mode == "read" ) {
         $( ".globaltext-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
     } else if ( mode == "edit" ) {
+    // editing view
         if ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == '#contribute/1/' ||
              location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == "#contribute/2/typological/" ||
              location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == "#contribute/2/genetic/" ||
              location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == "#contribute/2/intratextual/" ||
              (location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == "#contribute/2/genetic/2/" && tid == location.hash.substring( location.hash.lastIndexOf("/")+1 ).split( "-" )[0] )
             ) {
+            // load globaltext as text
             $( ".globaltext-workbench .globaltext-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
         }
         if ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) == "#contribute/2/genetic/2/" && tid == location.hash.substring( location.hash.lastIndexOf("/")+1 ).split( "-" )[1] ) {
-            // TODO?
-            $( ".globalcontext" ).html( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
+            // load globaltext as context
+            $( ".globaltext-workbench .globaltext-container .globalcontext" ).html( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
         }
     } else {
-        $( ".context-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );        
+    // context view
+        if ( $( ".globalcontext" ).length ) {
+            $( ".context-workbench .context-container .globalcontext" ).html( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
+        } else {
+            $( ".context-workbench .context-container .globaltext" ).replaceWith( `<div class="globaltext"><ul class="nav nav-pills" id="pills-tab" role="tablist">`+tab_nav+`</ul><div class="tab-content" id="pills-tabContent">`+tab_content+`</div></div>` );
+        }
     }
     clearInterval( t );
     t = setInterval(updateDOM(),500);
@@ -1893,10 +1901,18 @@ async function processGlobalText( tid, wid ) {
                     {
                         ?w intro:R17_actualizesFeature ?f .
                         ?f ?p ?o .
-                    } UNION
-                    {
+                    } UNION {
                         ?w intro:R19_hasType ?ty .
                         ?ty intro:R4i_isDefinedIn ?f .
+                        ?f ?p ?o .
+                    } UNION {
+                        ?w intro:R19_hasType ?ty .
+                        ?ty intro:R4i_isDefinedIn ?f2 .
+                        ?f2 skos:inScheme ?f .
+                        ?f ?p ?o .
+                    } UNION {
+                        ?w intro:R17_actualizesFeature ?f2 .
+                        ?f2 skos:inScheme ?f .
                         ?f ?p ?o .
                     }
                     BIND( ?f AS ?s )
@@ -1904,16 +1920,26 @@ async function processGlobalText( tid, wid ) {
                 UNION {
                     ?s2 intro:R20_discusses ?work .
                     ?s2 intro:R21_identifies+ ?w .
-                      ?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity) ?t .
+                    ?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity) ?t .
                     {
+                        ?t intro:R10i_isPassageOf ?to .
+                        ?to ?p ?too .
+                        BIND ( ?to AS ?s)
+                    } UNION {
+                        ?t intro:R10i_isPassageOf ?do .
+                        ?do ?p ?to .
+                        ?to ?p ?too
+                        BIND ( ?to AS ?s)
+                    } UNION {
                         ?t intro:R41_hasLocation [ ?p ?to ] .
-                        ?to rdf:rest*/rdf:first ?too .
-                      } UNION {
+                        ?to rdf:restASTERISK/rdf:first ?too .
+        BIND ( ?t AS ?s)
+                    } UNION {
                           ?t intro:R41_hasLocation ?to .
                         ?to ?p ?too .		
-                      }
+        BIND ( ?t AS ?s)
+                    }
                     BIND ( ?too AS ?o)
-                    BIND ( ?t AS ?s)
                 }
                 FILTER (?work = <https://www.romanticperiodpoetry.org/id/`+wid+`/work>)
                 BIND(<default> AS ?g)
@@ -1972,6 +1998,8 @@ async function processGlobalText( tid, wid ) {
         contexts = _l.groupBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), function(o) { return o.id.match(uuidRegex) });
         skos = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
         contributors = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
+        cxtref = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ) && !o.id.match(uuidRegex) && !o.id.endsWith( '/tool' ); }) , 'id' );
+        console.log( contexts, cxtref, skos, contributors);
 
         // tool settings
         if ( !!Object.keys( annotorious ).length ) {
@@ -1999,7 +2027,7 @@ async function processGlobalText( tid, wid ) {
 
         // initialize
         r = await getJSONLD( q, "raw" );
-        initializeContexts( contexts, r, mode );
+        initializeContexts( contexts, cxtref, r, mode );
     // this section is obsolete!
     } else if ( mode == "edit" ) {
         /*    
@@ -2308,7 +2336,7 @@ function genetic_step2( text, work ) {
                     </div>
                 </div>
                 <!--<ul class="bb"></ul>-->
-                <!-- TODO: do two col-sm-4 with headings -->
+                <!-- TODO?: do two col-sm-4 with headings -->
             </div>
             <div class="col-sm-6 globalcontext" style="max-width: calc(100vw / 3 - 20px);overflow: scroll;height: calc(100vh - 95px);">
                 <table id="worksSearchDT" class="table table-striped">
@@ -2609,12 +2637,13 @@ async function contribute_step3( tid, wid ) {
     // create JSON schema
     jf.schema.name = { title:"Title",key:"name",type:"string",required:true,description:"Give your contextualization a meaningful title — required" };
     jf.schema.description = { title:"Summary",key:"description",type:"textarea",description:"Provide a concise overall summary of your contextualization — optional" };
+    jf.schema.citation = { title:"Source citation",key:"citation",type:"string",description:"Cite a source for this contextualization — optional" };
     jf.schema.label = { title:"Alternative label",key:"label",type:"string" };
     jf.schema.comment = { title:"Comment",key:"comment",type:"textarea" };
     jf.schema.seeAlso = { title:"See also",key:"seeAlso",type:"string" };
     jf.schema.isDefinedBy = { title:"Is defined by",key:"isDefinedBy",type:"string" };
 
-    jf.form.push( { items:[ "name","description" ], legend:"Context", title:"Context – this information will create a contextualization", type:"fieldset" } );
+    jf.form.push( { items:[ "name","description","citation" ], legend:"Context", title:"Context – this information will create a contextualization", type:"fieldset" } );
     if ( /\/3\/genetic\/2\//.test(window.location.href) || /\/3\/intratextual\//.test(window.location.href) ) {
         jf.schema.itype = { type:"string",title:"Type of inter-/intra-textual relation",description:"Specify the type of context component from the list — required", required:true }
         jf.form.push( { items:[ "itype" ], legend:"Context", title:"Context type – this information will specify the type of interrelation", type:"fieldset" } );
@@ -2640,7 +2669,7 @@ async function contribute_step3( tid, wid ) {
                     "poetic/rhetorical": "poetic/rhetorical"
                 },
                 onChange: async function(e) { 
-                    console.log("ctype change:", e );
+                    //console.log("ctype change:", e );
                     var ctype = '';
                     if ( e.target.value != '' ) {
                         if ( e.target.value == "semantic" ) {
@@ -2652,6 +2681,8 @@ async function contribute_step3( tid, wid ) {
                         } 
                         var list_id = "datalist-"+uuidv4();
                         $( $( e.currentTarget ).closest( 'fieldset' ).find( 'input[type="text"]') ).attr( "list", list_id );
+                        var entities_list = '';
+                        /*
                         var q = namespaces+`SELECT * WHERE { 
                             ?s ?p <http://www.w3.org/2004/02/skos/core#Concept> . 
                             ?s <http://www.w3.org/2004/02/skos/core#prefLabel> ?q . 
@@ -2665,6 +2696,38 @@ async function contribute_step3( tid, wid ) {
                             var v = graph[ j ];
                             entities_list += `<option data-value="`+v.s.value+`">`+v.q.value+`</option>`;
                         }
+                        */
+                        var q = namespaces+`SELECT DISTINCT ?s ?p ?o WHERE { 
+  				            {
+                                ?s rdf:type <http://www.w3.org/2004/02/skos/core#Concept> . 
+                                ?s <http://www.w3.org/2004/02/skos/core#inScheme> ?g . 
+                                ?g <http://purl.org/dc/elements/1.1/type> `+ctype+` .
+                                ?s ?p ?o.
+				            } UNION {
+                                ?s rdf:type <http://www.w3.org/2004/02/skos/core#ConceptScheme> . 
+                                ?s <http://purl.org/dc/elements/1.1/type> `+ctype+` .
+                                ?s ?p ?o.
+                            }
+                            FILTER ( ISIRI(?o) || (lang(?o) = "en" ) || langmatches(lang(?o),"") )
+                        }`;
+                        var r = await getJSONLD( q );
+                        if (!r.hasOwnProperty( "graph" )) {
+                            r.graph = [];
+                        }
+                        entities_list = `<select>`;
+                        var schemes = _l.groupBy( r.graph, 'type' );
+                        var cbyscheme = _l.groupBy( r.graph, 'skos:inScheme.id' );
+                        var nbyscheme = _l.keyBy( r.graph, 'id' );
+                        $.each( schemes["skos:ConceptScheme"], function( i,v) {
+                            entities_list += `<optgroup label="`+v["dc:source"]+`">`;
+                            $.each( cbyscheme[ v.id ].sort(), function(i2,v2) {
+                                entities_list += `<option data-value="`+v2.id+`" value="`+(Array.isArray(v2["skos:prefLabel"])?v2["skos:prefLabel"].join("; "):v2["skos:prefLabel"])+(v2["skos:altLabel"]?" ["+(Array.isArray(v2["skos:altLabel"])?v2["skos:altLabel"].join("; "):v2["skos:altLabel"])+"]":``)+
+                                (v2.hasOwnProperty( "skos:broader" ) && v2["skos:broader" ].id in nbyscheme?` (`+nbyscheme[ v2["skos:broader" ].id ]["skos:prefLabel"]+`)`:``)+`">`+
+                                (v2.hasOwnProperty( "dcterms:bibliographicCitation" )?v2[ "dcterms:bibliographicCitation" ]:v[ "dcterms:bibliographicCitation" ])+`</option>`;
+                            });
+                            entities_list += `</optgroup>`;
+                        });
+                        entities_list += `</select>`;
                         $( "#jForm" ).append( `<datalist id="`+list_id+`"/>` );
                         $( '#jForm datalist#'+jqu( list_id ) ).html( entities_list );
                     }
@@ -2708,7 +2771,6 @@ async function contribute_step3( tid, wid ) {
     }]} );
 
     jf.onSubmit = async function (errors, values) {
-        // TODO: may need additional error checking, e.g. non-existing itype or cname...?
         if (errors || !check_contexts_ready( values.components )) {
             if ( errors ) {
                 console.log( errors );
@@ -2739,6 +2801,9 @@ async function contribute_step3( tid, wid ) {
             triples += `dcterms:creator `+user+` ;\n`;
             triples += `as:generator <`+domain+`/> ;\n`;
             triples += `dcterms:created "`+date.toISOString()+`" ;\n`;
+            if ( values.citation ) {
+                triples += `dcterms:source """`+values.citation+`""" ;\n`;
+            }
 
             triples += `intro:R20_discusses <`+Object.keys( _l.keyBy( tanchors, 'wid' ) )[0]+`> ;\n`;
             $.each( values.components, function( i, v) {
@@ -2756,6 +2821,11 @@ async function contribute_step3( tid, wid ) {
             });
             if (values.itype) {
                 itype = $( "datalist#itype option" ).filter(function() { return this.value == values.itype; }).data('value');
+                if ( !itype ) {
+                    message = `<b>Incorrect submission!</b> Please ensure only values from controlled lists are used. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
+                    show_alert_mod( message, "danger", true, 7500 );
+                    return;
+                }
                 triples += `intro:R21_identifies <`+domain+`/id/`+tripleid+`/intertextuality> ;\n`;
                 triples += `rdfs:isDefinedBy <`+itype+`> ;\n`;
             }
@@ -2790,6 +2860,12 @@ async function contribute_step3( tid, wid ) {
 
                 triples += `<`+domain+`/id/`+tripleid+`/typeOfIntertextuality> a intro:INT11_TypeOfInterrelation ;\n`;
                 triples += `intro:R4i_isDefinedIn <`+itype+`> ;\n`;
+                // force "intertextual"
+                /*
+                if ( w2id != '' ) {
+                    triples += `intro:R4i_isDefinedIn <https://www.romanticperiodpoetry.org/rppa/kos/contextuality/intertextual> ;\n`;
+                }
+                */
                 triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/intertextuality> ;\n`
                 triples += `rdfs:isDefinedBy <`+itype+`> ;\n`;
                 triples += `.\n`;
@@ -2798,8 +2874,9 @@ async function contribute_step3( tid, wid ) {
             $.each( values.components, function(i,v) {
                 // 1. do internal loop to generate locations
                 //    TODO: repeated use of same location produces new locations
-                //    — is this wanted?  not really expected, however, how could
-                //    I keep track of and reuse already created locations? 
+                //    — is this wanted?  neg: leads to duplication (scale not
+                //    known), pro: keeps components self-contained, possibility
+                //    to adjust individual targets independently of others
                 $.each( v.tanchors, function(i2,v2) {
                     var regex = /.*?\/id\/(.*?)\/work$/;
                     var wid = tanchors[v2].wid.match( regex )[1];   
@@ -2878,6 +2955,11 @@ async function contribute_step3( tid, wid ) {
                 $( $( "#jForm input[id$='cname'][list]" )[0].list ).attr("id")
 
                 var ctype = $( "datalist#"+$( $( "#jForm input[id$='cname'][list]" )[i].list ).attr("id")+" option" ).filter(function() { return this.value == v.cname; }).data('value');
+                if ( !ctype ) {
+                    message = `<b>Incorrect submission!</b> Please ensure only values from controlled lists are used. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
+                    show_alert_mod( message, "danger", true, 7500 );
+                    return;
+                }
                 if (values.itype) {
 
                     triples += `\n<`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> a intro:INT3_Interrelation, pdp:Intertextuality, oa:Annotation ;\n`;
@@ -2888,10 +2970,10 @@ async function contribute_step3( tid, wid ) {
                     triples += `intro:R19_hasType <`+domain+`/id/`+tripleid+`/typeOfIntertextuality/`+(i+1)+`> ;\n`;
 
                     $.each( v.canchors, function(i3,v3) {
-                        triples += `intro:R13_hasReferringEntity <`+domain+`/id/`+tripleid+`/contextLocation/`+(coffset+i3+1)+`> ;\n`;
+                        triples += `intro:R12_hasReferredToEntity <`+domain+`/id/`+tripleid+`/contextLocation/`+(coffset+i3+1)+`> ;\n`;
                     });
                     $.each( v.tanchors, function(i3,v3) {
-                        triples += `intro:R12_hasReferredToEntity <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i3+1)+`> ;\n`;
+                        triples += `intro:R13_hasReferringEntity <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i3+1)+`> ;\n`;
                         triples += `pdp:isIntertextualityPresentAt <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i3+1)+`> ;\n`;
                     });
 
@@ -2921,13 +3003,12 @@ async function contribute_step3( tid, wid ) {
                     $.each( v.tanchors, function(i,v) {
                         triples += `oa:hasTarget <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i+1)+`> ;\n`;
                     });
-                    triples += `dcterms:requires <https://www.romanticperiodpoetry.org/id/tool00002/tool> ;\n`;
                     triples += `.\n`;
 
                     triples += `<`+domain+`/id/`+tripleid+`/typeOfIntertextuality/`+(i+1)+`> a intro:INT11_TypeOfInterrelation ;\n`;
-                    triples += `intro:R4i_isDefinedIn <`+ctype+`> ;\n`;
+                    triples += `intro:R4i_isDefinedIn <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
                     triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> ;\n`
-                    triples += `rdfs:isDefinedBy <`+ctype+`> ;\n`;
+                    triples += `rdfs:isDefinedBy <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
                     triples += `.\n`;
 
                     triples += `<`+domain+`/id/`+tripleid+`/context> intro:R21_identifies <`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> .\n`;
@@ -2939,7 +3020,7 @@ async function contribute_step3( tid, wid ) {
                     triples += `skos:prefLabel """`+v.cname+`""" ;\n`;
                         
                     triples += `intro:R21i_isIdentifiedBy <`+domain+`/id/`+tripleid+`/context> ;\n`;
-                    triples += `intro:R17_actualizesFeature <`+ctype+`> ;\n`;
+                    triples += `intro:R17_actualizesFeature <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
                     $.each( v.tanchors, function(i3,v3) {
                         triples += `intro:R18i_actualizationFoundOn <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i3+1)+`> ;\n`;
                     });
@@ -2959,7 +3040,6 @@ async function contribute_step3( tid, wid ) {
                     $.each( v.tanchors, function(i,v) {
                         triples += `oa:hasTarget <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i+1)+`> ;\n`;
                     });
-                    triples += `dcterms:requires <https://www.romanticperiodpoetry.org/id/tool00002/tool> ;\n`;
                     triples += `.\n`;
 
                     triples += `<`+domain+`/id/`+tripleid+`/context> intro:R21_identifies <`+domain+`/id/`+tripleid+`/actualization/`+(i+1)+`> .\n`;
@@ -3068,7 +3148,7 @@ function cloneCanvas(oldCanvas) {
     - processes building-blocks (in editing mode) for lct:txt/lct:img/lct:aud
     - processes contexts (in reading mode)
 */
-async function initializeContexts( exprContexts, graph, mode ) {
+async function initializeContexts( exprContexts, exprNodes, graph, mode ) {
     // edit mode is obsolete, here will be NO buildingblocks in the graph!
     //$( ".contexts" ).html( "" );
     //$( ".workbench" ).html( "" );
@@ -3099,11 +3179,46 @@ async function initializeContexts( exprContexts, graph, mode ) {
 //        $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
 //        $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
 //        $( ".highlight-tc" ).removeClass( "highlight-tc" );
-        var graphElements = [];
+        var graphElements = [], done = {}, nodes_added = [], local_col = {};
         for ( var key in exprContexts ) {
-            var context = _l.keyBy( exprContexts[key], 'id' )
-            graphElements = graphElements.concat( processGraphContext( context ) );
-//            processExprContext( context );
+            if ( key != 'null' ) {
+                var context = _l.keyBy( exprContexts[key], 'id' )
+                graphElements = graphElements.concat( processGraphContext( context ) );
+    //            processExprContext( context );
+            }
+        }
+        for ( var part in exprNodes ) {
+            if ( exprNodes[ part ].hasOwnProperty( "type" ) ) {
+                if ( $( "#cy" ).length && !cy.$id( exprNodes[ part ].id ).length && !done[ exprNodes[ part ].id ] ) {
+                    nodes_added = nodes_added.concat([
+                        { group: 'nodes', 
+                            classes: "node",
+                            data: {
+                                id: exprNodes[ part ].id,
+                                name: (addicon( exprNodes[ part ].id )?addicon( exprNodes[ part ].id ):'')+" "+onto[exprNodes[ part ].type[0]].label+"\n"+exprNodes[ part ][ "skos:prefLabel" ],
+                                pref: exprNodes[ part ]["skos:prefLabel"],
+                                alt: exprNodes[ part ]["skos:altLabel"],
+                                class: exprNodes[ part ].type,
+                                bgcolor: (function() {
+                                    if ( exprNodes[ part ].id.includes( "/expression/" ) || exprNodes[ part ].id.includes( "/manifestation/" ) ) {
+                                        if (exprNodes[ part ].id.endsWith( "/1" )) { local_col[ exprNodes[ part ].id ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+                                        else if (exprNodes[ part ].id.endsWith( "/2" )) { local_col[ exprNodes[ part ].id ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+                                        else if (exprNodes[ part ].id.endsWith( "/3" )) { local_col[ exprNodes[ part ].id ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+                                        else if (exprNodes[ part ].id.endsWith( "/4" )) { local_col[ exprNodes[ part ].id ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+                                    } else if ( exprNodes[ part ].id.includes( "/excerpt/" ) ) {
+                                        return local_col[ exprNodes[ part ]["lrmoo:R15i_is_fragment_of"] ]
+                                    } else return graph_col[nsv( exprNodes[ part ].type[0] )];
+                                })(),
+                                shape: "round-rectangle",
+                                //context: exprNodes[ part ]["intro:R21i_isIdentifiedBy"].id
+                            },
+                            //position: cy.getElementById( exprNodes[ part ].id ).position()
+                        }
+                    ]);
+                    done[ exprNodes[ part ].id ] = true;
+                }
+            }
+            graphElements = graphElements.concat( nodes_added );
         }
         if ( $( "#cy" ).length ) {
             var added = cy.add( graphElements );
@@ -3121,7 +3236,6 @@ async function initializeContexts( exprContexts, graph, mode ) {
 
 // process contexts in the graph view
 function processGraphContext( context ) {
-    //console.log( context );
     var added = [];
     for (var [id, part] of Object.entries( context )) {
         if ( part.type.includes( "intro:INT2_ActualizationOfFeature" ) ) {
@@ -3130,7 +3244,7 @@ function processGraphContext( context ) {
                     classes: "node",
                     data: {
                         id: part.id,
-                        name: part["intro:R17_actualizesFeature"].id in skos?skos[ part["intro:R17_actualizesFeature"].id ]["skos:prefLabel"]:part["intro:R17_actualizesFeature"].id,
+                        name: onto[ "intro:INT2_ActualizationOfFeature" ].label+"\n"+(part["intro:R17_actualizesFeature"].id in skos?skos[ part["intro:R17_actualizesFeature"].id ]["skos:prefLabel"]:part["intro:R17_actualizesFeature"].id),
                         pref: part["skos:prefLabel"],
                         alt: part["skos:altLabel"],
                         class: [ onto[ "intro:INT2_ActualizationOfFeature" ].about ],
@@ -3152,44 +3266,46 @@ function processGraphContext( context ) {
                 }
             ]);
         } else if ( part.type.includes( "intro:INT3_Interrelation" )) {
-            added = added.concat([
-                { group: 'nodes', 
-                    classes: "node",
-                    data: {
-                        id: part.id,
-                        name: context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id in skos?skos[ context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:prefLabel"]:context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id,
-                        pref: part["skos:prefLabel"],
-                        alt: part["skos:altLabel"],
-                        class: [ onto[ "intro:INT3_Interrelation" ].about ],
-                        bgcolor: "#2a9d8f",
-                        shape: "concave-hexagon",
-                        context: part["intro:R21i_isIdentifiedBy"].id
+            if ( part.hasOwnProperty( "intro:R12_hasReferredToEntity" ) && part.hasOwnProperty( "intro:R13_hasReferringEntity" ) ) {
+                added = added.concat([
+                    { group: 'nodes', 
+                        classes: "node",
+                        data: {
+                            id: part.id,
+                            name: onto[ "intro:INT3_Interrelation"].label+"\n"+(context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id in skos?skos[ context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:prefLabel"]:context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id),
+                            pref: part["skos:prefLabel"],
+                            alt: part["skos:altLabel"],
+                            class: [ onto[ "intro:INT3_Interrelation" ].about ],
+                            bgcolor: "#2a9d8f",
+                            shape: "concave-hexagon",
+                            context: part["intro:R21i_isIdentifiedBy"].id
+                        },
+                        //position: cy.getElementById( part.id ).position()
                     },
-                    //position: cy.getElementById( part.id ).position()
-                },
-                { group: 'edges', 
-                    classes: "edge",
-                    data: { 
-                        id: part.id+context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
-                        source: part.id, 
-                        target: context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id, 
-                        name: onto[ "intro:R12_hasReferredToEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                        pref: onto[ "intro:R12_hasReferredToEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                        class: onto[ "intro:R12_hasReferredToEntity" ].about
+                    { group: 'edges', 
+                        classes: "edge",
+                        data: { 
+                            id: part.id+context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                            source: part.id, 
+                            target: context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id, 
+                            name: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                            pref: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                            class: onto[ "intro:R13_hasReferringEntity" ].about
+                        }
+                    },
+                    { group: 'edges', 
+                        classes: "edge",
+                        data: { 
+                            id: part.id+context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                            source: part.id,
+                            target: context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,
+                            name: onto[ "intro:R12_hasReferredToEntity" ].label,
+                            pref: onto[ "intro:R12_hasReferredToEntity" ].label,
+                            class: onto[ "intro:R12_hasReferredToEntity" ].about
+                        }
                     }
-                },
-                { group: 'edges', 
-                    classes: "edge",
-                    data: { 
-                        id: part.id+context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
-                        source: part.id,
-                        target: context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,
-                        name: onto[ "intro:R13_hasReferringEntity" ].label,
-                        pref: onto[ "intro:R13_hasReferringEntity" ].label,
-                        class: onto[ "intro:R13_hasReferringEntity" ].about
-                    }
-                }
-            ]);
+                ]);
+            }
         }
     }
     //console.log( added );
@@ -3259,9 +3375,9 @@ function print_cxtmd( md, skos ) {
             (v.hasOwnProperty("rdfs:isDefinedBy") && skos[v['rdfs:isDefinedBy'].id].hasOwnProperty("skos:inScheme")?
             `<dt>Context scheme</dt>`+
             `<dd>`+skos[v['rdfs:isDefinedBy'].id]["skos:inScheme"].id+`</dd>`:``)+
-            (v.hasOwnProperty("dcterms:spatial")?
-            `<dt>Spatial dimension</dt>`+
-            `<dd><a class="external" target="_blank" href="`+v['dcterms:spatial'].id+`">`+v['dcterms:spatial'].id+`</a></dd>`:``)+
+            (v.hasOwnProperty("dcterms:source")?
+            `<dt>Source citation</dt>`+
+            `<dd>`+v['dcterms:source']+`</dd>`:``)+
             (v.hasOwnProperty("dcterms:spatial")?
             `<dt>Spatial dimension</dt>`+
             `<dd><a class="external" target="_blank" href="`+v['dcterms:spatial'].id+`">`+v['dcterms:spatial'].id+`</a></dd>`:``)+
@@ -3285,7 +3401,6 @@ function print_cxtmd( md, skos ) {
 
 // format context work
 function print_cxtwrk( md, content, skos ) {
-    //console.log( md, content, skos );
     const work = [].concat( md );
     var formatted_metadata = '<div style="font-size:15px;"><h4><i class="fa-solid fa-right-left"></i> Contextualization</h4><dl>';
     $.each( work, function( i,v ) {
@@ -3296,15 +3411,27 @@ function print_cxtwrk( md, content, skos ) {
             (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
             `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:prefLabel"]+`</dd>`:
             `<dd>`+v['intro:R17_actualizesFeature'].id+`</dd>`))+
-            
-            // TODO: need to check for and display any rdf:value's in oa:hasBody
-            // (actualization summary: cdesc)
+
+            (v.hasOwnProperty("rdf:value")?
+            `<dt style='word-break:break-word;'>Contextualization description</dt>`+
+            `<dd>`+v['rdf:value']+`</dd>`:``)+
  
+            `<dt style='word-break:break-word;'>Contextualization citation</dt>`+
+            (v.hasOwnProperty("intro:R19_hasType")?
+            `<dd>`+("dcterms:bibliographicCitation" in skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]?skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["dcterms:bibliographicCitation"]:skos[ skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id ]["dcterms:bibliographicCitation"])+`</dd>`:
+            (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
+            `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["dcterms:bibliographicCitation"]+`</dd>`:`<dd>—</dd>`))+
             `<dt style='word-break:break-word;'>Contextualization scheme</dt>`+
             (v.hasOwnProperty("intro:R19_hasType")?
             `<dd>`+skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id+`</dd>`:
             (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
             `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:inScheme"].id+`</dd>`:`<dd>—</dd>`))+
+            `<dt style='word-break:break-word;'>Scheme title</dt>`+
+            (v.hasOwnProperty("intro:R19_hasType")?
+            `<dd>`+skos[ skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id ][ "dc:title" ]+`</dd>`:
+            (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
+            `<dd>`+skos[ skos[ v['intro:R17_actualizesFeature'].id ]["skos:inScheme"].id ][ "dc:title" ]+`</dd>`:`<dd>—</dd>`))+
+
             (v.hasOwnProperty("dcterms:format")?
             `<dt>Format</dt>`+
             `<dd><a class="external" target="_blank" href="`+context["@context"][v['dcterms:format'].id.split(":")[0]]+v['dcterms:format'].id.split(":")[1]+`">`+v['dcterms:format'].id+`</a></dd>`:``)+
@@ -3335,9 +3462,9 @@ function print_cxtwrk( md, content, skos ) {
       display: make_context
 */
 // TODO: this will be the key function that will process arrays of
-//       actualizations in the contexts retrieved!  Is still based on hasAction
-//       and types from the old monolithic contextWork object!
+//       actualizations in the contexts retrieved!
 async function display_context( context ) {
+    //console.log( context );
     var q = namespaces+`SELECT DISTINCT ?s ?p ?o WHERE {
         {
             {	# context metadata
@@ -3370,6 +3497,15 @@ async function display_context( context ) {
         			?w intro:R19_hasType ?ty .
         			?ty intro:R4i_isDefinedIn ?f .
         			?f ?p ?o .
+      			} UNION {
+                	?w intro:R19_hasType ?ty .
+        			?ty intro:R4i_isDefinedIn ?s2 .
+        			?s2 skos:inScheme ?f .
+          			?f ?p ?o .
+                } UNION {
+        			?w intro:R17_actualizesFeature ?s2 .
+                	?s2 skos:inScheme ?f .
+        			?f ?p ?o .
       			}
       			BIND( ?f AS ?s )
     		}
@@ -3377,17 +3513,36 @@ async function display_context( context ) {
                 ?context intro:R21_identifies+ ?w .
       			?w (intro:R18i_actualizationFoundOn|intro:R13_hasReferringEntity|intro:R12_hasReferredToEntity) ?t .
         		{
+        			?t intro:R10i_isPassageOf ?to .
+        			?to ?p ?too .
+			        BIND ( ?to AS ?s)
+    			} UNION {
         			?t intro:R10i_isPassageOf ?do .
-        			?do ?p ?too .
+        			?do ?p ?to .
+        			?to ?p ?too
+			        BIND ( ?to AS ?s)
     			} UNION {
 				    ?t intro:R41_hasLocation [ ?p ?to ] .
 					?to rdf:rest*/rdf:first ?too .
+			        BIND ( ?t AS ?s)
       			} UNION {
       				?t intro:R41_hasLocation ?to .
-					?to ?p ?too .		
+					?to ?p ?too .	
+                    BIND ( ?t AS ?s)
       			}
                 BIND ( ?too AS ?o)
-                BIND ( ?t AS ?s)
+        		#{
+        		#	?t intro:R10i_isPassageOf ?do .
+        		#	?do ?p ?too .
+    			#} UNION {
+				#    ?t intro:R41_hasLocation [ ?p ?to ] .
+			    #	 ?to rdf:rest*/rdf:first ?too .
+      			#} UNION {
+      			#	?t intro:R41_hasLocation ?to .
+				#	?to ?p ?too .		
+      			#}
+                #BIND ( ?too AS ?o)
+                #BIND ( ?t AS ?s)
     		}
     		UNION {
                 ?context intro:R21_identifies+ ?w .
@@ -3417,12 +3572,13 @@ async function display_context( context ) {
     if (!r.hasOwnProperty( "graph" )) {
         r.graph = [];
     }
-    var cxtmd = _l.keyBy( _l.filter( r.graph, function(o) { return o["type"].includes("rppa:Context") && o.id.match(uuidRegex); }), 'id' );
+    var cxtmd = _l.keyBy( _l.filter( r.graph, function(o) { return o.hasOwnProperty( "type" ) && o["type"].includes("rppa:Context") && o.id.match(uuidRegex); }), 'id' );
     var cxtcnt = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ) && o.id.match(uuidRegex); }), 'id' );
+    var cxtref = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ) && !o.id.match(uuidRegex) && !o.id.endsWith( '/tool' ); }) , 'id' );
     var skos = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
     var contributor = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
-    var tools = _l.keyBy( _l.filter( r.graph, function(o) { return o["type"].includes( 'crmdig:D14_Software' ); }), 'id' );
-    console.log( cxtmd, cxtcnt, skos, contributor, tools );
+    var tools = _l.keyBy( _l.filter( r.graph, function(o) { return o.hasOwnProperty( "type" ) && o["type"].includes( 'crmdig:D14_Software' ); }), 'id' );
+    console.log( cxtmd, cxtcnt, cxtref, skos, contributor, tools );
     mode = "view";
     zInd = zInd+1;
     if ( $('.offcanvas.show').length ) { 
@@ -3430,6 +3586,7 @@ async function display_context( context ) {
         $(".popover").hide(); // hide if new text was called from a popover
     }
     // create global text canvas
+    var intertext = _l.some(skos, ['id', 'rppa:kos/contextuality/intertextual']);
     var context_win_id = uuidv4();
     var context_win = `<div style="z-index:`+zInd+`;overflow:inherit;" class="offcanvas offcanvas-start context-workbench" data-bs-backdrop="static" tabindex="-1" id="win-`+context_win_id+`" aria-labelledby="staticBackdropLabel">
             <div class="offcanvas-body context-container globaltext-container" data-cid="`+context+`">`+
@@ -3442,13 +3599,13 @@ async function display_context( context ) {
                 -->
                 <div class="row">
                     <div class="col-sm-4 globaltext">
+                    </div>`+((intertext)?
+                    `<div class="col-sm-4 context" style="overflow:auto;">
                     </div>
-                    <div class="col-sm-8 context" style="columns:2;column-fill:auto;overflow:hidden;">
-                    </div>
-                    <!--
-                    <div class="col-sm-2 workbench">
-                    </div>
-                    -->
+                    <div class="col-sm-4 globalcontext-todo" style="">
+                    </div>`:
+                    `<div class="col-sm-8 context" style="columns:2;column-fill:auto;overflow:hidden;">
+                    </div>`)+`
                 </div>
             </div>
         </div>`;
@@ -3456,17 +3613,34 @@ async function display_context( context ) {
 
     const parts = [].concat( cxtcnt[context]["intro:R21_identifies"] );
     // collect the targets of annotations
-    var target = [], target_tabs = [], target_locs = [];
+    var target = [], target_tabs = [], target_locs = [], target_note = [];
+    var cxtloc = [], cxtloc_tabs = [], cxtloc_locs = [], cxtloc_note = [];
     for (var i in parts ) {
         var annotation = cxtcnt[ parts[i].id ];
         // show target globaltext
-        target.push( cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P48_has_preferred_identifier"] );
-        target_tabs = target_tabs.concat( _l.filter( cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
-        target_locs = target_locs.concat( cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] );
+        if ( annotation.hasOwnProperty( 'intro:R13_hasReferringEntity' ) && annotation.hasOwnProperty( 'intro:R12_hasReferredToEntity' ) ) {
+            target.push( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+            target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+            target_locs = target_locs.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdf:value"] );
+            target_note = target_note.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdfs:note"] );
+            cxtloc.push( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+            cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+            cxtloc_locs = cxtloc_locs.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdf:value"] );
+            cxtloc_note = cxtloc_note.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdfs:note"] );
+        } else if ( annotation.hasOwnProperty( 'intro:R18i_actualizationFoundOn' )) {
+            target.push( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+            target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+            target_locs = target_locs.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdf:value"] );
+            target_note = target_note.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdfs:note"] );
+        } 
     }
     // show target globaltext
     await display_globaltext( target[0],texts[target[0]]["work"] );
-    $( ".context-workbench .globaltext" ).addClass( "col-sm-4" );
+    $( ".context-workbench .context-container .globaltext" ).addClass( "col-sm-4" );
+    if (intertext) {
+        $('.globalcontext-todo').addClass('globalcontext').removeClass('globalcontext-todo');
+        await display_globaltext( cxtloc[0],texts[cxtloc[0]]["work"] );
+    }
     // context label
     $( ".context-container .context" ).append( `<h3><i class="fa-solid fa-layer-group"></i> Context: `+truncateString(cxtmd[context]["skos:prefLabel"],50)+`</h3>` );
     if ( cxtmd[context]["crm:P3_has_note"] ) {
@@ -3474,254 +3648,336 @@ async function display_context( context ) {
     }
     // iterate through whatever was identified with intro:R21_identifies 
     for (var i in parts ) {
-        // determine action
+        // determine action, if applicable
         var annotation = cxtcnt[ parts[i].id ];
-        switch ( annotation["dcterms:requires"].id ) {
+        /*
+        if ( annotation["rdf:value"] ) {
+            $( ".context-container .context" ).append( make_context( annotation.id, annotation["rdf:value"], cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
+        }
+        */
+        if ( annotation.hasOwnProperty( "dcterms:requires" ) ) {
+            switch ( annotation["dcterms:requires"].id ) {
 
-            // translation alignment
-            case "https://www.romanticperiodpoetry.org/id/tool00001/tool":
-                const response1 = await fetch(annotation["as:items"][0].id);
-                if (!response1.ok) {
-                    throw new Error("HTTP error " + response1.status);
-                }
-                const data1 = await response1.text();
-                // part body
-                $( ".context-container .context" ).append( make_context( cxtcnt[context].id, data1, cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
-
-                const response2 = await fetch(annotation["as:items"][1].id);
-                if (!response2.ok) {
-                    throw new Error("HTTP error " + response2.status);
-                }
-                const data2 = await response2.json();
-                // process alignment JSON
-                alignment[ annotation.id ] = {};
-                alignment[ annotation.id+"/orig" ] = data2;
-                // reverse alignment JSON to allow triggering from context
-                for ( var prop in data2 ) {
-                    $.each( data2[ prop ], function( index, item ) {
-                        // if alignment[ annotation.id ][ item ].length == 0
-                        if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
-                            alignment[ annotation.id ][ item ] = [];
+                // translation alignment
+                case "https://www.romanticperiodpoetry.org/id/tool00001/tool":
+                    /*
+                    const response1 = await fetch(annotation["as:items"][0].id);
+                    if (!response1.ok) {
+                        throw new Error("HTTP error " + response1.status);
+                    }
+                    const data1 = await response1.text();
+                    // part body
+                    $( ".context-container .context" ).append( make_context( cxtcnt[context].id, data1, cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
+                    */
+                    const response2 = await fetch(annotation["as:items"].id);
+                    if (!response2.ok) {
+                        throw new Error("HTTP error " + response2.status);
+                    }
+                    const data2 = await response2.json();
+                    // process alignment JSON
+                    alignment[ annotation.id ] = {};
+                    alignment[ annotation.id+"/orig" ] = data2;
+                    // reverse alignment JSON to allow triggering from context
+                    for ( var prop in data2 ) {
+                        $.each( data2[ prop ], function( index, item ) {
+                            // if alignment[ annotation.id ][ item ].length == 0
+                            if ( !alignment[ annotation.id ].hasOwnProperty( item ) ) {
+                                alignment[ annotation.id ][ item ] = [];
+                            }
+                            alignment[ annotation.id ][ item ].push( prop );
+                        });
+                    }
+                    //console.log( alignment[ annotation.id+"/orig" ], alignment[ annotation.id ] )
+                    // alignment activation on context-side
+                    $(document).on('mouseenter', '#win-'+context_win_id+' .globalcontext .w,#win-'+context_win_id+' .globalcontext .pc', function () {
+                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
+                            document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                            $( '.context-container .globaltext #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext #' ) ).addClass("idsSelected");       // text
+                            $( '[data-cid="'+context+'"] .text #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                            /*
+                            $( '.context[id="'+context+'"] .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
+                            */
                         }
-                        alignment[ annotation.id ][ item ].push( prop );
+                    }).on('mouseleave', '#win-'+context_win_id+' .globalcontext .w,#win-'+context_win_id+' .globalcontext .pc', function () {
+                        if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
+                            var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
+                            $( '.context-container .globaltext #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext #' ) ).removeClass("idsSelected");    // text
+                            $( '[data-cid="'+context+'"] .text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                            /*
+                            $( '.context[id="'+context+'"] .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });
+                            */                            
+                        }
                     });
-                }
-                //console.log( alignment[ annotation.id+"/orig" ], alignment[ annotation.id ] )
-                // alignment activation on context-side
-                $(document).on('mouseenter', '#win-'+context_win_id+' [id="'+context+'"] .w,#win-'+context_win_id+' [id="'+context+'"] .pc', function () {
-                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                        var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
-                        var targeted = [];
-                        $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
-                            targeted.push( $( jq(v) ).text().toLowerCase() );
-                        });
-                        document.getElementById( alignment[ annotation.id ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
-                        $( '.context-container .globaltext .text #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).addClass("idsSelected");       // text
-                        $( '[id="'+context+'"] div.text #'+$(this).attr('id') ).addClass("idsSelected");    // context
-                        /*
-                        $( '.context[id="'+context+'"] .text .w').each(function( index ) {
-                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                            $( $(this) ).addClass( "idsSelected" );
-                            }
-                        });
-                        $( '.tab-pane.active .text .w').each(function( index ) {
-                            if ( targeted.includes( $(this).text().toLowerCase() )) {
-                            $( $(this) ).addClass( "idsSelected" );
-                            }
-                        });
-                        */
-                    }
-                }).on('mouseleave', '#win-'+context_win_id+' [id="'+context+'"] .w,#win-'+context_win_id+' [id="'+context+'"] .pc', function () {
-                    if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
-                        var hovered = $( '[id="'+context+'"] #'+$(this).attr('id') ).text();
-                        var targeted = [];
-                        $.each( alignment[ annotation.id ][ $(this).attr('id') ], function( i,v ) {
-                            targeted.push( $( jq(v) ).text().toLowerCase() );
-                        });
-                        $( '.context-container .globaltext .text #'+alignment[ annotation.id ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).removeClass("idsSelected");    // text
-                        $( '[id="'+context+'"] div.text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
-                        /*
-                        $( '.context[id="'+context+'"] .text .w').each(function( index ) {
-                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                            $( $(this) ).removeClass( "idsSelected" );
-                            }
-                        });
-                        $( '.tab-pane.active .text .w').each(function( index ) {
-                            if ( targeted.includes( $(this).text().toLowerCase() )) {
-                            $( $(this) ).removeClass( "idsSelected" );
-                            }
-                        });
-                        */                            
-                    }
-                });
-                // alignment activation on text-side
-                $(document).on('mouseenter', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
-                    if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
-                        var hovered = $( '.context-container #'+$(this).attr('id') ).text();
-                        var targeted = [];
-                        $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
-                            targeted.push( $( jq(v) ).text().toLowerCase() );
-                        });
-                        document.getElementById( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
-                        $( '[id="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).addClass("idsSelected");       // text
-                        $( '.context-container .globaltext .text #'+$(this).attr('id') ).addClass("idsSelected");    // context
-                        /*
-                        $( '.context-container .globaltext .text .w').each(function( index ) {
-                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                            $( $(this) ).addClass( "idsSelected" );
-                            }
-                        });
-                        $( '.tab-pane.active .text .w').each(function( index ) {
-                            if ( targeted.includes( $(this).text().toLowerCase() )) {
-                            $( $(this) ).addClass( "idsSelected" );
-                            }
-                        });
-                        */
-                    }
-                }).on('mouseleave', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
-                    if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
-                        var hovered = $( '.context-container #'+$(this).attr('id') ).text();
-                        var targeted = [];
-                        $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
-                            targeted.push( $( jq(v) ).text().toLowerCase() );
-                        });
-                        $( '[id="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).removeClass("idsSelected");    // text
-                        $( '.context-container .globaltext .text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
-                        /*
-                        $( '.context-container .globaltext .text .w').each(function( index ) {
-                            if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
-                            $( $(this) ).removeClass( "idsSelected" );
-                            }
-                        });
-                        $( '.tab-pane.active .text .w').each(function( index ) {
-                            if ( targeted.includes( $(this).text().toLowerCase() )) {
-                            $( $(this) ).removeClass( "idsSelected" );
-                            }
-                        });
-                        */                            
-                    }
-                });
+                    // alignment activation on text-side
+                    $(document).on('mouseenter', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
+                        if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
+                            var hovered = $( '.context-container #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
+                            document.getElementById( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ][0] ).scrollIntoView( {behavior: "smooth", block: "center"} );
+                            $( '[data-cid="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).addClass("idsSelected");       // text
+                            $( '.context-container .globaltext .text #'+$(this).attr('id') ).addClass("idsSelected");    // context
+                            /*
+                            $( '.context-container .globaltext .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                $( $(this) ).addClass( "idsSelected" );
+                                }
+                            });
+                            */
+                        }
+                    }).on('mouseleave', '#win-'+context_win_id+' .context-container .globaltext .text .w,#win-'+context_win_id+' .context-container .globaltext .text .pc', function () {
+                        if ( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ] ) {
+                            var hovered = $( '.context-container #'+$(this).attr('id') ).text();
+                            var targeted = [];
+                            $.each( alignment[ annotation.id+"/orig" ][ $(this).attr('id') ], function( i,v ) {
+                                targeted.push( $( jq(v) ).text().toLowerCase() );
+                            });
+                            $( '[data-cid="'+context+'"] .text #'+alignment[ annotation.id+"/orig" ][ $(this).attr('id') ].join( ',.context-container .globaltext .text #' ) ).removeClass("idsSelected");    // text
+                            $( '.context-container .globaltext .text #'+$(this).attr('id') ).removeClass("idsSelected"); // context
+                            /*
+                            $( '.context-container .globaltext .text .w').each(function( index ) {
+                                if ( $(this).text().toLowerCase() == hovered.toLowerCase() ) {
+                                $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });
+                            $( '.tab-pane.active .text .w').each(function( index ) {
+                                if ( targeted.includes( $(this).text().toLowerCase() )) {
+                                $( $(this) ).removeClass( "idsSelected" );
+                                }
+                            });
+                            */                            
+                        }
+                    });
 
-                // contextualization
-                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
-                // tool info 
-                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+                    // contextualization
+                    $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                    // tool info 
+                    $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
 
-                clearInterval( t );
-                t = setInterval(updateDOM(),500);
-                break;
+                    clearInterval( t );
+                    t = setInterval(updateDOM(),500);
+                    break;
 
-            // ID highlighting
-            case "https://www.romanticperiodpoetry.org/id/tool00002/tool":
-
-                // part content
-                $( ".context-container .context" ).append( make_context( annotation.id, annotation["rdf:value"], cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
-                $( ".context-container .globaltext .text "+cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"].split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
-
-                // contextualization
-                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
-                // tool info
-                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
-
-                clearInterval( t );
-                t = setInterval(updateDOM(),500);
-                break;
-
-            // jsPlumb (connection drawing)
-            case "https://www.romanticperiodpoetry.org/id/tool00003/tool":
-                const response = await fetch(annotation["as:items"].id);
-                if (!response.ok) {
-                    throw new Error("HTTP error " + response.status);
-                }
-                const data = await response.json();
-                const conn_def = {
-                    "type": "Bezier",
-                    "options": {
-                        "curviness": 150
-                    }
-                };
-                const over_def =  
-                    { "type": "PlainArrow", "options": { "width": 10, "length":10, "location": 1} };
+                // ID highlighting
+                /*
+                case "https://www.romanticperiodpoetry.org/id/tool00002/tool":
                 
-                const instance = jsPlumb.newInstance({
-                    container: $('.context-container .text')[0],
-                    endpoints: [ null, null ],
-                    paintStyle: { strokeWidth: 1, stroke: '#cd6711' },
-                    connectionsDetachable: false
-                });
+                    // part content
+                    $( ".context-container .context" ).append( make_context( annotation.id, annotation["rdf:value"], cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"] ) );
+                    //$( ".context-container .globaltext .text "+cxtcnt[ annotation["oa:hasTarget"].id ]["rdf:value"].split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+
+                    // contextualization
+                    $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                    // tool info
+                    $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+
+                    clearInterval( t );
+                    t = setInterval(updateDOM(),500);
                 
-                var groups = {}, nodes = {};
-                // iterate through nodes and group them if required
-                if (data.hasOwnProperty( "nodes" )) {                    
-                    data[ "nodes" ].forEach(function(obj) { 
-                        if (obj.group) {
-                            groups[ obj.group ] = obj.group;
-                            if ( nodes.hasOwnProperty( obj.group )) {
-                                nodes[ obj.group ].push( obj.id );
-                            } else {
-                                nodes[ obj.group ] = [];
-                                nodes[ obj.group ].push( obj.id );
+                    break;
+                */
+                // jsPlumb (connection drawing)
+                case "https://www.romanticperiodpoetry.org/id/tool00003/tool":
+                    const response = await fetch(annotation["as:items"].id);
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    const data = await response.json();
+                    const conn_def = {
+                        "type": "Bezier",
+                        "options": {
+                            "curviness": 150
+                        }
+                    };
+                    const over_def =  
+                        { "type": "PlainArrow", "options": { "width": 10, "length":10, "location": 1} };
+                    
+                    const instance = jsPlumb.newInstance({
+                        container: $('.context-container .text')[0],
+                        endpoints: [ null, null ],
+                        paintStyle: { strokeWidth: 1, stroke: '#cd6711' },
+                        connectionsDetachable: false
+                    });
+                    
+                    var groups = {}, nodes = {};
+                    // iterate through nodes and group them if required
+                    if (data.hasOwnProperty( "nodes" )) {                    
+                        data[ "nodes" ].forEach(function(obj) { 
+                            if (obj.group) {
+                                groups[ obj.group ] = obj.group;
+                                if ( nodes.hasOwnProperty( obj.group )) {
+                                    nodes[ obj.group ].push( obj.id );
+                                } else {
+                                    nodes[ obj.group ] = [];
+                                    nodes[ obj.group ].push( obj.id );
+                                }
                             }
-                        }
-                    });
-                    Object.keys( nodes ).forEach(function (key) { 
-                        var value = nodes[key]
-                        var newArr = value.map(el => '.context-container .text #' + el);
-                        nodes[key] = key;
-                        $( newArr.join(',') ).wrapAll("<div style='display:inline-block;' id='"+key+"'/>");
-                        instance.addGroup({
-                            el: $( '#'+key )[0],
-                            id: 'grouped'
                         });
-                    })
-                }
-                // iterate through edges taking account of possible groups
-                if (data.hasOwnProperty( "edges" )) {                    
-                    data[ "edges" ].forEach(function(obj) {
-                        var source;
-                        if (obj.source in nodes) { 
-                            source = nodes[ obj.source ];
-                        } else { 
-                            source = obj.source 
-                        }
-                        //console.log( source );
-                        instance.connect({
-                            source: $( '#'+source )[0],
-                            target: $('.context-container .text #'+obj.target)[0],
-                            connector: conn_def,
-                            anchor: "AutoDefault",
-                            endpoints: ["Blank", "Blank"],
-                            overlays: [ over_def ]
+                        Object.keys( nodes ).forEach(function (key) { 
+                            var value = nodes[key]
+                            var newArr = value.map(el => '.context-container .text #' + el);
+                            nodes[key] = key;
+                            $( newArr.join(',') ).wrapAll("<div style='display:inline-block;' id='"+key+"'/>");
+                            instance.addGroup({
+                                el: $( '#'+key )[0],
+                                id: 'grouped'
+                            });
+                        })
+                    }
+                    // iterate through edges taking account of possible groups
+                    if (data.hasOwnProperty( "edges" )) {                    
+                        data[ "edges" ].forEach(function(obj) {
+                            var source;
+                            if (obj.source in nodes) { 
+                                source = nodes[ obj.source ];
+                            } else { 
+                                source = obj.source 
+                            }
+                            //console.log( source );
+                            instance.connect({
+                                source: $( '#'+source )[0],
+                                target: $('.context-container .text #'+obj.target)[0],
+                                connector: conn_def,
+                                anchor: "AutoDefault",
+                                endpoints: ["Blank", "Blank"],
+                                overlays: [ over_def ]
+                            });
                         });
-                    });
-                }
+                    }
 
+                    // contextualization
+                    $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                    // tool info
+                    $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
 
-                // contextualization
-                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
-                // tool info
-                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
+                    break;
 
-                break;
+                // no annotation beyond reference to SKOS
+                /*
+                default:
+                    // contextualization
+                    $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
+                    // tool info
+                    $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
 
-            // no annotation beyond reference to SKOS
-            default:
-
-
-                // contextualization
-                $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
-                // tool info
-                $( ".context-container .context" ).append( print_tool( tools[annotation["dcterms:requires"].id] ) );
-
-                break;
-        
+                    break;
+                */
+            }
+        } else {
+            // contextualization
+            $( ".context-container .context" ).append( print_cxtwrk( annotation, cxtcnt, skos ) );
         }
     }
     // context metadata
     $( ".context-container .context" ).append( print_cxtmd( cxtmd[context], skos ) );
-    // Add context data/metadata
+    // add context data/metadata
     $( ".context-container .context" ).append( print_user( contributor ) );
     
+    // highlight target/context locations
+    $.each( target_locs, function( i,v) {
+        // text
+        if ( v.substring(0,1) == '#' ) {
+            $( ".context-container .globaltext .text "+v.split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+        } else if ( v.substring(0,1) == 't' ) {
+        // media
+            var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
+            var default_region = v.split( 't=' )[1].split(',');
+            player[ "player_viewing_"+target_tabs[i] ].addRegion( {"id":play_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":'rgba(' +
+                [
+                    ~~(255),
+                    ~~(Math.random() * 255),
+                    ~~(Math.random() * 255),
+                    alpha || 1
+                ] +
+            ')'} );
+        } else if ( v.substring(0,1) == 'x' ) {
+        // image
+            var view_id = 'viid_'+uuidv4(); // TODO: these should really be the location IDs
+            if ( !annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ] ) { annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ] = []; }
+            var annotation = { 
+                "@context": "http://www.w3.org/ns/anno.jsonld",
+                "id": view_id,
+                "type": "Annotation",
+                "target": {
+                    "selector": {
+                    "type": "FragmentSelector",
+                    "conformsTo": "http://www.w3.org/TR/media-frags/",
+                    "value": v
+                    }
+                }
+            };
+            annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
+            annotorious[ "viewer_viewing_"+target_tabs[i] ].addAnnotation( annotation, true ); // true = readonly, false = editable
+        }
+    } );
+    $.each( cxtloc_locs, function( i,v) {
+        if ( v.substring(0,1) == '#' ) {
+            $( ".context-container .globaltext .text "+v.split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+        } else if ( v.substring(0,1) == 't' ) {
+            var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
+            var default_region = v.split( 't=' )[1].split(',');
+            player[ "player_viewing_"+cxtloc_tabs[i] ].addRegion( {"id":play_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":'rgba(' +
+                [
+                    ~~(255),
+                    ~~(Math.random() * 255),
+                    ~~(Math.random() * 255),
+                    alpha || 1
+                ] +
+            ')'} );
+        } else if ( v.substring(0,1) == 'x' ) {
+            var view_id = 'viid_'+uuidv4(); // TODO: these should really be the location IDs
+            if ( !annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ] ) { annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ] = []; }
+            var annotation = { 
+                "@context": "http://www.w3.org/ns/anno.jsonld",
+                "id": view_id,
+                "type": "Annotation",
+                "target": {
+                    "selector": {
+                    "type": "FragmentSelector",
+                    "conformsTo": "http://www.w3.org/TR/media-frags/",
+                    "value": v
+                    }
+                }
+            };
+            annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
+            annotorious[ "viewer_viewing_"+cxtloc_tabs[i] ].addAnnotation( annotation, true ); // true = readonly, false = editable
+        }
+    } );
+
     // open canvas
     myCanvasGTEl = document.getElementsByClassName( "context-workbench" )[0];
     myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
@@ -3735,6 +3991,20 @@ async function display_context( context ) {
         $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).removeClass( "disabled" );
         $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).click();
     });
+    $( ".context-container .globalcontext .globaltext .nav-pills button" ).addClass( "disabled" );
+    if ( cxtloc[0] && texts[ target[0] ]['work'] != texts[ cxtloc[0] ]['work']) {
+        cxtloc_tabs.forEach(function(obj) {
+            $( '#'+$( $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).closest( ".globalcontext" ).find( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' )[0] ).attr( "id" ) ).removeClass( 'disabled' );
+            $( '#'+$( $( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' ).closest( ".globalcontext" ).find( "#"+ $( "div[data-iid='"+obj.id+"']" ).parent().attr("id")+'-tab' )[0] ).attr( "id" ) ).click()
+        });
+    } else {
+        // if different expressions of same work: assume it's translation that
+        // is context
+        cxtloc.forEach(function(obj) {
+            $( '#'+$( $( "#pills-"+obj+'-1-tab' ).closest( ".globalcontext" ).find( "#pills-"+obj+'-1-tab' )[0] ).attr( "id" ) ).removeClass( 'disabled' );
+            $( '#'+$( $( "#pills-"+obj+'-1-tab' ).closest( ".globalcontext" ).find( "#pills-"+obj+'-1-tab' )[0] ).attr( "id" ) ).click()
+        });
+    }
     // jump to target location in globaltext
     document.getElementById( target_locs[0].split(',')[0].substring(1) ).scrollIntoView( {behavior: "smooth", block: "center"} );
     // on showing canvas

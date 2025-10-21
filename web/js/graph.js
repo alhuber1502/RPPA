@@ -606,7 +606,7 @@ function tippyNodes( nodes, graph, all ) {
 				var g = v.g;
 				if ( s.value == node.id() && !( o.type == 'uri' && o.value.startsWith( domain )) && typeof nodes_seen[ jqu( s.value+p.value+o.value ) ] == 'undefined') {
 					// properties
-					if ( nsv( p.value) == "crm:P106_is_composed_of" || nsv( p.value) == "crm:P70i_is_documented_in" || nsv( p.value) == "dcterm:created" 
+					if ( nsv( p.value) == "crm:P106_is_composed_of" || nsv( p.value) == "crm:P70i_is_documented_in" || nsv( p.value) == "dcterms:created" 
 						|| nsv( p.value) == "rdf:type" || nsv( p.value ).startsWith( "cnt:" ) || nsv( p.value ).startsWith( "wdt:" )
 					) { return; }
 					var addition = '';
@@ -633,7 +633,7 @@ function tippyNodes( nodes, graph, all ) {
 				if ( all ) {
 					if ( v.s.value == node.id() && (v.o.value.startsWith( domain ) || v.o.value.startsWith( "_:" )) ) {
 						// outgoing
-						if ( nsv( v.p.value) == "dcterm:creator" ) { return; }
+						if ( nsv( v.p.value) == "dcterms:creator" ) { return; }
 						contentR += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `"><span style="font-style:italic;">`
 						+ (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
 						+ `</span> &nbsp; <span><a `+((v.o.type == "uri")?`data-component="`+v.o.value+`"`:``)+` href="`+v.o.value+`" class="nodejump add_ent_wb" ` //style="color:`+cy.$id( node.id() )["_private"].data.color
@@ -1182,9 +1182,9 @@ function createCYgraph(data, graph, layout) {
 		cy.on('dblclick:timeout', function(evt) {
 		});
 	} else {
-		tippyNodes( cy.nodes(), graph );
+		tippyNodes( cy.nodes(), graph, true );
 	}
-    // TODO
+    // TODO?
     tippyNodes( cy.nodes(), graph );
 	$( ".cytoscape-navigator" ).css( "display","unset" );
     // Event handlers
@@ -1357,9 +1357,8 @@ async function loadLayout() {
     regex = /(?<=^\/)[^\/]+/;
     switch ( location.pathname.match( regex ) && location.pathname.match( regex )[0] ) {
         case "authors":
-			console.log( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) );
-            switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ) {
-                case "#id/":
+            switch ( true ) {
+                case /#id\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
                     $( ".layout_navigation" ).hide();
 					if (!$(".col-graph").length) {
 	                    $( ".layout_wrapper" ).append(`<div class="col col-graph" style="flex:unset;"></div><div class="col col-content" style="flex:unset;padding-right:0;"><div id="content"></div></div>`);
@@ -1371,7 +1370,7 @@ async function loadLayout() {
 	                    Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
 					}
                     break;
-                case "":
+                case /\s?/.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
                     if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
                         $( ".col-graph,.col-content,.gutter" ).remove();
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );
@@ -1381,9 +1380,8 @@ async function loadLayout() {
             }
             break;
         case "works":
-			console.log( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) );
-			switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ) {
-                case "#text/":
+			switch ( true ) {
+                case /#text\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( $('.offcanvas.show').length ) { 
 						$( myCanvasGTEl ).offcanvas( "hide" ); // myCanvasGT.hide(); // close any open texts if a new one is requested
 						$(".popover").hide(); // hide if new text was called from a popover
@@ -1404,11 +1402,11 @@ async function loadLayout() {
 						previousState = location.href;
 					}
                     break;
-                case "#context/":
+                case /#context\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 	                    await display_context( domain+"/id/"+location.hash.substring( location.hash.indexOf("/")+1 ) );
-						$( ".context-workbench .globaltext" ).addClass( "col-sm-4" );
+						$($( ".context-workbench .globaltext" )[0]).addClass( "col-sm-4" );
 					break;
-				case "#contribute/1/":
+				case /#contribute\/1\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1424,9 +1422,9 @@ async function loadLayout() {
 						contribute_step1( hash, texts[ hash ][ "work" ] );
 					}
 					break;
-				case "#contribute/3/genetic/2/":
-				case "#contribute/3/intratextual/":
-				case "#contribute/3/typological/":
+				case /#contribute\/3\/genetic\/2\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
+				case /#contribute\/3\/intratextual\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
+				case /#contribute\/3\/typological\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1442,7 +1440,7 @@ async function loadLayout() {
 						contribute_step3( hash );
 					}
 					break;
-				case "#contribute/2/intratextual/":
+				case /#contribute\/2\/intratextual\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1456,7 +1454,7 @@ async function loadLayout() {
 					}
 					intratextual_step2(hash, texts[ hash ][ "work" ]);
 					break;
-				case "#contribute/2/typological/":
+				case /#contribute\/2\/typological\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1470,7 +1468,7 @@ async function loadLayout() {
 					}
 					typological_step2(hash, texts[ hash ][ "work" ]);
 					break;
-				case "#contribute/2/genetic/2/":
+				case /#contribute\/2\/genetic\/2\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1492,7 +1490,7 @@ async function loadLayout() {
 					await display_globaltext( hash.split( "-" )[1], texts[ hash.split( "-" )[1] ][ "work" ] );
 					//genetic_step2a();
 					break;
-				case "#contribute/2/genetic/":
+				case /#contribute\/2\/genetic\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( !$( ".offcanvas" ).length ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
@@ -1506,7 +1504,7 @@ async function loadLayout() {
 					}
 					genetic_step2(hash, texts[ hash ][ "work" ]);
 					break;
-				case "":
+				case /\s?/.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
                     if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
                         $( ".col-graph,.col-content,.gutter" ).remove();
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );
@@ -1516,8 +1514,8 @@ async function loadLayout() {
             }
             break;
         case "networks":
-            switch ( location.hash.substring( location.hash.indexOf("#"), location.hash.indexOf("/")+1 ) ) {
-                case "#id/":
+            switch ( true ) {
+                case /#id\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
                     // TODO
                     break;
             }
