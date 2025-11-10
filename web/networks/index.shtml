@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Networks" -->
+    <!--#set var="bodyid" value="networks" -->
+    <!--#set var="networks" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+        
+    <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
+
+    <!-- main -->
+    <main class="h-100 flex-shrink-0">
+      <div class="container-fluid h-100">
+        <div class="canvas col-graph" id="canvas"></div>
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

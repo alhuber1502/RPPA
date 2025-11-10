@@ -2,7 +2,7 @@
     "@context" : {
 
 	"rppa"     : "https://www.romanticperiodpoetry.org/rppa/",
-        "prisms"   : "https://www.prisms.digital/prisms/",
+	"prisms"   : "https://www.prisms.digital/prisms/",
 	
 	"rdf"      : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 	"rdfs"     : "http://www.w3.org/2000/01/rdf-schema#",
@@ -13,9 +13,12 @@
 
 	"oa"	   : "http://www.w3.org/ns/oa#",
 	"as"	   : "http://www.w3.org/ns/activitystreams#",
+	"prov"	   : "http://www.w3.org/ns/prov#",
 
 	"crm"      : "http://www.cidoc-crm.org/cidoc-crm/",
-	"crmdig"   : "http://www.ics.forth.gr/isl/CRMdig/",
+	"crmdig"   : "http://www.cidoc-crm.org/extensions/crmdig/",
+	"crmsci"   : "http://www.cidoc-crm.org/extensions/crmsci/",
+	"crminf"   : "http://www.cidoc-crm.org/extensions/crminf/",
 	"lrmoo"    : "http://iflastandards.info/ns/lrm/lrmoo/",
 
 	"pdc"      : "http://postdata.linhd.uned.es/ontology/postdata-core#",
@@ -24,7 +27,7 @@
 	"pdk"      : "http://postdata.linhd.uned.es/kos/",
 	"pdkrf"    : "http://postdata.linhd.uned.es/kos/role-function/",
 	"pdklp"    : "http://postdata.linhd.uned.es/kos/literary-period/",
-	"intro"	   : "https://w3id.org/lso/intro/currentbeta#",
+	"intro"	   : "https://w3id.org/lso/intro/beta202408#",
 
 	"dc"   	   : "http://purl.org/dc/elements/1.1/",
 	"dcterms"  : "http://purl.org/dc/terms/",
