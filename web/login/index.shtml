@@ -67,6 +67,7 @@
             if ( user == undefined || username.length < 2) { return };
             var update = namespaces+"insert data {\n";
             update += user+` a foaf:Agent ;\n`;
+            update += `skos:prefLabel """`+$( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val()+`""" ;\n`;
             update += `foaf:name """`+$( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val()+`""" ;\n`;
             update += `foaf:accountName <`+$( "#orcidId" ).val()+`> ;\n`;
             update += `.\n}`;
