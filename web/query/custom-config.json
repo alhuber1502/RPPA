@@ -1,0 +1,82 @@
+{
+  "api": {
+    "sparql": {
+      "uri": "https://data.prisms.digital/query/rppa/sparql"
+    },
+    "wikibase": {
+      "uri": "https://www.wikidata.org/w/api.php"
+    },
+    "examples": {
+      "server": "https://www.wikidata.org/",
+      "apiPath": "w/api.php",
+      "pageTitle": "Wikidata:SPARQL_query_service/queries/examples",
+      "pagePathElement": "wiki/"
+    },
+    "urlShortener": "tinyurl",
+    "query-builder": {
+      "server": "https://query.wikidata.org/querybuilder/"
+    }
+  },
+  "brand": {
+    "title": "RPPA Query Service",
+    "logo": "/favicon-96x96.png",
+    "favicon": "/favicon.ico",
+    "copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
+  },
+  "location": {
+    "root": "/query/gui/",
+    "index": "/query/gui/index.shtml"
+  },
+  "showBanner": false,
+   "prefixes": {
+        "rppa"     : "https://www.romanticperiodpoetry.org/rppa/",
+        "prisms"   : "https://www.prisms.digital/prisms/",
+        
+        "rdf"      : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs"     : "http://www.w3.org/2000/01/rdf-schema#",
+        "xsd"      : "http://www.w3.org/2001/XMLSchema#",
+        "owl"      : "http://www.w3.org/2002/07/owl#",
+        "link"     : "http://www.w3.org/2007/ont/link#",
+        "cnt"      : "http://www.w3.org/2011/content#",
+
+        "oa"       : "http://www.w3.org/ns/oa#",
+        "as"       : "http://www.w3.org/ns/activitystreams#",
+        "prov"     : "http://www.w3.org/ns/prov#",
+
+        "crm"      : "http://www.cidoc-crm.org/cidoc-crm/",
+        "crmdig"   : "http://www.cidoc-crm.org/extensions/crmdig/",
+        "crmsci"   : "http://www.cidoc-crm.org/extensions/crmsci/",
+        "crminf"   : "http://www.cidoc-crm.org/extensions/crminf/",
+        "lrmoo"    : "http://iflastandards.info/ns/lrm/lrmoo/",
+
+        "pdc"      : "http://postdata.linhd.uned.es/ontology/postdata-core#",
+        "pdt"      : "http://postdata.linhd.uned.es/ontology/postdata-transmission#",
+        "pdp"      : "http://postdata.linhd.uned.es/ontology/postdata-poeticAnalysis#",
+        "pdk"      : "http://postdata.linhd.uned.es/kos/",
+        "pdkrf"    : "http://postdata.linhd.uned.es/kos/role-function/",
+        "pdklp"    : "http://postdata.linhd.uned.es/kos/literary-period/",
+        "olo"      : "http://purl.org/ontology/olo/core#",
+        "intro"    : "https://w3id.org/lso/intro/beta202408#",
+
+        "dc"       : "http://purl.org/dc/elements/1.1/",
+        "dcterms"  : "http://purl.org/dc/terms/",
+        "dctypes"  : "http://purl.org/dc/dcmitype/",
+        "skos"     : "http://www.w3.org/2004/02/skos/core#",
+        "schema"   : "http://schema.org/",
+        "foaf"     : "http://xmlns.com/foaf/0.1/",
+        "viaf"     : "http://viaf.org/viaf/",
+        "bf"       : "http://id.loc.gov/ontologies/bibframe/",
+
+        "wd"       : "http://www.wikidata.org/entity/",
+        "wdt"      : "http://www.wikidata.org/prop/direct/",
+
+        "lcs"      : "http://id.loc.gov/authorities/subjects/",
+        "lcn"      : "http://id.loc.gov/authorities/names/",
+        "lcf"      : "http://id.loc.gov/vocabulary/mencformat/",
+        "lcr"      : "http://id.loc.gov/vocabulary/relators/",
+        "lct"      : "http://id.loc.gov/vocabulary/resourceTypes/",
+        "lcg"      : "http://id.loc.gov/authorities/genreForms/",
+
+        "sc"       : "http://iiif.io/api/presentation/2#"
+    }
+}

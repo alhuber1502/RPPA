@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Query Service" -->
+    <!--#set var="bodyid" value="query" -->
+    <!--#set var="query" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="padding:55px 0 0;">
+    
+        <!-- content: insert here -->
+	<iframe src="/query/" title="RPPA Query Service" id="prisms_query" style="width:calc(100vw);height:calc(100vh - 95px);border:0;"></iframe>
+    
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

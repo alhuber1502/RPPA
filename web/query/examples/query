@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="utf-8"?><sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="s"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#Class</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>The physical objects that are of interest in the numismatic domain.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Objects considered to be within the numismatic domain such as coins, tokens, banknotes etc.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>NumismaticObject</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">The physical objects that are of interest in the numismatic domain.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#NumismaticObject</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Objects considered to be within the numismatic domain such as coins, tokens, banknotes etc.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#ObjectProperty</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal/>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Identifies the modern collection or repository in which a coin resides or has resided in the past. Collections are defined by Nomisma IDs</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Identifies the modern collection or repository in which a numismatic object resides or has resided in the past. Collections are defined by Nomisma IDs.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Identifies the modern collection or repository in which a numismatic object resides or has resided in the past.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>hasCollection</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Identifies the modern collection or repository in which a coin resides or has resided in the past. Collections are defined by Nomisma IDs</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Identifies the modern collection or repository in which a numismatic object resides or has resided in the past. Collections are defined by Nomisma IDs.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasCollection</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Identifies the modern collection or repository in which a numismatic object resides or has resided in the past.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2004/02/skos/core#Concept</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/ontology#Collection</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/greek_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/medieval_european_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/islamic_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/byzantine_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/roman_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/roman_provincial_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/east_asian_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/visigothic_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/parthian_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/celtic_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/carolingian_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/isPartOf</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/indo-greek_numismatics</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="la">Museum Ashmoleanum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="ca">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="cs">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="cy">Amgueddfa'r Ashmolean</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="de">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="el">Ασμόλειο Μουσείο</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="eo">Muzeo Ashmolean</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="es">Museo Ashmolean</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="fa">موزه اشمولین</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="fi">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="fr">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="he">מוזיאון אשמוליאן</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="hi">एश्मोलियन संग्रहालय</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="it">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="ja">アシュモレアン博物館</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="nl">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="oc">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="pl">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="pt">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="ru">Музей Ашмола</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="uk">Ашмолеан музей</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="zh">阿須摩林博物館</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="sv">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="id">Museum Ashmolean</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="be">Музей Эшмала</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="hy">Էշմոլի թանգարան</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="da">Ashmolean Museum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="tr">Ashmolean Müzesi</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="sl">Ashmolov muzej</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">The Ashmolean is the University of Oxford’s museum of art and archaeology, founded in 1683. The Numismatic collections are kept in the Heberden Coin Room, which houses a systematic and comprehensive collection of some three hundred thousand coins and medals with particular strengths in the fields of Greek, Roman, Celtic, Byzantine, Medieval, Islamic, Indian, and Chinese coinages. It also holds collections of paper money, tokens, jetons, and commemorative and art medals.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://hcr.ashmus.ox.ac.uk/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Ashmolean_Museum</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://viaf.org/viaf/32144814252027122452</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.idref.fr/027561070</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://catalogue.bnf.fr/ark:/12148/cb11868703t</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://isni.org/0000000121715847</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>https://www.freebase.com/m/0lxbb</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://d-nb.info/gnd/1007560-4</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#exactMatch</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.wikidata.org/entity/Q636400</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#inScheme</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/id/ashmolean</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#changeNote</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/ashmolean#provenance</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#ObjectProperty</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal/>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Identifies the position of a numismatic object within a published or recognized reference list of coin types, such as a catalogue or corpus.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Identifies the position of a numismatic object within a published or recognized reference list of types, such as a catalogue or corpus.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>hasTypeSeriesItem</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Identifies the position of a numismatic object within a published or recognized reference list of coin types, such as a catalogue or corpus.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasTypeSeriesItem</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Identifies the position of a numismatic object within a published or recognized reference list of types, such as a catalogue or corpus.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2004/02/skos/core#Concept</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/ontology#TypeSeriesItem</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasObverse</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://numismatics.org/pella/id/price.153#obverse</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasReverse</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://numismatics.org/pella/id/price.153#reverse</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#inDataset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://numismatics.org/pella/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#prefLabel</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Price 153</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Price 153</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasMaterial</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/ar</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasAuthority</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/alexander_iii</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasMint</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasMint</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasDenomination</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/drachma</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasStartDate</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#gYear">-0336</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasEndDate</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#gYear">-0323</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/source</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/price1991</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#representsObjectType</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/coin</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://numismatics.org/pella/id/price.153</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://nomisma.org/ontology#hasStatedAuthority</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://nomisma.org/id/alexander_iii</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasWeight</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#ObjectProperty</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasWeight</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal/>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasWeight</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2004/02/skos/core#definition</uri>
+      </binding>
+      <binding name="o">
+        <literal>Describes the actual weight of a numismatic object.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasWeight</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>hasWeight</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="s">
+        <uri>http://nomisma.org/ontology#hasWeight</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="o">
+        <literal xml:lang="en">Describes the actual weight of a numismatic object.</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>
