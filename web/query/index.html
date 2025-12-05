@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-bs-theme="auto">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,10 +14,6 @@
       /* placeholder for MathJax */
     </style>
     <style>
-        [data-bs-theme="dark"] html,
-        [data-bs-theme="dark"] body {
-          background: #333; 
-        }
         .wikibase-queryservice #open-example,
         .wikibase-queryservice .namespace-shortcuts select:nth-child(4),
         .wikibase-queryservice #query-builder-dd,
@@ -29,6 +25,9 @@
         .navbar-brand img
         {
             height: 36px;
+        }
+        .query-main {
+          max-height: 50vh;
         }
     </style>
   </head>
@@ -105,14 +104,25 @@
                 href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3AImageGrid%7B"hide"%3A%5B"%3FauthorImage"%5D%7D%0APREFIX%20wdt%3A%20%20<http%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F>%0APREFIX%20crm%3A%20%20<http%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F>%0APREFIX%20lcr%3A%20%20<http%3A%2F%2Fid.loc.gov%2Fvocabulary%2Frelators%2F>%0A%23%20show%20all%0ASELECT%20%2a%0AWHERE%20%7B%0A%20%20%23%20select%20all%20authors%0A%20%20%3Fauthor%20crm%3AP2_has_type%20lcr%3Aaut%20.%0A%20%20%3Fauthor%20crm%3AP1_is_identified_by%20%3FauthorLabel%20.%0A%20%20%23%20and%20%28where%20available%29%20their%20images%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fauthor%20wdt%3AP18%20%3FauthorImage%20.%20%0A%20%20%7D%0A%7D'>Grid
                 of author portraits</a>
                     </li>
-                <!--
-                    <li>
-                <a href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3AMap%7B"hide"%3A%5B"%3FlocationCoordinates"%5D%2C"markercluster"%3A"true"%7D%0APREFIX%20crm%3A%20%20<http%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F>%0APREFIX%20frbroo%3A%20<http%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F>%0A%23%20show%20de-duplicated%20results%0ASELECT%20DISTINCT%20%3FitemLocation%20%3FlocationLabel%20%3FlocationCoordinates%0AWHERE%20%7B%0A%20%20%23%20select%20publication%20or%20MS%20creation%20events%0A%20%20%7B%20%3Fitem%20a%20frbroo%3AF32_Carrier_Production_Event%20.%20%7D%0A%20%20UNION%0A%20%20%7B%20%3Fitem%20a%20crm%3AE65_Creation%20.%20%7D.%0A%20%20%23%20and%20retrieve%20their%20location%20information%0A%20%20%3Fitem%20crm%3AP7_took_place_at%20%3FitemLocation%20.%0A%20%20%3FitemLocation%20crm%3AP1_is_identified_by%20%3FlocationLabel%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3FitemLocation%20crm%3AP168_place_is_defined_by%20%3FlocationCoordinates%20.%0A%20%20%7D%0A%7D'>Map of publication locations</a>		
-                    </li>
-                  -->
-                    <li>
+                                    <li>
                         <a href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATimeline%0APREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20lcr%3A%20%3Chttp%3A%2F%2Fid.loc.gov%2Fvocabulary%2Frelators%2F%3E%0APREFIX%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%23%20show%20results%0ASELECT%20DISTINCT%20%3Fauthor%20%3FauthorLabel%20%3FdateTime%20%3FauthorImage%0AWHERE%20%7B%0A%20%20%23%20retrieve%20all%20authors%0A%20%20%3Fauthor%20crm%3AP2_has_type%20lcr%3Aaut%20.%0A%20%20%3Fauthor%20crm%3AP1_is_identified_by%20%3FauthorLabel%20.%0A%20%20%23%20and%20their%20birth%20dates%0A%20%20%3Fauthor%20crm%3AP98i_was_born%20%3FauthorBirth%20.%0A%20%20%3FauthorBirth%20crm%3AP4_has_time-span%20%3FbirthDate%20.%0A%20%20%3FbirthDate%20crm%3AP82_at_some_time_within%20%3FdateTime%20.%0A%20%20%23%20and%20filter%20out%20those%20outside%20of%201795-1805%0A%20%20FILTER%20%28%20%3FdateTime%20%3E%3D%20%221795-01-01%22%5E%5Exsd%3Adate%20%26%26%20%3FdateTime%20%3C%20%221805-01-01%22%5E%5Exsd%3Adate%20%29%0A%20%20OPTIONAL%20%7B%20%3Fauthor%20wdt%3AP18%20%3FauthorImage.%20%7D%0A%7D'>Timeline of authors born 1795-1805</a>
                     </li>
+                    <li>
+                <a
+                href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATable%0Aprefix%20crm%3A%20%20%20%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%20%0A%0A%23%20show%20variables%0ASELECT%20DISTINCT%20%2A%20%0AWHERE%20%7B%20%0A%20%20%23%20full-text%20search%0A%20%20%3Fs%20a%20crm%3AE33_Linguistic_Object%20.%0A%20%20%3Fs%20%3Fp%20%3Fo%20.%0A%20%20FILTER%20%28%20%3Fp%20IN%20%28crm%3AP190_has_symbolic_content%29%20%29%20.%0A%20%20FILTER%20%28%20regex%28%3Fo%2C%20%22Erlk.n.%3Fg%22%2C%20%22i%22%20%29%20%29%20.%0A%7D'>Poem
+                full-text
+                search</a>   
+                    </li>
+                <li>
+                  <a
+                  href="https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATable%0Aprefix%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0Aprefix%20pdp%3A%20%3Chttp%3A%2F%2Fpostdata.linhd.uned.es%2Fontology%2Fpostdata-poeticAnalysis%23%3E%0A%0A%23%20show%20variables%0ASELECT%20DISTINCT%20%3Fs%20%3Fp%20%3Fo%20%0AWHERE%20%7B%20%0A%20%20%23%20OntoPoetry%20representation%0A%20%20%7B%0A%09%3Chttps%3A%2F%2Fwww.romanticperiodpoetry.org%2Fid%2Fwork00412%2Ftext00474%3E%20%3Fp%20%3Fo%20.%0A%20%20%20%20BIND%20%28%20%3Chttps%3A%2F%2Fwww.romanticperiodpoetry.org%2Fid%2Fwork00412%2Ftext00474%3E%20AS%20%3Fs%20%29%0A%20%20%7D%20UNION%20%7B%0A%20%20%09%3Chttps%3A%2F%2Fwww.romanticperiodpoetry.org%2Fid%2Fwork00412%2Ftext00474%3E%20pdp%3AhasLineList%7Cpdp%3AhasStanzaList%20%3Flists%20.%0A%20%20%09%3Flists%20pdp%3Aline%7Cpdp%3Astanza%20%3Fsegment%20.%0A%20%20%20%20%3Fsegment%20rdf%3Arest%2A%2Frdf%3Afirst%20%3Funit%20.%0A%20%20%20%20%3Funit%20%3Fp%20%3Fo%20.%0A%20%20%20%20BIND%20%28%20%3Funit%20AS%20%3Fs%20%29%20%20%09%0A%20%20%7D%0A%7D">OntoPoetry
+                  representation</a>
+                </li>
+                <li>
+                  <a
+                  href="https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATable%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0Aprefix%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0Aprefix%20pdp%3A%20%3Chttp%3A%2F%2Fpostdata.linhd.uned.es%2Fontology%2Fpostdata-poeticAnalysis%23%3E%0Aprefix%20intro%3A%20%3Chttps%3A%2F%2Fw3id.org%2Flso%2Fintro%2Fbeta202408%23%3E%0Aprefix%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0Aprefix%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0Aprefix%20oa%3A%20%20%20%20%20%20%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Foa%23%3E%0Aprefix%20foaf%3A%20%20%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0A%0A%23%20show%20variables%0ASELECT%20DISTINCT%20%3Fs%20%3Fp%20%3Fo%20%0AWHERE%20%7B%0A%20%20%7B%0A%20%20%20%20%7B%20%23%20context%20metadata%0A%20%20%20%20%20%20%3Fcontext%20%3Fp%20%3Fo%20.%0A%20%20%20%20%20%20BIND%28%3Fcontext%20AS%20%3Fs%29%0A%20%20%20%20%7D%20UNION%20%7B%20%23%20identified%20contextual%20relation%0A%20%20%20%20%20%20%3Fcontext%20rdfs%3AisDefinedBy%20%3Fos%20.%0A%20%20%20%20%20%20%3Fos%20%3Fp%20%3Fo%20.%20%0A%20%20%20%20%20%20BIND%28%3Fos%20AS%20%3Fs%29%0A%20%20%20%20%7D%20UNION%20%7B%20%23%20ALL%20actualizations%20and%20intertextual%20relations.%0A%20%20%20%20%20%20%3Fcontext%20intro%3AR21_identifies%2B%20%3Fw%20.%0A%20%20%20%20%20%20%3Fw%20%3Fp%20%3Fo%20.%0A%20%20%20%20%20%20BIND%28%3Fw%20AS%20%3Fs%29%0A%20%20%20%20%7D%09%23%20ALL%20target%20locations%20of%20ALL%20actualizations%20and%20intertextual%20relations%0A%20%20%20%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fcontext%20intro%3AR21_identifies%2B%20%3Fw%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20%28intro%3AR18i_actualizationFoundOn%7Cintro%3AR13_hasReferringEntity%7Cintro%3AR12_hasReferredToEntity%7Cintro%3AR19_hasType%7Cdcterms%3Arequires%29%20%3Ft%20.%0A%20%20%20%20%20%20%20%20%20%20%3Ft%20%3Fp%20%3Fo%20.%0A%20%20%20%20%20%20%20%20%20%20BIND%20%28%3Ft%20AS%20%3Fs%29%0A%20%20%20%20%7D%20UNION%20%7B%20%23%20SKOS%0A%20%20%20%20%20%20%20%20%20%20%3Fcontext%20intro%3AR21_identifies%2B%20%3Fw%20.%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20intro%3AR17_actualizesFeature%20%3Ff%20.%0A%20%20%20%20%20%20%20%20%20%20%3Ff%20%3Fp%20%3Fo%20.%0A%20%20%20%20%09%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20intro%3AR19_hasType%20%3Fty%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fty%20intro%3AR4i_isDefinedIn%20%3Ff%20.%0A%20%20%20%20%20%20%20%20%20%20%3Ff%20%3Fp%20%3Fo%20.%0A%20%20%20%20%09%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20intro%3AR19_hasType%20%3Fty%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fty%20intro%3AR4i_isDefinedIn%20%3Fs2%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fs2%20skos%3AinScheme%20%3Ff%20.%0A%20%20%20%20%20%20%20%20%20%20%3Ff%20%3Fp%20%3Fo%20.%0A%20%20%20%20%09%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20intro%3AR17_actualizesFeature%20%3Fs2%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fs2%20skos%3AinScheme%20%3Ff%20.%0A%20%20%20%20%20%20%20%20%20%20%3Ff%20%3Fp%20%3Fo%20.%0A%20%20%20%20%09%7D%0A%20%20%20%20%09BIND%28%20%3Ff%20AS%20%3Fs%20%29%0A%20%20%09%7D%20UNION%20%7B%20%23%20OntoPoetry%20locations%0A%20%20%20%20%20%20%3Fcontext%20intro%3AR21_identifies%2B%20%3Fw%20.%0A%20%20%20%20%20%20%3Fw%20%28intro%3AR18i_actualizationFoundOn%7Cintro%3AR13_hasReferringEntity%7Cintro%3AR12_hasReferredToEntity%29%20%3Ft%20.%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%3Ft%20intro%3AR10i_isPassageOf%20%3Fto%20.%0A%20%20%20%20%20%20%20%20%3Fto%20%3Fp%20%3Ftoo%20.%0A%20%20%20%20%20%20%20%20BIND%20%28%20%3Fto%20AS%20%3Fs%29%0A%20%20%20%20%20%20%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Ft%20intro%3AR10i_isPassageOf%20%3Fdo%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fdo%20%3Fp%20%3Fto%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fto%20%3Fp%20%3Ftoo%0A%20%20%20%20%20%20%20%20%20%20BIND%20%28%20%3Fto%20AS%20%3Fs%29%0A%20%20%20%20%20%20%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Ft%20intro%3AR41_hasLocation%20%5B%20%3Fp%20%3Fto%20%5D%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fto%20rdf%3Arest%2A%2Frdf%3Afirst%20%3Ftoo%20.%0A%20%20%20%20%20%20%20%20%20%20BIND%20%28%20%3Ft%20AS%20%3Fs%29%0A%20%20%20%20%20%20%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Ft%20intro%3AR41_hasLocation%20%3Fto%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fto%20%3Fp%20%3Ftoo%20.%09%0A%20%20%20%20%20%20%20%20%20%20BIND%20%28%20%3Ft%20AS%20%3Fs%29%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20BIND%20%28%20%3Ftoo%20AS%20%3Fo%29%0A%20%20%20%20%7D%20UNION%20%7B%20%23%20annotations%0A%20%20%20%20%20%20%3Fcontext%20intro%3AR21_identifies%2B%20%3Fw%20.%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%3Fw%20oa%3AhasBody%20%5B%20%3Fp%20%3Fto%20%5D%20.%0A%20%20%20%20%20%20%20%20%3Fto%20rdf%3Arest%2A%2Frdf%3Afirst%20%3Ftoo%20.%0A%20%20%20%20%09%7D%20UNION%20%7B%0A%20%20%20%20%20%20%20%20%20%20%3Fw%20oa%3AhasBody%20%3Fto%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fto%20%3Fp%20%3Ftoo%20.%09%09%0A%20%20%20%20%09%7D%0A%20%20%20%20%09BIND%20%28%20%3Ftoo%20AS%20%3Fo%29%0A%20%20%20%20%09BIND%20%28%20%3Fw%20AS%20%3Fs%29%0A%20%20%09%20%20%7D%0A%20%20%20%20%20%20FILTER%20%28%3Fcontext%20%3D%20%3Chttps%3A%2F%2Fwww.romanticperiodpoetry.org%2Fid%2F98edaf48-fd94-11ed-a388-149d997e93df%2Fcontext%3E%29%0A%20%20%20%20%20%20BIND%28%3Cdefault%3E%20AS%20%3Fg%29%0A%20%20%7D%20UNION%20%7B%20%23%20contributor%0A%20%20%20%20%3Fcontext%20%28%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Fcontributor%3E%7C%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Fcreator%3E%29%20%3Fo2%20.%0A%20%20%20%20%3Fo2%20a%20foaf%3AAgent%20.%0A%20%20%20%20%3Fo2%20%3Fp%20%3Fo%20.%0A%20%20%20%20BIND%28%3Fo2%20AS%20%3Fs%29%0A%20%20%20%20BIND%28%3Cdefault%3E%20AS%20%3Fg%29%0A%20%20%20%20FILTER%20%28%3Fcontext%20%3D%20%3Chttps%3A%2F%2Fwww.romanticperiodpoetry.org%2Fid%2F98edaf48-fd94-11ed-a388-149d997e93df%2Fcontext%3E%29%0A%20%20%7D%0A%20%20FILTER%20%28%21isBlank%28%3Fo%29%29%0A%7D">INTRO context
+                  retrieval</a>
+                </li>
                 </ul>
                 </div>
               </li>
@@ -875,6 +885,105 @@
         </div>
       </div>
     </div>
+    <script>
+      // dark mode WDQS GUI
+      var dark_mode = `
+          html, body, .CodeMirror-scroll, .CodeMirror { background: #333; color: #fff; }
+          .CodeMirror-gutter { background: #555; }
+          .navbar-default { background: #333; border: 1px solid #666;}
+          .query-main { background: #333; color: #fff; }
+          a { color: #bbb; }
+          a:hover,a:focus { color: #ddd; }
+          a:active { color: #fff; }
+          .btn.focus, .btn:focus, .btn:hover {
+            color: #ddd;
+            text-decoration: none;
+          }
+          .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+            color: #ccc;
+            background-color: transparent;
+          }
+          .btn-group>.btn+.dropdown-toggle {
+            background: #666;
+            color: #ddd;
+          }
+          .btn-default {
+            background: #444;
+            border: 1px solid #777;
+            color:#fff
+          }
+          .btn.focus, .btn:focus, .btn:hover {
+            background: #555;
+            text-decoration: none;
+          }
+          .wikibase-queryservice { background: #333; }
+          .navbar .dropdown-menu { background: #555; }
+          .navbar .dropdown-menu a { color: #ddd; }
+          .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+            background-color: #555;
+            border-color: #aaa;
+          }
+          .open>.dropdown-toggle.btn-default {
+            color: #ddd;
+            background-color: #555;
+          }
+          .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+            color: #ddd;
+            background-color: #555;
+          }
+          .popover { background-color: #555; }
+          .popover.right>.arrow:after,.popover.bottom>.arrow:after {
+            border-right-color: #555;
+            border-bottom-color: #555;
+          }
+          .dropdown-menu,.form-control { background: #555; color:#fff; }
+          .dropdown-menu>li>a { color:#ddd; cursor:pointer; }
+          .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+            background: #555;
+            color:#ddd;
+          }
+          .navbar .dropdown-menu>li>a:hover {
+            background: #fff;
+            color: #555;
+          }
+          .form-control:focus { border-color: #fff; box-shadow:unset; }
+          .panel,#query-box .query-helper .panel-heading { background: #555; }
+          .panel-info>.panel-heading { color: #ddd; }
+          input { color: #000; }
+          .select2-results { background: #555; }
+          .CodeMirror .cm-atom { color: #57b; }
+          .CodeMirror .cm-keyword { color: #c44; }
+          .table-hover>tbody>tr:hover {
+            background-color: #aaa;
+            color: #333;
+          }
+          .table-hover>tbody>tr:hover a { color: #333; }
+          .table-cell-selected { background-color: #ccc; color: #333; }
+          .table-cell-selected a { color: #333; }
+          .modal-body { background: #555; }
+          .uls-lcd { background-color: #555; color:#ccc; }
+          .uls-language-block a { color: #ccc; }
+          .uls-language-block>ul>li:hover { background-color: #777; }
+}
+      `;
+      function theme() {
+        var theme = parent.document.documentElement.getAttribute('data-bs-theme');
+        if ( theme == 'dark' ) {
+          if ( !document.getElementById('dark-mode') ) {
+            var s = document.createElement("style");
+            s.setAttribute("id","dark-mode");
+            s.innerHTML = dark_mode ;
+            document.getElementsByTagName("head")[0].appendChild(s);
+          }
+        } else {
+          if ( document.getElementById("dark-mode") ) {
+            document.getElementById("dark-mode").remove();
+          }
+        }
+      }
+      theme()
+      setInterval( theme, 500);
+    </script>
     <script src="js/vendor.min.js"></script>
     <script src="js/wdqs.min.js"></script>
   </body>
