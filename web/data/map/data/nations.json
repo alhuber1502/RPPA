@@ -158,8 +158,8 @@
         "cont": "EU",
         "coord": "Point(4.668055555 50.641111111)",
         "lang": [
-            "fr",
             "de",
+            "fr",
             "nl"
         ]
     },
@@ -178,8 +178,8 @@
         "cont": "EU",
         "coord": "Point(28.046666666 53.528333333)",
         "lang": [
-            "be",
-            "ru"
+            "ru",
+            "be"
         ]
     },
     "HR": {
@@ -224,8 +224,8 @@
         "cont": "EU",
         "coord": "Point(27.0 65.0)",
         "lang": [
-            "sv",
-            "fi"
+            "fi",
+            "sv"
         ]
     },
     "FR": {
@@ -326,9 +326,9 @@
         "cont": "EU",
         "coord": "Point(11.0 65.0)",
         "lang": [
-            "no",
             "nn",
-            "nb"
+            "nb",
+            "no"
         ]
     },
     "PL": {
@@ -409,10 +409,10 @@
         "cont": "EU",
         "coord": "Point(8.231973 46.798562)",
         "lang": [
-            "fr",
-            "it",
+            "rm",
             "de",
-            "rm"
+            "it",
+            "fr"
         ]
     },
     "UA": {
@@ -430,8 +430,8 @@
         "cont": "EU",
         "coord": "Point(21.716667 41.65)",
         "lang": [
-            "sq",
-            "mk"
+            "mk",
+            "sq"
         ]
     },
     "GB": {
@@ -541,8 +541,8 @@
         "cont": "NA",
         "coord": "Point(-66.5 18.25)",
         "lang": [
-            "es",
-            "en"
+            "en",
+            "es"
         ]
     },
     "US": {
@@ -585,8 +585,8 @@
         "cont": "SA",
         "coord": "Point(-64.991228611 -17.056869611)",
         "lang": [
-            "es",
             "ay",
+            "es",
             "qu",
             "gn"
         ]
@@ -643,8 +643,8 @@
         "coord": "Point(-76.0 -9.4)",
         "lang": [
             "es",
-            "qu",
-            "ay"
+            "ay",
+            "qu"
         ]
     },
     "UY": {
@@ -680,6 +680,27 @@
         ],
         "name": "Ghana"
     },
+    "KN": {
+        "coord": "Point(-62.666669444 17.271666666)",
+        "lang": [
+            "Q1860"
+        ],
+        "name": "Saint Kitts and Nevis"
+    },
+    "NI": {
+        "coord": "Point(-85.0 13.0)",
+        "lang": [
+            "Q1321"
+        ],
+        "name": "Nicaragua"
+    },
+    "PA": {
+        "coord": "Point(-80.366667 8.616667)",
+        "lang": [
+            "Q1321"
+        ],
+        "name": "Panama"
+    },
     "JM": {
         "coord": "Point(-77.4 18.18)",
         "lang": [
@@ -695,12 +716,12 @@
         ],
         "name": "Saint Lucia"
     },
-    "KN": {
-        "coord": "Point(-62.666669444 17.271666666)",
+    "BZ": {
+        "coord": "Point(-88.7 17.066666666)",
         "lang": [
             "Q1860"
         ],
-        "name": "Saint Kitts and Nevis"
+        "name": "Belize"
     },
     "GD": {
         "coord": "Point(-61.7 12.1)",
@@ -710,33 +731,12 @@
         ],
         "name": "Grenada"
     },
-    "BZ": {
-        "coord": "Point(-88.7 17.066666666)",
-        "lang": [
-            "Q1860"
-        ],
-        "name": "Belize"
-    },
     "DM": {
         "coord": "Point(-61.333333 15.416667)",
         "lang": [
             "Q1860"
         ],
         "name": "Dominica"
-    },
-    "PA": {
-        "coord": "Point(-80.366667 8.616667)",
-        "lang": [
-            "Q1321"
-        ],
-        "name": "Panama"
-    },
-    "NI": {
-        "coord": "Point(-85.0 13.0)",
-        "lang": [
-            "Q1321"
-        ],
-        "name": "Nicaragua"
     },
     "MD": {
         "coord": "Point(28.516667 47.25)",
@@ -755,8 +755,8 @@
     "AZ": {
         "coord": "Point(47.7 40.3)",
         "lang": [
-            "Q55698568",
-            "Q9292"
+            "Q9292",
+            "Q55698568"
         ],
         "name": "Azerbaijan"
     },
@@ -768,19 +768,19 @@
         ],
         "name": "Algeria"
     },
-    "IL": {
-        "coord": "Point(35.0 31.0)",
-        "lang": [
-            "Q9288"
-        ],
-        "name": "Israel"
-    },
     "PS": {
         "coord": "Point(35.25 32.0)",
         "lang": [
             "Q13955"
         ],
         "name": "Palestine"
+    },
+    "IL": {
+        "coord": "Point(35.0 31.0)",
+        "lang": [
+            "Q9288"
+        ],
+        "name": "Israel"
     },
     "ID": {
         "coord": "Point(118.0 -2.0)",

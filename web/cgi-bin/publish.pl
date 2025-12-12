@@ -8,7 +8,7 @@ use Fcntl qw(:flock);
 my $cgi = CGI->new;
 
 my $date = strftime '%Y-%m-%d', localtime;
-my $file = "../data/contributions/contexts-".$date.".txt";
+my $file = "../data/contributions/contexts-".$date."-".time().".ru";
 
 sub send_mail {
     my ($from, $email, $type) = @_;
