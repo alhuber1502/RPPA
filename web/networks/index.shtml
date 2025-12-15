@@ -23,6 +23,158 @@
       </div>
     </main>
 
+
+<!-- Content of the menu -->
+<div id="sidebar" class="leaflet-sidebar">
+  <!-- Nav tabs -->
+  <div class="leaflet-sidebar-tabs">
+      <ul role="tablist">
+          <!--<li><a href="#welcome"><i class="fas fa-door-open"></i><span class="sr-only">[Welcome]</span></a></li>-->
+          <li><a href="#home" role="tab"><i class="fas fa-circle-nodes"></i><span class="sr-only">[Home]</span></a></li>
+          <!--
+          <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i><span class="sr-only">[Location]</span></a></li>
+          <li><a href="#profile" role="tab"><i class="fa fa-user"></i><span class="sr-only">[Profile]</span></a></li>
+          -->
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <!--<li><a href="#about" role="tab"><i class="fas fa-info"></i><span class="sr-only">[About]</span></a></li>-->
+          <!--<li><a href="#help" role="tab"><i class="fas fa-question-circle"></i><span class="sr-only">[Help]</span></a></li>-->
+          <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
+          <!--<li><a href="#feed" role="tab"><i class="fas fa-rss"></i><span class="sr-only">[News/Updates]</span></a></li>-->
+          <!--<li><a href="#contact" role="tab"><i class="fas fa-envelope-open"></i><span class="sr-only">[Contact]</span></a></li>-->
+          <!--
+          <li class="disabled"><a href="#messages" role="tab"><i class="far fa-envelope"></i></a></li>
+          <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fab fa-github"></i></a></li>
+          -->
+      </ul>
+      <!--
+      <ul role="tablist">
+          <li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
+      </ul>
+      -->
+  </div>
+  <!-- Tab panes -->
+  <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="home">
+          <h1 class="leaflet-sidebar-header">
+              The Romantic-period world
+              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+          <div>
+            <h2>Explore the network graph</h2>
+            <form class="row g-3 align-items-center" id="keywordsearchForm">
+              <div class="col-auto">
+                <label for="keywordsearch" class="form-label">Search
+                  <select id="keywordsearchClass">
+                    <option value="crm:E21_Person">persons</option>
+                    <option value="crm:E53_Place">places</option>
+                    <option value="crm:E52_Time-Span">time-spans</option>
+                    <option value="lrmoo:F1_Work,lrmoo:F2_Expression">work titles</option>
+                    <option value="crm:E33_Linguistic_Object">work full-text</option>
+                    <option value="skos:Concept">concepts</option>
+                    <option value="crm:E56_Language">languages</option>
+                    <option value="">everything</option>
+                  </select>
+                </label>
+                <input type="text" class="form-control" id="keywordsearch" name="wd-keyword" aria-describedby="keywordsearchHelp">
+              </div>
+              <div class="col-auto">
+                <button id="find" type="submit" style="margin-top:31px;border-color:#fff;background-color:#cd6711;" class="btn btn-primary">Find</button>
+                <button id="add" type="submit" style="margin-top:31px;border-color:#fff;background-color:#cd6711;" class="btn btn-primary">Add</button>
+              </div>
+              <div id="keywordsearchHelp" class="form-text">Search for
+                instances by class or keyword.</div>
+            </form>
+            
+          </div>
+          
+          <div class="help" style="margin-top:15px;">
+            <h2>Help</h2>
+            <div id="networks_help">
+              <p>Add nodes to the network using the graph search function
+              above.  Search results will be listed on entering a search term.
+              Choose an item from the list and click "Add" to add it to the
+              graph.</p>
+                <dt>Graph display</dt>
+                <dd>You can drag nodes to change the graph layout, and zoom
+                in and out to reposition the graph display.
+                <dt>Graph traversal</dt>
+                <dd>On right-click (or click and hold), a context wheel is
+                displayed with these options:
+                  <ul>
+                    <li><span class="fas fa-right-left"></span> add
+              incoming/outgoing connections (when on a node)</li>
+                    <li><span class="fas fa-rotate-left"></span> undo last
+                    change</li>
+                    <li><span class="fas fa-rotate-right"></span> redo last
+                    change</li>
+                    <li><i class="fa-solid fa-terminal"></i> log node</li>
+                  </ul>
+                  Individual selected nodes can be deleted with the
+                  <kbd>delete</kbd> key.  Press <kbd>Ctrl</kbd> + <kbd>Z/Y</kbd> to
+                  undo/redo any changes to
+                  the graph.
+                </dd>
+              </dl>
+              <dl>
+                <dt>Nodes and edges</dt>
+                <dd>Nodes labels comprise the class of node, followed by a brief
+                descriptive label;  edge labels show the property label only;
+                see the <a href="/help/#networks_graph">Help pages</a> for a key
+                to node colours and shapes.</dd> 
+                <dt>Node properties </dt>
+                <dd>An overview of a node's properties is displayed next to the
+                node on hover and in the Graph information panel on the right when
+                clicking on a node.</dd>
+
+
+            </div>
+          </div>
+      </div>
+      <!--
+      <div class="leaflet-sidebar-pane" id="location">
+        <h1 class="leaflet-sidebar-header">Poets at this location<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        <div class="results"></div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="profile">
+          <h1 class="leaflet-sidebar-header">Poet overview<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+          <div class="results"></div>
+      </div>
+      -->
+      <!--
+      <div class="leaflet-sidebar-pane" id="messages">
+          <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+      -->
+      <!--
+      <div class="leaflet-sidebar-pane" id="settings">
+          <h1 class="leaflet-sidebar-header">Settings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+      -->
+  </div>
+</div>
+
+    <script>
+      
+      document.addEventListener("DOMContentLoaded", function() {
+        // Network sidebar
+        var network = new L.Map('canvas', { zoomControl: false }).setView([0, 0], 5);
+        var sidebar = L.control.sidebar({
+          autopan: false,
+          closeButton: true,
+          container: 'sidebar',
+          position: 'left',
+        }).addTo(network);
+        sidebar.open('home');
+        network.dragging.disable();
+        network.touchZoom.disable();
+        network.doubleClickZoom.disable();
+        network.scrollWheelZoom.disable();
+        network.boxZoom.disable();
+        network.keyboard.disable();      
+      });
+    
+    </script>
+
     <!--#include virtual="/templates/footer.shtml" -->
     <!--#include virtual="/templates/bottom.shtml" -->
   </body>

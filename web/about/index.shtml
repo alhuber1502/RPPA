@@ -81,6 +81,18 @@
                 It connects these nodes reflexively as well as to
                 various internal and external contexts.
               </p>
+              <p>Despite every effort to include the most relevant figures of the
+                Romantic period, a disclaimer needs to be issued regarding the
+                inclusion or omission of poets. While "Romantic" itself is a notoriously
+                "elastic" label (Michael Ferber's term) that includes "pre"-, "early"-,
+                "proto"-, "high"-, "late"-, and "post"-Romantic incarnations, the
+                scholarship that underlies much of the selection process is largely
+                Western/Northern-centric and may have been superseeded within national
+                contexts. In such cases, the
+                <a href="mailto:huber@romanticperiodpoetry.org">editor</a>
+                would be grateful for any corrections and suggestions for additions and
+                improvements.
+              </p>
               <h2 id="features">Features</h2>
               <ul>
                 <li>RPPA will assemble an extensive and open-ended archive of
@@ -135,7 +147,8 @@
                   <a target="_blank" class="external"
                     href="https://postdata.linhd.uned.es/results/ontopoetry-v2-0/">OntoPoetry</a>,
                   and <a target="_blank" class="external"
-                    href="https://github.com/BOberreither/INTRO#whatisintro">INTRO</a>).
+                  href="https://github.com/BOberreither/INTRO#whatisintro">INTRO</a>),
+                  which comprise an integrated framework.
                   This shared framework
                   provides a unified mechanism for the cross-linguistic representation
                   of the poems while maintaining the ability to describe them
@@ -178,6 +191,28 @@
                   Regular updates about new resources or functionality will be posted on our social media
                   channels.
                 </p>
+                <h3 id="future_plans">Future Plans</h2>
+                <p>Throughout the <span style="font-variant:small-caps">open beta</span>
+                phase and beyond, we will be adding more poems to RPPA.  Any <a
+                href="mailto:info@romanticperiodpoetry.org">suggestions</a> for additions
+                are welcome and appreciated.  We are currently working on a number of
+                areas, including:</p>
+                <ul>
+                  <li>visualization options for poetic networks and clusters;</li>
+                  <li>spatio-temporal tools to highlight historical and geographical
+                  components of the network;</li>
+                  <li>network analytical measures to relate national literary traditions
+                  within the global literary landscape;</li>
+                  <li>enhanced filtering and search capabilities in the maps and networks
+                  views;</li>
+                  <li>user-defined context-sharing features;</li>
+                  <li>external/intermedial contextualization options;</li>
+                  <li>full-text/linguistic search to supplement graph search;</li>
+                  <li>expermental application of the RPPA graph in support of Graph RAG
+                  LLM-applications.</li>
+                </ul>
+
+
                 <h2 id="outcome">Outcome</h2>
                 <p>
                   The expected outcome of this project is a fuller
@@ -206,7 +241,7 @@
                 <h2 id="citation">Citation Guide</h2>
                 <p>If you use RPPA in your research, please use below example (MLA) or adapt it to match your favourite citation format:</p>
                 <p>
-                  “Romantic Period Poetry Archive (RPPA).” <em>Romanticperiodpoetry.org</em>, 2020-, www.romanticperiodpoetry.org/.
+                  “Romantic Period Poetry Archive (RPPA).” <em>Romanticperiodpoetry.org</em>, 2020-, www.romanticperiodpoetry.org
                 </p>
 
                 <h2 id="privacy">Use and privacy policy</h2>
@@ -277,10 +312,14 @@
               </nav>
               <a class="nav-link" href="#publications">Publications/Presentations</a>
               <a class="nav-link" href="#timeline">Timeline</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1"
+                href="#future_plans">Future Plans</a>
+              </nav>
               <a class="nav-link" href="#outcome">Outcome</a>
               <a class="nav-link" href="#licensing">Licensing</a>
               <a class="nav-link" href="#citation">Citation Guide</a>
-              <a class="nav-link" href="#privacy">Use and privacy policy</a>
+              <a class="nav-link" href="#privacy">Use and Privacy policy</a>
             </nav>
           </nav>
 

@@ -1,161 +1,560 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100" data-bs-theme="auto">
 
-  <head>
-    <!-- set: title, bodyID, active navigation -->
-    <!--#config timefmt="%d %b %Y" -->
-    <!--#set var="title" value="Help" -->
-    <!--#set var="bodyid" value="help" -->
-    <!--#set var="help" value="active" -->
+<head>
+  <!-- set: title, bodyID, active navigation -->
+  <!--#config timefmt="%d %b %Y" -->
+  <!--#set var="title" value="Help" -->
+  <!--#set var="bodyid" value="help" -->
+  <!--#set var="help" value="active" -->
 
-    <!--#include virtual="/templates/head.shtml" -->
-  </head>
+  <!--#include virtual="/templates/head.shtml" -->
+</head>
 
-  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
-    <!--#include virtual="/templates/header.shtml" -->
+<body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+  <!--#include virtual="/templates/header.shtml" -->
 
-    <!-- Begin page content -->
-    <main class="flex-shrink-0">
-      <div class="container-fluid">
-    
-        <!-- content: insert here -->
-        <div >
-          <!--<h1>Help</h1>-->
-          <div class="results">
-            <h2 id="maps">Maps</h2>
-            <p>The historical map used in the visualization is John Arrowsmith's <em><a 
-              href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002"
-              class="external" target="_blank">The World, on Mercators Projection</a></em>
-               (London: J. Arrowsmith, 1844).  While the original map centres on the
-               Pacific region, it is Western/Northern-centric in other ways, not least with regard 
-               to its place of manufacture and its Mercartor projection.  For geo-referencing
-               purposes the map has been aligned with the Web Mercator 
-               projection, the de facto standard for maps on the web.  
-            </p>
-            <p>Poets are shown at their place of birth, unless it is unknown or the poet 
-              is generally associated with a country other than their birth country, in which
-              case they are shown at the country's geographical centre.  Images of the poets
-              have been sourced from <a class="external" target="_blank" 
-              href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
-            </p>
-            <h3>Mapping global Romantic-period poetry</h3>
-            <p>
-              While little more than a visual access point at the moment, our aim is to use
-              maps and mapping as an analytical tool that facilitates multi-perspectival 
-              approaches, mitigates ambiguity and uncertainty, helps to consider and appreciate
-              the evolution of national literatures and literary spaces alongside the 
-              world literary space portrayed on the world canvas, and benefits from the 
-              participatory nature of RPPA to arrive at more useful representations.
-            </p>
-            <p>
-              Over time, as the networks of contextuality on the world canvas become more 
-              apparent, we envision the emergence of dynamic maps at a higher 
-              levels of detail.  We expect these to reveal more contexts and the inner- 
-              as well as extra-literary structures that underpin and facilitate the construction 
-              of global texts and will allow for a more detailed representation and analysis
-              of their components and evolution.
-            </p>
-            <p>
-              As we map out, literally and figuratively spoken, the poetry of the
-              global Romantic period, we address not only its temporal challenges, 
-              but also embrace the geographic, linguistic, and 
-              cultural diversity of the various stages of a global artistic phenomenon.
-              We hope that by virtue of the project's historical focus on the Romantic
-              period, its comparative focus on contextuality and the building of global
-              texts, and its collaborative and participatory nature, the map can be 
-              useful as an emerging historical canvas for the 
-              poetry of the global Romantic period.
-            </p>
-            <h3>Known issues</h3>
-            <p>Despite every effort to include the most relevant figures of the 
-            Romantic period, a disclaimer needs to be issued regarding the 
-            inclusion or omission of poets.  While "Romantic" itself is a notoriously 
-            "elastic" label (Michael Ferber's term) that includes "pre"-, "early"-,
-            "proto"-, "high"-, "late"-, and "post"-Romantic incarnations, the 
-            scholarship that underlies much of the selection process is largely 
-            Western/Northern-centric and may have been superseeded within national 
-            contexts.  In such cases, the 
-            <a href="mailto:huber@romanticperiodpoetry.org">editor</a>
-            would be grateful for any corrections and suggestions for additions and
-            improvements.</p>
-            <p>Also, regretfully, for navigational purposes, country names and borders
-            used in the map navigation correspond to present-day denominations and 
-            historical reality.  We <em>apologize</em> for the resulting distortion
-            and historical inaccuracy, and hope to improve this over time with the 
-            help of projects like 
-            <a href="https://openhistoricalmap.org/" class="external" 
-            target="_blank">OpenHistoricalMap</a> as they evolve and mature. 
-            </p>
-            <h3>Further reading</h3>
-            <ul>
-              <li>
-                Casanova, Pascale. <a href="https://newleftreview.org/issues/ii31/articles/pascale-casanova-literature-as-a-world" 
-                class="external" target="_blank">"Literature as a World"</a>. <em>New Left Review</em> 31 (Jan/Feb 2005): 71-90.
-              </li>
-              <li>
-                D'haen, Theo. <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9780203806494-49" class="external" 
-                target="_blank">"Mapping World Literature"</a>. <em>The Routledge Companion to World Literature</em>, ed.
-                Theo D'haen, David Damrosch, Djelal Kadir. London: Routledge, 2011. 413-422.
-              </li>
-              <li>
-                Hewitt, Rachel. <a href="https://www.jstor.org/stable/24045852" class="external" 
-                target="_blank">"Mapping and Romanticism"</a>. <em>The Wordsworth Circle</em> 42(2) (Spring 2011): 157-165.
-              </li>
-              <li>
-                Presner, Todd and David Shepard. <a href="https://doi.org/10.1002/9781118680605.ch14" class="external" 
-                target="_blank">"Mapping the Geospatial Turn"</a>. <em>A New Companion to Digital Humanities</em>,
-                ed. Susan Schreibman, Ray Siemens, John Unsworth. Chichester: Wiley-Blackwell, 2016. 199-212.
-              </li>
-              <li>
-                Tanoukhi, Nirvana. <a href="https://www.jstor.org/stable/20533104" class="external" target="_blank">"The 
-                  Scale of World Literature"</a>. <em>New Literary History</em> 39(3) (Summer 2008): 599-617.
-              </li>
-            </ul>
-          </div>
-        </div>
-  
-        <div>
-          <h2 id="contact">Contact</h2>
-          <div class="results">
-            <h3>Get in touch</h3>
-            <p>This is an open invitation to academics, research
-              projects, digital archives and repositories, and anyone with
-              an interest in the literature of the Romantic period
-              in any discipline to <em>collaborate on RPPA</em>.  The project looks forward
-              to welcoming partners at any stage to discuss
-              collaboration or other forms of participation.  Please do
-              not hesitate to reach out:
-            </p>
-            <p style="margin-left:15px;">
-              <b>Romantic Period Poetry Archive (RPPA)</b><br>
-              Alexander Huber, Editor<br>
-            <ul style="list-style:none;">
-              <li style="text-indent:-15px;"><span>E-mail:</span> <a href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
-              <li style="text-indent:-15px;"><span>Facebook:</span> <a target="_blank" href="https://www.facebook.com/RomanticPeriodPoetryArchive" class="external">@RomanticPeriodPoetryArchive</a>
+  <!-- Begin page content -->
+  <main class="flex-shrink-0">
+    <div class="container-fluid">
 
-              <li style="text-indent:-15px;"><span>Bluesky:</span> <a target="_blank" href="https://bsky.app/profile/c18ah.bsky.social" class="external">@c18ah.bsky.social</a> <code>#RomanticPeriodPoetryArchive</code>
-              <li style="text-indent:-15px;"><span>Mastodon:</span> <a target="_blank" href="https://hcommons.social/@c18ah" class="external">https://hcommons.social/@c18ah</a> <code>#RomanticPeriodPoetryArchive</code>
-              <li style="text-indent:-15px;"><span>X:</span> <a target="_blank" href="https://twitter.com/C18AH" class="external">@C18AH</a> <code>#RomanticPeriodPoetryArchive</code>
+      <!-- content: insert here -->
+      <div class="row">
+        <div class="col-md-9">
+
+          <!-- content: insert here -->
+          <div data-bs-spy="scroll" data-bs-target="#navbar-help" data-bs-smooth-scroll="true" class=""
+            data-bs-offset="60" tabindex="0">
+            <!--<h1>Help</h1>-->
+            <div class="results">
+              <h2 id="networks">Networks</h2>
+              <p>The Networks view is an approximation of contextuality as a
+              theory of space.  It facilitates the exploration of the RPPA
+              knowledge base in form of a network graph and aims to
+                strike a balance between the necessities
+                of spatial and temporal situatedness of contextuality and the
+                freedom to explore formal, semantic, poetic, as well as
+              network-analytical measures in the underlying knowledge base.
+               
+        
+      Contextuality supplements the
+      temporal axis of textual reception with contextual connectivity in space.  The spatial
+      dimension allows for a full appreciation of a text's complexities in a 
+      space that connects all parts of a text among themselves and shows exits and
+      pathways to its contexts.  Only in this space can a real
+      interpretation of a text unfold:  as texts invite dialogue and
+      contextualization, the interpretative space grows with it. 
+      </p>
+
+      <h3 id="networks_methodology">Methodology</h3>
+      <p>Contextuality is spatially and temporally situated, meaning that each
+      context carries place and moment that shape interpretation. In RPPA this
+      requires:</p> 
+      <ul>
+        <li>Spatial anchoring — linking contexts to specific locations
+        (birthplaces, performance sites, publication or translation events);</li>
+        <li>Temporal anchoring — recording dates, periods, and historical
+        horizons that affect meaning;</li> 
+        <li>Integrated modelling — representing contexts as graph nodes with
+        spatial and temporal attributes so analyses can traverse both
+        dimensions.</li> 
+      </ul>
+                <p>
+      Contexts themselves have a historical place and function that is linked to
+      in the space of the context, thus the text enters this realm of the
+      contexts' universe while at the same time the context transforms our
+      understanding, reading, representation, and overal model of the text.  All
+      contextuality is therfore minimally bi-directional, it facilitates a
+      spatial movement between text and context, i.e. the text's place in the
+      context's reach through time and space is just as important as
+      the work it performs in the text. </p>
+      <p>This temporal/spatial expansion historicizes a text as a ‘global text‘,
+      i.e. contexts embed texts in multidimensional spaces and connect texts more
+      broadly via shared contexts.
+      As such, the global text evolves from the countless recontextualizations
+      of the text (every reading adds a layer to this space), and hence serves
+      as a representative model of the text in its 
+      contextualized state, it extends and ultimately replaces the textual
+      discourse with an open-ended, context-based network, or graph.
+    </p>
+      
+<h3 id="networks_display">Graph display</h3>
+              <p>The RPPA knowledge graph can be explored in any
+              user-defined direction.  Nodes can be added to the network using
+              either the graph search function or by expanding existing nodes by
+              adding their connected (incoming and outgoing) nodes.  
+              Nodes can also be dragged to change the graph
+              layout, and the graph as a whole can be zoomed 
+                in and out of to reposition the graph display.</p>
+ 
+              <p>
+                The nodes in the RPPA knowledge graph are coded by colour and shape to
+                indicate their class (type) and ontological contexts.  Nodes
+                labels comprise the class of node, followed by a brief 
+                descriptive label; edge labels show the property label only. 
+                An overview of a node's properties is displayed next to the
+                node on hover and in the Graph information panel on the right when
+                clicking on a node.
+              </p>
+              <div class="row">
+                <div class="col">
+                  <h4>Colours</h4>
+                    <div class="legend" style="margin-top:15px;">
+                        <ul class="listBibl">
+                          <li><span style="background-color:#cd6711;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span style="vertical-align:text-bottom;">Authors</span>
+                          <ul>
+                          <li><span style="background-color:#1E3888;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small" style="vertical-align:text-bottom;">Birth</span></li>
+                          <li><span style="background-color:#754043;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small" style="vertical-align:text-bottom;">Death</span></li>
+                                            <li><span
+                          style="background-color:#974B0C;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small"
+                          style="vertical-align:text-bottom;">Creation/Production</span></li>
+                          </ul>
+                          </li>
+                          <li><span
+                          style="background-color:#cd6711;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">Works</span>
+                          <ul>
+                          <li><span
+                          style="background-color:#cd6711;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small"
+                          style="vertical-align:text-bottom;">Expression #1</span></li>
+                          <li><span
+                          style="background-color:#124E78;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small"
+                          style="vertical-align:text-bottom;">Expression #2</span></li>
+                                          <li><span
+                          style="background-color:#2C6E49;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small"
+                          style="vertical-align:text-bottom;">Expression #3</span></li>
+                                          <li><span
+                          style="background-color:#82204A;width:100px;height:12px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span class="small"
+                          style="vertical-align:text-bottom;">Expression #4</span></li>
+                          </ul>
+                          </li>
+                          <li><span
+                          style="background-color:#90A583;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">Places</span>
+                          </li>
+                                          <li><span
+                          style="background-color:#0081A7;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">Time-Spans</span>
+                          </li>
+                                                          <li><span
+                          style="background-color:#928b11;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">Languages</span>
+                          </li>
+                          <li><span
+                          style="background-color:#2a9d8f;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">Contextuality</span>
+                          </li>
+                          <li><span
+                          style="background-color:#AA4465;width:100px;height:15px;margin-top:0px;display:inline-flex;border:1px
+                          solid;"></span> <span
+                          style="vertical-align:text-bottom;">SKOS vocabularies</span>
+                          </li>
+                        </ul>         
+                    </div>
+                </div>
+                <div class="col">
+                  <h4>Shapes</h4>
+                  <div id="cy_help" style="height:365px;border:1px dashed;">
+                  </div>
+                </div>
+              </div>
+
+      <h3 id="networks_traversal">Graph traversal</h3>
+          <p>On right-click (or click and hold) in the graph display, a context wheel is
+            displayed with these options:</p>
+                  <ul>
+                    <li><span class="fas fa-right-left"></span> – add
+              incoming/outgoing connections (when on a node)</li>
+                    <li><span class="fas fa-rotate-left"></span> – undo last
+                    change</li>
+                    <li><span class="fas fa-rotate-right"></span> – redo last
+                    change</li>
+                    <li><i class="fa-solid fa-terminal"></i> – log node</li>
+                  </ul>
+              <p>Individual selected nodes can be deleted with the <kbd>delete</kbd> key. Press <kbd>Ctrl</kbd> + <kbd>Z/Y</kbd> to undo/redo any changes to
+                  the graph.</p>
+
+      <h3 id="networks_ontologies">Ontologies and vocabularies</h3>
+      <p>Contextuality is not limited to intertextual or intermedial relations — it also
+      encompasses social, material, spatial and institutional factors that shape
+      how texts are produced, transmitted and read.  RPPA models these dimensions
+      using a mix of established ontologies and project-specific vocabularies to
+      ensure consistent contextualization and linked-data interoperability.</p> 
+      <ul>
+        <li><strong>Core semantic standards</strong>: Dublin Core, FOAF, schema.org and SKOS for metadata and concept organisation;</li>
+        <li><strong>Geographic and temporal</strong>: GeoNames, WGS84 and ISO date/time vocabularies for places and time-spans;</li>
+        <li><strong>Linguistic and classification</strong>: ISO language codes and SKOS-based thesauri for language and domain classification;</li>
+        <li><strong>RPPA ontologies</strong>: project-specific RDF models
+        (drawing on the CIDOC-CRM, POSTDATA, and INTRO ontologies)
+        describing nodes (works, expressions, agents, contexts), properties and
+        contextual relations; exposed via a SPARQL endpoint for querying and
+        graph export.</li> 
+      </ul>
+
+      <h4 id="networks_vocabularies">RPPA context vocabularies</h4>
+
+      <p>To support the modelling of intertextual, intratextual, and typological
+      contexts, RPPA has produced a number of SKOS vocabulaires drawing on
+      established dictionaries, encyclopedias, and glossaries from among others
+      literature, poetry, art, and music.
+
+                  Below is a complete list of the vocabularies currently available
+                  for classifying the contextualizations of intertextual and
+                  intermedial contextuality in RPPA.    
+
+                The task of creating and offering high-quality domain-specific
+                vocabularies in support of RPPA's contextualization effort is
+                ongoing.  We will be adding new vocabularies periodically,
+                including but not limited to art, music, theatre, sciences,
+                history, religion, philosophy, and mythology.  Please feel free to
+                <a href="mailto:huber@romanticperiodpoetry.org">suggest</a>
+                additional vocabularies to be included.
+                Clicking on any of the terms/concepts below will show them in
+                their contextualized form 
+                  in the <a href="/networks/">Networks view</a>.
+              </p>
+              <div id="networks_vocabs"><div class="spinner-border text-info" role="status" style="margin-left:10px;"><span class="sr-only">Loading...</span></div></div>
               
-              <li style="text-indent:-15px;"><span>GitHub:</span> <a target="_blank" href="https://github.com/alhuber1502/RPPA"
-                class="external">https://github.com/alhuber1502/RPPA</a>
-              <li style="text-indent:-15px;"><span>Web:</span> <a target="_blank" href="http://users.ox.ac.uk/~bodl0153/"
-                class="external">http://users.ox.ac.uk/~bodl0153/</a>
-              <li style="margin-left:-15px;"><span>Share:</span> 
-                <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33106436"></div>
+      <p>These vocabularies allow RPPA to support rich, multi-dimensional
+      contextualizations, enable graph-based discovery, and facilitate reuse
+      across digital humanities tools. </p>
+
+    <h3 id="networks_scholarship">Open Scholarship</h3>
+    <p>Thanks to the nature of Romanticism as a global phenomenon, reading
+      global Romanticism will more often than not be reading in translation (i.e.
+      distantly).  Additionally, ‘global texts‘ are 'open texts', they invite
+      readers to participate in their creation.  Finally, a database of
+      contextuality like RPPA's constitutes a corpus of a higher order
+      (a network) that is in itself a valuable object of study beyond the concrete 
+      work contexts perform in the texts.  Taken together, it is only through
+    collaboration and participation that all of these challenges can be addressed:</p>
+    <ul>
+      <li>subject and domain expertise of poetic traditions within and across national
+        literatures;</li>
+      <li>comparatist approaches to look beyond the artistic
+          aspects to the expression of broader literary and cultural trends,
+          mapping it onto the evolution of forms, genres, and ideas/motifs;</li>
+      <li>computational approaches from ontological modelling to
+          network analysis and mapping approaches.</li>
+    </ul>  
+
+
+              <h2 id="maps">Maps</h2>
+              <p>The historical map used in the visualization is John Arrowsmith's <em><a
+                    href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002" class="external"
+                    target="_blank">The World, on Mercators Projection</a></em>
+                (London: J. Arrowsmith, 1844). While the original map centres on the
+                Pacific region, it is Western/Northern-centric in other ways, not least with regard
+                to its place of manufacture and its Mercartor projection. For geo-referencing
+                purposes the map has been aligned with the Web Mercator
+                projection, the de facto standard for maps on the web.
+              </p>
+              <p>Poets are shown at their place of birth, unless it is unknown or the poet
+                is generally associated with a country other than their birth country, in which
+                case they are shown at the country's geographical centre. Images of the poets
+                have been sourced from <a class="external" target="_blank"
+                  href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
+              </p>
+              <h3 id="mapping_global_romantic-period_poetry">Mapping global Romantic-period poetry</h3>
+              <p>
+                Primarily conceived as a visual access point at the moment, our aim is to use
+                maps and mapping as an analytical tool that facilitates multi-perspectival
+                approaches, mitigates ambiguity and uncertainty, helps to consider and appreciate
+                the evolution of national literatures and literary spaces alongside the
+                world literary space portrayed on the world canvas, and benefits from the
+                participatory nature of RPPA to arrive at more useful representations.
+              </p>
+              <p>
+                Over time, as the networks of contextuality on the world canvas become more
+                apparent, we envision the emergence of dynamic maps at a higher
+                levels of detail. We expect these to reveal more contexts and the inner-
+                as well as extra-literary structures that underpin and facilitate the construction
+                of global texts and will allow for a more detailed representation and analysis
+                of their components and evolution.
+              </p>
+              <p>
+                As we map out, literally and figuratively spoken, the poetry of the
+                global Romantic period, we address not only its temporal challenges,
+                but also embrace the geographic, linguistic, and
+                cultural diversity of the various stages of a global artistic phenomenon.
+                We hope that by virtue of the project's historical focus on the Romantic
+                period, its comparative focus on contextuality and the building of global
+                texts, and its collaborative and participatory nature, the map can be
+                useful as an emerging historical canvas for the
+                poetry of the global Romantic period.
+              </p>
+              <h3 id="known_issues">Known issues</h3>
+              <p>Regretfully, for navigational purposes, country names and borders
+                used in the map navigation correspond to present-day denominations and
+                historical reality. We <em>apologize</em> for the resulting distortion
+                and historical inaccuracy, and hope to improve this over time with the
+                help of projects like
+                <a href="https://openhistoricalmap.org/" class="external" target="_blank">OpenHistoricalMap</a> as they
+                evolve and mature.
+              </p>
+              <h3 id="further_reading">Further reading</h3>
+              <ul>
+                <li>
+                  Casanova, Pascale. <a
+                    href="https://newleftreview.org/issues/ii31/articles/pascale-casanova-literature-as-a-world"
+                    class="external" target="_blank">"Literature as a World"</a>. <em>New Left Review</em> 31 (Jan/Feb
+                  2005): 71-90.
+                </li>
+                <li>
+                  D'haen, Theo. <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9780203806494-49"
+                    class="external" target="_blank">"Mapping World Literature"</a>. <em>The Routledge Companion to
+                    World
+                    Literature</em>, ed.
+                  Theo D'haen, David Damrosch, Djelal Kadir. London: Routledge, 2011. 413-422.
+                </li>
+                <li>
+                  Hewitt, Rachel. <a href="https://www.jstor.org/stable/24045852" class="external"
+                    target="_blank">"Mapping
+                    and Romanticism"</a>. <em>The Wordsworth Circle</em> 42(2) (Spring 2011): 157-165.
+                </li>
+                <li>
+                  Presner, Todd and David Shepard. <a href="https://doi.org/10.1002/9781118680605.ch14" class="external"
+                    target="_blank">"Mapping the Geospatial Turn"</a>. <em>A New Companion to Digital Humanities</em>,
+                  ed. Susan Schreibman, Ray Siemens, John Unsworth. Chichester: Wiley-Blackwell, 2016. 199-212.
+                </li>
+                <li>
+                  Tanoukhi, Nirvana. <a href="https://www.jstor.org/stable/20533104" class="external"
+                    target="_blank">"The
+                    Scale of World Literature"</a>. <em>New Literary History</em> 39(3) (Summer 2008): 599-617.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+              <h2 id="query">Query</h2>
+              <p>
+                RPPA participates in the <a
+                href="https://www.w3.org/2001/sw/wiki/Main_Page"
+                class="external" target="_blank">Semantic Web</a>
+                of literatures and 
+                literary studies and contributes to the wider knowledge 
+                base on the global Romantic period.  Its use of computational
+                methods as well as peer contributions to contextualize large
+                multi-lingual corpora with regard to both form and content aims
+                at arriving at a global network of contexts.  This
+                network facilitates model-building that can lead to insights
+                about the historical and geographic dynamics of the network,
+                resulting in a knowledge base of the period that can be
+                re-used, queried and combined with related digital scholarship,
+                and that facilitates further enquiry. To this end, RPPA provides
+                access to its knowledge base via a public SPARQL endpoint, which
+               powers the <a href="/query/gui/">RPPA Query Service</a>.
+              </p>
+              <h3 id="query_service">Access to the RPPA knowledge base</h3>
                 <!--
+                  <ul>
+                    <li>
+                -->
+              <p>The RPPA knowledge base is hosted on the <a
+              href="https://www.prisms.digital" target="_blank" class="external">PRISMS</a> OpenScholarship
+              platform and is accessible via a dedicated RPPA SPARQL endpoint
+              &lt;https://data.prisms.digital/query/rppa/sparql&gt;.  The
+              endpoint is a
+                    deployment of <a href="https://jena.apache.org/documentation/" class="external" target="_blank">Apache Jena Fuseki</a>, which supports the
+                    <a href="https://www.w3.org/TR/sparql11-query/" class="external" target="_blank">SPARQL 1.1 Query Language</a> and
+                    content negotiation for the following content types with SELECT
+                    queries: <code>text/csv, text/plain, application/sparql-results+json,</code> and 
+                    <code>application/sparql-results+xml</code> (URL parameter 
+                    <code>?format=csv|text|json|xml</code>).
+                    The RPPA SPARQL endpoint currently employs the <a
+                    href="https://github.com/wikimedia/wikidata-query-gui"
+                    class="external" target="_blank">Wikibase Query Service
+                   GUI</a>,
+                    but you should be able to use any SPARQL GUI, e.g. <a href="https://yasgui.triply.cc/" class="external" target="_blank">Yasgui</a>, with the above endpoint URI.
+                  </p>
+
+                  
+                    <!--
+                    </li>
+                    <li><em>RDF dumps:</em><br> RDF dumps of the entire PRISMS graph
+                    (currently updated weekly) are made available in <a href="https://www.w3.org/TR/n-quads/" class="external" target="_blank">N-Quads format</a>:<br>
+                    <a href="/data/dumps/PRISMS-RDFdump@latest.nq.gz"><i class="fas fa-file-archive"></i> 
+                    PRISMS-RDFdump@latest.nq.gz</a>
+                    ( @latest=2025-11-30T03:35:09Z
+            )<br>
+                    <em>Citation suggestion:</em> 
+                    <em>PRISMS RDF dump</em>, www.prisms.digital, Huber
+                    Digital, 06 Nov 2022, https://www.prisms.digital/data/dumps/PRISMS-RDFdump2022-11-06T03:35:16Z.nq.gz
+                    </li>
+                  </ul>
+                  -->
+            </div>
+
+          <div>
+            <h2 id="contact">Contact</h2>
+            <div class="results">
+              <h3 id="get_in_touch">Get in touch</h3>
+              <p>This is an open invitation to academics, research
+                projects, digital archives and repositories, and anyone with
+                an interest in the literature of the Romantic period
+                in any discipline to <em>collaborate on RPPA</em>. The project looks forward
+                to welcoming partners at any stage to discuss
+                collaboration or other forms of participation. Please do
+              not hesitate to reach out, there are many ways to contribute and
+              all of them are valued and appreciated:
+              </p>
+              <p style="margin-left:15px;">
+                <b>Romantic Period Poetry Archive (RPPA)</b><br>
+                Alexander Huber, Editor<br>
+              <ul style="list-style:none;">
+                <li style="text-indent:-15px;"><span>E-mail:</span> <a
+                    href="mailto:info@romanticperiodpoetry.org">info@romanticperiodpoetry.org</a>
+                <li style="text-indent:-15px;"><span>Facebook:</span> <a target="_blank"
+                    href="https://www.facebook.com/RomanticPeriodPoetryArchive"
+                    class="external">@RomanticPeriodPoetryArchive</a>
+
+                <li style="text-indent:-15px;"><span>Bluesky:</span> <a target="_blank"
+                    href="https://bsky.app/profile/c18ah.bsky.social" class="external">@c18ah.bsky.social</a>
+                  <code>#RomanticPeriodPoetryArchive</code>
+                <li style="text-indent:-15px;"><span>Mastodon:</span> <a target="_blank"
+                    href="https://hcommons.social/@c18ah" class="external">https://hcommons.social/@c18ah</a>
+                  <code>#RomanticPeriodPoetryArchive</code>
+                <li style="text-indent:-15px;"><span>X:</span> <a target="_blank" href="https://twitter.com/C18AH"
+                    class="external">@C18AH</a> <code>#RomanticPeriodPoetryArchive</code>
+
+                <li style="text-indent:-15px;"><span>GitHub:</span> <a target="_blank"
+                    href="https://github.com/alhuber1502/RPPA" class="external">https://github.com/alhuber1502/RPPA</a>
+                <li style="text-indent:-15px;"><span>Web:</span> <a target="_blank"
+                    href="http://users.ox.ac.uk/~bodl0153/" class="external">http://users.ox.ac.uk/~bodl0153/</a>
+                <li style="margin-left:-15px;"><span>Share:</span>
+                  <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33106436"></div>
+                  <!--
                 <span style="display:inline-block;vertical-align:middle;" class="addthis_inline_share_toolbox"></span>
                 -->
-            </ul>
+              </ul>
+
+            </div>
           </div>
-        </div>        
+        
+        
+        </div>
+        <div class="col-md-3">
+          <!--#set var="mode" value=""-->
 
-    
+          <nav id="navbar-help" class="h-100 flex-column align-items-stretch
+          pe-4 border-end" style="position:fixed;width:inherit;margin-top:2px;">
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link" href="#networks">Networks</a>
+              <nav class="nav nav-pills flex-column">
+                  <a class="nav-link ms-3 my-1" href="#networks_methodology">Methodology</a>  
+                  <a class="nav-link ms-3 my-1" href="#networks_display">Graph display</a>  
+                  <a class="nav-link ms-3 my-1" href="#networks_traversal">Graph
+                  traversal</a>  
+                  <a class="nav-link ms-3 my-1"
+                  href="#networks_ontologies">Ontologies and vocabularies</a>  
+                  <a class="nav-link ms-3 my-1"
+                  href="#networks_scholarship">Open Scholarship</a>  
+                </nav> 
+              <a class="nav-link" href="#maps">Maps</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#mapping_global_romantic-period_poetry">Mapping global Romantic-period
+                  poetry</a>
+                <a class="nav-link ms-3 my-1" href="#known_issues">Known issues</a>
+                <a class="nav-link ms-3 my-1" href="#further_reading">Further reading</a>
+              </nav>
+              <a class="nav-link" href="#query">Query</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#query_service">Access to the RPPA knowledge base</a>
+              </nav>
+              <a class="nav-link" href="#contact">Contact</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#get_in_touch">Get in
+                touch</a>  
+              </nav>
+            </nav>
+          </nav>
+
+        </div>
+
       </div>
-    </main>
 
-    <!--#include virtual="/templates/footer.shtml" -->
-    <!--#include virtual="/templates/bottom.shtml" -->
-  </body>
+
+    </div>
+  </main>
+  <script>
+    // document.ready
+    document.addEventListener("DOMContentLoaded", () => {
+      var node_shapes = [
+        {
+          data: {
+            type: "ellipse",
+            label: "Authors/Events/Places/Time-Spans..."
+          }
+        },
+        {
+          data: {
+            type: "round-rectangle",
+            label: "Manifestations/Digital objects"
+          }
+        },
+        {
+          data: {
+            type: "round-hexagon",
+            label: "Works/Expressions"
+          }
+        },
+        {
+          data: {
+            type: "concave-hexagon",
+            label: "Actualizations/Interrelations"
+          }
+        },
+        {
+          data: {
+            type: "round-octagon",
+            label: "Languages/Vocabularies"
+          }
+        },
+        {
+          data: {
+            type: "round-tag",
+            label: "Object selectors (location markers)"
+          }
+        },
+      ];
+      cy_help = cytoscape({
+        container: $('#cy_help'),
+        elements: node_shapes,
+        layout: { name: 'circle' },
+        style: [
+          {
+            selector: "node",
+            style: {
+              shape: "data(type)",
+              label: "data(label)",
+              height: 40,
+              width: 40,
+              color: (theme == 'dark')?'#fff':'#333'
+            }
+          }
+        ]
+      });
+      cy_help.panzoom();
+      cs_lists();
+    });
+  </script>
+
+  <!--#include virtual="/templates/footer.shtml" -->
+  <!--#include virtual="/templates/bottom.shtml" -->
+</body>
 
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Entity browser" -->
+    <!--#set var="bodyid" value="query" -->
+    <!--#set var="query" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+	<div class="col-md-12">
+	  <div id="entity-view">
+	    <h1 style="margin-bottom:15px;">Entity Browser <span class="spinner-border text-info" role="status" style="width: 20px;
+							      height: 20px;
+							      margin-left: 10px;
+							      font-size: 10px;
+							      margin-bottom: 5px;"><span class="sr-only">Loading...</span>            </span></h1>
+	    <div id="tabDetails" style="padding-top: 0px;
+				      margin-top: -10px;"></div>
+	  </div>
+	</div>
+    
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

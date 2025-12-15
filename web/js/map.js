@@ -355,13 +355,37 @@
   function print_work( work ) {
     var formatted_work = '';
     formatted_work += 
-      `<a href="/works/#text/`+work.text+`" data-tid="`+work.text+`" data-wid="`+work.work+`">`+
+      `<a class="open_text" href="/works/#text/`+work.text+`" data-tid="`+work.text+`" data-wid="`+work.work+`">`+
       `<em>`+work.title+`</em>`+
       '</a>'+
       ((work["type"].startsWith('trans_'))?' (<code>'+work.type.split('_')[1]+'</code>)':'')+
       ((work.publ != '')?` (`+work.publ+`)`: ((work.comp != '')?` (comp. `+work.comp+`)`: ``));
     return( formatted_work );
   }
+
+  $(document.body).on('click', '.open_text', async function(e) { 
+    if ( location.href.includes( '/maps/' ) ) {
+      e.preventDefault();
+      zInd = zInd+1;
+      var text = `<div id="content" style="z-index:`+zInd+`;overflow:inherit;top:55px;height: calc(100vh - 96px);min-width:500px;" class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1">
+        <div class="offcanvas-body globaltext-container">`+
+          `
+          <div class="globaltext" style="min-width:550px !important;">							
+          </div>
+          <button type="button" class="btn-close" style="float: right;top: 8px;position: absolute;right: 0;" data-mode="read" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+      </div>
+      `;
+      $( "body" ).prepend( text );
+      var tid = e.currentTarget.getAttribute( "data-tid" );
+      var wid = e.currentTarget.getAttribute( "data-wid" );
+      await display_globaltext( tid, wid, false );
+      var myCanvasGTEl = document.getElementById( "content" );
+      var myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
+        keyboard: false
+      }).show();
+    }
+  });
 
   // return a list of poems for the selected country
   function update_country( country, isEmbedded ) {
@@ -437,7 +461,6 @@
         sidebar.open('location');
         source = nations[ hash ].coord;
       break;
-      // TODO: these should be links to /works/#text/...
       /*
       case "#text/":
         var work = await load_work_overview( texts[ hash ][ "work" ] );

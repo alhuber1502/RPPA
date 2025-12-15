@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!-- set: title, bodyID, active navigation -->
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Home" -->
+    <!--#set var="bodyid" value="home" -->
+    <!--#set var="home" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container-fluid">
+    
+        <!-- content: insert here -->
+        <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
+        <div style="display:flex;align-items:center;justify-content:center;height:calc(100vh - 115px);">
+          <div style="padding:10px 15px;width:39%;height:43%;min-width:300px;min-height:125px;background-color:var(--bs-body-bg);border-radius:15px;overflow:auto;border: 1px solid #999;">
+            
+            <div id="welcome">
+              <!--
+              <h1 class="leaflet-sidebar-header">
+                Welcome to RPPA<sup>alpha</sup>
+                <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+              </h1>
+              -->
+              <div style="text-align:center;margin-top:20px;">
+                  <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
+                    <span class="h2">Romantic Period Poetry Archive<sup>alpha</sup></span><br><small><b>Alexander Huber, editor.</b></small><br>
+                  <p style="text-align:left;">The Romantic Period Poetry Archive—or RPPA <a href="#"
+                  onclick="document.getElementById('player').play()"><i class="fas
+                  fa-volume-up"></i><span class="sr-only">[Listen]</span></a> for
+                  short—is a new, open access digital platform for global
+                  Romantic-period poetry — start your journey (almost) anywhere in the
+                  world!  <!--To fully participate in RPPA, i.e. to be able to
+                  contribute contexts for texts, you need to be signed in.-->
+                  </p> 
+                  <button type="button" class="btn sso-sign-in" style="background-color:
+                  var(--bs-orange);color:#fff;float:right;margin-left:10px;">Sign in</button>
+                  <a type="button" class="btn" href="/authors/"
+                  style="background-color:
+                  var(--bs-orange);color:#fff;float:right;">Start exploring</a>
+                  <p class="small" style="clear:both;text-align:left;
+                  padding-top:20px; width:100%;position:relative;
+                  left: 0%;">RPPA is a rapidly prototyped and openly
+                  developed
+                  DH project, currently in public <span
+                  style="font-variant:small-caps;">alpha</span>. It will
+                  initially run from late 2020 to the end of 2025, 
+                      when it will have reached <span style="font-variant:small-caps;">beta</span> stage.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

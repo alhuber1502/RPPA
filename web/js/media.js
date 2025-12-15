@@ -48,40 +48,11 @@ $(document ).on('mouseenter', '.bb-item.med label', function ( e ) {
     - creates a minimal live version of the building-block to list/highlight
 */
 async function createW3CannoMedia( iid, tid, target, ids, obj_id, digo, work, expr, start, end, _this ) {
-    // this is obsolete, except for liveanno part below
     //console.log(  iid, tid, target, ids, obj_id, work, expr, start, end  );
     var date = new Date();
     player[ "player_"+(mode == 'edit'?'editing_'+iid:(mode == 'view')?'viewing_'+iid:iid) ].regions.list[ ids ].remove();
     var id = domain+`/id/`+uuidv4()+`/buildingblock`;
     // add annotation
-    /*
-    var update = namespaces+"insert data {\n";
-    update += `GRAPH `+user+` \n{` 
-    var quads = `<`+id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
-    quads += `dcterms:relation <`+work+`> ;\n`;
-    quads += `dcterms:isPartOf <`+expr+`> ;\n`;
-    quads += `crm:P2_has_type lct:aud ;\n`;
-    quads += `dcterms:contributor `+user+` ;\n`;
-    quads += `dcterms:created "`+date.toISOString()+`" ;\n`;
-    quads += `as:generator <`+domain+`> ;\n`;
-    quads += `skos:prefLabel "`+target+`" ;\n`;
-    quads += `oa:motivatedBy oa:highlighting ;\n` ;
-    quads += `oa:hasTarget [
-        dcterms:type dctypes:Sound ;
-        dc:format lct:aud ;
-        dc:language "`+$( ".globaltext .tab-content .active" ).attr( "lang" )+`" ;
-        oa:hasSelector [
-            rdf:type oa:FragmentSelector ;
-            dcterms:conformsTo <http://www.w3.org/TR/media-frags/> ;
-            rdf:value "t=`+Number(start).toFixed(2)+`,`+Number(end).toFixed(2)+`" ;
-        ] ;
-        oa:hasSource <`+obj_id+`> ;
-    ] ;\n.` ;
-    update += quads;
-    update += `}\n}`;
-    await putTRIPLES( update );
-    */
-    // only relevant part 
     var liveanno = {};
     liveanno.id = id;
     liveanno.iid = iid;
@@ -136,15 +107,3 @@ $( document ).on( "click", ".bb-item.med .trash", async function(e) {
     $( this ).parent().remove();
     //    processGlobalText( "", wid );
 });
-
-// Editing view: retrieve and display annotations
-// this is obsolete
-/*
-function processMediaBuildingBlocks( bb ) {
-    console.log( bb );
-    for (var j = 0; j < bb.length; j++ ) {
-        $( ".workbench .bb" ).append( processW3CannoMedia( bb[ j ] ) );
-    }
-    player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].drawBuffer();
-}
-*/

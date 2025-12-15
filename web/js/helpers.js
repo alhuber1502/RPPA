@@ -117,7 +117,8 @@ function skp(graph, subject, retrievedVal) {
 
 // function to add an FA icon to a given IRI
 function addicon(myiri) {
-    // TODO
+    // TODO: should I extend this to all classes?
+    return '';
 	if (myiri.endsWith( "/delivery" ) ) {
 		if ( myiri.includes ("/imageset/") ) {
 			return ( graph_icon["fa-camera"] );
@@ -152,6 +153,120 @@ function addicon(myiri) {
 		}
 	}
 	return '';
+}
+
+function publish( sparql ) {
+    $.ajax({
+        url: '/cgi-bin/publish.pl',
+        type: 'POST',
+        data: { pub: sparql },
+        success: function(result) {},
+        error: function( error ) {}
+    });
+}
+
+function formatEntity( entity, graph ) {
+    var contentR = `<h4>Outgoing:</h4><ul class="listBibl">`;
+    var contentL = `<h4>Incoming:</h4><ul class="listBibl">`;
+    var contentP = `<ul class="listBibl">`, contentPadd = '', heading = '';
+    var nodes_seen = [];
+
+    $.each( graph, function( i,v ) {
+        var s = v.s;
+        var p = v.p;
+        var o = v.o;
+        var g = v.g;
+        if ( s.value == entity && !( o.type == 'uri' && o.value.startsWith( domain )) && typeof nodes_seen[ jqu( s.value+p.value+o.value ) ] == 'undefined') {
+            // properties
+            if ( 
+                nsv( p.value) == "crm:P106_is_composed_of" 
+                || nsv( p.value) == "crm:P70i_is_documented_in" 
+                || nsv( p.value) == "dcterm:created" 
+//                || nsv( p.value) == "rdf:type" 
+//                || nsv( p.value ).startsWith( "cnt:" )
+            ) { 
+                return; 
+            }
+            var addition = '';
+            nodes_seen[ jqu( s.value+p.value+o.value ) ] = 1;
+            if (o.value.startsWith( domain ) ) {
+                addition = `>`;
+            } else if ( o.value.startsWith( 'http' ) ) {
+                addition = ` class="external" target="_blank">`;
+            }
+            if ( p.value == "http://www.w3.org/2004/02/skos/core#prefLabel" ) {
+                heading = o.value;
+            }
+            contentP += `<li data-s="` + s.value + `" data-p="` + p.value + `" data-o="` + o.value + `"` + `>
+            <i class="fas fa-bars"></i>
+            <span style="font-style:italic;vertical-align:top;">`
+            + (onto[nsv(p.value)] ? onto[nsv(p.value)].label : (nsv(p.value) ? nsv(p.value) : p.value))
+            + ` &nbsp; (`+(nsv(p.value) ? nsv(p.value) : p.value)+`)`+`</span> &nbsp; <span>` +
+            ((o.value.startsWith( 'http') && nsv(p.value) != "rdf:type" )?`<a href="`+o.value+`"`+addition:``)+
+                    (onto[nsv(o.value)] ? onto[nsv(o.value)].label :
+                    (skp(graph, o.value, "crm:P1_is_identified_by") ? skp(graph, o.value, "crm:P1_is_identified_by") :
+                    ( nsv( o.value )?nsv( o.value ):o.value
+            )))+	((o.value.startsWith( 'http' ) && nsv(p.value) != "rdf:type")?`</a>`:``)
+            + ` &nbsp; `+(nsv(o.value) ? `(`+nsv(o.value)+`)` : `(`+o.type+`)`)+`</span></li>`;
+        }
+    });
+    $.each( graph, function( i,v ) {
+            if ( v.s.value == entity && (v.o.value.startsWith( domain ) || v.o.value.startsWith( "_:" ) || nsv( v.p.value) == "crm:P106_is_composed_of" || nsv( v.p.value) == "crm:P70i_is_documented_in" ) ) {
+                // outgoing
+                if ( nsv( v.p.value) == "dcterm:creator" ) { return; }
+                contentR += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `">
+                <i class="fas fa-arrow-right"></i>
+                <span style="font-style:italic;vertical-align:top;">`
+                + (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
+                +` &nbsp; `+(nsv(v.p.value) ? `(`+nsv(v.p.value)+`)` : `(`+v.p.type+`)`)
+                + `</span> &nbsp; <span><a `+((v.o.type == "uri")?`href="`+v.o.value+`"`:``)+` href="`+v.o.value+`">` +
+                    //(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
+                    ((v.qp)?truncateString(v.qp.value,150) //+ ((v.qa)?` (`+v.qa.value+`)`:``)
+                    :v.o.value)
+                + `</a>`+` &nbsp; `+(v.qt && nsv(v.qt.value) ? `(`+nsv(v.qt.value)+`)` : (v.qt && v.qt.type)? `(`+v.qt.type+`)` : `` )+`</span></li>`;
+            } else if ( ((v.o.type=='uri' && v.o.value == entity)) && (v.s.value.startsWith( domain ) || v.s.value.startsWith( "_:" )) ) {
+                 // incoming
+                contentL += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `">
+                <i class="fas fa-arrow-left"></i>
+                <span style="font-style:italic;vertical-align:top;">`
+                + (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
+                +` &nbsp; `+(nsv(v.p.value) ? `(`+nsv(v.p.value)+`)` : `(`+v.p.type+`)`)
+                + `</span> &nbsp; <span><a `+((v.s.type == "uri")?`href="`+v.s.value+`"`:``)+` href="`+v.s.value+`">` +
+                     //(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
+                     ((v.qp)?truncateString(v.qp.value,150) //+ ((v.qa)?` (`+v.qa.value+`)`:``)
+                     :v.s.value)
+                + `</a>`+` &nbsp; `+(nsv(v.qt.value) ? `(`+nsv(v.qt.value)+`)` : `(`+v.qt.type+`)`)+`</span></li>`;
+            } else {
+                if ( !contentP.includes( "<li" ) && contentPadd == '' ) {
+                    contentPadd += `<li><span style="font-style:italic;">`
+                    + onto[ "crm:P1_is_identified_by" ].label + `</span> &nbsp; <span>` +v.o.value
+                    + `</span></li>`;
+                }
+                if ( v.o.type == 'literal' && !contentP.includes( "<li" ) 
+                ) {
+                    contentL += `<li data-s="` + v.s.value + `" data-p="` + v.p.value + `" data-o="` + v.o.value + `">
+                    <i class="fas fa-arrow-left"></i>
+                    <span style="font-style:italic;vertical-align:top;">`
+                    + (onto[nsv(v.p.value)] ? onto[nsv(v.p.value)].label : (nsv(v.p.value) ? nsv(v.p.value) : v.p.value))
+                    +` &nbsp; `+(nsv(v.o.value) ? `(`+nsv(v.o.value)+`)` : `(`+v.o.type+`)`)
+                    + `</span> &nbsp; <span><a `+((v.s.type == "uri")?`href="`+v.s.value+`"`:``)+` href="`+v.s.value+`">` +
+                         //(onto[nsv(o.value)] ? onto[nsv(o.value)].label :
+                         ((v.qp)?truncateString(v.qp.value,150) //+ ((v.qa)?` (`+v.qa.value+`)`:``)
+                         :v.s.value
+                         )
+                    + `</a>`+` &nbsp; `+(v.qt && nsv(v.qt.value) ? `(`+nsv(v.qt.value)+`)` : (v.qt && v.qt.type)? `(`+v.qt.type+`)` : ``)+`</span></li>`;	
+                }
+            }
+    });
+    if ( !contentR.includes( "<li" ) ) { contentR += "<li>none</li>" }
+    if ( !contentL.includes( "<li" ) ) { contentL += "<li>none</li>" }
+    contentR += "</ul>";
+    contentL += "</ul>";
+    contentP += contentPadd+"</ul>";
+    // get statements for a single node for graphInfo/detailsTab
+    info = "<h2>"+heading+"</h2><p>&lt;"+entity+"&gt;</p>"+
+            "<h3>Properties</h3>"+contentP+"<h3>Relationships</h3>"+contentL+contentR+"";
+    return( info );
 }
 
 var cyLayouts = {};
@@ -261,7 +376,7 @@ cyLayouts['cose'] = {
 	// Called on `layoutready`
 	ready: function(){},
 	// Called on `layoutstop`
-	stop: function(){},
+	stop: function(e){},
 	// Whether to animate while running the layout
 	// true : Animate continuously as the layout is running
 	// false : Just show the end result
@@ -277,7 +392,7 @@ cyLayouts['cose'] = {
 	animateFilter: function ( node, i ){ return true; },
 	// The layout animates only after this many milliseconds for animate:true
 	// (prevents flashing on fast runs)
-	animationThreshold: 250,
+	animationThreshold: 50,
 	// Number of iterations between consecutive screen positions update
 	refresh: 20,
 	// Whether to fit the network view after when done
@@ -291,13 +406,13 @@ cyLayouts['cose'] = {
 	// Randomize the initial positions of the nodes (true) or use existing positions (false)
 	randomize: false,
 	// Extra spacing between components in non-compound graphs
-	componentSpacing: 40,
+	componentSpacing: 60,
 	// Node repulsion (non overlapping) multiplier
-	nodeRepulsion: function( node ){ return 2048; },
+	nodeRepulsion: function( node ){ return 3048; },
 	// Node repulsion (overlapping) multiplier
-	nodeOverlap: 4,
+	nodeOverlap: 8,
 	// Ideal edge (non nested) length
-	idealEdgeLength: function( edge ){ return 162; },
+	idealEdgeLength: function( edge ){ return 192; },
 	// Divisor to compute edge forces
 	edgeElasticity: function( edge ){ return 132; },
 	// Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -537,7 +652,27 @@ function randomColor(alpha) {
         ')'
     );
 }
+// export graph as image
+function base64ToBlob(base64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
 
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+}
 // load poet/work JSON files for the selected individual
 function load_poet_overview( id ) {
     return new Promise(function(resolve, reject) {
@@ -626,16 +761,18 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                         data-auto_prompt="false">
                     </div>
                     <div class="g_id_signin" style="margin-top: 20px;
-                    margin-left: 120px;"
+                    margin-left: 110px;"
                         data-type="standard"
                         data-shape="rectangular"
                         data-theme="outline"
                         data-text="continue_with"
                         data-size="large"
                         data-logo_alignment="left"
-                        data-width="226">
+                        data-width="245">
+                    </div><br/>
+                    <div>
+                        <span class="text-muted small">Having trouble authenticating? Please <a href="mailto:help@romanticperiodpoetry.org?subject=RPPA authentication">get in touch</a>.
                     </div>
-
                     <br/>
                 </div>
             </div>
@@ -700,6 +837,7 @@ function testAPI() {                      // Testing Graph API after login.  See
             if ( user == undefined || username == 'undefined') { return; }
             var update = namespaces+"insert data {\n";
             update += user+` a foaf:Agent ;\n`;
+            update += `skos:prefLabel """`+response.name+`""" ;\n`;
             update += `foaf:name """`+response.name+`""" ;\n`;
             update += `foaf:accountName <https://www.facebook.com/`+response.id+`> ;\n`;
             update += `.\n}`;
@@ -708,9 +846,9 @@ function testAPI() {                      // Testing Graph API after login.  See
             await putTRIPLES( update );
         }
         if ( user == undefined || username == 'undefined') { return; }
-        Cookies.set( 'RPPA-login-provider','fb', { expires: 365 } );
-        Cookies.set('RPPA-login-user', user );
-        Cookies.set('RPPA-login-username', username );
+        Cookies.set('RPPA-login-provider','fb', { expires: 365, secure: true } );
+        Cookies.set('RPPA-login-user', user, { secure: true } );
+        Cookies.set('RPPA-login-username', username, { secure: true } );
         if ( $( "#myModal" ).length ) {
             $( "#myModal" ).hide();
             $( ".modal-backdrop" ).remove();
@@ -760,6 +898,7 @@ async function handleCredentialResponse(response) {
         var update = namespaces+"insert data {\n";
         update += user+` a foaf:Agent ;\n`;
         update += `foaf:name """`+response.name+`""" ;\n`;
+        update += `skos:prefLabel """`+response.name+`""" ;\n`;
         update += `foaf:accountName <https://www.google.com/`+response.sub+`> ;\n`;
         update += `.\n}`;
     //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
@@ -767,9 +906,9 @@ async function handleCredentialResponse(response) {
         await putTRIPLES( update );
     }
     if ( user == undefined || username == 'undefined') { return; }
-    Cookies.set( 'RPPA-login-provider','google', { expires: 365 } );
-    Cookies.set('RPPA-login-user', user );
-    Cookies.set('RPPA-login-username', username );
+    Cookies.set( 'RPPA-login-provider','google', { expires: 365, secure: true } );
+    Cookies.set('RPPA-login-user', user, { secure: true } );
+    Cookies.set('RPPA-login-username', username, { secure: true } );
     if ( $( "#myModal" ).length ) {
         $( "#myModal" ).hide();
         $( ".modal-backdrop" ).remove();

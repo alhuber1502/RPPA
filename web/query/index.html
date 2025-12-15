@@ -105,7 +105,7 @@
                 of author portraits</a>
                     </li>
                                     <li>
-                        <a href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATimeline%0APREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20lcr%3A%20%3Chttp%3A%2F%2Fid.loc.gov%2Fvocabulary%2Frelators%2F%3E%0APREFIX%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%23%20show%20results%0ASELECT%20DISTINCT%20%3Fauthor%20%3FauthorLabel%20%3FdateTime%20%3FauthorImage%0AWHERE%20%7B%0A%20%20%23%20retrieve%20all%20authors%0A%20%20%3Fauthor%20crm%3AP2_has_type%20lcr%3Aaut%20.%0A%20%20%3Fauthor%20crm%3AP1_is_identified_by%20%3FauthorLabel%20.%0A%20%20%23%20and%20their%20birth%20dates%0A%20%20%3Fauthor%20crm%3AP98i_was_born%20%3FauthorBirth%20.%0A%20%20%3FauthorBirth%20crm%3AP4_has_time-span%20%3FbirthDate%20.%0A%20%20%3FbirthDate%20crm%3AP82_at_some_time_within%20%3FdateTime%20.%0A%20%20%23%20and%20filter%20out%20those%20outside%20of%201795-1805%0A%20%20FILTER%20%28%20%3FdateTime%20%3E%3D%20%221795-01-01%22%5E%5Exsd%3Adate%20%26%26%20%3FdateTime%20%3C%20%221805-01-01%22%5E%5Exsd%3Adate%20%29%0A%20%20OPTIONAL%20%7B%20%3Fauthor%20wdt%3AP18%20%3FauthorImage.%20%7D%0A%7D'>Timeline of authors born 1795-1805</a>
+                        <a href='https://www.romanticperiodpoetry.org/query/#%23defaultView%3ATimeline%0APREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20lcr%3A%20%3Chttp%3A%2F%2Fid.loc.gov%2Fvocabulary%2Frelators%2F%3E%0APREFIX%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%23%20show%20results%0ASELECT%20DISTINCT%20%3Fauthor%20%3FauthorLabel%20%3FauthorImage%20%28xsd%3AdateTime%28%3FdateTime%29%20as%20%3FdateTimeDT%29%0AWHERE%20%7B%0A%20%20%23%20retrieve%20all%20authors%0A%20%20%3Fauthor%20crm%3AP2_has_type%20lcr%3Aaut%20.%0A%20%20%3Fauthor%20crm%3AP1_is_identified_by%20%3FauthorLabel%20.%0A%20%20%23%20and%20their%20birth%20dates%0A%20%20%3Fauthor%20crm%3AP98i_was_born%20%3FauthorBirth%20.%0A%20%20%3FauthorBirth%20crm%3AP4_has_time-span%20%3FbirthDate%20.%0A%20%20%3FbirthDate%20crm%3AP82_at_some_time_within%20%3FdateTime%20.%0A%20%20%23%20and%20filter%20out%20those%20outside%20of%201795-1805%0A%20%20FILTER%20%28%20%3FdateTime%20%3E%3D%20%221795-01-01%22%5E%5Exsd%3Adate%20%26%26%20%3FdateTime%20%3C%20%221805-01-01%22%5E%5Exsd%3Adate%20%29%0A%20%20OPTIONAL%20%7B%20%3Fauthor%20wdt%3AP18%20%3FauthorImage.%20%7D%0A%7D'>Timeline of authors born 1795-1805</a>
                     </li>
                     <li>
                 <a
@@ -964,7 +964,10 @@
           .uls-lcd { background-color: #555; color:#ccc; }
           .uls-language-block a { color: #ccc; }
           .uls-language-block>ul>li:hover { background-color: #777; }
-}
+          .CodeMirror-cursor { border-left-color: white !important; }
+          .vis-time-axis .vis-text { color: #aaa; }
+          .vis-item, .vis-item.vis-line { background: #666; }
+          .pagination>li>a, .pagination>li>span { background-color: #aaa; }
       `;
       function theme() {
         var theme = parent.document.documentElement.getAttribute('data-bs-theme');

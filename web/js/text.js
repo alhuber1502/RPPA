@@ -120,51 +120,12 @@ $(document ).on('click', ".text .pagebreak a,.image_link a", async function(e) {
     - creates a minimal live version of the building-block to list/highlight (processW3Canno)
 */
 async function createW3Canno( target, ids, obj_id, digo, work, expr, _this ) {
-    // again this section is obsolete
     var date = new Date();
     var id = domain+`/id/`+uuidv4()+`/buildingblock`;
     ids.forEach(function(part, index) {
         ids[index] = "#"+part.replace( /\\./g,"\\\\." );
     });
     // add annotation
-    /*
-    var update = namespaces+"insert data {\n";
-    update += `GRAPH `+user+` \n{` 
-    var quads = `<`+id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
-    quads += `dcterms:relation <`+work+`> ;\n`;
-    quads += `dcterms:isPartOf <`+expr+`> ;\n`;
-    quads += `crm:P2_has_type lct:txt ;\n`;
-    quads += `dcterms:contributor `+user+` ;\n`;
-    quads += `dcterms:created "`+date.toISOString()+`" ;\n`;
-    quads += `as:generator <`+domain+`> ;\n`;
-    quads += `skos:prefLabel "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`" ;\n`;
-    quads += `oa:motivatedBy oa:highlighting ;\n` ;
-    quads += `oa:hasTarget [
-        dcterms:type dctypes:Text ;
-        dc:format lct:txt ;
-        dc:language "`+$( ".globaltext .tab-content .active" ).attr( "lang" )+`" ;
-        oa:hasSelector [
-            rdf:type oa:CssSelector ;
-            rdf:value "`+ids.join( "," )+`" ;
-        ] ;
-        `;
-    /*
-    if ( target != '' ) {
-        quads += `oa:hasSelector [
-                rdf:type oa:TextQuoteSelector ;
-                oa:exact "`+target.replace(/"/g,'&quot;').replace(/(\r\n|\n|\r|\t|\f)/gm,"\\\\n")+`" ;
-            ] ;
-            `;        
-    }
-    */
-    /*
-    quads += `oa:hasSource <`+obj_id+`> ;
-    ] ;\n.` ;
-    update += quads;
-    update += `}\n}`;
-    await putTRIPLES( update );
-    */
-    // this is the only required section
     var liveanno = {};
     liveanno.id = id;
     liveanno["oa:hasTarget"] = [];
@@ -238,17 +199,17 @@ function processW3Canno( annotation ) {
             }
         }
         if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'lg' ) ) {
-            sel_text = "<em>Stanza:</em> "+sel_text;
+            sel_text = sel_text + " [stanza]";
         } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'l' ) ) {
-            sel_text = "<em>Line:</em> "+sel_text;
+            sel_text = sel_text + " [line]";
         } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'head' ) ) {
-            sel_text = "<em>Heading:</em> "+sel_text;
+            sel_text = sel_text + " [heading]";
         } //else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
         //} 
         else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
-            sel_text = "<em>Whole poem:</em> "+sel_text;
+            sel_text = sel_text + " [whole poem]";
         } else {
-            sel_text = "<em>Segment:</em> "+sel_text;
+            sel_text = sel_text + " [segment]";
         }
         return `<li class="bb-item txt" data-ids="`+annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"].split( "," )+`" data-wid="`+annotation['dcterms:isPartOf'].wid+`" data-tid="`+annotation['dcterms:isPartOf'].tid+`" data-expr="`+annotation['dcterms:isPartOf'].id+`" data-digo="`+annotation['dcterms:isPartOf'].oid+`" data-iid="`+annotation['dcterms:isPartOf'].iid+`">
             <input type="checkbox" id="`+bb_id+`" name="`+bb_id+`">
@@ -264,40 +225,12 @@ $( document ).on( "click", ".bb-item.txt .trash", async function(e) {
     var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     var id = $( this ).prev().attr( "id" );
     var ids = $( this ).parent().data( "ids" ).split( "," );
-    // obsolete
-    /*
-    var update = namespaces+`\nWITH `+user+` DELETE { <`+id+`> ?p ?o . } WHERE { <`+id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+id+`> . } WHERE { ?s ?p <`+id+`> . } `;
-    await putTRIPLES( update );
-    */
     _this.parent().remove();
     // unhighlight annotation and detach popovers
     $( jqu(ids[0]) ).removeClass( "highlight-bb-start" )
     $( jqu(ids[ids.length-1]) ).removeClass( "highlight-bb-end" )
-    /*
-    $.each( ids, function( i,v ) {
-        $( jqu(v) ).removeClass( "highlight-bb" ).removeClass( "highlight-bb-start" ).removeClass( "highlight-bb-end" ).removeClass( "pulse-bb" );
-        $( jqu(v) ).next( ".highlight-bb" ).removeClass( "highlight-bb" ).removeClass( "pulse-bb" );
-    });
-    */
-    //processGlobalText( tid, wid );
 });
-// Editing view: retrieve and display list of building blocks
-// obsolete!
-/*
-function processBuildingBlocks( bb ) {
-    $( ".workbench" ).html( `<h2>Current selections</h2><ul class="bb"></ul>` );
-    $( ".highlight-bb" ).removeClass( "highlight-bb" );
-    $( ".highlight-bb-start" ).removeClass( "highlight-bb-start" );
-    $( ".highlight-bb-end" ).removeClass( "highlight-bb-end" );
-    for (var j = 0; j < bb.length; j++ ) {
-        try {
-            $( ".workbench .bb" ).append( processW3Canno( bb[ j ] ) );
-        } catch(err) {
-            console.log( err )
-        }
-    }
-}
-*/
+
 // Editing view: highlight the building block in the text on hover in the list
 $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
     var id = $( e.currentTarget ).data( "ids" ).split( "," )[0] || '';
@@ -311,7 +244,6 @@ $(document ).on('mouseenter', '.bb-item.txt', function ( e ) {
 });
 
 // Reading view: highlight target of the selected context on hover
-
 /*
 $(document).on('mouseenter', '.context', function () {
     $( $(this) ).addClass("active");

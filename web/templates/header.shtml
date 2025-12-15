@@ -61,7 +61,7 @@
                         setStoredTheme(theme)
                         setTheme(theme)
                         showActiveTheme(theme, true)
-                        reTheme()
+                        reTheme(theme)
                     })
             })
         })
@@ -211,7 +211,7 @@
           <a class="navbar-brand" href="/">
             <img src="/images/authors/ByroGe1788_NPG_detail.jpg" alt="[Lord Byron (1788-1824) / © National Portrait Gallery, London]"
               title="Lord Byron (1788-1824) / © National Portrait Gallery, London">
-            <span>Romantic Period Poetry Archive<sup>alpha</sup></span></a>
+            <span>Romantic Period Poetry Archive<sup>beta</sup></span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -227,13 +227,13 @@
                 <a class="nav-link <!--#echo var='works' -->" href="/works/">Works</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='networks' -->" aria-disabled="true" href="/networks/">Networks</a>
+                <a class="nav-link <!--#echo var='networks' -->" href="/networks/">Networks</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link <!--#echo var='map_tool' -->" href="/maps/">Maps</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled <!--#echo var='search' -->" aria-disabled="true" href="/search/">Search</a>
+                <a class="nav-link <!--#echo var='query' -->" href="/query/gui/">Query</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link <!--#echo var='about' -->" href="/about/">About</a>
@@ -242,16 +242,18 @@
                 <a class="nav-link dropdown-toggle <!--#echo var='help' -->" data-bs-toggle="dropdown" href="/help/">Help</a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item disabled" aria-disabled="true" href="/help/#networks">Networks</a>
+                    <a class="dropdown-item" href="/help/#networks">Networks</a>
                   </li><li>
                     <a class="dropdown-item" href="/help/#maps">Maps</a>
+                  </li><li>
+                    <a class="dropdown-item" href="/help/#query">Query</a>
                   </li><li>
                     <a class="dropdown-item" href="/help/#contact">Contact</a>
                   </li>
                 </ul>
               </li>
             </ul>
-            <span class="sso" style="color:#fff;font-size:15px;padding-left:33px;"></span>
+            <span class="sso" style="color:#fff;font-size:16px;padding-left:33px;"></span>
             <ul class="navbar-nav mb-2 mb-md-0 flex-row flex-wrap">
               <li class="nav-item dropdown">
                   <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">

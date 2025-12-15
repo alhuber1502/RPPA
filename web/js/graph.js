@@ -8,7 +8,8 @@ $.ajax({url: "/data/graphs/onto.json", dataType: 'json', async: false,
 
 // PRISMS graph view
 
-var cy, eh, ontofcr = [], graph_icon = {}, graph_uuid = {}, graph_col = {}, previousState = null;
+var cy, eh, ur, ontofcr = [], graph_icon = {}, graph_uuid = {}, graph_col = {}, previousState = null, previousGState = null;
+var tippy1 = {}, tippy2 = {}
 // node colours
 
 graph_col["crm:E53_Place"] = '#90A583';//Cambridge blue
@@ -24,6 +25,8 @@ graph_col["expression1"] = '#cd6711';
 graph_col["expression2"] = '#124E78';
 graph_col["expression3"] = '#2C6E49';
 graph_col["expression4"] = '#82204A';
+
+graph_col["intro"] = '#2a9d8f';
 /*
 BLUES
 #031D44 Oxford Blue
@@ -63,7 +66,7 @@ BROWNS
 */
 
 // dataType properties
-graph_uuid["lang"] = {};
+graph_uuid["skos"] = {};
 graph_uuid["coll"] = {};
 graph_uuid["begin"] = {};
 graph_uuid["end"] = {};
@@ -93,22 +96,200 @@ async function initializeGraph( id, view ) {
 	} else if (view == "works") {
 		graph = await getWork( id );
 	} else {
-		throw 'NO GRAPH DATA!';
+		graph = [];
 	}
     data = await createCYJSON( graph, view );
     if ( $( "#cy" ).length ) {
 		cy.add( data );
-		run_layout( view == 'authors'?'klay':'cose');
+		run_layout( 'cose' );
     } else {
-        $( ".col-graph" ).append( `<div id='cy'><div class="cytoscape-navigator" style="display:none;"></div></div>` );
+        $( ".col-graph" ).append( `<div class="graph-about" style="display:none;"></div><div id='cy'><div class="cytoscape-navigator" style="display:none;"></div></div>` );
 		createCYgraph( data, graph, cyLayouts[ "cose" ] );
     }
+	// undo/redo extension
+	ur = cy.undoRedo();
+	// cxtmenu extension
+	cy.cxtmenu({
+		menuRadius: function(ele){ return 30; },
+		selector: 'node',
+		commands: [{
+			content: '<span class="fas fa-right-left fa-2x"></span>',
+			select: async function( ele ) {
+				await addEleNode( ele.id() )
+			},
+			enabled: true
+		}, {
+			content: '<span class="fas fa-rotate-left"></span>',
+			select: function(ele){
+				ur.undo()
+			},
+			enabled: true
+		},{
+			content: '<span class="fas fa-rotate-right"></span>',
+			select: function(ele){
+				ur.redo()
+			},
+			enabled: true
+		},{
+			content: '<i class="fa-solid fa-terminal"></i>',
+			select: function(ele){
+				console.log( ele.id(), ele.data(), ele.position() );
+			},
+			enabled: true
+		}],
+		fillColor: (theme == 'dark')?'rgba(100, 100, 100, 0.75)':'rgba(200, 200, 200, 0.75)', // the background colour of the menu
+		activeFillColor: 'rgba(198, 120, 54, .75)', //'rgba(1, 105, 217, 0.75)', // the colour used to indicate the selected command
+		activePadding: 20, // additional size in pixels for the active command
+		indicatorSize: 24, // the size in pixels of the pointer to the active command, will default to the node size if the node size is smaller than the indicator size, 
+		separatorWidth: 3, // the empty spacing in pixels between successive commands
+		spotlightPadding: 4, // extra spacing in pixels between the element and the spotlight
+		adaptativeNodeSpotlightRadius: false, // specify whether the spotlight radius should adapt to the node size
+		minSpotlightRadius: 12, // the minimum radius in pixels of the spotlight (ignored for the node if adaptativeNodeSpotlightRadius is enabled but still used for the edge & background)
+		maxSpotlightRadius: 24, // the maximum radius in pixels of the spotlight (ignored for the node if adaptativeNodeSpotlightRadius is enabled but still used for the edge & background)
+		openMenuEvents: 'cxttapstart taphold', // space-separated cytoscape events that will open the menu; only `cxttapstart` and/or `taphold` work here
+		itemColor: (theme == 'dark')?'white':'black', // the colour of text in the command's content
+		itemTextShadowColor: 'transparent', // the text shadow colour of the command's content
+		zIndex: 9999, // the z-index of the ui div
+		atMouse: false, // draw menu at mouse position
+		outsideMenuCancel: false // if set to a number, this will cancel the command if the pointer is released outside of the spotlight, padded by the number given 
+	});
+	cy.cxtmenu({
+		menuRadius: function(ele){ return 50; },
+		selector: 'core',
+		commands: [{
+			content: '<span class="fas fa-rotate-left"></span>',
+			select: function(ele){
+				ur.undo()
+			},
+			enabled: true
+		},{
+			content: '<span class="fas fa-rotate-right"></span>',
+			select: function(ele){
+				ur.redo()
+			},
+			enabled: true
+		},{
+			content: '<i class="fa-solid fa-terminal"></i>',
+			select: function(ele){
+			},
+			enabled: false
+		}],
+		fillColor: (theme == 'dark')?'rgba(100, 100, 100, 0.75)':'rgba(200, 200, 200, 0.75)', // the background colour of the menu
+		activeFillColor: 'rgba(198, 120, 54, .75)', //'rgba(1, 105, 217, 0.75)', // the colour used to indicate the selected command
+		activePadding: 20, // additional size in pixels for the active command
+		indicatorSize: 24, // the size in pixels of the pointer to the active command, will default to the node size if the node size is smaller than the indicator size, 
+		separatorWidth: 3, // the empty spacing in pixels between successive commands
+		spotlightPadding: 4, // extra spacing in pixels between the element and the spotlight
+		adaptativeNodeSpotlightRadius: false, // specify whether the spotlight radius should adapt to the node size
+		minSpotlightRadius: 12, // the minimum radius in pixels of the spotlight (ignored for the node if adaptativeNodeSpotlightRadius is enabled but still used for the edge & background)
+		maxSpotlightRadius: 24, // the maximum radius in pixels of the spotlight (ignored for the node if adaptativeNodeSpotlightRadius is enabled but still used for the edge & background)
+		openMenuEvents: 'cxttapstart taphold', // space-separated cytoscape events that will open the menu; only `cxttapstart` and/or `taphold` work here
+		itemColor: (theme == 'dark')?'white':'black', // the colour of text in the command's content
+		itemTextShadowColor: 'transparent', // the text shadow colour of the command's content
+		zIndex: 9999, // the z-index of the ui div
+		atMouse: false, // draw menu at mouse position
+		outsideMenuCancel: false // if set to a number, this will cancel the command if the pointer is released outside of the spotlight, padded by the number given 
+	});
+	document.addEventListener("keydown", function (e) {
+		if(e.key === 'Delete') {
+			var selecteds = cy.$(":selected");
+			if (selecteds.length > 0)
+				ur.do("remove", selecteds);
+		}
+		else if (e.ctrlKey && (e.target.nodeName === 'BODY' || e.target.nodeName === 'DIV')) {
+			if (e.key === 'z')
+				ur.undo();
+			else if (e.key === 'y')
+				ur.redo();
+		}
+	});
+}
+
+async function addEleNode( ele ) {
+	if ( !ele.startsWith( 'http' ) ) {
+		ele = context['@context'][ ele.split( ':' )[0] ]+ele.split( ':' )[1];
+	}
+	ele = decodeURIComponent(JSON.parse('"'+ele+'"')); // escape
+	var q = namespaces+`SELECT DISTINCT ?s ?p ?o ?g WHERE {
+		{
+			<`+ele+`> ?p2 ?o2 .
+			?o2 ?p ?o .
+			BIND( ?o2 AS ?s )
+			BIND( <default> AS ?g)
+		} UNION {
+			?s2 ?p2 <`+ele+`> .
+			?s2 ?p ?o .
+			BIND( ?s2 AS ?s )
+			BIND( <default> AS ?g)
+		} UNION {
+			<`+ele+`> ?p ?o .
+			BIND( <`+ele+`> AS ?s )
+			BIND( <default> AS ?g)
+		}
+	}`;
+	var graph = await getJSONLD( q, "raw" );
+	var nodes = _l.uniq( _l.map(graph, 's.value') );
+	var added = [];
+	for ( var i=0 ; i < graph.length ; i++ ) {
+		if ( graph[i].o.type == 'uri' 
+			&& graph[i].o.value.startsWith( domain ) 
+			&& (!nodes.includes( graph[i].o.value ))
+			&& !nsv(graph[i].p["value"]).startsWith( "crm:P138i" )
+			&& !nsv(graph[i].p["value"]).startsWith( "pdc:" ) 
+			&& !nsv(graph[i].p["value"]).startsWith( "pdt:" ) 
+			&& !nsv(graph[i].p["value"]).startsWith( "pdp:" )
+
+		) { continue; }
+		added.push( graph[i] );
+	}
+	var data = await createCYJSON( added );
+	added = ur.do( "add", data );
+	$( "#tabHome" ).html( updateGraphInfo() );
+	tippyNodes( added.nodes(), graph );
+
+	clean_graph();
+
+	// toggle classes
+	if ( /\/networks\//.test(window.location.href) ) {
+		const bsCollapse = new bootstrap.Collapse('#collapseOne', {
+			toggle: false
+		})
+		bsCollapse.show();
+	}
+
+	// layout
+	run_layout( 'cose', ele );
+}
+
+function clean_graph() {
+	// hide visible nodes without edges
+	const visibleNodes = cy.nodes().filter(":visible").nodes();
+	const disconnectedNodes = visibleNodes.filter(n => {
+		return n.neighborhood(":visible").length === 0;
+	}).nodes();
+	disconnectedNodes.addClass("hidden");
+	// show hidden nodes with edges
+	const invisibleNodes = cy.nodes().filter(":hidden").nodes();
+	const connectedNodes = invisibleNodes.filter(n => {
+		return n.neighborhood(":visible").length > 0;
+	}).nodes();
+	connectedNodes.removeClass("hidden").addClass("shown");
 }
 
 // run layout on graph
-function run_layout( layout_name ) {
+function run_layout( layout_name, focus ) {
 	var layout = cy.elements().layout( cyLayouts[ layout_name ] );
 	layout.run();
+	if ( cy.$id( focus ).length ) {
+		layout.on( "layoutstop", function() {
+			cy.animate({
+				zoom: .75,
+				center: { eles: cy.filter( '[id="'+focus+'"]' ) }
+			}, {
+				duration: 500
+			});
+		});
+	}
 }
 
 async function getPerson( id ) {
@@ -199,6 +380,12 @@ async function getPerson( id ) {
             ?nationality ?p ?o .
             BIND(?nationality as ?s) 
         }
+		UNION
+        {   ?person <http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence> ?nationality .
+            ?nationality crm:P89_falls_within ?Continent .
+			?Continent ?p ?o .
+			BIND(?Continent as ?s) 
+        }
         UNION
         {   ?workscreation crm:P14_carried_out_by ?person .
  		    ?workscreation a <http://iflastandards.info/ns/lrm/lrmoo/F27_Work_Creation> .
@@ -277,6 +464,12 @@ async function getWork( id ) {
 		}
 		UNION
 		{ 	?work <http://iflastandards.info/ns/lrm/lrmoo/R3_is_realised_in> ?expr .
+			?expr crm:P72_has_language ?lang .
+			?lang ?p ?o .
+			BIND(?lang as ?s)
+		}
+		UNION
+		{ 	?work <http://iflastandards.info/ns/lrm/lrmoo/R3_is_realised_in> ?expr .
 			?expr lrmoo:R15_has_fragment ?excerpt.
 			?excerpt ?p ?o .
 			BIND(?excerpt as ?s)
@@ -321,7 +514,6 @@ async function getPRISMSobject( id ) {
 		for (var j = 0; j < graph.length; j++ ) {
 			var v = graph[ j ];
 			total.push( v );
-			// nodes will be counted only once and must be part of PRISMS, and single- or multi-volume object
 			if ( v.o.type == 'uri' && !node_seen[ v.o.value ]
 				&& ( v.o.value.startsWith( id ) || v.o.value.startsWith( domain + "/id/" ) )
 //				|| ( v.o.value.includes( "/expression/" ) )
@@ -329,6 +521,7 @@ async function getPRISMSobject( id ) {
 //				|| ( v.o.value.includes( "/publication" ) )
 //				|| ( v.o["value"].includes( "/manifestation") )// including their publication events
 // 				|| ( v.p["value"].includes( "embodies") ) // including digital manifestations
+				&& ( !v.p.value.startsWith( "http://postdata.linhd.uned.es/ontology/" ))
 			) {
 				ids.push( v.o.value );
 				node_seen[ v.o.value ] = 1;
@@ -342,7 +535,6 @@ async function getPRISMSobject( id ) {
 // create CY-JSON from graph
 async function createCYJSON( graph, view ) {
 	var jsonObj = [], nodes_seen = [], local_col = {};
-
     // process triples in the graph object
 	for ( var i=0; i<graph.length; i++ ) {
 		var v = graph[ i ];
@@ -352,13 +544,16 @@ async function createCYJSON( graph, view ) {
 		var g = v.g;
 		if ( view == "authors" ) {
 			if (   p.value.includes( 'R3_' ) 
+				|| p.value.includes( 'isRealisedThrough' )
 				|| p.value.includes( 'creator' )
 				|| p.value.includes( 'R19i_' )
 				|| p.value.includes( 'R16_' )
+				|| p.value.includes( 'P2_' )
 			) { continue; }
 		} else if (view == "works" ) {
 			if (   p.value.includes( 'R17i_' ) 
-				|| p.value.includes( 'creator' )
+				|| p.value.includes( 'contributor' )
+				|| p.value.includes( 'isVersionOf' )
 				|| p.value.includes( 'R19i_' )
 				|| p.value.includes( 'R16_' )
 				|| p.value.includes( 'P100i_' )
@@ -369,85 +564,173 @@ async function createCYJSON( graph, view ) {
 				|| p.value.includes( '/prisms/' )
 				|| p.value.includes( '/skos/core#topConceptOf' )
 				|| p.value.includes( '/skos/core#inScheme' )
+				|| p.value.includes( 'P2_' )
 			) { continue; }
 		}
 		// process PRISMS elements
 		if ( typeof nodes_seen[s.value] == 'undefined' // count each instance once
 			&& s["value"].startsWith( domain )
+			&& !s["value"].endsWith( "/creator" )
+			&& !s["value"].endsWith( "/restricted" )
+			&& !nsv(p["value"]).startsWith( "oa:" )
+			&& !nsv(p["value"]).startsWith( "dcterms:isVersionOf" )
+			&& !nsv(p["value"]).startsWith( "dcterms:hasVersion" )
+			&& !nsv(p["value"]).startsWith( "crm:P138i" )
+			&& !nsv(p["value"]).startsWith( "pdc:" ) 
+			&& !nsv(p["value"]).startsWith( "pdt:" ) 
+			&& !nsv(p["value"]).startsWith( "pdp:" )
+			//&& !(s["value"].endsWith("/person/creator") || s["value"].endsWith("/person/agent") )
 		) {
-			nodes_seen[s.value] = 1;
-			// process nodes (s)
-			var node = {};
-			node["data"] = { "id": s.value };
-			node["classes"] = "node";
-			node["data"]["name"] = (addicon( s.value )?addicon( s.value ):'')+" "+onto[nsv(skp(graph, s.value, "rdf:type")[0])].label+"\n" + skp(graph, s.value, "crm:P1_is_identified_by"); // default is P1_is_identified_by
-			node["data"]["pref"] = skp(graph, s.value, "skos:prefLabel");
-			node["data"]["alt"] = skp(graph, s.value, "skos:altLabel");
-			node["data"]["img"] = skp(graph, s.value, "crm:P138i_has_representation") || skp(graph, s.value, "wdt:P18");
-			node["data"]["class"] = skp(graph, s.value, "rdf:type") ;//|| s.value.includes( "/expression/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression":s.value.includes( "/publication/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F32_Carrier_Production_Event":'';
-			node["data"]["shape"] = ((skp(graph, s.value, "rdf:type").filter(s => s.includes("http://www.ics.forth.gr/isl/CRMdig/")).length > 0 || skp(graph, s.value, "rdf:type").filter(s => s.includes("https://www.prisms.digital")).length > 0)?"round-rectangle": (nsv(skp(graph, s.value, "rdf:type")[0]) == "lrmoo:F1_Work" || nsv(skp(graph, s.value, "rdf:type")[0]) == "lrmoo:F2_Expression" || s.value.includes( "/expression/" ))?"round-hexagon":"ellipse" );
-			node["data"]["bgcolor"] = (function() {
-				if ( s.value.includes( "/expression/" ) || s.value.includes( "/manifestation/" ) ) {
-					if (s.value.endsWith( "/1" )) { local_col[ s.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
-					else if (s.value.endsWith( "/2" )) { local_col[ s.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
-					else if (s.value.endsWith( "/3" )) { local_col[ s.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
-					else if (s.value.endsWith( "/4" )) { local_col[ s.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
-				} else if ( s.value.includes( "/excerpt/" ) ) {
-					return local_col[ skp( graph, s.value, "lrmoo:R15i_is_fragment_of") ]
-				} else return graph_col[nsv(skp(graph, s.value, "rdf:type")[0])];
-			})();
-			jsonObj.push(node);
+			if (!cy || cy && !cy.$id( s.value ).length ) {
+				nodes_seen[s.value] = 1;
+				// process nodes (s)
+				//console.log( s.value, skp(graph, s.value, "rdf:type"), _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' )|| t.includes( '/postdata' ) || t.includes( 'foaf/' ) } )[0] );
+				var node = {};
+				node["data"] = { "id": s.value };
+				node["classes"] = "node";
+				node["data"]["name"] = (addicon( s.value )?addicon( s.value ):'')+" "+
+					onto[nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) 
+						|| t.includes( 'frbr/' ) 
+						|| t.includes( 'intro/' ) 
+						|| t.includes( 'foaf/' )
+						|| t.includes( 'lrmoo/' ) 
+						|| t.includes( '/postdata' ) 
+						|| t.includes( 'skos/' ) } )[0] 
+					)].label+"\n" + (skp(graph, s.value, "crm:P1_is_identified_by")?
+						skp(graph, s.value, "crm:P1_is_identified_by"):
+						skp(graph, s.value, "skos:prefLabel")); // default is P1_is_identified_by
+				node["data"]["pref"] = (skp(graph, s.value, "skos:prefLabel") != false)?skp(graph, s.value, "skos:prefLabel"):skp(graph, s.value, "crm:P1_is_identified_by");
+				node["data"]["alt"] = skp(graph, s.value, "skos:altLabel");
+				if (skp(graph, s.value, "crm:P138i_has_representation") || skp(graph, s.value, "wdt:P18")) {
+					node["data"]["img"] = skp(graph, s.value, "crm:P138i_has_representation") || skp(graph, s.value, "wdt:P18");
+				}
+				node["data"]["type"] = skp(graph, s.value, "crm:P2_has_type");
+				node["data"]["class"] = skp(graph, s.value, "rdf:type") ;//|| s.value.includes( "/expression/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression":s.value.includes( "/publication/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F32_Carrier_Production_Event":'';
+				node["data"]["shape"] = (function() {
+					if ( skp(graph, s.value, "rdf:type").filter(s => s.includes("http://www.cidoc-crm.org/extensions/crmdig/")).length > 0 
+					     || skp(graph, s.value, "rdf:type").filter(s => s.includes("https://www.prisms.digital")).length > 0) {
+							return "round-rectangle"
+					} else if ( nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) 
+						|| t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) } )[0] ) == "lrmoo:F1_Work" 
+						|| nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) 
+						|| t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) } )[0] ) == "lrmoo:F2_Expression" 
+						|| s.value.includes( "/expression/" ) ) {
+							return "round-hexagon";
+					} else if (s.value.includes( "/language" ) || s.value.includes( "/rppa/kos" ) ) {
+						return "round-octagon";
+					} else { return "ellipse" }
+				})();
+				node["data"]["bgcolor"] = (function() {
+					if ( s.value.includes( "/expression/" ) || s.value.includes( "/manifestation/" ) ) {
+						if (s.value.endsWith( "/1" )) { local_col[ s.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+						else if (s.value.endsWith( "/2" )) { local_col[ s.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+						else if (s.value.endsWith( "/3" )) { local_col[ s.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+						else if (s.value.endsWith( "/4" )) { local_col[ s.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+					} else if ( s.value.includes( "/excerpt/" ) ) {
+						return local_col[ skp( graph, s.value, "lrmoo:R15i_is_fragment_of") ]
+					} else if ( nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( '/intro/' ) })[0] ) ){
+						return graph_col["intro"];
+					} 	
+					else return graph_col[nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) 
+						|| t.includes( 'frbr/' ) 
+						|| t.includes( 'intro/' ) 
+						|| t.includes( 'foaf/' )
+						|| t.includes( 'lrmoo/' ) 
+						|| t.includes( '/postdata' ) 
+						|| t.includes( 'skos/' ) } )[0] 
+						)];
+				})();
+				jsonObj.push(node);
+			}
 		}
 		if ( s["value"].startsWith(domain) 
 		 ) {
 			// process edges (p)
 			if ( o.type == "uri" // if object is a node
 				&& o["value"].startsWith(domain) // and it is in the PRISMS NS
-				&& (!nsv(p["value"]).startsWith( "dcterms:" ) || nsv(p["value"]).endsWith( "creator" ))
+				&& !p["value"].endsWith( "/creator" )
 				&& !o["value"].endsWith( "/restricted" )
-				&& !(nsv(p["value"]).startsWith( "crm:P138i" ) || nsv(p["value"]).startsWith( "pdc:portrait" ) )
-                && !(nsv(p["value"]).startsWith( "pdc:" ) || nsv(p["value"]).startsWith( "pdt:" ) || nsv(p["value"]).startsWith( "pdp:" ) )
+				&& !nsv(p["value"]).startsWith( "dcterms:isVersionOf" )
+				&& !nsv(p["value"]).startsWith( "dcterms:hasVersion" )
+				&& !nsv(p["value"]).startsWith( "oa:" )
+				&& !nsv(p["value"]).startsWith( "crm:P138i" )
+                && !nsv(p["value"]).startsWith( "pdc:" ) 
+				&& !nsv(p["value"]).startsWith( "pdt:" ) 
+				&& !nsv(p["value"]).startsWith( "pdp:" )
             ) {
 				// object properties (relationships)
-				var edge = {};
-				edge["data"] = { "name": ((onto[nsv(p.value)]) ? onto[nsv(p.value)].label : ((nsv(p.value)) ? nsv(p.value) : p.value)), "id": uuidv4() };
-				edge["data"]["source"] = s.value;
-				edge["data"]["target"] = o.value;
-				edge["classes"] = "edge";
-				edge["data"]["class"] = p.value;
-				edge["data"]["bgcolor"] =  (function() {
-					if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
-						if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
-						else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
-						else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
-						else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
-					} else if ( o.value.includes( "/excerpt/" ) ) {
-						return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
-					} else return graph_col[nsv(skp(graph, o.value, "rdf:type")[0])];
-				})();	
-				jsonObj.push(edge);
-				nodes_seen[ o.value ] = 1;
-				var node = {};
-				node["data"] = { "id": o.value };
-				node["classes"] = "node";
-				node["data"]["name"] = (addicon( o.value )?addicon( o.value ):'')+" "+(nsv(skp(graph, o.value, "rdf:type")[0]) in onto?onto[nsv(skp(graph, o.value, "rdf:type")[0])].label:nsv(skp(graph, o.value, "rdf:type")[0]))+"\n" + skp(graph, o.value, "crm:P1_is_identified_by");
-				node["data"]["pref"] = skp(graph, o.value, "skos:prefLabel");
-				node["data"]["alt"] = skp(graph, o.value, "skos:altLabel");
-				node["data"]["img"] = skp(graph, o.value, "crm:P138i_has_representation") || skp(graph, o.value, "wdt:P18");
-				node["data"]["class"] = skp(graph, o.value, "rdf:type") ;//|| o.value.includes( "/expression/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression":o.value.includes( "/publication/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F32_Carrier_Production_Event":'';
-				node["data"]["shape"] = (((skp(graph, o.value, "rdf:type") && skp(graph, o.value, "rdf:type").filter(s => s.includes("http://www.ics.forth.gr/isl/CRMdig/")).length > 0) || (skp(graph, o.value, "rdf:type") && skp(graph, o.value, "rdf:type").filter(s => s.includes("https://www.prisms.digital")).length > 0))?"round-rectangle": (nsv(skp(graph, o.value, "rdf:type")[0]) == "lrmoo:F1_Work" || nsv(skp(graph, o.value, "rdf:type")[0]) == "lrmoo:F12_Nomen" || nsv(skp(graph, o.value, "rdf:type")[0]) == "lrmoo:F2_Expression" || o.value.includes( "/expression/" ))?"round-hexagon":"ellipse" );
-				node["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
-				node["data"]["bgcolor"] = (function() {
-					if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
-						if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
-						else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
-						else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
-						else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
-					} else if ( o.value.includes( "/excerpt/" ) ) {
-						return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
-					} else return graph_col[nsv(skp(graph, o.value, "rdf:type")[0])];
-				})();
-				jsonObj.push(node);
+//				if (!cy || (cy && (!cy.$id( s.value ).length || !cy.$id( o.value ).length)) ) {
+					var edge = {};
+					edge["data"] = { "name": ((onto[nsv(p.value)]) ? onto[nsv(p.value)].label : ((nsv(p.value)) ? nsv(p.value) : p.value)), "id": s.value+p.value+o.value };
+					edge["data"]["source"] = s.value;
+					edge["data"]["target"] = o.value;
+					edge["classes"] = "edge";
+					edge["data"]["class"] = p.value;
+					edge["data"]["bgcolor"] =  (function() {
+						if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
+							if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+							else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+							else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+							else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+						} else if ( o.value.includes( "/excerpt/" ) ) {
+							return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
+						} else if ( s.value.includes( "/intro/")  ) {
+							return graph_col["intro"];
+						}  
+						else return graph_col[nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) 
+							|| t.includes( 'frbr/' ) 
+							|| t.includes( 'intro/' ) 
+							|| t.includes( 'foaf/' )
+							|| t.includes( 'lrmoo/' ) 
+							|| t.includes( '/postdata' ) 
+							|| t.includes( 'skos/' ) } )[0] 
+							)];
+					})();	
+					jsonObj.push(edge);
+//				}
+//				if (!cy || cy && !cy.$id( s.value ).length ) {
+					nodes_seen[ o.value ] = 1;
+					var node = {};
+					//console.log( o.value, skp(graph, o.value, "rdf:type"), _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' ) } )[0] );
+					node["data"] = { "id": o.value };
+					node["classes"] = "node";
+					node["data"]["name"] = (addicon( o.value )?addicon( o.value ):'')+" "+(onto[nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' )} )[0] )].label)+"\n" + (skp(graph, o.value, "crm:P1_is_identified_by")?skp(graph, o.value, "crm:P1_is_identified_by"):skp(graph, o.value, "skos:prefLabel"));
+					node["data"]["pref"] = (skp(graph, o.value, "skos:prefLabel") != false)?skp(graph, o.value, "skos:prefLabel"):skp(graph, o.value, "crm:P1_is_identified_by");;
+					node["data"]["alt"] = skp(graph, o.value, "skos:altLabel");
+					if (skp(graph, o.value, "crm:P138i_has_representation") || skp(graph, o.value, "wdt:P18")) {
+						node["data"]["img"] = skp(graph, o.value, "crm:P138i_has_representation") || skp(graph, o.value, "wdt:P18");
+					}
+					node["data"]["class"] = skp(graph, o.value, "rdf:type") ;//|| o.value.includes( "/expression/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression":o.value.includes( "/publication/" )?"http://iflastandards.info/ns/fr/frbr/frbroo/F32_Carrier_Production_Event":'';
+					node["data"]["shape"] = (function() {
+						if (skp(graph, o.value, "rdf:type") && skp(graph, o.value, "rdf:type").filter(s => s.includes("http://www.cidoc-crm.org/extensions/crmdig/")).length > 0
+						|| skp(graph, o.value, "rdf:type") && skp(graph, o.value, "rdf:type").filter(s => s.includes("https://www.prisms.digital")).length > 0) {
+							return "round-rectangle"
+						} else if (nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' )} )[0] ) == "lrmoo:F1_Work" 
+							|| nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' ) } )[0] ) == "lrmoo:F12_Nomen" 
+							|| nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' ) } )[0] ) == "lrmoo:F2_Expression" 
+							|| o.value.includes( "/expression/" )) {
+								return "round-hexagon";
+						} else if (o.value.includes( "/language" ) || o.value.includes( "/rppa/kos" ) ) {
+							return "round-octagon";
+						} else { return "ellipse" }
+					})();
+					node["data"]["type"] = skp(graph, o.value, "crm:P2_has_type");
+					node["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
+					node["data"]["bgcolor"] = (function() {
+						if ( o.value.includes( "/expression/" ) || o.value.includes( "/manifestation/" ) ) {
+							if (o.value.endsWith( "/1" )) { local_col[ o.value ] = graph_col["expression1"] ; return graph_col["expression1"]; }
+							else if (o.value.endsWith( "/2" )) { local_col[ o.value ] = graph_col["expression2"] ; return graph_col["expression2"]; }
+							else if (o.value.endsWith( "/3" )) { local_col[ o.value ] = graph_col["expression3"] ; return graph_col["expression3"]; }
+							else if (o.value.endsWith( "/4" )) { local_col[ o.value ] = graph_col["expression4"] ; return graph_col["expression4"]; }
+						} else if ( o.value.includes( "/excerpt/" ) ) {
+							return local_col[ skp( graph, o.value, "lrmoo:R15i_is_fragment_of") ]
+						} else if ( nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( '/intro/' ) })[0] ) ){
+							return graph_col["intro"];
+						} 	 
+						else return graph_col[nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' ) } )[0] )];
+					})();
+					jsonObj.push(node);
+//				}
 			} else if ((
 				// dataType properties
 				o.type == "literal"
@@ -456,6 +739,8 @@ async function createCYJSON( graph, view ) {
 					p.value.startsWith   (context["@context"]["rdf"]    + "type")
 					|| p.value.startsWith(context["@context"]["skos"]   + "prefLabel")
 					|| p.value.startsWith(context["@context"]["skos"]   + "altLabel")
+					|| p.value.startsWith(context["@context"]["skos"]   + "hiddenLabel")
+					|| p.value.startsWith(context["@context"]["skos"]   + "note")
 					|| p.value.startsWith(context["@context"]["crm"]    + "P1_is_identified_by")
 					|| p.value.startsWith(context["@context"]["crm"]    + "P3_has_note")
 					|| p.value.startsWith(context["@context"]["crm"]    + "P106_is_composed_of")
@@ -476,7 +761,8 @@ async function createCYJSON( graph, view ) {
 					|| p.value.startsWith(context["@context"]["crm"]    + "P82a_begin_of_the_begin")
 					|| p.value.startsWith(context["@context"]["crm"]    + "P82b_end_of_the_end")
 					|| p.value.startsWith(context["@context"]["crm"]    + "P82_at_some_time_within")
-                    || p.value.startsWith(context["@context"]["foaf"])
+					|| p.value.startsWith(context["@context"]["crm"]    + "P190_has_symbolic_content")
+					|| p.value.startsWith(context["@context"]["foaf"])
 					|| p.value.startsWith(context["@context"]["rdfs"]   + "comment")
 					|| p.value.startsWith(context["@context"]["rdfs"]   + "label")
 					|| p.value.startsWith(context["@context"]["rdfs"]   + "seeAlso")
@@ -488,13 +774,15 @@ async function createCYJSON( graph, view ) {
 				var node = {};
 				var dtp;
 				// nodes we want related, but can't have graph-wide instances: language, collection, time
+				/*
 				if ( nsv( p.value ) == "crm:P72_has_language" ) {
 					if ( graph_uuid["lang"][ o.value ] ) {
 						dtp = graph_uuid["lang"][ o.value ];
 					} else {
 						dtp = graph_uuid["lang"][ o.value ] = uuidv4();
 					}
-				} else if ( nsv( p.value ) == "crm:P46i_forms_part_of" ) {
+				} else */
+				if ( nsv( p.value ) == "crm:P46i_forms_part_of" ) {
 					if ( graph_uuid["coll"][ o.value ] ) {
 						dtp = graph_uuid["coll"][ o.value ];
 					} else {
@@ -513,28 +801,35 @@ async function createCYJSON( graph, view ) {
 						dtp = graph_uuid["end"][ o.value ] = uuidv4();
 					}
 				} else {
-					dtp = uuidv4();
+//					dtp = uuidv4();
+					if ( graph_uuid["skos"][ o.value ] ) {
+						dtp = graph_uuid["skos"][ o.value ];
+					} else {
+						dtp = graph_uuid["skos"][ o.value ] = uuidv4();
+					}
 				}
-				node["data"] = { "id": "_:dtp-" + dtp };
-				node["data"]["name"] = ((onto[nsv(o.value)]) ? onto[nsv(o.value)].label : ((nsv(o.value)) ? nsv(o.value) : o.value));
-				node["data"]["pref"] = skp(graph, o.value, "skos:prefLabel");
-				node["data"]["alt"] = skp(graph, o.value, "skos:altLabel");
-				node["data"]["class"] = o.type;
-				node["classes"] = "node";
-				node["data"]["shape"] = "round-octagon";
-				node["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
-				node["data"]["bgcolor"] = graph_col[nsv(skp(graph, o.value, "rdf:type")[0])] || '#AA4465';
-				jsonObj.push(node);
-				var edge = {};
-				edge["data"] = { "name": ((onto[nsv(p.value)]) ? onto[nsv(p.value)].label : ((nsv(p.value)) ? nsv(p.value) : p.value)), "id": uuidv4() };
-				edge["data"]["class"] = p.value;
-				edge["data"]["source"] = s.value;
-				edge["data"]["target"] = "_:dtp-" + dtp;
-				edge["classes"] = "edge";
-				edge["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
-				edge["data"]["bgcolor"] = (theme == 'dark')?"white":"#333";
-				jsonObj.push(edge);
-			}
+//				if (!cy || cy && !cy.$id( "_:dtp-" + dtp ).length) {
+					node["data"] = { "id": "_:dtp-" + dtp };
+					node["data"]["name"] = ((onto[nsv(o.value)]) ? onto[nsv(o.value)].label : ((nsv(o.value)) ? nsv(o.value) : o.value));
+					node["data"]["pref"] = (skp(graph, o.value, "skos:prefLabel") != false)?skp(graph, o.value, "skos:prefLabel"):skp(graph, o.value, "crm:P1_is_identified_by");;
+					node["data"]["alt"] = skp(graph, o.value, "skos:altLabel");
+					node["data"]["class"] = o.type;
+					node["classes"] = "node";
+					node["data"]["shape"] = "round-octagon";
+					node["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
+					node["data"]["bgcolor"] = graph_col[nsv(skp(graph, o.value, "rdf:type")[0])] || '#AA4465';
+					jsonObj.push(node);
+					var edge = {};
+					edge["data"] = { "name": ((onto[nsv(p.value)]) ? onto[nsv(p.value)].label : ((nsv(p.value)) ? nsv(p.value) : p.value)), "id": s.value+p.value+"_:dtp-" + dtp };
+					edge["data"]["class"] = p.value;
+					edge["data"]["source"] = s.value;
+					edge["data"]["target"] = "_:dtp-" + dtp;
+					edge["classes"] = "edge";
+					edge["data"]["private"] = ((g.value.startsWith( context["@context"]["prisms"] ))?true:false);
+					edge["data"]["bgcolor"] = (theme == 'dark')?"#fff":"#333";
+					jsonObj.push(edge);
+				}
+//			}
 		}
 	}
 	// de-dup any duplicates
@@ -709,22 +1004,24 @@ function tippyNodes( nodes, graph, all ) {
 					"<p><b>Properties</b></p>"+contentP+(( node.classes().toString() != "edge" )?"<p><b>Relationships</b></p>"+contentL+contentR:``)+"</div>";
 			} else {
 			// apply statements to tippies for the graph
-                var tippy = node.popper({
+				if ( tippy1[ node.id() ]) { tippy1[ node.id() ].destroy(); }
+				if ( tippy2[ node.id() ]) { tippy2[ node.id() ].destroy(); }
+				tippy1[ node.id() ] = node.popper({
                     content: () => {
                        let content = document.createElement('div');
                        content.innerHTML = "<p><b>Relationships</b></p>"+contentL+contentR;
                        return content;
                     },
                 });
-                var tippy2 = node.popper({
+                tippy2[ node.id()] = node.popper({
                     content: () => {
                        let content = document.createElement('div');
                        content.innerHTML = "<p><b>Properties</b></p>"+contentP;
                        return content;
                     },
                 });
-                tippyShowHandler = function() { tippy.show(); tippy2.show(); };
-				tippyHideHandler = function() { tippy.hide(); tippy2.hide(); };
+                tippyShowHandler = function() { tippy1[ node.id() ].show(); tippy2[ node.id() ].show(); };
+				tippyHideHandler = function() { tippy1[ node.id() ].hide(); tippy2[ node.id() ].hide(); };
 				node.on('mouseover', tippyShowHandler );
 				node.on('mouseout', tippyHideHandler );
 			}
@@ -744,18 +1041,18 @@ function createCYgraph(data, graph, layout) {
 				selector: 'node',
 				style: {
 					'shape': function (e) { return e.data().shape },
-					'background-color': (theme == 'dark')?"#333":"white",//function (e) { return e.data().bgcolor },
-					'color': (theme == 'dark')?"white":"black", 
+					'background-color': (theme == 'dark')?"#333":"#fff",//function (e) { return e.data().bgcolor },
+					'color': (theme == 'dark')?"#fff":"#000", 
 					'label': function (e) { return ((e.data().name)?e.data().name.replace(/\\n/g, '\n'):
 						e.data().id.includes( "/expression/" )?'Expression':e.data().id.includes( "/publication/")?'Publication':'')
 						//(((e.data().class) ? ((onto[nsv(e.data().class)]) ? onto[nsv(e.data().class)].label : (nsv(e.data().class) ? nsv(e.data().class) : e.data().class)) + `\n` : ``) + e.data().type)) 
 					},
 					'background-image': function (e) { 
 						if ( e.data().img ) {
-							if ( e.data().img[0].startsWith( domain ) || e.data().img[0].includes( "/wikipedia/commons/thumb/" ) ) {
-								return e.data().img[0];
+							if ( e.data().img.startsWith( domain ) || e.data().img.includes( "/wikipedia/commons/thumb/" ) ) {
+								return e.data().img;
 							} else {
-								var filename = decodeURIComponent( e.data().img[0].split("/").pop().replace(/%20/g, "_") );
+								var filename = decodeURIComponent( e.data().img.split("/").pop().replace(/%20/g, "_") );
 								var md5Hash = CryptoJS.MD5( filename ).toString();
 								return "https://upload.wikimedia.org/wikipedia/commons/"+md5Hash[0]+"/"+md5Hash[0]+md5Hash[1]+"/"+filename;
 							}
@@ -788,7 +1085,7 @@ function createCYgraph(data, graph, layout) {
 				style: {
 					'label': function (e) { return ((e.data().name?e.data().name:'') + "\n \u2060") },
 					'width': 1,
-                    'color': (theme == 'dark')?"white":"#333",
+                    'color': (theme == 'dark')?"#fff":"#333",
 					'curve-style': 'unbundled-bezier',
 					'target-arrow-shape': 'triangle',
 					'target-arrow-fill': 'filled',
@@ -803,7 +1100,47 @@ function createCYgraph(data, graph, layout) {
 				}
 			},
 			{
-				selector: 'edge[target^="_"]',
+				selector: 'node[id*="/typeOfIntertextuality"],node[id*="/intertextuality"],node[id*="/actualization"],node[id*="/contextLocation"]',
+				style: {
+					'shape': 'concave-hexagon',
+					'border-color': '#2a9d8f'
+				}
+			},
+			{
+				selector: 'node[id*="/targetLocation"],node[id*="/contextLocation"]',
+				style: {
+					'shape': 'round-tag',
+					'border-color': '#2a9d8f'
+				}
+			},
+			{
+				selector: 'node[id*="rppa/kos"]',
+				style: {
+					'shape': 'round-octagon',
+					'background-color': '#AA4465',
+					'border-color': '#AA4465',
+					'color': "#fff", 
+					'label': function (e) { return ((e.data().name)?e.data().name.replace(/\\n/g, '\n'):
+						e.data().id.includes( "/expression/" )?'Expression':e.data().id.includes( "/publication/")?'Publication':'')
+						//(((e.data().class) ? ((onto[nsv(e.data().class)]) ? onto[nsv(e.data().class)].label : (nsv(e.data().class) ? nsv(e.data().class) : e.data().class)) + `\n` : ``) + e.data().type)) 
+					}
+				}
+			},
+			{
+				selector: 'node[id$="/language"]',
+				style: {
+					'shape': 'round-octagon',
+					'background-color': '#928b11',
+					'border-color': '#928b11',
+					'color': "#fff", 
+					'label': function (e) { return ((e.data().name)?e.data().name.replace(/\\n/g, '\n'):
+						e.data().id.includes( "/expression/" )?'Expression':e.data().id.includes( "/publication/")?'Publication':'')
+						//(((e.data().class) ? ((onto[nsv(e.data().class)]) ? onto[nsv(e.data().class)].label : (nsv(e.data().class) ? nsv(e.data().class) : e.data().class)) + `\n` : ``) + e.data().type)) 
+					}
+				}
+			},
+			{
+				selector: 'edge[target^="_"],edge[target$="/language"]',
 				style: {
 					'label': function (e) { return ((e.data().name?e.data().name:e.data().class) + "\n \u2060") },
 					'width': 1,
@@ -819,22 +1156,46 @@ function createCYgraph(data, graph, layout) {
 					'font-family': 'system-ui, "Font Awesome 6 Free"',
 					'font-size': '14px',
 					'font-style': 'italic',
-					'color': (theme == 'dark')?"white":"#333"
+					'color': '#fff',//(theme == 'dark')?"#fff":"#333"
 					//'color': function (color) { return color.data().color }, 
 				}
 			},
 			{
 				selector: 'node.highlight',
 				style: {
-					'color': function (e) { if ( e.data().img ) { return e.data().color || '#cd6711' } else { return ((theme == 'dark')?"#white":"white") } },
+					'color': function (e) { //if ( e.data().img ) { return e.data().color || '#cd6711' } else { 
+						return ((theme == 'dark')?"#fff":"#333") 
+					//} 
+				},
 					'background-color': function (e) { return e.data().bgcolor || '#cd6711' }
 				}
 			},
 			{
-				selector: 'node[shape="round-diamond"].highlight',
+				selector: 'node[!img].highlight',
 				style: {
-					'color': function (e) { return e.data().color || 'rgba(245,251,253,1)' },
+					'color': function (e) { //if ( e.data().img ) { return e.data().color || '#cd6711' } else { 
+						return "#fff" 
+					//} 
+				},
 					'background-color': function (e) { return e.data().bgcolor || '#cd6711' }
+				}
+			},
+			{
+				selector: 'node[shape="round-octagon"][id*="rppa/kos"].highlight',
+				style: {
+					'background-color': '#AA4465'
+				}
+			},
+			{
+				selector: 'node[shape="round-octagon"][id$="/language"].highlight',
+				style: {
+					'background-color': '#928b11'
+				}
+			},
+			{
+				selector: 'node[id*="/typeOfIntertextuality"].highlight,node[id*="/intertextuality"].highlight,node[id*="/actualization"].highlight,node[id*="/targetLocation"].highlight,node[id*="/contextLocation"].highlight',
+				style: {
+					'background-color': '#2a9d8f'
 				}
 			},
 			{
@@ -843,7 +1204,7 @@ function createCYgraph(data, graph, layout) {
 			},
 			{
 				selector: 'edge.highlight',
-				style: { 'target-arrow-color': function (e) { if ("bgcolor" in e.data()) { return e.data().bgcolor } else { return (theme == 'dark')?"white":"#000" } }
+				style: { 'target-arrow-color': function (e) { if (e.data().hasOwnProperty( "bgcolor" ) && e.data().bgcolor != null ) { return e.data().bgcolor } else { return (theme == 'dark')?"#fff":"#000" } }
 				}
 			},
 			{
@@ -923,42 +1284,32 @@ function createCYgraph(data, graph, layout) {
 	});
 	// "about graph"-section 
 	var graph_about = '';
-	// graph preview in search results
-	if ( cy.container().parentNode.className == "modal-body" ) {
-		graph_about += `<ul class="nav nav-tabs" id="graphTab" role="tablist">
-		<li class="nav-item" role="presentation">
-		  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabHome" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-info-circle"></i> Info</a>
-		</li>
-		</ul>
-		<div class="tab-content" id="myTabContent" style="overflow-y: auto;height: calc( 100vh - 541px);">
-			<div class="tab-pane fade show active" id="tabHome" role="tabpanel" aria-labelledby="home-tab"></div>
-		</div>
-		`;
-		$( "#newGraph .modal-body .graph-about" ).html( graph_about );
-	} else {
+	if ( /\/networks\//.test(window.location.href)
+	|| /\/authors\//.test(window.location.href) 
+	|| /\/works\//.test(window.location.href)
+	) {
 	// workbench graph display
-		graph_about += `<ul class="nav nav-tabs" id="graphTab" role="tablist">
+		graph_about += `<ul class="nav nav-tabs" id="graphTab">
 		<li class="nav-item" role="presentation">
-		  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabHome" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-info-circle"></i> Info</a>
+		  <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tabHome" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-info-circle"></i> Info</a>
 		</li>
 		<li class="nav-item" role="presentation">
-		  <a class="nav-link" id="details-tab" data-toggle="tab" href="#tabDetails" role="tab" aria-controls="details" aria-selected="false"><i class="fas fa-exchange-alt"></i> Details</a>
+		  <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#tabDetails" role="tab" aria-controls="details" aria-selected="false"><i class="fas fa-exchange-alt"></i> Details</a>
 		</li>
 		<li class="nav-item" role="presentation">
-		  <a class="nav-link" id="settings-tab" data-toggle="tab" href="#tabSettings" role="tab" aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> Display</a>
+		  <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#tabSettings" role="tab" aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> Settings</a>
 		</li>
   		</ul>
-  		<div class="tab-content" id="myTabContent" style="overflow-y: auto;height: calc( 100vh - 430px);">
+  		<div class="tab-content" id="myTabContent" style="overflow-y: auto;">
 			<div class="tab-pane fade show active" id="tabHome" role="tabpanel" aria-labelledby="home-tab"></div>
 			<div class="tab-pane fade" id="tabDetails" role="tabpanel" aria-labelledby="details-tab"></div>
 			<div class="tab-pane fade" id="tabSettings" role="tabpanel" aria-labelledby="settings-tab"></div>
 		  </div>`;
-        // TODO
-        /*
+        $( ".graph-about" ).css( "display","unset" );
 		$( ".graph-about" ).html( graph_about );
-		$( ".graph-about #tabSettings" ).append( `<p/>
-		<ul class="listBibl" style="text-indent:unset;"><li>Node display
-
+		$( ".graph-about #tabSettings" ).append( `
+		<ul class="listBibl" style="text-indent:unset;font-size:14px;">
+		<!--<li>Node display
 		<div class="form-check" style="padding-left: 35px;">
   			<input class="form-check-input" type="radio" name="nodesRadioOptions" id="nodesMaterial" value="material">
   			<label class="form-check-label" for="nodesMaterial">Material</label>
@@ -971,220 +1322,269 @@ function createCYgraph(data, graph, layout) {
 		<input class="form-check-input" checked type="radio" name="nodesRadioOptions" id="nodesBoth" value="both">
 		<label class="form-check-label" for="nodesBoth">Material/Digital</label>
 		</div><br></li>
-		<li>Graph display<div style="padding-left: 15px;">
-  		<button type="button" class="btn" style="background-color:rgb(18, 122, 140); color:#fff;" id="graph_redraw">Redraw graph</button></div></ul>` );
-        */
+  		-->
+		<li>Help</li>
+		<p>Please refer to the <a href="/help/#networks">Networks help page</a> for details on the visualization and traversal of the graph.</p>
+		<li>Graph display<br>
+		<button type="button" class="btn" style="background-color:rgba(210, 120, 30, 1); color:#fff;margin-bottom:15px;font-size:inherit;" id="graph_redraw">Redraw graph</button>
+		</li>
+		<li>Graph export<br>
+		<button type="button" class="btn" style="background-color:rgba(210, 120, 30, 1); color:#fff;margin-bottom:5px;font-size:inherit;" id="graph_graphml">Export graph (GraphML)</button>
+		<button type="button" class="btn" style="background-color:rgba(210, 120, 30, 1); color:#fff;margin-bottom:5px;font-size:inherit;" id="graph_cyjson">Export graph (Cytoscape JSON)</button>
+		<button type="button" class="btn" style="background-color:rgba(210, 120, 30, 1); color:#fff;font-size:inherit;" id="graph_png">Export graph (PNG [viewport])</button>
+		</li>
+		<!--
+		</div>
+		-->
+		</ul>` );
+		$( "#tabHome" ).html( updateGraphInfo() );        
 	}
 	// Initialize navigator and panzoom
 	var nav = cy.navigator({ container: ".cytoscape-navigator" });
 	cy.panzoom();
 	// Event handlers
 	// initialize edgehandles for workbench, and tippies for graph preview
-	if ( cy.container().parentNode.className != "modal-body" ) {
-		var tippy, tippy2;
-		eh = cy.edgehandles({
-            preview: true, // whether to show added edges preview before releasing selection
-            hoverDelay: 150, // time spent hovering over a target node before it is considered selected
-            handleNodes: 'node[shape != "round-diamond"]', // selector/filter function for whether edges can be made from a given node
-            snap: false, // when enabled, the edge can be drawn by just moving close to a target node
-            snapThreshold: 50, // the target node must be less than or equal to this many pixels away from the cursor/finger
-            snapFrequency: 15, // the number of times per second (Hz) that snap checks done (lower is less expensive)
-            noEdgeEventsInDraw: false, // set events:no to edges during draws, prevents mouseouts on compounds
-            disableBrowserGestures: true, // during an edge drawing gesture, disable browser gestures such as two-finger trackpad swipe and pinch-to-zoom
-            handlePosition: function( node ){
-            return 'middle top'; // sets the position of the handle in the format of "X-AXIS Y-AXIS" such as "left top", "middle top"
-            },
-            handleInDrawMode: false, // whether to show the handle in draw mode
-            edgeType: function( sourceNode, targetNode ){
-            // can return 'flat' for flat edges between nodes or 'node' for intermediate node between them
-            // returning null/undefined means an edge can't be added between the two nodes
-            return 'flat';
-            },
-            loopAllowed: function( node ){
-            // for the specified node, return whether edges from itself to itself are allowed
-            return true;
-            },
-            nodeLoopOffset: -50, // offset for edgeType: 'node' loops
-            nodeParams: function( sourceNode, targetNode ){
-            // for edges between the specified source and target
-            // return element object to be passed to cy.add() for intermediary node
-            return {};
-            },
-            edgeParams: function( sourceNode, targetNode, i ){
-            // for edges between the specified source and target
-            // return element object to be passed to cy.add() for edge
-            // NB: i indicates edge index in case of edgeType: 'node'
-            return {};
-            },
-            ghostEdgeParams: function(){
-            // return element object to be passed to cy.add() for the ghost edge
-            // (default classes are always added for you)
-            return {};
-            },
-            complete: function( sourceNode, targetNode, addedEles ){
-            // fired when edgehandles is done and elements are added
-            if (tippy) { tippy.hide(); }
-            if ( sourceNode === targetNode ) { cy.remove( addedEles ); return false; }
-            else { 
-                if ( targetNode["_private"].data.class == "literal" ) {
-                    targetNode["_private"].data.class = [];
-                    targetNode["_private"].data.class.push( "rdfs:Literal" );
-                }
-                var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
-                $.each( sourceNode["_private"].data.class, function( i,v ) {
-                    crels = retrieve_class_relationships( nsv(v) );
-                    prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
-                    trelsdd.push( prels[0] );
-                    trelsdi.push( prels[2] );
-                    trelsid.push( prels[1] );
-                    trelsii.push( prels[3] );
-                });
-                var hitd = [], hiti = [];
-                $.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
-                    $.each( targetNode["_private"].data.class, function( i2,v2 ) {
-                        if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
-                            hitd.push( v );
-                        }
-                    });
-                });
-                $.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
-                    $.each( targetNode["_private"].data.class, function( i2,v2 ) {
-                        crels = retrieve_class_relationships( nsv(v2) );
-                        if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
-                            hiti.push( v );
-                        }
-                    });
-                });
-                hiti = _l.difference(hiti, hitd);
-                addModelling( sourceNode, targetNode, addedEles, hitd, hiti ); 
-            }
-            },
-            cancel: function( sourceNode, cancelledTargets ){
-            // fired when edgehandles are cancelled (incomplete gesture)
-            if (tippy2) { tippy2.hide(); }
-            addModelling( sourceNode );
-            },
-            hoverover: function( sourceNode, targetNode ){
-				// fired when a target is hovered
-				if ( targetNode["_private"].data.class == "literal" ) {
-					targetNode["_private"].data.class = [];
-					targetNode["_private"].data.class.push( "rdfs:Literal" );
-				}
-				var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
-				$.each( sourceNode["_private"].data.class, function( i,v ) {
-					crels = retrieve_class_relationships( nsv(v) );
-					prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
-					trelsdd.push( prels[0] );
-					trelsdi.push( prels[2] );
-					trelsid.push( prels[1] );
-					trelsii.push( prels[3] );
+	var tippy, tippy2;
+	eh = cy.edgehandles({
+		preview: true, // whether to show added edges preview before releasing selection
+		hoverDelay: 150, // time spent hovering over a target node before it is considered selected
+		handleNodes: 'node[shape != "round-octagon"]', // selector/filter function for whether edges can be made from a given node
+		snap: false, // when enabled, the edge can be drawn by just moving close to a target node
+		snapThreshold: 50, // the target node must be less than or equal to this many pixels away from the cursor/finger
+		snapFrequency: 15, // the number of times per second (Hz) that snap checks done (lower is less expensive)
+		noEdgeEventsInDraw: false, // set events:no to edges during draws, prevents mouseouts on compounds
+		disableBrowserGestures: true, // during an edge drawing gesture, disable browser gestures such as two-finger trackpad swipe and pinch-to-zoom
+		handlePosition: function( node ){
+		return 'middle top'; // sets the position of the handle in the format of "X-AXIS Y-AXIS" such as "left top", "middle top"
+		},
+		handleInDrawMode: false, // whether to show the handle in draw mode
+		edgeType: function( sourceNode, targetNode ){
+		// can return 'flat' for flat edges between nodes or 'node' for intermediate node between them
+		// returning null/undefined means an edge can't be added between the two nodes
+		return 'flat';
+		},
+		loopAllowed: function( node ){
+		// for the specified node, return whether edges from itself to itself are allowed
+		return true;
+		},
+		nodeLoopOffset: -50, // offset for edgeType: 'node' loops
+		nodeParams: function( sourceNode, targetNode ){
+		// for edges between the specified source and target
+		// return element object to be passed to cy.add() for intermediary node
+		return {};
+		},
+		edgeParams: function( sourceNode, targetNode, i ){
+		// for edges between the specified source and target
+		// return element object to be passed to cy.add() for edge
+		// NB: i indicates edge index in case of edgeType: 'node'
+		return {};
+		},
+		ghostEdgeParams: function(){
+		// return element object to be passed to cy.add() for the ghost edge
+		// (default classes are always added for you)
+		return {};
+		},
+		complete: function( sourceNode, targetNode, addedEles ){
+		// fired when edgehandles is done and elements are added
+		if (tippy) { tippy.hide(); }
+		if ( sourceNode === targetNode ) { cy.remove( addedEles ); return false; }
+		else { 
+			if ( targetNode["_private"].data.class == "literal" ) {
+				targetNode["_private"].data.class = [];
+				targetNode["_private"].data.class.push( "rdfs:Literal" );
+			}
+			var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
+			$.each( sourceNode["_private"].data.class, function( i,v ) {
+				crels = retrieve_class_relationships( nsv(v) );
+				prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
+				trelsdd.push( prels[0] );
+				trelsdi.push( prels[2] );
+				trelsid.push( prels[1] );
+				trelsii.push( prels[3] );
+			});
+			var hitd = [], hiti = [];
+			$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
+				$.each( targetNode["_private"].data.class, function( i2,v2 ) {
+					if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
+						hitd.push( v );
+					}
 				});
-				var hitd = [], hiti = [];
-				$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
-					$.each( targetNode["_private"].data.class, function( i2,v2 ) {
-						if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
-							hitd.push( v );
-						}
-					});
+			});
+			$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
+				$.each( targetNode["_private"].data.class, function( i2,v2 ) {
+					crels = retrieve_class_relationships( nsv(v2) );
+					if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
+						hiti.push( v );
+					}
 				});
-				$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
-					$.each( targetNode["_private"].data.class, function( i2,v2 ) {
-						crels = retrieve_class_relationships( nsv(v2) );
-						if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
-							hiti.push( v );
-						}
-					});
+			});
+			hiti = _l.difference(hiti, hitd);
+			addModelling( sourceNode, targetNode, addedEles, hitd, hiti ); 
+		}
+		},
+		cancel: function( sourceNode, cancelledTargets ){
+		// fired when edgehandles are cancelled (incomplete gesture)
+		if (tippy2) { tippy2.hide(); }
+		addModelling( sourceNode );
+		},
+		hoverover: function( sourceNode, targetNode ){
+			// fired when a target is hovered
+			if ( targetNode["_private"].data.class == "literal" ) {
+				targetNode["_private"].data.class = [];
+				targetNode["_private"].data.class.push( "rdfs:Literal" );
+			}
+			var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
+			$.each( sourceNode["_private"].data.class, function( i,v ) {
+				crels = retrieve_class_relationships( nsv(v) );
+				prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
+				trelsdd.push( prels[0] );
+				trelsdi.push( prels[2] );
+				trelsid.push( prels[1] );
+				trelsii.push( prels[3] );
+			});
+			var hitd = [], hiti = [];
+			$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ) )), function( i,v ) {
+				$.each( targetNode["_private"].data.class, function( i2,v2 ) {
+					if ( onto[ v ] && onto[ v ].range == nsv(v2) ) {
+						hitd.push( v );
+					}
 				});
-				hiti = _l.difference(hiti, hitd);
-				var sonto = '<ul class="listBibl">', sonto2 = '<ul class="listBibl">';
-				$.each( _l.uniq( _l.flatten( hitd ) ), function(i,v) {
-					sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
+			});
+			$.each( _l.uniq(_l.flatten( trelsdd.concat( trelsdi ).concat( trelsid ).concat( trelsii ) )), function( i,v ) {
+				$.each( targetNode["_private"].data.class, function( i2,v2 ) {
+					crels = retrieve_class_relationships( nsv(v2) );
+					if ( onto[ v ] && onto[ v ].range == nsv(v2) || _l.uniq(_l.flatten( crels[0].concat(crels[1]) )).includes( onto[ v ].range ) ) {
+						hiti.push( v );
+					}
 				});
-				$.each( _l.uniq( _l.flatten( hiti ) ), function(i,v) {
-					sonto2 += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
-				});
-				sonto += '</ul>'; sonto2 += '</ul>';
-				tippy = makeTippy( targetNode, "<p><b>"+_l.uniq( _l.flatten(hitd)).length+" direct relationships</b>"+sonto+"<p><b>"+_l.uniq( _l.flatten(hiti)).length+" inferred relationships</b>"+sonto2, 'right');
-				tippy.show();
-				if (tippy2) { tippy2.hide(); }
-            },
-            show: function( sourceNode ){
-                // fired when handle is shown
-            },
-            hide: function( sourceNode ){
-                // fired when the handle is hidden
-            },
-            start: function( sourceNode ){
-                // fired when edgehandles interaction starts (drag on handle)
-                var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
-                $.each( sourceNode["_private"].data.class, function( i,v ) {
-                    crels = retrieve_class_relationships( nsv(v) );
-                    prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
-                    trelsdd.push( prels[0] );
-                    trelsdi.push( prels[2] );
-                    trelsid.push( prels[1] );
-                    trelsii.push( prels[3] );
-                });
-                var sonto = '<ul class="listBibl">';
-                $.each( _l.uniq( _l.flatten( trelsdd.concat( trelsdi ) ) ), function(i,v) {
-                    sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
-                });
-                sonto += '</ul>';
-                tippy2 = makeTippy( sourceNode, "<p><b>"+_l.uniq( _l.flatten(trelsdd.concat(trelsdi))).length+" direct relationships</b></p>"+sonto+"<p>+ "+_l.uniq( _l.flatten(trelsid.concat(trelsii))).length+" inferred relationships</p>", 'left');
-                tippy2.show();
-            },
-            stop: function( sourceNode ){
-                // fired when edgehandles interaction is stopped (either complete with added edges or incomplete)
-            },
-            hoverout: function( sourceNode, targetNode ){
-            // fired when a target isn't hovered anymore
-            if (tippy) { tippy.hide(); }
-            if (tippy2) { tippy2.show(); }
-            },
-            previewon: function( sourceNode, targetNode, previewEles ){
-            // fired when preview is shown
-            },
-            previewoff: function( sourceNode, targetNode, previewEles ){
-            // fired when preview is hidden
-            },
-            drawon: function(){
-            // fired when draw mode enabled
-            },
-            drawoff: function(){
-            // fired when draw mode disabled
-            }
-		});
-        // TODO: edgehandles has changed substantially, needs re-implementing!
-        // eh.enableDrawMode();
-		// new node
-		//cy.dblclick();
-		cy.on('dblclick', function(evt) {
-			console.log( "double click: ", evt["target"]["_private"].data.context );
-			if ( evt["target"]["_private"].data.context !== undefined ) {
-				display_context( evt["target"]["_private"].data.context );
+			});
+			hiti = _l.difference(hiti, hitd);
+			var sonto = '<ul class="listBibl">', sonto2 = '<ul class="listBibl">';
+			$.each( _l.uniq( _l.flatten( hitd ) ), function(i,v) {
+				sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
+			});
+			$.each( _l.uniq( _l.flatten( hiti ) ), function(i,v) {
+				sonto2 += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
+			});
+			sonto += '</ul>'; sonto2 += '</ul>';
+			tippy = makeTippy( targetNode, "<p><b>"+_l.uniq( _l.flatten(hitd)).length+" direct relationships</b>"+sonto+"<p><b>"+_l.uniq( _l.flatten(hiti)).length+" inferred relationships</b>"+sonto2, 'right');
+			tippy.show();
+			if (tippy2) { tippy2.hide(); }
+		},
+		show: function( sourceNode ){
+			// fired when handle is shown
+		},
+		hide: function( sourceNode ){
+			// fired when the handle is hidden
+		},
+		start: function( sourceNode ){
+			// fired when edgehandles interaction starts (drag on handle)
+			var crels = [], prels = [], trelsdd = [], trelsdi = [], trelsid = [], trelsii = [];
+			$.each( sourceNode["_private"].data.class, function( i,v ) {
+				crels = retrieve_class_relationships( nsv(v) );
+				prels = retrieve_property_relationships( nsv(v),crels[0].concat(crels[1]) );
+				trelsdd.push( prels[0] );
+				trelsdi.push( prels[2] );
+				trelsid.push( prels[1] );
+				trelsii.push( prels[3] );
+			});
+			var sonto = '<ul class="listBibl">';
+			$.each( _l.uniq( _l.flatten( trelsdd.concat( trelsdi ) ) ), function(i,v) {
+				sonto += `<li><span style="font-style:italic;">`+ onto[ v ].label +`</span> &nbsp; <span>`+((onto[ onto[ v ].range ])?onto[ onto[ v ].range ].label:onto[ v ].range)+` (class)</span></li>`;
+			});
+			sonto += '</ul>';
+			tippy2 = makeTippy( sourceNode, "<p><b>"+_l.uniq( _l.flatten(trelsdd.concat(trelsdi))).length+" direct relationships</b></p>"+sonto+"<p>+ "+_l.uniq( _l.flatten(trelsid.concat(trelsii))).length+" inferred relationships</p>", 'left');
+			tippy2.show();
+		},
+		stop: function( sourceNode ){
+			// fired when edgehandles interaction is stopped (either complete with added edges or incomplete)
+		},
+		hoverout: function( sourceNode, targetNode ){
+		// fired when a target isn't hovered anymore
+		if (tippy) { tippy.hide(); }
+		if (tippy2) { tippy2.show(); }
+		},
+		previewon: function( sourceNode, targetNode, previewEles ){
+		// fired when preview is shown
+		},
+		previewoff: function( sourceNode, targetNode, previewEles ){
+		// fired when preview is hidden
+		},
+		drawon: function(){
+		// fired when draw mode enabled
+		},
+		drawoff: function(){
+		// fired when draw mode disabled
+		}
+	});
+	// TODO: edgehandles has changed substantially, needs re-implementing!
+	// eh.enableDrawMode();
+	// new node
+	//cy.dblclick();
+	cy.on('dblclick', async function(evt) {
+		var link;
+		// open context
+		if ( (/\/networks\//.test(window.location.href)
+			|| /\/authors\//.test(window.location.href)
+			|| /\/works\//.test(window.location.href)) &&
+			( evt["target"]["_private"].data.context !== undefined 
+				|| evt["target"]["_private"].data.class.includes( "https://w3id.org/lso/intro/beta202408#INT_Interpretation" )
+			)) {
+				link = (evt["target"]["_private"].data.context?evt["target"]["_private"].data.context:evt["target"]["_private"].data.id )
+				display_context( link );
 				var regex = /.*?\/id\/(.*?)$/;
 				previousState = location.href;
-				history.replaceState(null,null,'/works/#context/'+evt["target"]["_private"].data.context.match( regex )[1]);
-//				location.href = "/works/#context/"+evt["target"]["_private"].data.context;
-//				display_context(evt["target"]["_private"].data.context);
+				history.replaceState(null,null,'#context/'+link.match( regex )[1]);
+		// open author page
+			} else if ( evt["target"]["_private"]["data"].type 
+				&& evt["target"]["_private"]["data"]["type"].includes( "http://id.loc.gov/vocabulary/relators/aut" )
+				&& /\/networks\//.test(window.location.href)
+				) {
+				zInd = zInd+1;
+				var text = `<div id="content" style="z-index:`+zInd+`;overflow:inherit;top:55px;height: calc(100vh - 96px);min-width:500px;" class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1">
+					<div class="offcanvas-body">`+
+						`<button type="button" class="btn-close" style="float:right;" data-mode="read" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						<div id="poet_content"></div>
+					</div>
+				</div>
+				`;
+				$( "body" ).prepend( text );
+				$( "#poet_content" ).html( await poet_profile( evt["target"]["_private"].data.id.match(/\/id\/(.*?)\/person$/)[1] ) );
+				var myCanvasGTEl = document.getElementById( "content" );
+				var myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
+					keyboard: false
+				}).show();
+		// open work page
+			} else if ( (evt["target"]["_private"].data.hasOwnProperty( "class" ) && (
+				evt["target"]["_private"].data.class.includes( "http://iflastandards.info/ns/lrm/lrmoo/F2_Expression" )
+				|| evt["target"]["_private"].data.class.includes( "http://iflastandards.info/ns/lrm/lrmoo/F1_Work" )
+				|| evt["target"]["_private"].data.class.includes( "lrmoo:F3_Manifestation" ) )
+				&& /\/networks\//.test(window.location.href)
+				)) {
+				zInd = zInd+1;
+				var text = `<div id="content" style="z-index:`+zInd+`;overflow:inherit;top:55px;height: calc(100vh - 96px);min-width:500px;" class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1">
+					<div class="offcanvas-body globaltext-container">`+
+						`
+						<div class="globaltext" style="min-width:550px !important;">							
+						</div>
+						<button type="button" class="btn-close" style="float: right;top: 8px;position: absolute;right: 0;" data-mode="read" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+				</div>
+				`;
+				$( "body" ).prepend( text );
+				var tid = _l.filter( texts, function(e) { return e.work == evt["target"]["_private"].data.id.match(/\/id\/(.*?)\/.*?$/)[1] })[0].text
+				var wid = evt["target"]["_private"].data.id.match(/\/id\/(.*?)\/.*?$/)[1];
+				await display_globaltext( tid, wid, false );
+				var myCanvasGTEl = document.getElementById( "content" );
+				var myCanvasGT = new bootstrap.Offcanvas(myCanvasGTEl, {
+					keyboard: false
+				}).show();
 			}
-			/*
-			if ( evt["target"]["_private"].data.class.includes( "http://iflastandards.info/ns/lrm/lrmoo/F1_Work") ) {
-				window.location.href = '/works/';
-				// this patterns return the "first" expression of a work, e.g. "text01234":
-				// _l.groupBy( texts, 'work')["work00932"][0].text
-			}
-			*/
-			// TODO: double click on empty bakground =
-			//addModelling();
-			// TODO: double click on node = reveal neighborhood -> graph traversal
-		});
-		cy.on('dblclick:timeout', function(evt) {
-		});
-	} else {
-		tippyNodes( cy.nodes(), graph, true );
-	}
-    // TODO?
+		// double click on empty bakground =
+		//addModelling();
+	});
+	cy.on('dblclick:timeout', function(evt) {
+	});
     tippyNodes( cy.nodes(), graph );
 	$( ".cytoscape-navigator" ).css( "display","unset" );
     // Event handlers
@@ -1193,20 +1593,11 @@ function createCYgraph(data, graph, layout) {
 		var ele = e.target, q;
 		var j = cy.$id( ele.id() );
 		// double-clicking is impossible if node/edge moves on first click
-		/*
-		cy.animate({
-			center: { eles: cy.filter( j ) },
-			zoom: 0.9
-		}, {
-			duration: 500
-		});
-		*/
-		/*
 		if ( $( "[id='cy']" )[0].parentNode.className != "modal-body" ) {
 			if (!$( "#details-tab" ).hasClass( "active" ) ) { $( "#details-tab" ).click() }
 			var q;
 			if ( ele["_private"].data.shape == "round-diamond" ) {
-				// non-node
+				// literal
 				var edge = ele.incomers( 'edge' )[0]["_private"].data.class;
 				q = namespaces+`SELECT * WHERE { 
 					{
@@ -1216,17 +1607,6 @@ function createCYgraph(data, graph, layout) {
 						BIND (<`+edge+`> AS ?p) 
 						BIND ( <default> AS ?g)
 						FILTER ( ?o = '`+ele["_private"].data.name+`' ) 
-					} 
-					UNION 
-					{
-						GRAPH `+user+` { 
-							?s <`+edge+`> ?o . 
-							OPTIONAL { ?s skos:prefLabel ?qp . 
-								?s skos:altLabel ?qa . } 
-							BIND (<`+edge+`> AS ?p)
-							BIND (<`+user+`> AS ?g) 
-							FILTER ( ?o = '`+ele["_private"].data.name+`' ) 
-						}
 					} 
 				}`;
 			} else {
@@ -1247,37 +1627,25 @@ function createCYgraph(data, graph, layout) {
 							BIND ( <`+ele.id()+`> as ?o ) BIND ( <default> as ?g )
 						} 
 					} 
-					UNION
-					{
-						{
-							GRAPH `+user+` { 
-								<`+ele.id()+`> ?p ?o . 
-								OPTIONAL { ?o skos:prefLabel ?qp . 
-									?o skos:altLabel ?qa . } 
-								BIND ( <`+ele.id()+`> as ?s ) BIND ( `+user+` as ?g )
-							}
-						} 
-						UNION
-						{ 
-							GRAPH `+user+` { 
-								?s ?p <`+ele.id()+`> . 
-								OPTIONAL { ?s skos:prefLabel ?qp . 
-									?s skos:altLabel ?qa . } 
-								BIND ( <`+ele.id()+`> as ?o ) BIND ( `+user+` as ?g )
-							}
-						} 
-					}
 				}`;
 			}
 			var graph = await getJSONLD( q, "raw" ); // DONE
 			var statementsInfo = tippyNodes( ele, graph, true );
+			var sel = document.querySelector('#details-tab')
+			bootstrap.Tab.getOrCreateInstance(sel).show()
 			$( ".graph-about #tabDetails" ). html( statementsInfo );
 		}
-		*/
+		
 	});
 	// highlight connections
 	cy.on('mouseover', 'node', function (e) {
 		var sel = e.target;
+		// TODO: 
+		// target highlighting by using a popover needs switching to associated expressions tab! Use:
+		// $( "#"+ $( "div[data-iid='"+sel["_private"].data.obj+"']" ).parent().attr("id")+'-tab' ).click();
+		// where the value of target_tabs[i] gets written into the node as a "obj"-value
+		// 
+		//$( "[class*='"+sel["_private"].data.id+"']" ).popover( 'show' );
 		cy.elements()
 			.difference(sel.outgoers()
 			.union(sel.incomers()))
@@ -1289,6 +1657,7 @@ function createCYgraph(data, graph, layout) {
 			.addClass('highlight');
 	}).on('mouseout', 'node', function (e) {
 		var sel = e.target;
+		//$( "[class*='"+sel["_private"].data.id+"']" ).popover( 'hide' );
 		cy.elements()
 			.removeClass('semitransp');
 		sel.removeClass('highlight')
@@ -1306,48 +1675,212 @@ function updateGraphInfo( level ) {
 	});
 	$.each( _l.uniq( _l.flatten( classes )) , function( i,v ) {
 		if ( v && onto[ nsv( v )] ) {
-			if ( !level || ( level == "digital" && (nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) ||
-				( level == "material" && !(nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) ||
-				( level == "both" ) ) {
+			if ( ( !level 
+				//|| ( level == "digital" && (nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) 
+				//|| ( level == "material" && !(nsv(onto[ nsv(v) ].about).startsWith( 'crmdig' ) || nsv(onto[ nsv(v) ].about).startsWith( 'prisms' )) ) 
+				|| ( level == "both" ) )
+				&& (nsv(onto[ nsv(v) ].about).startsWith( 'crm' ) || nsv(onto[ nsv(v) ].about).startsWith( 'lrm' ) || nsv(onto[ nsv(v) ].about).startsWith( 'intro' ))
+				) {
 				classInfo += `<li><a href="#`+onto[ nsv(v) ].about+`" class="relsLink">`+onto[ nsv(v) ].label+`</a></li>`;
 			}
 		}
 	});
 	classInfo += `</ul>`;
 	return `<div class="accordion" id="workbenchGraph">
-	<div class="card" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
-		<div class="card-header" id="headingOne" style="padding:0;background-color:unset;">
+	<div class="accordion-item" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
+		<div class="accordion-header" id="headingOne" style="padding:0;background-color:unset;">
 			<h2 class="mb-0">
-				<button class="btn text-left collapsed" style="text-decoration:none;border:0;color:#138496;border-bottom:1px" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Classes</button>
+				<button class="accordion-button text-left" style="text-decoration:none;border:0;border-bottom:1px;padding:0 5px" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Classes</button>
 			</h2>
 		</div>
-		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#workbenchGraph">
-			<div class="card-body" style="padding:.75rem;">`+classInfo+`</div>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#workbenchGraph">
+			<div class="accordion-body" style="padding:.75rem;">`+classInfo+`</div>
 		</div>
 	</div>
-	<div class="card" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
-		<div class="card-header" id="headingTwo" style="padding:0;background-color:unset;">
+	<div class="accordion-item" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
+		<div class="accordion-header" id="headingTwo" style="padding:0;background-color:unset;">
 			<h2 class="mb-0">
-				<button class="btn text-left collapsed" style="text-decoration:none;border:0;color:#138496;border-bottom:1px" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Instances</button>
+				<button class="accordion-button text-left collapsed" style="text-decoration:none;border:0;border-bottom:1px;padding:0 5px" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Instances</button>
 			</h2>
 		</div>
-		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#workbenchGraph">
-			<div class="card-body" style="padding:.75rem;"></div>
+		<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#workbenchGraph">
+			<div class="accordion-body" style="padding:.75rem;"></div>
 		</div>
 	</div>
-	<div class="card" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
-		<div class="card-header" id="headingThree" style="padding:0;background-color:unset;">
+	<div class="accordion-item" style="border:0;border-radius:unset;border-bottom:1px solid #ccc;">
+		<div class="accordion-header" id="headingThree" style="padding:0;background-color:unset;">
 			<h2 class="mb-0">
-				<button class="btn text-left collapsed" style="text-decoration:none;border:0;color:#138496;border-bottom:1px" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Statements</button>
+				<button class="accordion-button text-left collapsed" style="text-decoration:none;border:0;border-bottom:1px;padding:0 5px" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Statements</button>
 			</h2>
 		</div>
-		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#workbenchGraph">
-			<div class="card-body" style="padding:.75rem;"></div>
+		<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#workbenchGraph">
+			<div class="accordion-body" style="padding:.75rem;"></div>
 		</div>
 	</div>
 	</div>`;
 }
 
+async function cs_lists() {
+	q = namespaces+`SELECT DISTINCT ?s ?p ?o 
+		WHERE { 
+		{
+			?s a skos:ConceptScheme .
+			?s ?p ?o .
+			FILTER ( ?p IN (skos:prefLabel,rdf:type,dc:subject,dcterms:bibliographicCitation) ) . 
+		} UNION {
+			?s a skos:Concept .
+			?s ?p ?o .
+			FILTER ( ?p IN (skos:prefLabel,skos:inScheme,rdf:type) ) . 
+		}
+		#FILTER ( ISIRI(?o) || (lang(?o) = "en" ) || langmatches(lang(?o),"") )
+	}
+	`;
+	var r = await getJSONLD( q );
+	cs_schemes = _l.keyBy( _l.groupBy( r.graph, 'type' )['skos:ConceptScheme'], "id" );
+	cs_concepts = _l.groupBy( _l.groupBy( r.graph, 'type' )['skos:Concept,lrmoo:F12_Nomen'], "skos:inScheme.id");
+	if (Object.keys( cs_concepts ).length == 0 ) { 
+		cs_concepts = _l.groupBy( _l.groupBy( r.graph, 'type' )['lrmoo:F12_Nomen,skos:Concept'], "skos:inScheme.id");
+	}
+	var concepts_list = `<ul>`;
+	$.each( _l.orderBy(cs_schemes, ['dcterms:bibliographicCitation'],['asc']), function( i,v ) {
+		concepts_list += `<li><a href="#`+v.id+`" role="button" aria-expanded="false" aria-controls="`+v.id+`" data-bs-toggle="collapse">`+
+			v["dcterms:bibliographicCitation"]+`</a> (`+(Array.isArray(v["dc:subject"])?v["dc:subject"].join("; "):v["dc:subject"])+`)
+			<div class="collapse" id="`+v.id+`">
+				<ul style="columns:4;">`
+			$.each( _l.orderBy(cs_concepts[ v.id ], [w => w["skos:prefLabel"].toString().toLowerCase()],['asc']), function( i2,v2 ) { 
+				concepts_list += `<li><a class="consLink" href="/networks/#node/`+v2.id+`">`+(Array.isArray(v2["skos:prefLabel"])?v2["skos:prefLabel"].join("; "):v2["skos:prefLabel"])+`</a></li>`
+			});
+		concepts_list += `</ul>
+			</div>
+		</li>`
+	});
+	concepts_list += `</ul>`
+	$( "#networks_vocabs" ).html( concepts_list );
+}
+// export model (visible part only) as PNG 
+//$(document.body).on('click', 'a.consLink', function(e) { 
+//	e.preventDefault();
+//	addEleNode( e["target"]["hash"].substring( 1 ) );
+//});
+
+$(document.body).on('submit', '#keywordsearchForm', async function(e) {
+	e.preventDefault();
+	var match = $( "#keywordsearch" ).val(), kclass = $( "#keywordsearchClass" ).val(), q;
+	if ( match == '' ) return;
+	var inList = $( "#keywordsearch" ).attr( "list" );
+	// check if term is from a controlled list
+	var termInList = $( "datalist#"+inList+" option" ).filter(function() { return this.value == match; }).data('value');
+	if ( !termInList && e.originalEvent.submitter.id == 'find' ) {
+		$( '#keywordsearchForm button#add' ).after( `<div class="spinner-border text-info" role="status" style="margin-left:10px;float:right;margin-top:35px;"><span class="sr-only">Loading...</span></div>` );
+		switch ( $( "#keywordsearch" ).attr("name") ) {
+			case "wd-keyword":
+				q = namespaces+`SELECT DISTINCT * 
+					WHERE { 
+						`+(( kclass != '' )?`?s a ?c .`:``)+`
+						?s ?p ?o .
+						`+(( kclass != '' )?`FILTER ( ?c IN (`+kclass+`) ) .`:``)+`
+						FILTER ( ?p IN (crm:P1_is_identified_by,skos:prefLabel,skos:altLabel,skos:hiddenLabel,rdfs:label,crm:P190_has_symbolic_content) ) .
+						FILTER ( regex(?o, "`+match+`", "i" ) ) .
+					}
+				`;
+				break;
+		}
+		var r = await getJSONLD( q );
+	    if ( !r.graph ) { r.graph = []; r.graph.push( r ); }
+ 		$( ".spinner-border").remove();
+		var list_id = "datalist-"+uuidv4();
+		var entities_list = ``;//`<select>`;
+		$.each( r.graph, function(i,v) {
+			label = ''
+			if (v["crm:P1_is_identified_by"] !== undefined) {
+				label = v["crm:P1_is_identified_by"]; 
+			} else if ( v["skos:prefLabel"] !== undefined ) {
+				label = v["skos:prefLabel"];
+			} else if ( v["rdfs:label"] !== undefined ) {
+				label = v["rdfs:label"];
+			} else if ( v["skos:altLabel"] !== undefined ) {
+				label = v["skos:altLabel"];
+			} else if ( v["skos:hiddenLabel"] !== undefined ) {
+				label = v["skos:hiddenLabel"];
+			} else if ( v["crm:P190_has_symbolic_content"] !== undefined ) {
+				label = v["crm:P190_has_symbolic_content"];
+			}
+			if ( label == '' ) return;
+			entities_list += `<option value="`+v.id+`" data-value="`+v.id+`">`+
+			label+`</option>`;
+		});
+//		entities_list += `</select>`;
+		if ( entities_list != '' ) {
+			$( '#keywordsearch' ).attr( "list", list_id );
+			$( "#keywordsearch" ).append( `<datalist id="`+list_id+`"/>` );
+			$( '#keywordsearch datalist#'+jqu( list_id ) ).html( entities_list );
+		} else {
+			$( '#keywordsearch' ).attr( "list", "none" );
+		}
+	} else if ( termInList && e.originalEvent.submitter.id == 'add') {
+		$( "#keywordsearch" ).val("")
+		await addEleNode( termInList );
+	}
+});
+
+// export model (visible part only) as PNG 
+$(document.body).on('click', '#graph_png', function(e) { 
+	e.preventDefault();
+	var b64key = 'base64,';
+    var b64 = cy.png().substring( cy.png().indexOf(b64key) + b64key.length );
+    var imgBlob = base64ToBlob( b64, 'image/png' );
+    // see https://stackoverflow.com/questions/39168928/cytoscape-save-graph-as-image-by-button
+	saveAs( imgBlob, 'RPPA-viewport-graph-'+Math.floor(Date.now() / 1000)+'.png'); 
+});
+// export model as JSON                                                                                                    
+$(document.body).on('click', '#graph_cyjson', function(e) { 
+	e.preventDefault();
+	var jsonBlob = new Blob([ JSON.stringify( cy.json() ) ], { type: 'application/javascript;charset=utf-8' });
+	saveAs( jsonBlob, 'RPPA-CYjson-graph-'+Math.floor(Date.now() / 1000)+'.json' ); 
+});
+$(document.body).on('click', '#graph_graphml', function(e) { 
+	e.preventDefault();
+	var jsonBlob = new Blob([ cy.graphml() ], { type: 'application/javascript;charset=utf-8' });
+	saveAs( jsonBlob, 'RPPA-GraphML-graph-'+Math.floor(Date.now() / 1000)+'.xml' ); 	
+});
+
+$(document.body).on('click', '#graph_redraw', function() { 
+	run_layout( 'cose' );
+});
+$( document.body ).on( 'click', '#collapseOne a.relsLink', function(e) {
+	e.preventDefault();
+	//$('.popover').remove();
+	var vNodes = cy.nodes().not(':hidden, :transparent');
+	var instances = [], instancesInfo = `<ul class="listBibl">`;
+	$.each( vNodes, function( i,v ) {
+		if ( v["_private"]["data"].class && v["_private"]["data"].class.includes( e.target.hash.substring(1) ) ) {
+			instances.push( v["_private"]["data"] );
+		}
+	});
+	$.each( instances , function( i,v ) {
+		instancesInfo += `<li><a href="#`+v.id+`" style="color:`+v.color
+		+`">`+truncateString(v.pref, 35)+((v.alt != false)?` (`+v.alt+`)`:``)+`</a></li>`;
+	});
+	instancesInfo += `</ul>`;
+	$( "#collapseTwo .accordion-body" ).html( instancesInfo );
+	$( "#headingTwo button" ).trigger( 'click' );
+});
+$( document.body ).on( 'click', '#collapseTwo a', async function(e) {
+	e.preventDefault();
+	$( "#headingThree button" ).trigger( 'click' );
+	var j = cy.$( "[id='"+$(e.target).attr( 'href' ).substring(1)+"']" );
+	cy.animate({
+		zoom: 0.9,
+		center: { eles: cy.filter( j ) }
+	}, {
+		duration: 500
+	});
+	graph = await getPRISMSobject( $(e.target).attr( 'href' ).substring(1) );
+	var statementsInfo = tippyNodes( cy.$id( $(e.target).attr( 'href' ).substring(1) ), graph );
+	$( "#collapseThree .accordion-body" ).html( statementsInfo );
+	$( ".graph-about #tabDetails" ).html( statementsInfo );
+
+});
 // /PRISMS
 
 
@@ -1355,7 +1888,8 @@ function updateGraphInfo( level ) {
 async function loadLayout() {
     var hash = location.hash.substring( location.hash.lastIndexOf("/")+1 ), source;
     regex = /(?<=^\/)[^\/]+/;
-    switch ( location.pathname.match( regex ) && location.pathname.match( regex )[0] ) {
+	//console.log( location.pathname.match( regex ) && location.pathname.match( regex )[0] ); 
+	switch ( location.pathname.match( regex ) && location.pathname.match( regex )[0] ) {
         case "authors":
             switch ( true ) {
                 case /#id\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
@@ -1367,7 +1901,7 @@ async function loadLayout() {
             	        // load poet graph
                 	    initializeGraph( "https://www.romanticperiodpoetry.org/id/"+hash+"/person", "authors" );
                     	$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
-	                    Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+	                    Split([ ".col-graph", ".col-content" ], { sizes: [73, 27], minSize: 450, gutterSize: 8 });
 					}
                     break;
                 case /\s?/.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
@@ -1380,6 +1914,8 @@ async function loadLayout() {
             }
             break;
         case "works":
+		case "networks":
+		case "maps":
 			switch ( true ) {
                 case /#text\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 					if ( $('.offcanvas.show').length ) { 
@@ -1392,13 +1928,13 @@ async function loadLayout() {
 						$( ".layout_wrapper" ).addClass( "globaltext-container" );
 						$( ".layout_wrapper" ).attr( 'data-tid', hash );
 						$( ".layout_wrapper" ).attr( 'data-wid', texts[ hash ][ "work" ] );
-						// load global text
 						$( "#content" ).html(''); 
-						display_globaltext( hash, texts[ hash ][ "work" ] );
 						// load global text graph
 						initializeGraph( "https://www.romanticperiodpoetry.org/id/"+texts[ hash ][ "work" ]+"/work", "works" );
+						// load global text
+						await display_globaltext( hash, texts[ hash ][ "work" ] );
 						$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
-						Split([ ".col-graph", ".col-content" ], { sizes: [70, 30], minSize: 450, gutterSize: 8 });
+						Split([ ".col-graph", ".col-content" ], { sizes: [73, 27], minSize: 450, gutterSize: 8 });
 						previousState = location.href;
 					}
                     break;
@@ -1407,8 +1943,12 @@ async function loadLayout() {
 						$($( ".context-workbench .globaltext" )[0]).addClass( "col-sm-4" );
 					break;
 				case /#contribute\/1\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
-					    var modeC = {}
+					if ( !$( ".offcanvas" ).length || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps" ) {
+						if (location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps" ) {
+							$( ".offcanvas" ).remove()
+							$( ".offcanvas-backdrop" ).remove()
+						}
+						var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
 						modeC[ 'view' ] = 'var(--bs-orange)';
@@ -1425,7 +1965,10 @@ async function loadLayout() {
 				case /#contribute\/3\/genetic\/2\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 				case /#contribute\/3\/intratextual\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
 				case /#contribute\/3\/typological\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
+					if (/#contribute\/3\/genetic\/2\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) )) {
+						hash = previousGState.substring( previousGState.lastIndexOf("/")+1 );
+					}
+					if ( !$( ".offcanvas" ).length  || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps"  ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
@@ -1433,7 +1976,7 @@ async function loadLayout() {
 						$( "#mode" ).remove();
 						mode = "edit";
 						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
-						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						await display_globaltext( hash.split( "-" )[0], texts[ hash.split( "-" )[0] ][ "work" ] );
 						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
 						contribute_step3( hash );
 					} else {
@@ -1441,7 +1984,7 @@ async function loadLayout() {
 					}
 					break;
 				case /#contribute\/2\/intratextual\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
+					if ( !$( ".offcanvas" ).length  || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps"  ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
@@ -1451,11 +1994,13 @@ async function loadLayout() {
 						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
 						await display_globaltext( hash, texts[ hash ][ "work" ] );
 						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						intratextual_step2(hash, texts[ hash ][ "work" ]);
+					} else {
+						intratextual_step2(hash, texts[ hash ][ "work" ]);
 					}
-					intratextual_step2(hash, texts[ hash ][ "work" ]);
 					break;
 				case /#contribute\/2\/typological\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
+					if ( !$( ".offcanvas" ).length  || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps"  ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
@@ -1465,11 +2010,13 @@ async function loadLayout() {
 						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
 						await display_globaltext( hash, texts[ hash ][ "work" ] );
 						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						typological_step2(hash, texts[ hash ][ "work" ]);
+					} else {
+						typological_step2(hash, texts[ hash ][ "work" ]);
 					}
-					typological_step2(hash, texts[ hash ][ "work" ]);
 					break;
 				case /#contribute\/2\/genetic\/2\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
+					if ( !$( ".offcanvas" ).length  || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps"  ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
@@ -1481,17 +2028,12 @@ async function loadLayout() {
 						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
 						await genetic_step2(hash.split( "-" )[0], texts[ hash.split( "-" )[0] ][ "work" ]);
 					}
-					/*
-					if ($( ".steps #worksSearchDT_wrapper" ).length) {
-						$( ".steps #worksSearchDT_wrapper" ).closest( ".col-sm-6" ).addClass( "globalcontext" );
-    					$( ".steps #worksSearchDT_wrapper" ).remove();
-					}
-					*/
 					await display_globaltext( hash.split( "-" )[1], texts[ hash.split( "-" )[1] ][ "work" ] );
 					//genetic_step2a();
+					previousGState = location.href;
 					break;
 				case /#contribute\/2\/genetic\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-					if ( !$( ".offcanvas" ).length ) {
+					if ( !$( ".offcanvas" ).length  || location.pathname.match( regex )[0] == "networks" || location.pathname.match( regex )[0] == "maps"  ) {
 					    var modeC = {}
 						modeC[ 'edit' ] = '#2a9d8f';
 						modeC[ 'read' ] = 'var(--bs-orange)';
@@ -1501,8 +2043,15 @@ async function loadLayout() {
 						$( "head" ).append( `<style type="text/css" id="mode">.globaltext-workbench a,.globaltext-workbench a:hover,.globaltext-workbench a:visited,.globaltext-workbench a:active,.popover a.save,.popover a.cancel{color: `+modeC[ mode ]+` !important;}.globaltext-workbench .nav-pills .nav-link.active,.globaltext-workbench .bg-rppa,.globaltext-workbench .controls .btn{background-color:`+modeC[ mode ]+` !important;}.globaltext-workbench a.bg-rppa{color:white !important;}.globaltext-workbench input{accent-color: `+modeC[ mode ]+` !important;}.page-item .page-link {color:`+modeC[ mode ]+`;}.page-item.active .page-link {background-color:`+modeC[ mode ]+`;</style>` );
 						await display_globaltext( hash, texts[ hash ][ "work" ] );
 						$( ".globaltext-workbench .globaltext" ).addClass( "col-sm-4" );
+						genetic_step2(hash, texts[ hash ][ "work" ]);
+					} else {
+						genetic_step2(hash, texts[ hash ][ "work" ]);
 					}
-					genetic_step2(hash, texts[ hash ][ "work" ]);
+					break;
+				case /#node\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
+					try { await initializeGraph( "" ); 
+						  await addEleNode( location.hash.substring( location.hash.indexOf("#node/")+6 ) );
+					} catch(e) {}
 					break;
 				case /\s?/.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
                     if ( location.hash === '' && $( ".layout_navigation" ).is(":hidden") ) {
@@ -1510,16 +2059,36 @@ async function loadLayout() {
                         $( ".layout_wrapper" ).css( "flex-wrap", "wrap" );
                         $( ".layout_navigation" ).show();
                     }
-                    break;
-            }
+					try { await initializeGraph( "" ); } catch(e) {}
+					break;
+			}
             break;
-        case "networks":
-            switch ( true ) {
-                case /#id\//.test( location.hash.substring( location.hash.indexOf("#"), location.hash.lastIndexOf("/")+1 ) ):
-                    // TODO
-                    break;
-            }
-            break;
-
+		case "id":
+			var entity;
+			entity = "https://www.romanticperiodpoetry.org"+window.location.pathname.split('https://www.romanticperiodpoetry.org/id/')[0]
+			var q = namespaces+`SELECT * WHERE { 
+				{ 
+					<`+entity+`> ?p ?o . 
+					OPTIONAL { 
+						?o rdf:type ?qt .
+						?o skos:prefLabel ?qp . 
+						?o skos:altLabel ?qa .
+					} 
+					BIND ( <`+entity+`> as ?s ) BIND ( <default> as ?g )
+				} 
+				UNION 
+				{ 
+					?s ?p <`+entity+`> . 
+					?s rdf:type ?qt .
+					OPTIONAL { ?s skos:prefLabel ?qp . 
+						?s skos:altLabel ?qa .
+						} 
+					BIND ( <`+entity+`> as ?o ) BIND ( <default> as ?g )
+				} 
+			}`;
+			var graph = await getJSONLD( q, "raw" ); // DONE
+			$( "#entity-view #tabDetails" ).html( formatEntity(entity, graph) );
+			$( ".spinner-border").remove();
+			break;
     }
 }

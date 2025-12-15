@@ -61,19 +61,6 @@ var initDataAuthors = function() {
             value.cont = nations[ value.nat.substring(0,2) ].cont;
             return [value];
         });
-        /*
-        {
-            "id": "pers00001",
-            "name": "Smith, Charlotte Turner",
-            "nat": "GB",
-            "img": "http://commons.wikimedia.org/wiki/Special:FilePath/Romney-Charlotte-Smith.jpg",
-            "pob": "Q84",
-            "pod": "Q145",
-            "sex": "f",
-            "dob": "1749-05-04T00:00:00Z",
-            "dod": "1806-10-28T00:00:00Z"
-        }
-        */
         var table = $('#authorsDT').DataTable({
             data: authors,
             columns: [
@@ -376,6 +363,13 @@ var initDataAuthors = function() {
             table.search('').draw()
         });
 
+        $( '.dt-search' ).append( `<button id="searchButton" type="button" class="btn btn-sm" style="width:40px;background-color:#e07012;color:#fff;">
+            <i class="fa fa-search"></i>
+            </button>` );
+        $('#searchButton').click(function () {
+            table.search($("#dt-search-0").val()).draw();
+        });
+
     });
 }
 // works browse page (DT)
@@ -394,22 +388,6 @@ var initDataWorks = function() {
                 return [value];
             }
         });
-
-        /*
-        {
-            "text": "text00004",
-            "firstline": "In Xanadu did Kubla Khan",
-            "lastline": " And drunk the milk of Paradise. ",
-            "title": "Kubla Khan",
-            "work": "work00004",
-            "comp": "November 1797",
-            "publ": "1816",
-            "type": "orig",
-            "extent": "complete",
-            "ciso": "1797-11",
-            "piso": "1816"
-        }
-        */
         var table = $('#worksDT').DataTable({
             data: wtxts,
             columns: [
@@ -756,6 +734,13 @@ var initDataWorks = function() {
             table.search('').draw()
         });
 
+        $( '.dt-search' ).append( `<button id="searchButton" type="button" class="btn btn-sm" style="width:40px;background-color:#e07012;color:#fff;">
+            <i class="fa fa-search"></i>
+            </button>` );
+        $('#searchButton').click(function () {
+            table.search($("#dt-search-0").val()).draw();
+        });
+
     });
 }
 // works browse page (DT)
@@ -774,22 +759,6 @@ var initDataWorksSearch = function( text, work ) {
                 return [value];
             }
         });
-
-        /*
-        {
-            "text": "text00004",
-            "firstline": "In Xanadu did Kubla Khan",
-            "lastline": " And drunk the milk of Paradise. ",
-            "title": "Kubla Khan",
-            "work": "work00004",
-            "comp": "November 1797",
-            "publ": "1816",
-            "type": "orig",
-            "extent": "complete",
-            "ciso": "1797-11",
-            "piso": "1816"
-        }
-        */
         var table = $('#worksSearchDT').DataTable({
             data: wtxts,
             columns: [
@@ -810,7 +779,7 @@ var initDataWorksSearch = function( text, work ) {
                     render: function( data, type, row ) {
                         if (type === 'display') {
                             if (data != '') {
-                                return `<a class="genetic_context" href="/works/#contribute/2/genetic/2/`+text+`-`+row.text+`">`+wwrks[ row.work ].tit+( row.extent == 'excerpt'?" "+row.sub:'' )+`</a>`;
+                                return `<a class="genetic_context" href="#contribute/2/genetic/2/`+text+`-`+row.text+`">`+wwrks[ row.work ].tit+( row.extent == 'excerpt'?" "+row.sub:'' )+`</a>`;
                             } else {
                                 return '—';
                             }
@@ -1137,8 +1106,15 @@ var initDataWorksSearch = function( text, work ) {
                 table.page( 'first' ).draw( 'page' );
             }, 200);
         });
-        $('.dt-search').on('search', function (e) {
+        $('.globalcontext .dt-search').on('search', function (e) {
             table.search('').draw()
+        });
+
+        $( '.globalcontext .dt-search' ).append( `<button id="searchButton" type="button" class="btn btn-sm" style="width:40px;background-color:#2a9d8f;color:#fff;">
+            <i class="fa fa-search"></i>
+            </button>` );
+        $('#searchButton').click(function () {
+            table.search($("#dt-search-0").val()).draw();
         });
 
     });
@@ -1152,7 +1128,7 @@ var initDataWorksSearch = function( text, work ) {
     - retrieves and processes contexts/building blocks for the globaltext (processGlobalText) (reading/editing mode)
     - attaches event handlers to the globaltext-workbench canvas (only in editing mode)
 */
-async function display_globaltext( tid, wid ) {
+async function display_globaltext( tid, wid, show ) {
 
     // retrieve RDF in JSON-LD
     // get work, expression, manifestation/excerpt, and master/deliverables
@@ -1228,7 +1204,7 @@ async function display_globaltext( tid, wid ) {
     // activate text pane
     try { $( '#'+$( $("#"+tid).closest( ".tab-pane" )[0] ).attr( 'id' )+'-tab' )[0].click(); } catch(e) {}
     // process contexts/building-blocks
-    await processGlobalText( tid, wid );
+    await processGlobalText( tid, wid, show );
     
     // attach handlers for editing
     if ( mode == "edit" ) {
@@ -1277,8 +1253,6 @@ async function display_globaltext( tid, wid ) {
                 bbs_text = $( "<ul class='bbs_text connectedBB'></ul>" );
                 bbs_context = $( "<ul class='bbs_context connectedBB'></ul>" );
                 updateDOM();
-                // TODO: do this only on SUCCESSFUL contribution!
-                //processGlobalText( tid, wid )
             });
         }
     }
@@ -1307,9 +1281,9 @@ async function drawGlobalText( tid, wid ) {
     var tab_content = "", tab_nav = "", excerpt = null, excerpt_saved = null, sources = [], texts = [], madeActive = false;
     for (i=0; i<workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ].length; i++ ) { // expressions
         var nav_name = '', cnt_lang = '';
-        cnt_lang = workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P72_has_language" ];
+        cnt_lang = workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P72_has_language" ].id;
+        cnt_lang = cnt_lang.match(/\/id\/(.*?)\/language$/)[1];
         // navigation
-
         if ( madeActive == false ) {
             if ( _l.findIndex(workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ][ "crm:P2_has_type" ], function(typ) { return typ.id == 'lct:txt' }) != -1 ) {
                 if ( workbench[ wid ][ workbench[ wid ][ domain+"/id/"+wid+"/work" ][ "lrmoo:R3_is_realised_in" ][i].id ].hasOwnProperty( 'lrmoo:R15_has_fragment' ) ) {
@@ -1556,7 +1530,7 @@ async function drawGlobalText( tid, wid ) {
     }
     // create DOM
     if ( mode == "read" ) {
-        tab_nav += `<li style="right: 5px;position: absolute;"><a href="#contribute/1/`+tid+`" class="add_context`+((user == undefined && username == undefined)?' pe-none':' pe-auto')+`" `+((user == undefined && username == undefined)?'tabindex="-1" aria-disabled="true"':'')+` title="add a new context" data-tid="`+tid+`" data-wid="`+wid+`"><i class="fas fa-plus-circle"></i></a></li>`;
+        tab_nav += `<li style="right: -10px;position: relative;"><a href="#contribute/1/`+tid+`" class="add_context`+((user == undefined && username == undefined)?' pe-none':' pe-auto')+`" `+((user == undefined && username == undefined)?'tabindex="-1" aria-disabled="true"':'')+` title="add a new context" data-tid="`+tid+`" data-wid="`+wid+`"><i class="fas fa-plus-circle"></i></a></li>`;
     }
     // reading view
     if ( mode == "read" ) {
@@ -1709,7 +1683,6 @@ function getJSONLD( BGquery, mode ) {
 
 // update RDF store (on completed publishable user-contribution)
 function putTRIPLES( BGupdate ) {
-    console.log( BGupdate );
     if ( user.startsWith( "rppa:" ) ) {
         return new Promise(function(resolve, reject) {
             $.ajax({
@@ -1721,6 +1694,7 @@ function putTRIPLES( BGupdate ) {
                 }
             }).done( function( result ) {
                 resolve();
+                publish( BGupdate );
             }).fail( function( error ) {
                 console.log( "FATAL UPDATE error!",error );
             });
@@ -1736,7 +1710,7 @@ function show_alert_mod( message, type, hide, ms ) {
     if ( message ) {
 		$( '.toast' ).remove();
 		$( "body" ).prepend(
-		`<div role="alert" style="min-width:300px;z-index:1060" aria-live="assertive" aria-atomic="true" class="toast position-fixed bottom-0 end-0 p-3 alert-`+type+`" data-autohide="`+hide+`" data-delay="`+ms+`">
+		`<div role="alert" style="min-width:300px;z-index:2060;" aria-live="assertive" aria-atomic="true" class="toast position-fixed bottom-0 end-0 p-3 alert-`+type+`" data-autohide="`+hide+`" data-delay="`+ms+`">
             <div class="toast-header">
                 <span class="badge badge-`+type+`"><i class="fas fa-exclamation-triangle"></i></span> 
                 <strong class="me-auto">RPPA</strong>
@@ -1774,7 +1748,6 @@ $( document ).on('click', '.add_context', function() {
 // update UI on expression / expressions selection
 $(document).on('click','button[data-bs-toggle="pill"]',function(){
     $(".popover").hide();
-    // TODO: need to work out exactly what needs doing here!
     if ( mode == "edit" ) {
 //        processGlobalText( "", $( this ).closest( "[data-wid]" ).data( "wid" ) );
     } else {
@@ -1810,75 +1783,12 @@ var dismiss_region = undefined;
       or editable (editing mode)
     - calls initializeContexts for the default expression
 */
-async function processGlobalText( tid, wid ) {
+async function processGlobalText( tid, wid, show ) {
     var work = domain+"/id/"+wid+"/work";
     // only reading section should remain, contexts variable holds ALL
     // contexts (i.e. for ALL expressions!), edit section is obsolete
-    if ( mode == "read" || mode == "view" ) {
+    if ( ( mode == "read" || mode == "view" ) && show != false ) {
         // load all contexts
-        /*
-        var q = namespaces+`SELECT ?s ?p ?o ?g
-        WHERE {
-        {
-            {
-                ?s a rppa:Context .
-                ?s intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s ?p ?o .
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-    			?s2 intro:R21_identifies+ ?w .
-    			?w ?p ?o . 
-          		BIND (?w AS ?s)
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s2 intro:R21_identifies+ ?w .
-                ?w <http://www.w3.org/ns/oa#hasBody> ?body .
-                ?body ?p ?o .
-                BIND(?body AS ?s)
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s2 intro:R21_identifies+ ?w .
-                ?w <http://www.w3.org/ns/oa#hasTarget> ?target .
-                ?target ?p ?o .
-                BIND(?target AS ?s)
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s2 intro:R21_identifies+ ?w .
-                ?w <http://www.w3.org/ns/oa#hasBody> ?body .
-                ?body <http://www.w3.org/ns/activitystreams#items> ?list .
-                ?list rdf:rest/rdf:first ?items .
-                BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
-                BIND(?items as ?o)
-                BIND(?list as ?s)
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s2 intro:R21_identifies+ ?w .
-                ?w <http://www.w3.org/ns/oa#hasTarget> ?target .
-                ?target oa:hasSelector+ ?items .
-                ?items ?p ?o .
-                BIND(?items as ?s)
-            } UNION {
-                ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                ?s2 intro:R21_identifies+ ?w .
-                ?w <http://www.w3.org/ns/oa#hasTarget> ?target .
-                ?target oa:hasSelector+ ?items .
-                ?items <http://www.w3.org/ns/activitystreams#items> ?list .
-                ?list rdf:rest/rdf:first ?composites .
-                BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
-                BIND(?composites as ?o)
-                BIND(?list as ?s)
-            }
-            BIND(<default> AS ?g)
-        } UNION {
-            ?s2 intro:R20_discusses <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-            ?s2 (<http://purl.org/dc/terms/contributor>|<http://purl.org/dc/terms/creator>) ?o2 .
-            ?o2 a foaf:Agent .
-            ?o2 ?p ?o .
-            BIND(?o2 AS ?s)
-            BIND(<default> AS ?g)                
-        }
-        }`;
-        */
         var q = namespaces+`SELECT DISTINCT ?s ?p ?o ?g WHERE {
             {
                 {	# ALL actualizations and intertextual relations
@@ -1899,11 +1809,11 @@ async function processGlobalText( tid, wid ) {
                     ?s2 intro:R20_discusses ?work .
                     ?s2 intro:R21_identifies+ ?w .
                     {
-                        ?w intro:R17_actualizesFeature ?f .
+                        ?w intro:R17_actualizesFeature|crm:P67_refers_to ?f .
                         ?f ?p ?o .
                     } UNION {
                         ?w intro:R19_hasType ?ty .
-                        ?ty intro:R4i_isDefinedIn ?f .
+                        ?ty intro:R4i_isDefinedIn|crm:P67_refers_to ?f .
                         ?f ?p ?o .
                     } UNION {
                         ?w intro:R19_hasType ?ty .
@@ -1932,12 +1842,12 @@ async function processGlobalText( tid, wid ) {
                         BIND ( ?to AS ?s)
                     } UNION {
                         ?t intro:R41_hasLocation [ ?p ?to ] .
-                        ?to rdf:restASTERISK/rdf:first ?too .
-        BIND ( ?t AS ?s)
+                        ?to rdf:rest*/rdf:first ?too .
+                        BIND ( ?t AS ?s)
                     } UNION {
-                          ?t intro:R41_hasLocation ?to .
+                        ?t intro:R41_hasLocation ?to .
                         ?to ?p ?too .		
-        BIND ( ?t AS ?s)
+                        BIND ( ?t AS ?s)
                     }
                     BIND ( ?too AS ?o)
                 }
@@ -1956,50 +1866,12 @@ async function processGlobalText( tid, wid ) {
         }`
         var r = await getJSONLD( q );
         if (!r.hasOwnProperty( "graph" )) {
-            // insert blank nodes into JSON-LD structure
-            //console.log( r.graph );
-            //ckeys = _l.keyBy( r.graph, 'id' ); // create blank node IDs
-            //contexts = _l.groupBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
-            //console.log( ckeys, contexts );
-            // TODO: this is almost working but not quite, all generic solutions
-            // attempted have failed so far.
-            /*
-            for (let i = 0; i < r.graph.length; i++) {
-                let obj = r.graph[i];
-                if (obj.id.startsWith( 'http' )) {
-                    if ( obj.hasOwnProperty( "oa:hasBody" ) ) {
-                        var hasBody = obj['oa:hasBody'].id ;
-                        obj['oa:hasBody'] = [];
-                        obj['oa:hasBody'].push( ckeys[ hasBody ] );
-                        if ( obj['oa:hasBody'][0].hasOwnProperty( 'as:items' ) ) {
-                            var asItems = obj['oa:hasBody'][0]['as:items'].id;
-                            obj['oa:hasBody'][0]['as:items'] = ckeys[ asItems ][ 'as:items' ];
-                        }    
-                    }
-                    if ( obj.hasOwnProperty( "oa:hasTarget" ) ) {
-                        var hasTarget = obj['oa:hasTarget'].id ;
-                        obj['oa:hasTarget'] = [];
-                        obj['oa:hasTarget'].push( ckeys[ hasTarget ] ); 
-                        var hasSelector = obj['oa:hasTarget'][0]['oa:hasSelector'][1].id;
-                        obj['oa:hasTarget'][0]['oa:hasSelector'][1] = ckeys[ hasSelector ];
-                    }
-                    if (obj.id.startsWith( 'http' )) {
-                        if ( obj.hasOwnProperty( "intro:R21_identifies" ) ) {
-                            var consistsOf = obj['intro:R21_identifies'].id ;
-                            obj['intro:R21_identifies'] = [];
-                            obj['intro:R21_identifies'].push( ckeys[ consistsOf ] ); 
-                        }
-                    }
-                }
-            }
-            */
             r.graph = [];
         }
         contexts = _l.groupBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ); }), function(o) { return o.id.match(uuidRegex) });
         skos = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
         contributors = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
         cxtref = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'http' ) && !o.id.match(uuidRegex) && !o.id.endsWith( '/tool' ); }) , 'id' );
-        console.log( contexts, cxtref, skos, contributors);
 
         // tool settings
         if ( !!Object.keys( annotorious ).length ) {
@@ -2007,111 +1879,24 @@ async function processGlobalText( tid, wid ) {
                 annotorious[ key ].readOnly = true; // image
             });
         }
-        /*
-        if ( typeof annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ] != 'undefined' ) {
-            annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].readOnly = true; // image
-        }
-        */
         if ( !!Object.keys( player ).length ) {
             Object.keys( player ).forEach(key => {
                 player[ key ].disableDragSelection(); // sound
                 player[ key ].setProgressColor( '#666' );
             });
         }
-        /*
-        if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].disableDragSelection(); // sound
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].setProgressColor( '#666' );
-        }
-        */
-
         // initialize
         r = await getJSONLD( q, "raw" );
         initializeContexts( contexts, cxtref, r, mode );
-    // this section is obsolete!
-    } else if ( mode == "edit" ) {
-        /*    
-        // load user contributions
-        var q = namespaces+`SELECT *
-        WHERE {
-            {
-            GRAPH `+user+` {
-                {
-                    ?s a rppa:BuildingBlock .
-                    ?s dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                    ?s ?p ?o .
-                } UNION {
-                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                    ?s2 <http://www.w3.org/ns/oa#hasBody> ?body .
-                    ?body ?p ?o .
-                    BIND(?body AS ?s)
-                } UNION {
-                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                    ?s2 <http://www.w3.org/ns/oa#hasTarget> ?body .
-                    ?body ?p ?o .
-                    BIND(?body AS ?s)
-                } UNION {
-                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                    ?s2 <http://www.w3.org/ns/oa#hasBody> ?body .
-                    ?body <http://www.w3.org/ns/activitystreams#items> ?list .
-                    ?list rdf:rest/rdf:first ?items .
-                    BIND(<http://www.w3.org/ns/activitystreams#items> as ?p)
-                    BIND(?items as ?o)
-                    BIND(?list as ?s)
-                } UNION {
-                    ?s2 dcterms:relation <https://www.romanticperiodpoetry.org/id/`+wid+`/work> .
-                    ?s2 <http://www.w3.org/ns/oa#hasTarget> ?body .
-                    ?body oa:hasSelector ?items .
-                    ?items ?p ?o .
-                    BIND(?items as ?s)
-                }
-                BIND(`+user+` AS ?g)
-            }
-            }
-        }`;
-        var r = await getJSONLD( q );
-        if (r.hasOwnProperty( "graph" )) {
-            // insert blank nodes into JSON-LD structure
-            ckeys = _l.keyBy( r.graph, 'id' ); // create blank node IDs
-            for (let i = 0; i < r.graph.length; i++) {
-                let obj = r.graph[i];
-                if (obj.id.startsWith( 'http' )) {
-                    if ( obj.hasOwnProperty( "oa:hasBody" ) ) {
-                        var hasBody = obj['oa:hasBody'].id ;
-                        obj['oa:hasBody'] = [];
-                        obj['oa:hasBody'].push( ckeys[ hasBody ] );
-                        if ( obj['oa:hasBody'][0].hasOwnProperty( 'as:items' ) ) {
-                            var asItems = obj['oa:hasBody'][0]['as:items'].id;
-                            obj['oa:hasBody'][0]['as:items'] = ckeys[ asItems ][ 'as:items' ];
-                        }    
-                    }
-                    if ( obj.hasOwnProperty( "oa:hasTarget" ) ) {
-                        var hasTarget = obj['oa:hasTarget'].id ;
-                        obj['oa:hasTarget'] = [];
-                        obj['oa:hasTarget'].push( ckeys[ hasTarget ] ); 
-                        var hasSelector = obj['oa:hasTarget'][0]['oa:hasSelector'].id;
-                        obj['oa:hasTarget'][0]['oa:hasSelector'] = ckeys[ hasSelector ];
-                    }
-                }
-            }
-        } else {
-            r.graph = [];
-        }
-        contexts = _l.groupBy( _l.filter( r.graph, function(o) { return
-        o.id.startsWith( 'http' ); }), '["intro:R20_discusses"][1].id' );
-        */
 
+    } else if ( mode == "edit" ) {
+        
         // tool settings
         if ( !!Object.keys( annotorious ).length ) {
             Object.keys( annotorious ).forEach(key => {
                 annotorious[ key ].readOnly = false; // image
             });
         }
-        /*
-        if ( typeof annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ] != 'undefined' ) {
-            annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ].readOnly = false; // image
-        }
-        */
         if ( !!Object.keys( player ).length ) {
             Object.keys( player ).forEach(key => {
                 player[ key ].disableDragSelection();
@@ -2148,41 +1933,6 @@ async function processGlobalText( tid, wid ) {
                 }); // sound
             });
         }
-        /*
-        if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].disableDragSelection();
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].enableDragSelection({
-                color: 'rgb(74, 186, 159,.2)',
-                resize: false,
-                drag: false
-            }); // sound
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].setProgressColor( '#358078' );
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].un('region-update-end');
-            player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].on('region-update-end', function( region ) {
-                player[ "player_"+(mode == 'edit'?'editing_'+tid:tid) ].disableDragSelection();
-                var target = secondsToTime(region.start) + "–" + secondsToTime(region.end);
-                var id = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).attr( 'id' );
-                var work = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'id' );
-                var expr = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'expr' );
-                var digo = $( "[data-id='"+region.id+"']" ).closest( 'div[data-expr]' ).data( 'digo' );
-                $( ".tab-pane.active [data-id='"+region.id+"']" ).popover({
-                    sanitize: false,
-                    content: `<a role="button" class="save" data-start="`+region.start+`" data-end="`+region.end+`" data-ids="`+region.id+`" data-id="`+id+`" data-work="`+work+`" data-expr="`+expr+`" data-digo="`+digo+`" data-sel="`+target+`" style="font-size:18px;margin-left:10px;"><i class="fas fa-save"></i></a>
-                        <a role="button" class="cancel" style="font-size:20px;margin:0 10px;"><i class="fas fa-close"></i></a>`,
-                    html: true,
-                    placement: 'auto',
-                    container: '.globaltext',
-                    template: `<div class="popover popover-dismiss-select med" role="popover" tabindex="0" data-trigger="focus" style="opacity:.85;">
-                        <div class="popover-arrow"></div>
-                        <div class="popover-body"></div>
-                    </div>`
-                })
-                dismiss_select = $( ".tab-pane.active [data-id='"+region.id+"']" ).popover('show');
-                dismiss_select.popover('toggleEnabled'); // disable toggling
-                dismiss_region = region;
-            });
-        }
-        */
     }
 }
 
@@ -2226,7 +1976,7 @@ function contribute_step1( tid, wid ) {
                 </div>
                 <div class="row">
                     <div class="col-sm-4" >
-                        <a class="btn" href="/works/#contribute/2/genetic/`+tid+`" style="background-color:#2a9d8f;color:white !important;">Intertextual</a>
+                        <a class="btn" href="#contribute/2/genetic/`+tid+`" style="background-color:#2a9d8f;color:white !important;border: 1px solid white;">Intertextual</a>
                         <div style="text-align:left;margin-top:15px;">
                         <p>Intertextual (or genetic) contexts are based on a concrete dialogue between two works, e.g. 
                         <ul>
@@ -2238,7 +1988,7 @@ function contribute_step1( tid, wid ) {
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <a class="btn" href="/works/#contribute/2/intratextual/`+tid+`" class="btn" style="background-color:#2a9d8f;color:white !important;text-align:center;">Intratextual</a>
+                        <a class="btn" href="#contribute/2/intratextual/`+tid+`" class="btn" style="background-color:#2a9d8f;color:white !important;text-align:center;border: 1px solid white;">Intratextual</a>
                         <div style="text-align:left;margin-top:15px;">
                         <p>Intratextual contexts are based on text-internal relational properties, e.g. 
                         <ul>
@@ -2249,7 +1999,7 @@ function contribute_step1( tid, wid ) {
                         </div>   
                     </div>
                     <div class="col-sm-4">
-                        <a class="btn" href="/works/#contribute/2/typological/`+tid+`" class="btn" style="background-color:#2a9d8f;color:white !important;text-align:center;">Typological</a>
+                        <a class="btn" href="#contribute/2/typological/`+tid+`" class="btn" style="background-color:#2a9d8f;color:white !important;text-align:center;border: 1px solid white;">Typological</a>
                         <div style="text-align:left;margin-top:15px;">
                         <p>Typological contexts are based on historical, poetological, literary, periodic properties, e.g. 
                         <ul>
@@ -2332,11 +2082,10 @@ function genetic_step2( text, work ) {
                             <div class="step-description"><h3>Describe the contextualization</h3></div>
                         </div>
                         <p>Once you have chosen and <i class="fas fa-check"></i> the appropriate anchors for your context, above, please proceed to the final step:
-                        <p class="center"><a class="btn" onclick="check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;">Contextualization</a></p>
+                        <p class="center"><a href="#contribute/3/genetic/2/`+text+`" class="btn" onclick="return check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;border: 1px solid white;">Contextualization</a></p>
                     </div>
                 </div>
                 <!--<ul class="bb"></ul>-->
-                <!-- TODO?: do two col-sm-4 with headings -->
             </div>
             <div class="col-sm-6 globalcontext" style="max-width: calc(100vw / 3 - 20px);overflow: scroll;height: calc(100vh - 95px);">
                 <table id="worksSearchDT" class="table table-striped">
@@ -2404,7 +2153,7 @@ function check_contextualization_ready( text ) {
         var text2 = window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split( "-" )[1];
         if ( $('.workbench .bbs_context input:checked').length ) {
             if ( selected_bbs_text.length > 0 && selected_bbs_context.length > 0 ) {
-                window.location.href = `/works/#contribute/3/genetic/2/`+text+"-"+text2;
+                return true;
             } else {
                 message = `<b>Incomplete selection!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
                 show_alert_mod( message, "danger", true, 7500 );
@@ -2417,7 +2166,7 @@ function check_contextualization_ready( text ) {
     // else if intratextual
         if ( $('.workbench .bbs_context input:checked').length ) {
             if ( selected_bbs_text.length > 0 && selected_bbs_context.length > 0 ) {
-                window.location.href = `/works/#contribute/3/intratextual/`+text;
+                return true;
             } else {
                 message = `<b>Incomplete selection!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
                 show_alert_mod( message, "danger", true, 7500 );
@@ -2430,7 +2179,7 @@ function check_contextualization_ready( text ) {
     // else if typological
         if ( $('.workbench .bbs_text input:checked').length ) {
             if ( selected_bbs_text.length > 0 ) {
-                window.location.href = `/works/#contribute/3/typological/`+text;
+                return true
             } else {
                 message = `<b>Incomplete selection!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
                 show_alert_mod( message, "danger", true, 7500 );
@@ -2443,6 +2192,7 @@ function check_contextualization_ready( text ) {
         message = `<b>Incomplete selection!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
         show_alert_mod( message, "danger", true, 7500 );
     }
+    return false;
 }
 
 $( document ).on('click', '.selectAllTexts', function() {
@@ -2515,7 +2265,7 @@ function intratextual_step2( text, work ) {
                         <div class="step-description"><h3>Describe the contextualization</h3></div>
                     </div>
                     <p>Once you have chosen and <i class="fas fa-check"></i> the appropriate anchors for your context, on the left, please proceed to the final step:
-                    <p class="center"><a class="btn" onclick="check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;">Contextualization</a></p>
+                    <p class="center"><a href="#contribute/3/intratextual/`+text+`" class="btn" onclick="return check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;border: 1px solid white;">Contextualization</a></p>
                     </div>
                 </div>
             </div>
@@ -2578,7 +2328,7 @@ function typological_step2( text, work ) {
                         <div class="step-description"><h3>Describe the contextualization</h3></div>
                     </div>
                     <p>Once you have chosen and <i class="fas fa-check"></i> the appropriate anchors for your context, on the left, please proceed to the final step:
-                    <p class="center"><a class="btn" onclick="check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;">Contextualization</a></p>
+                    <p class="center"><a href="#contribute/3/typological/`+text+`" class="btn" onclick="return check_contextualization_ready( '`+text+`' )" style="cursor:pointer; background-color:#2a9d8f;color:white !important;border: 1px solid white;">Contextualization</a></p>
                     </div>
                 </div>
             </div>
@@ -2601,19 +2351,28 @@ async function contribute_step3( tid, wid ) {
 
     // JSON form
     var jf = new Object();
-    var tanchors = {},tmap = {}, canchors = {},cmap = {}, t2, w2id = '';
+    var tanchors = {},tmap = {}, canchors = {},cmap = {}, t2, w2id = '', interprefix = '';
     jf.schema = {};
     jf.form = [];
 
-    jf.schema.components = { type:"array",minItems:1,items:{ type:"object",properties:{ ctype:{ type:"string",enum:['','semantic','formal','poetic/rhetorical'],description:"Specify the type of context component — required", required:true }, cname: { type:"string",title:"Name",description:"Select the appropriate entry from a controlled list — required", required:true }, cdesc:{ title:"Description",key:"description",type:"textarea",description:"Give this actualization a concise description — optional" } } } };
+    jf.schema.components = { type:"array",minItems:1,items:{ type:"object",properties:{ ctype:{ type:"string",enum:['','semantic','formal','poetic/rhetorical','referential'],description:"Specify the type of context component — required", required:true }, cname: { type:"string",title:"Name",description:"Select the appropriate entry from a controlled list (this may take a second to load)— required", required:true }, creftype:{ type:"string", enum:[ "crm:E21_Person",
+                                    "crm:E53_Place",
+                                    "crm:E52_Time-Span",
+                                    "lrmoo:F1_Work,lrmoo:F2_Expression",
+                                    "crm:E33_Linguistic_Object",
+                                    "skos:Concept",
+                                    "crm:E56_Language",
+                                    "" ] }, cdesc:{ title:"Description",key:"description",type:"textarea",description:"Give this actualization a concise description — optional" } } } };
     // convert targets into a hash
     $.each(selected_bbs_text, function(i,e) {
         tanchors[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].dataset;
-        tmap[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].innerHTML;
+        tanchors[ $( e[0] ).find( "input" ).attr( "id" ) ].label = $( e[0] )[0].innerText.trim();
+        tmap[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].innerText;
     });
     $.each(selected_bbs_context, function(i,e) {
         canchors[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].dataset;
-        cmap[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].innerHTML;
+        canchors[ $( e[0] ).find( "input" ).attr( "id" ) ].label = $( e[0] )[0].innerText.trim();
+        cmap[ $( e[0] ).find( "input" ).attr( "id" ) ] = $( e[0] )[0].innerText;
     });
     // target schema
     jf.schema.components.items.properties.tanchors = {
@@ -2643,19 +2402,20 @@ async function contribute_step3( tid, wid ) {
     jf.schema.seeAlso = { title:"See also",key:"seeAlso",type:"string" };
     jf.schema.isDefinedBy = { title:"Is defined by",key:"isDefinedBy",type:"string" };
 
-    jf.form.push( { items:[ "name","description","citation" ], legend:"Context", title:"Context – this information will create a contextualization", type:"fieldset" } );
+    jf.form.push( { items:[ "name", { type:"fieldset", title:"Additional information — optional", expandable:true, items:["description","citation"] } ], legend:"Context", title:"Context – this information will create a contextualization", type:"fieldset" } );
     if ( /\/3\/genetic\/2\//.test(window.location.href) || /\/3\/intratextual\//.test(window.location.href) ) {
         jf.schema.itype = { type:"string",title:"Type of inter-/intra-textual relation",description:"Specify the type of context component from the list — required", required:true }
         jf.form.push( { items:[ "itype" ], legend:"Context", title:"Context type – this information will specify the type of interrelation", type:"fieldset" } );
     }
     // if genetic
     if ( /\/3\/genetic\/2\//.test(window.location.href) ) {
-        var t2, w2id;
         [ tid,t2 ] = tid.split( "-" );
         wid = texts[ tid ][ "work" ];
         w2id = texts[ t2 ][ "work" ];
+        interprefix = "inter";
     } else {
         wid = texts[ tid ][ "work" ];
+        interprefix = "intra";
     }
     jf.form.push( { "items": [ { type: "array", title: "Components", items: {
         type: "fieldset", title: "Component {{idx}}", items: [
@@ -2666,12 +2426,17 @@ async function contribute_step3( tid, wid ) {
                     "": "Please choose a context type",
                     "semantic": "semantic",
                     "formal": "formal",
-                    "poetic/rhetorical": "poetic/rhetorical"
+                    "poetic/rhetorical": "poetic/rhetorical",
+                    "referential": "referential"
                 },
+                type: "selectfieldset",
                 onChange: async function(e) { 
-                    //console.log("ctype change:", e );
                     var ctype = '';
-                    if ( e.target.value != '' ) {
+                    if ( e.target.value != '' && (
+                        e.target.value == "semantic" ||
+                        e.target.value == "formal" ||
+                        e.target.value == "poetic/rhetorical"
+                    ) ) {
                         if ( e.target.value == "semantic" ) {
                             ctype = "intro:INT9_SemanticFeature"
                         } else if ( e.target.value == "formal" ) {
@@ -2682,21 +2447,6 @@ async function contribute_step3( tid, wid ) {
                         var list_id = "datalist-"+uuidv4();
                         $( $( e.currentTarget ).closest( 'fieldset' ).find( 'input[type="text"]') ).attr( "list", list_id );
                         var entities_list = '';
-                        /*
-                        var q = namespaces+`SELECT * WHERE { 
-                            ?s ?p <http://www.w3.org/2004/02/skos/core#Concept> . 
-                            ?s <http://www.w3.org/2004/02/skos/core#prefLabel> ?q . 
-                            ?s <http://www.w3.org/2004/02/skos/core#inScheme> ?o . 
-                            ?o <http://purl.org/dc/elements/1.1/type> `+ctype+` .
-                            FILTER (lang(?q) = 'en')
-                        }`;
-                        var graph = await getJSONLD( q, "raw" ); // DONE
-                        var entities_list = '';
-                        for (var j = 0; j < graph.length; j++ ) {
-                            var v = graph[ j ];
-                            entities_list += `<option data-value="`+v.s.value+`">`+v.q.value+`</option>`;
-                        }
-                        */
                         var q = namespaces+`SELECT DISTINCT ?s ?p ?o WHERE { 
   				            {
                                 ?s rdf:type <http://www.w3.org/2004/02/skos/core#Concept> . 
@@ -2708,13 +2458,14 @@ async function contribute_step3( tid, wid ) {
                                 ?s <http://purl.org/dc/elements/1.1/type> `+ctype+` .
                                 ?s ?p ?o.
                             }
-                            FILTER ( ISIRI(?o) || (lang(?o) = "en" ) || langmatches(lang(?o),"") )
+                            FILTER ( (lang(?o) = "en" ) || langmatches(lang(?o),"") )
                         }`;
                         var r = await getJSONLD( q );
                         if (!r.hasOwnProperty( "graph" )) {
                             r.graph = [];
                         }
                         entities_list = `<select>`;
+                        /*
                         var schemes = _l.groupBy( r.graph, 'type' );
                         var cbyscheme = _l.groupBy( r.graph, 'skos:inScheme.id' );
                         var nbyscheme = _l.keyBy( r.graph, 'id' );
@@ -2722,23 +2473,121 @@ async function contribute_step3( tid, wid ) {
                             entities_list += `<optgroup label="`+v["dc:source"]+`">`;
                             $.each( cbyscheme[ v.id ].sort(), function(i2,v2) {
                                 entities_list += `<option data-value="`+v2.id+`" value="`+(Array.isArray(v2["skos:prefLabel"])?v2["skos:prefLabel"].join("; "):v2["skos:prefLabel"])+(v2["skos:altLabel"]?" ["+(Array.isArray(v2["skos:altLabel"])?v2["skos:altLabel"].join("; "):v2["skos:altLabel"])+"]":``)+
-                                (v2.hasOwnProperty( "skos:broader" ) && v2["skos:broader" ].id in nbyscheme?` (`+nbyscheme[ v2["skos:broader" ].id ]["skos:prefLabel"]+`)`:``)+`">`+
-                                (v2.hasOwnProperty( "dcterms:bibliographicCitation" )?v2[ "dcterms:bibliographicCitation" ]:v[ "dcterms:bibliographicCitation" ])+`</option>`;
+                                //(v2.hasOwnProperty( "skos:broader" ) && v2["skos:broader" ].id in nbyscheme?` (`+nbyscheme[ v2["skos:broader" ].id ]["skos:prefLabel"]+`)`:``)+
+                                `">`+(v2.hasOwnProperty( "dcterms:bibliographicCitation" )?v2[ "dcterms:bibliographicCitation" ]:v[ "dcterms:bibliographicCitation" ])+`</option>`;
                             });
                             entities_list += `</optgroup>`;
+                        });
+                        */
+                        var cbyname = _l.sortBy( r.graph, 'skos:prefLabel' )
+                        $.each( cbyname, function(i,v) {
+                            entities_list += `<option data-value="`+v.id+`" value="`+(Array.isArray(v["skos:prefLabel"])?v["skos:prefLabel"].join("; "):v["skos:prefLabel"])+(v["skos:altLabel"]?" ["+(Array.isArray(v["skos:altLabel"])?v["skos:altLabel"].join("; "):v["skos:altLabel"])+"]":``)+
+                            `">`+(v.hasOwnProperty( "dcterms:bibliographicCitation" )?v[ "dcterms:bibliographicCitation" ]:v.id)+`</option>`;
                         });
                         entities_list += `</select>`;
                         $( "#jForm" ).append( `<datalist id="`+list_id+`"/>` );
                         $( '#jForm datalist#'+jqu( list_id ) ).html( entities_list );
                     }
-                }
-            },
-            {
-                title: "Name",
-                key: "components[].cname",
-                onClick: function(e) { 
-                    //console.log("cname click:" , e)
-                }
+                }, items: [
+                    {},
+                    {
+                        title: "Name",
+                        key: "components[].cname",
+                        onClick: function(e) { 
+                        }
+                    },
+                    {
+                        title: "Name",
+                        key: "components[].cname",
+                        onClick: function(e) { 
+                        }
+                    },
+                    {
+                        title: "Name",
+                        key: "components[].cname",
+                        onClick: function(e) { 
+                        }
+                    },
+                    {
+                        type: "fieldset",
+                        items: [
+                            {
+                                key: "components[].creftype",
+                                title: "Entity type",
+                                titleMap: {
+                                    "crm:E21_Person":"persons",
+                                    "crm:E53_Place":"places",
+                                    "crm:E52_Time-Span":"time-spans",
+                                    "lrmoo:F1_Work,lrmoo:F2_Expression":"work titles",
+                                    "crm:E33_Linguistic_Object":"work full-text",
+                                    "skos:Concept":"concepts",
+                                    "crm:E56_Language":"languages",
+                                    "":"everything"
+                                }
+                            }
+                            ,
+                            {
+                            key: "components[].cname",
+                            },
+                            {
+                            "type": "button",
+                            "title": "Find",
+                            "onClick": async function (evt) {
+                                evt.preventDefault();
+                                if ($(evt.target).prev().find( "input" ).val() != '' ) {
+                                    var kclass = $(evt.target).prev().prev().find( ":selected" ).val();
+                                    $(evt.target).after( `<div class="spinner-border text-info" role="status" style="margin-left:20px;"><span class="sr-only">Loading...</span></div>` );
+                                    q = namespaces+`SELECT DISTINCT * 
+                                        WHERE { 
+                                            `+(( kclass != '' )?`?s a ?c .`:``)+`
+                                            ?s ?p ?o .
+                                            `+(( kclass != '' )?`FILTER ( ?c IN (`+kclass+`) ) .`:``)+`
+                                            FILTER ( ?p IN (crm:P1_is_identified_by,skos:prefLabel,skos:altLabel,skos:hiddenLabel,rdfs:label,crm:P190_has_symbolic_content) ) .
+                                            FILTER ( regex(?o, "`+$(evt.target).prev().find( "input" ).val()+`", "i" ) ) .
+                                        }
+                                    `;
+                                    var r = await getJSONLD( q );
+                                    if ( !r.graph ) { r.graph = []; r.graph.push( r ); }
+                                    var list_id = "datalist-"+uuidv4();
+                                    var entities_list = ``;//`<select>`;
+                                    $( ".spinner-border").remove();
+                                    $.each( r.graph, function(i,v) {
+                                        label = ''
+                                        if (v["crm:P1_is_identified_by"] !== undefined) {
+                                            label = v["crm:P1_is_identified_by"]; 
+                                        } else if ( v["skos:prefLabel"] !== undefined ) {
+                                            label = v["skos:prefLabel"];
+                                        } else if ( v["rdfs:label"] !== undefined ) {
+                                            label = v["rdfs:label"];
+                                        } else if ( v["skos:altLabel"] !== undefined ) {
+                                            label = v["skos:altLabel"];
+                                        } else if ( v["skos:hiddenLabel"] !== undefined ) {
+                                            label = v["skos:hiddenLabel"];
+                                        } else if ( v["crm:P190_has_symbolic_content"] !== undefined ) {
+                                            label = v["crm:P190_has_symbolic_content"];
+                                        }
+                                        if ( label == '' ) return;
+                                        entities_list += `<option value="`+label+`" data-value="`+v.id+`">`+
+                                        v.id+`</option>`; 
+                                    });
+                                    //		entities_list += `</select>`;
+                                    if ( entities_list != '' ) {
+                                        $(evt.target).prev().find( "input" ).attr( "list", list_id );
+                                        $(evt.target).prev().find( "input" ).append( `<datalist id="`+list_id+`"/>` );
+                                        $(evt.target).prev().find( "datalist#"+jqu( list_id ) ).html( entities_list );
+                                    } else {
+                                        $(evt.target).prev().find( "input" ).attr( "list", "none" );
+                                    }
+                                }
+                            }
+                        }
+                        ],
+                        onChange: function(e) {
+                        },
+                        onClick: function(e) { 
+                        }
+                    }
+                ]
             },
             {
                 title: "Description",
@@ -2774,25 +2623,24 @@ async function contribute_step3( tid, wid ) {
         if (errors || !check_contexts_ready( values.components )) {
             if ( errors ) {
                 console.log( errors );
-                message = `<b>Oh snap!</b> Something went wrong, try again? Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
+                message = `<b>Oh snap!</b> Something went wrong, try again? Or call for <a class="alert-link" href="mailto:help@romanticperiodpoetry.org">help!</a>`;
                 show_alert_mod( message, "danger", true, 7500 );
             } else {
-                message = `<b>Incomplete submission!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
+                message = `<b>Incomplete submission!</b> Please ensure the text/context anchors have been selected. Or call for <a class="alert-link" href="mailto:help@romanticperiodpoetry.org">help!</a>`;
                 show_alert_mod( message, "danger", true, 7500 );
             }
+            return; // stop form submission
         } else {
             // construct RDF representation
-            console.log( JSON.stringify( values ), tanchors, canchors );
-
             var tripleid = uuidv4(), tused = [], cused = [], itype;
             // Contextualization
             var triples = namespaces+"insert data {\n";
             triples += `<`+domain+`/id/`+tripleid+`/context> a rppa:Context, intro:INT_Interpretation ;\n`;
-            triples += `skos:prefLabel """`+values.name+`""" ;\n`;
+            triples += `skos:prefLabel """`+values.name+` """ ;\n`;
             triples += `skos:altLabel """a RPPA context""" ;\n`;
-            triples += `crm:P1_is_identified_by """`+values.name+`""" ;\n`;
+            triples += `crm:P1_is_identified_by """`+values.name+` """ ;\n`;
             if ( values.description ) {
-                triples += `crm:P3_has_note """`+values.description+`""" ;\n`;
+                triples += `crm:P3_has_note """`+values.description+` """ ;\n`;
             }
             const date = new Date();
             triples += `dcterms:license <http://creativecommons.org/licenses/by-nc/4.0/> ;\n`;
@@ -2802,7 +2650,7 @@ async function contribute_step3( tid, wid ) {
             triples += `as:generator <`+domain+`/> ;\n`;
             triples += `dcterms:created "`+date.toISOString()+`" ;\n`;
             if ( values.citation ) {
-                triples += `dcterms:source """`+values.citation+`""" ;\n`;
+                triples += `dcterms:source """`+values.citation+` """ ;\n`;
             }
 
             triples += `intro:R20_discusses <`+Object.keys( _l.keyBy( tanchors, 'wid' ) )[0]+`> ;\n`;
@@ -2824,9 +2672,9 @@ async function contribute_step3( tid, wid ) {
                 if ( !itype ) {
                     message = `<b>Incorrect submission!</b> Please ensure only values from controlled lists are used. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
                     show_alert_mod( message, "danger", true, 7500 );
-                    return;
+                    return; // stop form submission
                 }
-                triples += `intro:R21_identifies <`+domain+`/id/`+tripleid+`/intertextuality> ;\n`;
+                triples += `intro:R21_identifies <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality> ;\n`;
                 triples += `rdfs:isDefinedBy <`+itype+`> ;\n`;
             }
             if ( w2id != '' ) {
@@ -2850,40 +2698,38 @@ async function contribute_step3( tid, wid ) {
             // 1. Initialize targets: from current component tanchors/canchors
             // Interrelation (inter- and intra-textual only)
             if (values.itype) {
-                triples += `<`+domain+`/id/`+tripleid+`/intertextuality> a intro:INT3_Interrelation, pdp:Intertextuality, oa:Annotation ;\n`;
+                triples += `<`+domain+`/id/`+tripleid+`/`+interprefix+`textuality> a intro:INT3_Interrelation, pdp:Intertextuality, oa:Annotation ;\n`;
                 triples += `skos:altLabel """a RPPA contextual relationship""" ;\n`;
-                triples += `skos:prefLabel """`+values.name+`""" ;\n`;
+                triples += `skos:prefLabel """`+values.name+` """ ;\n`;
                 triples += `intro:R19_hasType <`+domain+`/id/`+tripleid+`/typeOfIntertextuality> ;\n`;
                 triples += `pdp:typeOfIntertextuality <`+domain+`/id/`+tripleid+`/typeOfIntertextuality> ;\n`;
                 triples += `intro:R21i_isIdentifiedBy <`+domain+`/id/`+tripleid+`/context> ;\n`;
                 triples += `.\n`;
 
                 triples += `<`+domain+`/id/`+tripleid+`/typeOfIntertextuality> a intro:INT11_TypeOfInterrelation ;\n`;
+                triples += `skos:prefLabel """`+values.itype+` """ ;\n`;
                 triples += `intro:R4i_isDefinedIn <`+itype+`> ;\n`;
-                // force "intertextual"
-                /*
-                if ( w2id != '' ) {
-                    triples += `intro:R4i_isDefinedIn <https://www.romanticperiodpoetry.org/rppa/kos/contextuality/intertextual> ;\n`;
-                }
-                */
-                triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/intertextuality> ;\n`
+                triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality> ;\n`
                 triples += `rdfs:isDefinedBy <`+itype+`> ;\n`;
                 triples += `.\n`;
             }
-            var toffset = 0, coffset = 0;
+            var toffset = 0, coffset = 0, breakOut = false;
             $.each( values.components, function(i,v) {
                 // 1. do internal loop to generate locations
                 //    TODO: repeated use of same location produces new locations
-                //    — is this wanted?  neg: leads to duplication (scale not
+                //    — is this wanted?  con: leads to duplication (scale not
                 //    known), pro: keeps components self-contained, possibility
                 //    to adjust individual targets independently of others
                 $.each( v.tanchors, function(i2,v2) {
                     var regex = /.*?\/id\/(.*?)\/work$/;
                     var wid = tanchors[v2].wid.match( regex )[1];   
                     triples += `\n<`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i2+1)+`> a intro:INT1_Passage ;\n`;
+                    triples += `skos:prefLabel """`+tanchors[v2].label+` """ ;\n`
                     triples += `intro:R10i_isPassageOf <`+tanchors[v2].digo+`> ;\n`;
                     if (!values.itype) {
                         triples += `intro:R18_showsActualization <`+domain+`/id/`+tripleid+`/actualization/`+(i+1)+`> ;\n`;
+                    } else {
+                        triples += `intro:R24i_isRelatedEntity <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality/`+(i+1)+`> ;\n`
                     }
                     triples += `intro:R41_hasLocation [
                         a `+((tanchors[v2].ids[0]=='#')?`oa:CssSelector`:`oa:FragmentSelector`)+`;
@@ -2909,7 +2755,7 @@ async function contribute_step3( tid, wid ) {
                     } else if (tanchors[v2].ids[0]=='x') {
                         triples += `lct:img ;`
                     }
-                    triples += `\ndcterms:language "`+workbench[ wid ][ tanchors[v2].expr ]["crm:P72_has_language"]+`" ;\n`;
+                    triples += `\ndcterms:language <`+workbench[ wid ][ tanchors[v2].expr ]["crm:P72_has_language"].id+`> ;\n`;
                     triples += `.\n`;
                 });
 
@@ -2917,9 +2763,12 @@ async function contribute_step3( tid, wid ) {
                     var regex = /.*?\/id\/(.*?)\/work$/;
                     var wid = canchors[v2].wid.match( regex )[1];   
                     triples += `\n<`+domain+`/id/`+tripleid+`/contextLocation/`+(coffset+i2+1)+`> a intro:INT1_Passage ;\n`;
+                    triples += `skos:prefLabel """`+canchors[v2].label+` """ ;\n`
                     triples += `intro:R10i_isPassageOf <`+canchors[v2].digo+`> ;\n`;
                     if (!values.itype) {
                         triples += `intro:R18_showsActualization <`+domain+`/id/`+tripleid+`/actualization/`+(i+1)+`> ;\n`;
+                    } else {
+                        triples += `intro:R24i_isRelatedEntity <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality/`+(i+1)+`> ;\n`;
                     }
                     triples += `intro:R41_hasLocation [
                         a `+((canchors[v2].ids[0]=='#')?`oa:CssSelector`:`oa:FragmentSelector`)+`;
@@ -2945,26 +2794,27 @@ async function contribute_step3( tid, wid ) {
                     } else if (canchors[v2].ids[0]=='x') {
                         triples += `lct:img ;`
                     }
-                    triples += `\ndcterms:language "`+workbench[ wid ][ canchors[v2].expr ]["crm:P72_has_language"]+`" ;\n`;
+                    triples += `\ndcterms:language <`+workbench[ wid ][ canchors[v2].expr ]["crm:P72_has_language"].id+`> ;\n`;
                     triples += `.\n`;
                 });
 
                 // 2. do INT2/3 part
                 // load type-specific (formal/semantic/poetic) datalist!
-
-                $( $( "#jForm input[id$='cname'][list]" )[0].list ).attr("id")
-
-                var ctype = $( "datalist#"+$( $( "#jForm input[id$='cname'][list]" )[i].list ).attr("id")+" option" ).filter(function() { return this.value == v.cname; }).data('value');
+                if ( $( "#jForm input[id$='cname'][list]" ).length ) {
+                    $( $( "#jForm input[id$='components["+i+"].cname'][list]" )[0].list ).attr("id")
+                }
+                var ctype = $( "datalist#"+$( $( "#jForm input[id$='components["+i+"].cname'][list]" )[0].list ).attr("id")+" option" ).filter(function() { return this.value == v.cname; }).data('value');
                 if ( !ctype ) {
                     message = `<b>Incorrect submission!</b> Please ensure only values from controlled lists are used. Or call for <a class="alert-link" href="mailto:huber@romanticperiodpoetry.org">help!</a>`;
                     show_alert_mod( message, "danger", true, 7500 );
-                    return;
+                    breakOut = true;
+                    return false;
                 }
                 if (values.itype) {
 
-                    triples += `\n<`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> a intro:INT3_Interrelation, pdp:Intertextuality, oa:Annotation ;\n`;
+                    triples += `\n<`+domain+`/id/`+tripleid+`/`+interprefix+`textuality/`+(i+1)+`> a intro:INT3_Interrelation, pdp:Intertextuality, oa:Annotation ;\n`;
                     triples += `skos:altLabel """a RPPA contextual relationship: `+v.cname+`""" ;\n`; 
-                    triples += `skos:prefLabel """`+v.cname+`""" ;\n`;
+                    triples += `skos:prefLabel """`+v.cname+` """ ;\n`;
 
                     triples += `intro:R21i_isIdentifiedBy <`+domain+`/id/`+tripleid+`/context> ;\n`;
                     triples += `intro:R19_hasType <`+domain+`/id/`+tripleid+`/typeOfIntertextuality/`+(i+1)+`> ;\n`;
@@ -2982,7 +2832,7 @@ async function contribute_step3( tid, wid ) {
                     if ( v.cdesc != '' ) {
                         triples += `oa:hasBody [
                             a oa:TextualBody;
-                            rdf:value """`+v.cdesc+`""" ;
+                            rdf:value """`+v.cdesc+` """ ;
                             dcterms:format lct:txt ;
                             oa:hasPurpose oa:identifying ;`+
                         `] ;\n`
@@ -3006,21 +2856,30 @@ async function contribute_step3( tid, wid ) {
                     triples += `.\n`;
 
                     triples += `<`+domain+`/id/`+tripleid+`/typeOfIntertextuality/`+(i+1)+`> a intro:INT11_TypeOfInterrelation ;\n`;
-                    triples += `intro:R4i_isDefinedIn <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
-                    triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> ;\n`
+                    triples += `skos:prefLabel """`+v.cname+` """ ;\n`;
+                    if ( v.ctype == 'referential' ) {
+                        triples += `crm:P67_refers_to <`+ctype+`> ;\n`;                        
+                    } else {
+                        triples += `intro:R4i_isDefinedIn <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
+                    }
+                    triples += `intro:R19i_isTypeOf <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality/`+(i+1)+`> ;\n`
                     triples += `rdfs:isDefinedBy <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
                     triples += `.\n`;
 
-                    triples += `<`+domain+`/id/`+tripleid+`/context> intro:R21_identifies <`+domain+`/id/`+tripleid+`/intertextuality/`+(i+1)+`> .\n`;
+                    triples += `<`+domain+`/id/`+tripleid+`/context> intro:R21_identifies <`+domain+`/id/`+tripleid+`/`+interprefix+`textuality/`+(i+1)+`> .\n`;
 
                 } else {
                 
                     triples += `\n<`+domain+`/id/`+tripleid+`/actualization/`+(i+1)+`> a intro:INT2_ActualizationOfFeature, oa:Annotation ;\n`;
                     triples += `skos:altLabel """a RPPA contextual actualization: `+v.cname+`""" ;\n`;
-                    triples += `skos:prefLabel """`+v.cname+`""" ;\n`;
+                    triples += `skos:prefLabel """`+v.cname+` """ ;\n`;
                         
                     triples += `intro:R21i_isIdentifiedBy <`+domain+`/id/`+tripleid+`/context> ;\n`;
-                    triples += `intro:R17_actualizesFeature <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
+                    if ( v.ctype == 'referential' ) {
+                        triples += `crm:P67_refers_to <`+ctype+`> ;\n`;
+                    } else {
+                        triples += `intro:R17_actualizesFeature <`+context["@context"][ ctype.split(":")[0] ]+ctype.split(":")[1]+`> ;\n`;
+                    }
                     $.each( v.tanchors, function(i3,v3) {
                         triples += `intro:R18i_actualizationFoundOn <`+domain+`/id/`+tripleid+`/targetLocation/`+(toffset+i3+1)+`> ;\n`;
                     });
@@ -3032,7 +2891,7 @@ async function contribute_step3( tid, wid ) {
                     if ( v.cdesc != '' ) {
                         triples += `oa:hasBody [
                             a oa:TextualBody;
-                            rdf:value """`+v.cdesc+`""" ;
+                            rdf:value """`+v.cdesc+` """ ;
                             dcterms:format lct:txt ;
                             oa:hasPurpose oa:identifying ;`+
                         `] ;\n`
@@ -3046,26 +2905,37 @@ async function contribute_step3( tid, wid ) {
                 
                 }
                 toffset += v.tanchors.length;
-                coffset += v.canchors.length;
+                if ( v.hasOwnProperty( "canchors" ) ) {
+                    coffset += v.canchors.length;
+                }
             });
+            if (breakOut) {
+                // stop form submission
+                breakOut = false;
+                return;
+            }
             // Additional
             if ( values.label ) {
-                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:label """`+values.label+`""" ;\n.`;
+                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:label """`+values.label+` """ ;\n.`;
             }
             if ( values.comment ) {
-                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:comment """`+values.comment+`""" ;\n.`;
+                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:comment """`+values.comment+` """ ;\n.`;
             }
             if ( values.seeAlso ) {
-                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:seeAlso """`+values.seeAlso+`""" ;\n.`;
+                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:seeAlso """`+values.seeAlso+` """ ;\n.`;
             }
             if ( values.isDefinedBy ) {
-                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:isDefinedBy """`+values.isDefinedBy+`""" ;\n.`;
+                triples += `\n<`+domain+`/id/`+tripleid+`/context> rdfs:isDefinedBy """`+values.isDefinedBy+` """ ;\n.`;
             }
             triples += `\n}`;
 
             $( myCanvasGTEl ).offcanvas( "hide" );
             await putTRIPLES( triples );
-            initializeGraph( tripleid );
+            await addEleNode( domain+`/id/`+tripleid+`/context` );
+            // TODO: do highlighting of all expression targets used in this
+            // contextualization; needs expression-aware switching/highlighting! 
+            message = `<b>Success!</b> The contextualization has been added. <em>Thank you for your contribution!</em>`;
+            show_alert_mod( message, "success", true, 5000 );
         }
     }
     // create page
@@ -3114,7 +2984,7 @@ async function contribute_step3( tid, wid ) {
             ?s ?p <http://www.w3.org/2004/02/skos/core#Concept> . 
             ?s <http://www.w3.org/2004/02/skos/core#prefLabel> ?q . 
             ?s <http://www.w3.org/2004/02/skos/core#topConceptOf> ?o . 
-            ?o <http://purl.org/dc/elements/1.1/type> <https://w3id.org/lso/intro/currentbeta#INT11_TypeOfInterrelation> . 
+            ?o <http://purl.org/dc/elements/1.1/type> <https://w3id.org/lso/intro/beta202408#INT11_TypeOfInterrelation> . 
         }`;
         var graph = await getJSONLD( q, "raw" ); // DONE
         var entities_list = '';
@@ -3149,44 +3019,195 @@ function cloneCanvas(oldCanvas) {
     - processes contexts (in reading mode)
 */
 async function initializeContexts( exprContexts, exprNodes, graph, mode ) {
-    // edit mode is obsolete, here will be NO buildingblocks in the graph!
-    //$( ".contexts" ).html( "" );
-    //$( ".workbench" ).html( "" );
     
     var tid = $( this ).closest( "[data-tid]" ).data( "tid" );
     // filter exprContexts by type and pass to handlers
     if ( mode == "edit" ) {
-        /*
-        var bb = _l.filter( exprContexts, function(o) { 
-            return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:txt";
-        });
-        processBuildingBlocks( bb );
-        if ( typeof annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ] != 'undefined' ) {
-            var bb = _l.filter( exprContexts, function(o) { 
-                return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:img";
-            });
-            processImageBuildingBlocks( annotorious[ "viewer_"+(mode == 'edit'?'editing_'+tid:tid) ], bb )
-        }
-        if ( $( "#waveform_"+(mode == 'edit'?'editing_'+tid:tid) ).length ) {
-            var bb = _l.filter( exprContexts, function(o) { 
-                return o["type"].includes( "rppa:BuildingBlock" ) && o["crm:P2_has_type"][0].id == "lct:aud";
-            });
-            processMediaBuildingBlocks( bb )
-        }
-        */
-    // only this below part should remain!
+
     } else {
-//        $( ".workbench" ).html( `<h2>Contexts</h2><ul class="tc"></ul>` );
-//        $( ".contexts" ).html( `<ul class="tc-main"></ul>` );
-//        $( ".highlight-tc" ).removeClass( "highlight-tc" );
+        
+        /* TODO: is this sensibe/necessary, or should I be using the default
+                 createCYJSON function?
+        */
+        // highlight targets
+        if ( !/\/#context\//.test( location.href) ) {        
+            var target = [], target_tabs = [], target_locs = [], target_note = [], target_label = [], target_host = [];
+            var cxtloc = [], cxtloc_tabs = [], cxtloc_locs = [], cxtloc_note = [], cxtloc_label = [], cxtloc_host = [];
+            cxtref = _l.groupBy( exprContexts[null], 'id' );
+            for (var i in exprContexts ) {
+                var annotations = exprContexts[i];
+                for ( var j in annotations ) {
+                    annotation = annotations[j];
+                    // show target globaltext
+                    if ( annotation.id.match(uuidRegex) != null ) {
+                        var anno_id = annotation.id.match(uuidRegex)[0];
+                        var cxtcnt =_l.keyBy( exprContexts[ anno_id ], 'id' );
+                        // interrelations
+                        if ( annotation.hasOwnProperty( 'intro:R13_hasReferringEntity' ) && annotation.hasOwnProperty( 'intro:R12_hasReferredToEntity' ) ) {
+                            if ( !Array.isArray( annotation["intro:R13_hasReferringEntity"] ) ) {
+                                target.push( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                target_locs = target_locs.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdf:value"] );
+                                target_note = target_note.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdfs:note"] );
+                                target_label = target_label.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["skos:prefLabel"] );
+                                target_host = target_host.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R24i_isRelatedEntity"].id );
+                            } else {
+                                $.each( annotation["intro:R13_hasReferringEntity"], function( i,v ) {
+                                    target.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                    target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                    target_locs = target_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                                    target_note = target_note.concat( cxtcnt[ v.id ]["rdfs:note"] );
+                                    target_label = target_label.concat( cxtcnt[ v.id ]["skos:prefLabel"] );
+                                    target_host = target_host.concat( cxtcnt[ v.id ]["intro:R24i_isRelatedEntity"].id );
+                                });
+                            }   
+                            if ( !Array.isArray( annotation["intro:R12_hasReferredToEntity"] ) ) {
+                                cxtloc.push( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                cxtloc_locs = cxtloc_locs.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdf:value"] );
+                                cxtloc_note = cxtloc_note.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdfs:note"] );
+                                cxtloc_label = cxtloc_label.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["skos:prefLabel"] );
+                                cxtloc_host = cxtloc_host.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R24i_isRelatedEntity"].id );
+                            } else {
+                                $.each( annotation["intro:R12_hasReferredToEntity"], function( i,v ) {
+                                    cxtloc.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                    cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                    cxtloc_locs = cxtloc_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                                    cxtloc_note = cxtloc_note.concat( cxtcnt[ v.id ]["rdfs:note"] );
+                                    cxtloc_label = cxtloc_label.concat( cxtcnt[ v.id ]["skos:prefLabel"] );
+                                    cxtloc_host = cxtloc_host.concat( cxtcnt[ v.id ]["intro:R24i_isRelatedEntity"].id );
+                                });
+                            }
+                        // actualizations
+                        } else if ( annotation.hasOwnProperty( 'intro:R18i_actualizationFoundOn' )) {
+                            var anno_id = annotation.id;
+                            if ( !Array.isArray( annotation['intro:R18i_actualizationFoundOn'] ) ) {
+                                target.push( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                target_locs = target_locs.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdf:value"] );
+                                target_note = target_note.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdfs:note"] );
+                                target_label = target_label.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["skos:prefLabel"] );
+                                target_host = target_host.concat( annotation.id );
+                            } else {
+                                $.each( annotation["intro:R18i_actualizationFoundOn"], function( i,v ) {
+                                    target.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                                    target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                                    target_locs = target_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                                    target_note = target_note.concat( cxtcnt[ v.id ]["rdfs:note"] );
+                                    target_label = target_label.concat( cxtcnt[ v.id ]["skos:prefLabel"] );                                        
+                                    target_host = target_host.concat( anno_id );   
+                                });
+                            }
+                        } 
+                    }
+                }
+            }
+            $.each( target_locs, function( i,v) {
+                // text
+                if ( v.substring(0,1) == '#' ) {
+                    if ( v.split( ',' ).length > 2) {
+                        $( ".globaltext-container .globaltext "+v.split(',')[0] ).addClass( "highlight-gbl-start" );
+                        $( ".globaltext-container .globaltext "+v.split(',').pop() ).addClass( "highlight-gbl-end" );
+                    } else {
+                        $( ".globaltext-container .globaltext "+v.split(',').join( ',.globaltext-container .globaltext ' ) ).addClass( "highlight-gbl-start highlight-gbl-end" );
+                    }
+                    $( v.split(',')[0] ).addClass( target_host[i] )
+                    // TODO:
+                    // highlighting of locations per actualization/interrelation
+                    // will need switching to correct expression before popover
+                    // is shown, hence need to include target_tabs values in
+                    // graph nodes first somehow!
+                    //var exampleEl = document.getElementById( v.split(',')[0].substring(1) );
+                    //var popover = new bootstrap.Popover(exampleEl, {
+                    //    trigger: 'focus',
+                    //    customClass: target_host[i],
+                    //    content: target_label[i]
+                    //});
+                } else if ( v.substring(0,1) == 't' ) {
+                // media
+                    var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
+                    var default_region = v.split( 't=' )[1].split(',');
+                    player[ "player_viewing_"+target_tabs[i] ].addRegion( {"id":play_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":'rgba(' +
+                        [
+                            ~~(255),
+                            ~~(Math.random() * 255),
+                            ~~(Math.random() * 255),
+                            alpha || 1
+                        ] +
+                    ')'} );
+                } else if ( v.substring(0,1) == 'x' ) {
+                // image
+                    var view_id = 'viid_'+uuidv4(); // TODO: these should really be the location IDs
+                    if ( !annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ] ) { annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ] = []; }
+                    var annotation = { 
+                        "@context": "http://www.w3.org/ns/anno.jsonld",
+                        "id": view_id,
+                        "type": "Annotation",
+                        "target": {
+                            "selector": {
+                            "type": "FragmentSelector",
+                            "conformsTo": "http://www.w3.org/TR/media-frags/",
+                            "value": v
+                            }
+                        }
+                    };
+                    annos[ "viewer_viewing_"+target_tabs[i] ][ target_note[i] ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
+                    annotorious[ "viewer_viewing_"+target_tabs[i] ].addAnnotation( annotation, true ); // true = readonly, false = editable
+                }
+            } );
+            /*
+            // TODO: 
+            // context cannot be assumed to be present in the global text view
+            // (under which circumstances? only if context is one of the expressions?)
+            $.each( cxtloc_locs, function( i,v) {
+                if ( v.substring(0,1) == '#' ) {
+                    if ( v.split( ',' ).length > 2) {
+                        $( ".globaltext-container .globaltext "+v.split(',')[0] ).addClass( "highlight-gbl-start" );
+                        $( ".globaltext-container .globaltext "+v.split(',').pop() ).addClass( "highlight-gbl-end" );
+                    } else {
+                        $( ".globaltext-container .globaltext "+v.split(',').join( ',.globaltext-container .globaltext ' ) ).addClass( "highlight-gbl-start highlight-gbl-end" );
+                    }
+                } else if ( v.substring(0,1) == 't' ) {
+                    var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
+                    var default_region = v.split( 't=' )[1].split(',');
+                    player[ "player_viewing_"+cxtloc_tabs[i] ].addRegion( {"id":play_id,"drag":false,"resize":false,"start":default_region[0],"end":default_region[1],"color":'rgba(' +
+                        [
+                            ~~(255),
+                            ~~(Math.random() * 255),
+                            ~~(Math.random() * 255),
+                            alpha || 1
+                        ] +
+                    ')'} );
+                } else if ( v.substring(0,1) == 'x' ) {
+                    var view_id = 'viid_'+uuidv4(); // TODO: these should really be the location IDs
+                    if ( !annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ] ) { annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ] = []; }
+                    var annotation = { 
+                        "@context": "http://www.w3.org/ns/anno.jsonld",
+                        "id": view_id,
+                        "type": "Annotation",
+                        "target": {
+                            "selector": {
+                            "type": "FragmentSelector",
+                            "conformsTo": "http://www.w3.org/TR/media-frags/",
+                            "value": v
+                            }
+                        }
+                    };
+                    annos[ "viewer_viewing_"+cxtloc_tabs[i] ][ cxtloc_note[i] ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
+                    annotorious[ "viewer_viewing_"+cxtloc_tabs[i] ].addAnnotation( annotation, true ); // true = readonly, false = editable
+                }
+            } );
+            */
+        }
+        // add contexts nodes
         var graphElements = [], done = {}, nodes_added = [], local_col = {};
         for ( var key in exprContexts ) {
             if ( key != 'null' ) {
                 var context = _l.keyBy( exprContexts[key], 'id' )
                 graphElements = graphElements.concat( processGraphContext( context ) );
-    //            processExprContext( context );
             }
         }
+        // add expression nodes (if needed)
         for ( var part in exprNodes ) {
             if ( exprNodes[ part ].hasOwnProperty( "type" ) ) {
                 if ( $( "#cy" ).length && !cy.$id( exprNodes[ part ].id ).length && !done[ exprNodes[ part ].id ] ) {
@@ -3196,7 +3217,7 @@ async function initializeContexts( exprContexts, exprNodes, graph, mode ) {
                             data: {
                                 id: exprNodes[ part ].id,
                                 name: (addicon( exprNodes[ part ].id )?addicon( exprNodes[ part ].id ):'')+" "+onto[exprNodes[ part ].type[0]].label+"\n"+exprNodes[ part ][ "skos:prefLabel" ],
-                                pref: exprNodes[ part ]["skos:prefLabel"],
+                                pref: "skos:prefLabel" in exprNodes[ part ]?exprNodes[ part ]["skos:prefLabel"]:exprNodes[ part ]["crm:P1_is_identified_by"],
                                 alt: exprNodes[ part ]["skos:altLabel"],
                                 class: exprNodes[ part ].type,
                                 bgcolor: (function() {
@@ -3210,7 +3231,7 @@ async function initializeContexts( exprContexts, exprNodes, graph, mode ) {
                                     } else return graph_col[nsv( exprNodes[ part ].type[0] )];
                                 })(),
                                 shape: "round-rectangle",
-                                //context: exprNodes[ part ]["intro:R21i_isIdentifiedBy"].id
+                                context: exprNodes[ part ].hasOwnProperty("intro:R21i_isIdentifiedBy")?exprNodes[ part ]["intro:R21i_isIdentifiedBy"].id:undefined
                             },
                             //position: cy.getElementById( exprNodes[ part ].id ).position()
                         }
@@ -3220,17 +3241,13 @@ async function initializeContexts( exprContexts, exprNodes, graph, mode ) {
             }
             graphElements = graphElements.concat( nodes_added );
         }
-        if ( $( "#cy" ).length ) {
-            var added = cy.add( graphElements );
+        if ( $( "#cy" ).length && graphElements.length > 0 && mode != 'view' ) {
+            //var added = cy.add( graphElements );
+            var added = ur.do( "add", graphElements );
             tippyNodes( added.nodes(), graph );
+            clean_graph();
             run_layout( 'cose' );
         }
-        /*
-        var tc = _l.filter( exprContexts, function(o) {
-            return o["type"].includes( "rppa:Context" ) //&& o["crm:P2_has_type"][0].id == "lct:txt";
-        });
-        processW3Ccontexts( tc );
-        */
     }
 }
 
@@ -3244,27 +3261,50 @@ function processGraphContext( context ) {
                     classes: "node",
                     data: {
                         id: part.id,
-                        name: onto[ "intro:INT2_ActualizationOfFeature" ].label+"\n"+(part["intro:R17_actualizesFeature"].id in skos?skos[ part["intro:R17_actualizesFeature"].id ]["skos:prefLabel"]:part["intro:R17_actualizesFeature"].id),
-                        pref: part["skos:prefLabel"],
+                        name: onto[ "intro:INT2_ActualizationOfFeature" ].label+"\n"+(
+                            part.hasOwnProperty( "intro:R17_actualizesFeature" ) && part["intro:R17_actualizesFeature"].id in skos?
+                                skos[ part["intro:R17_actualizesFeature"].id ]["skos:prefLabel"]:
+                                part.hasOwnProperty( "intro:R17_actualizesFeature" )?part["intro:R17_actualizesFeature"].id:part["skos:prefLabel"]),
+                        pref: part[ "skos:prefLabel" ]?part["skos:prefLabel"]:part["crm:P1_is_identified_by"],
                         alt: part["skos:altLabel"],
                         class: [ onto[ "intro:INT2_ActualizationOfFeature" ].about ],
                         bgcolor: "#2a9d8f",
                         shape: "concave-hexagon",
                         context: part["intro:R21i_isIdentifiedBy"].id
                     }
-                },
-                { group: 'edges', 
-                    classes: "edge",
-                    data: { 
-                        id: part.id+context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
-                        source: part.id,
-                        target: context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id, 
-                        name: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                        pref: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                        class: onto[ "intro:R18i_actualizationFoundOn" ].about
-                    }
                 }
             ]);
+            if ( !Array.isArray( part['intro:R18i_actualizationFoundOn'] ) ) {
+                added = added.concat([
+                    { group: 'edges', 
+                        classes: "edge",
+                        data: { 
+                            id: part.id+onto["intro:R18i_actualizationFoundOn"].about+context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                            source: part.id,
+                            target: context[ part["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id, 
+                            name: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                            pref: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                            class: onto[ "intro:R18i_actualizationFoundOn" ].about
+                        }
+                    }
+                ]);
+            } else {
+                $.each( part['intro:R18i_actualizationFoundOn'], function( i,v ) {
+                    added = added.concat([
+                        { group: 'edges', 
+                            classes: "edge",
+                            data: { 
+                                id: part.id+onto["intro:R18i_actualizationFoundOn"].about+context[ part["intro:R18i_actualizationFoundOn"][i].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                                source: part.id,
+                                target: context[ part["intro:R18i_actualizationFoundOn"][i].id ]["intro:R10i_isPassageOf"].id, 
+                                name: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                pref: onto[ "intro:R18i_actualizationFoundOn" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                class: onto[ "intro:R18i_actualizationFoundOn" ].about
+                            }
+                        }
+                    ]);
+                });
+            }
         } else if ( part.type.includes( "intro:INT3_Interrelation" )) {
             if ( part.hasOwnProperty( "intro:R12_hasReferredToEntity" ) && part.hasOwnProperty( "intro:R13_hasReferringEntity" ) ) {
                 added = added.concat([
@@ -3272,8 +3312,11 @@ function processGraphContext( context ) {
                         classes: "node",
                         data: {
                             id: part.id,
-                            name: onto[ "intro:INT3_Interrelation"].label+"\n"+(context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id in skos?skos[ context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:prefLabel"]:context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id),
-                            pref: part["skos:prefLabel"],
+                            name: onto[ "intro:INT3_Interrelation"].label+"\n"+(
+                                context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id in skos?
+                                    skos[ context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:prefLabel"]:
+                                    context[ part["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id),
+                            pref: part.hasOwnProperty("skos:prefLabel")?part["skos:prefLabel"]:part["crm:P1_is_identified_by"],
                             alt: part["skos:altLabel"],
                             class: [ onto[ "intro:INT3_Interrelation" ].about ],
                             bgcolor: "#2a9d8f",
@@ -3281,34 +3324,73 @@ function processGraphContext( context ) {
                             context: part["intro:R21i_isIdentifiedBy"].id
                         },
                         //position: cy.getElementById( part.id ).position()
-                    },
-                    { group: 'edges', 
-                        classes: "edge",
-                        data: { 
-                            id: part.id+context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
-                            source: part.id, 
-                            target: context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id, 
-                            name: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                            pref: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
-                            class: onto[ "intro:R13_hasReferringEntity" ].about
-                        }
-                    },
-                    { group: 'edges', 
-                        classes: "edge",
-                        data: { 
-                            id: part.id+context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
-                            source: part.id,
-                            target: context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,
-                            name: onto[ "intro:R12_hasReferredToEntity" ].label,
-                            pref: onto[ "intro:R12_hasReferredToEntity" ].label,
-                            class: onto[ "intro:R12_hasReferredToEntity" ].about
-                        }
                     }
                 ]);
+                if ( !Array.isArray( part["intro:R12_hasReferredToEntity"] ) ) {
+                    added = added.concat([
+                        { group: 'edges', 
+                            classes: "edge",
+                            data: { 
+                                id: part.id+onto["intro:R12_hasReferredToEntity"].about+context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                                source: part.id, 
+                                target: context[ part["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id, 
+                                name: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                pref: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                class: onto[ "intro:R13_hasReferringEntity" ].about
+                            }
+                        }
+                    ]);
+                } else {
+                    $.each( part["intro:R12_hasReferredToEntity"], function( i,v ) {
+                        added = added.concat([
+                            { group: 'edges', 
+                                classes: "edge",
+                                data: { 
+                                    id: part.id+onto["intro:R12_hasReferredToEntity"].about+context[ part["intro:R12_hasReferredToEntity"][i].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                                    source: part.id, 
+                                    target: context[ part["intro:R12_hasReferredToEntity"][i].id ]["intro:R10i_isPassageOf"].id, 
+                                    name: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                    pref: onto[ "intro:R13_hasReferringEntity" ].label, //skos[ context[ context["intro:R19_hasType"].id ]["intro:R4i_isDefinedIn"].id ]["skos:preflabel"],
+                                    class: onto[ "intro:R13_hasReferringEntity" ].about
+                                }
+                            }
+                        ]);
+                    });
+                }
+                if ( !Array.isArray( part["intro:R13_hasReferringEntity"] ) ) {
+                    added = added.concat([
+                        { group: 'edges', 
+                            classes: "edge",
+                            data: { 
+                                id: part.id+onto["intro:R13_hasReferringEntity"].about+context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                                source: part.id,
+                                target: context[ part["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id,
+                                name: onto[ "intro:R12_hasReferredToEntity" ].label,
+                                pref: onto[ "intro:R12_hasReferredToEntity" ].label,
+                                class: onto[ "intro:R12_hasReferredToEntity" ].about
+                            }
+                        }
+                    ]);
+                } else {
+                    $.each( part["intro:R13_hasReferringEntity"], function( i,v ) {
+                        added = added.concat([
+                            { group: 'edges', 
+                                classes: "edge",
+                                data: { 
+                                    id: part.id+onto["intro:R13_hasReferringEntity"].about+context[ part["intro:R13_hasReferringEntity"][i].id ]["intro:R10i_isPassageOf"].id,//uuidv4(), 
+                                    source: part.id,
+                                    target: context[ part["intro:R13_hasReferringEntity"][i].id ]["intro:R10i_isPassageOf"].id,
+                                    name: onto[ "intro:R12_hasReferredToEntity" ].label,
+                                    pref: onto[ "intro:R12_hasReferredToEntity" ].label,
+                                    class: onto[ "intro:R12_hasReferredToEntity" ].about
+                                }
+                            }
+                        ]);
+                    });
+                }
             }
         }
     }
-    //console.log( added );
     return added;
 }
 
@@ -3392,7 +3474,7 @@ function print_cxtmd( md, skos ) {
             `<dt>Citation</dt>`+
             `<dd>`+v['dcterms:bibliographicCitation']+`</dd>`:``)+
             `<dt>Context URI:</dt>`+
-            `<dd>`+location.href+`</dd>`
+            `<dd>`+domain+`/works/#context/`+md.id.match(/\id\/(.*?)$/)[1]+`</dd>`
             ;
     });
     formatted_metadata += `</dl></div>`
@@ -3405,27 +3487,34 @@ function print_cxtwrk( md, content, skos ) {
     var formatted_metadata = '<div style="font-size:15px;"><h4><i class="fa-solid fa-right-left"></i> Contextualization</h4><dl>';
     $.each( work, function( i,v ) {
         formatted_metadata += 
-            `<dt style='word-break:break-word;'>Contextualization type</dt>`+
+            `<dt style='word-break:break-word;'>Contextualization type/reference</dt>`+
             (v.hasOwnProperty("intro:R19_hasType")?
             `<dd>`+skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:prefLabel"]+`</dd>`:
             (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
             `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:prefLabel"]+`</dd>`:
-            `<dd>`+v['intro:R17_actualizesFeature'].id+`</dd>`))+
+            v.hasOwnProperty( "intro:R17_actualizesFeature" )?
+            `<dd>`+v['intro:R17_actualizesFeature'].id+`</dd>`:`<dd>`+v["skos:prefLabel"]+`</dd>`))+
 
             (v.hasOwnProperty("rdf:value")?
             `<dt style='word-break:break-word;'>Contextualization description</dt>`+
             `<dd>`+v['rdf:value']+`</dd>`:``)+
  
             `<dt style='word-break:break-word;'>Contextualization citation</dt>`+
-            (v.hasOwnProperty("intro:R19_hasType")?
+            (v.hasOwnProperty("intro:R19_hasType") ?
             `<dd>`+("dcterms:bibliographicCitation" in skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]?skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["dcterms:bibliographicCitation"]:skos[ skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id ]["dcterms:bibliographicCitation"])+`</dd>`:
             (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
-            `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["dcterms:bibliographicCitation"]+`</dd>`:`<dd>—</dd>`))+
+            `<dd>`+
+            (skos[ v['intro:R17_actualizesFeature'].id ]["dcterms:bibliographicCitation"]?skos[ v['intro:R17_actualizesFeature'].id ]["dcterms:bibliographicCitation"]:
+            skos[ skos[ v['intro:R17_actualizesFeature'].id ]["skos:inScheme"].id ]["dcterms:bibliographicCitation"] )
+            +`</dd>`:
+            `<dd>—</dd>`))+
+
             `<dt style='word-break:break-word;'>Contextualization scheme</dt>`+
             (v.hasOwnProperty("intro:R19_hasType")?
             `<dd>`+skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id+`</dd>`:
             (v.hasOwnProperty("intro:R17_actualizesFeature") && v['intro:R17_actualizesFeature'].id in skos?
             `<dd>`+skos[ v['intro:R17_actualizesFeature'].id ]["skos:inScheme"].id+`</dd>`:`<dd>—</dd>`))+
+
             `<dt style='word-break:break-word;'>Scheme title</dt>`+
             (v.hasOwnProperty("intro:R19_hasType")?
             `<dd>`+skos[ skos[ content[ v['intro:R19_hasType'].id ]['intro:R4i_isDefinedIn'].id ]["skos:inScheme"].id ][ "dc:title" ]+`</dd>`:
@@ -3437,7 +3526,7 @@ function print_cxtwrk( md, content, skos ) {
             `<dd><a class="external" target="_blank" href="`+context["@context"][v['dcterms:format'].id.split(":")[0]]+v['dcterms:format'].id.split(":")[1]+`">`+v['dcterms:format'].id+`</a></dd>`:``)+
             (v.hasOwnProperty("dcterms:language")?
             `<dt>Language</dt>`+
-            `<dd><code>`+v["dcterms:language"]+`</code></dd>`:``)+
+            `<dd>`+language[ v["dcterms:language"].id.match(/\/id\/(.*?)\/language$/)[1] ].name+` (<code>`+language[ v["dcterms:language"].id.match(/\/id\/(.*?)\/language$/)[1] ].id+`</code>)</dd>`:``)+
             (v.hasOwnProperty("oa:hasPurpose")?            
             `<dt>Purpose</dt>`+
             `<dd><a class="external" target="_blank" href="`+context["@context"][v['oa:hasPurpose'].id.split(":")[0]]+v['oa:hasPurpose'].id.split(":")[1]+`">`+v['oa:hasPurpose'].id+`</a></dd></dd>`:``)+
@@ -3461,10 +3550,7 @@ function print_cxtwrk( md, content, skos ) {
     - wraps context in a uniform context-card (header/body/footer) for
       display: make_context
 */
-// TODO: this will be the key function that will process arrays of
-//       actualizations in the contexts retrieved!
 async function display_context( context ) {
-    //console.log( context );
     var q = namespaces+`SELECT DISTINCT ?s ?p ?o WHERE {
         {
             {	# context metadata
@@ -3490,12 +3576,12 @@ async function display_context( context ) {
     		UNION {
                 ?context intro:R21_identifies+ ?w .
                 {
-        			?w intro:R17_actualizesFeature ?f .
+        			?w intro:R17_actualizesFeature|crm:P67_refers_to ?f .
         			?f ?p ?o .
                 } UNION
                 {
         			?w intro:R19_hasType ?ty .
-        			?ty intro:R4i_isDefinedIn ?f .
+        			?ty intro:R4i_isDefinedIn|crm:P67_refers_to ?f .
         			?f ?p ?o .
       			} UNION {
                 	?w intro:R19_hasType ?ty .
@@ -3578,7 +3664,7 @@ async function display_context( context ) {
     var skos = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.includes( 'rppa:kos/' ); }), 'id' );
     var contributor = _l.keyBy( _l.filter( r.graph, function(o) { return o.id.startsWith( 'rppa:user-' ); }), 'id' );
     var tools = _l.keyBy( _l.filter( r.graph, function(o) { return o.hasOwnProperty( "type" ) && o["type"].includes( 'crmdig:D14_Software' ); }), 'id' );
-    console.log( cxtmd, cxtcnt, cxtref, skos, contributor, tools );
+    
     mode = "view";
     zInd = zInd+1;
     if ( $('.offcanvas.show').length ) { 
@@ -3586,7 +3672,7 @@ async function display_context( context ) {
         $(".popover").hide(); // hide if new text was called from a popover
     }
     // create global text canvas
-    var intertext = _l.some(skos, ['id', 'rppa:kos/contextuality/intertextual']);
+    var intertext = _l.some(cxtcnt, function(o) { return o.id.includes( "/intertextuality" ) });
     var context_win_id = uuidv4();
     var context_win = `<div style="z-index:`+zInd+`;overflow:inherit;" class="offcanvas offcanvas-start context-workbench" data-bs-backdrop="static" tabindex="-1" id="win-`+context_win_id+`" aria-labelledby="staticBackdropLabel">
             <div class="offcanvas-body context-container globaltext-container" data-cid="`+context+`">`+
@@ -3619,19 +3705,46 @@ async function display_context( context ) {
         var annotation = cxtcnt[ parts[i].id ];
         // show target globaltext
         if ( annotation.hasOwnProperty( 'intro:R13_hasReferringEntity' ) && annotation.hasOwnProperty( 'intro:R12_hasReferredToEntity' ) ) {
-            target.push( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
-            target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
-            target_locs = target_locs.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdf:value"] );
-            target_note = target_note.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdfs:note"] );
-            cxtloc.push( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
-            cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
-            cxtloc_locs = cxtloc_locs.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdf:value"] );
-            cxtloc_note = cxtloc_note.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdfs:note"] );
+            if ( !Array.isArray( annotation["intro:R13_hasReferringEntity"] ) ) {
+                target.push( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                target_locs = target_locs.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdf:value"] );
+                target_note = target_note.concat( cxtcnt[ annotation["intro:R13_hasReferringEntity"].id ]["rdfs:note"] );
+            } else {
+                $.each( annotation["intro:R13_hasReferringEntity"], function( i,v ) {
+                    target.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                    target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                    target_locs = target_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                    target_note = target_note.concat( cxtcnt[ v.id ]["rdfs:note"] );
+                });
+            }   
+            if ( !Array.isArray( annotation["intro:R12_hasReferredToEntity"] ) ) {
+                cxtloc.push( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                cxtloc_locs = cxtloc_locs.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdf:value"] );
+                cxtloc_note = cxtloc_note.concat( cxtcnt[ annotation["intro:R12_hasReferredToEntity"].id ]["rdfs:note"] );
+            } else {
+                $.each( annotation["intro:R12_hasReferredToEntity"], function( i,v ) {
+                    cxtloc.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                    cxtloc_tabs = cxtloc_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                    cxtloc_locs = cxtloc_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                    cxtloc_note = cxtloc_note.concat( cxtcnt[ v.id ]["rdfs:note"] );
+                });
+            }
         } else if ( annotation.hasOwnProperty( 'intro:R18i_actualizationFoundOn' )) {
-            target.push( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
-            target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
-            target_locs = target_locs.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdf:value"] );
-            target_note = target_note.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdfs:note"] );
+            if ( !Array.isArray( annotation['intro:R18i_actualizationFoundOn'] ) ) {
+                target.push( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                target_locs = target_locs.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdf:value"] );
+                target_note = target_note.concat( cxtcnt[ annotation["intro:R18i_actualizationFoundOn"].id ]["rdfs:note"] );
+            } else {
+                $.each( annotation["intro:R18i_actualizationFoundOn"], function( i,v ) {
+                    target.push( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P48_has_preferred_identifier"] );
+                    target_tabs = target_tabs.concat( _l.filter( cxtref[ cxtcnt[ v.id ]["intro:R10i_isPassageOf"].id ]["crm:P106_is_composed_of"], function(o) { return o.id.includes( "/delivery" ); }) );
+                    target_locs = target_locs.concat( cxtcnt[ v.id ]["rdf:value"] );
+                    target_note = target_note.concat( cxtcnt[ v.id ]["rdfs:note"] );                                        
+                });
+            }
         } 
     }
     // show target globaltext
@@ -3687,7 +3800,6 @@ async function display_context( context ) {
                             alignment[ annotation.id ][ item ].push( prop );
                         });
                     }
-                    //console.log( alignment[ annotation.id+"/orig" ], alignment[ annotation.id ] )
                     // alignment activation on context-side
                     $(document).on('mouseenter', '#win-'+context_win_id+' .globalcontext .w,#win-'+context_win_id+' .globalcontext .pc', function () {
                         if ( alignment[ annotation.id ][ $(this).attr('id') ] ) {
@@ -3867,7 +3979,6 @@ async function display_context( context ) {
                             } else { 
                                 source = obj.source 
                             }
-                            //console.log( source );
                             instance.connect({
                                 source: $( '#'+source )[0],
                                 target: $('.context-container .text #'+obj.target)[0],
@@ -3906,12 +4017,18 @@ async function display_context( context ) {
     $( ".context-container .context" ).append( print_cxtmd( cxtmd[context], skos ) );
     // add context data/metadata
     $( ".context-container .context" ).append( print_user( contributor ) );
-    
+
+    // TODO: redundant, is repeated both here below AND in initializeContexts
     // highlight target/context locations
     $.each( target_locs, function( i,v) {
         // text
         if ( v.substring(0,1) == '#' ) {
-            $( ".context-container .globaltext .text "+v.split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+            if ( v.split( ',' ).length > 2) {
+                $( ".context-container .globaltext "+v.split(',')[0] ).addClass( "highlight-gbl-start" );
+                $( ".context-container .globaltext "+v.split(',').pop() ).addClass( "highlight-gbl-end" );
+            } else {
+                $( ".context-container .globaltext "+v.split(',').join( ',.context-container .globaltext ' ) ).addClass( "highlight-gbl-start highlight-gbl-end" );
+            }
         } else if ( v.substring(0,1) == 't' ) {
         // media
             var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
@@ -3946,7 +4063,12 @@ async function display_context( context ) {
     } );
     $.each( cxtloc_locs, function( i,v) {
         if ( v.substring(0,1) == '#' ) {
-            $( ".context-container .globaltext .text "+v.split(',').join( ',.context-container .globaltext .text ' ) ).addClass( "idsSelected" );
+            if ( v.split( ',' ).length > 2) {
+                $( ".context-container .globaltext "+v.split(',')[0] ).addClass( "highlight-gbl-start" );
+                $( ".context-container .globaltext "+v.split(',').pop() ).addClass( "highlight-gbl-end" );
+            } else {
+                $( ".context-container .globaltext "+v.split(',').join( ',.context-container .globaltext ' ) ).addClass( "highlight-gbl-start highlight-gbl-end" );
+            }
         } else if ( v.substring(0,1) == 't' ) {
             var play_id = 'plid_'+uuidv4(); // TODO: these should really be the location IDs
             var default_region = v.split( 't=' )[1].split(',');
@@ -4023,7 +4145,6 @@ async function display_context( context ) {
         $(this).remove();
         mode = "read"; 
         history.replaceState(null,null,previousState!=null?previousState:domain);
-//        location.href = "/works/#text/"+cxtcnt[ annotation["oa:hasTarget"].id ]["crm:P48_has_preferred_identifier"];
         zInd = 1054;
         done_tooltipTriggerList = [];
         done_popoverTriggerList = [];
@@ -4040,10 +4161,54 @@ $( document ).on('click', 'a.show_globaltext', async function (e) {
 });
 */
 
-// page re-load on theme switch
-function reTheme() {
-    if ( $( "#map" ).length || $( "#network" ).length || $( "#cy" ).length || $( "body#about" ).length ) {
-        location.reload();
+// theme switch
+function reTheme( theme ) {
+    if ( $( "#map" ).length ) {
+        layerscontrol.remove();
+        if (theme == 'light' ) {
+            map.removeLayer( baseMapDark );
+            map.addLayer( baseMapLight );
+            baseMap = baseMapLight;
+            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'topright'} ).addTo( map );
+        } else {
+            map.removeLayer( baseMapLight );
+            map.addLayer( baseMapDark );
+            baseMap = baseMapDark;
+            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'topright'} ).addTo( map );
+        }
+        if ( map.hasLayer( overlayMap ) && map.getZoom() <= 5 ) {
+          baseMap.setOpacity(0);
+          $( ".map").css( "background-color", "#ede0cb" );
+        } else {
+          if (theme == 'dark') {
+            $( ".map").css( "background-color", "#000" );
+          } else {
+            $( ".map").css( "background-color", "#fff" );
+          }  
+          baseMap.setOpacity(1);
+        }
+    } else if ( $( "#cy" ).length || $( "#cy_help" ).length ) {
+        if ( $( "#cy" ).length ) {
+            if ( theme == 'light' ) {
+                cy.style().selector( 'edge' ).style( {'color':'#333'} ).update()
+                cy.style().selector( 'node' ).style( {'background-color':'#fff','color':'#333'} ).update()
+                //cy.style().fromJson( lightStyle ).update();
+            } else {
+                cy.style().selector( 'edge' ).style( {'color':'#fff'} ).update()
+                cy.style().selector( 'node' ).style( {'background-color':'#333','color':'#fff'} ).update()
+                //cy.style().fromJson( darkStyle ).update();
+            }
+        } else {
+            if ( theme == 'light' ) {
+                cy_help.style().selector( 'edge' ).style( {'color':'#333'} ).update()
+                cy_help.style().selector( 'node' ).style( {'background-color':'#666','color':'#333'} ).update()
+                //cy.style().fromJson( lightStyle ).update();
+            } else {
+                cy_help.style().selector( 'edge' ).style( {'color':'#fff'} ).update()
+                cy_help.style().selector( 'node' ).style( {'background-color':'#666','color':'#fff'} ).update()
+                //cy.style().fromJson( darkStyle ).update();
+            }
+        }
     }
 }
 
@@ -4084,7 +4249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const offcanvasList = [...offcanvasElementList].map(offcanvasEl => new bootstrap.Offcanvas(offcanvasEl))
 
     // SSO
-    $( ".sso,.sso-sign-in" ).remove(); // TODO: remove when ready
+    $( ".sso,.sso-sign-in" ).remove(); // TODO: remove after testing
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;

@@ -9,20 +9,54 @@
     <!--#set var="home" value="active" -->
 
     <!--#include virtual="/templates/head.shtml" -->
+    <style>
+      .parallax {
+        overflow: hidden; 
+        position: relative; 
+        width: 100%; 
+        background-attachment: fixed; 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+      }
+      @media (max-width: 1280px) {
+        .parallax-one {
+          padding: calc(100vh - 37%) 0; 
+          background-image: url('/images/4613002_home.jpg'); 
+          background-position: center center;
+        }
+      }
+
+      @media (min-width: 1281px) {
+        .parallax-one {
+          padding: calc(100vh - 34%) 0; 
+          background-image: url('/images/4613002_home.jpg'); 
+          background-position: center center;
+        }
+      }
+      #home {
+        padding-bottom:55px;
+      }
+    </style>
   </head>
 
   <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
     <!--#include virtual="/templates/header.shtml" -->
 
+    <section>
+        <h2 class="visually-hidden">[Background image]</h2>
+        <div class="parallax parallax-one"></div>
+    </section> 
+
     <!-- Begin page content -->
-    <main class="flex-shrink-0">
+    <section>
       <div class="container-fluid">
     
         <!-- content: insert here -->
         <audio src="https://dictionary.cambridge.org/media/english/uk_pron/u/ukb/ukb01/ukb01207.mp3" id="player"></audio>
-        <div style="display:flex;align-items:center;justify-content:center;height:calc(100vh - 115px);">
-          <div style="padding:10px 15px;width:39%;height:43%;min-width:300px;min-height:125px;background-color:var(--bs-body-bg);border-radius:15px;overflow:auto;border: 1px solid #999;">
-            
+        <div class="row">
+
+          <div class="col-md-8">
+
             <div id="welcome">
               <!--
               <h1 class="leaflet-sidebar-header">
@@ -30,38 +64,101 @@
                 <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
               </h1>
               -->
-              <div style="text-align:center;margin-top:20px;">
-                  <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>Welcome to the<br>
-                    <span class="h2">Romantic Period Poetry Archive<sup>alpha</sup></span><br><small><b>Alexander Huber, editor.</b></small><br>
+              <div style="margin-top:20px;">
+                  <h1><i class="fas fa-door-open"
+                  style="font-size:28px;margin-bottom:15px;"></i> Welcome to
+                  the 
+                    Romantic Period Poetry
+                    Archive<sup>beta</sup></h1>
+
                   <p style="text-align:left;">The Romantic Period Poetry Archive—or RPPA <a href="#"
                   onclick="document.getElementById('player').play()"><i class="fas
                   fa-volume-up"></i><span class="sr-only">[Listen]</span></a> for
-                  short—is a new, open access digital platform for global
-                  Romantic-period poetry — start your journey (almost) anywhere in the
-                  world!  <!--To fully participate in RPPA, i.e. to be able to
-                  contribute contexts for texts, you need to be signed in.-->
-                  </p> 
+                  short—is an open access digital platform for global
+                  <a href="/works/">Romantic-period poetry</a>. 
+                  RPPA conceptualizes Romanticism as a global, deeply
+                  interconnected phenomenon, as a period in international
+                  literary history. 
+                  RPPA aggregates both peer- and computationally-created
+                  contextualizations that situate the poetry of the Romantic period
+                  in its  
+                  in global, transnational contexts. 
+
+                  The main purpose of RPPA is the creation of a database of contextuality that manifests itself in an
+    expandable, re-usable and open knowledge base.</p> 
+    <h2>‘Global texts’</h2>
+    <p>
+    The highly contextualized and interlinked poetic texts from any
+    <a href="/authors/">national literature</a> are what we refer to as ‘global texts’. Texts that carry
+    the family resemblance of Romantic poetry on a global scale.  ‘Global texts’
+    are represented as highly contextualized and therefore reconfigured entities
+    that betray their interconnectedness in <a href="/maps/">space and time</a>.
+
+    This temporal and spatial expansion historizises texts as ‘global texts’, i.e.
+    contexts embed texts in multi-dimensional spaces and connect texts more
+    broadly via shared contexts.  Contexts thus overlay the original text with texts
+    from different dimensions, which results in a <a href="/networks/">network</a>, or graph.<!-- that transcends the linear reading act.-->
+    </p> 
+    <h2>Contextuality</h2>
+    <p>Contexts
+    establish a performative dialogue with a text in the sense that it results
+    in meaning that only exists through their encounter.  Contexts therefore
+    always remain 
+    anchored, concrete, and purposeful: they perform transformative work in the
+    text and vice versa.  The promise of RPPA is to arrive at an
+    understanding of the 
+    functions of the transformative potential, in other words an
+    interpretation, of these encounters. To this end,
+    RPPA facilitates the collaborative, ontologically-underpinned, and
+    open-ended annotation of the texts in RPPA.
+    </p>
+    <h2>Community</h2>
+    <p>RPPA is currently in <span style="font-variant:small-caps">open
+    beta</span> and is accepting contributions from authenticated users.
+    Please feel free <a class="sso-sign-in" href="#">to sign in to RPPA</a> to start
+    contributing contexts for texts wherever you see the 
+    <i style="font-size:large;position: sticky;
+    color:#3aad9f;background-color:#fff;border-radius: 50%;" class="fas fa-plus-circle"></i> button    
+    (all
+    contributions are attributed and citable as mirco-publications).   We encourage contributions, big or small,
+    on any aspect of the texts' poetic, semantic, formal, historical, national or cultural
+    dimensions, including but not limited to their material legacies, reception
+    and interpretation, translations,
+    circulation, and afterlives — in fact, you can start your
+    journey (almost) anywhere in the world!
+    </p> 
                   <button type="button" class="btn sso-sign-in" style="background-color:
                   var(--bs-orange);color:#fff;float:right;margin-left:10px;">Sign in</button>
                   <a type="button" class="btn" href="/authors/"
                   style="background-color:
                   var(--bs-orange);color:#fff;float:right;">Start exploring</a>
-                  <p class="small" style="clear:both;text-align:left;
-                  padding-top:20px; width:100%;position:relative;
-                  left: 0%;">RPPA is a rapidly prototyped and openly
-                  developed
-                  DH project, currently in public <span
-                  style="font-variant:small-caps;">alpha</span>. It will
-                  initially run from late 2020 to the end of 2025, 
-                      when it will have reached <span style="font-variant:small-caps;">beta</span> stage.</p>
               </div>
             </div>
-
+          
           </div>
+
+          <div class="col-md-4">
+            <!--#set var="mode" value=""-->
+            <div id="feed" style="margin-top:20px;">
+              <h2>News/Updates</h2>
+
+              <script type="module" src="https://cdn.jsdelivr.net/npm/bsky-embed/dist/bsky-embed.es.js" async></script>
+              <bsky-embed
+                  search="#RomanticPeriodPoetryArchive"
+                  mode=""
+                  limit="10"
+                  load-more="false"
+              custom-styles="section { max-height:635px; overflow: scroll; }section a
+              {color: #e07012 !important;}"
+              >
+              </bsky-embed>
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </main>
+    </section>
 
     <!--#include virtual="/templates/footer.shtml" -->
     <!--#include virtual="/templates/bottom.shtml" -->

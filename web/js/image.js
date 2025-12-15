@@ -85,7 +85,6 @@ async function add_image_tools( id, hasStartPage ) {
         viewer[ id ].gestureSettingsMouse.pinchToZoom = false;
         viewer[ id ].gestureSettingsMouse.pinchRotate = false;
     });
-    // TODO: causes error in console, need to stop event propagation?
     annotorious[ id ].on('changeSelectionTarget', function(target) {
         $( ".popover-dismiss-select.img .cancel" ).trigger( "click" );
     });
@@ -155,14 +154,6 @@ $( document ).on( "click", ".bb-item.img .trash", async function(e) {
     $( this ).parent().remove();
     //processGlobalText( tid, wid );
 });
-// delete an annotation
-/*
-async function deleteW3Cannotorious( id, page, annotation ) {
-    var update = namespaces+`\nWITH `+user+` DELETE { <`+annotation.id+`> ?p ?o . } WHERE { <`+annotation.id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+annotation.id+`> . } WHERE { ?s ?p <`+annotation.id+`> . } `;
-    await putTRIPLES( update );
-    processImageBuildingBlocks( id );
-}
-*/
 
 // Editing view: process a new or update an existing annotation
 /*  This function
@@ -180,44 +171,9 @@ async function createW3Cannotorious( id, page, annotation, digo, expr, work, _th
         annotation.id = domain+`/id/`+uuidv4()+`/buildingblock`;        
     }
     // add annotation
-    //var update = namespaces+`\nWITH `+user+` DELETE { <`+annotation.id+`> ?p ?o . } WHERE { <`+annotation.id+`> ?p ?o . } ;\nWITH `+user+` DELETE { ?s ?p <`+annotation.id+`> . } WHERE { ?s ?p <`+annotation.id+`> . } `;
-    //await putTRIPLES( update );
-    // add annotation
-    /*
-    var update = namespaces+"insert data {\n";
-    update += `GRAPH `+user+` \n{` 
-    var quads = `<`+annotation.id+`> a rppa:BuildingBlock, oa:Annotation ;\n`;
-    quads += `dcterms:relation <`+$( ".globaltext button.active" ).data( "work" )+`> ;\n`;
-    quads += `dcterms:isPartOf <`+$( ".globaltext button.active" ).data( "expr" )+`> ;\n`;
-    quads += `crm:P2_has_type lct:img ;\n`;
-    quads += `rdfs:note "`+page+`"^^xsd:integer ;\n`;
-    quads += `dcterms:contributor `+user+` ;\n`;
-    quads += `dcterms:created "`+( (annotation.date)?new Date( annotation.date ).toISOString():new Date().toISOString() )+`" ;\n`;
-    quads += `as:generator <`+domain+`> ;\n`;
-    quads += `skos:prefLabel """Image #`+page+`""" ;\n`;
-    quads += `skos:altLabel """Image annotation""" ;\n`;
-    quads += `oa:motivatedBy oa:highlighting ;\n` ;
-    quads += `oa:hasTarget [
-        dcterms:type dctypes:Image ;
-        dc:format lct:img ;
-        dc:language "`+$( ".globaltext .tab-content .active" ).attr( "lang" )+`" ;
-        oa:hasSelector [
-            rdf:type oa:FragmentSelector ;
-            dcterms:conformsTo <http://www.w3.org/TR/media-frags/> ;
-            rdf:value """`+annotation.target.selector.value+`""" ;
-        ] ;
-        oa:hasSource <`+$( ".globaltext .tab-content .active div" ).attr( "id" )+`> ;
-    ] ;\n.` ;
-    update += quads;
-    update += `}\n}`;
-    await putTRIPLES( update );
-    */
-    // maybe ALL I need from this part this the below few lines:
     if ( !annos[ id ][ page ] ) { annos[ id ][ page ] = []; }
     annotation["dcterms:isPartOf"] = expr;
     annos[ id ][ page ].push( JSON.parse( JSON.stringify( annotation ).replace(/\\"/g,"'") ) );
-//    $( "button.active:contains(Facsimile)" ).trigger( "click" ); // DO NOT USE THIS LINE!!!
-//    $( ".workbench .bb" ).append( processW3Cannotorious( id, JSON.parse( annotation ) ) );
 
     annotorious[ id ].addAnnotation( annotation, true ); // true = readonly, false = editable
     const { snippet, transform } = annotorious[ id ].getImageSnippetById( annotation.id );
@@ -227,13 +183,15 @@ async function createW3Cannotorious( id, page, annotation, digo, expr, work, _th
                 <input type="checkbox" id="`+annotation.id+`" data-id="`+annotation.id+`" name="`+annotation.id+`">
                 <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
             </li>` );
-        bbs_context.find( "[id='"+annotation.id+"']" ).parent().append( snippet );
+        bbs_context.find( "[id='"+annotation.id+"']" ).parent().append( snippet );        bbs_context.find( "[id='"+annotation.id+"']" ).parent().append( snippet );
+        bbs_context.find( "[id='"+annotation.id+"']" ).parent().append( `<label>[Image snippet]</label>` );
     } else {
         bbs_text.append( `<li class="bb-item img" data-page="`+page+`" data-iid="`+id.split("viewer_editing_")[1]+`" data-ids="`+annotation.target.selector.value.replace(/\"/g,'\\"')+`" data-expr="`+annotation['dcterms:isPartOf']+`" data-wid="`+work+`" data-digo="`+digo+`">
                 <input type="checkbox" id="`+annotation.id+`" data-id="`+annotation.id+`" name="`+annotation.id+`">
-                <i class="far fa-trash-alt trash" style="cursor:pointer;"></i>
+                <i class="far fa-trash-alt trash" style="cursor:pointer;"></i> [image region]
             </li>` );
         bbs_text.find( "[id='"+annotation.id+"']" ).parent().append( snippet );
+        bbs_text.find( "[id='"+annotation.id+"']" ).parent().append( `<label>[Image snippet]</label>` );
     }
     viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
 }
@@ -257,17 +215,3 @@ $(document ).on('mouseenter', '.bb-item.img', function ( e ) {
         annotorious[ iid ].cancelSelected();
     }
 });
-
-// Editing view: process an array of image annotations in pages by populating an
-// annos Array which is processed on page change
-/*
-function processImageBuildingBlocks( id, bb ) {
-    annos[ id ] = {};
-    for (var j = 0; j < bb.length; j++ ) {
-        var v = bb[ j ];
-        if ( !annos[ id ][ v["rdfs:note"] ] ) { annos[ id ][ v["rdfs:note"] ] = []; }
-        annos[ id ][ v["rdfs:note"] ].push( v );
-    }
-    viewer[ id ].goToPage( viewer[ id ].currentPage() ); // trigger page click to load page annotations
-}
-*/

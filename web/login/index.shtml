@@ -58,12 +58,10 @@
             // existing user
             user = usergraph.id;
             username = usergraph["foaf:name"];
-            console.log( "existing user: ", user, username );
           } else {
             // new user
             user = "rppa:user-"+uuidv4();
             username = $( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val();
-            console.log( "new user:", user, username );
             if ( user == undefined || username.length < 2) { return };
             var update = namespaces+"insert data {\n";
             update += user+` a foaf:Agent ;\n`;
@@ -76,9 +74,9 @@
             await putTRIPLES( update );
           }
           if ( user == undefined || username.length < 2 ) { return };
-          Cookies.set('RPPA-login-provider','orcid', { expires: 365 } );
-          Cookies.set('RPPA-login-user', user );
-          Cookies.set('RPPA-login-username', username );
+          Cookies.set('RPPA-login-provider','orcid', { expires: 365, secure: true } );
+          Cookies.set('RPPA-login-user', user, { secure: true } );
+          Cookies.set('RPPA-login-username', username, { secure: true } );
         }
         document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
       }
