@@ -406,6 +406,165 @@ async function getPerson( id ) {
             ?works ?p ?o .
             BIND(?works as ?s) 
         }
+		UNION
+		{   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+            ?p2 ?p ?o .
+            BIND(?p2 as ?s) 
+        }
+        UNION
+        {   
+    		?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth ?p ?o .
+            BIND(?birth as ?s)
+        }
+        UNION
+        {   
+    		?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death ?p ?o .
+            BIND(?death as ?s)
+        } 
+        UNION 
+        {   
+        	?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?birthDate .
+            ?birthDate ?p ?o.
+            BIND(?birthDate as ?s)
+        }
+        UNION
+        {   
+        	?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?birthDate .
+            ?birthDate <http://www.cidoc-crm.org/cidoc-crm/P86_falls_within> ?birthYear .
+            ?birthYear ?p ?o.
+            BIND(?birthYear as ?s)
+        }
+        UNION 
+        {   
+        	?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?deathDate .
+            ?deathDate ?p ?o.
+            BIND(?deathDate as ?s)
+        } 
+        UNION
+        {   
+        	?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?deathDate .
+            ?deathDate <http://www.cidoc-crm.org/cidoc-crm/P86_falls_within> ?deathYear .
+            ?deathYear ?p ?o.
+            BIND(?deathYear as ?s)
+        }
+		UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?birthPlace .
+            ?birthPlace ?p ?o.
+            BIND(?birthPlace as ?s)
+        }
+        UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?birthPlace .
+            ?birthPlace <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?birthCountry .
+            ?birthCountry <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?birthContinent .
+            ?birthContinent ?p ?o .
+            BIND(?birthContinent as ?s)
+        }
+        UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth .
+            ?birth <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?birthPlace .
+            ?birthPlace <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?birthCountry .
+            ?birthCountry ?p ?o.
+            BIND(?birthCountry as ?s)
+        }
+        UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?deathPlace .
+            ?deathPlace ?p ?o.
+            BIND(?deathPlace as ?s)
+        }
+        UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?deathPlace .
+            ?deathPlace <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?deathCountry .
+            ?deathCountry <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?deathContinent .
+            ?deathContinent ?p ?o.
+            BIND(?deathContinent as ?s)
+        }
+        UNION 
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> ?death .
+            ?death <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?deathPlace .
+            ?deathPlace <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?deathCountry .
+            ?deathCountry ?p ?o.
+            BIND(?deathCountry as ?s)
+        }
+        UNION
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence> ?nationality .
+            ?nationality ?p ?o .
+            BIND(?nationality as ?s) 
+        }
+		UNION
+        {   ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?person .
+    		OPTIONAL {
+			    ?workscreation <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?p2 .
+    		}
+    		?p2 <http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence> ?nationality .
+            ?nationality crm:P89_falls_within ?Continent .
+			?Continent ?p ?o .
+			BIND(?Continent as ?s) 
+        }
         FILTER (?person = <`+id+`>)
         BIND ( <default> AS ?g)
     }`;
@@ -2064,8 +2223,13 @@ async function loadLayout() {
 			}
             break;
 		case "id":
+		case "rppa":
 			var entity;
-			entity = "https://www.romanticperiodpoetry.org"+window.location.pathname.split('https://www.romanticperiodpoetry.org/id/')[0]
+			if ( window.location.pathname.split('/')[1] == "id" ) {
+				entity = "https://www.romanticperiodpoetry.org"+window.location.pathname.split('https://www.romanticperiodpoetry.org/id/')[0]
+			} else {
+				entity = "https://www.romanticperiodpoetry.org"+window.location.pathname.split('https://www.romanticperiodpoetry.org/rppa/')[0]
+			}
 			var q = namespaces+`SELECT * WHERE { 
 				{ 
 					<`+entity+`> ?p ?o . 

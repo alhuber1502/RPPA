@@ -5,7 +5,7 @@
 </Files>
 
 IndexIgnore *
-Options -Indexes +FollowSymLinks
+Options -Indexes +FollowSymLinks -Multiviews
 
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
@@ -26,6 +26,7 @@ Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
 RewriteEngine On
 RewriteRule   ^(.*?)/rppaid.*?/(.*)$	/$1/$2			[L]
 RewriteRule   ^id/(.+)$			/entity.shtml?$1	[L,B]
+RewriteRule   ^rppa/(.+)$		/entity.shtml?$1	[L,B]
 
 # make pages extension-less
 RewriteCond %{REQUEST_FILENAME} !-d

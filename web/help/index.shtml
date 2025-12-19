@@ -96,6 +96,11 @@
                 node on hover and in the Graph information panel on the right when
                 clicking on a node.
               </p>
+
+              <p>Double click on works, expressions, contexts,
+                  actualizations, or interrelations at any time to bring up
+                  detailed content views.</p>
+
               <div class="row">
                 <div class="col">
                   <h4>Colours</h4>
@@ -360,11 +365,10 @@
                powers the <a href="/query/gui/">RPPA Query Service</a>.
               </p>
               <h3 id="query_service">Access to the RPPA knowledge base</h3>
-                <!--
+                
                   <ul>
-                    <li>
-                -->
-              <p>The RPPA knowledge base is hosted on the <a
+                    <li><em>SPARQL:</em><br> 
+              The RPPA knowledge base is hosted on the <a
               href="https://www.prisms.digital" target="_blank" class="external">PRISMS</a> OpenScholarship
               platform and is accessible via a dedicated RPPA SPARQL endpoint
               &lt;https://data.prisms.digital/query/rppa/sparql&gt;.  The
@@ -380,23 +384,17 @@
                     class="external" target="_blank">Wikibase Query Service
                    GUI</a>,
                     but you should be able to use any SPARQL GUI, e.g. <a href="https://yasgui.triply.cc/" class="external" target="_blank">Yasgui</a>, with the above endpoint URI.
-                  </p>
-
-                  
-                    <!--
                     </li>
-                    <li><em>RDF dumps:</em><br> RDF dumps of the entire PRISMS graph
+                    <li><em>RDF dumps:</em><br> RDF dumps of the entire RPPA graph
                     (currently updated weekly) are made available in <a href="https://www.w3.org/TR/n-quads/" class="external" target="_blank">N-Quads format</a>:<br>
-                    <a href="/data/dumps/PRISMS-RDFdump@latest.nq.gz"><i class="fas fa-file-archive"></i> 
-                    PRISMS-RDFdump@latest.nq.gz</a>
-                    ( @latest=2025-11-30T03:35:09Z
-            )<br>
+                    <a href="/data/dumps/-RDFdump@latest.nq.gz"><i class="fas fa-file-archive"></i> 
+                    RPPA-RDFdump@latest.nq.gz</a>
+                    ( @latest=<!--#include virtual="/data/dumps/latest" -->)<br>
                     <em>Citation suggestion:</em> 
-                    <em>PRISMS RDF dump</em>, www.prisms.digital, Huber
-                    Digital, 06 Nov 2022, https://www.prisms.digital/data/dumps/PRISMS-RDFdump2022-11-06T03:35:16Z.nq.gz
+                    <em>RPPA RDF dump</em>, www.romanticperiodpoetry.org, Huber
+                    Digital, 16 Dec 2025, https://www.romanticperiodpoetry.org/data/dumps/RPPA-RDFdump2025-12-16T09:44:46Z.nq.gz
                     </li>
                   </ul>
-                  -->
             </div>
 
           <div>

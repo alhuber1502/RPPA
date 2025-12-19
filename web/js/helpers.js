@@ -713,7 +713,7 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Please sign into RPPA</h5>
+                    <h5 class="modal-title">Please connect to RPPA</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -732,7 +732,7 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                             appId      : '1289578978503896',
                             cookie     : true,
                             xfbml      : true,
-                            version    : 'v18.0'
+                            version    : 'v24.0'
                         });
                         FB.AppEvents.logPageView();
                     //    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
