@@ -29,6 +29,9 @@ newspapers, and many more relevant contexts.
 * Bootstrap 5
 * JavaScript/jQuery3
 * JSON-LD
+* Leaflet
+* Apache Jena
+* RDF
 
 ## Contact
 * ORCID: [Alexander Huber](http://orcid.org/0000-0002-2151-6415)
