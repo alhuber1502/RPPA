@@ -74,9 +74,10 @@
             await putTRIPLES( update );
           }
           if ( user == undefined || username.length < 2 ) { return };
-          Cookies.set('RPPA-login-provider','orcid', { expires: 365, secure: true } );
-          Cookies.set('RPPA-login-user', user, { secure: true } );
-          Cookies.set('RPPA-login-username', username, { secure: true } );
+          RPPA_Auth.setUser( user );
+          Cookies.set('RPPA-login-provider','orcid', Object.assign( { expires: 365 }, cookieDefaults ) );
+          Cookies.set('RPPA-login-user', user, cookieDefaults );
+          Cookies.set('RPPA-login-username', username, cookieDefaults );
         }
         document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
       }

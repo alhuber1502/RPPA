@@ -846,9 +846,10 @@ function testAPI() {                      // Testing Graph API after login.  See
             await putTRIPLES( update );
         }
         if ( user == undefined || username == 'undefined') { return; }
-        Cookies.set('RPPA-login-provider','fb', { expires: 365, secure: true } );
-        Cookies.set('RPPA-login-user', user, { secure: true } );
-        Cookies.set('RPPA-login-username', username, { secure: true } );
+        RPPA_Auth.setUser( user );
+        Cookies.set('RPPA-login-provider','fb', Object.assign( { expires: 365 }, cookieDefaults ) );
+        Cookies.set('RPPA-login-user', user, cookieDefaults );
+        Cookies.set('RPPA-login-username', username, cookieDefaults );
         if ( $( "#myModal" ).length ) {
             $( "#myModal" ).hide();
             $( ".modal-backdrop" ).remove();
@@ -906,9 +907,10 @@ async function handleCredentialResponse(response) {
         await putTRIPLES( update );
     }
     if ( user == undefined || username == 'undefined') { return; }
-    Cookies.set( 'RPPA-login-provider','google', { expires: 365, secure: true } );
-    Cookies.set('RPPA-login-user', user, { secure: true } );
-    Cookies.set('RPPA-login-username', username, { secure: true } );
+    RPPA_Auth.setUser( user );
+    Cookies.set( 'RPPA-login-provider','google', Object.assign( { expires: 365 }, cookieDefaults ) );
+    Cookies.set('RPPA-login-user', user, cookieDefaults );
+    Cookies.set('RPPA-login-username', username, cookieDefaults );
     if ( $( "#myModal" ).length ) {
         $( "#myModal" ).hide();
         $( ".modal-backdrop" ).remove();

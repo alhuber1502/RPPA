@@ -89,7 +89,7 @@
 	        css_link.appendTo('head'); 
 
 	        /******* Load jsrasign  *******/
-	        $.getScript( "https://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js", function( data, textStatus, jqxhr ) { 
+	        $.getScript( "/js/jsrsasign-all-min.js", function( data, textStatus, jqxhr ) { 
 				//check for response - if exists process it
 				if (getFragmentParameterByName("id_token")){
 					var id_token = getFragmentParameterByName("id_token");

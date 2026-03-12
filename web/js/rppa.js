@@ -1,6 +1,14 @@
 // RPPA
 
 // global settings
+var RPPA_Auth = (function() {
+    var _user = undefined;
+    return Object.freeze({
+        setUser: function(u) { if ( _user === undefined ) _user = u; },
+        verify:  function(u) { return _user !== undefined && _user === u; },
+        clear:   function()  { _user = undefined; }
+    });
+})();
 var user = undefined, username = undefined;
 var workbench = {}, provider_img = '', contexts, skos, contributors;
 var domain = "https://www.romanticperiodpoetry.org";
@@ -21,6 +29,7 @@ if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
     SOLR_RPPA = "http://192.168.1.2:8983/solr/rppa/select";
 }
 
+var cookieDefaults = { sameSite: 'Lax', secure: location.protocol === 'https:' };
 var namespaces = '';
 // load PRISMS JSON-LD context and create namespaces
 $.ajax({ url: "/rppa.jsonld", dataType: 'json', async: false,
@@ -1683,7 +1692,7 @@ function getJSONLD( BGquery, mode ) {
 
 // update RDF store (on completed publishable user-contribution)
 function putTRIPLES( BGupdate ) {
-    if ( user.startsWith( "rppa:" ) ) {
+    if ( user.startsWith( "rppa:" ) && RPPA_Auth.verify( user ) ) {
         return new Promise(function(resolve, reject) {
             $.ajax({
                 type: "POST",
@@ -4256,6 +4265,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         user = "rppa:user-9bf0ccc9-dcaa-4e57-9b83-b8a08d2614cb";
         username = "Alexander Huber";
+    }
+    if ( user !== undefined ) {
+        RPPA_Auth.setUser( user );
+        Object.defineProperty( window, 'user', { value: user, writable: false, configurable: false } );
     }
     if ( user != undefined && username != 'undefined' ) {
         $( ".sso-sign-in" ).remove();
