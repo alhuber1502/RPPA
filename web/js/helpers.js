@@ -856,7 +856,7 @@ function testAPI() {                      // Testing Graph API after login.  See
             var goto = Cookies.get( 'RPPA-login-redirect' ) || '/'
             window.location = goto, true;
             $( ".sso-sign-in" ).remove();
-            $( "#username" ).html( username );
+            $( "#username" ).text( username );
             provider_img = Cookies.get( 'RPPA-login-provider' );
             if ( provider_img == 'orcid' ) {
                 provider_img = ` <i class="fa-brands fa-orcid"></i>`
@@ -917,7 +917,7 @@ async function handleCredentialResponse(response) {
         var goto = Cookies.get( 'RPPA-login-redirect' ) || '/'
         window.location = goto, true;
         $( ".sso-sign-in" ).remove();
-        $( "#username" ).html( username );
+        $( "#username" ).text( username );
         provider_img = Cookies.get( 'RPPA-login-provider' );
         if ( provider_img == 'orcid' ) {
             provider_img = ` <i class="fa-brands fa-orcid"></i>`
