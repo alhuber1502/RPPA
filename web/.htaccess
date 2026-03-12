@@ -21,7 +21,7 @@ Options -Indexes +FollowSymLinks -Multiviews
 </IfModule>
 
 Header add Access-Control-Allow-Origin "*"
-Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
+Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS"
 
 RewriteEngine On
 RewriteRule   ^(.*?)/rppaid.*?/(.*)$	/$1/$2			[L]
