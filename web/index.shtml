@@ -40,8 +40,8 @@
 
       /* ── HERO ───────────────────────────────────────────── */
       #archive-hero {
-        min-height: 92vh;
-        padding-top: 60px;
+        min-height: calc(92vh - 60px);
+        margin-top: 60px;
         position: relative;
         overflow: hidden;
         display: flex;
