@@ -840,9 +840,8 @@
 
       /* ══════════════════════════════════════════════════
          buildPortraitWall
-         Picks 40 random persons from persons.json,
-         builds <img> tiles and injects into #portraitWall.
-         Images that 404 silently remove their tile.
+         Only includes persons that have an img property in
+         persons.json (i.e. a known portrait exists).
          ══════════════════════════════════════════════════ */
       function buildPortraitWall() {
         var wall = document.getElementById('portraitWall');
@@ -861,15 +860,19 @@
             var rows = Math.max(Math.ceil(h / 180), 3);
             var needed = cols * rows;
 
-            /* Set explicit grid template so every cell is accounted for */
             wall.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
             wall.style.gridTemplateRows    = 'repeat(' + rows + ', 1fr)';
 
-            /* Build a pool of exactly needed IDs, repeating if necessary */
-            var allIds = shuffle(Object.keys(data));
-            var pool   = [];
+            /* Only use persons that have a known portrait */
+            var withImg = Object.keys(data).filter(function (id) {
+              return data[id].img;
+            });
+            shuffle(withImg);
+
+            /* Repeat the pool to fill the exact grid */
+            var pool = [];
             while (pool.length < needed) {
-              pool = pool.concat(shuffle(allIds.slice()));
+              pool = pool.concat(withImg.slice());
             }
             pool = pool.slice(0, needed);
 
@@ -881,8 +884,6 @@
               img.src     = '/images/authors/' + id + '.jpg';
               img.alt     = '';
               img.loading = 'lazy';
-              /* Hide rather than remove so the grid cell stays occupied */
-              img.onerror = function () { this.style.visibility = 'hidden'; };
               div.appendChild(img);
               frag.appendChild(div);
             });
@@ -950,13 +951,6 @@
           .catch(function () { elNations.textContent = '?'; check(); });
       }
 
-      /* ══════════════════════════════════════════════════
-         buildPortraitGrid
-         Picks 20 random persons, builds portrait cards with
-         name (First Last), nationality, and birth–death
-         year range. Cards whose portrait image returns 404
-         are hidden via onerror so the grid stays clean.
-         ══════════════════════════════════════════════════ */
       /* After all images load/error, detect how many columns the grid
          has at the current viewport width and hide cards that would
          form an incomplete last row. */
@@ -996,7 +990,12 @@
         ]).then(function (results) {
             var persons = results[0];
             var nations = results[1];
-            var ids  = shuffle(Object.keys(persons)).slice(0, 60);
+
+            /* Only pick persons that have a known portrait */
+            var withImg = Object.keys(persons).filter(function (id) {
+              return persons[id].img;
+            });
+            var ids  = shuffle(withImg).slice(0, 60);
             var frag = document.createDocumentFragment();
             var pending = ids.length;
 
@@ -1010,12 +1009,13 @@
 
               var dispName = formatName(p.name || id);
 
+              /* Nationality: use part before first comma */
               var natCode = p.nat || '';
               var natName = '';
               if (natCode) {
                 var n = nations[natCode]
                      || nations[natCode.split('-')[0]];
-                natName = n ? n.name : natCode;
+                natName = n ? n.name.split(',')[0] : natCode;
               }
 
               var born  = p.dob ? p.dob.substring(0, 4) : '';
