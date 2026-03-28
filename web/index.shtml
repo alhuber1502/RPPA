@@ -64,6 +64,7 @@
 
       .portrait-wall-item {
         overflow: hidden;
+        background: var(--linen);
       }
 
       .portrait-wall-item img {
@@ -850,20 +851,27 @@
         fetch('/data/map/data/persons.json')
           .then(function (r) { return r.json(); })
           .then(function (data) {
-            /* Calculate how many tiles are needed to cover the viewport */
-            var colW   = 134; /* 130px min + 4px gap */
-            var rowH   = 180; /* approximate row height */
-            var cols   = Math.ceil(window.innerWidth  / colW) + 1;
-            var rows   = Math.ceil(window.innerHeight / rowH) + 1;
+            var hero = wall.parentElement;
+            var w = hero.offsetWidth  || window.innerWidth;
+            var h = hero.offsetHeight || window.innerHeight;
+
+            /* Calculate an explicit grid that exactly covers the hero */
+            var minCol = 130;
+            var cols = Math.ceil(w / minCol);
+            var rows = Math.max(Math.ceil(h / 180), 3);
             var needed = cols * rows;
 
-            /* Build a shuffled pool large enough, repeating IDs if necessary */
+            /* Set explicit grid template so every cell is accounted for */
+            wall.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+            wall.style.gridTemplateRows    = 'repeat(' + rows + ', 1fr)';
+
+            /* Build a pool of exactly needed IDs, repeating if necessary */
             var allIds = shuffle(Object.keys(data));
             var pool   = [];
-            while (pool.length < needed + 30) {
-              pool = pool.concat(allIds.slice());
+            while (pool.length < needed) {
+              pool = pool.concat(shuffle(allIds.slice()));
             }
-            pool = shuffle(pool).slice(0, needed + 30);
+            pool = pool.slice(0, needed);
 
             var frag = document.createDocumentFragment();
             pool.forEach(function (id) {
@@ -873,10 +881,8 @@
               img.src     = '/images/authors/' + id + '.jpg';
               img.alt     = '';
               img.loading = 'lazy';
-              img.onerror = function () {
-                var tile = this.closest('.portrait-wall-item');
-                if (tile) tile.remove();
-              };
+              /* Hide rather than remove so the grid cell stays occupied */
+              img.onerror = function () { this.style.visibility = 'hidden'; };
               div.appendChild(img);
               frag.appendChild(div);
             });
@@ -951,6 +957,35 @@
          year range. Cards whose portrait image returns 404
          are hidden via onerror so the grid stays clean.
          ══════════════════════════════════════════════════ */
+      /* After all images load/error, detect how many columns the grid
+         has at the current viewport width and hide cards that would
+         form an incomplete last row. */
+      function trimIncompleteRow(grid) {
+        requestAnimationFrame(function () {
+          var cards = Array.prototype.filter.call(
+            grid.querySelectorAll('.poet-portrait-card'),
+            function (c) { return c.style.display !== 'none'; }
+          );
+          if (cards.length < 2) return;
+
+          var firstTop = cards[0].getBoundingClientRect().top;
+          var cols = 0;
+          for (var i = 0; i < cards.length; i++) {
+            if (Math.abs(cards[i].getBoundingClientRect().top - firstTop) < 3) {
+              cols++;
+            } else { break; }
+          }
+          if (cols < 1) return;
+
+          var excess = cards.length % cols;
+          if (excess > 0) {
+            for (var j = cards.length - excess; j < cards.length; j++) {
+              cards[j].style.display = 'none';
+            }
+          }
+        });
+      }
+
       function buildPortraitGrid() {
         var grid = document.getElementById('portraitGrid');
         if (!grid) return;
@@ -963,14 +998,18 @@
             var nations = results[1];
             var ids  = shuffle(Object.keys(persons)).slice(0, 60);
             var frag = document.createDocumentFragment();
+            var pending = ids.length;
+
+            function onImageSettled() {
+              pending--;
+              if (pending <= 0) trimIncompleteRow(grid);
+            }
 
             ids.forEach(function (id) {
               var p = persons[id];
 
-              /* Name: "Last, First" → "First Last" */
               var dispName = formatName(p.name || id);
 
-              /* Nationality: resolve ISO code → country name */
               var natCode = p.nat || '';
               var natName = '';
               if (natCode) {
@@ -979,7 +1018,6 @@
                 natName = n ? n.name : natCode;
               }
 
-              /* Birth–death years from ISO dates */
               var born  = p.dob ? p.dob.substring(0, 4) : '';
               var died  = p.dod ? p.dod.substring(0, 4) : '';
               var dates = (born || died)
@@ -988,23 +1026,22 @@
 
               var meta = [natName, dates].filter(Boolean).join(' \u00b7 ');
 
-              /* Card */
               var card = document.createElement('a');
               card.className = 'poet-portrait-card';
               card.href      = '/authors/#id/' + id;
               card.title     = dispName;
 
-              /* Portrait */
               var img = document.createElement('img');
               img.src     = '/images/authors/' + id + '.jpg';
               img.alt     = dispName;
               img.loading = 'lazy';
+              img.onload  = onImageSettled;
               img.onerror = function () {
                 var c = this.closest('.poet-portrait-card');
                 if (c) c.style.display = 'none';
+                onImageSettled();
               };
 
-              /* Info */
               var info   = document.createElement('div');
               info.className = 'poet-portrait-info';
 
