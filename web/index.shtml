@@ -40,8 +40,8 @@
 
       /* ── HERO ───────────────────────────────────────────── */
       #archive-hero {
-        min-height: calc(92vh - 60px);
-        margin-top: 60px;
+        min-height: calc(100vh - 95px);
+        margin-top: 55px;
         position: relative;
         overflow: hidden;
         display: flex;
@@ -951,65 +951,45 @@
           .catch(function () { elNations.textContent = '?'; check(); });
       }
 
-      /* After all images load/error, detect how many columns the grid
-         has at the current viewport width and hide cards that would
-         form an incomplete last row. */
-      function trimIncompleteRow(grid) {
-        requestAnimationFrame(function () {
-          var cards = Array.prototype.filter.call(
-            grid.querySelectorAll('.poet-portrait-card'),
-            function (c) { return c.style.display !== 'none'; }
-          );
-          if (cards.length < 2) return;
-
-          var firstTop = cards[0].getBoundingClientRect().top;
-          var cols = 0;
-          for (var i = 0; i < cards.length; i++) {
-            if (Math.abs(cards[i].getBoundingClientRect().top - firstTop) < 3) {
-              cols++;
-            } else { break; }
-          }
-          if (cols < 1) return;
-
-          var excess = cards.length % cols;
-          if (excess > 0) {
-            for (var j = cards.length - excess; j < cards.length; j++) {
-              cards[j].style.display = 'none';
-            }
-          }
-        });
-      }
-
+      /* ══════════════════════════════════════════════════
+         buildPortraitGrid
+         Fetches featured-poets.json (poets with both poems
+         and portraits, pre-built at build time), persons.json
+         and nations.json.  Detects the grid column count from
+         the container width and generates exactly 3 complete
+         rows of portrait cards.
+         ══════════════════════════════════════════════════ */
       function buildPortraitGrid() {
         var grid = document.getElementById('portraitGrid');
         if (!grid) return;
 
+        var MAX_ROWS = 3;
+
         Promise.all([
+          fetch('/data/featured-poets.json').then(function (r) { return r.json(); }),
           fetch('/data/map/data/persons.json').then(function (r) { return r.json(); }),
           fetch('/data/map/data/nations.json').then(function (r) { return r.json(); })
         ]).then(function (results) {
-            var persons = results[0];
-            var nations = results[1];
+            var featuredIds = results[0];
+            var persons     = results[1];
+            var nations     = results[2];
 
-            /* Only pick persons that have a known portrait */
-            var withImg = Object.keys(persons).filter(function (id) {
-              return persons[id].img;
-            });
-            var ids  = shuffle(withImg).slice(0, 60);
+            /* Detect how many columns the grid will produce */
+            var gridW  = grid.offsetWidth || window.innerWidth;
+            var minCol = 160; /* matches CSS minmax(160px, 1fr) */
+            var gap    = 24;  /* matches CSS gap: 1.5rem */
+            var cols   = Math.max(1, Math.floor((gridW + gap) / (minCol + gap)));
+            var count  = cols * MAX_ROWS;
+
+            var ids  = shuffle(featuredIds).slice(0, count);
             var frag = document.createDocumentFragment();
-            var pending = ids.length;
-
-            function onImageSettled() {
-              pending--;
-              if (pending <= 0) trimIncompleteRow(grid);
-            }
 
             ids.forEach(function (id) {
               var p = persons[id];
+              if (!p) return;
 
               var dispName = formatName(p.name || id);
 
-              /* Nationality: use part before first comma */
               var natCode = p.nat || '';
               var natName = '';
               if (natCode) {
@@ -1035,12 +1015,6 @@
               img.src     = '/images/authors/' + id + '.jpg';
               img.alt     = dispName;
               img.loading = 'lazy';
-              img.onload  = onImageSettled;
-              img.onerror = function () {
-                var c = this.closest('.poet-portrait-card');
-                if (c) c.style.display = 'none';
-                onImageSettled();
-              };
 
               var info   = document.createElement('div');
               info.className = 'poet-portrait-info';
