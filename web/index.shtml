@@ -56,16 +56,21 @@
         inset: 0;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-auto-rows: 1fr;
         gap: 4px;
         opacity: 0.35;
-        pointer-events: none; /* collage is decorative only */
+        pointer-events: none;
+      }
+
+      .portrait-wall-item {
+        overflow: hidden;
       }
 
       .portrait-wall-item img {
         width: 100%;
-        height: 200px;
+        height: 100%;
         object-fit: cover;
-        object-position: top;
+        object-position: top center;
         display: block;
         filter: sepia(15%) saturate(0.8);
       }
@@ -514,20 +519,20 @@
       /* The hero keeps its portrait-collage feel; content sections
          flip to a deep forest palette. */
       [data-bs-theme=dark] {
-        --cream:  #192b22;
-        --linen:  #1d3a2f;
-        --forest: #d4e8dc;
-        --stone:  #8fad9a;
-        --white:  #192b22;
+        --cream:  #1e1e1e;
+        --linen:  #2a2a2a;
+        --forest: #e8e2da;
+        --stone:  #9a9288;
+        --white:  #1e1e1e;
       }
-      [data-bs-theme=dark] body#home            { background: #192b22; color: var(--forest); }
+      [data-bs-theme=dark] body#home            { background: #1e1e1e; color: var(--forest); }
       [data-bs-theme=dark] #archive-hero        { background: var(--linen); }
-      [data-bs-theme=dark] .hero-glass-card     { background: rgba(25,43,34,0.88); border-color: rgba(196,137,111,0.35); }
+      [data-bs-theme=dark] .hero-glass-card     { background: rgba(30,30,30,0.9); border-color: rgba(196,137,111,0.35); }
       [data-bs-theme=dark] .archive-title       { color: var(--forest); }
       [data-bs-theme=dark] .archive-subtitle    { color: var(--stone); }
       [data-bs-theme=dark] .hero-label          { color: var(--stone); }
-      [data-bs-theme=dark] #stats-strip         { background: #0f1f17; }
-      [data-bs-theme=dark] #main-content        { background: #192b22; }
+      [data-bs-theme=dark] #stats-strip         { background: #141414; }
+      [data-bs-theme=dark] #main-content        { background: #1e1e1e; }
       [data-bs-theme=dark] .editorial-opener    { color: var(--forest); }
       [data-bs-theme=dark] .body-text           { color: var(--stone); }
       [data-bs-theme=dark] .content-heading     { color: var(--forest); }
@@ -539,7 +544,7 @@
       [data-bs-theme=dark] .poet-portrait-info  { background: var(--linen); }
       [data-bs-theme=dark] .poet-portrait-name  { color: var(--forest); }
       [data-bs-theme=dark] .poet-portrait-meta  { color: var(--stone); }
-      [data-bs-theme=dark] #bottom-row          { background: #192b22; }
+      [data-bs-theme=dark] #bottom-row          { background: #1e1e1e; }
       [data-bs-theme=dark] .feed-title          { color: var(--forest); }
     </style>
   </head>
@@ -845,22 +850,33 @@
         fetch('/data/map/data/persons.json')
           .then(function (r) { return r.json(); })
           .then(function (data) {
-            var ids = shuffle(Object.keys(data)).slice(0, 40);
-            var frag = document.createDocumentFragment();
+            /* Calculate how many tiles are needed to cover the viewport */
+            var colW   = 134; /* 130px min + 4px gap */
+            var rowH   = 180; /* approximate row height */
+            var cols   = Math.ceil(window.innerWidth  / colW) + 1;
+            var rows   = Math.ceil(window.innerHeight / rowH) + 1;
+            var needed = cols * rows;
 
-            ids.forEach(function (id) {
+            /* Build a shuffled pool large enough, repeating IDs if necessary */
+            var allIds = shuffle(Object.keys(data));
+            var pool   = [];
+            while (pool.length < needed + 30) {
+              pool = pool.concat(allIds.slice());
+            }
+            pool = shuffle(pool).slice(0, needed + 30);
+
+            var frag = document.createDocumentFragment();
+            pool.forEach(function (id) {
               var div = document.createElement('div');
               div.className = 'portrait-wall-item';
-
               var img = document.createElement('img');
-              img.src = '/images/authors/' + id + '.jpg';
-              img.alt = '';
+              img.src     = '/images/authors/' + id + '.jpg';
+              img.alt     = '';
               img.loading = 'lazy';
               img.onerror = function () {
                 var tile = this.closest('.portrait-wall-item');
                 if (tile) tile.remove();
               };
-
               div.appendChild(img);
               frag.appendChild(div);
             });
@@ -939,40 +955,46 @@
         var grid = document.getElementById('portraitGrid');
         if (!grid) return;
 
-        fetch('/data/map/data/persons.json')
-          .then(function (r) { return r.json(); })
-          .then(function (data) {
-            var ids  = shuffle(Object.keys(data)).slice(0, 20);
+        Promise.all([
+          fetch('/data/map/data/persons.json').then(function (r) { return r.json(); }),
+          fetch('/data/map/data/nations.json').then(function (r) { return r.json(); })
+        ]).then(function (results) {
+            var persons = results[0];
+            var nations = results[1];
+            var ids  = shuffle(Object.keys(persons)).slice(0, 60);
             var frag = document.createDocumentFragment();
 
             ids.forEach(function (id) {
-              var p = data[id];
+              var p = persons[id];
 
-              /* Display name */
-              var rawName  = resolveLabel(p.label) || id;
-              var dispName = formatName(rawName);
+              /* Name: "Last, First" → "First Last" */
+              var dispName = formatName(p.name || id);
 
-              /* Nationality */
-              var nat = resolveLabel(p.nationality) || '';
-
-              /* Birth–death */
-              var born = p.born  ? String(p.born)  : '';
-              var died = p.died  ? String(p.died)  : '';
-              var dates = '';
-              if (born || died) {
-                dates = (born || '?') + '\u2013' + (died || '');
+              /* Nationality: resolve ISO code → country name */
+              var natCode = p.nat || '';
+              var natName = '';
+              if (natCode) {
+                var n = nations[natCode]
+                     || nations[natCode.split('-')[0]];
+                natName = n ? n.name : natCode;
               }
 
-              /* Meta line */
-              var meta = [nat, dates].filter(Boolean).join(' \u00b7 ');
+              /* Birth–death years from ISO dates */
+              var born  = p.dob ? p.dob.substring(0, 4) : '';
+              var died  = p.dod ? p.dod.substring(0, 4) : '';
+              var dates = (born || died)
+                        ? (born || '?') + '\u2013' + (died || '')
+                        : '';
 
-              /* Build card anchor */
+              var meta = [natName, dates].filter(Boolean).join(' \u00b7 ');
+
+              /* Card */
               var card = document.createElement('a');
               card.className = 'poet-portrait-card';
-              card.href  = '/authors/' + id + '/';
-              card.title = dispName;
+              card.href      = '/authors/#id/' + id;
+              card.title     = dispName;
 
-              /* Portrait image */
+              /* Portrait */
               var img = document.createElement('img');
               img.src     = '/images/authors/' + id + '.jpg';
               img.alt     = dispName;
@@ -982,14 +1004,13 @@
                 if (c) c.style.display = 'none';
               };
 
-              /* Info block */
-              var info = document.createElement('div');
+              /* Info */
+              var info   = document.createElement('div');
               info.className = 'poet-portrait-info';
 
               var nameEl = document.createElement('div');
               nameEl.className   = 'poet-portrait-name';
               nameEl.textContent = dispName;
-
               info.appendChild(nameEl);
 
               if (meta) {
@@ -1007,7 +1028,7 @@
             grid.appendChild(frag);
           })
           .catch(function (err) {
-            console.warn('RPPA portrait grid: could not load persons.json', err);
+            console.warn('RPPA portrait grid: could not load data', err);
           });
       }
 
