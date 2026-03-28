@@ -278,7 +278,7 @@
         font-family: 'Source Serif 4', serif;
         font-size: 1.05rem;
         line-height: 1.85;
-        color: #3d3730;
+        color: var(--stone);
         margin-bottom: 1rem;
       }
 
@@ -508,6 +508,38 @@
           font-size: 1.6rem;
         }
       }
+
+      /* ── Dark mode overrides (Bootstrap data-bs-theme=dark) ────── */
+      /* The hero keeps its portrait-collage feel; content sections
+         flip to a deep forest palette. */
+      [data-bs-theme=dark] {
+        --cream:  #192b22;
+        --linen:  #1d3a2f;
+        --forest: #d4e8dc;
+        --stone:  #8fad9a;
+        --white:  #192b22;
+      }
+      [data-bs-theme=dark] body#home            { background: #192b22; color: var(--forest); }
+      [data-bs-theme=dark] #archive-hero        { background: var(--linen); }
+      [data-bs-theme=dark] .hero-glass-card     { background: rgba(25,43,34,0.88); border-color: rgba(196,137,111,0.35); }
+      [data-bs-theme=dark] .archive-title       { color: var(--forest); }
+      [data-bs-theme=dark] .archive-subtitle    { color: var(--stone); }
+      [data-bs-theme=dark] .hero-label          { color: var(--stone); }
+      [data-bs-theme=dark] #stats-strip         { background: #0f1f17; }
+      [data-bs-theme=dark] #main-content        { background: #192b22; }
+      [data-bs-theme=dark] .editorial-opener    { color: var(--forest); }
+      [data-bs-theme=dark] .body-text           { color: var(--stone); }
+      [data-bs-theme=dark] .content-heading     { color: var(--forest); }
+      [data-bs-theme=dark] .section-title       { color: var(--forest); }
+      [data-bs-theme=dark] .section-kicker      { color: var(--rose); }
+      [data-bs-theme=dark] .archive-nav-item    { color: var(--forest); border-color: rgba(196,137,111,0.2); }
+      [data-bs-theme=dark] #featured-section    { background: var(--linen); }
+      [data-bs-theme=dark] .poet-portrait-card  { background: var(--linen); }
+      [data-bs-theme=dark] .poet-portrait-info  { background: var(--linen); }
+      [data-bs-theme=dark] .poet-portrait-name  { color: var(--forest); }
+      [data-bs-theme=dark] .poet-portrait-meta  { color: var(--stone); }
+      [data-bs-theme=dark] #bottom-row          { background: #192b22; }
+      [data-bs-theme=dark] .feed-title          { color: var(--forest); }
     </style>
   </head>
 
