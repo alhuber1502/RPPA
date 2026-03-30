@@ -9,8 +9,11 @@ html {
 body {
   font-optical-sizing: auto;
   font-weight: 400;
-  font-style: normal;    
+  font-style: normal;
 }
+[data-bs-theme=light] body {
+  background-color: rgb(247, 243, 238);
+} 
 /*
 body#home {
     background-image: url('/images/4613002_home.jpg');
