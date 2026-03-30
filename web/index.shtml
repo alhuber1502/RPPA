@@ -123,7 +123,7 @@
       }
 
       .audio-link {
-        color: var(--rose);
+        color: var(--orange);
         text-decoration: none;
         font-size: 0.8em;
         vertical-align: middle;
@@ -158,8 +158,8 @@
       }
       .btn-forest:hover,
       .btn-forest:focus {
-        background: var(--rose);
-        border-color: var(--rose);
+        background: var(--orange);
+        border-color: var(--orange);
         color: var(--white) !important;
       }
 
@@ -208,7 +208,7 @@
         font-family: 'Oswald', sans-serif;
         font-size: 2.8rem;
         font-weight: 400;
-        color: var(--rose);
+        color: var(--orange);
         line-height: 1;
       }
 
@@ -248,7 +248,7 @@
         font-weight: 300;
         letter-spacing: 0.4em;
         text-transform: uppercase;
-        color: var(--rose);
+        color: var(--orange);
         margin-bottom: 0.5rem;
       }
 
@@ -278,7 +278,7 @@
         float: left;
         line-height: 0.75;
         margin: 0.05em 0.12em 0 0;
-        color: var(--rose);
+        color: var(--orange);
       }
 
       .body-text {
@@ -294,7 +294,7 @@
         text-decoration-thickness: 1px;
         text-underline-offset: 3px;
       }
-      .body-text a:hover { color: var(--rose); }
+      .body-text a:hover { color: var(--orange); }
 
       .text-rose { color: var(--rose) !important; }
 
@@ -305,7 +305,7 @@
         color: var(--forest);
         margin-top: 2rem;
         margin-bottom: 0.5rem;
-        border-left: 3px solid var(--rose);
+        border-left: 3px solid var(--orange);
         padding-left: 0.75rem;
       }
 
@@ -343,14 +343,14 @@
       }
 
       .archive-nav-item:hover .nav-arrow {
-        color: var(--rose);
+        color: var(--orange);
       }
 
       .nav-num {
         font-family: 'Oswald', sans-serif;
         font-weight: 300;
         font-size: 0.85rem;
-        color: var(--rose);
+        color: var(--orange);
         min-width: 2rem;
         flex-shrink: 0;
       }
@@ -538,7 +538,7 @@
       [data-bs-theme=dark] .body-text           { color: var(--stone); }
       [data-bs-theme=dark] .content-heading     { color: var(--forest); }
       [data-bs-theme=dark] .section-title       { color: var(--forest); }
-      [data-bs-theme=dark] .section-kicker      { color: var(--rose); }
+      [data-bs-theme=dark] .section-kicker      { color: var(--orange); }
       [data-bs-theme=dark] .archive-nav-item    { color: var(--forest); border-color: rgba(196,137,111,0.2); }
       [data-bs-theme=dark] #featured-section    { background: var(--linen); }
       [data-bs-theme=dark] .poet-portrait-card  { background: var(--linen); }
@@ -569,7 +569,7 @@
         <p class="hero-label">est. 2020 &middot; Open Access &middot; Global</p>
         <h1 class="archive-title">Romantic Period<br>Poetry Archive</h1>
         <p class="archive-subtitle">
-          A digital platform for the world&rsquo;s Romantic-era poetry &mdash;
+          A digital platform for the world&rsquo;s Romantic-era poetry: 
           annotated, contextualized, interconnected.
           <a href="#"
              onclick="document.getElementById('player').play(); return false;"
@@ -627,7 +627,8 @@
             <p class="section-kicker">About the Archive</p>
 
             <p class="editorial-opener">The Romantic Period Poetry
-              Archive&mdash;or <abbr title="Romantic Period Poetry Archive">RPPA</abbr>&mdash;is
+            Archive&mdash;or <abbr title="Romantic Period Poetry
+            Archive">RPPA</abbr> for short&mdash;is
               an open access digital platform for global Romantic-period poetry.
               RPPA conceptualizes Romanticism as a global, deeply interconnected
               phenomenon, as a period in international literary history.</p>
@@ -653,20 +654,19 @@
 
             <h2 class="content-heading">Contextuality</h2>
             <p class="body-text">Contexts establish a performative dialogue with a
-              text &mdash; resulting in meaning that only exists through their
+              text, resulting in meaning that only exists through their
               encounter. They always remain anchored, concrete, and purposeful:
               they perform transformative work in the text and vice versa. The
               promise of RPPA is to arrive at an understanding of the functions
-              of the transformative potential &mdash; in other words, an
-              interpretation &mdash; of these encounters. To this end, RPPA
+              of the transformative potential&mdash;in other words, an
+              interpretation&mdash;of these encounters. To this end, RPPA
               facilitates the collaborative, ontologically-underpinned, and
               open-ended annotation of its texts.</p>
 
             <h2 class="content-heading">Community</h2>
             <p class="body-text">RPPA is in <span style="font-variant:small-caps">open
-              beta</span> and accepting contributions.
-              <a href="#" class="sso-sign-in text-rose">Connect to RPPA</a>
-              to start contributing contexts &mdash; all contributions are
+              beta</span> and accepting contributions. Please feel free <a class="sso-sign-in" href="#">to connect to RPPA</a> to
+              start contributing contexts: all contributions are
               attributed and citable as micro-publications. We welcome
               contributions on any aspect of the texts&rsquo; poetic, semantic,
               formal, historical, national, or cultural dimensions, including
@@ -720,7 +720,7 @@
                 <span class="nav-arrow" aria-hidden="true">&rarr;</span>
               </a>
 
-              <a href="/query/" class="archive-nav-item">
+              <a href="/query/gui/" class="archive-nav-item">
                 <span class="nav-num">05</span>
                 <span class="nav-body">
                   <strong>Query</strong>
@@ -757,7 +757,7 @@
         <div class="row">
 
           <!-- ── CTA ────────────────────────────────────── -->
-          <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="col-lg-7 mb-5 mb-lg-0">
             <p class="section-kicker">Participate</p>
             <h2 class="section-title">Join the Archive</h2>
             <p class="body-text">RPPA is a collaborative scholarly platform open
@@ -767,21 +767,21 @@
               knowledge base.</p>
             <div class="action-row">
               <button class="btn btn-forest sso-sign-in" type="button">Connect to RPPA</button>
-              <a href="/help/" class="btn btn-outline-forest ms-2">Learn more</a>
+              <a href="/about/" class="btn btn-outline-forest ms-2">Learn more</a>
             </div>
           </div><!-- /.col-lg-8 -->
 
           <!-- ── Social feed ────────────────────────────── -->
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <p class="section-kicker">Social</p>
-            <h3 class="feed-title">Latest from RPPA</h3>
+            <!--<h3 class="feed-title">Latest from RPPA</h3>-->
             <script type="module" src="https://cdn.jsdelivr.net/npm/bsky-embed/dist/bsky-embed.es.js" async></script>
             <bsky-embed
               search="RomanticPeriodPoetryArchive"
               mode=""
               limit="5"
               load-more="false"
-              custom-styles="section { max-height:350px; overflow:scroll; } section a { color: #c4896f !important; }"
+              custom-styles="section { max-height:255px; overflow:scroll; } section a { color: #e07012 !important; }"
             ></bsky-embed>
           </div><!-- /.col-lg-4 -->
 
