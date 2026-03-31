@@ -2,15 +2,11 @@
 <html lang="en" class="h-100" data-bs-theme="auto">
 
   <head>
-    <!-- set: title, bodyID, active navigation -->
     <!--#config timefmt="%d %b %Y" -->
-    <!--#set var="title" value="Home" -->
+    <!--#set var="title" value="Login" -->
     <!--#set var="bodyid" value="home" -->
     <!--#set var="home" value="active" -->
-
     <!--#include virtual="/templates/head.shtml" -->
-    <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="/js/js.cookie.min.js"></script>
   </head>
 
   <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
@@ -22,70 +18,14 @@
     <div class="row">
       <div class="col-md-12">
         <h2>Redirecting...</h2>
-        <script src="/js/orcid-auth-widget-master/orcid-widget.js"></script>
-        <style>
-          #orcidWidget { display:none; }
-        </style>
-        <!-- ORCiD SSO -->
-        <div id="orcidWidget" style="margin:0 auto;"
-        data-size='lg' data-env='production'
-        data-clientid='APP-LOLR4JW8AREHAJ1I' data-redirecturi='https://www.romanticperiodpoetry.org/login/'></div>
       </div>
     </div>
   </div>
 </main>
 
 <script>
-
-// main 
-  $(document).ready( function(){
-
-    // SSO ORCiD
-    if ( $( "#orcidAuthSuccess") ) {
-      // check user exists
-      const myTimeout = setTimeout(getUser, 500);
-      async function getUser() {
-        if ($('#orcidId').length) {
-          var q=namespaces+` 
-            SELECT * WHERE {
-                ?s a foaf:Agent ;
-                foaf:name ?o ;
-                foaf:accountName <`+$( "#orcidId" ).val()+`> .
-              BIND( foaf:name AS ?p )
-            }`;
-          var usergraph = await getJSONLD( q, "quads" );
-          if ( usergraph.id ) {
-            // existing user
-            user = usergraph.id;
-            username = usergraph["foaf:name"];
-          } else {
-            // new user
-            user = "rppa:user-"+uuidv4();
-            username = $( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val();
-            if ( user == undefined || username.length < 2) { return };
-            var update = namespaces+"insert data {\n";
-            update += user+` a foaf:Agent ;\n`;
-            update += `skos:prefLabel """`+$( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val()+`""" ;\n`;
-            update += `foaf:name """`+$( "#orcidGivenName" ).val()+` `+$( "#orcidFamilyName" ).val()+`""" ;\n`;
-            update += `foaf:accountName <`+$( "#orcidId" ).val()+`> ;\n`;
-            update += `.\n}`;
-//            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
-//            await putTRIPLES( updel );
-            await putTRIPLES( update );
-          }
-          if ( user == undefined || username.length < 2 ) { return };
-          RPPA_Auth.setUser( user );
-          Cookies.set('RPPA-login-provider','orcid', Object.assign( { expires: 365 }, cookieDefaults ) );
-          Cookies.set('RPPA-login-user', user, cookieDefaults );
-          Cookies.set('RPPA-login-username', username, cookieDefaults );
-        }
-        document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
-      }
-    } else {
-      document.location = Cookies.get( 'RPPA-login-redirect' ) || '/'; 
-    }
-  });
-
+  // Legacy redirect — auth is now handled via /api/auth/*
+  window.location = '/';
 </script>
 
     <!--#include virtual="/templates/footer.shtml" -->

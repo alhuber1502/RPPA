@@ -28,6 +28,9 @@ RewriteRule   ^(.*?)/rppaid.*?/(.*)$	/$1/$2			[L]
 RewriteRule   ^id/(.+)$			/entity.shtml?$1	[L,B]
 RewriteRule   ^rppa/(.+)$		/entity.shtml?$1	[L,B]
 
+# exclude auth API from rewriting
+RewriteCond %{REQUEST_URI} !^/api/
+
 # make pages extension-less
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.shtml -f

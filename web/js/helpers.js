@@ -161,7 +161,9 @@ function publish( sparql ) {
         type: 'POST',
         data: { pub: sparql },
         success: function(result) {},
-        error: function( error ) {}
+        error: function( error ) {
+	    console.log( "FATAL PUBLISH error!",error );
+	}
     });
 }
 
@@ -717,59 +719,24 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:15px;"></i><br>
+                    <p><i class="fas fa-door-open" style="font-size:28px;margin-bottom:25px;"></i><br>
 
-                    <!-- ORCiD SSO -->
-                    <script src="/js/orcid-auth-widget-master/orcid-widget.js"></script>
-                    <div id="orcidWidget" style="margin:0 auto;"
-                    data-size='lg' data-env='production'
-                    data-clientid='APP-LOLR4JW8AREHAJ1I' data-redirecturi='https://www.romanticperiodpoetry.org/login/'></div>
+                    <button class="btn btn-lg mb-2 sso-provider-btn" id="sso-orcid"
+                        style="background-color:#a6ce39;color:#fff;width:275px;"
+                        onclick="RPPAAuth.signIn('orcid')">
+                        <i class="fa-brands fa-orcid"></i> Connect with ORCID
+                    </button><br>
+                    <button class="btn btn-lg mb-2 sso-provider-btn" id="sso-facebook"
+                        style="background-color:#1877f2;color:#fff;width:275px;"
+                        onclick="RPPAAuth.signIn('facebook')">
+                        <i class="fa-brands fa-facebook"></i> Continue with Facebook
+                    </button><br>
+                    <button class="btn btn-lg mb-2 sso-provider-btn" id="sso-google"
+                        style="background-color:#fff;color:#444;border:1px solid #ddd;width:275px;"
+                        onclick="RPPAAuth.signIn('google')">
+                        <i class="fa-brands fa-google"></i> Continue with Google
+                    </button><br>
 
-                    <!-- FB SSO -->
-                    <script>
-                    window.fbAsyncInit = function() {
-                        FB.init({
-                            appId      : '1289578978503896',
-                            cookie     : true,
-                            xfbml      : true,
-                            version    : 'v24.0'
-                        });
-                        FB.AppEvents.logPageView();
-                    //    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-                    //        statusChangeCallback(response);      // Returns the login status.
-                    //    });
-                    };
-                    (function(d, s, id){
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {return;}
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https://connect.facebook.net/en_US/sdk.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-                    </script>
-                    <div class="fb-login-button" config_id="1480790596480316" data-size="large" data-button-type="continue_with" data-layout="default" 
-                        data-auto-logout-link="false" data-onlogin="checkLoginState();" data-scope="public_profile" data-use-continue-as="false"></div>
-                    
-                    <!-- Google SSO -->
-                    <script src="https://accounts.google.com/gsi/client"></script> 
-                    <div id="g_id_onload"
-                        data-client_id="1056047910768-826v0a41c0trtntqnkh6slfprjp3t4fr.apps.googleusercontent.com"
-                        data-context="signin"
-                        data-ux_mode="popup"
-                        data-callback="handleCredentialResponse"
-                        data-login_uri="https://www.romanticperiodpoetry.org/login/"
-                        data-auto_prompt="false">
-                    </div>
-                    <div class="g_id_signin" style="margin-top: 20px;
-                    margin-left: 110px;"
-                        data-type="standard"
-                        data-shape="rectangular"
-                        data-theme="outline"
-                        data-text="continue_with"
-                        data-size="large"
-                        data-logo_alignment="left"
-                        data-width="245">
-                    </div><br/>
                     <div>
                         <span class="text-muted small">Having trouble authenticating? Please <a href="mailto:help@romanticperiodpoetry.org?subject=RPPA authentication">get in touch</a>.
                     </div>
@@ -788,148 +755,20 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
         backdrop: 'static',
         keyboard: false
     }).show();
-    Cookies.set('RPPA-login-redirect', document.location.pathname+document.location.hash );
+
+    // If user has previously authenticated with a specific provider,
+    // only show that provider's button
     var provider = Cookies.get( 'RPPA-login-provider' );
     if ( provider != undefined ) {
         if ( provider == 'google' ) {
-            $( "#orcidWidget" ).hide()
-            $( ".fb-login-button" ).hide()
-        } else if ( provider == 'fb' ) {
-            $( "#orcidWidget" ).hide()
-            $( ".g_id_signin" ).hide()
+            $( "#sso-orcid" ).hide();
+            $( "#sso-facebook" ).hide();
+        } else if ( provider == 'fb' || provider == 'facebook' ) {
+            $( "#sso-orcid" ).hide();
+            $( "#sso-google" ).hide();
         } else if ( provider == 'orcid' ) {
-            $( ".fb-login-button" ).hide()
-            $( ".g_id_signin" ).hide()
+            $( "#sso-facebook" ).hide();
+            $( "#sso-google" ).hide();
         }
     }
 });
-
-// FB SSO
-function statusChangeCallback(response) {    // Called with the results from FB.getLoginStatus().
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        testAPI();
-    } else {                           // Not logged into your webpage or we are unable to tell.
-//        FB.login();
-    }
-}
-function checkLoginState() {               // Called when a person is finished with the Login Button.
-    FB.getLoginStatus(function(response) {   // See the onlogin handler
-        statusChangeCallback(response);
-    });
-}
-function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    FB.api('/me', async function(response) {
-        var q=namespaces+` 
-        SELECT * WHERE {
-            ?s a foaf:Agent ;
-                foaf:name ?o ;
-                foaf:accountName <https://www.facebook.com/`+response.id+`> .
-            BIND( foaf:name AS ?p )
-        }`;
-        var usergraph = await getJSONLD( q, "quads" );
-        if ( usergraph.hasOwnProperty( 'id' ) ) {
-            user = usergraph.id;
-            username = usergraph["foaf:name"];
-        } else {
-            // new user
-            user = "rppa:user-"+uuidv4();
-            username = response.name;
-            if ( user == undefined || username == 'undefined') { return; }
-            var update = namespaces+"insert data {\n";
-            update += user+` a foaf:Agent ;\n`;
-            update += `skos:prefLabel """`+response.name+`""" ;\n`;
-            update += `foaf:name """`+response.name+`""" ;\n`;
-            update += `foaf:accountName <https://www.facebook.com/`+response.id+`> ;\n`;
-            update += `.\n}`;
-        //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
-        //            await putTRIPLES( updel );
-            await putTRIPLES( update );
-        }
-        if ( user == undefined || username == 'undefined') { return; }
-        RPPA_Auth.setUser( user );
-        Cookies.set('RPPA-login-provider','fb', Object.assign( { expires: 365 }, cookieDefaults ) );
-        Cookies.set('RPPA-login-user', user, cookieDefaults );
-        Cookies.set('RPPA-login-username', username, cookieDefaults );
-        if ( $( "#myModal" ).length ) {
-            $( "#myModal" ).hide();
-            $( ".modal-backdrop" ).remove();
-            var goto = Cookies.get( 'RPPA-login-redirect' ) || '/'
-            window.location = goto, true;
-            $( ".sso-sign-in" ).remove();
-            $( "#username" ).text( username );
-            provider_img = Cookies.get( 'RPPA-login-provider' );
-            if ( provider_img == 'orcid' ) {
-                provider_img = ` <i class="fa-brands fa-orcid"></i>`
-            } else if ( provider_img == 'fb' ) {
-                provider_img = ` <i class="fa-brands fa-facebook"></i>`
-            } else if ( provider_img == 'google' ) {
-                provider_img = ` <i class="fa-brands fa-google"></i>`
-            }
-            $( "#provider" ).html( provider_img );
-            $( "a[data-mode='edit']" ).attr( "aria-disabled", "false" );
-            $( "a[data-mode='edit']" ).attr( "role", "button" );
-            $( "a[data-mode='edit']" ).css( "opacity", "1" );
-        }
-    });
-    return false;
-}
-
-// Google SSO
-async function handleCredentialResponse(response) {
-    // decodeJwtResponse() is a custom function defined by you
-    // to decode the credential response.
-    var response = await KJUR.jws.JWS.readSafeJSONString(b64utoutf8(response.credential.split(".")[1]));
-
-    var q=namespaces+` 
-        SELECT * WHERE {
-            ?s a foaf:Agent ;
-                foaf:name ?o ;
-                foaf:accountName <https://www.google.com/`+response.sub+`> .
-            BIND( foaf:name AS ?p )
-        }`;
-    var usergraph = await getJSONLD( q, "quads" );
-    if ( usergraph.hasOwnProperty( 'id' ) ) {
-        user = usergraph.id;
-        username = usergraph["foaf:name"];
-    } else {
-        // new user
-        user = "rppa:user-"+uuidv4();
-        username = response.name;
-        if ( user == undefined || username == 'undefined') { return; }
-        var update = namespaces+"insert data {\n";
-        update += user+` a foaf:Agent ;\n`;
-        update += `foaf:name """`+response.name+`""" ;\n`;
-        update += `skos:prefLabel """`+response.name+`""" ;\n`;
-        update += `foaf:accountName <https://www.google.com/`+response.sub+`> ;\n`;
-        update += `.\n}`;
-    //            var updel = namespaces+`\nWITH `+user+` DELETE { `+user+` ?p ?o } WHERE { `+user+` ?p ?o } `;
-    //            await putTRIPLES( updel );
-        await putTRIPLES( update );
-    }
-    if ( user == undefined || username == 'undefined') { return; }
-    RPPA_Auth.setUser( user );
-    Cookies.set( 'RPPA-login-provider','google', Object.assign( { expires: 365 }, cookieDefaults ) );
-    Cookies.set('RPPA-login-user', user, cookieDefaults );
-    Cookies.set('RPPA-login-username', username, cookieDefaults );
-    if ( $( "#myModal" ).length ) {
-        $( "#myModal" ).hide();
-        $( ".modal-backdrop" ).remove();
-        var goto = Cookies.get( 'RPPA-login-redirect' ) || '/'
-        window.location = goto, true;
-        $( ".sso-sign-in" ).remove();
-        $( "#username" ).text( username );
-        provider_img = Cookies.get( 'RPPA-login-provider' );
-        if ( provider_img == 'orcid' ) {
-            provider_img = ` <i class="fa-brands fa-orcid"></i>`
-        } else if ( provider_img == 'fb' ) {
-            provider_img = ` <i class="fa-brands fa-facebook"></i>`
-        } else if ( provider_img == 'google' ) {
-            provider_img = ` <i class="fa-brands fa-google"></i>`
-        }
-        $( "#provider" ).html( provider_img );
-        $( "a[data-mode='edit']" ).attr( "aria-disabled", "false" );
-        $( "a[data-mode='edit']" ).attr( "role", "button" );
-        $( "a[data-mode='edit']" ).css( "opacity", "1" );
-    }
-    return false;
-}

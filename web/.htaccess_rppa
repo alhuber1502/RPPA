@@ -34,6 +34,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.shtml -f
 RewriteRule ^(.*)$ $1.shtml [L]
 
+# exclude auth API from rewriting
+RewriteCond %{REQUEST_URI} !^/api/
+
 RewriteRule ^(.*?)/rppaid.*?/(.*)$	       /$1/$2			[L]
 RewriteRule ^id/(.+)$			       /entity.shtml?$1		[L,B]
 RewriteRule ^rppa/(.+)$			       /entity.shtml?$1		[L,B]
