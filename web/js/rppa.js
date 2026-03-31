@@ -4258,10 +4258,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const offcanvasList = [...offcanvasElementList].map(offcanvasEl => new bootstrap.Offcanvas(offcanvasEl))
 
     // SSO
-    //$( ".sso,.sso-sign-in" ).remove(); // TODO: remove after testing
     if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
         user = Cookies.get( 'RPPA-login-user' ) || undefined;
         username = Cookies.get( 'RPPA-login-username' ) || undefined;
+
+        // Check if we're returning from OAuth (URL has auth params
+        // set by the rppa-complete redirect from data.prisms.digital)
+        if ( user === undefined && typeof RPPAAuth !== 'undefined' ) {
+            var authResult = RPPAAuth.handleCallback();
+            if ( authResult ) {
+                user = authResult.user;
+                username = authResult.username;
+            }
+        }
     } else {
         user = "rppa:user-9bf0ccc9-dcaa-4e57-9b83-b8a08d2614cb";
         username = "Alexander Huber";
@@ -4275,7 +4284,7 @@ document.addEventListener("DOMContentLoaded", () => {
         provider_img = Cookies.get( 'RPPA-login-provider' );
         if ( provider_img == 'orcid' ) {
             provider_img = ` <i class="fa-brands fa-orcid"></i>`
-        } else if ( provider_img == 'fb' ) {
+        } else if ( provider_img == 'fb' || provider_img == 'facebook' ) {
             provider_img = ` <i class="fa-brands fa-facebook"></i>`
         } else if ( provider_img == 'google' ) {
             provider_img = ` <i class="fa-brands fa-google"></i>`
