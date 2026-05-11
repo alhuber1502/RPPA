@@ -254,7 +254,31 @@
           mapping it onto the evolution of forms, genres, and ideas/motifs;</li>
       <li>computational approaches from ontological modelling to
           network analysis and mapping approaches.</li>
-    </ul>  
+    </ul>
+
+    <h3 id="networks_contribute">How to contribute a context</h3>
+    <p>Any authenticated user can add contextual knowledge directly from a poem page.
+      Look for the <span style="font-size:x-large;color:#3aad9f;"><i class="fas fa-plus-circle" style="background-color:white;border-radius:50%;"></i></span>
+      icon in the poem header &mdash; clicking it opens the contribution form.
+      The process takes three steps:</p>
+    <ol>
+      <li><strong>Connect to RPPA</strong> &mdash; Sign in with your ORCID, Google, or Facebook account
+        using the <em>Connect</em> button in the top navigation bar. Authentication is handled
+        securely via OAuth&nbsp;2.0 and RPPA never stores your password.</li>
+      <li><strong>Navigate to a poem</strong> &mdash; Go to any full-text poem page.
+        Once signed in, the <span style="font-size:x-large;color:#3aad9f;"><i class="fas fa-plus-circle" style="background-color:white;border-radius:50%;"></i></span>
+        icon becomes active in the poem header. You can try this with
+        <a href="/works/#text/text00100">Keats&rsquo;s &ldquo;Ode to a Nightingale&rdquo;</a>, for example.</li>
+      <li><strong>Add a context</strong> &mdash; Click the icon to open the contribution panel,
+      select a context type (intertextual, intratextual, biographical,
+      typological), specify the text anchors, and fill in the details of your contextualization. When you are done, click
+        "Add Context". Your contribution is immediately attributed to you by name and is citable
+        as a micro-publication under a <a href="https://creativecommons.org/licenses/by-nc/4.0/"
+        class="external" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> licence.</li>
+    </ol>
+    <p>Contexts become part of RPPA&rsquo;s knowledge graph and are discoverable through
+      the network and map visualizations. If you have questions or would like guidance before
+      contributing, please <a href="#get_in_touch">get in touch</a>.</p>
 
 
               <h2 id="maps">Maps</h2>
@@ -460,8 +484,10 @@
                   <a class="nav-link ms-3 my-1"
                   href="#networks_ontologies">Ontologies and vocabularies</a>  
                   <a class="nav-link ms-3 my-1"
-                  href="#networks_scholarship">Open Scholarship</a>  
-                </nav> 
+                  href="#networks_scholarship">Open Scholarship</a>
+                  <a class="nav-link ms-3 my-1"
+                  href="#networks_contribute">How to contribute</a>
+                </nav>
               <a class="nav-link" href="#maps">Maps</a>
               <nav class="nav nav-pills flex-column">
                 <a class="nav-link ms-3 my-1" href="#mapping_global_romantic-period_poetry">Mapping global Romantic-period
