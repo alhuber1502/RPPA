@@ -14,6 +14,7 @@
   var language = {}
   language["ben"] = { 'id': 'ben', 'name': 'Bengali' }
   language["bul"] = { 'id': 'bul', 'name': 'Bulgarian' }
+  language["cat"] = { 'id': 'cat', 'name': 'Catalan' }
   language["ces"] = { 'id': 'ces', 'name': 'Czech' }
   language["dan"] = { 'id': 'dan', 'name': 'Danish' }
   language["deu"] = { 'id': 'deu', 'name': 'German' }
