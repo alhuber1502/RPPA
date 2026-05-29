@@ -3492,11 +3492,9 @@ function print_cxtmd( md, skos ) {
 
 // format context work
 function print_cxtwrk( md, content, skos ) {
-    console.log( md, content, skos );
     const work = [].concat( md );
     var formatted_metadata = '<div style="font-size:15px;"><h4><i class="fa-solid fa-right-left"></i> Contextualization</h4><dl>';
     $.each( work, function( i,v ) {
-        console.log( v );
         formatted_metadata += 
             `<dt style='word-break:break-word;'>Contextualization type/reference</dt>`+
             (v.hasOwnProperty("intro:R19_hasType")?
