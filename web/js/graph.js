@@ -646,8 +646,486 @@ async function getWork( id ) {
     return graph;
 }
 
+// ============================================================================
+// OntoPoetry structure view (Text-As-Graph) — WP-A
+// Renders a poem's POSTDATA/OntoPoetry encoding (stanza > line; words on demand
+// in later WPs) as a reading-order graph, in its own Cytoscape instance, lazily
+// when its "Structure" tab is first shown. Reuses SPARQL_RPPA + the loaded
+// cytoscape stack; intentionally decoupled from the entity graph (`cy`).
+// ============================================================================
+var opCY = {};  // per-text cytoscape instances, keyed by textURI
+
+// Poem structure query: explicit back-links + numbers (pdp:stanzaList / isLineOf /
+// stanzaNumber / relativeLineNumber) so we never traverse the rdf:List blank nodes.
+function opStructureQuery( textURI ) {
+    // Traverse the text's rdf:List collections (stanzaList -> stanzas -> each stanza's
+    // lineList -> lines). This works for full texts AND excerpts/fragments (excerpts
+    // omit pdp:stanzaNumber and the pdp:stanzaList back-link, so we can't key on those).
+    // Order is resolved client-side (rdf:List order isn't recoverable in plain SPARQL).
+    return `PREFIX pdp: <http://postdata.linhd.uned.es/ontology/postdata-poeticAnalysis#>
+PREFIX pdc: <http://postdata.linhd.uned.es/ontology/postdata-core#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?stanza ?snum ?srhyme ?disp ?displabel ?mtype ?mtypelabel ?line ?lnum ?ltext ?rhyme ?syll ?stress WHERE {
+  <`+textURI+`> pdp:hasStanzaList ?slist .
+  ?slist pdp:stanza/rdf:rest*/rdf:first ?stanza .
+  ?stanza pdp:hasLineList ?sll .
+  ?sll pdp:line/rdf:rest*/rdf:first ?line .
+  ?line pdp:relativeLineNumber ?lnum ; pdc:text ?ltext .
+  OPTIONAL { ?stanza pdp:stanzaNumber ?snum }
+  OPTIONAL { ?stanza pdp:hasStanzaPattern ?sp .
+    OPTIONAL { ?sp pdp:rhymeScheme ?srhyme }
+    OPTIONAL { ?sp pdp:rhymeDispositionType ?disp . OPTIONAL { ?disp skos:prefLabel ?displabel } }
+    OPTIONAL { ?sp pdp:metricalType ?mtype . OPTIONAL { ?mtype skos:prefLabel ?mtypelabel } }
+  }
+  OPTIONAL { ?line pdp:hasRhyme ?rh . ?rh pdp:rhymeLabel ?rhyme . }
+  OPTIONAL { ?line pdp:hasLinePattern ?lp .
+    OPTIONAL { ?lp pdp:syllabicMetricalScheme ?syll }
+    OPTIONAL { ?lp pdp:altPatterningMetricalScheme ?stress }
+  }
+}`;
+}
+
+// Lightweight SPARQL SELECT -> raw bindings. (getJSONLD can't be reused: it builds
+// N-Quads from ?s/?p/?o unconditionally and would throw on these column names.)
+function opFetch( query ) {
+    return new Promise( function( resolve ) {
+        $.ajax({ type: "POST", url: SPARQL_RPPA+"sparql", data: { query: query },
+            headers: { Accept: "application/json" } })
+        .done( function( result ) { resolve( ( result.results && result.results.bindings ) || [] ); } )
+        .fail( function( err ) { console.log( "OntoPoetry query failed", err ); resolve( [] ); } );
+    });
+}
+
+var OP_PALETTE = ['#cd6711','#0081A7','#2C6E49','#82204A','#974B0C','#7B1E7A','#1E3888','#754043','#09814A','#AA1155','#511730','#4A5859'];
+
+function opLastSeg( uri ) { return uri.split( /[\/#]/ ).pop(); }
+
+// assign a stable colour to each distinct rhyme label (poem-local)
+function opRhymeColours( labels ) {
+    var map = {}, i = 0;
+    labels.forEach( function( l ) { if ( l && !( l in map ) ) { map[ l ] = OP_PALETTE[ i % OP_PALETTE.length ]; i++; } } );
+    return map;
+}
+
+function opSafe( id ) { return id.replace( /[^a-zA-Z0-9]/g, '_' ); }
+
+// numeric suffix of an instance URI fragment (e.g. ...#pbrp-l02640 -> 2640),
+// used to recover document order when stanzaNumber is absent (excerpts)
+function opIdNum( uri ) { var m = String( uri ).split( '#' ).pop().match( /(\d+)$/ ); return m ? parseInt( m[ 1 ], 10 ) : 0; }
+
+// Convert a stored metrical scheme (@met, e.g. "-+|-+|-+|-+|-+/") to the ECEP
+// scansion convention from encodingDesc.xml: ˘ unstressed, ′ stressed, | foot
+// boundary, || caesura, / line boundary. Also derives a metre name (e.g. "iambic
+// pentameter") when the feet are regular. Returns { marks, name }.
+var OP_BREVE = '˘', OP_ICTUS = '′';
+var OP_FEET = {};
+OP_FEET[ OP_BREVE + OP_ICTUS ] = 'iambic';
+OP_FEET[ OP_ICTUS + OP_BREVE ] = 'trochaic';
+OP_FEET[ OP_ICTUS + OP_ICTUS ] = 'spondaic';
+OP_FEET[ OP_BREVE + OP_BREVE ] = 'pyrrhic';
+OP_FEET[ OP_BREVE + OP_BREVE + OP_ICTUS ] = 'anapaestic';
+OP_FEET[ OP_ICTUS + OP_BREVE + OP_BREVE ] = 'dactylic';
+OP_FEET[ OP_BREVE + OP_ICTUS + OP_BREVE ] = 'amphibrachic';
+var OP_FOOTCOUNT = [ '', 'monometer', 'dimeter', 'trimeter', 'tetrameter', 'pentameter', 'hexameter', 'heptameter', 'octameter' ];
+function opScansion( met ) {
+    if ( !met ) return { marks: '', name: '' };
+    var marks = String( met ).replace( /\+/g, OP_ICTUS ).replace( /-/g, OP_BREVE );
+    var feet = marks.split( '/' )[ 0 ].split( '|' )
+        .map( function( f ) { return f.replace( new RegExp( '[^' + OP_BREVE + OP_ICTUS + ']', 'g' ), '' ); } )
+        .filter( Boolean );
+    var name = '';
+    if ( feet.length ) {
+        var t0 = OP_FEET[ feet[ 0 ] ];
+        if ( t0 && feet.every( function( f ) { return OP_FEET[ f ] === t0; } ) ) {
+            name = t0 + ' ' + ( OP_FOOTCOUNT[ feet.length ] || ( feet.length + '-foot' ) );
+        }
+    }
+    return { marks: marks, name: name };
+}
+
+// Render the poem column at natural size (readable line width), centred
+// horizontally and aligned to the top; long poems scroll vertically. Fitting to
+// height instead shrank tall poems to a thin strip.
+function opFitColumn( cyInst ) {
+    var nodes = cyInst.nodes( '.op-line, .op-stanza' );
+    if ( !nodes.length ) return;
+    var w = cyInst.width() || 800;
+    cyInst.zoom( 1 );
+    var bb = nodes.boundingBox();                 // model == screen units at zoom 1
+    cyInst.pan({ x: ( w - bb.w ) / 2 - bb.x1, y: 50 - bb.y1 } );
+}
+
+// WP-C: a line's content (words AND punctuation) in reading order, via the
+// rppa:hasContentList rdf:Seq (rdf:_N members). Note: rppa: is the https namespace
+// in the store. tei:c spacing nodes carry no pdc:text and are filtered out.
+function opContentQuery( lineURI ) {
+    return `PREFIX rppa: <https://www.romanticperiodpoetry.org/rppa/>
+PREFIX pdp: <http://postdata.linhd.uned.es/ontology/postdata-poeticAnalysis#>
+PREFIX pdc: <http://postdata.linhd.uned.es/ontology/postdata-core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?item ?t ?pos ?type WHERE {
+  <`+lineURI+`> rppa:hasContentList ?cl .
+  ?cl ?member ?item .
+  FILTER( STRSTARTS( STR(?member), "http://www.w3.org/1999/02/22-rdf-syntax-ns#_" ) )
+  BIND( xsd:integer( STRAFTER( STR(?member), "#_" ) ) AS ?pos )
+  ?item pdc:text ?t .
+  OPTIONAL { ?item a ?type . FILTER( ?type IN ( pdp:Word, pdp:Punctuation ) ) }
+} ORDER BY ?pos`;
+}
+
+async function opExpandLine( cyInst, lineNode ) {
+    if ( lineNode.data( 'expanded' ) ) return;
+    var lid = lineNode.id();
+    var rows = await opFetch( opContentQuery( lid ) );
+    if ( !rows.length ) return;
+    var pos = lineNode.position(), cls = 'w-of-' + opSafe( lid ), add = [], prev = lid, x = pos.x + 260;
+    rows.forEach( function( v ) {
+        var iid = v.item.value, isPunct = !!( v.type && /Punctuation$/.test( v.type.value ) );
+        add.push({ group: 'nodes', classes: ( isPunct ? 'op-punct' : 'op-word' ) + ' op-tok ' + cls,
+            data: { id: iid, type: isPunct ? 'op-punct' : 'op-word', label: ( v.t.value || '' ).trim(), ofLine: lid },
+            position: { x: x, y: pos.y } });
+        add.push({ group: 'edges', classes: 'op-flow ' + cls,
+            data: { id: 'wf-' + opSafe( prev ) + '-' + opSafe( iid ), source: prev, target: iid } });
+        prev = iid; x += isPunct ? 36 : 74;
+    } );
+    cyInst.add( add );
+    lineNode.data( 'expanded', true );
+}
+
+function opCollapseLine( cyInst, lineNode ) {
+    cyInst.remove( '.w-of-' + opSafe( lineNode.id() ) );
+    lineNode.data( 'expanded', false );
+}
+
+function opFocusRhyme( cyInst, rh ) {
+    cyInst.elements().removeClass( 'op-dim op-focus' );
+    var lines = cyInst.nodes( '.op-line' );
+    var keep = lines.filter( function( n ) { return n.data( 'rhyme' ) === rh; } );
+    // dim the OTHER lines + all rhyme arcs; leave stanza frames + kept lines readable
+    lines.not( keep ).addClass( 'op-dim' );
+    cyInst.edges( '.op-rhyme' ).addClass( 'op-dim' );
+    keep.addClass( 'op-focus' );
+    keep.connectedEdges( '.op-rhyme' ).removeClass( 'op-dim' );
+}
+function opClearFocus( cyInst ) { cyInst.elements().removeClass( 'op-dim op-focus' ); }
+
+// WP-D: contribution on-ramp — right-click a line to start a context here
+function opAddContextMenu( cyInst, tid ) {
+    try {
+        cyInst.cxtmenu({
+            selector: 'node.op-line',
+            menuRadius: function() { return 36; },
+            commands: [ {
+                content: '<i class="fas fa-plus-circle"></i>',
+                select: function() {
+                    var loggedIn = ( typeof user !== 'undefined' && user ) || ( typeof username !== 'undefined' && username );
+                    if ( !loggedIn ) { alert( 'Please log in to contribute a context.' ); return; }
+                    location.hash = '#contribute/1/' + tid;
+                },
+                enabled: true
+            } ],
+            fillColor: 'rgba(42,157,143,0.85)',
+            activeFillColor: 'rgba(198,120,54,0.85)',
+            openMenuEvents: 'cxttapstart taphold',
+            itemColor: '#fff',
+            zIndex: 9999
+        });
+    } catch ( e ) { console.log( 'OntoPoetry: cxtmenu unavailable', e ); }
+}
+
+function opStyle() {
+    var dark = ( typeof theme !== 'undefined' && theme == 'dark' );
+    return [
+        { selector: 'node.op-line', style: {
+            'shape': 'round-rectangle',
+            'label': 'data(label)',
+            'text-wrap': 'wrap', 'text-max-width': 360,
+            'text-valign': 'center', 'text-halign': 'center',
+            'width': 'label', 'height': 'label', 'padding': '6px',
+            'font-size': '13px', 'font-family': 'Georgia, serif',
+            'background-color': dark ? '#222' : '#fff',
+            'border-width': 2, 'border-color': 'data(rhymecol)',
+            'color': dark ? '#eee' : '#222'
+        } },
+        // metre toggle: swap label to include the stress/syllable ribbon
+        { selector: 'node.op-line.op-metre', style: { 'label': 'data(labelMetre)' } },
+        // metrical deviation (line whose syllable count differs from the poem's mode)
+        { selector: 'node.op-line.op-dev', style: { 'border-style': 'double', 'border-width': 5 } },
+        { selector: 'node.op-stanza', style: {
+            'shape': 'round-rectangle',
+            'label': 'data(label)',
+            'text-valign': 'top', 'text-halign': 'center',
+            'font-size': '12px', 'font-family': 'system-ui', 'font-style': 'italic',
+            'color': dark ? '#bbb' : '#666',
+            'background-opacity': 0.06, 'background-color': '#0081A7',
+            'border-width': 1, 'border-style': 'dashed', 'border-color': '#90A583',
+            'padding': '12px'
+        } },
+        // rhyme-weave: arcs linking lines that share a rhyme within a stanza
+        { selector: 'edge.op-rhyme', style: {
+            'curve-style': 'unbundled-bezier',
+            'control-point-distances': [ 50 ], 'control-point-weights': [ 0.5 ],
+            'line-color': 'data(rhymecol)', 'width': 2, 'opacity': 0.5,
+            'target-arrow-shape': 'none', 'source-arrow-shape': 'none'
+        } },
+        // tap-to-focus dim/highlight
+        { selector: '.op-dim', style: { 'opacity': 0.3 } },
+        { selector: 'node.op-focus', style: { 'border-width': 5 } },
+        // expanded words (WP-C) + reading-order flow
+        { selector: 'node.op-word', style: {
+            'shape': 'round-rectangle', 'label': 'data(label)',
+            'width': 'label', 'height': 'label', 'padding': '4px',
+            'font-size': '12px', 'font-family': 'Georgia, serif',
+            'background-color': dark ? '#2a2a2a' : '#f7f3ec',
+            'border-width': 1, 'border-color': '#9aa0a6', 'color': dark ? '#eee' : '#333'
+        } },
+        { selector: 'node.op-punct', style: {
+            'shape': 'round-rectangle', 'label': 'data(label)',
+            'width': 'label', 'height': 'label', 'padding': '3px',
+            'font-size': '12px', 'font-family': 'Georgia, serif',
+            'background-color': dark ? '#1f1f1f' : '#efece4',
+            'border-width': 1, 'border-style': 'dashed', 'border-color': '#c9ccd1', 'color': dark ? '#999' : '#999'
+        } },
+        { selector: 'edge.op-flow', style: {
+            'curve-style': 'bezier', 'width': 1, 'line-color': '#9aa0a6', 'opacity': 0.5,
+            'target-arrow-shape': 'vee', 'target-arrow-color': '#9aa0a6', 'arrow-scale': 0.7
+        } }
+    ];
+}
+
+async function renderOntoPoetry( textURI, containerSel ) {
+    var rows = await opFetch( opStructureQuery( textURI ) );
+    if ( !rows.length ) {
+        $( containerSel ).html( `<p class="text-muted" style="padding:1em;">No OntoPoetry structure available for this text (it may be prose or an unanalysed fragment).</p>` );
+        return;
+    }
+    // pass 1: rhyme palette + modal syllable count (for deviation marking)
+    var rhymeLabels = [], syllCounts = {};
+    rows.forEach( function( v ) {
+        if ( v.rhyme ) rhymeLabels.push( v.rhyme.value );
+        if ( v.syll ) { syllCounts[ v.syll.value ] = ( syllCounts[ v.syll.value ] || 0 ) + 1; }
+    });
+    var rcol = opRhymeColours( rhymeLabels );
+    var modeSyll = null, best = -1;
+    Object.keys( syllCounts ).forEach( function( s ) { if ( syllCounts[ s ] > best ) { best = syllCounts[ s ]; modeSyll = s; } } );
+
+    // pass 2: group rows by stanza and sort in document order (via instance-id
+    // numbers, so it works for excerpts that lack stanzaNumber), then lay out as a
+    // single reading-order column. Words expand to the RIGHT on tap.
+    var byStanza = {}, stanzaArr = [];
+    rows.forEach( function( v ) {
+        var sId = v.stanza.value;
+        if ( !byStanza[ sId ] ) { byStanza[ sId ] = { id: sId, snum: '', srhyme: '', disp: '', mtype: '', lines: [], seen: {} }; stanzaArr.push( byStanza[ sId ] ); }
+        var st = byStanza[ sId ];
+        if ( v.snum && !st.snum ) st.snum = v.snum.value;
+        if ( v.srhyme && !st.srhyme ) st.srhyme = v.srhyme.value;
+        if ( !st.disp )  st.disp  = v.displabel ? v.displabel.value : ( v.disp ? opLastSeg( v.disp.value ) : '' );
+        if ( !st.mtype ) st.mtype = v.mtypelabel ? v.mtypelabel.value : ( v.mtype ? opLastSeg( v.mtype.value ) : '' );
+        if ( !st.seen[ v.line.value ] ) { st.seen[ v.line.value ] = true; st.lines.push( v ); }
+    } );
+    stanzaArr.forEach( function( st ) {
+        st.lines.sort( function( a, b ) { return ( parseInt( a.lnum.value ) || opIdNum( a.line.value ) ) - ( parseInt( b.lnum.value ) || opIdNum( b.line.value ) ); } );
+        st.key = Math.min.apply( null, st.lines.map( function( v ) { return opIdNum( v.line.value ); } ) );
+    } );
+    stanzaArr.sort( function( a, b ) { return a.key - b.key; } );
+
+    var els = [], y = 0;
+    stanzaArr.forEach( function( st, si ) {
+        var sbits = [];
+        if ( st.srhyme ) sbits.push( st.srhyme );
+        if ( st.disp )   sbits.push( st.disp );
+        if ( st.mtype )  sbits.push( st.mtype );
+        els.push({ data: { id: st.id, type: 'op-stanza',
+            label: 'Stanza ' + ( st.snum || ( si + 1 ) ) + ( sbits.length ? '  (' + sbits.join( '; ' ) + ')' : '' ) }, classes: 'op-stanza' });
+        if ( si > 0 ) y += 28;  // gap between stanzas
+        var rhymeLast = {};
+        st.lines.forEach( function( v ) {
+            var lId = v.line.value;
+            var rhyme = v.rhyme ? v.rhyme.value : '';
+            var syll  = v.syll  ? v.syll.value  : '';
+            var stress = v.stress ? v.stress.value : '';
+            var text  = ( v.ltext.value || '' ).trim();
+            var meta = [];
+            if ( rhyme ) meta.push( rhyme );
+            if ( syll )  meta.push( syll + ' syll' );
+            var label = text + ( meta.length ? '\n[' + meta.join( ' · ' ) + ']' : '' );
+            var scan = opScansion( stress );
+            var metreBits = meta.slice();
+            if ( scan.marks ) metreBits.push( scan.marks + ( scan.name ? '  (' + scan.name + ')' : '' ) );
+            var labelMetre = text + ( metreBits.length ? '\n[' + metreBits.join( ' · ' ) + ']' : '' );
+            var dev = ( syll && modeSyll && syll !== modeSyll );
+            els.push({ data: { id: lId, parent: st.id, type: 'op-line',
+                label: label, labelMetre: labelMetre,
+                rhyme: rhyme, rhymecol: rhyme ? rcol[ rhyme ] : '#9aa0a6', textOnly: text },
+                position: { x: 0, y: y },
+                classes: 'op-line' + ( rhyme ? ' rhyme-' + rhyme : '' ) + ( dev ? ' op-dev' : '' ) });
+            if ( rhyme ) {  // rhyme-weave arc to the previous same-rhyme line in this stanza
+                if ( rhymeLast[ rhyme ] ) {
+                    els.push({ data: { id: 'arc-' + rhymeLast[ rhyme ] + '-' + lId,
+                        source: rhymeLast[ rhyme ], target: lId, rhymecol: rcol[ rhyme ] }, classes: 'op-rhyme' });
+                }
+                rhymeLast[ rhyme ] = lId;
+            }
+            y += 56;
+        } );
+    } );
+
+    if ( opCY[ textURI ] ) { try { opCY[ textURI ].destroy(); } catch(e){} }
+    var cyInst = cytoscape({
+        container: $( containerSel )[0],
+        elements: els,
+        layout: { name: 'preset', fit: false },
+        style: opStyle(),
+        wheelSensitivity: 0.2
+    });
+    opCY[ textURI ] = cyInst;
+    opFitColumn( cyInst );
+
+    // tap a line -> expand/collapse its words (lazy, reading order)
+    cyInst.on( 'tap', 'node.op-line', function( evt ) {
+        var n = evt.target;
+        if ( n.data( 'expanded' ) ) { opCollapseLine( cyInst, n ); } else { opExpandLine( cyInst, n ); }
+    });
+    // tap background -> collapse words + clear any focus
+    cyInst.on( 'tap', function( evt ) {
+        if ( evt.target === cyInst ) {
+            cyInst.remove( '.op-tok' );
+            cyInst.nodes( '.op-line' ).data( 'expanded', false );
+            cyInst.elements().removeClass( 'op-dim op-focus' );
+        }
+    } );
+    // WP-D: right-click a line -> contribution on-ramp
+    opAddContextMenu( cyInst, opLastSeg( textURI ) );
+
+    opToolbar( $( containerSel ), cyInst, rcol, modeSyll, textURI );
+}
+
+// toolbar: clickable rhyme legend (focus) + metre toggle + guided tour + fit, once above the graph
+function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
+    var $pane = $container.parent();
+    if ( $pane.find( '.op-toolbar' ).length ) return;
+    // text switcher: mirror the right-side Text / Translation tabs
+    var texts = opTextList(), wid = $( '.layout_wrapper' ).attr( 'data-wid' ), curTid = ( textURI || '' ).split( '/' ).pop(), switcher = '';
+    if ( texts.length > 1 ) {
+        var opts = texts.map( function( t ) { return `<option value="${t.tid}"${ t.tid === curTid ? ' selected' : '' }>${t.label}</option>`; } ).join( '' );
+        switcher = `<span><strong>View:</strong> <select class="op-textswitch form-select form-select-sm" style="width:auto;display:inline-block;">${opts}</select></span>`;
+    }
+    var legend = Object.keys( rcol ).map( function( l ) {
+        return `<span class="op-leg" data-rhyme="${l}" title="click to highlight this rhyme" style="cursor:pointer;border:2px solid ${rcol[l]};border-radius:4px;padding:0 6px;margin-right:4px;font-family:Georgia,serif;">${l}</span>`;
+    } ).join( '' );
+    var $bar = $( `<div class="op-toolbar" style="padding:6px 10px 6px 168px;font-size:13px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-bottom:1px solid rgba(128,128,128,.3);">
+        ${ switcher }
+        <span><strong>Rhyme:</strong> ${ legend || '<em>none encoded</em>' }</span>
+        <label style="cursor:pointer;margin:0;"><input type="checkbox" class="op-metre-toggle"> show metre</label>
+        ${ modeSyll ? `<span class="text-muted">double border = ≠ ${modeSyll} syllables</span>` : '' }
+        <button type="button" class="btn btn-sm btn-outline-secondary op-tour" style="padding:0 8px;">tour ▸</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary op-fit" style="padding:0 8px;">fit</button>
+        <span class="op-caption text-muted" style="font-style:italic;"></span>
+        <span class="text-muted" style="margin-left:auto;">tap a line for its words · right-click to add a context</span>
+    </div>` );
+    $bar.insertBefore( $container );
+    // switch the structure to another text of the work
+    $bar.on( 'change', '.op-textswitch', function() {
+        opShowStructure( 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + this.value );
+    } );
+    // click a rhyme chip -> toggle: spotlight that rhyme (solid chip) / click again to clear
+    var activeRhyme = null;
+    $bar.on( 'click', '.op-leg', function() {
+        var rh = this.dataset.rhyme, chips = $bar.find( '.op-leg' );
+        chips.css({ 'background-color': '', 'color': '' } );
+        if ( activeRhyme === rh ) {
+            activeRhyme = null;
+            opClearFocus( cyInst );
+        } else {
+            activeRhyme = rh;
+            opFocusRhyme( cyInst, rh );
+            $( this ).css({ 'background-color': rcol[ rh ], 'color': '#fff' } );
+        }
+    } );
+    // metre toggle -> append the stress/syllable ribbon to line labels
+    $bar.find( '.op-metre-toggle' ).on( 'change', function() {
+        if ( this.checked ) { cyInst.nodes( '.op-line' ).addClass( 'op-metre' ); }
+        else { cyInst.nodes( '.op-line' ).removeClass( 'op-metre' ); }
+    } );
+    $bar.find( '.op-fit' ).on( 'click', function() { opFitColumn( cyInst ); } );
+    // guided tour: step through stanzas, spotlighting + captioning each in turn
+    var $caption = $bar.find( '.op-caption' ), stanzas = cyInst.nodes( '.op-stanza' ), tourIdx = -1;
+    $bar.find( '.op-tour' ).on( 'click', function() {
+        tourIdx++;
+        if ( tourIdx >= stanzas.length ) {
+            tourIdx = -1; cyInst.elements().removeClass( 'op-dim op-focus' ); opFitColumn( cyInst );
+            $caption.text( '' ); $( this ).text( 'tour ▸' ); return;
+        }
+        var st = stanzas[ tourIdx ], lines = st.children();
+        cyInst.elements().addClass( 'op-dim' );
+        st.removeClass( 'op-dim' ); lines.removeClass( 'op-dim' ).addClass( 'op-focus' );
+        cyInst.fit( lines.union( st ), 60 );
+        $caption.text( st.data( 'label' ) );
+        $( this ).text( 'next ▸ (' + ( tourIdx + 1 ) + '/' + stanzas.length + ')' );
+    } );
+}
+
+// Left graph-panel switcher: toggle .col-graph between the Contexts graph (#cy)
+// and the OntoPoetry Structure graph (#cy-onto). Added in the poem reading view.
+function opEnsureGraphPanel() {
+    var $cg = $( '.col-graph' );
+    if ( !$cg.length || $cg.find( '.op-graph-toggle' ).length ) return;
+    $cg.append(
+        `<div class="op-graph-toggle btn-group btn-group-sm" role="group" style="position:absolute;top:8px;left:8px;z-index:1001;">
+            <button type="button" class="btn btn-secondary active" data-opview="contexts">Contexts</button>
+            <button type="button" class="btn btn-outline-secondary" data-opview="structure">Structure</button>
+        </div>
+        <div id="cy-onto-panel" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;flex-direction:column;background:var(--bs-body-bg,#fff);"><div id="cy-onto" style="flex:1;position:relative;min-height:0;"></div></div>`
+    );
+    $cg.find( '.op-graph-toggle' ).on( 'click', 'button[data-opview]', function() {
+        $cg.find( '.op-graph-toggle button' ).removeClass( 'active btn-secondary' ).addClass( 'btn-outline-secondary' );
+        $( this ).addClass( 'active btn-secondary' ).removeClass( 'btn-outline-secondary' );
+        opGraphPanelToggle( this.dataset.opview );
+    } );
+}
+
+function opGraphPanelToggle( view ) {
+    var $cg = $( '.col-graph' ); if ( !$cg.length ) return;
+    if ( view === 'structure' ) {
+        $( '#cy' ).hide(); $cg.find( '.graph-about' ).hide();
+        $( '#cy-onto-panel' ).css( 'display', 'flex' );
+        var wid = $( '.layout_wrapper' ).attr( 'data-wid' ), tid = $( '.layout_wrapper' ).attr( 'data-tid' );
+        var textURI = 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + tid;
+        if ( $( '#cy-onto-panel' ).attr( 'data-uri' ) !== textURI ) { opShowStructure( textURI ); }
+        else if ( opCY[ textURI ] ) { opCY[ textURI ].resize(); }
+    } else {
+        $( '#cy-onto-panel' ).hide();
+        $( '#cy' ).show(); $cg.find( '.graph-about' ).show();
+    }
+}
+
+// (re)render the Structure panel for one text — used by the toggle and by the
+// text-switcher dropdown that mirrors the right-side Text/Translation tabs
+function opShowStructure( textURI ) {
+    var $panel = $( '#cy-onto-panel' );
+    $panel.attr( 'data-uri', textURI );
+    if ( opCY[ textURI ] ) { try { opCY[ textURI ].destroy(); } catch ( e ) {} }
+    $panel.find( '.op-toolbar' ).remove();
+    $( '#cy-onto' ).empty();
+    renderOntoPoetry( textURI, '#cy-onto' );
+}
+
+// enumerate the work's textual expressions from the right-side tabs:
+// [{tid, label}] for "Text" / "Translation (xxx)" (skips Facsimile/Performance)
+function opTextList() {
+    var out = [];
+    $( '#pills-tab button[data-bs-target^="#pills-"]' ).each( function() {
+        var label = $( this ).text().replace( /\s+/g, ' ' ).trim();
+        if ( !/^(Text|Translation)/i.test( label ) ) return;
+        var tid = $( $( this ).attr( 'data-bs-target' ) ).find( '.text' ).attr( 'id' );
+        if ( tid ) out.push({ tid: tid, label: label } );
+    } );
+    return out;
+}
+
 // click nodes
-$(document.body).on('click', 'a.nodejump', function(e) { 
+$(document.body).on('click', 'a.nodejump', function(e) {
 	e.preventDefault();
 	var j = cy.$( "[id='"+$( e.currentTarget ).attr("href")+"']" );	
 	cy.animate({
@@ -2092,6 +2570,8 @@ async function loadLayout() {
 						initializeGraph( "https://www.romanticperiodpoetry.org/id/"+texts[ hash ][ "work" ]+"/work", "works" );
 						// load global text
 						await display_globaltext( hash, texts[ hash ][ "work" ] );
+						// add the OntoPoetry "Structure" toggle to the graph panel
+						opEnsureGraphPanel();
 						$( ".layout_wrapper" ).css( "flex-wrap", "unset" );
 						Split([ ".col-graph", ".col-content" ], { sizes: [73, 27], minSize: 450, gutterSize: 8 });
 						previousState = location.href;
