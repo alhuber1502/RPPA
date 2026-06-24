@@ -4219,6 +4219,8 @@ function reTheme( theme ) {
             }
         }
     }
+    // re-theme the OntoPoetry Structure graph(s) too
+    if ( typeof opRetheme === 'function' ) { opRetheme( theme ); }
 }
 
 // document.ready
