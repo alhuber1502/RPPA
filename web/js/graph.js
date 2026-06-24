@@ -774,23 +774,75 @@ SELECT ?item ?t ?pos ?type WHERE {
 } ORDER BY ?pos`;
 }
 
-async function opExpandLine( cyInst, lineNode ) {
-    if ( lineNode.data( 'expanded' ) ) return;
-    var lid = lineNode.id();
-    var rows = await opFetch( opContentQuery( lid ) );
-    if ( !rows.length ) return;
-    var pos = lineNode.position(), cls = 'w-of-' + opSafe( lid ), add = [], prev = lid, x = pos.x + 260;
+// build token nodes/edges (words + punctuation, reading order) fanned to the right
+// of a line node. Shared by per-line expand and expand-all.
+function opBuildTokens( lid, rows, pos ) {
+    var cls = 'w-of-' + opSafe( lid ), add = [], prev = lid, x = pos.x + 260, first = true;
     rows.forEach( function( v ) {
         var iid = v.item.value, isPunct = !!( v.type && /Punctuation$/.test( v.type.value ) );
+        // step BEFORE placing: small step into a punctuation mark so it hugs the
+        // preceding word; normal step into a word.
+        if ( !first ) { x += isPunct ? 30 : 74; }
+        first = false;
         add.push({ group: 'nodes', classes: ( isPunct ? 'op-punct' : 'op-word' ) + ' op-tok ' + cls,
             data: { id: iid, type: isPunct ? 'op-punct' : 'op-word', label: ( v.t.value || '' ).trim(), ofLine: lid },
             position: { x: x, y: pos.y } });
         add.push({ group: 'edges', classes: 'op-flow ' + cls,
             data: { id: 'wf-' + opSafe( prev ) + '-' + opSafe( iid ), source: prev, target: iid } });
-        prev = iid; x += isPunct ? 36 : 74;
+        prev = iid;
     } );
-    cyInst.add( add );
+    return add;
+}
+
+async function opExpandLine( cyInst, lineNode ) {
+    if ( lineNode.data( 'expanded' ) ) return;
+    var lid = lineNode.id();
+    var rows = await opFetch( opContentQuery( lid ) );
+    if ( !rows.length ) return;
+    cyInst.add( opBuildTokens( lid, rows, lineNode.position() ) );
     lineNode.data( 'expanded', true );
+}
+
+// whole-poem content (all lines' words + punctuation) in ONE query, for expand-all
+function opPoemContentQuery( textURI ) {
+    return `PREFIX rppa: <https://www.romanticperiodpoetry.org/rppa/>
+PREFIX pdp: <http://postdata.linhd.uned.es/ontology/postdata-poeticAnalysis#>
+PREFIX pdc: <http://postdata.linhd.uned.es/ontology/postdata-core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?line ?item ?t ?pos ?type WHERE {
+  <`+textURI+`> pdp:hasStanzaList ?sl .
+  ?sl pdp:stanza/rdf:rest*/rdf:first ?stanza .
+  ?stanza pdp:hasLineList ?ll .
+  ?ll pdp:line/rdf:rest*/rdf:first ?line .
+  ?line rppa:hasContentList ?cl .
+  ?cl ?member ?item .
+  FILTER( STRSTARTS( STR(?member), "http://www.w3.org/1999/02/22-rdf-syntax-ns#_" ) )
+  BIND( xsd:integer( STRAFTER( STR(?member), "#_" ) ) AS ?pos )
+  ?item pdc:text ?t .
+  OPTIONAL { ?item a ?type . FILTER( ?type IN ( pdp:Word, pdp:Punctuation ) ) }
+}`;
+}
+
+async function opExpandAll( cyInst, textURI ) {
+    var rows = await opFetch( opPoemContentQuery( textURI ) );
+    if ( !rows.length ) return;
+    var byLine = {};
+    rows.forEach( function( v ) { ( byLine[ v.line.value ] = byLine[ v.line.value ] || [] ).push( v ); } );
+    var add = [];
+    Object.keys( byLine ).forEach( function( lid ) {
+        var ln = cyInst.getElementById( lid );
+        if ( !ln || !ln.length || ln.data( 'expanded' ) ) return;
+        var items = byLine[ lid ].sort( function( a, b ) { return parseInt( a.pos.value ) - parseInt( b.pos.value ); } );
+        add = add.concat( opBuildTokens( lid, items, ln.position() ) );
+        ln.data( 'expanded', true );
+    } );
+    if ( add.length ) cyInst.add( add );
+}
+
+function opCollapseAll( cyInst ) {
+    cyInst.remove( '.op-tok' );
+    cyInst.nodes( '.op-line' ).data( 'expanded', false );
 }
 
 function opCollapseLine( cyInst, lineNode ) {
@@ -815,7 +867,9 @@ function opAddContextMenu( cyInst, tid ) {
     try {
         cyInst.cxtmenu({
             selector: 'node.op-line',
-            menuRadius: function() { return 36; },
+            // cxtmenu sets outer radius = renderedWidth/2 + menuRadius; our line
+            // nodes are very wide, so cancel the width term to get a constant ~60px.
+            menuRadius: function( ele ) { return 60 - ele.renderedOuterWidth() / 2; },
             commands: [ {
                 content: '<i class="fas fa-plus-circle"></i>',
                 select: function() {
@@ -827,6 +881,13 @@ function opAddContextMenu( cyInst, tid ) {
             } ],
             fillColor: 'rgba(42,157,143,0.85)',
             activeFillColor: 'rgba(198,120,54,0.85)',
+            activePadding: 20,
+            indicatorSize: 24,
+            separatorWidth: 3,
+            spotlightPadding: 4,
+            adaptativeNodeSpotlightRadius: false,   // don't scale the menu to the big line node
+            minSpotlightRadius: 12,
+            maxSpotlightRadius: 24,
             openMenuEvents: 'cxttapstart taphold',
             itemColor: '#fff',
             zIndex: 9999
@@ -834,8 +895,22 @@ function opAddContextMenu( cyInst, tid ) {
     } catch ( e ) { console.log( 'OntoPoetry: cxtmenu unavailable', e ); }
 }
 
-function opStyle() {
-    var dark = ( typeof theme !== 'undefined' && theme == 'dark' );
+function opIsDark( themeVal ) {
+    if ( themeVal ) return themeVal === 'dark';
+    return ( typeof document !== 'undefined' && document.documentElement.getAttribute( 'data-bs-theme' ) === 'dark' );
+}
+
+// re-apply the structure stylesheet to every open instance when the site theme
+// toggles (node bg/text colours are theme-dependent and otherwise stay stale)
+function opRetheme( themeVal ) {
+    Object.keys( opCY ).forEach( function( k ) {
+        var c = opCY[ k ];
+        if ( c && c.style ) { try { c.style().fromJson( opStyle( themeVal ) ).update(); } catch ( e ) {} }
+    } );
+}
+
+function opStyle( themeVal ) {
+    var dark = opIsDark( themeVal );
     return [
         { selector: 'node.op-line', style: {
             'shape': 'round-rectangle',
@@ -887,6 +962,8 @@ function opStyle() {
             'background-color': dark ? '#1f1f1f' : '#efece4',
             'border-width': 1, 'border-style': 'dashed', 'border-color': '#c9ccd1', 'color': dark ? '#999' : '#999'
         } },
+        // hover highlight: last node rule so it overrides line/word/punctuation borders
+        { selector: 'node.op-hl', style: { 'border-color': '#fd7e14', 'border-width': 4, 'border-style': 'solid' } },
         { selector: 'edge.op-flow', style: {
             'curve-style': 'bezier', 'width': 1, 'line-color': '#9aa0a6', 'opacity': 0.5,
             'target-arrow-shape': 'vee', 'target-arrow-color': '#9aa0a6', 'arrow-scale': 0.7
@@ -998,6 +1075,14 @@ async function renderOntoPoetry( textURI, containerSel ) {
     // WP-D: right-click a line -> contribution on-ramp
     opAddContextMenu( cyInst, opLastSeg( textURI ) );
 
+    // graph -> text hover highlight (node id minus the "...#" prefix == DOM id)
+    cyInst.on( 'mouseover', 'node.op-line, node.op-word, node.op-punct', function( evt ) {
+        opTextHL( String( evt.target.id() ).split( '#' ).pop(), true );
+    } );
+    cyInst.on( 'mouseout', 'node.op-line, node.op-word, node.op-punct', function( evt ) {
+        opTextHL( String( evt.target.id() ).split( '#' ).pop(), false );
+    } );
+
     opToolbar( $( containerSel ), cyInst, rcol, modeSyll, textURI );
 }
 
@@ -1018,16 +1103,19 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
         ${ switcher }
         <span><strong>Rhyme:</strong> ${ legend || '<em>none encoded</em>' }</span>
         <label style="cursor:pointer;margin:0;"><input type="checkbox" class="op-metre-toggle"> show metre</label>
-        ${ modeSyll ? `<span class="text-muted">double border = ≠ ${modeSyll} syllables</span>` : '' }
+        ${ modeSyll ? `<span class="text-muted" title="lines whose syllable count differs from the poem's most common (${modeSyll})">double border = syllabic deviation</span>` : '' }
+        <button type="button" class="btn btn-sm btn-outline-secondary op-expandall" style="padding:0 8px;">expand all</button>
         <button type="button" class="btn btn-sm btn-outline-secondary op-tour" style="padding:0 8px;">tour ▸</button>
         <button type="button" class="btn btn-sm btn-outline-secondary op-fit" style="padding:0 8px;">fit</button>
         <span class="op-caption text-muted" style="font-style:italic;"></span>
         <span class="text-muted" style="margin-left:auto;">tap a line for its words · right-click to add a context</span>
     </div>` );
     $bar.insertBefore( $container );
-    // switch the structure to another text of the work
+    // switch the structure to another text of the work, and align the right tab to it
     $bar.on( 'change', '.op-textswitch', function() {
-        opShowStructure( 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + this.value );
+        var tid = this.value;
+        opShowStructure( 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + tid );
+        opSyncTextToStructure( tid );
     } );
     // click a rhyme chip -> toggle: spotlight that rhyme (solid chip) / click again to clear
     var activeRhyme = null;
@@ -1049,6 +1137,13 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
         else { cyInst.nodes( '.op-line' ).removeClass( 'op-metre' ); }
     } );
     $bar.find( '.op-fit' ).on( 'click', function() { opFitColumn( cyInst ); } );
+    // expand all / collapse all line tokens (line-level stays the default)
+    var allExpanded = false;
+    $bar.find( '.op-expandall' ).on( 'click', async function() {
+        var $b = $( this );
+        if ( allExpanded ) { opCollapseAll( cyInst ); allExpanded = false; $b.text( 'expand all' ); }
+        else { $b.text( '…' ); await opExpandAll( cyInst, textURI ); allExpanded = true; $b.text( 'collapse all' ); }
+    } );
     // guided tour: step through stanzas, spotlighting + captioning each in turn
     var $caption = $bar.find( '.op-caption' ), stanzas = cyInst.nodes( '.op-stanza' ), tourIdx = -1;
     $bar.find( '.op-tour' ).on( 'click', function() {
@@ -1090,7 +1185,7 @@ function opGraphPanelToggle( view ) {
     if ( view === 'structure' ) {
         $( '#cy' ).hide(); $cg.find( '.graph-about' ).hide();
         $( '#cy-onto-panel' ).css( 'display', 'flex' );
-        var wid = $( '.layout_wrapper' ).attr( 'data-wid' ), tid = $( '.layout_wrapper' ).attr( 'data-tid' );
+        var wid = $( '.layout_wrapper' ).attr( 'data-wid' ), tid = opActiveTextId();
         var textURI = 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + tid;
         if ( $( '#cy-onto-panel' ).attr( 'data-uri' ) !== textURI ) { opShowStructure( textURI ); }
         else if ( opCY[ textURI ] ) { opCY[ textURI ].resize(); }
@@ -1123,6 +1218,75 @@ function opTextList() {
     } );
     return out;
 }
+
+// the text id of the currently-active right-hand tab (falls back to the route's text)
+function opActiveTextId() {
+    var b = document.querySelector( '#pills-tab button.active[data-bs-target^="#pills-"]' );
+    var tid = b ? $( b.getAttribute( 'data-bs-target' ) ).find( '.text' ).attr( 'id' ) : null;
+    return tid || $( '.layout_wrapper' ).attr( 'data-tid' );
+}
+
+// the right-hand tab button whose pane holds a given text
+function opTabButtonForText( tid ) {
+    var found = null;
+    $( '#pills-tab button[data-bs-target^="#pills-"]' ).each( function() {
+        if ( $( $( this ).attr( 'data-bs-target' ) ).find( '.text' ).attr( 'id' ) === tid ) { found = this; return false; }
+    } );
+    return found;
+}
+
+// align the right tab to a text (used when the Structure switcher changes)
+function opSyncTextToStructure( tid ) {
+    var btn = opTabButtonForText( tid );
+    if ( btn && !btn.classList.contains( 'active' ) ) {
+        try { bootstrap.Tab.getOrCreateInstance( btn ).show(); } catch ( e ) { btn.click(); }
+    }
+}
+
+// align the Structure (left) when a right Text/Translation tab is shown
+$( document ).on( 'shown.bs.tab', '#pills-tab button[data-bs-target^="#pills-"]', function( e ) {
+    var $panel = $( '#cy-onto-panel' );
+    if ( !$panel.length || $panel.css( 'display' ) === 'none' ) return;   // Structure not active
+    var tid = $( $( e.target ).attr( 'data-bs-target' ) ).find( '.text' ).attr( 'id' );
+    if ( !tid ) return;                                                    // facsimile/performance: no structure
+    var uri = 'https://www.romanticperiodpoetry.org/id/' + $( '.layout_wrapper' ).attr( 'data-wid' ) + '/' + tid;
+    if ( $panel.attr( 'data-uri' ) !== uri ) opShowStructure( uri );
+} );
+
+// --- two-way hover highlight between the linear text (right) and the Structure graph (left) ---
+function opCurrentCy() { var uri = $( '#cy-onto-panel' ).attr( 'data-uri' ); return uri ? opCY[ uri ] : null; }
+function opTextHL( frag, on ) {
+    var el = document.querySelector( '.col-content .text [id="' + frag + '"]' );
+    if ( el ) el.style.background = on ? 'rgba(253,126,20,.35)' : '';   // --bs-orange tint
+}
+// text -> graph: hovering a line/word/punctuation lights up its node AND its line node
+// (the line sits in the visible left column, so there is always feedback even when an
+// expanded word is fanned off-screen to the right), and pans an off-screen node into
+// view. Uses mouseover (bubbles) + closest() for reliable hit-testing over nested spans;
+// clears only on leaving the whole text block, so moving between tokens doesn't flicker.
+$( document ).on( 'mouseover', '.col-content .text', function( e ) {
+    var cy = opCurrentCy();
+    if ( !cy || $( '#cy-onto-panel' ).css( 'display' ) === 'none' ) return;
+    cy.elements( '.op-hl' ).removeClass( 'op-hl' );
+    var el = e.target.closest ? e.target.closest( '.l, .w, .pc' ) : null;
+    if ( !el ) return;
+    var uri = $( '#cy-onto-panel' ).attr( 'data-uri' );
+    var lineEl = el.classList.contains( 'l' ) ? el : ( el.closest ? el.closest( '.l' ) : null );
+    var hl = cy.collection();
+    var tok = cy.getElementById( uri + '#' + el.id ); if ( tok && tok.length ) hl = hl.union( tok );
+    if ( lineEl ) { var ln = cy.getElementById( uri + '#' + lineEl.id ); if ( ln && ln.length ) hl = hl.union( ln ); }
+    if ( !hl.length ) return;
+    hl.addClass( 'op-hl' );
+    var focus = ( tok && tok.length ) ? tok : hl;
+    var bb = focus.renderedBoundingBox();
+    if ( bb.x1 < 0 || bb.y1 < 0 || bb.x2 > cy.width() || bb.y2 > cy.height() ) {
+        cy.stop().animate( { center: { eles: focus } }, { duration: 200 } );
+    }
+} );
+$( document ).on( 'mouseleave', '.col-content .text', function() {
+    var cy = opCurrentCy();
+    if ( cy ) cy.elements( '.op-hl' ).removeClass( 'op-hl' );
+} );
 
 // click nodes
 $(document.body).on('click', 'a.nodejump', function(e) {
