@@ -46,11 +46,6 @@
           <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fab fa-github"></i></a></li>
           -->
       </ul>
-      <!--
-      <ul role="tablist">
-          <li><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
-      </ul>
-      -->
   </div>
   <!-- Tab panes -->
   <div class="leaflet-sidebar-content">
@@ -84,7 +79,8 @@
               <div id="keywordsearchHelp" class="form-text">Search for
                 instances by class or keyword.</div>
             </form>
-            
+            <!-- WP-F: corpus form-space index (populated by forms.js) -->
+            <div id="form-index" style="margin-top:15px;"></div>
           </div>
           
           <div class="help" style="margin-top:15px;">
@@ -146,11 +142,6 @@
       <!--
       <div class="leaflet-sidebar-pane" id="messages">
           <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-      </div>
-      -->
-      <!--
-      <div class="leaflet-sidebar-pane" id="settings">
-          <h1 class="leaflet-sidebar-header">Settings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       </div>
       -->
   </div>

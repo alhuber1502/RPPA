@@ -204,9 +204,13 @@ function processW3Canno( annotation ) {
             sel_text = sel_text + " [line]";
         } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'head' ) ) {
             sel_text = sel_text + " [heading]";
-        } //else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
-        //} 
-        else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
+        // a LONE token reads "[word]"/"[punctuation]"; multi-token spans are built from .w/.pc
+        // too, so guard on ids.length===1 or every segment would match .hasClass('w')
+        } else if ( ids.length === 1 && $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'w' ) ) {
+            sel_text = sel_text + " [word]";
+        } else if ( ids.length === 1 && $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'pc' ) ) {
+            sel_text = sel_text + " [punctuation]";
+        } else if ( $( $( jqu(annotation["oa:hasTarget"][0]["oa:hasSelector"]["rdf:value"]) ) ).hasClass( 'text' ) ) {
             sel_text = sel_text + " [whole poem]";
         } else {
             sel_text = sel_text + " [segment]";

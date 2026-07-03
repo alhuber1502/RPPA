@@ -60,7 +60,15 @@
     <script src="https://cdn.jsdelivr.net/npm/cytoscape-graphml@1.0.6/cytoscape-graphml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/klayjs@0.4.1/klay.js"></script>
     <script src="/js/cytoscape.js-klay-3.1.4/cytoscape-klay.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-layers@3/build/index.umd.min.js"></script>
+    <script src="/js/cytoscape.js-bubblesets-4.0.0/build/index.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/layout-base/layout-base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cose-base/cose-base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/avsdf-base/avsdf-base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-cise/cytoscape-cise.js"></script>
+    <script>try{ if(window.cytoscape && window.cytoscapeCise) cytoscape.use(window.cytoscapeCise); }catch(e){ console.log('cise register failed',e); }</script>
+    <script src="/js/cytoscape.js-leaflet-1.2.4/cytoscape-leaf.js"></script>
+
     <!-- RPPA JavaScript -->
     <script src="/js/rppa-auth.js" crossorigin="anonymous"></script>
     <script src="/js/helpers.js" crossorigin="anonymous"></script>
@@ -70,3 +78,5 @@
     <script src="/js/media.js" crossorigin="anonymous"></script>
     <script src="/js/map.js" crossorigin="anonymous"></script>
     <script src="/js/rppa.js" crossorigin="anonymous"></script>
+    <script src="/js/forms.js" crossorigin="anonymous"></script>
+    <script src="/js/maps-graph.js" crossorigin="anonymous"></script>

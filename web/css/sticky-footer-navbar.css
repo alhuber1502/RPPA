@@ -1698,3 +1698,9 @@ dl::before {
     float: right;
     margin-top: 22px;
 }
+.nw-panel input  {
+    accent-color: #cc6814; /* var(--bs-orange); */
+}
+.nw-panel input::checkmark  {
+    color:white;
+}

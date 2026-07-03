@@ -21,7 +21,10 @@ var t, myCanvasGT, myCanvasGTEl, zInd = 1054, player = {}, viewer = {}, mode = '
     selected_bbs_text = [], selected_bbs_context = [];
 var done_tooltipTriggerList = [], done_popoverTriggerList = [];
 var SOLR_RPPA, SPARQL_RPPA;
-if ( /romanticperiodpoetry\.org/.test(window.location.href) ) {
+// NB: test the HOSTNAME, not the full href — the href includes the hash, and a
+// node URI like #node/https://www.romanticperiodpoetry.org/... would otherwise
+// flip a local/dev host onto the prod endpoint (and get CORS-blocked).
+if ( /romanticperiodpoetry\.org/.test(window.location.hostname) ) {
     SPARQL_RPPA = "https://data.prisms.digital/query/rppa/";
     SOLR_RPPA = "https://data.prisms.digital/solr/rppa/select";
 } else {
@@ -2131,6 +2134,7 @@ function genetic_step2( text, work ) {
     } );
     </script>
     `);
+    if ( typeof opApplyPendingAnchor === 'function' ) opApplyPendingAnchor();   // WP-D: pre-fill "+" anchor
     initDataWorksSearch( text, work );
 }
 
@@ -2291,6 +2295,7 @@ function intratextual_step2( text, work ) {
     } );
     </script>
     `);
+    if ( typeof opApplyPendingAnchor === 'function' ) opApplyPendingAnchor();   // WP-D: pre-fill "+" anchor
 }
 
 function typological_step2( text, work ) {
@@ -2354,6 +2359,7 @@ function typological_step2( text, work ) {
     } );
     </script>
     `);
+    if ( typeof opApplyPendingAnchor === 'function' ) opApplyPendingAnchor();   // WP-D: pre-fill "+" anchor
 }
 
 async function contribute_step3( tid, wid ) {
@@ -2945,6 +2951,9 @@ async function contribute_step3( tid, wid ) {
             // contextualization; needs expression-aware switching/highlighting! 
             message = `<b>Success!</b> The contextualization has been added. <em>Thank you for your contribution!</em>`;
             show_alert_mod( message, "success", true, 5000 );
+            // WP-F: refresh the concept browser (if present) so the new context's
+            // concept/count appears live, without a page reload.
+            if ( typeof formsRefresh === 'function' ) formsRefresh();
         }
     }
     // create page
@@ -4178,12 +4187,12 @@ function reTheme( theme ) {
             map.removeLayer( baseMapDark );
             map.addLayer( baseMapLight );
             baseMap = baseMapLight;
-            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'topright'} ).addTo( map );
+            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'bottomright'} ).addTo( map );
         } else {
             map.removeLayer( baseMapLight );
             map.addLayer( baseMapDark );
             baseMap = baseMapDark;
-            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'topright'} ).addTo( map );
+            layerscontrol = L.control.layers( {"OpenStreetMap": baseMap }, { "The World (1844)": overlayMap }, {position: 'bottomright'} ).addTo( map );
         }
         if ( map.hasLayer( overlayMap ) && map.getZoom() <= 5 ) {
           baseMap.setOpacity(0);
