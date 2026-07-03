@@ -106,8 +106,10 @@ async function initializeGraph( id, view ) {
         $( ".col-graph" ).append( `<div class="graph-about" style="display:none;"></div><div id='cy'><div class="cytoscape-navigator" style="display:none;"></div></div>` );
 		createCYgraph( data, graph, cyLayouts[ "cose" ] );
     }
+	if ( typeof nwEnsureGraphControls === 'function' ) nwEnsureGraphControls();   // WP-G controls
 	// undo/redo extension
 	ur = cy.undoRedo();
+	if ( typeof nwHookUndo === 'function' ) nwHookUndo();   // WP-G: keep grouping out of undo/redo
 	// cxtmenu extension
 	cy.cxtmenu({
 		menuRadius: function(ele){ return 30; },
@@ -203,9 +205,15 @@ async function initializeGraph( id, view ) {
 				ur.redo();
 		}
 	});
+	// WP-G: apply the active grouping / ungrouped aggregation to the freshly-built graph, so a large
+	// author/work graph self-tidies on load — not only after an expand. (nwAutoAggregateByType stops
+	// the initial cose above before its own layout, so no race.)
+	if ( typeof nwAfterExpand === 'function' ) await nwAfterExpand();
 }
 
 async function addEleNode( ele ) {
+	if ( String( ele ).indexOf( 'nwagg-' ) === 0 ) { nwExpandAggregate( cy.getElementById( ele ) ); return; }   // count-node -> expand, not a store lookup
+	var nwWasEmpty = ( typeof cy !== 'undefined' && cy ) ? cy.nodes().length === 0 : true;   // fresh seed vs expansion
 	if ( !ele.startsWith( 'http' ) ) {
 		ele = context['@context'][ ele.split( ':' )[0] ]+ele.split( ':' )[1];
 	}
@@ -257,8 +265,20 @@ async function addEleNode( ele ) {
 		bsCollapse.show();
 	}
 
-	// layout
-	run_layout( 'cose', ele );
+	// layout — when a facet grouping OR ungrouped aggregation is active, nwAfterExpand OWNS the
+	// layout, so DON'T also run cose here (it would fight the async grouping and blend cose+cise).
+	// Exception: cise (facet path) needs an initial spread on the FIRST seed (a spring embedder can't
+	// separate a fully degenerate 0,0 start), so run cose once THEN — but only for the facet path,
+	// not the ungrouped-aggregate path (cose handles a degenerate start fine on its own).
+	var nwPanel = ( typeof nwHasPanel !== 'function' || nwHasPanel() );
+	var nwOwnsLayout = ( typeof nwGroupFacet !== 'undefined' && ( nwGroupFacet || nwAggregate || nwMapMode ) && nwPanel );
+	if ( !nwOwnsLayout ) run_layout( 'cose', ele );
+	else if ( nwWasEmpty && nwGroupFacet && !nwMapMode ) run_layout( 'cose' );   // never spring-embed under the Leaflet basemap
+	// WP-G: re-apply INT1 contraction / facet grouping to the newly-expanded nodes. On an
+	// EXPANSION keep the viewport focused on the node just expanded (nwRecentre reads + clears
+	// this); on a FRESH SEED leave it null so nwRecentre fits the whole graph instead.
+	nwFocusEle = nwWasEmpty ? null : ele;
+	if ( typeof nwAfterExpand === 'function' ) await nwAfterExpand();
 }
 
 function clean_graph() {
@@ -276,9 +296,772 @@ function clean_graph() {
 	connectedNodes.removeClass("hidden").addClass("shown");
 }
 
+// ───────────────────────────────────────────────────────────────────────────
+// WP-G (G1): /networks graph — additive, reversible INT1 contraction + facet
+// grouping (language). Grouping uses BUBBLESETS (soft, multi-membership, a
+// NON-interactive overlay so it never blocks node right-click/expand) + a manual
+// radial re-position so the clusters visibly separate. No compound nodes, no extra
+// layout lib. Operates on the rendered `cy`; does NOT touch the legacy filters.
+// Defaults: ON, so clustering shows from the first seed and as the graph grows.
+// ───────────────────────────────────────────────────────────────────────────
+var nwCollapseInt1 = true, nwGroupFacet = 'language', NW_COL = {}, nwBB = null, nwBBPaths = [], nwMapHullRAF = 0;
+var nwAggregate = true, nwAggExpanded = {};   // collapse large facet groups into count-nodes; set of groups the user re-expanded
+var nwColourFacet = null;   // which facet NW_COL currently holds colours for (reset palette on facet switch)
+var NW_MAX_FIT_ZOOM = 1.2;   // cap auto-fit zoom so a small graph doesn't fill the screen with huge magnified nodes
+var cyRunningLayout = null;   // handle to the last base layout (cose/klay) so grouping can stop it before re-laying-out
+var nwCiseLayout = null;      // handle to the last cise layout so a re-run can stop it first (else it never completes)
+var nwFocusEle = null;        // id of the node just expanded; grouping centres on it (then clears) instead of fitting all
+// map mode (geo-graph on a Leaflet basemap, /maps graph view): Leaflet owns the viewport, nodes are
+// placed by lat/lng, facet grouping shows as node FILL colour + bubbleset hulls (cise/cose bypassed).
+var nwMapMode = false, nwLeaf = null, nwGeoLoaded = false, nwGeoColoured = null, nwMapGroups = null;
+// _adaptive: coarsen the hull grid per group by member count (fine grid for small localized groups so
+// they still look good; coarse only for big scattered ones like Gender/Europe, where a fine grid over a
+// globe-spanning hull is what crashed). virtualEdges stays TRUE (the reliable, connected hull shape);
+// redraw is gated to pan/zoom SETTLE (see maps-graph.js).
+var NW_MAP_BB_OPTS = { _adaptive: true, throttle: 250, maxRoutingIterations: 40, maxMarchingIterations: 20 };
+
+// the WP-G graph panel + faceting run on the three cy-graph views: /networks (full), plus the
+// poet-centric /authors and poem-centric /works split-pane graphs (same cy engine).
+function nwGraphView() {
+    var h = ( typeof window !== 'undefined' && window.location ) ? window.location.href : '';
+    if ( /\/networks\//.test( h ) ) return 'networks';
+    if ( /\/authors\//.test( h ) ) return 'authors';
+    if ( /\/works\//.test( h ) ) return 'works';
+    if ( /\/maps\//.test( h ) ) return 'maps';
+    return '';
+}
+function nwHasPanel() { return nwGraphView() !== ''; }
+
+function nwIsClass( node, frag ) {
+    var c = node.data( 'class' ); if ( !c ) return false;
+    if ( !Array.isArray( c ) ) c = [ c ];
+    return c.some( function( t ) { return String( t ).indexOf( frag ) >= 0; } );
+}
+function nwRelations() {
+    return cy.nodes().filter( function( n ) { return nwNodeType( n ) === 'context'; } );
+}
+// the rdf:type local-name -> coarse type + human label, in priority order (a node carries several
+// types; the first match wins). EXACT local-name match (read the class, no substring guessing).
+var NW_TYPES = [
+    [ { INT2_ActualizationOfFeature: 1, INT3_Interrelation: 1, Intertextuality: 1, INT_Interpretation: 1 }, 'context', 'Context' ],
+    [ { INT1_Passage: 1 }, 'passage', 'Passage' ],
+    [ { E21_Person: 1, Person: 1, F10_Person: 1, E74_Group: 1, Agent: 1 }, 'person', 'Person' ],
+    [ { F1_Work: 1, PoeticWork: 1, F2_Expression: 1, Redaction: 1, SelfContainedExpression: 1, F3_Manifestation: 1, E33_Linguistic_Object: 1, ExpressionFragment: 1, Excerpt: 1 }, 'work', 'Work' ],
+    [ { Concept: 1, F12_Nomen: 1 }, 'concept', 'Concept' ],
+    [ { ConceptScheme: 1 }, 'scheme', 'Concept scheme' ],
+    [ { E56_Language: 1 }, 'language', 'Language' ],
+    [ { E65_Creation: 1, F27_Work_Creation: 1, F28_Expression_Creation: 1, WorkConception: 1, ExpressionCreation: 1 }, 'creation', 'Creation' ],
+    [ { E12_Production: 1, CarrierProduction: 1 }, 'production', 'Production' ],
+    [ { E67_Birth: 1, Birth: 1 }, 'birth', 'Birth' ],
+    [ { E69_Death: 1, Death: 1 }, 'death', 'Death' ],
+    [ { 'E52_Time-Span': 1, TimeSpan: 1 }, 'timespan', 'Time-span' ],
+    [ { E53_Place: 1, Place: 1 }, 'place', 'Place' ],
+    [ { AgentRole: 1 }, 'agentrole', 'Agent role' ],
+    [ { D1_Digital_Object: 1, D9_Data_Object: 1, D2_Digitization_Process: 1, D7_Digital_Machine_Event: 1, D14_Software: 1, Application: 1 }, 'digital', 'Digital object' ],
+    [ { BibliographicSource: 1 }, 'source', 'Source' ],
+    [ { E90_Symbolic_Object: 1 }, 'content', 'Content' ]
+];
+var NW_TYPE_LABEL = {}; NW_TYPES.forEach( function( t ) { NW_TYPE_LABEL[ t[ 1 ] ] = t[ 2 ]; } );
+// the rdf:type local names (after the last # or /) of a node's class array
+function nwLocalNames( n ) {
+    var c = n.data( 'class' ); if ( !c ) return [];
+    if ( !Array.isArray( c ) ) c = [ c ];
+    return c.map( function( t ) { var s = String( t ), h = s.lastIndexOf( '#' ); if ( h < 0 ) h = s.lastIndexOf( '/' ); return h >= 0 ? s.substring( h + 1 ) : s; } );
+}
+// classify a node by its ACTUAL rdf:type (used by facets + the aggregation buckets). 'other' is a
+// genuine last resort — only for nodes with no recognised class.
+function nwNodeType( n ) {
+    var names = nwLocalNames( n ), set = {};
+    names.forEach( function( x ) { set[ x ] = 1; } );
+    for ( var i = 0; i < NW_TYPES.length; i++ ) {
+        for ( var k in NW_TYPES[ i ][ 0 ] ) { if ( set[ k ] ) return NW_TYPES[ i ][ 1 ]; }
+    }
+    var id = String( n.id() );   // id fallbacks when the class is missing/unhelpful
+    if ( id.indexOf( '/kos/' ) >= 0 ) return 'concept';
+    if ( id.indexOf( '/country' ) >= 0 ) return 'place';
+    if ( id.indexOf( '/language' ) >= 0 ) return 'language';
+    return 'other';
+}
+// set of node types currently visible in the graph (drives the dynamic facet menu)
+function nwPresentTypes() {
+    var s = {};
+    if ( typeof cy !== 'undefined' && cy ) cy.nodes().forEach( function( n ) {
+        if ( n.visible() && !n.hasClass( 'nw-collapsed' ) ) s[ nwNodeType( n ) ] = 1;
+    } );
+    return s;
+}
+function nwFacetColour( v ) {
+    if ( !( v in NW_COL ) ) NW_COL[ v ] = OP_PALETTE[ Object.keys( NW_COL ).length % OP_PALETTE.length ];
+    return NW_COL[ v ];
+}
+// ── WP-G facet registry (NODE-CENTRIC) ───────────────────────────────────────
+// Each facet declares which node `types` it can resolve and a `query(nodeIds)` returning
+// ?node ?val ?vlabel (one row per resolvable node). A facet with `client:true` resolves in JS
+// (no SPARQL). `group` buckets facets in the "Group by" menu; the menu only offers a facet when
+// the graph currently holds a node of one of its types. Values are cached per node; resolved
+// values then propagate to unresolved neighbours so clusters carry mass.
+var NW_PREFIX = `PREFIX intro: <https://w3id.org/lso/intro/beta202408#>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>`;
+var NW_FACETS = {
+    type:       { label: 'Node type', group: 'general', types: [ '*' ], client: true },
+    language:   { label: 'Language', group: 'origin', types: [ 'work' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (REPLACE(STR(?x),"^.*/id/([^/]+).*$","$1") AS ?val) (REPLACE(STR(?x),"^.*/id/([^/]+).*$","$1") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  ?node ( lrmoo:R4_embodies | lrmoo:R3_is_realised_in )? / crm:P72_has_language ?x . }`; } },
+    compDecade: { label: 'Composition decade', group: 'origin', types: [ 'work' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (CONCAT(SUBSTR(STR(?y),1,3),"0s") AS ?val) (CONCAT(SUBSTR(STR(?y),1,3),"0s") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  ?node lrmoo:R4_embodies? / lrmoo:R3i_realises? / lrmoo:R16i_was_created_by / crm:P4_has_time-span / crm:P82_at_some_time_within ?y . }`; } },
+    publDecade: { label: 'Publication decade', group: 'origin', types: [ 'work' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (CONCAT(SUBSTR(STR(?y),1,3),"0s") AS ?val) (CONCAT(SUBSTR(STR(?y),1,3),"0s") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  ?node lrmoo:R3_is_realised_in? / lrmoo:R4i_is_embodied_in? / ^crm:P108_has_produced / crm:P4_has_time-span / crm:P82_at_some_time_within ?y . }`; } },
+    authorCountry: { label: 'Residence', group: 'origin', types: [ 'person', 'work' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (REPLACE(STR(?place),"^.*/id/([^/]+).*$","$1") AS ?val) (REPLACE(STR(?place),"^.*/id/([^/]+).*$","$1") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  { ?node crm:P74_has_current_or_former_residence ?place }
+  UNION { ?node lrmoo:R4_embodies? / dcterms:creator / crm:P74_has_current_or_former_residence ?place } }`; } },
+    concept:    { label: 'Concept', group: 'semantic', types: [ 'context' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node ?val ?vlabel WHERE {
+  VALUES ?node { ${ v } }
+  { ?node intro:R17_actualizesFeature ?val } UNION { ?node intro:R19_hasType / intro:R4i_isDefinedIn ?val }
+  OPTIONAL { ?val skos:prefLabel ?vlabel } }`; } },
+    vocabulary: { label: 'Vocabulary', group: 'semantic', types: [ 'context' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node ?val (COALESCE(?ttl, REPLACE(STR(?val),"^.*/([^/]+)$","$1")) AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  { ?node intro:R17_actualizesFeature ?c } UNION { ?node intro:R19_hasType / intro:R4i_isDefinedIn ?c }
+  ?c skos:inScheme ?val . OPTIONAL { ?val dcterms:title ?ttl } }`; } },
+    reachCountry: { label: 'Country (reach)', group: 'reach', types: [ 'context' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (REPLACE(STR(?place),"^.*/id/([^/]+).*$","$1") AS ?val) (REPLACE(STR(?place),"^.*/id/([^/]+).*$","$1") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  ?interp intro:R21_identifies ?node ; dcterms:spatial ?place . }`; } },
+    reachPeriod:  { label: 'Period (reach)', group: 'reach', types: [ 'context' ], query: function( v ) { return `${ NW_PREFIX }
+SELECT ?node (CONCAT(SUBSTR(REPLACE(STR(?t),"^.*/id/([^/]+).*$","$1"),1,3),"0s") AS ?val) (CONCAT(SUBSTR(REPLACE(STR(?t),"^.*/id/([^/]+).*$","$1"),1,3),"0s") AS ?vlabel) WHERE {
+  VALUES ?node { ${ v } }
+  ?interp intro:R21_identifies ?node ; dcterms:temporal ?t . }`; } },
+    // poet-level facets resolved client-side from the map JSON (persons/nations) — zero SPARQL; used on the /maps geo-graph
+    poetCountry:   { label: 'Nationality', group: 'origin', types: [ 'person' ], client: true, resolve: function( n ) { var p = nwPoet( n ); if ( !p || !p.nat ) return null; var iso = String( p.nat ).substring( 0, 2 ); return { val: iso, label: ( typeof nations !== 'undefined' && nations && nations[ iso ] ) ? nations[ iso ].name : iso }; } },
+    poetContinent: { label: 'Continent', group: 'origin', types: [ 'person' ], client: true, resolve: function( n ) { var p = nwPoet( n ); if ( !p || !p.nat ) return null; var iso = String( p.nat ).substring( 0, 2 ); var nat = ( typeof nations !== 'undefined' && nations ) ? nations[ iso ] : null; if ( !nat || !nat.cont ) return null; return { val: nat.cont, label: NW_CONTINENT[ nat.cont ] || nat.cont }; } },
+    poetDecade:    { label: 'Birth decade', group: 'origin', types: [ 'person' ], client: true, resolve: function( n ) { var p = nwPoet( n ); if ( !p || !p.dob ) return null; var d = String( p.dob ).substring( 0, 3 ) + '0s'; return { val: d, label: d }; } },
+    poetGender:    { label: 'Gender', group: 'general', types: [ 'person' ], client: true, resolve: function( n ) { var p = nwPoet( n ); if ( !p || !p.sex ) return null; return { val: p.sex, label: p.sex === 'f' ? 'Female' : p.sex === 'm' ? 'Male' : p.sex }; } }
+};
+var NW_CONTINENT = { AF: 'Africa', NA: 'North America', SA: 'South America', AS: 'Asia', EU: 'Europe', OC: 'Oceania', AN: 'Antarctica' };
+function nwPoet( n ) { var m = String( n.id() ).match( /\/id\/(pers\d+)\b/ ); return ( m && typeof persons !== 'undefined' && persons ) ? persons[ m[ 1 ] ] : null; }
+var NW_FACET_GROUPS = [ [ 'general', 'General' ], [ 'origin', 'Origin' ], [ 'semantic', 'Semantic' ], [ 'reach', 'Reach' ] ];
+// REVERSIBLE INT1 contraction: hide each passage (not remove) + add a relation→work
+// shortcut edge. Toggling off restores. Display-only; the store is untouched.
+function nwContractPassages() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    // collect first, then hide ALL passages in one collection .style() + add ALL edges in one
+    // cy.add() — per-passage .style()/.add() each forced a full re-render.
+    var hide = cy.collection(), toAdd = [], seen = {};
+    cy.nodes().filter( function( n ) { return nwNodeType( n ) === 'passage' && !n.hasClass( 'nw-collapsed' ); } ).forEach( function( p ) {
+        var neigh = p.neighborhood( 'node' );
+        var rels = neigh.filter( function( n ) { return nwNodeType( n ) === 'context'; } );
+        // rewire the relation to the passage's VISIBLE TEXT only — not to the passage's language
+        // node (the passage carries dcterms:language) nor a concept (redundant, and a rel->language
+        // shortcut renders "undefined" via the language-edge label rule), and not to a hidden/
+        // unloaded node (a shortcut to a hidden target = an invisible edge that strands the relation).
+        var locs = neigh.not( rels ).filter( function( o ) {
+            var id = String( o.id() );
+            return o.visible() && id.indexOf( '/language' ) < 0 && id.indexOf( '/kos/' ) < 0 && id.indexOf( '/rppa/kos' ) < 0;
+        } );
+        // don't collapse a passage that is a relation's ONLY link (no visible work/manifestation
+        // to rewire to) — hiding it would orphan the relation (and e.g. its concept). Keep it as
+        // the visible connector instead.
+        if ( rels.empty() || locs.empty() ) return;
+        rels.forEach( function( r ) { locs.forEach( function( o ) {
+            var id = 'nwc-' + opSafe( r.id() ) + '-' + opSafe( o.id() );
+            if ( !seen[ id ] && cy.getElementById( id ).empty() ) { seen[ id ] = 1;
+                toAdd.push({ group: 'edges', classes: 'edge nw-contracted', data: { id: id, source: r.id(), target: o.id(), name: '' } }); }
+        } ); } );
+        hide = hide.union( p );
+    } );
+    if ( toAdd.length ) cy.add( toAdd ).style({ 'line-style': 'dashed', 'opacity': 0.55 });
+    if ( hide.nonempty() ) hide.addClass( 'nw-collapsed' ).style( 'display', 'none' );
+}
+function nwRestorePassages() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    cy.remove( '.nw-contracted' );
+    cy.nodes( '.nw-collapsed' ).removeClass( 'nw-collapsed' ).style( 'display', 'element' );
+}
+// hide visible nodes left with no visible neighbour once passages are collapsed (e.g. a language
+// node whose only link was the now-hidden passage). Uses the graph's existing '.hidden' mechanism;
+// never touches collapsed passages. Multi-node disconnected clusters are left alone (each member
+// still has a visible neighbour) — they are legitimate expansion results, not orphans.
+function nwHideOrphans() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    cy.nodes( ':visible' ).forEach( function( n ) {
+        if ( n.hasClass( 'nw-collapsed' ) ) return;
+        if ( n.neighborhood( 'node:visible' ).length === 0 ) n.addClass( 'hidden' );
+    } );
+}
+// shape a SPARQL-style triple binding for createCYJSON
+function nwT( s, p, o, otype ) {
+    return { s: { type: 'uri', value: s }, p: { type: 'uri', value: p }, o: { type: ( otype || 'uri' ), value: o }, g: { type: 'uri', value: 'default' } };
+}
+// A context relation (INT2/INT3) points at its text only via passage -> R10i_isPassageOf, and the
+// legacy addEleNode filter drops that whole chain (passage reached via intro:R18i/R12/R13, text via
+// R10i — none in the P138i/pdc/pdt/pdp allow-set). So a freshly-seeded TYPOLOGICAL concept shows the
+// concept + its INT2s and NOTHING ELSE. This fetches, for every visible relation with no visible
+// text, the target text DIRECTLY (property path through the passage) and adds just the text node +
+// a dashed rel->text shortcut — no passage node, so nothing to hide and nothing to overlap.
+async function nwFetchRelationTexts() {
+    if ( typeof cy === 'undefined' || !cy ) return false;
+    var need = nwRelations().filter( function( r ) {
+        if ( !r.visible() ) return false;
+        return !r.neighborhood( 'node:visible' ).some( function( n ) {   // already has a visible text?
+            var id = String( n.id() ); return id.indexOf( '/manifestation/' ) >= 0 || id.indexOf( '/expression/' ) >= 0;
+        } );
+    } );
+    if ( need.empty() ) return false;
+    var values = need.map( function( r ) { return '<' + r.id() + '>'; } ).join( ' ' );
+    // resolve rel -> text DIRECTLY (property path through the passage) so we only ever add TEXT nodes
+    // plus a synthetic rel->text shortcut. If the passage targets a pdc:ExpressionFragment (a gated
+    // OntoPoetry node — those belong only in the Structure view), map it UP to its lrmoo expression
+    // so only proper entities surface here.
+    var q = `PREFIX intro: <https://w3id.org/lso/intro/beta202408#>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>
+SELECT DISTINCT ?rel ?text ?ttype ?tlabel WHERE {
+  VALUES ?rel { ${ values } }
+  ?rel ( intro:R18i_actualizationFoundOn | intro:R12_hasReferredToEntity | intro:R13_hasReferringEntity ) / intro:R10i_isPassageOf ?t0 .
+  OPTIONAL { ?t0 lrmoo:R15i_is_fragment_of ?expr }
+  BIND( COALESCE( ?expr, ?t0 ) AS ?text )
+  OPTIONAL { ?text a ?ttype } OPTIONAL { ?text crm:P1_is_identified_by ?tlabel }
+}`;
+    var rows;
+    try { rows = await opFetch( q ); } catch ( e ) { console.log( 'WP-G fetch-relation-texts query failed', e ); return false; }
+    if ( !rows || !rows.length ) return false;
+    var RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+        P1  = 'http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by';
+    var triples = [], pairs = [];
+    rows.forEach( function( v ) {
+        if ( !v.rel || !v.text ) return;
+        pairs.push( [ v.rel.value, v.text.value ] );
+        if ( v.ttype )  triples.push( nwT( v.text.value, RDF, v.ttype.value ) );
+        if ( v.tlabel ) triples.push( nwT( v.text.value, P1, v.tlabel.value, 'literal' ) );
+    } );
+    try {   // build + add the text nodes (styled exactly like normal text nodes)
+        var data = await createCYJSON( triples );
+        data = ( data || [] ).filter( function( el ) { return el.data && el.data.id && cy.getElementById( el.data.id ).empty(); } );
+        if ( data.length ) cy.add( data );
+    } catch ( e ) { console.log( 'WP-G build-relation-texts failed', e ); }
+    // add a dashed rel -> text shortcut (same look as the INT1 contraction edges)
+    var edges = [];
+    pairs.forEach( function( p ) {
+        var eid = 'nwc-' + opSafe( p[ 0 ] ) + '-' + opSafe( p[ 1 ] );
+        if ( cy.getElementById( p[ 1 ] ).nonempty() && cy.getElementById( eid ).empty() )
+            edges.push({ group: 'edges', classes: 'edge nw-contracted', data: { id: eid, source: p[ 0 ], target: p[ 1 ], name: '' } });
+    } );
+    if ( edges.length ) cy.add( edges ).style({ 'line-style': 'dashed', 'opacity': 0.55 } );
+    return ( pairs.length > 0 );
+}
+
+function nwFacetAttr( facet ) { return 'nwF_' + facet; }
+// does this facet apply to a node's type?
+function nwFacetApplies( def, n ) {
+    return def.types.indexOf( '*' ) >= 0 || def.types.indexOf( nwNodeType( n ) ) >= 0;
+}
+// resolve the chosen facet's value per applicable VISIBLE node, cached on node.data('nwF_<facet>');
+// incremental (only unresolved nodes). Client facets (e.g. node type) resolve in JS; others query
+// the store with the node ids. Labels cached on the facet def.
+async function nwResolveFacet( facet ) {
+    var def = NW_FACETS[ facet ]; if ( !def ) return;
+    var attr = nwFacetAttr( facet );
+    def._labels = def._labels || {};
+    var todo = cy.nodes().filter( function( n ) { return n.data( attr ) === undefined && nwFacetApplies( def, n ); } );
+    if ( todo.empty() ) return;
+    if ( def.client ) {   // resolve in JS (node type, or a facet-specific def.resolve for map JSON facets)
+        todo.forEach( function( n ) {
+            if ( def.resolve ) { var r = def.resolve( n ); if ( r && r.val != null ) { n.data( attr, r.val ); def._labels[ r.val ] = ( r.label != null ? r.label : r.val ); } return; }
+            var t = nwNodeType( n ); n.data( attr, t ); def._labels[ t ] = NW_TYPE_LABEL[ t ] || t;   // default client facet = node type
+        } );
+        return;
+    }
+    var values = todo.map( function( n ) { return '<' + n.id() + '>'; } ).join( ' ' );
+    var rows;
+    try { rows = await opFetch( def.query( values ) ); } catch ( e ) { console.log( 'WP-G facet resolve failed', facet, e ); rows = []; }
+    var byNode = {};
+    ( rows || [] ).forEach( function( v ) {
+        if ( !v.node || !v.val || !v.val.value ) return;
+        if ( !( v.node.value in byNode ) ) byNode[ v.node.value ] = v.val.value;   // first value wins (single-membership for cise)
+        if ( v.vlabel && v.vlabel.value ) def._labels[ v.val.value ] = v.vlabel.value;
+    } );
+    todo.forEach( function( n ) { n.data( attr, byNode[ n.id() ] || '' ); } );
+}
+
+function nwClearBubblesets() {
+    ( nwBBPaths || [] ).forEach( function( p ) { try { if ( nwBB ) nwBB.removePath( p ); } catch ( e ) {} } );
+    nwBBPaths = [];
+}
+function nwUpdateLegend( groups, labels ) {
+    var $l = $( '.nw-panel .nw-legend' ); if ( !$l.length ) return;
+    if ( !groups ) { $l.empty(); return; }
+    labels = labels || {};
+    $l.html( Object.keys( groups ).map( function( k ) {
+        var name = labels[ k ] || k;
+        return `<span style="white-space:nowrap;margin-right:8px;" title="${ String( name ).replace( /"/g, '&quot;' ) }"><span style="display:inline-block;width:10px;height:10px;background:${ nwFacetColour( k ) };border-radius:2px;"></span> ${ String( name ).substring( 0, 24 ) } (${ groups[ k ].length })</span>`;
+    } ).join( '' ) );
+}
+// bubbleset outline (soft, multi-membership, NON-interactive so it never blocks node
+// right-clicks) around each facet-value group
+function nwDrawBubblesets( groups, perfOpts ) {
+    nwClearBubblesets();
+    var BS = ( typeof CytoscapeBubbleSets !== 'undefined' && CytoscapeBubbleSets.BubbleSetsPlugin );
+    if ( !BS ) return;
+    if ( !nwBB ) { try { nwBB = new BS( cy ); } catch ( e ) { nwBB = null; return; } }
+    Object.keys( groups ).forEach( function( k ) {
+        if ( groups[ k ].length < 2 ) return;   // a single node (incl. an aggregated count-node) needs no hull
+        var col = nwFacetColour( k );
+        var opts = { virtualEdges: true, interactive: false,
+            style: { fill: col, fillOpacity: '0.12', stroke: col, 'strokeWidth': '2', strokeOpacity: '0.85', 'pointer-events': 'none' } };
+        if ( perfOpts ) for ( var p in perfOpts ) opts[ p ] = perfOpts[ p ];
+        if ( opts._adaptive ) {   // coarsen the grid for big/scattered groups; keep it fine for small ones
+            var m = groups[ k ].length;
+            opts.pixelGroup = m > 60 ? 20 : ( m > 20 ? 10 : 4 );
+            delete opts._adaptive;
+        }
+        try { nwBBPaths.push( nwBB.addPath( cy.collection( groups[ k ] ), null, null, opts ) ); } catch ( e ) {}
+    } );
+}
+// dependency-free fallback: pull each language's relations into a ring cluster
+function nwRadial( langs, keys ) {
+    var bb = cy.elements().boundingBox(), cx = ( bb.x1 + bb.x2 ) / 2, cyc = ( bb.y1 + bb.y2 ) / 2;
+    var ringR = Math.max( 260, ( bb.w + bb.h ) / 4 + keys.length * 30 );
+    keys.forEach( function( l, i ) {
+        var ang = 2 * Math.PI * i / keys.length, ax = cx + ringR * Math.cos( ang ), ay = cyc + ringR * Math.sin( ang );
+        var nodes = langs[ l ], m = nodes.length, clR = Math.max( 30, m * 11 );
+        nodes.forEach( function( n, j ) {
+            var a2 = 2 * Math.PI * j / Math.max( 1, m );
+            n.position({ x: ax + ( m > 1 ? clR * Math.cos( a2 ) : 0 ), y: ay + ( m > 1 ? clR * Math.sin( a2 ) : 0 ) });
+        } );
+    } );
+}
+// Spread each RESOLVED node's facet value onto its unresolved neighbours (one pass, using a
+// snapshot so values don't cascade), so clusters carry mass — e.g. a work's language reaches its
+// contexts, a context's concept reaches its works. Never tags the shared concept hub (it connects
+// everything, so tagging it would merge unrelated clusters). Node type ('*') never propagates.
+function nwPropagateFacet( facet ) {
+    if ( NW_FACETS[ facet ] && NW_FACETS[ facet ].client ) return;   // node-type: every node already has its own value
+    var attr = nwFacetAttr( facet );
+    var seeded = cy.nodes().filter( function( n ) { return !!n.data( attr ); } );   // resolved-with-a-value
+    seeded.forEach( function( r ) {
+        var val = r.data( attr );
+        r.neighborhood( 'node' ).forEach( function( w ) {
+            if ( w.data( attr ) ) return;                                          // already has a value
+            if ( nwNodeType( w ) === 'concept' ) return;   // shared concept hub
+            w.data( attr, val );
+        } );
+    } );
+}
+// ── Hub aggregation ──────────────────────────────────────────────────────────
+// Collapse a large facet-value group into ONE synthetic count-node ("60 · eng"), wired to the
+// neighbours its members connected to (usually the concept hub). Reversible + display-only (the
+// store is untouched); the count-node is a NORMAL cy node so cise / bubblesets / right-click all
+// keep working (no compound nodes). Click a count-node to expand its group.
+var NW_AGG_THRESHOLD = 12;
+function nwAggKey( facet, v ) { return facet + '::' + v; }
+function nwRestoreAggregates( clearExpanded ) {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    cy.remove( '.nw-agg, .nw-agg-edge' );
+    cy.nodes( '.nw-agg-hidden' ).removeClass( 'nw-agg-hidden' ).style( 'display', 'element' );   // one collection call
+    if ( clearExpanded ) nwAggExpanded = {};
+}
+// hide big groups and add a count-node per group; MUTATES groups+clustered so the count-node becomes
+// the cluster. Skips groups the user manually expanded (nwAggExpanded). Connectivity: every edge a
+// member had is preserved on the count-node — an edge to a node in ANOTHER aggregated group is
+// REWIRED to that group's count-node (so "Creation" ↔ "Work" ↔ "Time-span" ↔ the poet all connect),
+// never dropped. Edges are deduped (incl. the reverse of a count↔count pair).
+// Perf: hide ALL members in ONE collection .style() call + add ALL count-nodes/edges in ONE cy.add()
+// (per-element .style() forced a full re-render each). NOT cy.batch() — adding elements in a batch is unreliable.
+function nwAggregateGroups( facet, groups, clustered ) {
+    var attr = nwFacetAttr( facet ), def = NW_FACETS[ facet ];
+    var aggVs = Object.keys( groups ).filter( function( v ) {
+        return groups[ v ].length > NW_AGG_THRESHOLD && !nwAggExpanded[ nwAggKey( facet, v ) ];
+    } );
+    if ( !aggVs.length ) return;
+    var aggIdOf = function( v ) { return 'nwagg-' + opSafe( facet ) + '-' + opSafe( v ); };
+    var memberAgg = {};   // memberId -> its group's count-node id (so cross-group edges can be rewired)
+    aggVs.forEach( function( v ) { var a = aggIdOf( v ); groups[ v ].forEach( function( m ) { memberAgg[ m.id() ] = a; } ); } );
+    var hide = cy.collection(), toAdd = [], edgeSeen = {};
+    aggVs.forEach( function( v ) {
+        var aggId = aggIdOf( v ), memColl = cy.collection( groups[ v ] );
+        var nd = { id: aggId, name: groups[ v ].length + ' · ' + ( ( def._labels && def._labels[ v ] ) || v ),
+                   shape: 'round-rectangle', bgcolor: nwFacetColour( v ), nwAgg: 1, nwAggFacet: facet, nwAggVal: v };
+        nd[ attr ] = v;
+        toAdd.push( { group: 'nodes', classes: 'node nw-agg', data: nd } );
+        memColl.neighborhood( 'node' ).forEach( function( w ) {
+            if ( w.hasClass( 'hidden' ) || w.hasClass( 'nw-collapsed' ) ) return;
+            var target = memberAgg[ w.id() ] || w.id();   // aggregated neighbour -> its count-node; else the node itself
+            if ( target === aggId ) return;                // edge internal to this group
+            var eid = 'nwagge-' + opSafe( aggId ) + '-' + opSafe( target ), rev = 'nwagge-' + opSafe( target ) + '-' + opSafe( aggId );
+            if ( edgeSeen[ eid ] || edgeSeen[ rev ] ) return;
+            edgeSeen[ eid ] = 1;
+            toAdd.push( { group: 'edges', classes: 'edge nw-agg-edge', data: { id: eid, source: aggId, target: target, name: '', class: '' } } );   // class:'' -> blank-node/language label rule renders blank, not "undefined"
+        } );
+        hide = hide.union( memColl );
+        clustered[ aggId ] = 1;
+    } );
+    hide.addClass( 'nw-agg-hidden' ).style( 'display', 'none' );   // ONE call
+    cy.add( toAdd ).edges().style( { 'line-style': 'dashed', 'opacity': 0.6 } );   // ONE call
+    aggVs.forEach( function( v ) { groups[ v ] = [ cy.getElementById( aggIdOf( v ) ) ]; } );
+}
+function nwExpandAggregate( agg ) {
+    if ( !agg || agg.empty() || !agg.data( 'nwAgg' ) ) return;
+    var facet = agg.data( 'nwAggFacet' ), v = agg.data( 'nwAggVal' ), attr = nwFacetAttr( facet );
+    nwAggExpanded[ nwAggKey( facet, v ) ] = 1;   // stay expanded across re-groups
+    cy.nodes( '.nw-agg-hidden' ).filter( function( n ) { return n.data( attr ) === v; } ).removeClass( 'nw-agg-hidden' ).style( 'display', 'element' );
+    agg.connectedEdges().remove(); agg.remove();
+    if ( nwGroupFacet ) nwGroupByFacet( nwGroupFacet );
+    else if ( nwAggregate ) nwAutoAggregateByType();
+    else run_layout( 'cose' );
+}
+// UNGROUPED aggregation: no facet is active, but "aggregate large groups" is on — so collapse each
+// large SAME-TYPE fan-out (a poet's many works, etc.) into a count-node using node type as the
+// implicit bucket, then lay out with cose (this path is always cose, never cise, so the two never mix).
+async function nwAutoAggregateByType() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    if ( nwMapMode ) { nwApplyGeoPositions(); return; }   // geo: no ungrouped cose aggregation under the map
+    var nwFocusId = nwFocusEle; nwFocusEle = null;
+    try { if ( cyRunningLayout ) cyRunningLayout.stop(); } catch ( e ) {}
+    nwRestoreAggregates( false );
+    await nwResolveFacet( 'type' );   // client (fast): caches nwF_type on every node
+    var buckets = {};
+    cy.nodes().forEach( function( n ) {
+        if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) || !n.visible() ) return;
+        var t = n.data( 'nwF_type' ); if ( t ) ( buckets[ t ] = buckets[ t ] || [] ).push( n );
+    } );
+    nwAggregateGroups( 'type', buckets, {} );
+    run_layout( 'cose', nwFocusId || undefined );
+}
+var nwCiseReg = false;
+// GENERIC grouping: separate the chosen facet's value-clusters with the CISE layout (whole-graph,
+// no compound nodes, so no click-blocking), outline each value with a bubbleset. Falls back to a
+// manual radial layout if cise isn't available.
+async function nwGroupByFacet( facet ) {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    if ( nwMapMode ) { await nwMapRegroup( facet ); return; }   // geo: colour + bubblesets on fixed positions, no cise
+    var def = NW_FACETS[ facet ]; if ( !def ) { nwUngroup(); return; }
+    var attr = nwFacetAttr( facet );
+    var nwFocusId = nwFocusEle; nwFocusEle = null;   // this grouping is for that expansion; centre on it (else fit)
+    if ( nwColourFacet !== facet ) { NW_COL = {}; nwColourFacet = facet; nwAggExpanded = {}; }   // fresh palette + expansions per facet
+    // halt the base cose layout (from addEleNode) IMMEDIATELY — before the async facet lookup
+    // below — so it can't keep animating/fighting during the round-trip and the cise run.
+    try { if ( cyRunningLayout ) cyRunningLayout.stop(); } catch ( e ) {}
+    cy.elements().stop();
+    nwRestoreAggregates( false );   // drop old count-nodes + un-hide members; rebuild fresh below (keeps nwAggExpanded)
+    await nwResolveFacet( facet );
+    nwPropagateFacet( facet );
+    nwClearBubblesets();
+    var groups = {}, clustered = {};
+    cy.nodes().forEach( function( n ) {
+        if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) || !n.visible() ) return;   // hidden passages / cleaned orphans / aggregated members
+        var v = n.data( attr ); if ( v ) { ( groups[ v ] = groups[ v ] || [] ).push( n ); clustered[ n.id() ] = 1; }
+    } );
+    var keys = Object.keys( groups );
+    if ( !keys.length ) {
+        // nothing resolved for this facet (e.g. sparse reach facet, or no contexts) — cose was halted
+        // at the top, so run the natural layout instead of leaving the new nodes unpositioned/messy.
+        nwUpdateLegend( null );
+        run_layout( 'cose', nwFocusId || undefined );
+        return;
+    }
+    nwUpdateLegend( groups, def._labels );          // legend counts are the REAL member counts (before aggregation)
+    if ( nwAggregate ) nwAggregateGroups( facet, groups, clustered );   // big groups -> count-nodes (members now hidden)
+    try { if ( window.cytoscapeCise && !nwCiseReg && typeof cytoscape !== 'undefined' ) { cytoscape.use( window.cytoscapeCise ); nwCiseReg = true; } } catch ( e ) {}
+    // cise wants a 2D array of node-ID arrays (index = cluster id). Group the facet-value clusters,
+    // then sweep EVERY other visible node (concept hub, persons, unresolved works) into ONE 'other'
+    // cluster so cise lays them out as a single tidy circle instead of scattering them as
+    // force-placed unclustered nodes.
+    var clusterArrays = keys.map( function( k ) { return groups[ k ].map( function( n ) { return n.id(); } ); } );
+    var others = cy.nodes().filter( function( n ) { return n.visible() && !n.hasClass( 'nw-collapsed' ) && !clustered[ n.id() ]; } ).map( function( n ) { return n.id(); } );
+    if ( others.length ) clusterArrays.push( others );
+    // cose was already halted at the top; belt-and-braces stop any residual node animation.
+    cy.elements().stop();
+    // after the layout settles: centre on the just-expanded node (nwFocusId) so an expansion keeps
+    // you where you were; only fit-to-all when there's no focus (fresh seed / checkbox toggle).
+    // Tiny defer so it lands after the cose focus-zoom (from run_layout).
+    var nwRecentre = function() { setTimeout( function() { try {
+        var f = nwFocusId ? cy.getElementById( nwFocusId ) : null;
+        if ( f && f.nonempty() && f.visible() ) { cy.animate({ center: { eles: f }, zoom: 0.85 }, { duration: 300 } ); return; }
+        // fit-to-all, but CAP the zoom: a small graph otherwise fills the screen with a few huge
+        // magnified nodes. Compute the fit zoom manually and clamp it to NW_MAX_FIT_ZOOM.
+        var vis = cy.elements( ':visible' ); if ( vis.empty() ) return;
+        var bb = vis.boundingBox(), pad = 40;
+        var z = Math.min( ( cy.width() - 2 * pad ) / Math.max( 1, bb.w ), ( cy.height() - 2 * pad ) / Math.max( 1, bb.h ) );
+        z = Math.min( z, NW_MAX_FIT_ZOOM );
+        cy.animate({ zoom: z, center: { eles: vis } }, { duration: 300 } );
+    } catch ( e ) {} }, 60 ); };
+    var ran = false;
+    if ( window.cytoscapeCise && clusterArrays.length > 1 ) {
+        try {
+            try { if ( nwCiseLayout ) nwCiseLayout.stop(); } catch ( e ) {}   // a lingering prior cise run stops the next from completing
+            var layout = cy.layout({ name: 'cise',
+                clusters: clusterArrays,                     // 2D array form (function form is unreliable in 2.0.1)
+                randomize: false, animate: false,            // false: refine from CURRENT positions (an expand adjusts, doesn't re-scatter the whole graph); animate:false snaps (animate:'end' never fires layoutstop on re-runs)
+                fit: false, padding: 30,                     // nwRecentre owns the viewport (single zoom)
+                nodeSeparation: 4,                           // tighter packing on each circle
+                allowNodesInsideCircle: true, maxRatioOfNodesInsideCircle: 0.9,   // nest most of a cluster INSIDE the circle -> a filled disc, not a big thin ring (this is the main shrink lever)
+                idealInterClusterEdgeLengthCoefficient: 1.4,
+                gravity: 0.4, gravityRange: 3.0,             // pull the clusters closer together
+                packComponents: true });                     // multiple seeded concepts = disconnected components -> pack them tidily
+            nwCiseLayout = layout;
+            var _done = false;
+            layout.one( 'layoutstop', function() { _done = true; nwDrawBubblesets( groups ); nwRecentre(); } );   // draw + centre once nodes settle
+            layout.run();
+            ran = true;
+            setTimeout( function() { if ( !_done ) { try { layout.stop(); } catch ( e ) {} nwRadial( groups, keys ); nwDrawBubblesets( groups ); nwRecentre(); } }, 1500 );   // safety net if cise still stalls
+        } catch ( e ) { console.log( 'WP-G cise layout failed, using radial fallback', e ); }
+    }
+    if ( !ran ) { nwRadial( groups, keys ); nwDrawBubblesets( groups ); nwRecentre(); }
+}
+function nwUngroup() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    if ( nwMapMode ) { nwClearBubblesets(); nwMapGroups = null; nwUpdateLegend( null ); nwMapClearColours(); return; }   // geo: keep positions, Leaflet owns the viewport
+    nwClearBubblesets();
+    nwRestoreAggregates( true );   // un-collapse any count-nodes
+    nwUpdateLegend( null );
+    cy.layout( cyLayouts[ 'cose' ] ).run();   // restore a natural layout
+}
+
+// ── Map mode: geo-coordinate resolution ──────────────────────────────────────
+// Nodes are placed by lat/lng read from the frontend map JSON (persons/places/nations), NOT the
+// triplestore. Coord data lives only on places/nations as WKT "Point(lng lat)"; persons resolve via
+// their birthplace (or country centroid), works via their author. Reuses the exact map.js rule.
+function nwParseWKT( wkt ) {                 // "Point(lng lat)" -> {lat,lng} | null
+    if ( !wkt ) return null;
+    var c = [];
+    String( wkt ).replace( /[-+]?[0-9]*\.?[0-9]+/g, function( x ) { var n = Number( x ); if ( isFinite( n ) ) c.push( n ); } );
+    return c.length >= 2 ? { lat: c[ 1 ], lng: c[ 0 ] } : null;   // WKT is lng,lat; Leaflet wants lat,lng
+}
+function nwKeyCoord( key ) {                 // wikidata Qid or ISO-2 nation code -> {lat,lng} | null
+    if ( !key ) return null;
+    if ( typeof places !== 'undefined' && places && places[ key ] ) return nwParseWKT( places[ key ].coord );
+    if ( typeof nations !== 'undefined' && nations && nations[ key ] ) return nwParseWKT( nations[ key ].coord );
+    return null;
+}
+function nwPersonCoord( persid ) {           // birthplace if its nation matches, else country centroid (map.js:150 rule)
+    var v = ( typeof persons !== 'undefined' && persons ) ? persons[ persid ] : null;
+    if ( !v || !v.nat ) return null;
+    var iso = String( v.nat ).substring( 0, 2 );
+    var wkt = ( v.pob && places && places[ v.pob ] && places[ v.pob ].coord && places[ v.pob ].nat === iso )
+              ? places[ v.pob ].coord
+              : ( nations && nations[ iso ] ? nations[ iso ].coord : null );
+    return nwParseWKT( wkt );
+}
+function nwGeoCoord( node ) {                // cy node -> {lat,lng} | null (null = not geo-locatable)
+    var id = String( node.id() ), t = nwNodeType( node );
+    if ( t === 'person' ) { var mp = id.match( /\/id\/(pers\d+)\b/ ); return mp ? nwPersonCoord( mp[ 1 ] ) : null; }
+    if ( t === 'place' ) {
+        var mc = id.match( /\/id\/([A-Za-z]{2}(?:-[A-Za-z]+)?)\/country/ );   // .../id/<ISO2>/country
+        if ( mc ) return nwKeyCoord( mc[ 1 ].substring( 0, 2 ) );
+        var mq = id.match( /\/id\/(Q\d+)\b/ );                                // wikidata place
+        if ( mq ) return nwKeyCoord( mq[ 1 ] );
+        return nwKeyCoord( node.data( nwFacetAttr( 'authorCountry' ) ) || node.data( nwFacetAttr( 'reachCountry' ) ) );
+    }
+    if ( t === 'work' ) {
+        var mw = id.match( /\/id\/(work\d+)\b/ );
+        if ( mw && typeof nwWorkAuthor === 'function' ) { var p = nwWorkAuthor( mw[ 1 ] ); if ( p ) { var pc = nwPersonCoord( p ); if ( pc ) return pc; } }
+        return nwKeyCoord( node.data( nwFacetAttr( 'authorCountry' ) ) );    // fallback: cached author-country facet value (country-level)
+    }
+    return null;                            // concept / language / timespan / context / creation / etc.
+}
+// Give every node a finite lat/lng BEFORE cy.leaflet() (its constructor fit()s over ALL nodes, so one
+// NaN corrupts the fit). Locatable nodes go to their coord (with golden-angle jitter for co-located
+// ones — cytoscape-leaf has no spiderfy); the rest get the centroid and are hidden. Returns geo count.
+function nwApplyGeoPositions() {
+    if ( typeof cy === 'undefined' || !cy ) return 0;
+    var geo = [], nongeo = [], seen = {};
+    cy.nodes().forEach( function( n ) {
+        if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) ) return;
+        var c = nwGeoCoord( n );
+        if ( c && isFinite( c.lat ) && isFinite( c.lng ) ) {
+            var k = c.lat.toFixed( 4 ) + ',' + c.lng.toFixed( 4 ), i = seen[ k ] = ( seen[ k ] || 0 ) + 1;
+            if ( i > 1 ) { var a = i * 2.399963229;                          // golden angle -> spiral scatter
+                c = { lat: c.lat + 0.02 * i * Math.cos( a ), lng: c.lng + 0.02 * i * Math.sin( a ) }; }
+            n.data( { lat: c.lat, lng: c.lng } );
+            n.removeClass( 'nw-nongeo' ).style( 'display', 'element' );
+            geo.push( n );
+        } else nongeo.push( n );
+    } );
+    if ( geo.length ) {
+        var la = 0, ln = 0;
+        geo.forEach( function( n ) { la += n.data( 'lat' ); ln += n.data( 'lng' ); } );
+        var cLat = la / geo.length, cLng = ln / geo.length;
+        nongeo.forEach( function( n ) { n.data( { lat: cLat, lng: cLng } ).addClass( 'nw-nongeo' ).style( 'display', 'none' ); } );
+    }
+    return geo.length;
+}
+// Map-mode grouping: reuse WP-G facet resolution/propagation/legend, but show the facet as the node
+// FILL colour on the FIXED geo positions. NO bubbleset hulls here — a hull over hundreds of globally-
+// scattered poets (e.g. the 2 Gender groups) is both slow (crashes on zoom-redraw) and meaningless;
+// the fill colour + legend carry the grouping. No cise, no viewport fit (Leaflet owns the viewport).
+var NW_GEO_GREY = null;   // resolved lazily from theme
+function nwGeoGrey() { return ( typeof theme !== 'undefined' && theme === 'dark' ) ? '#bbb' : '#666'; }
+function nwMapClearColours() {
+    if ( nwGeoColoured ) { nwGeoColoured.style( 'background-color', nwGeoGrey() ); nwGeoColoured = null; }
+}
+// redraw the hulls for the CURRENT map groups (called on pan/zoom settle, so the plugin never
+// recomputes a giant hull per frame during interaction)
+function nwRedrawMapBubblesets() {
+    if ( nwMapMode && nwMapGroups && Object.keys( nwMapGroups ).length ) nwDrawBubblesets( nwMapGroups, NW_MAP_BB_OPTS );
+}
+async function nwMapRegroup( facet ) {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    nwClearBubblesets();
+    var def = NW_FACETS[ facet ];
+    if ( !def ) { nwUpdateLegend( null ); nwMapClearColours(); nwMapGroups = null; return; }   // ungrouped
+    var attr = nwFacetAttr( facet );
+    if ( nwColourFacet !== facet ) { NW_COL = {}; nwColourFacet = facet; }
+    await nwResolveFacet( facet );
+    nwPropagateFacet( facet );
+    var groups = {};
+    cy.nodes( ':visible' ).forEach( function( n ) {
+        if ( n.hasClass( 'nw-nongeo' ) || n.hasClass( 'nw-collapsed' ) ) return;
+        var v = n.data( attr ); if ( v ) ( groups[ v ] = groups[ v ] || [] ).push( n );
+    } );
+    var keys = Object.keys( groups );
+    nwUpdateLegend( keys.length ? groups : null, def._labels );
+    nwMapClearColours();
+    nwGeoColoured = cy.collection();
+    keys.forEach( function( k ) {
+        var coll = cy.collection( groups[ k ] );
+        coll.style( 'background-color', nwFacetColour( k ) );   // fill = group colour (ONE call per group)
+        nwGeoColoured = nwGeoColoured.union( coll );
+    } );
+    nwMapGroups = keys.length ? groups : null;
+    // Defer the hull draw one frame. We have just set each group's background-colour; drawing hulls
+    // synchronously reads cytoscape's geometry cache mid-style-flush and the marching-squares outline
+    // comes out empty (the "hulls not drawn on colour-by, but fine after nudging the map" bug — a map
+    // move recomputes them cleanly). Reproject + draw on the next frame, once the styles have settled.
+    if ( keys.length ) {
+        if ( nwMapHullRAF ) cancelAnimationFrame( nwMapHullRAF );
+        nwMapHullRAF = requestAnimationFrame( function () {
+            nwMapHullRAF = 0;
+            if ( typeof window.mapsProjectNodes === 'function' ) window.mapsProjectNodes();   // flush node positions/dims first
+            nwDrawBubblesets( groups, NW_MAP_BB_OPTS );   // soft hull per group (coarse grid = cheap)
+        } );
+    }
+}
+
+// re-apply active WP-G options after an expansion (called from addEleNode)
+async function nwAfterExpand() {
+    if ( nwCollapseInt1 ) {
+        nwContractPassages();                  // fold any passages already in the graph
+        await nwFetchRelationTexts();          // for rels with no visible text, add the text + a direct rel->text edge
+        nwHideOrphans();
+    }
+    nwRefreshFacetMenu();                       // the graph's node types may have changed -> update the Group by menu
+    if ( nwMapMode ) {                           // geo: place new nodes by lat/lng (or hide), then recolour + rehull
+        nwApplyGeoPositions();
+        if ( nwGroupFacet ) await nwMapRegroup( nwGroupFacet );
+        return;
+    }
+    if ( nwGroupFacet ) await nwGroupByFacet( nwGroupFacet );
+    else if ( nwAggregate ) await nwAutoAggregateByType();   // no facet: still collapse large same-type fan-outs (cose)
+}
+
+// strip all WP-G decorations (bubblesets, shortcut edges, hidden passages) so the graph
+// is in its RAW state — used around undo/redo so those ops act on the real graph.
+function nwTeardown() {
+    if ( typeof cy === 'undefined' || !cy ) return;
+    nwClearBubblesets();
+    nwRestoreAggregates( true );   // remove count-nodes + un-hide members so undo/redo act on the raw graph
+    cy.remove( '.nw-contracted' );
+    cy.nodes( '.nw-collapsed' ).removeClass( 'nw-collapsed' ).style( 'display', 'element' );
+}
+// The WP-G mutations are NOT recorded by the undo-redo extension, so they'd linger and
+// corrupt an undo/redo. Tear them down before, reapply after — keeping undo/redo on the
+// raw graph (fixes the back/forward buttons).
+var nwUndoHooked = false;
+function nwHookUndo() {
+    if ( nwUndoHooked || typeof cy === 'undefined' || !cy ) return;
+    cy.on( 'beforeUndo beforeRedo', function() { nwTeardown(); } );
+    cy.on( 'afterUndo afterRedo', function() { nwAfterExpand(); } );
+    cy.on( 'tap', 'node.nw-agg', function( evt ) { nwExpandAggregate( evt.target ); } );   // click a count-node to expand it
+    nwUndoHooked = true;
+}
+
+// build the <option>s for the "Group by" menu, bucketed by facet group (origin/semantic/reach)
+// build the Group-by <option>s, offering only facets whose node types are present in the graph
+// (the currently-selected facet is always kept so the selection never silently drops).
+function nwFacetOptionsHTML() {
+    var present = nwPresentTypes();
+    var html = `<option value="" ${ nwGroupFacet ? '' : 'selected' }>(none)</option>`;
+    NW_FACET_GROUPS.forEach( function( g ) {
+        var opts = Object.keys( NW_FACETS ).filter( function( k ) {
+            var def = NW_FACETS[ k ];
+            if ( def.group !== g[ 0 ] ) return false;
+            if ( k === nwGroupFacet ) return true;                                  // keep current selection
+            return def.types.indexOf( '*' ) >= 0 || def.types.some( function( t ) { return present[ t ]; } );
+        } ).map( function( k ) {
+            return `<option value="${ k }" ${ nwGroupFacet === k ? 'selected' : '' }>${ NW_FACETS[ k ].label }</option>`;
+        } ).join( '' );
+        if ( opts ) html += `<optgroup label="${ g[ 1 ] }">${ opts }</optgroup>`;
+    } );
+    return html;
+}
+// re-render the Group-by menu options in place (present node types may have changed)
+function nwRefreshFacetMenu() {
+    var $sel = $( '.nw-panel .nw-groupby' );
+    if ( $sel.length ) $sel.html( nwFacetOptionsHTML() );
+}
+// single floating control panel, split into Grouping (functional) + Layout (view) sections
+function nwEnsureGraphControls() {
+    if ( !nwHasPanel() ) return;
+    var view = nwGraphView(), maps = ( view === 'maps' );
+    // on /maps the controls live in the sidebar '#graph' tab pane; elsewhere they float over the graph
+    var $mount = maps ? $( '#graph-controls' ) : $( '.col-graph' );
+    if ( !$mount.length || $mount.find( '.nw-panel' ).length ) return;
+    // the poet/poem browsing stubs + /maps start UNGROUPED (opt-in); only /networks groups by default
+    if ( view !== 'networks' ) nwGroupFacet = null;
+    var panelStyle = maps
+        ? 'font-size:12px;'   // sidebar pane: inline, no floating box
+        : `position:absolute;top:8px;right:${ view === 'networks' ? 385 : 370 }px;max-width:220px;z-index:1001;background:var(--bs-body-bg,#fff);border:1px solid rgba(128,128,128,.4);border-radius:6px;padding:6px 10px;font-size:12px;`;
+    $mount.append(
+        `<div class="nw-panel" style="${ panelStyle }">
+            <div style="font-weight:bold;margin-bottom:2px;">Grouping</div>
+            ${ maps ? '' : `<label style="cursor:pointer;margin:0;display:block;"><input type="checkbox" class="nw-collapse" ${ nwCollapseInt1 ? 'checked' : '' }> collapse passages</label>` }
+            <label style="margin:2px 0 0;display:block;">${ maps ? 'Colour by' : 'Group by' }: <select class="nw-groupby" style="max-width:130px;">${ nwFacetOptionsHTML() }</select></label>
+            ${ maps ? '' : `<label style="cursor:pointer;margin:2px 0 0;display:block;" title="Collapse a group with more than ${ NW_AGG_THRESHOLD } members into a single count-node; click it to expand."><input type="checkbox" class="nw-aggregate" ${ nwAggregate ? 'checked' : '' }> aggregate large groups</label>` }
+            <div class="nw-legend" style="margin-top:4px;line-height:1.7;"></div>
+            <div style="font-weight:bold;margin:6px 0 2px;border-top:1px solid rgba(128,128,128,.25);padding-top:5px;">Layout</div>
+            <button type="button" id="graph_redraw" style="display:block;width:100%;margin-top:4px;padding:2px 6px;font-size:11px;background:#cd6711;color:#fff;border:none;border-radius:4px;cursor:pointer;">Redraw graph</button>
+            <div style="font-weight:bold;margin:6px 0 2px;border-top:1px solid rgba(128,128,128,.25);padding-top:5px;">Export</div>
+            <button type="button" id="graph_graphml" style="display:block;width:100%;margin-top:3px;padding:2px 6px;font-size:11px;background:#cd6711;color:#fff;border:none;border-radius:4px;cursor:pointer;">GraphML</button>
+            <button type="button" id="graph_cyjson" style="display:block;width:100%;margin-top:3px;padding:2px 6px;font-size:11px;background:#cd6711;color:#fff;border:none;border-radius:4px;cursor:pointer;">Cytoscape JSON</button>
+            <button type="button" id="graph_png" style="display:block;width:100%;margin-top:3px;padding:2px 6px;font-size:11px;background:#cd6711;color:#fff;border:none;border-radius:4px;cursor:pointer;">PNG (viewport)</button>
+        </div>`
+    );
+    $mount.on( 'change', '.nw-collapse', async function() {
+        nwCollapseInt1 = this.checked;
+        if ( nwCollapseInt1 ) nwContractPassages(); else nwRestorePassages();
+        if ( nwGroupFacet ) await nwGroupByFacet( nwGroupFacet ); else if ( nwMapMode ) nwApplyGeoPositions(); else if ( !nwCollapseInt1 ) run_layout( 'cose' );
+    } );
+    $mount.on( 'change', '.nw-groupby', async function() {
+        nwGroupFacet = this.value || null;
+        if ( nwGroupFacet ) await nwGroupByFacet( nwGroupFacet ); else nwUngroup();
+    } );
+    $mount.on( 'change', '.nw-aggregate', async function() {
+        nwAggregate = this.checked;
+        if ( nwMapMode ) { if ( nwGroupFacet ) await nwGroupByFacet( nwGroupFacet ); return; }   // no count-nodes under the map (MVP)
+        nwRestoreAggregates( true );   // clean slate, then re-apply (which re-aggregates iff enabled)
+        if ( nwGroupFacet ) await nwGroupByFacet( nwGroupFacet );
+        else if ( nwAggregate ) await nwAutoAggregateByType();
+        else run_layout( 'cose' );
+    } );
+}
+$( function() { nwEnsureGraphControls(); } );
+
 // run layout on graph
 function run_layout( layout_name, focus ) {
+	if ( typeof nwMapMode !== 'undefined' && nwMapMode ) return;   // geo (map) mode OWNS node positions — never run a spring/grid layout
 	var layout = cy.elements().layout( cyLayouts[ layout_name ] );
+	cyRunningLayout = layout;   // WP-G: expose so facet grouping can stop it before running cise
 	layout.run();
 	if ( cy.$id( focus ).length ) {
 		layout.on( "layoutstop", function() {
@@ -748,7 +1531,7 @@ function opScansion( met ) {
 // horizontally and aligned to the top; long poems scroll vertically. Fitting to
 // height instead shrank tall poems to a thin strip.
 function opFitColumn( cyInst ) {
-    var nodes = cyInst.nodes( '.op-line, .op-stanza' );
+    var nodes = cyInst.nodes( '.op-line, .op-stanza, .op-text' );
     if ( !nodes.length ) return;
     var w = cyInst.width() || 800;
     cyInst.zoom( 1 );
@@ -862,19 +1645,275 @@ function opFocusRhyme( cyInst, rh ) {
 }
 function opClearFocus( cyInst ) { cyInst.elements().removeClass( 'op-dim op-focus' ); }
 
-// WP-D: contribution on-ramp — right-click a line to start a context here
+// ───────────────────────────────────────────────────────────────────────────
+// WP-D (read): overlay EXISTING contexts onto the line/word/stanza nodes they
+// target. Two INTRO patterns share the INT1_Passage anchor (verified live):
+//   • INT3_Interrelation (inter-/intratextual): ?passage R24i_isRelatedEntity ?rel
+//   • INT2_ActualizationOfFeature (typological): ?act R18i_actualizationFoundOn ?passage
+// Passage as:items members ARE the structure node ids (work-qualified, identity).
+// dcterms:format lct:txt drops image/audio targets.
+// ───────────────────────────────────────────────────────────────────────────
+function opContextsQuery( textURI ) {
+    var tid = opLastSeg( textURI );
+    return `PREFIX intro: <https://w3id.org/lso/intro/beta202408#>
+PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX as: <http://www.w3.org/ns/activitystreams#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?node ?kind ?role ?ctx ?ctxLabel ?contextuality ?typeLabel ?featureLabel ?body WHERE {
+  ?passage a intro:INT1_Passage ;
+           dcterms:format <http://id.loc.gov/vocabulary/resourceTypes/txt> ;
+           intro:R41_hasLocation [ a oa:Composite ; as:items ?list ] .
+  ?list rdf:rest*/rdf:first ?node .
+  # token/line/stanza targets ("/tid#frag") AND whole-poem targets (bare ".../tid")
+  FILTER( CONTAINS( STR(?node), "/`+tid+`#" ) || STRENDS( STR(?node), "/`+tid+`" ) )
+  {
+    ?passage intro:R24i_isRelatedEntity ?rel . ?rel a intro:INT3_Interrelation .
+    BIND( "interrelation" AS ?kind )
+    OPTIONAL { ?rel intro:R19_hasType/skos:prefLabel ?typeLabel }
+    OPTIONAL { ?rel oa:hasBody [ rdf:value ?body ] }
+    OPTIONAL { ?rel intro:R13_hasReferringEntity ?passage . BIND( "target"  AS ?role ) }
+    OPTIONAL { ?rel intro:R12_hasReferredToEntity ?passage . BIND( "context" AS ?role ) }
+  } UNION {
+    ?rel intro:R18i_actualizationFoundOn ?passage . ?rel a intro:INT2_ActualizationOfFeature .
+    BIND( "actualization" AS ?kind ) BIND( "target" AS ?role )
+    OPTIONAL { ?rel intro:R17_actualizesFeature/skos:prefLabel ?featureLabel }
+  }
+  OPTIONAL { ?ctx intro:R21_identifies ?rel ; skos:prefLabel ?ctxLabel .
+             OPTIONAL { ?ctx rdfs:isDefinedBy ?contextuality } }
+}`;
+}
+
+// contextuality category -> colour (generic; categories beyond the canonical few
+// fall back to grey). Typological actualizations are coloured by their kind.
+var OP_CTX_COL = {
+    intertextual: '#82204A', intratextual: '#0081A7', infratextual: '#2C6E49',
+    paratextual: '#974B0C', typological: '#7B1E7A'
+};
+function opCtxCategory( e ) {
+    if ( e.kind === 'actualization' ) return e.contextuality || 'typological';
+    return e.contextuality || 'interrelation';
+}
+function opCtxColour( e ) { return OP_CTX_COL[ opCtxCategory( e ) ] || '#6c757d'; }
+
+// the site brand orange (--bs-orange), resolved for canvas use; matches the toolbar
+// buttons. Category is still conveyed by text/badges in the chooser.
+function opOrange() {
+    try { var v = getComputedStyle( document.documentElement ).getPropertyValue( '--bs-orange' ).trim(); return v || '#fd7e14'; }
+    catch ( e ) { return '#fd7e14'; }
+}
+
+// one display row for a context, deduped per context URI
+function opCtxParse( v ) {
+    return {
+        node: v.node.value,
+        ctx:  v.ctx ? v.ctx.value : ( v.node.value ),   // fall back to node if context wrapper absent
+        ctxLabel: ( v.ctxLabel && v.ctxLabel.value.trim() ) || '(untitled context)',
+        kind: v.kind ? v.kind.value : '',
+        role: v.role ? v.role.value : '',
+        contextuality: v.contextuality ? opLastSeg( v.contextuality.value ) : '',
+        typeLabel: v.typeLabel ? v.typeLabel.value.trim() : '',
+        featureLabel: v.featureLabel ? v.featureLabel.value.trim() : '',
+        body: v.body ? v.body.value : ''
+    };
+}
+
+// Fetch contexts + the word->line map (for roll-up), group by node URI deduped on
+// context, and stash on the instance. Returns the grouped map.
+async function opLoadContexts( cyInst, textURI ) {
+    if ( cyInst.scratch( '_opCtx' ) ) return cyInst.scratch( '_opCtx' );
+    var rows = await opFetch( opContextsQuery( textURI ) );
+    var lineRows = await opFetch( opPoemContentQuery( textURI ) );
+    var lineOfWord = {};
+    lineRows.forEach( function( v ) { lineOfWord[ v.item.value ] = v.line.value; } );
+    // group: byNode[ nodeURI ] = { ctxURI: entry }. Canonicalise both whole-poem
+    // target forms (bare ".../tid" and root ".../tid#tid") onto the Text-root id
+    // (== textURI), so they anchor to the synthetic "whole poem" node.
+    var byNode = {}, byCtx = {}, rootFrag = textURI + '#' + opLastSeg( textURI );
+    rows.forEach( function( v ) {
+        var e = opCtxParse( v );
+        if ( e.node === textURI || e.node === rootFrag ) e.node = textURI;
+        ( byNode[ e.node ] = byNode[ e.node ] || {} )[ e.ctx ] = e;
+        ( byCtx[ e.ctx ] = byCtx[ e.ctx ] || {} )[ e.node ] = true;   // context -> its node ids (for the weave)
+    } );
+    var data = { byNode: byNode, byCtx: byCtx, lineOfWord: lineOfWord };
+    cyInst.scratch( '_opCtx', data );
+    return data;
+}
+
+// contexts attached to a node id, rolled up: a line also shows its (collapsed)
+// words' contexts; stanzas/words/text-root show only their own. Returns entry[].
+function opCtxFor( cyInst, nodeId ) {
+    var data = cyInst.scratch( '_opCtx' ); if ( !data ) return [];
+    var merged = {};
+    if ( data.byNode[ nodeId ] ) Object.keys( data.byNode[ nodeId ] ).forEach( function( k ) { merged[ k ] = data.byNode[ nodeId ][ k ]; } );
+    var n = cyInst.getElementById( nodeId );
+    if ( n && n.length && n.hasClass( 'op-line' ) ) {
+        // roll up any word/punct contexts of this line that aren't currently shown
+        Object.keys( data.lineOfWord ).forEach( function( w ) {
+            if ( data.lineOfWord[ w ] === nodeId && data.byNode[ w ] ) {
+                var wn = cyInst.getElementById( w );
+                if ( !wn || !wn.length ) {   // word not expanded -> roll its contexts onto the line
+                    Object.keys( data.byNode[ w ] ).forEach( function( k ) { merged[ k ] = data.byNode[ w ][ k ]; } );
+                }
+            }
+        } );
+    }
+    return Object.keys( merged ).map( function( k ) { return merged[ k ]; } );
+}
+
+// place a count marker at the top-right corner of every node carrying contexts
+function opRenderContextMarkers( cyInst ) {
+    opClearContextMarkers( cyInst );
+    var add = [], orange = opOrange();
+    cyInst.nodes( '.op-line, .op-stanza, .op-word, .op-punct, .op-text' ).forEach( function( n ) {
+        var ctxs = opCtxFor( cyInst, n.id() );
+        if ( !ctxs.length ) return;
+        var bb = n.boundingBox();
+        add.push({ group: 'nodes', classes: 'op-ctx',
+            data: { id: 'ctxm-' + opSafe( n.id() ), label: String( ctxs.length ),
+                    forNode: n.id(), ctxcol: orange },
+            position: { x: bb.x2 - 4, y: bb.y1 + 4 } });
+    } );
+    if ( add.length ) cyInst.add( add ).ungrabify();   // markers ride their target; don't drag the circle itself
+}
+function opClearContextMarkers( cyInst ) { cyInst.remove( '.op-ctx' ); }
+
+// keep each marker pinned to its target node's corner (markers are free nodes, not
+// children, so they must be repositioned when the target moves — e.g. on drag)
+function opRepositionMarkers( cyInst ) {
+    cyInst.nodes( '.op-ctx' ).forEach( function( m ) {
+        var n = cyInst.getElementById( m.data( 'forNode' ) );
+        if ( n && n.length ) { var bb = n.boundingBox(); m.position( { x: bb.x2 - 4, y: bb.y1 + 4 } ); }
+    } );
+}
+
+// the VISIBLE structure nodes a context touches: the node itself, or (for a
+// collapsed word) its line, or the Text-root for whole-poem. Returns a collection.
+function opWeaveNodes( cyInst, ctxURI ) {
+    var data = cyInst.scratch( '_opCtx' ); if ( !data || !data.byCtx[ ctxURI ] ) return cyInst.collection();
+    var col = cyInst.collection();
+    Object.keys( data.byCtx[ ctxURI ] ).forEach( function( nodeURI ) {
+        var n = cyInst.getElementById( nodeURI );
+        if ( n && n.length ) { col = col.union( n ); return; }
+        var lid = data.lineOfWord[ nodeURI ];                 // collapsed word -> its line
+        if ( lid ) { var ln = cyInst.getElementById( lid ); if ( ln && ln.length ) col = col.union( ln ); }
+    } );
+    return col;
+}
+
+// Draw a bubbleset around each given context's passages (+ highlight the member
+// nodes), so a multi-passage context reads as one span. Single-node contexts get
+// the highlight only. No-op if the bubblesets plugin isn't loaded.
+function opShowWeave( cyInst, ctxURIs ) {
+    opClearWeave( cyInst );
+    var BS = ( typeof CytoscapeBubbleSets !== 'undefined' && CytoscapeBubbleSets.BubbleSetsPlugin );
+    var bb = null;
+    if ( BS ) {
+        bb = cyInst.scratch( '_opBB' );
+        if ( !bb ) { try { bb = new BS( cyInst ); cyInst.scratch( '_opBB', bb ); } catch ( e ) { bb = null; } }
+    }
+    var orange = opOrange(), paths = [];
+    ctxURIs.forEach( function( ctx ) {
+        var nodes = opWeaveNodes( cyInst, ctx );
+        if ( !nodes.length ) return;
+        nodes.addClass( 'op-weave' );
+        if ( nodes.length < 2 || !bb ) return;                // single node, or no plugin: highlight only
+        try {
+            paths.push( bb.addPath( nodes, null, null, {
+                virtualEdges: true,
+                style: { fill: orange, fillOpacity: '0.10', stroke: orange, 'strokeWidth': '2', strokeOpacity: '0.85' }
+            } ) );
+        } catch ( e ) {}
+    } );
+    cyInst.scratch( '_opWeavePaths', paths );
+}
+function opClearWeave( cyInst ) {
+    var bb = cyInst.scratch( '_opBB' ), paths = cyInst.scratch( '_opWeavePaths' ) || [];
+    paths.forEach( function( p ) { try { if ( bb ) bb.removePath( p ); } catch ( e ) {} } );
+    cyInst.scratch( '_opWeavePaths', [] );
+    cyInst.nodes( '.op-weave' ).removeClass( 'op-weave' );
+}
+
+// open a single context in the existing context-card overlay (same path the
+// entity graph uses on a context-node tap)
+function opOpenContext( ctxURI ) {
+    try {
+        display_context( ctxURI );
+        var m = ctxURI.match( /.*?\/id\/(.*?)$/ );
+        if ( m ) history.replaceState( null, null, '#context/' + m[ 1 ] );
+    } catch ( e ) { console.log( 'OntoPoetry: cannot open context', ctxURI, e ); }
+}
+
+// contexts whose target node is NOT rendered (whole-poem #textNNNNN, higher-level
+// divs, etc.) — surfaced as a poem-level bucket rather than dropped silently.
+function opUnmatchedContexts( cyInst ) {
+    var data = cyInst.scratch( '_opCtx' ); if ( !data ) return [];
+    var merged = {};
+    Object.keys( data.byNode ).forEach( function( nodeURI ) {
+        var n = cyInst.getElementById( nodeURI );
+        if ( ( n && n.length ) || data.lineOfWord[ nodeURI ] ) return;   // shown as a node, or rolls up to a line
+        Object.keys( data.byNode[ nodeURI ] ).forEach( function( k ) { merged[ k ] = data.byNode[ nodeURI ][ k ]; } );
+    } );
+    return Object.keys( merged ).map( function( k ) { return merged[ k ]; } );
+}
+
+function opCtxRowsHTML( entries ) {
+    return entries.map( function( e ) {
+        var badge = e.featureLabel || e.typeLabel || '';
+        var cat = opCtxCategory( e );
+        return `<div class="op-ctx-row" data-ctx="${ e.ctx }" style="cursor:pointer;padding:4px 8px;border-bottom:1px solid rgba(128,128,128,.2);">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${ opCtxColour( e ) };margin-right:6px;"></span>
+            <strong>${ e.ctxLabel }</strong>${ badge ? ` <span class="badge" style="background:${ opCtxColour( e ) };">${ badge }</span>` : '' }
+            <span class="text-muted" style="font-size:11px;"> ${ cat }${ e.role ? ' · ' + e.role : '' }</span>
+        </div>`;
+    } ).join( '' );
+}
+
+// render a context list popup at (left,top) within $host; clicking a row opens it
+function opShowCtxPopup( $host, entries, left, top ) {
+    $host.find( '.op-ctx-pop' ).remove();
+    if ( $host.css( 'position' ) === 'static' ) $host.css( 'position', 'relative' );
+    var $pop = $( `<div class="op-ctx-pop" style="position:absolute;z-index:10000;left:${ left }px;top:${ top }px;max-width:340px;max-height:280px;overflow:auto;background:var(--bs-body-bg,#fff);border:1px solid rgba(128,128,128,.5);border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.2);font-size:13px;">${ opCtxRowsHTML( entries ) }</div>` );
+    $host.append( $pop );
+    $pop.on( 'click', '.op-ctx-row', function() { opOpenContext( $( this ).data( 'ctx' ) ); $pop.remove(); } );
+    setTimeout( function() { $( document ).one( 'click', function() { $pop.remove(); } ); }, 0 );
+}
+
+// marker tap: 1 context -> open it; >1 -> a chooser anchored at the marker
+function opContextChooser( $container, cyInst, markerNode ) {
+    var ctxs = opCtxFor( cyInst, markerNode.data( 'forNode' ) );
+    if ( !ctxs.length ) return;
+    if ( ctxs.length === 1 ) { opOpenContext( ctxs[ 0 ].ctx ); return; }
+    var $host = $container.parent(), rp = markerNode.renderedPosition();
+    var cr = cyInst.container().getBoundingClientRect(), hr = $host[ 0 ].getBoundingClientRect();
+    opShowCtxPopup( $host, ctxs, ( cr.left - hr.left ) + rp.x + 8, ( cr.top - hr.top ) + rp.y );
+}
+
+// WP-D (write): a node the user right-clicked "+" on, to be pre-filled as a Contribute
+// target anchor at step 2. Survives the step1->step2 hash change (step 1 resets bbs_text).
+var opPendingAnchor = null;
+
+// WP-D: contribution on-ramp — right-click any structure node (line, word, punctuation,
+// stanza, whole-poem) to start a context anchored there.
 function opAddContextMenu( cyInst, tid ) {
     try {
         cyInst.cxtmenu({
-            selector: 'node.op-line',
-            // cxtmenu sets outer radius = renderedWidth/2 + menuRadius; our line
-            // nodes are very wide, so cancel the width term to get a constant ~60px.
-            menuRadius: function( ele ) { return 60 - ele.renderedOuterWidth() / 2; },
+            selector: 'node.op-line, node.op-word, node.op-punct, node.op-stanza, node.op-text',
+            // cxtmenu computes r = nodeWidth/2 + menuRadius; for normal nodes we cancel the
+            // width term to get a constant ~60px radius. Compound parents (stanza / whole-poem)
+            // report width=1 to cxtmenu's radius calc, so the cancellation would yield a large
+            // NEGATIVE r (circle vanishes, only the "+" shows) — use a flat radius for them.
+            menuRadius: function( ele ) { return ele.isParent() ? 60 : ( 60 - ele.renderedOuterWidth() / 2 ); },
             commands: [ {
                 content: '<i class="fas fa-plus-circle"></i>',
-                select: function() {
+                select: function( ele ) {
                     var loggedIn = ( typeof user !== 'undefined' && user ) || ( typeof username !== 'undefined' && username );
                     if ( !loggedIn ) { alert( 'Please log in to contribute a context.' ); return; }
+                    // stash the clicked node's fragment; step 2 will pre-fill it as the target
+                    opPendingAnchor = { tid: tid, frag: opLastSeg( ele.id() ) };
                     location.hash = '#contribute/1/' + tid;
                 },
                 enabled: true
@@ -893,6 +1932,26 @@ function opAddContextMenu( cyInst, tid ) {
             zIndex: 9999
         });
     } catch ( e ) { console.log( 'OntoPoetry: cxtmenu unavailable', e ); }
+}
+
+// WP-D (write): consume a pending "+" anchor at Contribute step 2 — synthesise the
+// clicked structure node as a pre-selected TEXT anchor by reusing the SAME machinery
+// as a manual text selection (createW3Canno -> processW3Canno -> bbs_text). Called at
+// the end of each *_step2 builder, after the linear text has been rendered.
+function opApplyPendingAnchor() {
+    if ( !opPendingAnchor ) return;
+    var frag = opPendingAnchor.frag;
+    opPendingAnchor = null;                                       // consume once
+    var scope = $( '.globaltext-workbench' ).length ? $( '.globaltext-workbench' ) : $( document );
+    var $el = scope.find( jq( frag ) ).first();
+    if ( !$el.length ) { console.log( 'OntoPoetry: pre-fill anchor not found in text', frag ); return; }
+    // derive the same isPartOf metadata the manual selection reads off the DOM
+    var $expr = $el.closest( 'div[data-expr]' );
+    var obj_id = $expr.attr( 'id' ), work = $expr.data( 'id' ), expr = $expr.data( 'expr' );
+    var digo = $el.closest( 'div[data-digo]' ).data( 'digo' );
+    var tid  = $el.closest( '.text' ).attr( 'id' );
+    if ( typeof createW3Canno !== 'function' ) return;
+    createW3Canno( '', [ frag ], obj_id, digo, work, expr, $( '<a>' ).attr( 'data-id', obj_id ).attr( 'data-tid', tid ) );
 }
 
 function opIsDark( themeVal ) {
@@ -937,6 +1996,16 @@ function opStyle( themeVal ) {
             'border-width': 1, 'border-style': 'dashed', 'border-color': '#90A583',
             'padding': '12px'
         } },
+        // synthetic Text-root ("whole poem") node: a compound box wrapping all stanzas,
+        // labelled at the top; the anchor for whole-poem context markers
+        { selector: 'node.op-text', style: {
+            'shape': 'round-rectangle', 'label': 'data(label)',
+            'text-valign': 'top', 'text-halign': 'center', 'text-margin-y': -4,
+            'font-size': '12px', 'font-family': 'system-ui', 'font-style': 'italic', 'font-weight': 'bold',
+            'color': dark ? '#e0a06a' : '#974B0C',
+            'background-opacity': 0.04, 'background-color': '#cd6711',
+            'border-width': 2, 'border-style': 'dashed', 'border-color': '#cd6711', 'padding': '16px'
+        } },
         // rhyme-weave: arcs linking lines that share a rhyme within a stanza
         { selector: 'edge.op-rhyme', style: {
             'curve-style': 'unbundled-bezier',
@@ -962,6 +2031,16 @@ function opStyle( themeVal ) {
             'background-color': dark ? '#1f1f1f' : '#efece4',
             'border-width': 1, 'border-style': 'dashed', 'border-color': '#c9ccd1', 'color': dark ? '#999' : '#999'
         } },
+        // WP-D: context-count marker pinned to a node's top-right corner
+        { selector: 'node.op-ctx', style: {
+            'shape': 'ellipse', 'label': 'data(label)',
+            'width': 18, 'height': 18, 'font-size': '10px', 'font-weight': 'bold',
+            'text-valign': 'center', 'text-halign': 'center', 'color': '#fff',
+            'background-color': 'data(ctxcol)', 'border-width': 1.5,
+            'border-color': dark ? '#111' : '#fff', 'z-index': 20
+        } },
+        // WP-D: nodes belonging to a hovered context (the weave) get an orange ring
+        { selector: 'node.op-weave', style: { 'border-color': '#fd7e14', 'border-width': 4, 'border-style': 'solid' } },
         // hover highlight: last node rule so it overrides line/word/punctuation borders
         { selector: 'node.op-hl', style: { 'border-color': '#fd7e14', 'border-width': 4, 'border-style': 'solid' } },
         { selector: 'edge.op-flow', style: {
@@ -1013,7 +2092,7 @@ async function renderOntoPoetry( textURI, containerSel ) {
         if ( st.srhyme ) sbits.push( st.srhyme );
         if ( st.disp )   sbits.push( st.disp );
         if ( st.mtype )  sbits.push( st.mtype );
-        els.push({ data: { id: st.id, type: 'op-stanza',
+        els.push({ data: { id: st.id, parent: textURI, type: 'op-stanza',
             label: 'Stanza ' + ( st.snum || ( si + 1 ) ) + ( sbits.length ? '  (' + sbits.join( '; ' ) + ')' : '' ) }, classes: 'op-stanza' });
         if ( si > 0 ) y += 28;  // gap between stanzas
         var rhymeLast = {};
@@ -1048,6 +2127,13 @@ async function renderOntoPoetry( textURI, containerSel ) {
         } );
     } );
 
+    // synthetic Text-root node (the "whole poem" in Text->Stanza->Line) — a COMPOUND
+    // parent that wraps every stanza (each stanza gets parent:textURI above), so it
+    // draws a box around the whole poem. The anchor for whole-poem contexts
+    // (translations, SKOS form/genre classifications). Its id IS the textURI so bare
+    // whole-poem targets match. No position: a compound's box is derived from children.
+    els.push({ data: { id: textURI, type: 'op-text', label: '◆ whole poem' }, classes: 'op-text' });
+
     if ( opCY[ textURI ] ) { try { opCY[ textURI ].destroy(); } catch(e){} }
     var cyInst = cytoscape({
         container: $( containerSel )[0],
@@ -1060,9 +2146,41 @@ async function renderOntoPoetry( textURI, containerSel ) {
     opFitColumn( cyInst );
 
     // tap a line -> expand/collapse its words (lazy, reading order)
-    cyInst.on( 'tap', 'node.op-line', function( evt ) {
+    cyInst.on( 'tap', 'node.op-line', async function( evt ) {
         var n = evt.target;
-        if ( n.data( 'expanded' ) ) { opCollapseLine( cyInst, n ); } else { opExpandLine( cyInst, n ); }
+        if ( n.data( 'expanded' ) ) { opCollapseLine( cyInst, n ); } else { await opExpandLine( cyInst, n ); }
+        if ( cyInst.scratch( '_opCtxOn' ) ) opRenderContextMarkers( cyInst );   // word markers + line roll-up follow expand state
+    });
+    // tap a STANZA box (its label/padding, not a line) -> expand/collapse all its lines
+    cyInst.on( 'tap', 'node.op-stanza', async function( evt ) {
+        var lines = evt.target.children( '.op-line' );
+        if ( !lines.length ) return;
+        var allExp = true; lines.forEach( function( n ) { if ( !n.data( 'expanded' ) ) allExp = false; } );
+        if ( allExp ) { lines.forEach( function( n ) { opCollapseLine( cyInst, n ); } ); }
+        else { var jobs = []; lines.forEach( function( n ) { if ( !n.data( 'expanded' ) ) jobs.push( opExpandLine( cyInst, n ) ); } ); await Promise.all( jobs ); }
+        if ( cyInst.scratch( '_opCtxOn' ) ) opRenderContextMarkers( cyInst );
+    });
+    // tap the WHOLE-POEM box (its label/padding) -> expand all / collapse all
+    cyInst.on( 'tap', 'node.op-text', async function( evt ) {
+        var lines = cyInst.nodes( '.op-line' );
+        if ( !lines.length ) return;
+        var allExp = true; lines.forEach( function( n ) { if ( !n.data( 'expanded' ) ) allExp = false; } );
+        if ( allExp ) { opCollapseAll( cyInst ); } else { await opExpandAll( cyInst, evt.target.id() ); }
+        if ( cyInst.scratch( '_opCtxOn' ) ) opRenderContextMarkers( cyInst );
+    });
+    // tap a context marker -> open the context (1) or a chooser (>1)
+    cyInst.on( 'tap', 'node.op-ctx', function( evt ) {
+        evt.stopPropagation && evt.stopPropagation();
+        opContextChooser( $( containerSel ), cyInst, evt.target );
+    });
+    // hover a marker -> weave: outline all passages of its context(s) at once
+    cyInst.on( 'mouseover', 'node.op-ctx', function( evt ) {
+        opShowWeave( cyInst, opCtxFor( cyInst, evt.target.data( 'forNode' ) ).map( function( e ) { return e.ctx; } ) );
+    });
+    cyInst.on( 'mouseout', 'node.op-ctx', function() { opClearWeave( cyInst ); });
+    // dragging a node (or its compound parent) moves its target box -> keep markers glued
+    cyInst.on( 'drag', 'node.op-line, node.op-word, node.op-punct, node.op-stanza, node.op-text', function() {
+        if ( cyInst.scratch( '_opCtxOn' ) ) opRepositionMarkers( cyInst );
     });
     // tap background -> collapse words + clear any focus
     cyInst.on( 'tap', function( evt ) {
@@ -1070,6 +2188,8 @@ async function renderOntoPoetry( textURI, containerSel ) {
             cyInst.remove( '.op-tok' );
             cyInst.nodes( '.op-line' ).data( 'expanded', false );
             cyInst.elements().removeClass( 'op-dim op-focus' );
+            opClearWeave( cyInst );
+            if ( cyInst.scratch( '_opCtxOn' ) ) opRenderContextMarkers( cyInst );   // word nodes gone -> roll back to lines
         }
     } );
     // WP-D: right-click a line -> contribution on-ramp
@@ -1090,6 +2210,7 @@ async function renderOntoPoetry( textURI, containerSel ) {
 function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
     var $pane = $container.parent();
     if ( $pane.find( '.op-toolbar' ).length ) return;
+    opInjectCtrlCSS();
     // text switcher: mirror the right-side Text / Translation tabs
     var texts = opTextList(), wid = $( '.layout_wrapper' ).attr( 'data-wid' ), curTid = ( textURI || '' ).split( '/' ).pop(), switcher = '';
     if ( texts.length > 1 ) {
@@ -1106,9 +2227,10 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
         ${ modeSyll ? `<span class="text-muted" title="lines whose syllable count differs from the poem's most common (${modeSyll})">double border = syllabic deviation</span>` : '' }
         <button type="button" class="btn btn-sm btn-outline-secondary op-expandall" style="padding:0 8px;">expand all</button>
         <button type="button" class="btn btn-sm btn-outline-secondary op-tour" style="padding:0 8px;">tour ▸</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary op-ctx-toggle" style="padding:0 8px;" title="show existing contexts attached to this poem">contexts ▸</button>
         <button type="button" class="btn btn-sm btn-outline-secondary op-fit" style="padding:0 8px;">fit</button>
         <span class="op-caption text-muted" style="font-style:italic;"></span>
-        <span class="text-muted" style="margin-left:auto;">tap a line for its words · right-click to add a context</span>
+        <span class="text-muted" style="margin-left:auto;">tap to expand · right-click to add a context</span>
     </div>` );
     $bar.insertBefore( $container );
     // switch the structure to another text of the work, and align the right tab to it
@@ -1137,12 +2259,40 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
         else { cyInst.nodes( '.op-line' ).removeClass( 'op-metre' ); }
     } );
     $bar.find( '.op-fit' ).on( 'click', function() { opFitColumn( cyInst ); } );
+    // WP-D: toggle the existing-context overlay (lazy-load on first enable)
+    $bar.find( '.op-ctx-toggle' ).on( 'click', async function() {
+        var $b = $( this );
+        if ( cyInst.scratch( '_opCtxOn' ) ) {
+            cyInst.scratch( '_opCtxOn', false ); opClearContextMarkers( cyInst ); opClearWeave( cyInst );
+            $container.parent().find( '.op-ctx-pop' ).remove();
+            $bar.find( '.op-ctx-poem' ).remove();
+            $b.text( 'contexts ▸' ).removeClass( 'active' );
+        } else {
+            $b.text( '…' );
+            await opLoadContexts( cyInst, textURI );
+            cyInst.scratch( '_opCtxOn', true ); opRenderContextMarkers( cyInst );
+            var marked = cyInst.nodes( '.op-ctx' ).length;
+            $b.text( marked ? 'contexts ◂ (' + marked + ')' : 'no contexts' ).addClass( 'active' );
+            // poem-level / unmatched (whole-poem, higher-level divs) get their own pill
+            var poem = opUnmatchedContexts( cyInst );
+            $bar.find( '.op-ctx-poem' ).remove();
+            if ( poem.length ) {
+                var $p = $( `<button type="button" class="btn btn-sm btn-outline-secondary op-ctx-poem" style="padding:0 8px;" title="contexts on the whole poem or sections not shown as nodes">poem-level (${ poem.length })</button>` );
+                $p.on( 'click', function() {
+                    var pr = $p[ 0 ].getBoundingClientRect(), hr = $container.parent()[ 0 ].getBoundingClientRect();
+                    opShowCtxPopup( $container.parent(), poem, pr.left - hr.left, pr.bottom - hr.top + 2 );
+                } );
+                $b.after( $p );
+            }
+        }
+    } );
     // expand all / collapse all line tokens (line-level stays the default)
     var allExpanded = false;
     $bar.find( '.op-expandall' ).on( 'click', async function() {
         var $b = $( this );
         if ( allExpanded ) { opCollapseAll( cyInst ); allExpanded = false; $b.text( 'expand all' ); }
         else { $b.text( '…' ); await opExpandAll( cyInst, textURI ); allExpanded = true; $b.text( 'collapse all' ); }
+        if ( cyInst.scratch( '_opCtxOn' ) ) opRenderContextMarkers( cyInst );
     } );
     // guided tour: step through stanzas, spotlighting + captioning each in turn
     var $caption = $bar.find( '.op-caption' ), stanzas = cyInst.nodes( '.op-stanza' ), tourIdx = -1;
@@ -1153,7 +2303,10 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
             $caption.text( '' ); $( this ).text( 'tour ▸' ); return;
         }
         var st = stanzas[ tourIdx ], lines = st.children();
-        cyInst.elements().addClass( 'op-dim' );
+        // NB: don't dim the op-text root — it's the compound PARENT of every stanza, and
+        // a dimmed compound parent cascades its opacity onto all children (muting the
+        // focused stanza too). Dim everything except the root.
+        cyInst.elements().not( '.op-text' ).addClass( 'op-dim' );
         st.removeClass( 'op-dim' ); lines.removeClass( 'op-dim' ).addClass( 'op-focus' );
         cyInst.fit( lines.union( st ), 60 );
         $caption.text( st.data( 'label' ) );
@@ -1163,9 +2316,23 @@ function opToolbar( $container, cyInst, rcol, modeSyll, textURI ) {
 
 // Left graph-panel switcher: toggle .col-graph between the Contexts graph (#cy)
 // and the OntoPoetry Structure graph (#cy-onto). Added in the poem reading view.
+// brand-orange styling for the OntoPoetry control buttons (toolbar action buttons +
+// the Contexts/Structure toggle group), injected once. Overrides Bootstrap's grey.
+function opInjectCtrlCSS() {
+    if ( document.getElementById( 'op-toolbar-css' ) ) return;
+    $( 'head' ).append( `<style id="op-toolbar-css">
+.op-toolbar .btn { background-color: var(--bs-orange); color:#fff; border-color: var(--bs-orange); }
+.op-toolbar .btn:hover, .op-toolbar .btn:focus, .op-toolbar .btn.active { background-color:#cd6711; border-color:#cd6711; color:#fff; box-shadow:none; }
+.op-graph-toggle .btn { background-color:transparent; color:var(--bs-orange); border-color:var(--bs-orange); }
+.op-graph-toggle .btn:hover, .op-graph-toggle .btn:focus { background-color:#cd6711; color:#fff; border-color:#cd6711; box-shadow:none; }
+.op-graph-toggle .btn.active { background-color:var(--bs-orange); color:#fff; border-color:var(--bs-orange); }
+</style>` );
+}
+
 function opEnsureGraphPanel() {
     var $cg = $( '.col-graph' );
     if ( !$cg.length || $cg.find( '.op-graph-toggle' ).length ) return;
+    opInjectCtrlCSS();
     $cg.append(
         `<div class="op-graph-toggle btn-group btn-group-sm" role="group" style="position:absolute;top:8px;left:8px;z-index:1001;">
             <button type="button" class="btn btn-secondary active" data-opview="contexts">Contexts</button>
@@ -1183,7 +2350,7 @@ function opEnsureGraphPanel() {
 function opGraphPanelToggle( view ) {
     var $cg = $( '.col-graph' ); if ( !$cg.length ) return;
     if ( view === 'structure' ) {
-        $( '#cy' ).hide(); $cg.find( '.graph-about' ).hide();
+        $( '#cy' ).hide(); $cg.find( '.graph-about, .nw-panel' ).hide();   // the WP-G panel belongs to the Contexts graph only
         $( '#cy-onto-panel' ).css( 'display', 'flex' );
         var wid = $( '.layout_wrapper' ).attr( 'data-wid' ), tid = opActiveTextId();
         var textURI = 'https://www.romanticperiodpoetry.org/id/' + wid + '/' + tid;
@@ -1191,7 +2358,7 @@ function opGraphPanelToggle( view ) {
         else if ( opCY[ textURI ] ) { opCY[ textURI ].resize(); }
     } else {
         $( '#cy-onto-panel' ).hide();
-        $( '#cy' ).show(); $cg.find( '.graph-about' ).show();
+        $( '#cy' ).show(); $cg.find( '.graph-about, .nw-panel' ).show();
     }
 }
 
@@ -1334,6 +2501,17 @@ async function getPRISMSobject( id ) {
 }
 
 // create CY-JSON from graph
+// pick the first "modelled" rdf:type and return its onto.json label, GUARDED: a type absent
+// from onto.json (e.g. pdp:StanzaPattern, which isn't in the file) previously threw on
+// onto[...].label and aborted the whole graph build. Falls back to the prefixed name.
+function ontoTypeLabel( types ) {
+    var t = _l.filter( types || [], function( x ) {
+        return x.includes( 'cidoc-crm' ) || x.includes( 'frbr/' ) || x.includes( 'intro/' )
+            || x.includes( 'foaf/' ) || x.includes( 'lrmoo/' ) || x.includes( '/postdata' ) || x.includes( 'skos/' );
+    } )[ 0 ];
+    var k = nsv( t );
+    return ( onto[ k ] ? onto[ k ].label : ( t ? k : '' ) );
+}
 async function createCYJSON( graph, view ) {
 	var jsonObj = [], nodes_seen = [], local_col = {};
     // process triples in the graph object
@@ -1390,14 +2568,7 @@ async function createCYJSON( graph, view ) {
 				node["data"] = { "id": s.value };
 				node["classes"] = "node";
 				node["data"]["name"] = (addicon( s.value )?addicon( s.value ):'')+" "+
-					onto[nsv( _l.filter( skp(graph, s.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) 
-						|| t.includes( 'frbr/' ) 
-						|| t.includes( 'intro/' ) 
-						|| t.includes( 'foaf/' )
-						|| t.includes( 'lrmoo/' ) 
-						|| t.includes( '/postdata' ) 
-						|| t.includes( 'skos/' ) } )[0] 
-					)].label+"\n" + (skp(graph, s.value, "crm:P1_is_identified_by")?
+					ontoTypeLabel( skp(graph, s.value, "rdf:type") )+"\n" + (skp(graph, s.value, "crm:P1_is_identified_by")?
 						skp(graph, s.value, "crm:P1_is_identified_by"):
 						skp(graph, s.value, "skos:prefLabel")); // default is P1_is_identified_by
 				node["data"]["pref"] = (skp(graph, s.value, "skos:prefLabel") != false)?skp(graph, s.value, "skos:prefLabel"):skp(graph, s.value, "crm:P1_is_identified_by");
@@ -1495,7 +2666,7 @@ async function createCYJSON( graph, view ) {
 					//console.log( o.value, skp(graph, o.value, "rdf:type"), _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' ) } )[0] );
 					node["data"] = { "id": o.value };
 					node["classes"] = "node";
-					node["data"]["name"] = (addicon( o.value )?addicon( o.value ):'')+" "+(onto[nsv( _l.filter( skp(graph, o.value, "rdf:type"), function(t) { return t.includes( 'cidoc-crm' ) || t.includes( 'frbr/' ) || t.includes( 'intro/' ) || t.includes( 'lrmoo/' ) || t.includes( '/postdata' ) || t.includes( 'skos/' ) || t.includes( 'foaf/' )} )[0] )].label)+"\n" + (skp(graph, o.value, "crm:P1_is_identified_by")?skp(graph, o.value, "crm:P1_is_identified_by"):skp(graph, o.value, "skos:prefLabel"));
+					node["data"]["name"] = (addicon( o.value )?addicon( o.value ):'')+" "+ontoTypeLabel( skp(graph, o.value, "rdf:type") )+"\n" + (skp(graph, o.value, "crm:P1_is_identified_by")?skp(graph, o.value, "crm:P1_is_identified_by"):skp(graph, o.value, "skos:prefLabel"));
 					node["data"]["pref"] = (skp(graph, o.value, "skos:prefLabel") != false)?skp(graph, o.value, "skos:prefLabel"):skp(graph, o.value, "crm:P1_is_identified_by");;
 					node["data"]["alt"] = skp(graph, o.value, "skos:altLabel");
 					if (skp(graph, o.value, "crm:P138i_has_representation") || skp(graph, o.value, "wdt:P18")) {
@@ -2083,12 +3254,13 @@ function createCYgraph(data, graph, layout) {
 		]
     
 	});
-	// "about graph"-section 
+	// "about graph"-section
 	var graph_about = '';
-	if ( /\/networks\//.test(window.location.href)
-	|| /\/authors\//.test(window.location.href) 
-	|| /\/works\//.test(window.location.href)
-	) {
+	// The Settings-tab controls (redraw / export) now live in the always-visible .nw-panel, which
+	// is on ALL the cy-graph views (networks + authors + works), so omit the Settings tab wherever
+	// the panel exists (i.e. everywhere the graph-about renders).
+	var nwHasNwPanel = ( typeof nwHasPanel === 'function' ) ? nwHasPanel() : /\/networks\//.test( window.location.href );
+	if ( nwHasNwPanel ) {
 	// workbench graph display
 		graph_about += `<ul class="nav nav-tabs" id="graphTab">
 		<li class="nav-item" role="presentation">
@@ -2097,18 +3269,18 @@ function createCYgraph(data, graph, layout) {
 		<li class="nav-item" role="presentation">
 		  <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#tabDetails" role="tab" aria-controls="details" aria-selected="false"><i class="fas fa-exchange-alt"></i> Details</a>
 		</li>
-		<li class="nav-item" role="presentation">
+		${ nwHasNwPanel ? '' : `<li class="nav-item" role="presentation">
 		  <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#tabSettings" role="tab" aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> Settings</a>
-		</li>
+		</li>` }
   		</ul>
   		<div class="tab-content" id="myTabContent" style="overflow-y: auto;">
 			<div class="tab-pane fade show active" id="tabHome" role="tabpanel" aria-labelledby="home-tab"></div>
 			<div class="tab-pane fade" id="tabDetails" role="tabpanel" aria-labelledby="details-tab"></div>
-			<div class="tab-pane fade" id="tabSettings" role="tabpanel" aria-labelledby="settings-tab"></div>
+			${ nwHasNwPanel ? '' : `<div class="tab-pane fade" id="tabSettings" role="tabpanel" aria-labelledby="settings-tab"></div>` }
 		  </div>`;
         $( ".graph-about" ).css( "display","unset" );
 		$( ".graph-about" ).html( graph_about );
-		$( ".graph-about #tabSettings" ).append( `
+		if ( !nwHasNwPanel ) $( ".graph-about #tabSettings" ).append( `
 		<ul class="listBibl" style="text-indent:unset;font-size:14px;">
 		<!--<li>Node display
 		<div class="form-check" style="padding-left: 35px;">
@@ -2645,8 +3817,12 @@ $(document.body).on('click', '#graph_graphml', function(e) {
 	saveAs( jsonBlob, 'RPPA-GraphML-graph-'+Math.floor(Date.now() / 1000)+'.xml' ); 	
 });
 
-$(document.body).on('click', '#graph_redraw', function() { 
-	run_layout( 'cose' );
+$(document.body).on('click', '#graph_redraw', async function() {
+	// re-run the ACTIVE view: rebuild the /maps geo-graph from the current filters; else the facet
+	// grouping (cise) if one is on, else a plain cose layout
+	if ( typeof nwMapMode !== 'undefined' && nwMapMode ) { if ( typeof window.mapsRedrawGraph === 'function' ) window.mapsRedrawGraph(); return; }
+	if ( typeof nwGroupFacet !== 'undefined' && nwGroupFacet && typeof nwHasPanel === 'function' && nwHasPanel() ) await nwGroupByFacet( nwGroupFacet );
+	else run_layout( 'cose' );
 });
 $( document.body ).on( 'click', '#collapseOne a.relsLink', function(e) {
 	e.preventDefault();

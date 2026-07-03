@@ -1,7 +1,10 @@
 // rppa-auth.js — better-auth client wrapper for RPPA
 var RPPAAuth = (function () {
-    // Auth server runs on data.prisms.digital, not the www host
-    var authOrigin = /romanticperiodpoetry\.org/.test(window.location.href)
+    // Auth server runs on data.prisms.digital, not the www host.
+    // NB: test the HOSTNAME, not the full href — a node URI in the hash
+    // (#node/https://www.romanticperiodpoetry.org/...) would otherwise flip a
+    // local/dev host onto the prod auth origin.
+    var authOrigin = /romanticperiodpoetry\.org/.test(window.location.hostname)
         ? "https://data.prisms.digital"
         : "";
 

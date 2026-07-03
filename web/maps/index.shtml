@@ -32,6 +32,7 @@
           <li><a href="#home" role="tab"><i class="fas fa-globe"></i><span class="sr-only">[Home]</span></a></li>
           <li><a href="#location" role="tab"><i class="fas fa-map-marked-alt"></i><span class="sr-only">[Location]</span></a></li>
           <li><a href="#profile" role="tab"><i class="fa fa-user"></i><span class="sr-only">[Profile]</span></a></li>
+          <li><a href="#graph" role="tab" title="Network graph"><i class="fas fa-circle-nodes"></i><span class="sr-only">[Network graph]</span></a></li>
           <li class="disabled"><a href="#" role="tab"><span class="sr-only">[Disabled]</span></a></li>
           <!--<li><a href="#about" role="tab"><i class="fas fa-info"></i><span class="sr-only">[About]</span></a></li>-->
           <!--<li><a href="#help" role="tab"><i class="fas fa-question-circle"></i><span class="sr-only">[Help]</span></a></li>-->
@@ -107,6 +108,18 @@
       <div class="leaflet-sidebar-pane" id="profile">
           <h1 class="leaflet-sidebar-header">Poet overview<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
           <div class="results"></div>
+      </div>
+      <div class="leaflet-sidebar-pane" id="graph">
+          <h1 class="leaflet-sidebar-header">Network graph<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+          <p style="font-size:12px;margin:0 0 6px;">Poets on the map. <b>Click</b> a poet for details; <b>double-click</b> one to reveal its connections. Redraw clears the links.</p>
+          <div style="font-size:12px;margin:0 0 10px;line-height:1.85;">
+            <div style="font-weight:bold;margin-bottom:2px;">Connection layers</div>
+            <label style="display:block;cursor:pointer;"><input type="checkbox" class="maps-tog" data-layer="concept" checked> <span style="color:#6a89b8;font-weight:bold;">Shared themes</span> <span style="color:#888;">&middot; motifs &amp; concepts</span></label>
+            <label style="display:block;cursor:pointer;"><input type="checkbox" class="maps-tog" data-layer="formal" checked> <span style="color:#4a9d5b;font-weight:bold;">Shared verse form</span> <span style="color:#888;">&middot; stanza, metre, rhyme</span></label>
+            <label style="display:block;cursor:pointer;"><input type="checkbox" class="maps-tog" data-layer="intertext" checked> <span style="color:#cd6711;font-weight:bold;">Intertextual allusion</span> <span style="color:#888;">&middot; direct references</span></label>
+          </div>
+          <!-- WP-G controls (Colour by / legend / Redraw) inject here via nwEnsureGraphControls -->
+          <div id="graph-controls"></div>
       </div>
       <!--
       <div class="leaflet-sidebar-pane" id="messages">
