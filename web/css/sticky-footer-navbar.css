@@ -567,12 +567,29 @@ a:not(.img).external {
   padding-right: .75em;
 }
 
-img[src='/images/male.png'], 
-img[src='/images/female.png'], 
+img[src='/images/male.png'],
+img[src='/images/female.png'],
 .poet-marker {
-  width:35px !important;
-  background-color: #fff;
+  width:34px !important;
+  height:34px !important;
+  border-radius:50%;
+  object-fit:cover;
+  background-color:#fff;
+  border:2px solid #fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.35);
 }
+/* marker hover label, matched to the graph overlay's tooltip (see mapsTip in maps-graph.js) */
+.leaflet-tooltip.poet-tooltip {
+  background: rgba(0,0,0,.82);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+.leaflet-tooltip.poet-tooltip::before { display: none; }   /* no callout arrow, matching the plain graph tip */
 #profile .results ul li span {
   font-variant: small-caps;
 }
