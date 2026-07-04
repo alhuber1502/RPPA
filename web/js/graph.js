@@ -2330,7 +2330,7 @@ function opInjectCtrlCSS() {
 .op-toolbar .btn:hover, .op-toolbar .btn:focus, .op-toolbar .btn.active { background-color:#cd6711; border-color:#cd6711; color:#fff; box-shadow:none; }
 /* Contexts|Structure toggle: match the /maps "Markers | Graph" segmented control */
 .op-graph-toggle { border-radius:5px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.35); }
-.op-graph-toggle .btn { background-color:#e9e9e9; color:#555; border:none; border-radius:0; padding:6px 13px; font-size:13px; line-height:1.2; box-shadow:none; }
+.op-graph-toggle .btn { background-color:#e9e9e9; color:#555; border:none; border-radius:0; padding:6px 10px; font-size:13px; line-height:1.2; box-shadow:none; }
 .op-graph-toggle .btn:hover, .op-graph-toggle .btn:focus { background-color:#e9e9e9; color:#555; box-shadow:none; }
 .op-graph-toggle .btn.active, .op-graph-toggle .btn.active:hover, .op-graph-toggle .btn.active:focus { background-color:#cd6711; color:#fff; box-shadow:none; }
 </style>` );
