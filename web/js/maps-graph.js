@@ -20,7 +20,7 @@
         if ( !coll || !coll.length ) return;
         var dark = ( typeof theme !== 'undefined' && theme === 'dark' );
         if ( mapsPortraits ) {
-            coll.style( { 'width': '26px', 'height': '26px', 'padding': '0px', 'background-fit': 'cover',
+            coll.style( { 'width': '34px', 'height': '34px', 'padding': '0px', 'background-fit': 'cover',
                 'background-color': dark ? '#333' : '#ccc', 'border-width': '3px', 'border-color': dark ? '#222' : '#fff' } );
             coll.forEach( function ( n ) { n.style( 'background-image', n.data( 'img' ) || '' ); } );   // inline .style() can't parse data() mappers
         } else {
@@ -123,7 +123,7 @@
             var p = n.position(), d = Math.sqrt( ( p.x - pt.x ) * ( p.x - pt.x ) + ( p.y - pt.y ) * ( p.y - pt.y ) );
             if ( d < bd ) { bd = d; best = n; }
         } );
-        return ( best && bd <= ( mapsPortraits ? 18 : 12 ) ) ? best : null;
+        return ( best && bd <= ( mapsPortraits ? 22 : 12 ) ) ? best : null;
     }
     // hover tooltip: show the poet name (there are no on-node labels) + a pointer cursor over a dot
     function mapsTip() {

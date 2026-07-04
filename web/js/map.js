@@ -183,13 +183,14 @@
       var icon = L.icon({
         className: "poet-marker",
         iconUrl: (v.img)?'/data/map/data/img/thumb/'+v.id+'.jpg':(v.sex == 'm')?'/images/male.png':'/images/female.png',
-        iconSize: [35]
+        iconSize: [34, 34]
       });
       markers[ v.id ] = L.marker([ coords[1],coords[0] ], {
         icon: icon,
-        title: v["name"],
         riseOnHover: true
       })
+      // hover label (poet name), styled to match the graph overlay's tooltip; popup stays on click
+      .bindTooltip( v["name"], { direction: 'top', offset: [0, -14], className: 'poet-tooltip', opacity: 1 } )
       .bindPopup( `<div class='popup'><span class='name'>` + v["name"] + `</span><span class='loc'>`+POB+`</span></div>` )
       .addTo( markerLayer );
       // add person ID to marker
