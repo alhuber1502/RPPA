@@ -238,13 +238,15 @@
         if ( !toAdd.length ) return 0;
         var added = cy.add( toAdd );
         mapsStyleNodes( added.nodes() );   // dots or portraits per the toggle
+        // fan the layers to separate sides so a pair sharing >1 kind of link doesn't overlap:
+        // themes bow one way (+), verse form the opposite (-), allusion runs straight down the middle
         if ( type === 'concept' ) {
-            added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#6a89b8', 'width': Math.min( 6, 1.2 + ( ed.data( 'weight' ) || 1 ) ), 'opacity': 0.35, 'curve-style': 'bezier', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
+            added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#6a89b8', 'width': Math.min( 6, 1.2 + ( ed.data( 'weight' ) || 1 ) ), 'opacity': 0.35, 'curve-style': 'unbundled-bezier', 'control-point-distances': '16', 'control-point-weights': '0.5', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
         } else if ( type === 'formal' ) {
             // shared verse-form (ECEP): dense, so kept thin + faint + dotted so it reads as a background layer
-            added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#4a9d5b', 'width': Math.min( 3, 0.8 + ( ed.data( 'weight' ) || 1 ) * 0.4 ), 'opacity': 0.22, 'line-style': 'dotted', 'curve-style': 'bezier', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
+            added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#4a9d5b', 'width': Math.min( 3, 0.8 + ( ed.data( 'weight' ) || 1 ) * 0.4 ), 'opacity': 0.22, 'line-style': 'dotted', 'curve-style': 'unbundled-bezier', 'control-point-distances': '-16', 'control-point-weights': '0.5', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
         } else {
-            added.edges().style( { 'line-color': '#cd6711', 'width': 2.5, 'opacity': 0.85, 'line-style': 'dashed', 'curve-style': 'bezier', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } );
+            added.edges().style( { 'line-color': '#cd6711', 'width': 2.5, 'opacity': 0.85, 'line-style': 'dashed', 'curve-style': 'straight', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } );
         }
         return edges;
     }
