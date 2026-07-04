@@ -6,7 +6,37 @@
 // click hit-tests the nearest node. Reuses the WP-G facet grouping / bubblesets in graph.js.
 ( function () {
     'use strict';
-    var mapsGraphOn = false, mapsPrevOverlay = false;
+    var mapsGraphOn = false, mapsPrevOverlay = false, mapsPortraits = true;
+    window.mapsPortraits = mapsPortraits;   // graph.js routes the facet colour to the border ring when portraits are on
+
+    // thumbnail (Wikidata Commons, cached locally) or a sex silhouette fallback — same source the markers use
+    function mapsPortraitURL( v ) {
+        if ( v && v.img ) return '/data/map/data/img/thumb/' + v.id + '.jpg';
+        return ( v && v.sex === 'm' ) ? '/images/male.png' : '/images/female.png';
+    }
+    // resting node style for a collection, per the portraits toggle. The facet colour is applied
+    // afterwards by nwMapRegroup (to the border ring when portraits are on, to the fill when off).
+    function mapsStyleNodes( coll ) {
+        if ( !coll || !coll.length ) return;
+        var dark = ( typeof theme !== 'undefined' && theme === 'dark' );
+        if ( mapsPortraits ) {
+            coll.style( { 'width': '26px', 'height': '26px', 'padding': '0px', 'background-fit': 'cover',
+                'background-color': dark ? '#333' : '#ccc', 'border-width': '3px', 'border-color': dark ? '#222' : '#fff' } );
+            coll.forEach( function ( n ) { n.style( 'background-image', n.data( 'img' ) || '' ); } );   // inline .style() can't parse data() mappers
+        } else {
+            coll.style( { 'width': '14px', 'height': '14px', 'padding': '0px', 'background-image': 'none',
+                'background-color': dark ? '#bbb' : '#666', 'border-width': '1.5px', 'border-color': dark ? '#222' : '#fff' } );
+        }
+    }
+    // toggle portraits on/off and re-apply facet colour + expanded markers
+    async function mapsSetPortraits( on ) {
+        mapsPortraits = !!on; window.mapsPortraits = mapsPortraits;
+        if ( typeof cy === 'undefined' || !cy ) return;
+        mapsStyleNodes( cy.nodes() );
+        if ( typeof nwGroupFacet !== 'undefined' && nwGroupFacet && typeof nwMapRegroup === 'function' ) await nwMapRegroup( nwGroupFacet );   // recolour on the now-correct channel (await: it colours the border in portrait mode)
+        cy.nodes( '[?mapsExpanded]' ).style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // re-mark expanded seeds after the regroup
+        mapsProjectNodes();
+    }
     var MAPS_PANES = '.leaflet-marker-pane, .leaflet-shadow-pane, .leaflet-overlay-pane';   // marker + geodesic-line panes to hide in graph mode
 
     // the currently-filtered poet set (mirrors map.js showYrRange: year slider + gender + continents)
@@ -59,7 +89,7 @@
             }
             return { group: 'nodes', data: {
                 id: domain + '/id/' + v.id + '/person', type: 'Person', shape: 'ellipse',
-                lat: c ? c.lat : null, lng: c ? c.lng : null,
+                lat: c ? c.lat : null, lng: c ? c.lng : null, pid: v.id, img: mapsPortraitURL( v ),
                 class: [ 'http://www.cidoc-crm.org/cidoc-crm/E21_Person' ]
             } };
         } );
@@ -79,10 +109,7 @@
         // LOCK cy at zoom 1 / pan 0,0 so it stays 1:1 with the map container and NOTHING can auto-fit it
         // (an auto-fit is what shrank the graph to "too small scale" and re-ran on every move).
         try { cy.minZoom( 1 ); cy.maxZoom( 1 ); cy.userZoomingEnabled( false ); cy.userPanningEnabled( false ); cy.boxSelectionEnabled( false ); cy.autoungrabify( true ); cy.zoom( 1 ); cy.pan( { x: 0, y: 0 } ); } catch ( e ) {}
-        var dark = ( typeof theme !== 'undefined' && theme === 'dark' ), $n = cy.nodes();
-        $n.style( 'width', '14px' ); $n.style( 'height', '14px' ); $n.style( 'padding', '0px' );
-        $n.style( 'border-width', '1.5px' ); $n.style( 'border-color', dark ? '#222' : '#fff' );
-        $n.style( 'background-image', 'none' ); $n.style( 'background-color', dark ? '#bbb' : '#666' );
+        mapsStyleNodes( cy.nodes() );   // dots or portraits per the toggle
         $( '#cy-overlay .cy-panzoom, #cy-overlay .cytoscape-navigator' ).hide();
         if ( typeof nwRefreshFacetMenu === 'function' ) nwRefreshFacetMenu();
     }
@@ -96,7 +123,7 @@
             var p = n.position(), d = Math.sqrt( ( p.x - pt.x ) * ( p.x - pt.x ) + ( p.y - pt.y ) * ( p.y - pt.y ) );
             if ( d < bd ) { bd = d; best = n; }
         } );
-        return ( best && bd <= 14 ) ? best : null;
+        return ( best && bd <= ( mapsPortraits ? 18 : 12 ) ) ? best : null;
     }
     // hover tooltip: show the poet name (there are no on-node labels) + a pointer cursor over a dot
     function mapsTip() {
@@ -198,7 +225,9 @@
             var om = String( other ).match( /\/id\/(pers\d+)\b/ ); if ( !om ) return;
             if ( cy.getElementById( other ).empty() ) {
                 var c = ( typeof nwPersonCoord === 'function' ) ? nwPersonCoord( om[ 1 ] ) : null; if ( !c ) return;
-                toAdd.push( { group: 'nodes', classes: 'maps-added', data: { id: other, type: 'Person', shape: 'ellipse', lat: c.lat, lng: c.lng, class: [ 'http://www.cidoc-crm.org/cidoc-crm/E21_Person' ] } } );
+                var pm = ( typeof persons !== 'undefined' && persons ) ? persons[ om[ 1 ] ] : null;
+                toAdd.push( { group: 'nodes', classes: 'maps-added', data: { id: other, type: 'Person', shape: 'ellipse', lat: c.lat, lng: c.lng,
+                    pid: om[ 1 ], img: mapsPortraitURL( pm || { id: om[ 1 ] } ), class: [ 'http://www.cidoc-crm.org/cidoc-crm/E21_Person' ] } } );
             }
             var eid = 'mapsedge-' + type + '-' + opSafe( seed ) + '-' + opSafe( other );
             if ( cy.getElementById( eid ).nonempty() ) return;
@@ -208,7 +237,7 @@
         } );
         if ( !toAdd.length ) return 0;
         var added = cy.add( toAdd );
-        added.nodes().style( { 'width': '14px', 'height': '14px', 'padding': '0px', 'border-width': '1.5px', 'border-color': dark ? '#222' : '#fff', 'background-image': 'none', 'background-color': dark ? '#bbb' : '#666' } );
+        mapsStyleNodes( added.nodes() );   // dots or portraits per the toggle
         if ( type === 'concept' ) {
             added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#6a89b8', 'width': Math.min( 6, 1.2 + ( ed.data( 'weight' ) || 1 ) ), 'opacity': 0.35, 'curve-style': 'bezier', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
         } else if ( type === 'formal' ) {
@@ -224,7 +253,6 @@
     async function mapsExpandPoet( node, persid ) {
         if ( typeof cy === 'undefined' || !cy || typeof opFetch !== 'function' || node.data( 'mapsExpanded' ) ) return;
         node.data( 'mapsExpanded', 1 );
-        node.style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // mark expanded
         var seed = node.id(), dark = ( typeof theme !== 'undefined' && theme === 'dark' ), added = 0;
         try {
             // fire all three layer queries in parallel, then draw each
@@ -235,8 +263,9 @@
             added += mapsAddLinks( seed, await qFormal, 'formal', dark );
             added += mapsAddLinks( seed, await qInter, 'intertext', dark );
             mapsApplyLayerToggles();   // respect any layers the user has switched off
+            if ( nwGroupFacet ) await nwMapRegroup( nwGroupFacet );   // colour any newly-added poets (await: it colours the border in portrait mode)
+            node.style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // mark expanded, after the regroup so it isn't overwritten
             mapsProjectNodes();
-            if ( nwGroupFacet ) nwMapRegroup( nwGroupFacet );   // colour any newly-added poets
             if ( !added ) { var pm = ( typeof persons !== 'undefined' && persons ) ? persons[ persid ] : null; mapsToast( 'No recorded connections yet for ' + ( pm ? pm.name : persid ) ); }
         } catch ( e ) { console.log( 'maps expand failed', e ); }
     }
@@ -331,5 +360,7 @@
         try { $( '#slider-range' ).on( 'slidestop', function () { if ( mapsGraphOn ) mapsRedrawGraph(); } ); } catch ( e ) {}
         // connection-layer legend toggles (Themes / Verse form / Intertextual) — show/hide each edge layer
         $( document ).on( 'change', '.maps-tog', function () { mapsToggleLayer( this.getAttribute( 'data-layer' ), this.checked ); } );
+        // portraits on/off (reversible): dots <-> cached poet thumbnails
+        $( document ).on( 'change', '#maps-portraits-tog', function () { mapsSetPortraits( this.checked ); } );
     } );
 } )();

@@ -902,8 +902,12 @@ function nwApplyGeoPositions() {
 // the fill colour + legend carry the grouping. No cise, no viewport fit (Leaflet owns the viewport).
 var NW_GEO_GREY = null;   // resolved lazily from theme
 function nwGeoGrey() { return ( typeof theme !== 'undefined' && theme === 'dark' ) ? '#bbb' : '#666'; }
+// which node property carries the facet colour: the border ring when portraits are on (the fill is a
+// photo), the fill when they're off (plain dots). Defaults to the ring (portraits are on by default).
+function nwMapFacetProp() { return ( typeof window !== 'undefined' && window.mapsPortraits === false ) ? 'background-color' : 'border-color'; }
+function nwMapNeutralBorder() { return ( typeof theme !== 'undefined' && theme === 'dark' ) ? '#222' : '#fff'; }
 function nwMapClearColours() {
-    if ( nwGeoColoured ) { nwGeoColoured.style( 'background-color', nwGeoGrey() ); nwGeoColoured = null; }
+    if ( nwGeoColoured ) { nwGeoColoured.style( 'background-color', nwGeoGrey() ); nwGeoColoured.style( 'border-color', nwMapNeutralBorder() ); nwGeoColoured = null; }
 }
 // redraw the hulls for the CURRENT map groups (called on pan/zoom settle, so the plugin never
 // recomputes a giant hull per frame during interaction)
@@ -928,9 +932,10 @@ async function nwMapRegroup( facet ) {
     nwUpdateLegend( keys.length ? groups : null, def._labels );
     nwMapClearColours();
     nwGeoColoured = cy.collection();
+    var facetProp = nwMapFacetProp();   // border ring (portraits) or fill (dots)
     keys.forEach( function( k ) {
         var coll = cy.collection( groups[ k ] );
-        coll.style( 'background-color', nwFacetColour( k ) );   // fill = group colour (ONE call per group)
+        coll.style( facetProp, nwFacetColour( k ) );   // group colour on the visible channel (ONE call per group)
         nwGeoColoured = nwGeoColoured.union( coll );
     } );
     nwMapGroups = keys.length ? groups : null;
@@ -3021,12 +3026,12 @@ function createCYgraph(data, graph, layout) {
 					},
 					'background-image': function (e) { 
 						if ( e.data().img ) {
-							if ( e.data().img.startsWith( domain ) || e.data().img.includes( "/wikipedia/commons/thumb/" ) ) {
+							if ( e.data().img.startsWith( domain ) || e.data().img.charAt( 0 ) === '/' || e.data().img.includes( "/wikipedia/commons/thumb/" ) ) {
 								return e.data().img;
 							} else {
 								var filename = decodeURIComponent( e.data().img.split("/").pop().replace(/%20/g, "_") );
-								var md5Hash = CryptoJS.MD5( filename ).toString();
-								return "https://upload.wikimedia.org/wikipedia/commons/"+md5Hash[0]+"/"+md5Hash[0]+md5Hash[1]+"/"+filename;
+								var pm = String( e.data().id || '' ).match( /(pers\d+)/ ); if ( pm ) { return '/data/map/data/img/thumb/' + pm[1] + '.jpg'; }   // person we cache locally (same thumbs the map uses)
+								return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent( filename ) + '?width=120';   // fallback: sized thumbnail straight from Commons over https (no MD5, no mixed content)
 							}
 						} else {
 							return 'none';
