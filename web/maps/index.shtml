@@ -221,10 +221,17 @@
       });
     });
 
-    // switch base/overlay (to hide hist map "flaw")
+    // switch base/overlay (to hide hist map "flaw"). The beige backdrop only bridges the 1844 overlay's
+    // cosmetic edge at low zoom; above zoom 5 the overlay doesn't cover, so keep the modern base visible
+    // instead of a beige void.
     map.on('overlayadd', function() {
-      baseMap.setOpacity(0);
-      $( ".map").css( "background-color", "#ede0cb" );
+      if ( map.getZoom() <= 5 ) {
+        baseMap.setOpacity(0);
+        $( ".map").css( "background-color", "#ede0cb" );
+      } else {
+        baseMap.setOpacity(1);
+        $( ".map").css( "background-color", (theme == 'dark') ? "#000" : "#fff" );
+      }
     });
     map.on('overlayremove', function() {
       if (theme == 'dark') {

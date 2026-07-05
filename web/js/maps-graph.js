@@ -326,7 +326,9 @@
             $( '#map > #cy-overlay' ).remove();
             nwMapMode = false; mapsGraphOn = false;
             $( '#map' ).find( MAPS_PANES ).css( 'display', '' );   // restore the marker/line panes (their layers were never removed, so the #birthdeath state is intact)
-            try { if ( mapsPrevOverlay && typeof overlayMap !== 'undefined' && overlayMap ) { map.addLayer( overlayMap ); if ( typeof baseMap !== 'undefined' && baseMap ) baseMap.setOpacity( 0 ); $( '.map' ).css( 'background-color', '#ede0cb' ); } } catch ( e ) {}   // restore the 1844 overlay if it was on
+            // restore the 1844 overlay if it was on; the beige backdrop + hidden base only applies at low
+            // zoom (where the overlay covers) — above zoom 5 keep the modern base, else you get a beige void
+            try { if ( mapsPrevOverlay && typeof overlayMap !== 'undefined' && overlayMap ) { map.addLayer( overlayMap ); var lowZoom = map.getZoom() <= 5; if ( typeof baseMap !== 'undefined' && baseMap ) baseMap.setOpacity( lowZoom ? 0 : 1 ); $( '.map' ).css( 'background-color', lowZoom ? '#ede0cb' : ( ( typeof theme !== 'undefined' && theme === 'dark' ) ? '#000' : '#fff' ) ); } } catch ( e ) {}
             if ( typeof sidebar !== 'undefined' && sidebar ) { try { sidebar.open( 'home' ); } catch ( e ) {} }   // back to the filters
         }
         mapsSetActive( 'markers' );
