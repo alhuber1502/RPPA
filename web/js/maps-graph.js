@@ -157,28 +157,33 @@
         var n = mapsNearestNode( e ); if ( !n ) return;
         var mp = String( n.id() ).match( /\/id\/(pers\d+)\b/ ); if ( mp ) mapsExpandPoet( n, mp[ 1 ] );
     }
-    // poets sharing >=2 non-formal (INTRO) concepts -> a thematic link, weighted by shared-concept count
+    // Layer A — poets sharing >=2 THEME/CONTENT concepts (motifs, topics, symbols, genres, subjects,
+    // rhetorical figures... everything that is NOT the ECEP metrical scheme). Weighted by shared count.
+    // NB genres/forms in the other vocabularies stay here for now — they can't be pulled into the Form
+    // layer cleanly until the cross-vocabulary skos:broader type-hierarchy is completed (data task).
     function mapsConceptQuery( seed ) {
         return 'PREFIX intro: <https://w3id.org/lso/intro/beta202408#>\n' +
-            'PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n' +
+            'PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\n' +
             'SELECT ?other (COUNT(DISTINCT ?concept) AS ?weight) (GROUP_CONCAT(DISTINCT ?conceptLabel; separator=" | ") AS ?concepts) WHERE {\n' +
             '  ?c1 a intro:INT2_ActualizationOfFeature ; intro:R17_actualizesFeature ?concept ; intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator <' + seed + '> .\n' +
             '  ?c2 a intro:INT2_ActualizationOfFeature ; intro:R17_actualizesFeature ?concept ; intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator ?other .\n' +
             '  FILTER( ?other != <' + seed + '> && CONTAINS(STR(?other), "/person") )\n' +
-            '  FILTER( !CONTAINS(STR(?concept), "/kos/ECEP/") )\n' +
+            '  FILTER NOT EXISTS { ?concept skos:inScheme/dc:subject ?fs . FILTER( STR(?fs) = "formal and metrical categories" ) }\n' +
             '  OPTIONAL { ?concept skos:prefLabel ?conceptLabel }\n' +
             '} GROUP BY ?other HAVING( COUNT(DISTINCT ?concept) >= 2 ) ORDER BY DESC(?weight)';
     }
-    // poets sharing >=2 FORMAL/prosodic (ECEP) concepts -> a shared-verse-form link (same query, but
-    // keeping ONLY the ECEP vocabulary this time: stanza type, disposition, rhyme, metre)
+    // Layer B — poets sharing >=2 FORM/metre concepts -> a shared-form link. Classified by TYPE not
+    // vocabulary source: the concepts whose scheme is subject "formal and metrical categories" (the ECEP
+    // metrical vocabulary: metre, stanza, rhyme, poetic form). This replaces the old "/kos/ECEP/" URL test,
+    // which wrongly also swept in ECEP's subject + rhetorical-figure schemes (now correctly in Themes).
     function mapsFormalQuery( seed ) {
         return 'PREFIX intro: <https://w3id.org/lso/intro/beta202408#>\n' +
-            'PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n' +
+            'PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\n' +
             'SELECT ?other (COUNT(DISTINCT ?concept) AS ?weight) (GROUP_CONCAT(DISTINCT ?conceptLabel; separator=" | ") AS ?concepts) WHERE {\n' +
             '  ?c1 a intro:INT2_ActualizationOfFeature ; intro:R17_actualizesFeature ?concept ; intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator <' + seed + '> .\n' +
             '  ?c2 a intro:INT2_ActualizationOfFeature ; intro:R17_actualizesFeature ?concept ; intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator ?other .\n' +
+            '  ?concept skos:inScheme/dc:subject ?fs . FILTER( STR(?fs) = "formal and metrical categories" )\n' +
             '  FILTER( ?other != <' + seed + '> && CONTAINS(STR(?other), "/person") )\n' +
-            '  FILTER( CONTAINS(STR(?concept), "/kos/ECEP/") )\n' +
             '  OPTIONAL { ?concept skos:prefLabel ?conceptLabel }\n' +
             '} GROUP BY ?other HAVING( COUNT(DISTINCT ?concept) >= 2 ) ORDER BY DESC(?weight)';
     }
