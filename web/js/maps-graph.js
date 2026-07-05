@@ -293,12 +293,11 @@
         try { mapsPrevOverlay = ( typeof overlayMap !== 'undefined' && overlayMap && map.hasLayer( overlayMap ) ); } catch ( e ) { mapsPrevOverlay = false; }
         try { if ( mapsPrevOverlay ) { map.removeLayer( overlayMap ); if ( typeof baseMap !== 'undefined' && baseMap ) baseMap.setOpacity( 1 ); $( '.map' ).css( 'background-color', ( typeof theme !== 'undefined' && theme === 'dark' ) ? '#000' : '#fff' ); } } catch ( e ) {}
         var ppl = mapsFilteredPersons();
-        // fit the map to the poets FIRST, so nodes are then BUILT at their final projected positions
-        var bounds = [];
-        ppl.forEach( function ( v ) { var c = ( typeof nwPersonCoord === 'function' ) ? nwPersonCoord( v.id ) : null; if ( c ) bounds.push( [ c.lat, c.lng ] ); } );
-        if ( bounds.length ) { try { map.fitBounds( bounds, { maxZoom: 5, padding: [ 30, 30 ], animate: false } ); } catch ( e ) {} }
+        // KEEP the current map view (zoom/centre, and thus the leaflet-hash URL) so switching
+        // Markers <-> Graph preserves it. Nodes are built at their projected positions in the current
+        // viewport — no fitBounds, which used to clobber the view on every switch to Graph.
         mapsBuildGraph( ppl );                                  // nodes created at their geo positions (preset), cy zoom locked at 1
-        mapsProjectNodes();                                     // safety re-project at the final view
+        mapsProjectNodes();                                     // safety re-project at the current view
         if ( nwGroupFacet ) nwMapRegroup( nwGroupFacet );
         // NOW bind pan/zoom projection (so subsequent user interaction moves the dots with the map)
         map.on( 'move zoom', mapsProjectNodes );
