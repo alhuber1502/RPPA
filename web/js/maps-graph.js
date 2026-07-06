@@ -6,7 +6,7 @@
 // click hit-tests the nearest node. Reuses the WP-G facet grouping / bubblesets in graph.js.
 ( function () {
     'use strict';
-    var mapsGraphOn = false, mapsPrevOverlay = false, mapsPortraits = true;
+    var mapsGraphOn = false, mapsPrevOverlay = false, mapsPortraits = true, mapsSpiderKey = null;
     window.mapsPortraits = mapsPortraits;   // graph.js routes the facet colour to the border ring when portraits are on
 
     // thumbnail (Wikidata Commons, cached locally) or a sex silhouette fallback — same source the markers use
@@ -62,17 +62,71 @@
     // project every node from its lat/lng onto the map's current viewport (cy stays at zoom 1 / 0,0)
     function mapsProjectNodes() {
         if ( typeof cy === 'undefined' || !cy || typeof map === 'undefined' || !map ) return;
+        var spider = !!mapsSpiderKey;   // apply spiderfy offsets ONLY while a fan is open (closed -> never a ghost fan)
         cy.batch( function () {
             cy.nodes().forEach( function ( n ) {
                 var lat = n.data( 'lat' ), lng = n.data( 'lng' );
                 if ( lat == null || lng == null ) return;
                 var pt = map.latLngToContainerPoint( [ lat, lng ] );
-                n.position( { x: pt.x, y: pt.y } );
+                n.position( { x: pt.x + ( spider ? ( n.scratch( '_spiderDx' ) || 0 ) : 0 ), y: pt.y + ( spider ? ( n.scratch( '_spiderDy' ) || 0 ) : 0 ) } );
             } );
         } );
         try { cy.zoom( 1 ); cy.pan( { x: 0, y: 0 } ); } catch ( e ) {}   // keep the canvas 1:1 with the map (zoom is locked, reset pan)
     }
-    function mapsOnMoveStart() { if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets(); }
+    // pixel offsets that pack `count` nodes into neat CONCENTRIC RINGS around a centre (like the marker
+    // spiderfier), sized so co-located poets never overlap and small stacks stay tight.
+    function mapsSpiderPositions( count ) {
+        var sep = mapsPortraits ? 40 : 22;                                  // min centre-to-centre spacing (px)
+        if ( count <= 1 ) return [ { x: 0, y: 0 } ];
+        var pos = [], placed = 0, ring = 0;
+        while ( placed < count ) {
+            ring++;
+            var radius = ring * sep;
+            var cap = Math.max( 1, Math.floor( ( 2 * Math.PI * radius ) / sep ) );   // nodes that fit on this ring
+            var n = Math.min( cap, count - placed );
+            if ( ring === 1 && n === count ) { radius = count === 2 ? sep * 0.62 : sep / ( 2 * Math.sin( Math.PI / count ) ); }   // pack a small total into one tight ring
+            var off = ( ring % 2 === 0 ) ? Math.PI / n : 0;                 // stagger alternate rings
+            for ( var i = 0; i < n; i++ ) {
+                var a = -Math.PI / 2 + off + ( 2 * Math.PI * i ) / n;
+                pos.push( { x: radius * Math.cos( a ), y: radius * Math.sin( a ) } );
+            }
+            placed += n;
+        }
+        return pos;
+    }
+    // fan a stack of co-located poets out into concentric rings around their shared point; ONLY the stack
+    // members get an offset (everything else stays exactly put). Collapse via mapsUnspiderfy.
+    function mapsSpiderfyStack( node ) {
+        if ( typeof cy === 'undefined' || !cy || !node ) return;
+        var key = node.data( 'stackKey' ); if ( !key ) return;
+        mapsUnspiderfy();                                                    // only one fan open at a time
+        var members = cy.nodes().filter( function ( m ) { return m.data( 'stackKey' ) === key; } );
+        var N = members.length; if ( N < 2 ) return;
+        var pos = mapsSpiderPositions( N );
+        members.forEach( function ( m, i ) {
+            m.scratch( '_spiderDx', pos[ i ].x ); m.scratch( '_spiderDy', pos[ i ].y );
+            m.style( 'z-index', 30 );                                        // fanned poets draw above the rest
+        } );
+        mapsSpiderKey = key;
+        mapsProjectNodes();
+    }
+    function mapsUnspiderfy() {
+        if ( !mapsSpiderKey ) return;
+        mapsSpiderKey = null;   // FIRST: mapsProjectNodes' spider-guard now drops EVERY offset, so the fan is
+                                // visually collapsed even if the scratch cleanup below throws for any reason
+        try {
+            if ( typeof cy !== 'undefined' && cy ) {
+                cy.nodes().forEach( function ( m ) { m.scratch( '_spiderDx', 0 ); m.scratch( '_spiderDy', 0 ); m.removeStyle( 'z-index' ); } );
+            }
+        } catch ( e ) {}
+        mapsProjectNodes();
+    }
+    function mapsOnMoveStart( e ) {
+        // Collapse the fan on a ZOOM (its offsets are fixed pixels, so they mis-scale at another zoom);
+        // a PAN keeps it open (mapsProjectNodes carries the offsets with the point). Bound to both events.
+        if ( e && e.type === 'zoomstart' ) mapsUnspiderfy();
+        if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets();
+    }
     function mapsOnMoveEnd() { mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
 
     // build the cy graph in a transparent overlay INSIDE #map. Nodes are CREATED already at their
@@ -80,19 +134,22 @@
     // with any spring/grid layout. The map must already be at its final view (fit) before this runs.
     function mapsBuildGraph( ppl ) {
         ppl = ppl || mapsFilteredPersons();
-        var seen = {};
+        mapsSpiderKey = null;                                    // new graph -> no fan open
+        // Keep poets at their TRUE coordinate (no jitter). Co-located poets stack exactly and are
+        // separated on demand by an on-click spiderfy; stackKey groups poets sharing a coordinate and
+        // stackSize (filled below) flags a stack worth fanning out.
+        var counts = {};
         var nodes = ppl.map( function ( v ) {
             var c = ( typeof nwPersonCoord === 'function' ) ? nwPersonCoord( v.id ) : null;
-            if ( c ) {   // golden-angle jitter for co-located poets (many share a country centroid)
-                var k = c.lat.toFixed( 4 ) + ',' + c.lng.toFixed( 4 ), i = seen[ k ] = ( seen[ k ] || 0 ) + 1;
-                if ( i > 1 ) { var a = i * 2.399963229; c = { lat: c.lat + 0.02 * i * Math.cos( a ), lng: c.lng + 0.02 * i * Math.sin( a ) }; }
-            }
+            var key = c ? ( c.lat.toFixed( 4 ) + ',' + c.lng.toFixed( 4 ) ) : null;
+            if ( key ) counts[ key ] = ( counts[ key ] || 0 ) + 1;
             return { group: 'nodes', data: {
                 id: domain + '/id/' + v.id + '/person', type: 'Person', shape: 'ellipse',
                 lat: c ? c.lat : null, lng: c ? c.lng : null, pid: v.id, img: mapsPortraitURL( v ),
-                class: [ 'http://www.cidoc-crm.org/cidoc-crm/E21_Person' ]
+                stackKey: key, class: [ 'http://www.cidoc-crm.org/cidoc-crm/E21_Person' ]
             } };
         } );
+        nodes.forEach( function ( nd ) { nd.data.stackSize = nd.data.stackKey ? counts[ nd.data.stackKey ] : 1; } );
         $( '#map > #cy-overlay' ).remove();
         $( '#map' ).append(
             '<div id="cy-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:450;pointer-events:none;">' +
@@ -132,22 +189,31 @@
         return t;
     }
     function mapsHideTip() { var t = document.getElementById( 'maps-graph-tip' ); if ( t ) t.style.display = 'none'; }
+    // a node still stacked with others (co-located, not yet fanned out)?
+    function mapsIsStacked( n ) { return n && n.data( 'stackSize' ) > 1 && n.data( 'stackKey' ) !== mapsSpiderKey; }
     function mapsMapMove( e ) {
         if ( !mapsGraphOn ) return;
         var n = mapsNearestNode( e ), c = map.getContainer();
         if ( n ) {
-            var pm = String( n.id() ).match( /\/id\/(pers\d+)/ ), pid = pm && pm[ 1 ];
-            var name = ( typeof persons !== 'undefined' && persons && pid && persons[ pid ] ) ? persons[ pid ].name : ( n.data( 'name' ) || pid || '' );
-            var t = mapsTip(); t.textContent = name; t.style.display = 'block';
+            var label;
+            if ( mapsIsStacked( n ) ) {
+                label = n.data( 'stackSize' ) + ' poets here · click to fan out';   // discoverability hint for a stack
+            } else {
+                var pm = String( n.id() ).match( /\/id\/(pers\d+)/ ), pid = pm && pm[ 1 ];
+                label = ( typeof persons !== 'undefined' && persons && pid && persons[ pid ] ) ? persons[ pid ].name : ( n.data( 'name' ) || pid || '' );
+            }
+            var t = mapsTip(); t.textContent = label; t.style.display = 'block';
             var oe = e.originalEvent || {}; t.style.left = ( ( oe.clientX || 0 ) + 12 ) + 'px'; t.style.top = ( ( oe.clientY || 0 ) + 12 ) + 'px';
             c.style.cursor = 'pointer';
         } else { mapsHideTip(); c.style.cursor = ''; }
     }
-    // single click -> reuse the marker view's poet profile. poet_profile() RETURNS the HTML (and opens
-    // the #profile pane); the caller must inject it, exactly as map.js / index.shtml do.
+    // single click -> a stacked point fans out (spiderfy) so its poets can be picked; a single poet
+    // opens its profile. poet_profile() RETURNS the HTML (and opens the #profile pane); the caller injects it.
     async function mapsMapClick( e ) {
         if ( !mapsGraphOn ) return;
-        var n = mapsNearestNode( e ); if ( !n ) return;
+        var n = mapsNearestNode( e );
+        if ( !n ) { mapsUnspiderfy(); return; }                     // click empty space -> collapse any open fan
+        if ( mapsIsStacked( n ) ) { mapsSpiderfyStack( n ); return; }
         var mp = String( n.id() ).match( /\/id\/(pers\d+)\b/ );
         if ( mp && typeof poet_profile === 'function' ) { try { $( '#profile .results' ).html( await poet_profile( mp[ 1 ] ) ); } catch ( err ) {} }
     }
@@ -155,6 +221,7 @@
     function mapsMapDblClick( e ) {
         if ( !mapsGraphOn ) return;
         var n = mapsNearestNode( e ); if ( !n ) return;
+        if ( mapsIsStacked( n ) ) { mapsSpiderfyStack( n ); return; }   // fan out first; then double-click a single poet to expand it
         var mp = String( n.id() ).match( /\/id\/(pers\d+)\b/ ); if ( mp ) mapsExpandPoet( n, mp[ 1 ] );
     }
     // Layer A — poets sharing >=2 THEME/CONTENT concepts (motifs, topics, symbols, genres, subjects,
