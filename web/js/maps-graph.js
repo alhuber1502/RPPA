@@ -266,6 +266,23 @@
             '  FILTER( ?other != <' + seed + '> && CONTAINS(STR(?other), "/person") )\n' +
             '  OPTIONAL { ?rel intro:R19_hasType/skos:prefLabel ?typeLabel }\n}';
     }
+    // Layer D — REFERENCES (crm:P67_refers_to): a poet's poem directly refers to another poet — the
+    // "reference" contextual annotation (contribute step 3, ctype=='referential') and curated poet-motifs.
+    // Directional ("wrote about" / reception); resolves the referent through a death-event hop too. Small
+    // but growing + transnational; both ends must be geo-located poets. dir=1: seed refers to ?other;
+    // dir=0: ?other refers to the seed.
+    function mapsReferenceQuery( seed ) {
+        return 'PREFIX intro: <https://w3id.org/lso/intro/beta202408#>\nPREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\n' +
+            'PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n' +
+            'SELECT DISTINCT ?other ?dir ?refName WHERE {\n' +
+            '  { ?anno crm:P67_refers_to ?ref . ?ref (crm:P100i_died_in|^crm:P93i_was_taken_out_of_existence_by)? ?other .\n' +
+            '    ?other a crm:E21_Person ; skos:prefLabel ?refName .\n' +
+            '    ?anno intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator <' + seed + '> . BIND("1" AS ?dir) }\n' +
+            '  UNION\n' +
+            '  { ?anno crm:P67_refers_to ?ref . ?ref (crm:P100i_died_in|^crm:P93i_was_taken_out_of_existence_by)? <' + seed + '> .\n' +
+            '    ?anno intro:R18i_actualizationFoundOn/intro:R10i_isPassageOf/(lrmoo:R4_embodies|lrmoo:R15i_is_fragment_of)?/dcterms:creator ?other . ?other skos:prefLabel ?refName . BIND("0" AS ?dir) }\n' +
+            '  FILTER( ?other != <' + seed + '> && CONTAINS(STR(?other), "/person") )\n}';
+    }
 
     // brief centred toast (used to say "no connections found" so a blank double-click isn't confusing)
     function mapsToast( msg ) {
@@ -281,7 +298,7 @@
     }
     // reapply all three checkbox states to the graph (called after adding edges)
     function mapsApplyLayerToggles() {
-        [ 'concept', 'formal', 'intertext' ].forEach( function ( t ) {
+        [ 'concept', 'formal', 'intertext', 'reference' ].forEach( function ( t ) {
             var cb = document.querySelector( '.maps-tog[data-layer="' + t + '"]' );
             mapsToggleLayer( t, !cb || cb.checked );
         } );
@@ -303,8 +320,12 @@
             }
             var eid = 'mapsedge-' + type + '-' + opSafe( seed ) + '-' + opSafe( other );
             if ( cy.getElementById( eid ).nonempty() ) return;
-            toAdd.push( { group: 'edges', classes: 'maps-link maps-' + type, data: { id: eid, source: seed, target: other,
-                weight: ( r.weight && r.weight.value ) ? +r.weight.value : 1, name: '', maplabel: ( r.concepts && r.concepts.value ) || ( r.typeLabel && r.typeLabel.value ) || '' } } );
+            // references are DIRECTIONAL: orient the arrow referring-poet -> referenced-poet (dir=0 means
+            // ?other wrote about the seed, so flip). All other layers are symmetric (seed -> other).
+            var eSrc = seed, eTgt = other;
+            if ( type === 'reference' && r.dir && r.dir.value === '0' ) { eSrc = other; eTgt = seed; }
+            toAdd.push( { group: 'edges', classes: 'maps-link maps-' + type, data: { id: eid, source: eSrc, target: eTgt,
+                weight: ( r.weight && r.weight.value ) ? +r.weight.value : 1, name: '', maplabel: ( r.concepts && r.concepts.value ) || ( r.typeLabel && r.typeLabel.value ) || ( r.refName && r.refName.value ) || '' } } );
             edges++;
         } );
         if ( !toAdd.length ) return 0;
@@ -317,6 +338,10 @@
         } else if ( type === 'formal' ) {
             // shared verse-form (ECEP): dense, so kept thin + faint + dotted so it reads as a background layer
             added.edges().forEach( function ( ed ) { ed.style( { 'line-color': '#4a9d5b', 'width': Math.min( 3, 0.8 + ( ed.data( 'weight' ) || 1 ) * 0.4 ), 'opacity': 0.22, 'line-style': 'dotted', 'curve-style': 'unbundled-bezier', 'control-point-distances': '-16', 'control-point-weights': '0.5', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } ); } );
+        } else if ( type === 'reference' ) {
+            // directional "wrote about" (P67_refers_to): solid purple, bowed wide of the others, with an
+            // arrowhead pointing at the referenced poet so the direction of reception reads at a glance
+            added.edges().style( { 'line-color': '#8e44ad', 'width': 1.8, 'opacity': 0.72, 'curve-style': 'unbundled-bezier', 'control-point-distances': '30', 'control-point-weights': '0.5', 'target-arrow-shape': 'triangle', 'target-arrow-color': '#8e44ad', 'arrow-scale': 0.9, 'text-opacity': 0, 'events': 'no' } );
         } else {
             added.edges().style( { 'line-color': '#cd6711', 'width': 2.5, 'opacity': 0.85, 'line-style': 'dashed', 'curve-style': 'straight', 'target-arrow-shape': 'none', 'text-opacity': 0, 'events': 'no' } );
         }
@@ -332,10 +357,12 @@
             // fire all three layer queries in parallel, then draw each
             var qConcept = opFetch( mapsConceptQuery( seed ) ),
                 qFormal = opFetch( mapsFormalQuery( seed ) ),
-                qInter = opFetch( mapsIntertextQuery( seed ) );
+                qInter = opFetch( mapsIntertextQuery( seed ) ),
+                qRef = opFetch( mapsReferenceQuery( seed ) );
             added += mapsAddLinks( seed, await qConcept, 'concept', dark );
             added += mapsAddLinks( seed, await qFormal, 'formal', dark );
             added += mapsAddLinks( seed, await qInter, 'intertext', dark );
+            added += mapsAddLinks( seed, await qRef, 'reference', dark );
             mapsApplyLayerToggles();   // respect any layers the user has switched off
             if ( nwGroupFacet ) await nwMapRegroup( nwGroupFacet );   // colour any newly-added poets (await: it colours the border in portrait mode)
             node.style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // mark expanded, after the regroup so it isn't overwritten
