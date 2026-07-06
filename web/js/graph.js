@@ -344,6 +344,7 @@ function nwRelations() {
 // types; the first match wins). EXACT local-name match (read the class, no substring guessing).
 var NW_TYPES = [
     [ { INT2_ActualizationOfFeature: 1, INT3_Interrelation: 1, Intertextuality: 1, INT_Interpretation: 1 }, 'context', 'Context' ],
+    [ { INT11_TypeOfInterrelation: 1 }, 'reltype', 'Relation type' ],
     [ { INT1_Passage: 1 }, 'passage', 'Passage' ],
     [ { E21_Person: 1, Person: 1, F10_Person: 1, E74_Group: 1, Agent: 1 }, 'person', 'Person' ],
     [ { F1_Work: 1, PoeticWork: 1, F2_Expression: 1, Redaction: 1, SelfContainedExpression: 1, F3_Manifestation: 1, E33_Linguistic_Object: 1, ExpressionFragment: 1, Excerpt: 1 }, 'work', 'Work' ],
@@ -362,6 +363,13 @@ var NW_TYPES = [
     [ { E90_Symbolic_Object: 1 }, 'content', 'Content' ]
 ];
 var NW_TYPE_LABEL = {}; NW_TYPES.forEach( function( t ) { NW_TYPE_LABEL[ t[ 1 ] ] = t[ 2 ]; } );
+// When a facet grouping can't cluster a node (no language/decade/etc.), these node types stay as
+// INDIVIDUAL nodes in the cise "other" cluster because the user browses them; every OTHER type
+// (relation/event/reification plumbing — INT11 relation-types, contexts, passages, CIDOC events…)
+// collapses into a count-node when its fan-out exceeds NW_AGG_THRESHOLD, so a concept like
+// "translation" with 358 INT11_TypeOfInterrelation reifications shows one "358 · Relation type"
+// node instead of an un-aggregated blob.
+var NW_KEEP_INDIVIDUAL = { person: 1, work: 1, concept: 1, place: 1, language: 1, scheme: 1 };
 // the rdf:type local names (after the last # or /) of a node's class array
 function nwLocalNames( n ) {
     var c = n.data( 'class' ); if ( !c ) return [];
@@ -774,10 +782,27 @@ async function nwGroupByFacet( facet ) {
         if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) || !n.visible() ) return;   // hidden passages / cleaned orphans / aggregated members
         var v = n.data( attr ); if ( v ) { ( groups[ v ] = groups[ v ] || [] ).push( n ); clustered[ n.id() ] = 1; }
     } );
+    // Collapse large SAME-TYPE fan-outs the facet CAN'T resolve BEFORE choosing the layout — the 358
+    // INT11 relation-type reifications off the "translation" concept (and any big context/passage/
+    // event fan) carry no language/decade, so without this they pile up as an un-aggregated blob
+    // (the empty-`keys` cose fallback below, or the cise "other" cluster). Bucket the still-visible
+    // un-clustered PLUMBING nodes by type; keep person/work/concept/place individual (the user
+    // browses those). Throwaway `{}` so each count-node stays un-clustered -> swept into "other".
+    if ( nwAggregate ) {
+        await nwResolveFacet( 'type' );
+        var typeBuckets = {};
+        cy.nodes().forEach( function( n ) {
+            if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) || !n.visible() ) return;
+            if ( clustered[ n.id() ] ) return;                       // already in a facet group
+            var t = n.data( 'nwF_type' );
+            if ( t && !NW_KEEP_INDIVIDUAL[ t ] ) ( typeBuckets[ t ] = typeBuckets[ t ] || [] ).push( n );
+        } );
+        nwAggregateGroups( 'type', typeBuckets, {} );
+    }
     var keys = Object.keys( groups );
     if ( !keys.length ) {
-        // nothing resolved for this facet (e.g. sparse reach facet, or no contexts) — cose was halted
-        // at the top, so run the natural layout instead of leaving the new nodes unpositioned/messy.
+        // no facet values resolved (e.g. a concept's relation-type reifications) — cose was halted at
+        // the top; lay out naturally. Any big plumbing fan was just collapsed above, so this stays tidy.
         nwUpdateLegend( null );
         run_layout( 'cose', nwFocusId || undefined );
         return;
