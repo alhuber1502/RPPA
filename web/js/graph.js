@@ -620,12 +620,24 @@ function nwDrawBubblesets( groups, perfOpts ) {
         var opts = { virtualEdges: true, interactive: false,
             style: { fill: col, fillOpacity: '0.12', stroke: col, 'strokeWidth': '2', strokeOpacity: '0.85', 'pointer-events': 'none' } };
         if ( perfOpts ) for ( var p in perfOpts ) opts[ p ] = perfOpts[ p ];
-        if ( opts._adaptive ) {   // coarsen the grid for big/scattered groups; keep it fine for small ones
-            var m = groups[ k ].length;
-            opts.pixelGroup = m > 60 ? 20 : ( m > 20 ? 10 : 4 );
+        var coll = cy.collection( groups[ k ] );
+        if ( opts._adaptive ) {
+            // The plugin allocates a marching-squares grid of (bbWidth/pixelGroup)x(bbHeight/pixelGroup)
+            // Float32 cells. When a facet group spreads across the viewport at HIGH ZOOM its bounding box
+            // explodes (off-screen members project thousands of px away), so a fixed pixelGroup blows up
+            // memory -> crash. Coarsen by member count as before, then RAISE pixelGroup so the grid never
+            // exceeds ~NW_BB_GRID_CAP cells per side regardless of zoom (bounds the allocation + the
+            // marching/routing cost). Purely the plugin's own pixelGroup lever.
+            var m = groups[ k ].length, bb = coll.boundingBox();
+            var base = m > 60 ? 20 : ( m > 20 ? 10 : 4 );
+            var NW_BB_GRID_CAP = 260;
+            opts.pixelGroup = Math.max( base, Math.ceil( Math.max( bb.w, bb.h ) / NW_BB_GRID_CAP ) );
+            // scattered-across-viewport groups: the virtual-edge routing (maxRoutingIterations) is the
+            // other cost sink, so drop it once the hull is already coarse — the blobs read fine.
+            if ( opts.pixelGroup > 24 ) opts.virtualEdges = false;
             delete opts._adaptive;
         }
-        try { nwBBPaths.push( nwBB.addPath( cy.collection( groups[ k ] ), null, null, opts ) ); } catch ( e ) {}
+        try { nwBBPaths.push( nwBB.addPath( coll, null, null, opts ) ); } catch ( e ) {}
     } );
 }
 // dependency-free fallback: pull each language's relations into a ring cluster
@@ -875,14 +887,14 @@ function nwGeoCoord( node ) {                // cy node -> {lat,lng} | null (nul
 // ones — cytoscape-leaf has no spiderfy); the rest get the centroid and are hidden. Returns geo count.
 function nwApplyGeoPositions() {
     if ( typeof cy === 'undefined' || !cy ) return 0;
-    var geo = [], nongeo = [], seen = {};
+    var geo = [], nongeo = [];
     cy.nodes().forEach( function( n ) {
         if ( n.hasClass( 'nw-collapsed' ) || n.hasClass( 'nw-agg-hidden' ) ) return;
         var c = nwGeoCoord( n );
         if ( c && isFinite( c.lat ) && isFinite( c.lng ) ) {
-            var k = c.lat.toFixed( 4 ) + ',' + c.lng.toFixed( 4 ), i = seen[ k ] = ( seen[ k ] || 0 ) + 1;
-            if ( i > 1 ) { var a = i * 2.399963229;                          // golden angle -> spiral scatter
-                c = { lat: c.lat + 0.02 * i * Math.cos( a ), lng: c.lng + 0.02 * i * Math.sin( a ) }; }
+            // NO jitter: co-located poets stack exactly and are separated on demand by the spiderfy
+            // (mapsSpiderfyStack). The old golden-angle jitter here (a cytoscape-leaf leftover) rewrote
+            // n.data lat/lng, permanently scattering stacks whenever this ran (e.g. after an expand).
             n.data( { lat: c.lat, lng: c.lng } );
             n.removeClass( 'nw-nongeo' ).style( 'display', 'element' );
             geo.push( n );
@@ -3319,9 +3331,16 @@ function createCYgraph(data, graph, layout) {
 		</ul>` );
 		$( "#tabHome" ).html( updateGraphInfo() );        
 	}
-	// Initialize navigator and panzoom
-	var nav = cy.navigator({ container: ".cytoscape-navigator" });
-	cy.panzoom();
+	// Initialize navigator and panzoom — SKIP in map mode: both controls are hidden and unused there
+	// (Leaflet drives pan/zoom, cy is locked at zoom 1), and /maps rebuilds cy on every redraw/filter, so
+	// the navigator's throttled cy.png() render would otherwise fire against the destroyed cy and throw
+	// "Cannot read properties of null (reading 'png')".
+	var nav = null;
+	if ( typeof nwMapMode === 'undefined' || !nwMapMode ) {
+		nav = cy.navigator({ container: ".cytoscape-navigator" });
+		cy.panzoom();
+	}
+	try { cy.scratch( '_nwNav', nav ); } catch ( e ) {}
 	// Event handlers
 	// initialize edgehandles for workbench, and tippies for graph preview
 	var tippy, tippy2;
