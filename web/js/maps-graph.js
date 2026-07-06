@@ -6,16 +6,17 @@
 // click hit-tests the nearest node. Reuses the WP-G facet grouping / bubblesets in graph.js.
 ( function () {
     'use strict';
-    var mapsGraphOn = false, mapsPrevOverlay = false, mapsPortraits = true, mapsSpiderKey = null;
-    window.mapsPortraits = mapsPortraits;   // graph.js routes the facet colour to the border ring when portraits are on
+    var mapsGraphOn = false, mapsPrevOverlay = false, mapsSpiderKey = null;
+    var mapsPortraits = true;               // poets always render as portrait avatars (matching the Markers view); the dots toggle was removed
+    window.mapsPortraits = mapsPortraits;   // graph.js routes the facet colour to the border ring (portraits are always on)
 
     // thumbnail (Wikidata Commons, cached locally) or a sex silhouette fallback — same source the markers use
     function mapsPortraitURL( v ) {
         if ( v && v.img ) return '/data/map/data/img/thumb/' + v.id + '.jpg';
         return ( v && v.sex === 'm' ) ? '/images/male.png' : '/images/female.png';
     }
-    // resting node style for a collection, per the portraits toggle. The facet colour is applied
-    // afterwards by nwMapRegroup (to the border ring when portraits are on, to the fill when off).
+    // resting node style for a collection (portrait avatars). The facet colour is applied
+    // afterwards by nwMapRegroup, to the border ring.
     function mapsStyleNodes( coll ) {
         if ( !coll || !coll.length ) return;
         var dark = ( typeof theme !== 'undefined' && theme === 'dark' );
@@ -27,15 +28,6 @@
             coll.style( { 'width': '14px', 'height': '14px', 'padding': '0px', 'background-image': 'none',
                 'background-color': dark ? '#bbb' : '#666', 'border-width': '1.5px', 'border-color': dark ? '#222' : '#fff' } );
         }
-    }
-    // toggle portraits on/off and re-apply facet colour + expanded markers
-    async function mapsSetPortraits( on ) {
-        mapsPortraits = !!on; window.mapsPortraits = mapsPortraits;
-        if ( typeof cy === 'undefined' || !cy ) return;
-        mapsStyleNodes( cy.nodes() );
-        if ( typeof nwGroupFacet !== 'undefined' && nwGroupFacet && typeof nwMapRegroup === 'function' ) await nwMapRegroup( nwGroupFacet );   // recolour on the now-correct channel (await: it colours the border in portrait mode)
-        cy.nodes( '[?mapsExpanded]' ).style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // re-mark expanded seeds after the regroup
-        mapsProjectNodes();
     }
     var MAPS_PANES = '.leaflet-marker-pane, .leaflet-shadow-pane, .leaflet-overlay-pane';   // marker + geodesic-line panes to hide in graph mode
 
@@ -166,7 +158,7 @@
         // LOCK cy at zoom 1 / pan 0,0 so it stays 1:1 with the map container and NOTHING can auto-fit it
         // (an auto-fit is what shrank the graph to "too small scale" and re-ran on every move).
         try { cy.minZoom( 1 ); cy.maxZoom( 1 ); cy.userZoomingEnabled( false ); cy.userPanningEnabled( false ); cy.boxSelectionEnabled( false ); cy.autoungrabify( true ); cy.zoom( 1 ); cy.pan( { x: 0, y: 0 } ); } catch ( e ) {}
-        mapsStyleNodes( cy.nodes() );   // dots or portraits per the toggle
+        mapsStyleNodes( cy.nodes() );   // style the poet portrait nodes
         $( '#cy-overlay .cy-panzoom, #cy-overlay .cytoscape-navigator' ).hide();
         if ( typeof nwRefreshFacetMenu === 'function' ) nwRefreshFacetMenu();
     }
@@ -330,7 +322,7 @@
         } );
         if ( !toAdd.length ) return 0;
         var added = cy.add( toAdd );
-        mapsStyleNodes( added.nodes() );   // dots or portraits per the toggle
+        mapsStyleNodes( added.nodes() );   // style the poet portrait nodes
         // fan the layers to separate sides so a pair sharing >1 kind of link doesn't overlap:
         // themes bow one way (+), verse form the opposite (-), allusion runs straight down the middle
         if ( type === 'concept' ) {
@@ -462,7 +454,5 @@
         try { $( '#slider-range' ).on( 'slidestop', function () { if ( mapsGraphOn ) mapsRedrawGraph(); } ); } catch ( e ) {}
         // connection-layer legend toggles (Themes / Verse form / Intertextual) — show/hide each edge layer
         $( document ).on( 'change', '.maps-tog', function () { mapsToggleLayer( this.getAttribute( 'data-layer' ), this.checked ); } );
-        // portraits on/off (reversible): dots <-> cached poet thumbnails
-        $( document ).on( 'change', '#maps-portraits-tog', function () { mapsSetPortraits( this.checked ); } );
     } );
 } )();
