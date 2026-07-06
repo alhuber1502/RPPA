@@ -112,7 +112,6 @@
       <div class="leaflet-sidebar-pane" id="graph">
           <h1 class="leaflet-sidebar-header">Network graph<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
           <p style="font-size:14px;margin:10px 0 6px;">Poets on the map. <b>Click</b> a poet for details; <b>double-click</b> one to reveal its connections. Redraw clears the links.</p>
-          <label style="display:block;cursor:pointer;font-size:12px;margin:0 0 8px;"><input type="checkbox" id="maps-portraits-tog" checked> <b>Show portraits</b> <span style="color:#888;">&middot; poet thumbnails instead of dots</span></label>
           <div style="font-size:12px;margin:0 0 10px;line-height:1.85;">
             <div style="font-weight:bold;margin-bottom:2px;">Connection layers <span style="color:#888;font-weight:normal;">&middot; double-click a poet; each line links it to a connected poet</span></div>
             <label style="display:block;cursor:pointer;" title="Two poets whose works share at least 2 of the same theme/content concepts (motifs, topics, symbols, subjects, genres, rhetorical figures) drawn from any of the archive's vocabularies."><input type="checkbox" class="maps-tog" data-layer="concept" checked> <span style="color:#6a89b8;font-weight:bold;">Shared themes &amp; concepts</span> <span style="color:#888;">&middot; motifs, topics, symbols, genres</span></label>

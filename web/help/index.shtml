@@ -27,6 +27,90 @@
             data-bs-offset="60" tabindex="0">
             <!--<h1>Help</h1>-->
             <div class="results">
+              <h2 id="texts">Texts</h2>
+              <p>Every poem in the archive can be read in two complementary ways.
+                The default <strong>Contexts</strong> view shows the poem alongside a
+                knowledge graph of the people, places, works, and contextualisations
+                connected to it. The <strong>Structure</strong> view (also called the
+                <em>Text-as-Graph</em> view) turns the poem itself into a graph,
+                exposing its formal architecture: stanzas, lines, words, rhyme, and
+                metre. A single text can thus be read structurally as well as
+                semantically. The structural model draws on the POSTDATA
+                poetic-analysis ontology (OntoPoetry).</p>
+
+              <h3 id="texts_structure">Structure view</h3>
+              <p>A segmented control at the top-left of the graph panel switches
+                between the two views:</p>
+              <ul>
+                <li><strong>Contexts</strong> (shown by default): the poem's entity
+                  graph of authors, works, expressions, places, time-spans, and
+                  contextualisations.</li>
+                <li><strong>Structure</strong>: the poem rendered as a reading-order
+                  graph of its own parts.</li>
+              </ul>
+              <p>In the Structure view a poem is modelled from the top down, as whole
+                poem, then stanza, then line, then words. The whole poem is a dashed
+                container node; each stanza is a box that, where the encoding allows,
+                is captioned with its rhyme scheme, rhyme disposition, and metrical
+                type (for example <code>Stanza&nbsp;1 (ABAB; alternate)</code>). Every
+                line is shown in full, with a coloured border keyed to its rhyme and a
+                short caption giving its rhyme letter and syllable count (for example
+                <code>[a&nbsp;·&nbsp;10&nbsp;syll]</code>). Tapping a line, a stanza,
+                or the whole-poem node fans out its words and punctuation in exact
+                reading order; tapping the background collapses everything again.</p>
+              <p>If a text has not yet been analysed for structure (for instance a
+                prose passage or an unanalysed fragment), the panel says so rather
+                than drawing an empty graph.</p>
+
+              <h3 id="texts_prosody">Form and prosody</h3>
+              <p>The Structure view renders a poem's prosody directly onto the
+                graph:</p>
+              <ul>
+                <li><strong>Rhyme</strong>: shown as coloured line borders drawn from
+                  a stable, poem-local palette, and as curved <em>rhyme-weave</em>
+                  arcs linking the lines within a stanza that share a rhyme. The
+                  toolbar carries a <strong>Rhyme</strong> legend of coloured chips;
+                  click a chip to spotlight the lines of that rhyme and dim the rest,
+                  and click it again to clear.</li>
+                <li><strong>Metre</strong>: revealed by the <strong>show metre</strong>
+                  checkbox, which appends a scansion ribbon to each line using the
+                  archive's notation (˘ for an unstressed syllable, ′ for a stressed
+                  one, | for a foot boundary, || for a caesura). Where the feet are
+                  regular, the line is also named, for example
+                  <em>iambic&nbsp;pentameter</em>.</li>
+                <li><strong>Syllabic deviation</strong>: lines whose syllable count
+                  differs from the poem's most common count are drawn with a double
+                  border, making metrical irregularities easy to spot.</li>
+              </ul>
+
+              <h3 id="texts_structure_explore">Exploring and contributing</h3>
+              <p>The toolbar above the graph offers several ways to move through a
+                poem:</p>
+              <ul>
+                <li><strong>expand all</strong> / <strong>collapse all</strong>: fan
+                  out (or fold away) the words of every line at once.</li>
+                <li><strong>tour ▸</strong>: a guided, stanza-by-stanza walk through
+                  the poem, where each click spotlights the next stanza.</li>
+                <li><strong>fit</strong>: re-centre and re-fit the graph.</li>
+                <li><strong>View:</strong> where a work has more than one text (for
+                  example an original and its translations), a selector switches the
+                  Structure view between them, keeping the linear text tabs in
+                  step.</li>
+              </ul>
+              <p>Hovering a line or word in either the linear poem or the graph
+                highlights the matching element in the other, so the two
+                representations stay linked as you read. The <strong>contexts ▸</strong>
+                button overlays any contextualisations already attached to the poem:
+                nodes carrying a context show a small count badge, and hovering a badge
+                outlines every passage that context touches. Contexts that apply to
+                the whole poem appear in a separate <em>poem-level</em> pill.</p>
+              <p>The Structure view is also a starting point for contributing.
+                Right-click (or long-press) any node, whether a stanza, line, word, or
+                the whole poem, to open the contribution flow with that element
+                pre-filled as the anchor of a new context. Contributing requires a
+                signed-in account (see
+                <a href="#networks_contribute">How to contribute a context</a>).</p>
+
               <h2 id="networks">Networks</h2>
               <p>The Networks view is an approximation of contextuality as a
               theory of space.  It facilitates the exploration of the RPPA
@@ -43,7 +127,7 @@
       space that connects all parts of a text among themselves and shows exits and
       pathways to its contexts.  Only in this space can a real
       interpretation of a text unfold:  as texts invite dialogue and
-      contextualization, the interpretative space grows with it. 
+      contextualisation, the interpretative space grows with it. 
       </p>
 
       <h3 id="networks_methodology">Methodology</h3>
@@ -68,13 +152,13 @@
       spatial movement between text and context, i.e. the text's place in the
       context's reach through time and space is just as important as
       the work it performs in the text. </p>
-      <p>This temporal/spatial expansion historicizes a text as a ‘global text‘,
+      <p>This temporal/spatial expansion historicises a text as a ‘global text‘,
       i.e. contexts embed texts in multidimensional spaces and connect texts more
       broadly via shared contexts.
-      As such, the global text evolves from the countless recontextualizations
+      As such, the global text evolves from the countless recontextualisations
       of the text (every reading adds a layer to this space), and hence serves
       as a representative model of the text in its 
-      contextualized state, it extends and ultimately replaces the textual
+      contextualised state, it extends and ultimately replaces the textual
       discourse with an open-ended, context-based network, or graph.
     </p>
       
@@ -177,6 +261,18 @@
                 </div>
               </div>
 
+      <h3 id="networks_browse">Browse by concept</h3>
+      <p>Beneath the graph search box, the <strong>Browse by concept</strong> panel
+        lists the concepts actually used to annotate the corpus, grouped under
+        subject headings (motifs, symbols, genres, forms, and so on). Each heading
+        reports how many concepts and annotations it holds; expanding it reveals the
+        individual concepts as chips, each with a count of the annotations that use
+        it. Clicking a concept seeds the graph with it, surfacing its cross-vocabulary
+        equivalents and the works it annotates. The panel is usage-driven and
+        refreshes as new contexts are contributed, so its coverage grows with the
+        archive. It is a live, counted counterpart to the vocabulary list
+        <a href="#networks_vocabularies">below</a>.</p>
+
       <h3 id="networks_traversal">Graph traversal</h3>
           <p>On right-click (or click and hold) in the graph display, a context wheel is
             displayed with these options:</p>
@@ -192,12 +288,37 @@
               <p>Individual selected nodes can be deleted with the <kbd>delete</kbd> key. Press <kbd>Ctrl</kbd> + <kbd>Z/Y</kbd> to undo/redo any changes to
                   the graph.</p>
 
+      <h3 id="networks_facets">Grouping, faceting, and export</h3>
+      <p>A control panel at the top-right of the graph lets you pivot and tidy the
+        network without leaving it. Under <strong>Grouping</strong>:</p>
+      <ul>
+        <li><strong>Group by</strong>: cluster the nodes by a chosen facet. Facets are
+          organised into <em>origin</em> properties (language, composition or
+          publication decade, residence, nationality, continent, birth decade),
+          <em>semantic</em> properties (concept, vocabulary), and <em>reach</em>
+          properties (the country or period a context reaches), alongside general
+          facets such as node type and gender. Each value-group is wrapped in a soft
+          coloured hull and listed, with its member count, in the legend. The Networks
+          graph opens grouped by language.</li>
+        <li><strong>collapse passages</strong>: on by default, this hides the
+          intermediary passage nodes and links contexts straight to their works, so
+          the graph reads work-to-work. Switch it off to see the passages again.</li>
+        <li><strong>aggregate large groups</strong>: on by default, this folds any
+          group of more than twelve members into a single count-node labelled, for
+          example, <code>60&nbsp;·&nbsp;English</code>, keeping the graph legible.
+          Click a count-node to expand it back into its members; the change is always
+          reversible.</li>
+      </ul>
+      <p>The <strong>Layout</strong> section redraws the graph, and
+        <strong>Export</strong> saves the current network as GraphML, Cytoscape JSON,
+        or a PNG image for reuse in your own analyses.</p>
+
       <h3 id="networks_ontologies">Ontologies and vocabularies</h3>
       <p>Contextuality is not limited to intertextual or intermedial relations — it also
       encompasses social, material, spatial and institutional factors that shape
       how texts are produced, transmitted and read.  RPPA models these dimensions
       using a mix of established ontologies and project-specific vocabularies to
-      ensure consistent contextualization and linked-data interoperability.</p> 
+      ensure consistent contextualisation and linked-data interoperability.</p> 
       <ul>
         <li><strong>Core semantic standards</strong>: Dublin Core, FOAF, schema.org and SKOS for metadata and concept organisation;</li>
         <li><strong>Geographic and temporal</strong>: GeoNames, WGS84 and ISO date/time vocabularies for places and time-spans;</li>
@@ -217,24 +338,24 @@
       literature, poetry, art, and music.
 
                   Below is a complete list of the vocabularies currently available
-                  for classifying the contextualizations of intertextual and
+                  for classifying the contextualisations of intertextual and
                   intermedial contextuality in RPPA.    
 
                 The task of creating and offering high-quality domain-specific
-                vocabularies in support of RPPA's contextualization effort is
+                vocabularies in support of RPPA's contextualisation effort is
                 ongoing.  We will be adding new vocabularies periodically,
                 including but not limited to art, music, theatre, sciences,
                 history, religion, philosophy, and mythology.  Please feel free to
                 <a href="mailto:huber@romanticperiodpoetry.org">suggest</a>
                 additional vocabularies to be included.
                 Clicking on any of the terms/concepts below will show them in
-                their contextualized form 
+                their contextualised form 
                   in the <a href="/networks/">Networks view</a>.
               </p>
               <div id="networks_vocabs"><div class="spinner-border text-info" role="status" style="margin-left:10px;"><span class="sr-only">Loading...</span></div></div>
               
       <p>These vocabularies allow RPPA to support rich, multi-dimensional
-      contextualizations, enable graph-based discovery, and facilitate reuse
+      contextualisations, enable graph-based discovery, and facilitate reuse
       across digital humanities tools. </p>
 
     <h3 id="networks_scholarship">Open Scholarship</h3>
@@ -270,18 +391,18 @@
         icon becomes active in the poem header. You can try this with
         <a href="/works/#text/text00100">Keats&rsquo;s &ldquo;Ode to a Nightingale&rdquo;</a>, for example.</li>
       <li><strong>Add a context</strong> &mdash; Click the icon to open the contribution panel,
-      select a context type (intertextual, intratextual, typological), specify the text anchors, and fill in the details of your contextualization. When you are done, click
+      select a context type (intertextual, intratextual, typological), specify the text anchors, and fill in the details of your contextualisation. When you are done, click
         "Add Context". Your contribution is immediately attributed to you by name and is citable
         as a micro-publication under a <a href="https://creativecommons.org/licenses/by-nc/4.0/"
         class="external" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> licence.</li>
     </ol>
     <p>Contexts become part of RPPA&rsquo;s knowledge graph and are discoverable through
-      the network and map visualizations. If you have questions or would like guidance before
+      the network and map visualisations. If you have questions or would like guidance before
       contributing, please <a href="#get_in_touch">get in touch</a>.</p>
 
 
               <h2 id="maps">Maps</h2>
-              <p>The historical map used in the visualization is John Arrowsmith's <em><a
+              <p>The historical map used in the visualisation is John Arrowsmith's <em><a
                     href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~2722~260002" class="external"
                     target="_blank">The World, on Mercators Projection</a></em>
                 (London: J. Arrowsmith, 1844). While the original map centres on the
@@ -296,6 +417,56 @@
                 have been sourced from <a class="external" target="_blank"
                   href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a>.
               </p>
+              <h3 id="maps_views">Markers and the poet network</h3>
+              <p>A <strong>Markers | Graph</strong> control at the top-right of the map
+                switches between two overlays on the same canvas.
+                <strong>Markers</strong> (the default) shows each poet as a pin at
+                their location. <strong>Graph</strong> replaces the pins with a network
+                of poets projected onto the map: every poet sits at their real
+                coordinate and stays anchored there as you pan and zoom. Switching
+                between the two keeps your current position and zoom, so you never lose
+                your place.</p>
+              <p>Poets appear as small round portraits sourced from Wikimedia
+                Commons, the same images used by the markers. Hovering a poet shows
+                their name. A
+                single click opens the poet's profile in the sidebar; a double click
+                reveals their connections (see below). Where several poets share the
+                same location they stack on a single point: click the stack to fan them
+                out into rings so you can pick an individual, and click empty space to
+                collapse the fan again.</p>
+              <p>As on the network graph, a <strong>Colour by</strong> control tints
+                the poets by nationality, continent, birth decade, or gender, drawing a
+                soft hull around each group, and a <strong>Redraw</strong> button
+                re-seeds the graph and clears any connection lines. The base map can
+                now be zoomed in more deeply, and a layers control at the bottom-right
+                switches between the modern OpenStreetMap base and the historical 1844
+                overlay.</p>
+
+              <h3 id="maps_layers">Connection layers</h3>
+              <p>Double-clicking a poet in the Graph view draws lines to the other
+                poets they are connected to. Four independently toggleable layers, each
+                a different colour, control which kinds of connection are shown (all are
+                on by default):</p>
+              <ul>
+                <li><strong>Shared themes &amp; concepts</strong> (blue): poets whose
+                  works share at least two of the same content concepts, such as
+                  motifs, topics, symbols, subjects, or genres.</li>
+                <li><strong>Shared form &amp; metre</strong> (green): poets sharing at
+                  least two of the same formal or metrical categories, such as metre,
+                  stanza type, rhyme scheme, or poetic form.</li>
+                <li><strong>Intertextual allusion</strong> (orange): poets directly
+                  linked by a recorded intertextual relation between their works, such
+                  as an allusion, imitation, or reply.</li>
+                <li><strong>References</strong> (purple, with an arrowhead): a poet
+                  whose poem writes <em>about</em> another poet. This layer is
+                  directional, the arrow pointing from the referring poet to the poet
+                  written about, tracing lines of reception (for example Pushkin and
+                  Heine pointing to Byron).</li>
+              </ul>
+              <p>Where a pair of poets is joined by more than one kind of connection,
+                the lines are fanned apart so each layer stays legible. If a poet has no
+                recorded connections yet, a brief message says so.</p>
+
               <h3 id="mapping_global_romantic-period_poetry">Mapping global Romantic-period poetry</h3>
               <p>
                 Primarily conceived as a visual access point at the moment, our aim is to use
@@ -327,7 +498,7 @@
               <h3 id="known_issues">Known issues</h3>
               <p>Regretfully, for navigational purposes, country names and borders
                 used in the map navigation correspond to present-day denominations and
-                historical reality. We <em>apologize</em> for the resulting distortion
+                historical reality. We <em>apologise</em> for the resulting distortion
                 and historical inaccuracy, and hope to improve this over time with the
                 help of projects like
                 <a href="https://openhistoricalmap.org/" class="external" target="_blank">OpenHistoricalMap</a> as they
@@ -376,7 +547,7 @@
                 of literatures and 
                 literary studies and contributes to the wider knowledge 
                 base on the global Romantic period.  Its use of computational
-                methods as well as peer contributions to contextualize large
+                methods as well as peer contributions to contextualise large
                 multi-lingual corpora with regard to both form and content aims
                 at arriving at a global network of contexts.  This
                 network facilitates model-building that can lead to insights
@@ -474,14 +645,24 @@
           <nav id="navbar-help" class="h-100 flex-column align-items-stretch
           pe-4 border-end" style="position:fixed;width:inherit;margin-top:2px;">
             <nav class="nav nav-pills flex-column">
+              <a class="nav-link" href="#texts">Texts</a>
+              <nav class="nav nav-pills flex-column">
+                  <a class="nav-link ms-3 my-1" href="#texts_structure">Structure view</a>
+                  <a class="nav-link ms-3 my-1" href="#texts_prosody">Form and prosody</a>
+                  <a class="nav-link ms-3 my-1" href="#texts_structure_explore">Exploring and
+                  contributing</a>
+                </nav>
               <a class="nav-link" href="#networks">Networks</a>
               <nav class="nav nav-pills flex-column">
-                  <a class="nav-link ms-3 my-1" href="#networks_methodology">Methodology</a>  
-                  <a class="nav-link ms-3 my-1" href="#networks_display">Graph display</a>  
+                  <a class="nav-link ms-3 my-1" href="#networks_methodology">Methodology</a>
+                  <a class="nav-link ms-3 my-1" href="#networks_display">Graph display</a>
+                  <a class="nav-link ms-3 my-1" href="#networks_browse">Browse by concept</a>
                   <a class="nav-link ms-3 my-1" href="#networks_traversal">Graph
-                  traversal</a>  
+                  traversal</a>
+                  <a class="nav-link ms-3 my-1" href="#networks_facets">Grouping and
+                  faceting</a>
                   <a class="nav-link ms-3 my-1"
-                  href="#networks_ontologies">Ontologies and vocabularies</a>  
+                  href="#networks_ontologies">Ontologies and vocabularies</a>
                   <a class="nav-link ms-3 my-1"
                   href="#networks_scholarship">Open Scholarship</a>
                   <a class="nav-link ms-3 my-1"
@@ -489,6 +670,9 @@
                 </nav>
               <a class="nav-link" href="#maps">Maps</a>
               <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#maps_views">Markers and the poet
+                  network</a>
+                <a class="nav-link ms-3 my-1" href="#maps_layers">Connection layers</a>
                 <a class="nav-link ms-3 my-1" href="#mapping_global_romantic-period_poetry">Mapping global Romantic-period
                   poetry</a>
                 <a class="nav-link ms-3 my-1" href="#known_issues">Known issues</a>
