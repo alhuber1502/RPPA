@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies / Canção do Exílio / tools & methods" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+
+        <div class="cs-hero" style="padding-bottom:.75rem">
+          <div class="cs-eyebrow">Case Study 01 &middot; Can&ccedil;&atilde;o do Ex&iacute;lio</div>
+          <h1>Tools &amp; methods</h1>
+          <p class="cs-lede" style="font-size:1.05rem">How the eighty-eight <strong>contexts</strong> were
+            produced, and the software that produced them. The reception is not asserted but computed, read and
+            adversarially checked; this page names each tool and how it was used, so the work can be scrutinised
+            and re-run.</p>
+        </div>
+
+        <nav class="cs-subnav mb-4">
+          <a href="/casestudies/dias/">Overview</a>
+          <a href="/casestudies/dias/network/">Network</a>
+          <a href="/casestudies/dias/map/">Map</a>
+          <a href="/casestudies/dias/motifs/">Motifs</a>
+          <a href="/casestudies/dias/texts/">The 88 texts</a>
+          <a href="/casestudies/dias/methods/" class="active">Methods</a>
+        </nav>
+
+        <!-- pipeline -->
+        <section class="cs-prose mb-4">
+          <div class="cs-section-label">The pipeline</div>
+          <p>Each context is the product of four passes, and every pass is <strong>grounded, not invented</strong>.</p>
+          <ol class="cs-steps">
+            <li><strong>Discovery.</strong> A TF-IDF cosine baseline (<em>scikit-learn</em>) and
+              <strong>BGE-M3</strong> dense and sparse embeddings (<em>FlagEmbedding</em>) locate the poems that
+              echo the <em>Can&ccedil;&atilde;o</em> and cluster those that echo one another; verbatim
+              <strong>n-gram</strong> matching extracts the reused fragments that become the <code>INT1</code>
+              passage anchors.</li>
+            <li><strong>Interpretation.</strong> A Large-language-model reads each candidate against the
+              controlled <code>INT3</code> relation vocabulary and its <code>INT2</code> motifs, and proposes the
+              equivalence-and-difference rationale for human review.</li>
+            <li><strong>Refutation.</strong> A further adversarial pass asks, of every candidate, whether the
+              link is real at all. Weak or oblique cases are held back rather than asserted (three were refuted,
+              fifteen quarantined for human review).</li>
+            <li><strong>Grounding.</strong> The relation type, the motifs and the modes are each bound to a real
+              <strong>SKOS</strong> concept in a shared vocabulary, so that a ratified context
+              <strong>promotes into the live RPPA graph unchanged</strong>.</li>
+          </ol>
+          <p>Alongside these, a structural signal is computed independently: <em>spaCy</em> with the Portuguese
+            model measures the <strong>T0&ndash;T6 syntactic-template</strong> degree of reuse of &ldquo;Minha
+            terra tem ___&rdquo;, after Enslen &amp; Bell (2024).  Enslen&rsquo;s own similarity
+            coefficient and Positive / Negative / Other mode (from <em>Song of Exile</em>, parsed out of the
+            book&rsquo;s appendix) are carried as a cross-check, never copied.</p>
+        </section>
+
+        <!-- software -->
+        <section class="mb-4">
+          <div class="cs-section-label">Software</div>
+          <p class="small text-muted" style="margin-bottom:.75rem">The core analytical toolchain, with the
+            versions used for this study. TextPAIR is a potential method held in reserve for larger corpora; how
+            the interpretive model is used and checked is detailed in the next section.</p>
+          <div class="cs-tools-wrap">
+            <table class="cs-tools">
+              <thead>
+                <tr><th>Tool</th><th>Role in this study</th><th>Reference</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>BGE-M3</strong> <span class="v">via FlagEmbedding 1.3.5</span></td>
+                  <td>Multilingual dense &amp; sparse embeddings for discovery and reuse-clustering (<code>BAAI/bge-m3</code>).</td>
+                  <td>Chen et&nbsp;al. 2024, <a href="https://arxiv.org/abs/2402.03216">arXiv:2402.03216</a></td>
+                </tr>
+                <tr>
+                  <td><strong>scikit-learn</strong> 1.x</td>
+                  <td>TF-IDF vectorisation and cosine-similarity discovery baseline.</td>
+                  <td>Pedregosa et&nbsp;al. 2011, <em>JMLR</em> 12</td>
+                </tr>
+                <tr class="considered">
+                  <td><strong>TextPAIR</strong> <span class="tag">potential</span></td>
+                  <td>Sequence-alignment text-reuse detection at corpus scale. Evaluated as a discovery method
+                    and held in reserve for scaling beyond the eighty-eight (see Limitations).</td>
+                  <td>ARTFL Project, <a href="https://github.com/ARTFL-Project/text-pair">Univ. of Chicago</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Claude Opus 4.8</strong> <span class="v">(Anthropic)</span></td>
+                  <td>Relation / motif classification, the equivalence-and-difference
+                    proposal and adversarial refutation.</td>
+                  <td>Anthropic, <a href="https://www.anthropic.com/claude">Claude</a></td>
+                </tr>
+                <tr>
+                  <td><strong>spaCy</strong> 3.8 <span class="v">+ pt_core_news_md</span></td>
+                  <td>Portuguese parsing for the T0&ndash;T6 syntactic-template signal.</td>
+                  <td>Honnibal et&nbsp;al. 2020, <a href="https://doi.org/10.5281/zenodo.1212303">Zenodo</a></td>
+                </tr>
+                <tr>
+                  <td><strong>NumPy</strong> 1.26</td>
+                  <td>Vector arithmetic underlying the similarity measures.</td>
+                  <td>Harris et&nbsp;al. 2020, <em>Nature</em> 585</td>
+                </tr>
+                <tr>
+                  <td><span class="v">supporting</span> PyTorch, Transformers, sentence-transformers</td>
+                  <td>The deep-learning stack the embedding model runs on.</td>
+                  <td>Paszke 2019; Wolf 2020; Reimers &amp; Gurevych 2019</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- the interpretive layer (honest disclosure) -->
+        <section class="cs-kg mb-4">
+          <h2>The interpretive layer, and how it is checked</h2>
+          <p class="mb-1">The relation typing, the motifs and the equivalence-and-difference proposals were
+            produced by computational means, not by a human reading each of the eighty-eight poems. This is
+            stated plainly because it matters: the proposals are <strong>candidates</strong>. They are made
+            legible (every one carries its evidence, its confidence and an adversarial verdict), demarcated as
+          unratified, and offered for <strong>expert peer-review</strong>. A
+          ratified proposal is a state-change, not a
+            rebuild. The candidate layer thus decouples <em>generation</em> from <em>verification</em>: nothing
+            here claims to be settled scholarship until a domain expert has ratified it.</p>
+        </section>
+
+        <!-- vocabularies -->
+        <section class="cs-prose mb-4">
+          <div class="cs-section-label">Vocabularies (the SKOS grounding)</div>
+          <p>Every relation type, motif and mode resolves to a concept in a shared vocabulary rather than free
+            text: the relation typology maps to the <em>Princeton Encyclopedia of Poetry &amp; Poetics</em>,
+            Burwick&rsquo;s <em>Romanticism: Keywords</em> and the Eighteenth-Century Poetry Archive (ECPA);
+            the symbols to Ferber&rsquo;s <em>Dictionary of Literary Symbols</em>; the modes and devices
+            to the Princeton Encyclopedia; and the poem&rsquo;s own structural motifs (the &ldquo;Minha terra
+            tem&rdquo; template, <em>terra</em>, <em>saudade</em>) to a small study-specific scheme drawn from
+            Enslen&rsquo;s <em>Song of Exile</em> (2022) and Enslen &amp; Bell (2024). Full bibliographic
+            detail is on the <a href="/casestudies/dias/">overview</a> and in the references below.</p>
+        </section>
+
+        <!-- limitations -->
+        <section class="cs-prose mb-4">
+          <div class="cs-section-label">Limitations</div>
+          <ul class="cs-steps">
+            <li><strong>The candidates are machine-generated</strong> and await expert ratification (above).</li>
+            <li><strong>Geography is country-level.</strong> Within-country marker placement on the map is
+              schematic (spread across the period&rsquo;s literary centres), not a claim of exact locality.</li>
+            <li><strong>Corpus-scale text-reuse tooling was evaluated, not used.</strong> TextPAIR was tested and
+              set aside, because its frequency filtering would suppress &ldquo;minha terra tem&rdquo;, the very
+              signal of interest, at this corpus size; verbatim n-gram matching was used instead.</li>
+            <li><strong>Eighty-eight is a deep sample, not the whole reception.</strong> Enslen catalogues some
+              five hundred texts; this study goes deep on the nineteenth-century core.</li>
+          </ul>
+        </section>
+
+        <!-- reproducibility -->
+        <section class="cs-prose mb-4">
+          <div class="cs-section-label">Reproducibility</div>
+          <p>The study is data-driven: the pages render a standalone JSON bundle, so re-running the pipeline
+            (discovery &rarr; interpretation &rarr; grounding) regenerates the bundle and the site reflects the
+            new reality on reload. The views themselves are drawn with standard open-source libraries
+            (Cytoscape.js for the network, Leaflet for the map); they display the results but produce none of
+            them.</p>
+        </section>
+
+        <!-- references -->
+        <section class="cs-prose mb-5">
+          <div class="cs-section-label">References</div>
+          <p class="small text-muted">Chen, J., Xiao, S., Zhang, P., Luo, K., Lian, D. &amp; Liu, Z. (2024).
+            <em>BGE M3-Embedding</em>. arXiv:2402.03216. &middot; Honnibal, M., Montani, I., Van Landeghem, S.
+            &amp; Boyd, A. (2020). <em>spaCy: Industrial-strength Natural Language Processing in Python</em>.
+            Zenodo, doi:10.5281/zenodo.1212303. &middot; Pedregosa, F. et&nbsp;al. (2011). Scikit-learn: Machine
+            Learning in Python. <em>Journal of Machine Learning Research</em> 12: 2825&ndash;30. &middot; Harris,
+            C.&nbsp;R. et&nbsp;al. (2020). Array programming with NumPy. <em>Nature</em> 585: 357&ndash;62.
+            &middot; Wolf, T. et&nbsp;al. (2020). Transformers: State-of-the-Art Natural Language Processing.
+            <em>EMNLP: System Demonstrations</em>. &middot; Reimers, N. &amp; Gurevych, I. (2019). Sentence-BERT.
+            <em>EMNLP-IJCNLP</em>. &middot; Paszke, A. et&nbsp;al. (2019). PyTorch. <em>NeurIPS</em>. &middot;
+            Franz, M. et&nbsp;al. (2016). Cytoscape.js. <em>Bioinformatics</em> 32(2): 309&ndash;11. &middot;
+            Anthropic. <em>Claude Opus&nbsp;4.8</em> (large language model). anthropic.com. &middot;
+            Enslen, J.&nbsp;A. (2022). <em>Song of Exile</em>. Purdue University Press. &middot; Enslen, J.&nbsp;A.
+            &amp; Bell, J.&nbsp;R. (2024). Minha Terra Tem ____. <em>MATLIT</em> 10(1): 107&ndash;24. &middot;
+            Ferber, M. (2017). <em>A Dictionary of Literary Symbols</em> (3rd&nbsp;ed.). Cambridge University
+            Press. &middot; <em>The Princeton Encyclopedia of Poetry and Poetics</em> (4th&nbsp;ed., 2012).
+            Princeton University Press. &middot; Burwick, F. (2015). <em>Romanticism: Keywords</em>.
+            Wiley-Blackwell.</p>
+        </section>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>
