@@ -3060,6 +3060,13 @@ function createCYgraph(data, graph, layout) {
 		container: $('#cy'),
 		elements: data,
 		layout: layout,
+		// PERF (maps overlay only): hundreds of image nodes repaint per pan/zoom frame, at 2x on retina.
+		// Halve the paint resolution + drop edges / use a cached texture during viewport moves. Other views
+		// (networks/works, PNG export) are unaffected (pixelRatio 'auto' = device default).
+		textureOnViewport: ( typeof nwMapMode !== 'undefined' && !!nwMapMode ),
+		hideEdgesOnViewport: ( typeof nwMapMode !== 'undefined' && !!nwMapMode ),
+		pixelRatio: ( typeof nwMapMode !== 'undefined' && nwMapMode ) ? 1 : 'auto',
+		motionBlur: false,
 		style: [ // the stylesheet for the CY graph
 			{
 				selector: 'node',
