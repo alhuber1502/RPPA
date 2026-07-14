@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_rus"
+     ana="#translation_rus #octet #cross"
      corresp="#work00955"
      subtype="rppatext"
      type="poem"
      xml:id="text01325"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00107" type="author"/>
    <link target="#pers00821" type="translator"/>
    <link target="#text01324" type="translation"/>
@@ -16,7 +18,13 @@
    <head type="main" xml:lang="eng" xml:id="erpa-h02430">
       <w xml:id="erpa-1559240">Meditation</w>
    </head>
-   <lg xml:id="erpa-s12235">
+   <lg xml:id="erpa-s12235"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="ababcdcdefefghgh"
+       rppa:syllab="13.12.13.10.11.12.13.8.11.12.14.13.11.12.13.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87160">
          <w xml:id="erpa-1559270">Oh</w>
          <pc xml:id="erpa-1559280">,</pc>
@@ -295,7 +303,13 @@
          <pc xml:id="erpa-1560670" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12240">
+   <lg xml:id="erpa-s12240"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="ababcdcd"
+       rppa:syllab="13.10.13.10.13.10.12.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87240">
          <w xml:id="erpa-1560700">We</w>
          <c> </c>
@@ -438,7 +452,13 @@
          <pc xml:id="erpa-1561400" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12245">
+   <lg xml:id="erpa-s12245"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="ababcdcdefef"
+       rppa:syllab="13.11.13.12.13.12.13.8.13.13.13.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87280">
          <w xml:id="erpa-1561430">The</w>
          <c> </c>
@@ -675,7 +695,13 @@
          <pc xml:id="erpa-1562620" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12250">
+   <lg xml:id="erpa-s12250"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="ababcdcd"
+       rppa:syllab="13.12.13.10.13.12.11.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87340">
          <w xml:id="erpa-1562650">A</w>
          <c> </c>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #twelve-line #ode"
      corresp="#work00349"
      subtype="rppatext"
      type="poem"
      xml:id="text00368"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00003" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01850">
@@ -60,7 +64,7 @@
       <w xml:id="pbrp-2802820">67-102</w>
       <pc xml:id="pbrp-2802830" unit="sentence">]</pc>
    </head>
-   <lg xml:id="pbrp-s22800">
+   <lg xml:id="pbrp-s22800" rhyme="ababccddefef">
       <l n="67" xml:id="pbrp-l134925">
          <w xml:id="pbrp-2802860">Sweet</w>
          <c> </c>
@@ -280,7 +284,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s22805">
+   <lg xml:id="pbrp-s22805" rhyme="abbacddceeff">
       <l xml:id="pbrp-l134985">
          <w xml:id="pbrp-2803930">Ye</w>
          <c> </c>
@@ -502,7 +506,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s22810">
+   <lg xml:id="pbrp-s22810" rhyme="aabbccdedeff">
       <l xml:id="pbrp-l135045">
          <w xml:id="pbrp-2805010">Oh</w>
          <pc xml:id="pbrp-2805020">,</pc>

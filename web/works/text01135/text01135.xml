@@ -2,12 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #sestet #tail"
      corresp="#work00862"
      subtype="rppatext"
      type="poem"
      xml:id="text01135"
-     xml:lang="eng">
+     xml:lang="eng"
+     rhyme="aabccb"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00064" type="author"/>
    <link target="#pers00764" type="translator"/>
    <link target="#pers00765" type="translator"/>

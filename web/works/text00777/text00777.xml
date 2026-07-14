@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #eleven-line"
      corresp="#work00631"
      rhyme="irregular"
      subtype="rppatext"
      type="poem"
      xml:id="text00777"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00602" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00750">
@@ -21,7 +23,13 @@
       <c> </c>
       <w xml:id="parr-0879450">Cricket</w>
    </head>
-   <lg xml:id="parr-s07925">
+   <lg xml:id="parr-s07925"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="axbabcddece"
+       rppa:syllab="11.5.10.4.10.4.10.10.5.10.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01255">
          <w xml:id="parr-0879490">I</w>
       </head>
@@ -189,7 +197,13 @@
          <pc xml:id="parr-0880310" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07930">
+   <lg xml:id="parr-s07930"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="ababcdxecxdfegfhghijihjxxxh"
+       rppa:syllab="10.10.11.10.9.7.10.4.5.6.11.10.10.10.4.4.10.4.8.8.8.4.4.4.9.8.4"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01260">
          <w xml:id="parr-0880350">II</w>
       </head>
@@ -534,7 +548,13 @@
          <pc xml:id="parr-0882070" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07935">
+   <lg xml:id="parr-s07935"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abbacddceeffgghhixixjjkk"
+       rppa:syllab="10.10.11.10.10.11.11.10.8.11.7.10.10.10.10.10.10.10.10.10.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01265">
          <w xml:id="parr-0882110">III</w>
       </head>
@@ -964,7 +984,13 @@
          <pc xml:id="parr-0884270" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07940">
+   <lg xml:id="parr-s07940"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="axaxbbcdcexxdxedffx"
+       rppa:syllab="10.4.10.4.9.11.4.2.6.10.3.10.8.3.4.10.10.10.12"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01270">
          <w xml:id="parr-0884310">IV</w>
       </head>
@@ -1215,7 +1241,13 @@
          <pc xml:id="parr-0885530" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07945">
+   <lg xml:id="parr-s07945"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abaxccbddcexfexfxghijighjxkxlkxxlkmnxmonppxoqrsrqs"
+       rppa:syllab="6.10.10.7.10.11.10.10.5.10.4.10.10.10.4.4.8.4.10.10.4.12.8.4.4.11.10.10.10.6.11.6.4.10.10.9.8.6.10.11.10.4.10.11.4.4.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01275">
          <w xml:id="parr-0885570">V</w>
       </head>

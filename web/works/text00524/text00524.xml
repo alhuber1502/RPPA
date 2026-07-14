@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #trochee #tetrameter"
      corresp="#work00434"
      subtype="rppatext"
      type="poem"
      xml:id="text00524"
-     xml:lang="fin">
+     xml:lang="fin"
+     met="+-|+-|+-|+-/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00731" type="compiler"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erar-n00730">

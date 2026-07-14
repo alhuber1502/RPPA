@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter"
      corresp="#work00365"
      subtype="rppatext"
      type="poem"
      xml:id="text00387"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00018" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01945">
@@ -152,7 +156,13 @@
          <pc xml:id="pbrp-2933780" unit="sentence">.</pc>
       </p>
    </argument>
-   <lg xml:id="pbrp-s23275">
+   <lg xml:id="pbrp-s23275"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghhiixxjjkkx"
+       rppa:syllab="10.10.10.10.11.11.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.11.10.11.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="pbrp-h05755">
          <w xml:id="pbrp-2933820">I.</w>
          <pc unit="sentence" xml:id="pbrp-2933820-eos"/>
@@ -628,7 +638,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s23280">
+   <lg xml:id="pbrp-s23280"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbxxxccddeeffghghiijjkxllkxmmnnoox"
+       rppa:syllab="5.10.10.10.11.10.6.4.10.10.10.10.10.10.11.11.10.10.10.10.11.10.10.10.10.10.10.10.10.10.10.10.10.10.10.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="pbrp-h05760">
          <w xml:id="pbrp-2936110">II</w>
          <pc xml:id="pbrp-2936120" unit="sentence">.</pc>
@@ -1327,7 +1343,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s23285">
+   <lg xml:id="pbrp-s23285"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabcbcddeeffgghhx"
+       rppa:syllab="4.10.10.11.10.10.10.10.10.10.10.10.10.11.10.10.5"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="pbrp-h05765">
          <w xml:id="pbrp-2939530">III</w>
          <pc xml:id="pbrp-2939540" unit="sentence">.</pc>
@@ -1650,7 +1672,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s23290">
+   <lg xml:id="pbrp-s23290"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabccbddeeffxxgghhiijkjkllmnmnooppqqrrssttuuvwvwxxyyzz"
+       rppa:syllab="5.10.11.10.10.11.10.10.11.10.10.10.10.11.10.11.10.10.10.10.10.10.10.10.10.10.10.10.10.11.10.10.10.10.10.10.10.10.10.11.10.9.10.11.10.10.10.10.10.10.10.11.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="pbrp-h05770">
          <w xml:id="pbrp-2941090">IV</w>
          <pc xml:id="pbrp-2941100" unit="sentence">.</pc>

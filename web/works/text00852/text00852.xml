@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter #octet"
      corresp="#work00706"
      subtype="rppatext"
      type="poem"
      xml:id="text00852"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00610" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n01125">
@@ -60,7 +64,13 @@
    <head type="main" xml:lang="eng" xml:id="parr-h01695">
       <w xml:id="parr-1074490">1492</w>
    </head>
-   <lg rhyme="abbaabba" xml:id="parr-s09340">
+   <lg rhyme="abbaabba"
+       xml:id="parr-s09340"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l48120">
          <w xml:id="parr-1074520">Thou</w>
          <c> </c>
@@ -213,7 +223,13 @@
          <pc xml:id="parr-1075300" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg rhyme="cdcdcd" xml:id="parr-s09345">
+   <lg rhyme="ababab"
+       xml:id="parr-s09345"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rppa:syllab="10.10.10.11.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l48160">
          <w xml:id="parr-1075330">Then</w>
          <c> </c>

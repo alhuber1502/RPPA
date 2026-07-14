@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #septet"
      corresp="#work00536"
      rhyme="irregular"
      subtype="rppatext"
      type="poem"
      xml:id="text00681"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00119" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00270">
@@ -38,7 +40,13 @@
    <head type="main" xml:lang="eng" xml:id="parr-h00440">
       <w xml:id="parr-0381450">Israfel</w>
    </head>
-   <lg xml:id="parr-s04495">
+   <lg xml:id="parr-s04495"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abaxaab"
+       rppa:syllab="7.6.6.7.9.8.5"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17250">
          <w xml:id="parr-0381480">In</w>
          <c> </c>
@@ -132,7 +140,13 @@
          <pc xml:id="parr-0381940" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04500">
+   <lg xml:id="parr-s04500"
+       ana="#iamb #dimeter"
+       met="-+|-+/"
+       rhyme="abbaxccc"
+       rppa:syllab="5.5.5.4.8.8.4.4"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17285">
          <w xml:id="parr-0381970">Tottering</w>
          <c> </c>
@@ -210,7 +224,13 @@
          <pc xml:id="parr-0382350" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04505">
+   <lg xml:id="parr-s04505"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="abaabab"
+       rppa:syllab="8.7.5.6.6.6.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17325">
          <w xml:id="parr-0382380">And</w>
          <c> </c>
@@ -290,7 +310,13 @@
          <pc xml:id="parr-0382740" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04510">
+   <lg xml:id="parr-s04510"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abacbc"
+       rppa:syllab="7.7.6.6.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17360">
          <w xml:id="parr-0382770">But</w>
          <c> </c>
@@ -370,7 +396,13 @@
          <pc xml:id="parr-0383130" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04515">
+   <lg xml:id="parr-s04515"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="abaaba"
+       rppa:syllab="6.7.6.7.7.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17390">
          <w xml:id="parr-0383160">Therefore</w>
          <pc xml:id="parr-0383170">,</pc>
@@ -437,7 +469,13 @@
          <pc xml:id="parr-0383490" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04520">
+   <lg xml:id="parr-s04520"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="ababb"
+       rppa:syllab="6.7.8.7.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17420">
          <w xml:id="parr-0383520">The</w>
          <c> </c>
@@ -509,7 +547,13 @@
          <pc xml:id="parr-0383860" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04525">
+   <lg xml:id="parr-s04525"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="abbab"
+       rppa:syllab="6.7.8.9.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17445">
          <w xml:id="parr-0383890">Yes</w>
          <pc xml:id="parr-0383900">,</pc>
@@ -583,7 +627,13 @@
          <pc xml:id="parr-0384240" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04530">
+   <lg xml:id="parr-s04530"
+       ana="#iamb #dimeter"
+       met="-+|-+/"
+       rhyme="axbaxab"
+       rppa:syllab="4.4.6.8.6.9.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l17470">
          <w xml:id="parr-0384270">If</w>
          <c> </c>

@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_por"
+     ana="#translation_por #quatrain #sestet #song #intermittent"
      corresp="#work00385"
      subtype="rppatext"
      type="poem"
      xml:id="text00421"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00405" type="author"/>
    <link target="#pers00705" type="translator"/>
    <link target="#text00420" type="translation"/>
@@ -264,7 +266,13 @@
          </bibl>
       </note>
    </epigraph>
-   <lg rhyme="xaxa" xml:id="pcgd-s00060">
+   <lg rhyme="xaxa"
+       xml:id="pcgd-s00060"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rppa:syllab="8.7.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pcgd-l00195">
          <w xml:id="pcgd-7320">My</w>
          <c> </c>
@@ -324,7 +332,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg rhyme="xaxa" xml:id="pcgd-s00065">
+   <lg rhyme="xaxa"
+       xml:id="pcgd-s00065"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rppa:syllab="8.8.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pcgd-l00215">
          <w xml:id="pcgd-7600">We</w>
          <c> </c>
@@ -388,7 +402,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg rhyme="xaxa" xml:id="pcgd-s00070">
+   <lg rhyme="xaxa"
+       xml:id="pcgd-s00070"
+       ana="#trochee #tetrameter"
+       met="+-|+-|+-|+-/"
+       rppa:syllab="8.7.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pcgd-l00235">
          <w xml:id="pcgd-7900">Lonely</w>
          <c> </c>
@@ -442,7 +462,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg rhyme="xaxaxa" xml:id="pcgd-s00075">
+   <lg rhyme="xaxaxa"
+       xml:id="pcgd-s00075"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rppa:syllab="8.7.8.7.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pcgd-l00255">
          <w xml:id="pcgd-8150">Such</w>
          <c> </c>
@@ -525,7 +551,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg rhyme="xaxaxa" xml:id="pcgd-s00080">
+   <lg rhyme="xaxaxa"
+       xml:id="pcgd-s00080"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rppa:syllab="7.7.8.7.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pcgd-l00285">
          <w xml:id="pcgd-8530">Don't</w>
          <c> </c>

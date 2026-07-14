@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #pair"
      corresp="#work00088"
      subtype="rppatext"
      type="poem"
      xml:id="text00911"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="aa"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00013" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="rocp-n00285">
@@ -616,7 +621,7 @@
          <w xml:id="rocp-329250">o’ercast</w>
          <pc xml:id="rocp-329260">;</pc>
       </l>
-      <l xml:id="rocp-l08205">
+      <l xml:id="rocp-l08205" rhyme="x">
          <w xml:id="rocp-329270">They</w>
          <c> </c>
          <w xml:id="rocp-329280">always</w>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_deu"
+     ana="#translation_deu #iamb #pentameter #quatrain #envelope #sonnet"
      corresp="#work00806"
      subtype="rppatext"
      type="poem"
      xml:id="text01023"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00097" type="author"/>
    <link target="#pers00768" type="translator"/>
    <link target="#text01022" type="translation"/>
@@ -24,7 +28,13 @@
       <c> </c>
       <w xml:id="erpa-0414710">Dream</w>
    </head>
-   <lg xml:id="erpa-s02870">
+   <lg xml:id="erpa-s02870"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abba"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17135">
          <w xml:id="erpa-0414740">The</w>
          <c> </c>
@@ -104,7 +114,13 @@
          <pc xml:id="erpa-0415130" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02875">
+   <lg xml:id="erpa-s02875"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abba"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17155">
          <w xml:id="erpa-0415160">In</w>
          <c> </c>
@@ -185,7 +201,13 @@
          <pc xml:id="erpa-0415550" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02880">
+   <lg xml:id="erpa-s02880"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabcbc"
+       rppa:syllab="10.10.10.10.11.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17175">
          <w xml:id="erpa-0415580">Love’s</w>
          <c> </c>

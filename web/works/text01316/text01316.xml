@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #cross"
      corresp="#work00951"
      subtype="rppatext"
      type="poem"
      xml:id="text01316"
-     xml:lang="rus">
+     xml:lang="rus"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00522" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n01760">
@@ -49,7 +51,10 @@
          <pc xml:id="erpa-1537240" unit="sentence">.</pc>
       </l>
    </epigraph>
-   <lg xml:id="erpa-s12085">
+   <lg xml:id="erpa-s12085"
+       rhyme="ababcdcdefefghghijijkkkk"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l85570">
          <w xml:id="erpa-1537270">В</w>
          <c> </c>
@@ -266,7 +271,10 @@
          <pc xml:id="erpa-1538280" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12090">
+   <lg xml:id="erpa-s12090"
+       rhyme="ababcdcdefefghghijij"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l85690">
          <w xml:id="erpa-1538310">Одной</w>
          <c> </c>
@@ -522,7 +530,10 @@
          <pc xml:id="erpa-1539560" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12095">
+   <lg xml:id="erpa-s12095"
+       rhyme="ababcdcdxexefgfghihi"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="erpa-l85790">
          <w xml:id="erpa-1539590">Другую</w>
          <c> </c>
@@ -724,7 +735,10 @@
          <pc xml:id="erpa-1540570" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12100">
+   <lg xml:id="erpa-s12100"
+       rhyme="ababcdcdxdxdexexfgfghihijkjk"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l85890">
          <w xml:id="erpa-1540600">Третья</w>
          <c> </c>

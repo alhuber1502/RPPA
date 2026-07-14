@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #tetrameter"
      corresp="#work00055"
      subtype="rppatext"
      type="poem"
      xml:id="text00055"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00004" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00285">
@@ -27,7 +31,13 @@
       <c> </c>
       <w xml:id="pbrp-0920870">Sleep</w>
    </head>
-   <lg xml:id="pbrp-s08335">
+   <lg xml:id="pbrp-s08335"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccdedeeff"
+       rppa:syllab="8.8.8.8.8.8.9.8.9.8.8.8.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l36255">
          <w xml:id="pbrp-0920900">Ere</w>
          <c> </c>
@@ -226,7 +236,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s08340">
+   <lg xml:id="pbrp-s08340"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="axaxbbbccddeefgfghh"
+       rppa:syllab="8.8.8.8.8.8.8.9.8.8.8.8.8.8.8.8.8.8.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l36320">
          <w xml:id="pbrp-0921840">But</w>
          <c> </c>
@@ -514,7 +530,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s08345">
+   <lg xml:id="pbrp-s08345"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aaxxbbccddefefeegghh"
+       rppa:syllab="8.8.8.8.8.8.8.8.8.8.8.9.8.9.8.8.8.8.9.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l36415">
          <w xml:id="pbrp-0923200">So</w>
          <c> </c>

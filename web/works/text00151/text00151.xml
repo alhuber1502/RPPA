@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #tetrameter #octet #pair"
      corresp="#work00151"
      subtype="rppatext"
      type="poem"
      xml:id="text00151"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00006" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00765">
@@ -34,7 +38,13 @@
       <c> </c>
       <w xml:id="pbrp-1541760">Westward</w>
    </head>
-   <lg xml:id="pbrp-s12615">
+   <lg xml:id="pbrp-s12615"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccdd"
+       rppa:syllab="8.9.8.8.8.9.8.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l69495">
          <pc xml:id="pbrp-1541790">‘</pc>
          <w xml:id="pbrp-1541800">What</w>
@@ -179,7 +189,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s12620">
+   <lg xml:id="pbrp-s12620"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccdd"
+       rppa:syllab="8.8.8.9.8.8.9.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l69535">
          <w xml:id="pbrp-1542520">The</w>
          <c> </c>
@@ -306,7 +322,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s12625">
+   <lg xml:id="pbrp-s12625"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddee"
+       rppa:syllab="8.8.8.8.9.8.8.8.8.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l69575">
          <w xml:id="pbrp-1543100">The</w>
          <c> </c>

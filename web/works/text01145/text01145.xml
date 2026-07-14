@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #iamb #hexameter"
      corresp="#work00867"
      subtype="rppatext"
      type="poem"
      xml:id="text01145"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+|-+/"
+     rppa:syllab="12"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00064" type="author"/>
    <link target="#pers00793" type="translator"/>
    <link target="#text01144" type="translation"/>
@@ -59,15 +63,14 @@
          <c> </c>
          <w xml:id="erpa-0792030">broke</w>
          <c> </c>
-         <w xml:id="erpa-0792040">ppt</w>
+         <w xml:id="erpa-0792040">out</w>
          <c> </c>
          <w xml:id="erpa-0792050">of</w>
          <c> </c>
          <w xml:id="erpa-0792060">my</w>
          <c> </c>
          <w xml:id="erpa-0792070">dream</w>
-         <c> </c>
-         <pc xml:id="erpa-0792080">/</pc>
+         <pc xml:id="erpa-0792080">.</pc>
       </l>
       <l xml:id="erpa-l38850">
          <w xml:id="erpa-0792090">I</w>
@@ -94,7 +97,9 @@
       <l xml:id="erpa-l38855">
          <w xml:id="erpa-0792200">It</w>
          <c> </c>
-         <w xml:id="erpa-0792210">was-shining</w>
+         <w xml:id="erpa-0792210">was</w>
+         <c> </c>
+         <w xml:id="erpa-0792215">shining</w>
          <c> </c>
          <w xml:id="erpa-0792220">in</w>
          <c> </c>

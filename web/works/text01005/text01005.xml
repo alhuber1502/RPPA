@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #su0036"
+     ana="#original #su0036 #sestet #ten-line"
      corresp="#work00798"
      subtype="rppatext"
      type="poem"
      xml:id="text01005"
-     xml:lang="deu">
+     xml:lang="deu"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00129" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n00200">
@@ -35,7 +37,10 @@
    <head type="main" xml:lang="deu" xml:id="erpa-h00355">
       <w xml:id="erpa-0365450">Liebe</w>
    </head>
-   <lg xml:id="erpa-s02335">
+   <lg xml:id="erpa-s02335"
+       rhyme="ababba"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l13845">
          <w xml:id="erpa-0365480">Weht</w>
          <c> </c>
@@ -120,7 +125,10 @@
          <pc xml:id="erpa-0365900" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02340">
+   <lg xml:id="erpa-s02340"
+       rhyme="abbacddccd"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l13875">
          <w xml:id="erpa-0365930">Liebe</w>
          <c> </c>

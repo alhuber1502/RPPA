@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #quatrain #envelope #cross"
      corresp="#work00875"
      subtype="rppatext"
      type="poem"
      xml:id="text01161"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00115" type="author"/>
    <link target="#pers00795" type="translator"/>
    <link target="#text01160" type="translation"/>
@@ -18,7 +20,7 @@
       <c> </c>
       <w xml:id="erpa-0870340">Fancy</w>
    </head>
-   <lg xml:id="erpa-s06690">
+   <lg xml:id="erpa-s06690" rhyme="abab">
       <l xml:id="erpa-l42845">
          <w xml:id="erpa-0870370">There</w>
          <c> </c>
@@ -94,7 +96,7 @@
          <pc xml:id="erpa-0870730" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s06695">
+   <lg xml:id="erpa-s06695" rhyme="abba">
       <l xml:id="erpa-l42865">
          <w xml:id="erpa-0870760">For</w>
          <c> </c>
@@ -169,7 +171,7 @@
          <pc xml:id="erpa-0871120">;</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s06700">
+   <lg xml:id="erpa-s06700" rhyme="abba">
       <l xml:id="erpa-l42885">
          <w xml:id="erpa-0871150">A</w>
          <c> </c>
@@ -242,7 +244,7 @@
          <pc xml:id="erpa-0871500">;</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s06705">
+   <lg xml:id="erpa-s06705" rhyme="abba">
       <l xml:id="erpa-l42905">
          <w xml:id="erpa-0871530">And</w>
          <c> </c>

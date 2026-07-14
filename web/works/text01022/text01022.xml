@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #quatrain #sestet #envelope"
+     ana="#original #quatrain #sestet #envelope #sonnet"
      corresp="#work00806"
      subtype="rppatext"
      type="poem"
      xml:id="text01022"
-     xml:lang="deu">
+     xml:lang="deu"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00097" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n00290">
@@ -24,7 +26,10 @@
       <c> </c>
       <w xml:id="erpa-0413350">Traume</w>
    </head>
-   <lg xml:id="erpa-s02855">
+   <lg xml:id="erpa-s02855"
+       rhyme="xaax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17065">
          <w xml:id="erpa-0413380">Es</w>
          <c> </c>
@@ -83,7 +88,10 @@
          <pc xml:id="erpa-0413660" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02860">
+   <lg xml:id="erpa-s02860"
+       rhyme="abba"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17085">
          <w xml:id="erpa-0413690">In</w>
          <c> </c>
@@ -149,7 +157,10 @@
          <pc xml:id="erpa-0414010" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02865">
+   <lg xml:id="erpa-s02865"
+       rhyme="abcabc"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l17105">
          <w xml:id="erpa-0414040">Der</w>
          <c> </c>

@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_rus"
+     ana="#translation_rus #sestet #sestarima"
      corresp="#work00956"
      subtype="rppatext"
      type="poem"
      xml:id="text01327"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00107" type="author"/>
    <link target="#pers00821" type="translator"/>
    <link target="#text01326" type="translation"/>
@@ -20,7 +22,13 @@
       <c> </c>
       <w xml:id="erpa-1565350">Land</w>
    </head>
-   <lg xml:id="erpa-s12265">
+   <lg xml:id="erpa-s12265"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="ababcc"
+       rppa:syllab="13.10.9.12.13.13"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87510">
          <w xml:id="erpa-1565380">I</w>
          <c> </c>
@@ -135,7 +143,13 @@
          <pc xml:id="erpa-1565930" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12270">
+   <lg xml:id="erpa-s12270"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abbacdcdefefghghikik"
+       rppa:syllab="10.11.11.12.11.12.13.12.9.8.9.8.9.8.9.8.9.8.9.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="erpa-l87540">
          <w xml:id="erpa-1565950">How</w>
          <c> </c>

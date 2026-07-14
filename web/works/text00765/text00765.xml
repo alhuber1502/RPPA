@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #ten-line"
      corresp="#work00620"
      rhyme="xaxaxabbcc"
      subtype="rppatext"
      type="poem"
      xml:id="text00765"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00600" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00690">
@@ -23,7 +25,13 @@
       <c> </c>
       <w xml:id="parr-0836400">Hill</w>
    </head>
-   <lg xml:id="parr-s07655">
+   <lg xml:id="parr-s07655"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxabbcc"
+       rppa:syllab="8.6.8.4.8.6.8.8.4.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l35405">
          <w xml:id="parr-0836430">Ye</w>
          <c> </c>
@@ -152,7 +160,13 @@
          <pc xml:id="parr-0837030" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07660">
+   <lg xml:id="parr-s07660"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxabbcc"
+       rppa:syllab="8.6.8.4.9.7.8.9.4.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l35455">
          <w xml:id="parr-0837060">The</w>
          <c> </c>
@@ -287,7 +301,13 @@
          <pc xml:id="parr-0837700" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s07665">
+   <lg xml:id="parr-s07665"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxabbcc"
+       rppa:syllab="9.7.8.4.8.6.8.8.4.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l35505">
          <w xml:id="parr-0837730">The</w>
          <c> </c>
@@ -421,7 +441,14 @@
          <pc xml:id="parr-0838390" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg rendition="#i" rhyme="abaab" xml:id="parr-s07670">
+   <lg rendition="#i"
+       rhyme="abaab"
+       xml:id="parr-s07670"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rppa:syllab="6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_6" xml:id="parr-l35555">
          <w xml:id="parr-0838420">We</w>
          <c> </c>

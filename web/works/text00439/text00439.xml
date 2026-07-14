@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra #excerpt"
+     ana="#translation_fra #excerpt #dialogue"
      corresp="#work00394"
      subtype="rppatext"
      type="poem"
      xml:id="text00439"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00113" type="author"/>
    <link target="#pers00712" type="translator"/>
    <link target="#text00438" type="translation"/>
@@ -87,7 +89,10 @@
             <w xml:id="erar-2344440">POET</w>
             <pc unit="sentence" xml:id="erar-2344440-eos"/>
          </speaker>
-         <lg xml:id="erar-s23445">
+         <lg xml:id="erar-s23445"
+             rhyme="abab"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08700">
                <w xml:id="erar-2344470">My</w>
                <c> </c>
@@ -174,7 +179,10 @@
             <w xml:id="erar-2344880">MUSE</w>
             <pc unit="sentence" xml:id="erar-2344880-eos"/>
          </speaker>
-         <lg xml:id="erar-s23455">
+         <lg xml:id="erar-s23455"
+             rhyme="aabccb"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08720">
                <w xml:id="erar-2344910">What</w>
                <c> </c>
@@ -288,7 +296,10 @@
             <w xml:id="erar-2345450">POET</w>
             <pc unit="sentence" xml:id="erar-2345450-eos"/>
          </speaker>
-         <lg xml:id="erar-s23465">
+         <lg xml:id="erar-s23465"
+             rhyme="abab"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08750">
                <w xml:id="erar-2345480">It</w>
                <c> </c>
@@ -374,7 +385,10 @@
             <w xml:id="erar-2345890">MUSE</w>
             <pc unit="sentence" xml:id="erar-2345890-eos"/>
          </speaker>
-         <lg xml:id="erar-s23475">
+         <lg xml:id="erar-s23475"
+             rhyme="abbaccdeed"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08770">
                <w xml:id="erar-2345920">It</w>
                <c> </c>
@@ -547,7 +561,10 @@
             <w xml:id="erar-2346730">POET</w>
             <pc unit="sentence" xml:id="erar-2346730-eos"/>
          </speaker>
-         <lg xml:id="erar-s23485">
+         <lg xml:id="erar-s23485"
+             rhyme="ababcdcd"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08820">
                <w xml:id="erar-2346760">If</w>
                <c> </c>
@@ -721,7 +738,10 @@
             <w xml:id="erar-2347600">MUSE</w>
             <pc unit="sentence" xml:id="erar-2347600-eos"/>
          </speaker>
-         <lg xml:id="erar-s23495">
+         <lg xml:id="erar-s23495"
+             rhyme="abbacddc"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08860">
                <w xml:id="erar-2347630">Before</w>
                <c> </c>
@@ -858,7 +878,10 @@
             <w xml:id="erar-2348250">POET</w>
             <pc unit="sentence" xml:id="erar-2348250-eos"/>
          </speaker>
-         <lg xml:id="erar-s23505">
+         <lg xml:id="erar-s23505"
+             rhyme="ababcdcd"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08900">
                <w xml:id="erar-2348280">So</w>
                <c> </c>
@@ -1040,7 +1063,10 @@
             <w xml:id="erar-2349150">MUSE</w>
             <pc unit="sentence" xml:id="erar-2349150-eos"/>
          </speaker>
-         <lg xml:id="erar-s23515">
+         <lg xml:id="erar-s23515"
+             rhyme="ababccdeed"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08940">
                <w xml:id="erar-2349180">Like</w>
                <c> </c>
@@ -1203,7 +1229,10 @@
             <w xml:id="erar-2349940">POET</w>
             <pc unit="sentence" xml:id="erar-2349940-eos"/>
          </speaker>
-         <lg xml:id="erar-s23525">
+         <lg xml:id="erar-s23525"
+             rhyme="ababcdcdee"
+             resp="#prosodic #rhymetagger"
+             cert="medium">
             <l xml:id="erar-l08990">
                <w xml:id="erar-2349970">Loved</w>
                <c> </c>

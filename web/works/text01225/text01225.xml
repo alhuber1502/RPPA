@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #quatrain"
      corresp="#work00907"
      subtype="rppatext"
      type="poem"
      xml:id="text01225"
-     xml:lang="spa">
+     xml:lang="spa"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00328" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n01305">
@@ -40,7 +42,10 @@
       <c> </c>
       <w xml:id="erpa-1163710">Larra</w>
    </head>
-   <lg xml:id="erpa-s08935">
+   <lg xml:id="erpa-s08935"
+       rhyme="abaab"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61075">
          <w xml:id="erpa-1163740">Ese</w>
          <c> </c>
@@ -111,7 +116,10 @@
          <pc xml:id="erpa-1164060" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08940">
+   <lg xml:id="erpa-s08940"
+       rhyme="xaax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61100">
          <w xml:id="erpa-1164090">Acabó</w>
          <c> </c>
@@ -168,7 +176,10 @@
          <pc xml:id="erpa-1164350" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08945">
+   <lg xml:id="erpa-s08945"
+       rhyme="xaax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61120">
          <w xml:id="erpa-1164380">Miró</w>
          <c> </c>
@@ -240,7 +251,10 @@
          <pc xml:id="erpa-1164720" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08950">
+   <lg xml:id="erpa-s08950"
+       rhyme="xaax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61140">
          <w xml:id="erpa-1164750">Era</w>
          <c> </c>
@@ -308,7 +322,10 @@
          <pc xml:id="erpa-1165070" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08955">
+   <lg xml:id="erpa-s08955"
+       rhyme="xaax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61160">
          <w xml:id="erpa-1165100">Todavía</w>
          <c> </c>
@@ -365,7 +382,10 @@
          <pc xml:id="erpa-1165360" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08960">
+   <lg xml:id="erpa-s08960"
+       rhyme="abba"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="erpa-l61180">
          <w xml:id="erpa-1165390">Que</w>
          <c> </c>
@@ -412,7 +432,10 @@
          <pc xml:id="erpa-1165600" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08965">
+   <lg xml:id="erpa-s08965"
+       rhyme="axax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61200">
          <w xml:id="erpa-1165630">Duerme</w>
          <c> </c>
@@ -473,7 +496,10 @@
          <pc xml:id="erpa-1165900" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08970">
+   <lg xml:id="erpa-s08970"
+       rhyme="axax"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61220">
          <w xml:id="erpa-1165930">Ésta</w>
          <c> </c>
@@ -540,7 +566,10 @@
          <pc xml:id="erpa-1166250" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08975">
+   <lg xml:id="erpa-s08975"
+       rhyme="axaa"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="erpa-l61240">
          <w xml:id="erpa-1166280">Si</w>
          <c> </c>
@@ -586,7 +615,10 @@
          <pc xml:id="erpa-1166480">,</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08980">
+   <lg xml:id="erpa-s08980"
+       rhyme="xababa"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61260">
          <w xml:id="erpa-1166510">fetidez</w>
          <c> </c>
@@ -655,7 +687,10 @@
          <pc xml:id="erpa-1166820" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s08985">
+   <lg xml:id="erpa-s08985"
+       rhyme="xxabba"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l61290">
          <pc xml:id="erpa-1166850">“</pc>
          <w xml:id="erpa-1166860">Poeta</w>

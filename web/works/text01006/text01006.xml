@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_deu"
+     ana="#translation_deu #sestet #ten-line"
      corresp="#work00798"
      subtype="rppatext"
      type="poem"
      xml:id="text01006"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00129" type="author"/>
    <link target="#pers00781" type="translator"/>
    <link target="#text01005" type="translation"/>
@@ -16,7 +18,13 @@
    <head type="main" xml:lang="eng" xml:id="erpa-h00360">
       <w xml:id="erpa-0366730">Love</w>
    </head>
-   <lg xml:id="erpa-s02345">
+   <lg xml:id="erpa-s02345"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/ -+|-+|-+/ -+|-+|-+/ -+|-+|-+/ -+|-+|-+/ -+|-+|-+/"
+       rhyme="ababba"
+       rppa:syllab="7.6.6.7.6.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l13925">
          <w xml:id="erpa-0366760">When</w>
          <c> </c>
@@ -108,7 +116,13 @@
          <pc xml:id="erpa-0367210" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02350">
+   <lg xml:id="erpa-s02350"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/"
+       rhyme="abbacddcee"
+       rppa:syllab="8.7.7.8.8.7.7.8.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l13955">
          <w xml:id="erpa-0367240">Love</w>
          <c> </c>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #tetrameter #fourteen-line"
      corresp="#work00736"
      subtype="rppatext"
      type="poem"
      xml:id="text00900"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00012" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="rocp-n00230">
@@ -38,7 +42,13 @@
    <head type="main" xml:lang="eng" xml:id="rocp-h00415">
       <w xml:id="rocp-247180">Prometheus</w>
    </head>
-   <lg xml:id="rocp-s03240">
+   <lg xml:id="rocp-s03240"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abbaccddeegffg"
+       rppa:syllab="8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="rocp-h00420">
          <w xml:id="rocp-247220">I.</w>
          <pc unit="sentence" xml:id="rocp-247220-eos"/>
@@ -238,7 +248,13 @@
          <pc xml:id="rocp-248210" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s03245">
+   <lg xml:id="rocp-s03245"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abbacccciideffedgghh"
+       rppa:syllab="9.8.8.8.8.8.8.8.9.8.8.9.8.8.8.8.9.9.9.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="rocp-h00425">
          <w xml:id="rocp-248250">II</w>
          <pc xml:id="rocp-248260" unit="sentence">.</pc>
@@ -533,7 +549,13 @@
          <pc xml:id="rocp-249690" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s03250">
+   <lg xml:id="rocp-s03250"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abbaccbdbdefefgghhiiklkll"
+       rppa:syllab="8.8.8.8.8.8.8.9.8.9.8.8.8.8.8.10.9.9.8.8.8.9.8.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="rocp-h00430">
          <w xml:id="rocp-249730">III</w>
          <pc xml:id="rocp-249740" unit="sentence">.</pc>

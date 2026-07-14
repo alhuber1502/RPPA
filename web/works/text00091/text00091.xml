@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter #pair"
      corresp="#work00091"
      subtype="rppatext"
      type="poem"
      xml:id="text00091"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="aa"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00016" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00465">
@@ -36,7 +41,13 @@
       <c> </c>
       <w xml:id="pbrp-1344150">Overhung</w>
    </head>
-   <lg xml:id="pbrp-s10460">
+   <lg xml:id="pbrp-s10460"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghhiijjkkll"
+       rppa:syllab="10.10.10.10.10.10.10.10.10.10.11.11.10.10.10.10.10.10.11.11.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l59105">
          <w xml:id="pbrp-1344180">This</w>
          <c> </c>
@@ -472,7 +483,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s10465">
+   <lg xml:id="pbrp-s10465"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="xxaabbccddeeffgghhxxiijjkk"
+       rppa:syllab="10.10.10.10.9.10.10.10.10.10.11.11.10.10.10.11.9.10.10.10.10.10.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="25" rendition="#h_3" xml:id="pbrp-l59225">
          <w xml:id="pbrp-1346220">There</w>
          <c> </c>
@@ -969,7 +986,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s10470">
+   <lg xml:id="pbrp-s10470"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aaxxbbccddeeffgghh"
+       rppa:syllab="10.10.10.10.10.10.10.9.9.10.10.10.11.10.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l59355">
          <w xml:id="pbrp-1348570">I</w>
          <c> </c>

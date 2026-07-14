@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #fourteen-line #intermittent"
      corresp="#work00170"
      subtype="rppatext"
      type="poem"
      xml:id="text00170"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00014" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00860">
@@ -23,7 +25,13 @@
       <c> </c>
       <w xml:id="pbrp-1595110">Cloud</w>
    </head>
-   <lg xml:id="pbrp-s13150">
+   <lg xml:id="pbrp-s13150"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxbxbxcxc"
+       rppa:syllab="11.6.9.5.11.6.9.8.9.8.10.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l72420">
          <w xml:id="pbrp-1595140">I</w>
          <c> </c>
@@ -226,7 +234,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s13155">
+   <lg xml:id="pbrp-s13155"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxbxbxcxcxdxdxd"
+       rppa:syllab="10.7.9.9.11.6.12.7.11.7.10.8.10.7.11.7.11.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l72480">
          <w xml:id="pbrp-1596090">I</w>
          <c> </c>
@@ -541,7 +555,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s13160">
+   <lg xml:id="pbrp-s13160"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxbxbxcxcxc"
+       rppa:syllab="11.7.9.7.9.7.10.8.12.8.9.7.11.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l72570">
          <w xml:id="pbrp-1597600">The</w>
          <c> </c>
@@ -780,7 +800,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s13165">
+   <lg xml:id="pbrp-s13165"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="xaxaxbxbxcxcxc"
+       rppa:syllab="9.6.9.7.11.7.11.8.9.7.11.8.11.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="45" xml:id="pbrp-l72640">
          <w xml:id="pbrp-1598730">That</w>
          <c> </c>
@@ -1031,7 +1057,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s13170">
+   <lg xml:id="pbrp-s13170"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxaxbxbxcxcxc"
+       rppa:syllab="10.9.12.9.9.6.8.7.9.7.12.7.10.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l72710">
          <w xml:id="pbrp-1599930">I</w>
          <c> </c>
@@ -1274,7 +1306,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s13175">
+   <lg xml:id="pbrp-s13175"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="xaxabcxcxbxx"
+       rppa:syllab="10.7.11.7.11.8.11.7.11.8.12.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l72780">
          <w xml:id="pbrp-1601100">I</w>
          <c> </c>

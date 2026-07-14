@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_deu"
+     ana="#translation_deu #iamb #pentameter"
      corresp="#work00837"
      subtype="rppatext"
      type="poem"
      xml:id="text01085"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00210" type="author"/>
    <link target="#pers00778" type="translator"/>
    <link target="#text01084" type="translation"/>
@@ -27,7 +31,13 @@
       <c> </c>
       <w xml:id="erpa-0535710">Sunrise</w>
    </head>
-   <lg xml:id="erpa-s04215">
+   <lg xml:id="erpa-s04215"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abba"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24760">
          <w xml:id="erpa-0535740">O</w>
          <c> </c>
@@ -107,7 +117,13 @@
          <pc xml:id="erpa-0536120" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04220">
+   <lg xml:id="erpa-s04220"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="xaxabb"
+       rppa:syllab="11.11.10.11.10.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24780">
          <w xml:id="erpa-0536150">My</w>
          <c> </c>
@@ -225,7 +241,13 @@
          <pc xml:id="erpa-0536720" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04225">
+   <lg xml:id="erpa-s04225"
+       ana="#iamb #hexameter"
+       met="-+|-+|-+|-+|-+|-+/"
+       rhyme="abbabcc"
+       rppa:syllab="12.10.12.12.10.11.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24810">
          <w xml:id="erpa-0536750">With</w>
          <c> </c>
@@ -359,7 +381,13 @@
          <pc xml:id="erpa-0537390" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04230">
+   <lg xml:id="erpa-s04230"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abaab"
+       rppa:syllab="10.10.10.11.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24845">
          <w xml:id="erpa-0537420">The</w>
          <c> </c>
@@ -429,7 +457,7 @@
          <c> </c>
          <w xml:id="erpa-0537750">people</w>
          <c> </c>
-         <w xml:id="erpa-0537760">nepr</w>
+         <w xml:id="erpa-0537760">near</w>
          <pc xml:id="erpa-0537770">,</pc>
       </l>
       <l xml:id="erpa-l24865">
@@ -449,7 +477,13 @@
          <pc xml:id="erpa-0537850" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04235">
+   <lg xml:id="erpa-s04235"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abbacdcdcff"
+       rppa:syllab="10.10.10.10.9.12.11.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24870">
          <w xml:id="erpa-0537880">And</w>
          <c> </c>
@@ -668,7 +702,13 @@
          <pc xml:id="erpa-0538980" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04240">
+   <lg xml:id="erpa-s04240"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abbacc"
+       rppa:syllab="12.10.10.8.12.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24925">
          <w xml:id="erpa-0539010">There</w>
          <pc xml:id="erpa-0539020">,</pc>

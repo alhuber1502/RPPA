@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_heb #excerpt"
+     ana="#translation_heb #excerpt #iamb #tetrameter #quatrain #intermittent"
      corresp="#work01015"
      subtype="rppatext"
      type="poem"
      xml:id="text01439"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/"
+     rhyme="xaxa"
+     rppa:syllab="7.7.7.7"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00678" type="author"/>
    <link target="#pers00866" type="translator"/>
    <link target="#nott" type="nott"/>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter"
      corresp="#work00283"
      subtype="rppatext"
      type="poem"
      xml:id="text00290"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00052" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01460">
@@ -71,7 +75,13 @@
       <pc xml:id="pbrp-2346500" unit="sentence">]</pc>
    </head>
    <div n="2" type="part" xml:id="pbrp-div01475">
-      <lg xml:id="pbrp-s19290">
+      <lg xml:id="pbrp-s19290"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddxeeffgghhiix"
+          rppa:syllab="10.10.11.10.10.10.11.10.10.10.10.10.10.10.10.10.10.10.10.9"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="287" xml:id="pbrp-l111425">
             <w xml:id="pbrp-2346540">Now</w>
             <pc xml:id="pbrp-2346550">,</pc>
@@ -452,7 +462,13 @@
             <pc xml:id="pbrp-2348310">;</pc>
          </l>
       </lg>
-      <lg xml:id="pbrp-s19295">
+      <lg xml:id="pbrp-s19295"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="xaa"
+          rppa:syllab="10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l111525">
             <w xml:id="pbrp-2348340">Yet</w>
             <c> </c>
@@ -504,7 +520,13 @@
             <pc xml:id="pbrp-2348570">:</pc>
          </l>
       </lg>
-      <lg xml:id="pbrp-s19300">
+      <lg xml:id="pbrp-s19300"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbxccddeeffxxgghhiijj"
+          rppa:syllab="10.10.11.10.4.11.10.10.10.10.10.10.10.10.10.12.10.10.10.10.10.10.10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l rendition="#h_3" xml:id="pbrp-l111540">
             <pc xml:id="pbrp-2348600">‘</pc>
             <w xml:id="pbrp-2348610">Whence</w>

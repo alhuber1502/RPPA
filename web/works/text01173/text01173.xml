@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #sestet"
      corresp="#work00881"
      subtype="rppatext"
      type="poem"
      xml:id="text01173"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00113" type="author"/>
    <link target="#pers00772" type="translator"/>
    <link target="#text01172" type="translation"/>
@@ -46,7 +48,7 @@
          <w xml:id="erpa-0929230">Mondes</w>
       </hi>
    </head>
-   <lg xml:id="erpa-s07000">
+   <lg xml:id="erpa-s07000" rhyme="aabccb">
       <l xml:id="erpa-l45900">
          <w xml:id="erpa-0929260">Friend</w>
          <pc xml:id="erpa-0929270">,</pc>
@@ -183,7 +185,7 @@
          <pc xml:id="erpa-0929960" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07005">
+   <lg xml:id="erpa-s07005" rhyme="aabbcc">
       <l xml:id="erpa-l45930">
          <w xml:id="erpa-0929990">You</w>
          <c> </c>

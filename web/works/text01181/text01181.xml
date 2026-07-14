@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra #sonnet"
+     ana="#translation_fra #sonnet #quatrain #intermittent"
      corresp="#work00885"
      subtype="rppatext"
      type="poem"
      xml:id="text01181"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00062" type="author"/>
    <link target="#pers00768" type="translator"/>
    <link target="#text01180" type="translation"/>
@@ -49,7 +51,7 @@
          <pc unit="sentence" xml:id="erpa-0956610-eos"/>
       </bibl>
    </epigraph>
-   <lg xml:id="erpa-s07170">
+   <lg xml:id="erpa-s07170" rhyme="xaxa">
       <l xml:id="erpa-l47160">
          <w xml:id="erpa-0956640">In</w>
          <c> </c>
@@ -132,7 +134,7 @@
          <pc xml:id="erpa-0957030">;</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07175">
+   <lg xml:id="erpa-s07175" rhyme="xbxb">
       <l xml:id="erpa-l47180">
          <w xml:id="erpa-0957060">And</w>
          <c> </c>
@@ -203,7 +205,7 @@
          <pc xml:id="erpa-0957390" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07180">
+   <lg xml:id="erpa-s07180" rhyme="xxc">
       <l xml:id="erpa-l47200">
          <w xml:id="erpa-0957420">Then</w>
          <c> </c>
@@ -259,7 +261,7 @@
          <pc xml:id="erpa-0957670">;</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07185">
+   <lg xml:id="erpa-s07185" rhyme="xxc">
       <l xml:id="erpa-l47215">
          <w xml:id="erpa-0957700">And</w>
          <c> </c>

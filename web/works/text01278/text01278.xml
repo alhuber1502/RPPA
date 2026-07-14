@@ -2,12 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #octet #cross"
      corresp="#work00932"
      subtype="rppatext"
      type="poem"
      xml:id="text01278"
-     xml:lang="rus">
+     xml:lang="rus"
+     rhyme="ababcbcb"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00120" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n01570">

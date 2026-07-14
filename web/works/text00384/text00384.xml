@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter #fourteen-line #sonnet"
      corresp="#work00362"
      subtype="rppatext"
      type="poem"
      xml:id="text00384"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="ababbbccddeeff"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00004" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01930">

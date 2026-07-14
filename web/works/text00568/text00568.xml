@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #iamb #pentameter #pair"
      corresp="#work00455"
      subtype="rppatext"
      type="poem"
      xml:id="text00568"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="aa"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00064" type="author"/>
    <link target="#pers00742" type="translator"/>
    <link target="#text00567" type="translation"/>
@@ -559,7 +564,7 @@
          <w xml:id="erar-4690610">feet</w>
          <pc xml:id="erar-4690620">,</pc>
       </l>
-      <l xml:id="erar-l51250">
+      <l xml:id="erar-l51250" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4690630">Intwining</w>
          <c> </c>
@@ -575,7 +580,7 @@
          <pc xml:id="erar-4690690" unit="sentence">.</pc>
          <c> </c>
       </l>
-      <l xml:id="erar-l51255">
+      <l xml:id="erar-l51255" rhyme="aaa">
          <w xml:id="erar-4690700">There</w>
          <pc xml:id="erar-4690710">,</pc>
          <c> </c>
@@ -595,7 +600,7 @@
          <w xml:id="erar-4690790">shine</w>
          <pc xml:id="erar-4690800">,</pc>
       </l>
-      <l xml:id="erar-l51260">
+      <l xml:id="erar-l51260" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4690810">And</w>
          <c> </c>
@@ -618,7 +623,7 @@
          <pc xml:id="erar-4690910" unit="sentence">.</pc>
          <c> </c>
       </l>
-      <l xml:id="erar-l51265">
+      <l xml:id="erar-l51265" rhyme="aaa">
          <w xml:id="erar-4690920">Chimeras</w>
          <c> </c>
          <w xml:id="erar-4690930">roused</w>
@@ -634,7 +639,7 @@
          <w xml:id="erar-4690980">thee</w>
          <pc xml:id="erar-4690990">,</pc>
       </l>
-      <l xml:id="erar-l51270">
+      <l xml:id="erar-l51270" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4691000">The</w>
          <c> </c>
@@ -653,7 +658,7 @@
          <w xml:id="erar-4691070">see</w>
          <pc xml:id="erar-4691080">,</pc>
       </l>
-      <l xml:id="erar-l51275">
+      <l xml:id="erar-l51275" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4691090">And</w>
          <c> </c>
@@ -825,7 +830,7 @@
          <pc xml:id="erar-4691910" unit="sentence">.</pc>
          <c> </c>
       </l>
-      <l xml:id="erar-l51320">
+      <l xml:id="erar-l51320" rhyme="aaa">
          <w xml:id="erar-4691920">Ever</w>
          <c> </c>
          <w xml:id="erar-4691930">the</w>
@@ -843,7 +848,7 @@
          <w xml:id="erar-4691990">say</w>
          <pc xml:id="erar-4692000">,</pc>
       </l>
-      <l xml:id="erar-l51325">
+      <l xml:id="erar-l51325" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4692010">And</w>
          <c> </c>
@@ -862,7 +867,7 @@
          <w xml:id="erar-4692080">play</w>
          <pc xml:id="erar-4692090">,</pc>
       </l>
-      <l xml:id="erar-l51330">
+      <l xml:id="erar-l51330" rhyme="aaa">
          <c> </c>
          <w xml:id="erar-4692100">Have</w>
          <c> </c>

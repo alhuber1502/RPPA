@@ -2,9 +2,11 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #hexasyllable #octosyllable #chain #pair"
      corresp="#work01058"
      subtype="rppatext"
+     rhyme="aa"
+     rppa:syllab="6.8"
      type="poem"
      xml:id="text01526"
      xml:lang="vie">
@@ -19,7 +21,7 @@
       <w xml:id="kieu-000070">Kiều</w>
    </head>
    <lg xml:id="kieu-s00015">
-      <l xml:id="kieu-l00005">
+      <l xml:id="kieu-l00005" rhyme="x">
          <w xml:id="kieu-000100">Trăm</w>
          <c> </c>
          <w xml:id="kieu-000110">năm</w>
@@ -52579,7 +52581,7 @@
          <w xml:id="kieu-264870">dài</w>
          <pc xml:id="kieu-264880">,</pc>
       </l>
-      <l xml:id="kieu-l16285">
+      <l xml:id="kieu-l16285" rhyme="x">
          <w xml:id="kieu-264890">Mua</w>
          <c> </c>
          <w xml:id="kieu-264900">vui</w>

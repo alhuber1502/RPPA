@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_ita"
+     ana="#translation_ita #iamb #pentameter #quatrain #envelope #sonnet"
      corresp="#work00892"
      subtype="rppatext"
      type="poem"
      xml:id="text01195"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00514" type="author"/>
    <link target="#pers00800" type="translator"/>
    <link target="#text01194" type="translation"/>
@@ -29,7 +33,13 @@
       <c> </c>
       <pc xml:id="erpa-0989950" unit="sentence">...</pc>
    </head>
-   <lg xml:id="erpa-s07600">
+   <lg xml:id="erpa-s07600"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abba"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l49225">
          <w xml:id="erpa-0989980">Here</w>
          <pc xml:id="erpa-0989990">,</pc>
@@ -104,7 +114,13 @@
          <pc xml:id="erpa-0990340" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07605">
+   <lg xml:id="erpa-s07605"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="cddc"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l49245">
          <w xml:id="erpa-0990370">And</w>
          <c> </c>
@@ -177,7 +193,13 @@
          <pc xml:id="erpa-0990730" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07610">
+   <lg xml:id="erpa-s07610"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="efe"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l49265">
          <w xml:id="erpa-0990760">Throng</w>
          <c> </c>
@@ -235,7 +257,13 @@
          <pc xml:id="erpa-0991040" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s07615">
+   <lg xml:id="erpa-s07615"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="fef"
+       rppa:syllab="10.10.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l49280">
          <w xml:id="erpa-0991070">There</w>
          <pc xml:id="erpa-0991080">,</pc>
