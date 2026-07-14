@@ -338,6 +338,10 @@
         if ( !toAdd.length ) return 0;
         var added = cy.add( toAdd );
         mapsStyleNodes( added.nodes() );   // style the poet portrait nodes
+        // PERF: drop the inherited edge label. The base 'edge' style maps a wrapped, autorotated label;
+        // even hidden (text-opacity:0) its text layout + rotation is recomputed for every edge on every
+        // pan frame (node reprojection dirties all edges), which is what makes a few dozen lines painful.
+        added.edges().style( 'label', '' );
         // fan the layers to separate sides so a pair sharing >1 kind of link doesn't overlap:
         // themes bow one way (+), verse form the opposite (-), allusion runs straight down the middle
         if ( type === 'concept' ) {
