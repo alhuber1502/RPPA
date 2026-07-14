@@ -285,6 +285,19 @@
         t.textContent = msg; t.style.display = 'block';
         clearTimeout( t._to ); t._to = setTimeout( function () { t.style.display = 'none'; }, 2400 );
     }
+    // persistent "working…" spinner (unlike mapsToast, which auto-hides) shown while an expand's queries
+    // and drawing are in flight, so a slow busy graph doesn't look frozen and invite a second double-click.
+    // Counter-based so several concurrent expansions (e.g. restoring a whole view) keep it up until the last.
+    var mapsBusyN = 0;
+    function mapsBusy( on, msg ) {
+        mapsBusyN = Math.max( 0, mapsBusyN + ( on ? 1 : -1 ) );
+        var b = document.getElementById( 'maps-graph-busy' );
+        if ( mapsBusyN > 0 ) {
+            if ( !b ) { b = $( '<div id="maps-graph-busy" style="position:fixed;top:112px;left:50%;transform:translateX(-50%);z-index:2060;background:rgba(0,0,0,.82);color:#fff;padding:5px 12px;border-radius:4px;font-size:13px;pointer-events:none;display:flex;align-items:center;"><span class="spinner-border spinner-border-sm" style="width:14px;height:14px;border-width:2px;margin-right:8px;"></span><span class="maps-busy-msg"></span></div>' ).appendTo( 'body' )[ 0 ]; }
+            if ( msg ) b.querySelector( '.maps-busy-msg' ).textContent = msg;
+            b.style.display = 'flex';
+        } else if ( b ) { b.style.display = 'none'; }
+    }
     // show/hide one connection layer (concept | formal | intertext) — the legibility control
     function mapsToggleLayer( type, on ) {
         if ( typeof cy === 'undefined' || !cy ) return;
@@ -348,6 +361,7 @@
         node.data( 'mapsExpanded', 1 );
         mapsExpandedSeeds[ node.id() ] = persid;   // remember, so a Markers<->Graph switch can redraw this expansion
         var seed = node.id(), dark = ( typeof theme !== 'undefined' && theme === 'dark' ), added = 0;
+        mapsBusy( true, restore ? 'Restoring graph…' : 'Drawing connections…' );   // instant feedback so a slow draw isn't mistaken for a dead click
         try {
             // fire all three layer queries in parallel, then draw each
             var qConcept = opFetch( mapsConceptQuery( seed ) ),
@@ -364,6 +378,7 @@
             mapsProjectNodes();
             if ( !added && !restore ) { var pm = ( typeof persons !== 'undefined' && persons ) ? persons[ persid ] : null; mapsToast( 'No recorded connections yet for ' + ( pm ? pm.name : persid ) ); }
         } catch ( e ) { console.log( 'maps expand failed', e ); }
+        finally { mapsBusy( false ); }
     }
 
     // re-expand every poet the user had opened before the last Markers<->Graph switch. cy was destroyed and
