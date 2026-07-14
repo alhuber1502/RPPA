@@ -7,6 +7,8 @@
 ( function () {
     'use strict';
     var mapsGraphOn = false, mapsPrevOverlay = false, mapsSpiderKey = null;
+    var mapsExpandedSeeds = {};             // seed URI -> persid of every poet the user has expanded; kept across a
+                                            // Markers<->Graph toggle (which destroys cy) so the expansions can be redrawn
     var mapsPortraits = true;               // poets always render as portrait avatars (matching the Markers view); the dots toggle was removed
     window.mapsPortraits = mapsPortraits;   // graph.js routes the facet colour to the border ring (portraits are always on)
 
@@ -341,9 +343,10 @@
     }
 
     // double-click a poet -> draw its INTRO connections (thematic shared-concept links + intertextual INT3)
-    async function mapsExpandPoet( node, persid ) {
+    async function mapsExpandPoet( node, persid, restore ) {
         if ( typeof cy === 'undefined' || !cy || typeof opFetch !== 'function' || node.data( 'mapsExpanded' ) ) return;
         node.data( 'mapsExpanded', 1 );
+        mapsExpandedSeeds[ node.id() ] = persid;   // remember, so a Markers<->Graph switch can redraw this expansion
         var seed = node.id(), dark = ( typeof theme !== 'undefined' && theme === 'dark' ), added = 0;
         try {
             // fire all three layer queries in parallel, then draw each
@@ -359,8 +362,18 @@
             if ( nwGroupFacet ) await nwMapRegroup( nwGroupFacet );   // colour any newly-added poets (await: it colours the border in portrait mode)
             node.style( { 'border-color': '#cd6711', 'border-width': '3px' } );   // mark expanded, after the regroup so it isn't overwritten
             mapsProjectNodes();
-            if ( !added ) { var pm = ( typeof persons !== 'undefined' && persons ) ? persons[ persid ] : null; mapsToast( 'No recorded connections yet for ' + ( pm ? pm.name : persid ) ); }
+            if ( !added && !restore ) { var pm = ( typeof persons !== 'undefined' && persons ) ? persons[ persid ] : null; mapsToast( 'No recorded connections yet for ' + ( pm ? pm.name : persid ) ); }
         } catch ( e ) { console.log( 'maps expand failed', e ); }
+    }
+
+    // re-expand every poet the user had opened before the last Markers<->Graph switch. cy was destroyed and
+    // rebuilt, so mapsExpandedSeeds is the memory; skip any seed no longer on the map (e.g. filters changed).
+    function mapsRestoreExpansions() {
+        if ( typeof cy === 'undefined' || !cy ) return;
+        Object.keys( mapsExpandedSeeds ).forEach( function ( seed ) {
+            var n = cy.getElementById( seed );
+            if ( n && n.nonempty() && !n.data( 'mapsExpanded' ) ) mapsExpandPoet( n, mapsExpandedSeeds[ seed ], true );
+        } );
     }
 
     function mapsSetActive( mode ) {
@@ -385,6 +398,7 @@
         mapsBuildGraph( ppl );                                  // nodes created at their geo positions (preset), cy zoom locked at 1
         mapsProjectNodes();                                     // safety re-project at the current view
         if ( nwGroupFacet ) nwMapRegroup( nwGroupFacet );
+        mapsRestoreExpansions();                                // redraw any expansions the user had open before switching to Markers
         // NOW bind pan/zoom projection (so subsequent user interaction moves the dots with the map)
         map.on( 'move zoom', mapsProjectNodes );
         map.on( 'movestart zoomstart', mapsOnMoveStart );
@@ -425,6 +439,7 @@
     // layers -> keep them hidden.
     function mapsRedrawGraph() {
         if ( !mapsGraphOn ) return;
+        mapsExpandedSeeds = {};                              // an explicit re-seed from the current filters starts a fresh graph
         if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets();
         $( '#map' ).find( MAPS_PANES ).css( 'display', 'none' );   // draw_viz may have rebuilt markers into the panes -> keep them hidden
         mapsBuildGraph();                                   // uses the current filter set; view unchanged
