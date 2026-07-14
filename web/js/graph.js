@@ -1602,9 +1602,14 @@ SELECT ?item ?t ?pos ?type WHERE {
 // build token nodes/edges (words + punctuation, reading order) fanned to the right
 // of a line node. Shared by per-line expand and expand-all.
 function opBuildTokens( lid, rows, pos ) {
-    var cls = 'w-of-' + opSafe( lid ), add = [], prev = lid, x = pos.x + 260, first = true;
+    var cls = 'w-of-' + opSafe( lid ), add = [], prev = lid, x = pos.x + 260, first = true, seen = {};
     rows.forEach( function( v ) {
         var iid = v.item.value, isPunct = !!( v.type && /Punctuation$/.test( v.type.value ) );
+        // guard: some prod poems have doubled OntoPoetry spines, so the poem-level
+        // content query returns each token twice; placing it again would draw a
+        // wf-<tok>-<tok> self-loop on every word. Keep only the first occurrence.
+        if ( seen[ iid ] ) return;
+        seen[ iid ] = true;
         // step BEFORE placing: small step into a punctuation mark so it hugs the
         // preceding word; normal step into a word.
         if ( !first ) { x += isPunct ? 30 : 74; }
