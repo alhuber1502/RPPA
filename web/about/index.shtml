@@ -311,8 +311,8 @@
         <div class="col-md-3">
           <!--#set var="mode" value=""-->
 
-          <nav id="navbar-about" class="h-100 flex-column align-items-stretch
-          pe-4 border-end" style="position:fixed;width:inherit;margin-top:2px;">
+          <nav id="navbar-about" class="flex-column align-items-stretch
+          pe-4 border-end" style="position:fixed;top:60px;bottom:0;width:inherit;overflow-y:auto;padding-top:2px;padding-bottom:1rem;">
             <nav class="nav nav-pills flex-column">
               <a class="nav-link" href="#introduction">Introduction</a>
               <a class="nav-link" href="#approach">Approach</a>
