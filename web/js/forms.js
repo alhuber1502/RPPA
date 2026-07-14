@@ -46,12 +46,17 @@ async function formsRenderIndex( $container ) {
     if ( rows === null ) { $container.html( '<p class="text-danger">Concept index unavailable (SPARQL endpoint not reachable).</p>' ); return; }
     if ( !rows.length ) { $container.html( '<p class="text-muted">No annotated concepts found.</p>' ); return; }
 
-    // pass 1: gather each used concept's subject headings (= its vocabulary's dc:subjects)
+    // pass 1: gather each used concept's subject headings (= its vocabulary's dc:subjects).
+    // A concept may carry skos:prefLabels in several languages (POSTDATA KOS have en + es,
+    // so the query returns one row per language); prefer the @en label, and only keep a
+    // non-English one when no English prefLabel exists.
     var byConcept = {};
     rows.forEach( function( row ) {
         var c = formsVal( row, 'concept' );
+        var isEn = !!( row.label && /^en\b/i.test( row.label[ 'xml:lang' ] || '' ) );
         var e = byConcept[ c ] || ( byConcept[ c ] = { concept: c, label: formsVal( row, 'label' ),
-            n: parseInt( formsVal( row, 'n' ) || '0', 10 ), subjects: [] } );
+            labelEn: isEn, n: parseInt( formsVal( row, 'n' ) || '0', 10 ), subjects: [] } );
+        if ( isEn && !e.labelEn ) { e.label = formsVal( row, 'label' ); e.labelEn = true; }   // upgrade to the English prefLabel
         var subj = formsVal( row, 'subject' );
         if ( subj && e.subjects.indexOf( subj ) < 0 ) e.subjects.push( subj );
     } );
