@@ -2159,7 +2159,10 @@ async function renderOntoPoetry( textURI, containerSel ) {
                 position: { x: 0, y: y },
                 classes: 'op-line' + ( rhyme ? ' rhyme-' + rhyme : '' ) + ( dev ? ' op-dev' : '' ) });
             if ( rhyme ) {  // rhyme-weave arc to the previous same-rhyme line in this stanza
-                if ( rhymeLast[ rhyme ] ) {
+                // guard !== lId: a duplicated rdf:List spine (e.g. an unclean whole-text
+                // reload) can surface the same line twice; without this it would draw a
+                // self-loop arc-{lId}-{lId}.
+                if ( rhymeLast[ rhyme ] && rhymeLast[ rhyme ] !== lId ) {
                     els.push({ data: { id: 'arc-' + rhymeLast[ rhyme ] + '-' + lId,
                         source: rhymeLast[ rhyme ], target: lId, rhymecol: rcol[ rhyme ] }, classes: 'op-rhyme' });
                 }
