@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter #septet #continuous #sonnet"
      corresp="#work00284"
      subtype="rppatext"
      type="poem"
      xml:id="text00291"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00006" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01465">
@@ -47,7 +51,7 @@
       <c> </c>
       <w xml:id="pbrp-2351150">Republic</w>
    </head>
-   <lg xml:id="pbrp-s19310">
+   <lg xml:id="pbrp-s19310" rhyme="abbaacc">
       <l xml:id="pbrp-l111655">
          <w xml:id="pbrp-2351180">Once</w>
          <c> </c>
@@ -181,7 +185,7 @@
          <pc xml:id="pbrp-2351810">,</pc>
       </l>
    </lg>
-   <lg xml:id="pbrp-s19315">
+   <lg xml:id="pbrp-s19315" rhyme="ababcac">
       <l xml:id="pbrp-l111690">
          <w xml:id="pbrp-2351840">She</w>
          <c> </c>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #tetrameter #octet"
      corresp="#work00137"
      subtype="rppatext"
      type="poem"
      xml:id="text00137"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00032" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00695">
@@ -40,7 +44,13 @@
       <c> </c>
       <w xml:id="pbrp-1507170">Walks</w>
    </head>
-   <lg xml:id="pbrp-s12225">
+   <lg xml:id="pbrp-s12225"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababxcxc"
+       rppa:syllab="9.8.8.8.8.6.8.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l67425">
          <w xml:id="pbrp-1507200">Through</w>
          <c> </c>
@@ -149,7 +159,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s12230">
+   <lg xml:id="pbrp-s12230"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababcdcd"
+       rppa:syllab="8.8.8.8.8.6.8.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l67465">
          <w xml:id="pbrp-1507710">While</w>
          <c> </c>
@@ -278,7 +294,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s12235">
+   <lg xml:id="pbrp-s12235"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababcxc"
+       rppa:syllab="8.8.9.8.6.8.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l67505">
          <w xml:id="pbrp-1508340">When</w>
          <c> </c>
@@ -386,7 +408,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s12240">
+   <lg xml:id="pbrp-s12240"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababxcxc"
+       rppa:syllab="8.8.10.8.8.6.9.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l67540">
          <w xml:id="pbrp-1508850">Now</w>
          <c> </c>

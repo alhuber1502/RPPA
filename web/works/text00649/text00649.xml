@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #quintet"
      corresp="#work00504"
      rhyme="irregular"
      subtype="rppatext"
      type="poem"
      xml:id="text00649"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00092" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00110">
@@ -19,7 +21,13 @@
    <head type="main" xml:lang="eng" xml:id="parr-h00255">
       <w xml:id="parr-0201370">Bacchus</w>
    </head>
-   <lg xml:id="parr-s03360">
+   <lg xml:id="parr-s03360"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="ababb"
+       rppa:syllab="9.7.10.8.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l06980">
          <w xml:id="parr-0201400">Bring</w>
          <c> </c>
@@ -103,7 +111,13 @@
          <pc xml:id="parr-0201800" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03365">
+   <lg xml:id="parr-s03365"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="aaxxbb"
+       rppa:syllab="7.6.9.6.6.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07005">
          <w xml:id="parr-0201830">Let</w>
          <c> </c>
@@ -184,7 +198,13 @@
          <pc xml:id="parr-0202210" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03370">
+   <lg xml:id="parr-s03370"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="axbaxbxacddcee"
+       rppa:syllab="6.6.5.8.8.6.3.4.8.7.9.9.7.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07035">
          <w xml:id="parr-0202240">We</w>
          <c> </c>
@@ -354,7 +374,13 @@
          <pc xml:id="parr-0203070" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03375">
+   <lg xml:id="parr-s03375"
+       ana="#iamb #dimeter"
+       met="-+|-+/"
+       rhyme="xabab"
+       rppa:syllab="4.7.6.9.5"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07105">
          <w xml:id="parr-0203100">Wine</w>
          <c> </c>
@@ -416,7 +442,13 @@
          <pc xml:id="parr-0203380" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03380">
+   <lg xml:id="parr-s03380"
+       ana="#trochee #tetrameter"
+       met="+-|+-|+-|+-/"
+       rhyme="xaabb"
+       rppa:syllab="4.7.9.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07130">
          <w xml:id="parr-0203410">Water</w>
          <c> </c>
@@ -470,7 +502,13 @@
          <pc xml:id="parr-0203660" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03385">
+   <lg xml:id="parr-s03385"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="axaxxbbcc"
+       rppa:syllab="5.6.5.8.7.8.8.7.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07155">
          <w xml:id="parr-0203690">Wine</w>
          <c> </c>
@@ -598,7 +636,13 @@
          <pc xml:id="parr-0204310" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03390">
+   <lg xml:id="parr-s03390"
+       ana="#iamb #dimeter"
+       met="-+|-+/"
+       rhyme="abxbab"
+       rppa:syllab="6.4.5.7.8.4"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07200">
          <w xml:id="parr-0204340">I</w>
          <c> </c>
@@ -661,7 +705,13 @@
          <pc xml:id="parr-0204620" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s03395">
+   <lg xml:id="parr-s03395"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbxccxddxeefggf"
+       rppa:syllab="8.8.7.7.7.8.8.6.8.7.8.6.6.10.6.6.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l07230">
          <w xml:id="parr-0204650">Pour</w>
          <pc xml:id="parr-0204660">,</pc>

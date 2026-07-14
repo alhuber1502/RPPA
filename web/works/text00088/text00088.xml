@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #pair"
      corresp="#work00088"
      subtype="rppatext"
      type="poem"
      xml:id="text00088"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00013" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00450">
@@ -44,7 +48,13 @@
       <pc xml:id="pbrp-1337420" unit="sentence">]</pc>
    </head>
    <div n="1" type="book" xml:id="pbrp-div00725">
-      <lg xml:id="pbrp-s10430">
+      <lg xml:id="pbrp-s10430"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="xaabbxxccddeeffggx"
+          rppa:syllab="10.10.10.10.9.10.10.10.10.11.10.10.11.10.10.10.10.11"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="777" xml:id="pbrp-l58735">
             <w xml:id="pbrp-1337460">Wherein</w>
             <c> </c>
@@ -340,7 +350,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s10435">
+      <lg xml:id="pbrp-s10435"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="xxaabbxx"
+          rppa:syllab="10.10.10.10.10.11.10.10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="795" rendition="#h_3" xml:id="pbrp-l58825">
             <w xml:id="pbrp-1338850">Feel</w>
             <c> </c>

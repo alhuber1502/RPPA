@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #twelve-line #pair"
      corresp="#work00035"
      subtype="rppatext"
      type="poem"
      xml:id="text00035"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00021" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00185">
@@ -89,7 +93,13 @@
       <pc xml:id="pbrp-0538790" unit="sentence">]</pc>
    </head>
    <div n="3" type="canto" xml:id="pbrp-div00400">
-      <lg xml:id="pbrp-s05835">
+      <lg xml:id="pbrp-s05835"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddxxeexxffgg"
+          rppa:syllab="11.10.10.10.10.10.10.10.10.10.10.10.11.11.10.10.11.13"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="482" xml:id="pbrp-l16945.1">
             <w xml:id="pbrp-0538830">All</w>
             <c> </c>
@@ -449,7 +459,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05840">
+      <lg xml:id="pbrp-s05840"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddeefff"
+          rppa:syllab="10.10.10.10.11.10.10.11.10.10.11.10.13"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="500" xml:id="pbrp-l17035.1">
             <w xml:id="pbrp-0540590">One</w>
             <c> </c>
@@ -704,7 +720,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05845">
+      <lg xml:id="pbrp-s05845"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddeeff"
+          rppa:syllab="11.10.10.11.10.10.10.10.10.10.10.10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l17100.1">
             <w xml:id="pbrp-0541820">She</w>
             <c> </c>
@@ -936,7 +958,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05850">
+      <lg xml:id="pbrp-s05850"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbcc"
+          rppa:syllab="10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l n="525" xml:id="pbrp-l17160.1">
             <w xml:id="pbrp-0542940">Painfully</w>
             <c> </c>
@@ -1055,7 +1083,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05855">
+      <lg xml:id="pbrp-s05855"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddeexxffgghhiijjkkllmmnnooppqq"
+          rppa:syllab="11.10.10.10.10.10.10.10.11.11.10.10.10.10.10.10.10.10.10.10.11.10.10.10.10.10.10.10.11.10.10.10.10.10.12.11"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l17190.1">
             <w xml:id="pbrp-0543520">’Twas</w>
             <c> </c>
@@ -1800,7 +1834,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05860">
+      <lg xml:id="pbrp-s05860"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbxxxxccddxxeeffxxggxxhh"
+          rppa:syllab="10.10.11.11.10.10.10.10.10.11.10.10.10.11.10.10.10.10.10.10.10.10.10.10.10.12"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l17370.1">
             <w xml:id="pbrp-0547120">Ready</w>
             <c> </c>
@@ -2331,7 +2371,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s05865">
+      <lg xml:id="pbrp-s05865"
+          ana="#iamb #pentameter"
+          met="-+|-+|-+|-+|-+/"
+          rhyme="aabbccddeeff"
+          rppa:syllab="10.10.10.11.10.10.11.11.10.10.10.10"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l17500.1">
             <w xml:id="pbrp-0549760">As</w>
             <c> </c>

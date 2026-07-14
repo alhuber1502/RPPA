@@ -2,12 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #occasional"
+     ana="#original #occasional #sestet #continuous"
      corresp="#work00837"
      subtype="rppatext"
      type="poem"
      xml:id="text01084"
-     xml:lang="deu">
+     xml:lang="deu"
+     rhyme="aaaaaa"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00210" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n00600">
@@ -30,7 +33,10 @@
       <c> </c>
       <w xml:id="erpa-0532140">Sonnenaufgang</w>
    </head>
-   <lg xml:id="erpa-s04185">
+   <lg xml:id="erpa-s04185"
+       rhyme="abba"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24565">
          <w xml:id="erpa-0532170">O</w>
          <c> </c>
@@ -96,7 +102,10 @@
          <pc xml:id="erpa-0532480" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04190">
+   <lg xml:id="erpa-s04190"
+       rhyme="ababcc"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24585">
          <w xml:id="erpa-0532510">Einem</w>
          <c> </c>
@@ -194,7 +203,10 @@
          <pc xml:id="erpa-0532980" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04195">
+   <lg xml:id="erpa-s04195"
+       rhyme="abbaccb"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24615">
          <w xml:id="erpa-0533010">Bei</w>
          <c> </c>
@@ -306,7 +318,10 @@
          <pc xml:id="erpa-0533550" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04200">
+   <lg xml:id="erpa-s04200"
+       rhyme="abaab"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24650">
          <w xml:id="erpa-0533580">Ich</w>
          <c> </c>
@@ -369,7 +384,10 @@
          <pc xml:id="erpa-0533870" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04205">
+   <lg xml:id="erpa-s04205"
+       rhyme="abbacdccdee"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24675">
          <w xml:id="erpa-0533900">Und</w>
          <c> </c>
@@ -566,7 +584,10 @@
          <pc xml:id="erpa-0534900" unit="sentence">!</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s04210">
+   <lg xml:id="erpa-s04210"
+       rhyme="aabcbc"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l24730">
          <w xml:id="erpa-0534930">Dort</w>
          <pc xml:id="erpa-0534940">,</pc>

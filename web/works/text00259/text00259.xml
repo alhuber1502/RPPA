@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #song #excerpt"
+     ana="#original #song #excerpt #octet"
      corresp="#work00254"
      subtype="rppatext"
      type="poem"
      xml:id="text00259"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00009" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01305">
@@ -94,7 +96,13 @@
             <pc xml:id="pbrp-2011670">:</pc>
          </p>
       </argument>
-      <lg xml:id="pbrp-s16630">
+      <lg xml:id="pbrp-s16630"
+          ana="#iamb #dimeter"
+          met="-+|-+/"
+          rhyme="ababxxxx"
+          rppa:syllab="5.4.6.4.8.8.9.6"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l93965">
             <w xml:id="pbrp-2011700">Oh</w>
             <c> </c>
@@ -206,7 +214,13 @@
             <c> </c>
          </l>
       </lg>
-      <lg xml:id="pbrp-s16635">
+      <lg xml:id="pbrp-s16635"
+          ana="#iamb #tetrameter"
+          met="-+|-+|-+|-+/"
+          rhyme="xxaaxbb"
+          rppa:syllab="7.8.10.9.7.4.9"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="pbrp-l94005">
             <w xml:id="pbrp-2012220">That</w>
             <c> </c>

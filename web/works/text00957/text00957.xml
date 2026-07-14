@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #cross"
      corresp="#work00770"
      subtype="rppatext"
      type="poem"
      xml:id="text00957"
-     xml:lang="rus">
+     xml:lang="rus"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00107" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="rocp-n00500">
@@ -30,7 +32,10 @@
       <c> </c>
       <w xml:id="rocp-492140">Поэта</w>
    </head>
-   <lg xml:id="rocp-s06515">
+   <lg xml:id="rocp-s06515"
+       rhyme="ababcdcdefefghghijij"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13220">
          <w xml:id="rocp-492170">Погиб</w>
          <c> </c>
@@ -255,7 +260,10 @@
          <pc xml:id="rocp-493280" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06520">
+   <lg xml:id="rocp-s06520"
+       rhyme="ababcddcefffe"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13320">
          <w xml:id="rocp-493310">Его</w>
          <c> </c>
@@ -412,7 +420,10 @@
          <pc xml:id="rocp-494070" unit="sentence">...</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06525">
+   <lg xml:id="rocp-s06525"
+       rhyme="axbab"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_6" xml:id="rocp-l13385">
          <w xml:id="rocp-494100">‎</w>
          <c> </c>
@@ -492,7 +503,10 @@
          <pc xml:id="rocp-494500" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06530">
+   <lg xml:id="rocp-s06530"
+       rhyme="aabccb"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13410">
          <w xml:id="rocp-494530">Зачем</w>
          <c> </c>
@@ -589,7 +603,10 @@
          <pc xml:id="rocp-494990" unit="sentence">...</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06535">
+   <lg xml:id="rocp-s06535"
+       rhyme="xaxabcbcdede"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13440">
          <w xml:id="rocp-495020">И</w>
          <pc xml:id="rocp-495030">,</pc>
@@ -749,7 +766,10 @@
          <pc xml:id="rocp-495800" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06540">
+   <lg xml:id="rocp-s06540"
+       rhyme="ababcacadedefgfg"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_6" xml:id="rocp-l13500">
          <w xml:id="rocp-495830">‎</w>
          <c> </c>

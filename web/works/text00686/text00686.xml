@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #septet"
      corresp="#work00541"
      rhyme="aa"
      subtype="rppatext"
      type="poem"
      xml:id="text00686"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00119" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00295">
@@ -37,7 +39,13 @@
    <head type="main" xml:lang="eng" xml:id="parr-h00465">
       <w xml:id="parr-0397620">Lenore</w>
    </head>
-   <lg xml:id="parr-s04585">
+   <lg xml:id="parr-s04585"
+       ana="#iamb #octameter"
+       met="-+|-+|-+|-+|-+|-+|-+|-+/"
+       rhyme="aabbccc"
+       rppa:syllab="15.15.14.14.16.15.14"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l18280">
          <w xml:id="parr-0397650">Ah</w>
          <pc xml:id="parr-0397660">,</pc>
@@ -243,7 +251,13 @@
          <pc xml:id="parr-0398680" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04590">
+   <lg xml:id="parr-s04590"
+       ana="#iamb #octameter"
+       met="-+|-+|-+|-+|-+|-+|-+|-+/"
+       rhyme="aabbb"
+       rppa:syllab="16.14.16.15.14"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l18315">
          <pc xml:id="parr-0398710">“</pc>
          <w xml:id="parr-0398720">Wretches</w>
@@ -397,7 +411,13 @@
          <pc xml:id="parr-0399470" unit="sentence">”</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04595">
+   <lg xml:id="parr-s04595"
+       ana="#iamb #heptameter"
+       met="-+|-+|-+|-+|-+|-+|-+/"
+       rhyme="aabbccc"
+       rppa:syllab="14.14.13.14.14.14.14"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l18340">
          <hi>
             <w xml:id="parr-0399500">Peccavimus</w>
@@ -583,7 +603,13 @@
          <pc xml:id="parr-0400420" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s04600">
+   <lg xml:id="parr-s04600"
+       ana="#iamb #heptameter"
+       met="-+|-+|-+|-+|-+|-+|-+/"
+       rhyme="aaabbcc"
+       rppa:syllab="16.14.15.14.13.14.15"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rhyme="aaa" xml:id="parr-l18375">
          <pc xml:id="parr-0400450">“</pc>
          <w xml:id="parr-0400460">Avaunt</w>

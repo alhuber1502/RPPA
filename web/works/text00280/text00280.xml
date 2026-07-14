@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #octet #pair"
      corresp="#work00273"
      subtype="rppatext"
      type="poem"
      xml:id="text00280"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00050" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01410">
@@ -39,7 +43,13 @@
       <w xml:id="pbrp-2296900">211-226</w>
       <pc xml:id="pbrp-2296910" unit="sentence">]</pc>
    </head>
-   <lg xml:id="pbrp-s19005">
+   <lg xml:id="pbrp-s19005"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbccdd"
+       rppa:syllab="10.10.10.11.10.11.11.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="67" rendition="#h_3" xml:id="pbrp-l108820">
          <w xml:id="pbrp-2296940">No</w>
          <pc xml:id="pbrp-2296950">;</pc>
@@ -192,7 +202,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s19010">
+   <lg xml:id="pbrp-s19010"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aaxxbbcc"
+       rppa:syllab="10.10.10.10.10.11.10.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="75" xml:id="pbrp-l108860">
          <w xml:id="pbrp-2297690">Nor</w>
          <c> </c>
@@ -349,7 +365,13 @@
         reason="sampling"
         resp="#AH"
         xml:id="pbrp-2298410-gap0"/>
-   <lg xml:id="pbrp-s19015">
+   <lg xml:id="pbrp-s19015"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghhiijjxxkkllmmnn"
+       rppa:syllab="10.11.10.10.11.10.10.10.11.10.11.10.10.10.10.10.11.10.12.10.10.10.10.10.10.10.9.10.11.12"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="95" rendition="#h_3" xml:id="pbrp-l108900">
          <w xml:id="pbrp-2298450">Whene’er</w>
          <c> </c>
@@ -899,7 +921,13 @@
         reason="sampling"
         resp="#AH"
         xml:id="pbrp-2301070-gap0"/>
-   <lg xml:id="pbrp-s19020">
+   <lg xml:id="pbrp-s19020"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabb"
+       rppa:syllab="10.10.10.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l109050">
          <w xml:id="pbrp-2301110">And</w>
          <c> </c>
@@ -975,7 +1003,13 @@
          <pc xml:id="pbrp-2301450">:</pc>
       </l>
    </lg>
-   <lg xml:id="pbrp-s19025">
+   <lg xml:id="pbrp-s19025"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabbccddeeff"
+       rppa:syllab="11.11.10.10.10.10.10.10.10.10.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="215" xml:id="pbrp-l109070">
          <w xml:id="pbrp-2301480">Whether</w>
          <c> </c>

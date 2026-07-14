@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_deu #prose #excerpt"
+     ana="#translation_deu #prose #excerpt #octet #intermittent"
      corresp="#work00796"
      subtype="rppatext"
      type="poem"
      xml:id="text01002"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00116" type="author"/>
    <link target="#pers00768" type="translator"/>
    <link target="#text01001" type="translation"/>
@@ -493,7 +495,7 @@
       <w xml:id="erpa-0348450">image</w>
       <pc xml:id="erpa-0348460">:</pc>
    </p>
-   <lg xml:id="erpa-s02240">
+   <lg xml:id="erpa-s02240" rhyme="xaxbxbxa">
       <l xml:id="erpa-l13325">
          <w xml:id="erpa-0348490">The</w>
          <c> </c>
@@ -631,7 +633,7 @@
          <pc xml:id="erpa-0349150" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02245">
+   <lg xml:id="erpa-s02245" rhyme="xaxbxbxa">
       <l xml:id="erpa-l13365">
          <w xml:id="erpa-0349180">Forever</w>
          <c> </c>
@@ -762,7 +764,7 @@
          <pc xml:id="erpa-0349800" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02250">
+   <lg xml:id="erpa-s02250" rhyme="xaxbxbxa">
       <l xml:id="erpa-l13405">
          <w xml:id="erpa-0349830">With</w>
          <c> </c>
@@ -1816,7 +1818,7 @@
       <w xml:id="erpa-0355270">child</w>
       <pc xml:id="erpa-0355280">:</pc>
    </p>
-   <lg xml:id="erpa-s02260">
+   <lg xml:id="erpa-s02260" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13445">
          <w xml:id="erpa-0355310">You</w>
          <c> </c>
@@ -2814,7 +2816,7 @@
       <w xml:id="erpa-0360460">eternity</w>
       <pc xml:id="erpa-0360470" unit="sentence">.</pc>
    </p>
-   <lg xml:id="erpa-s02280">
+   <lg xml:id="erpa-s02280" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13485">
          <w xml:id="erpa-0360500">Raised</w>
          <c> </c>
@@ -2907,7 +2909,7 @@
          <pc xml:id="erpa-0360920" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02285">
+   <lg xml:id="erpa-s02285" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13525">
          <w xml:id="erpa-0360950">Death</w>
          <c> </c>
@@ -3017,7 +3019,7 @@
          <pc xml:id="erpa-0361450" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02290">
+   <lg xml:id="erpa-s02290" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13565">
          <w xml:id="erpa-0361480">To</w>
          <c> </c>
@@ -3109,7 +3111,7 @@
          <pc xml:id="erpa-0361920" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02295">
+   <lg xml:id="erpa-s02295" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13605">
          <w xml:id="erpa-0361950">So</w>
          <c> </c>
@@ -3205,7 +3207,7 @@
          <pc xml:id="erpa-0362390" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02300">
+   <lg xml:id="erpa-s02300" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13645">
          <w xml:id="erpa-0362420">No</w>
          <c> </c>
@@ -3306,7 +3308,7 @@
          <pc xml:id="erpa-0362880" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02305">
+   <lg xml:id="erpa-s02305" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13685">
          <w xml:id="erpa-0362910">Our</w>
          <c> </c>
@@ -3402,7 +3404,7 @@
          <pc xml:id="erpa-0363350" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s02310">
+   <lg xml:id="erpa-s02310" rhyme="xaxaxbxb">
       <l xml:id="erpa-l13725">
          <w xml:id="erpa-0363380">Now</w>
          <c> </c>

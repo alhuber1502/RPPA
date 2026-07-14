@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_deu"
+     ana="#translation_deu #quintet #narrative"
      corresp="#work00714"
      subtype="rppatext"
      type="poem"
      xml:id="text00864"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00072" type="author"/>
    <link target="#pers00766" type="translator"/>
    <link target="#text00863" type="translation"/>
@@ -23,7 +25,13 @@
       <c> </c>
       <w xml:id="rocp-090767">Tale</w>
    </head>
-   <lg xml:id="rocp-s01100">
+   <lg xml:id="rocp-s01100"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aaxxa"
+       rppa:syllab="9.8.9.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01255">
          <w xml:id="rocp-090770">King</w>
          <c> </c>
@@ -83,7 +91,13 @@
          <pc xml:id="rocp-091030" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01105">
+   <lg xml:id="rocp-s01105"
+       ana="#iamb #dimeter"
+       met="-+|-+/"
+       rhyme="ababccxdd"
+       rppa:syllab="9.5.9.7.5.4.7.7.5"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01280">
          <w xml:id="rocp-091060">With</w>
          <c> </c>
@@ -190,7 +204,13 @@
          <pc xml:id="rocp-091550" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01110">
+   <lg xml:id="rocp-s01110"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="aaxbxbaxacxcdxcd"
+       rppa:syllab="6.4.5.5.5.3.6.6.3.7.4.3.6.3.5.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01325">
          <w xml:id="rocp-091580">When</w>
          <c> </c>
@@ -340,7 +360,13 @@
          <pc xml:id="rocp-092240" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01115">
+   <lg xml:id="rocp-s01115"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aaxxxbbccdd"
+       rppa:syllab="7.6.7.7.7.8.8.7.10.9.5"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01405">
          <w xml:id="rocp-092270">When</w>
          <c> </c>
@@ -483,7 +509,13 @@
          <pc xml:id="rocp-092940" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01120">
+   <lg xml:id="rocp-s01120"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabb"
+       rppa:syllab="9.8.7.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01460">
          <w xml:id="rocp-092970">Then</w>
          <c> </c>
@@ -536,7 +568,13 @@
          <pc xml:id="rocp-093200" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01125">
+   <lg xml:id="rocp-s01125"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="axabb"
+       rppa:syllab="8.11.8.10.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01480">
          <w xml:id="rocp-093230">And</w>
          <c> </c>
@@ -623,7 +661,13 @@
          <pc xml:id="rocp-093640" unit="sentence">”</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01130">
+   <lg xml:id="rocp-s01130"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabxb"
+       rppa:syllab="7.10.8.6.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01505">
          <w xml:id="rocp-093670">And</w>
          <c> </c>
@@ -697,7 +741,13 @@
          <pc xml:id="rocp-094000" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s01135">
+   <lg xml:id="rocp-s01135"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbcxxddcee"
+       rppa:syllab="10.10.9.8.9.8.7.6.6.8.11.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l01530">
          <w xml:id="rocp-094030">The</w>
          <c> </c>

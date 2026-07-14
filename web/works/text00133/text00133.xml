@@ -2,12 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #quatrain #cross #pair"
      corresp="#work00133"
      subtype="rppatext"
      type="poem"
      xml:id="text00133"
-     xml:lang="eng">
+     xml:lang="eng"
+     rhyme="abab"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00009" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n00675">
@@ -40,7 +43,7 @@
       <c> </c>
       <w xml:id="pbrp-1502180">Sweeper</w>
    </head>
-   <lg xml:id="pbrp-s12150">
+   <lg xml:id="pbrp-s12150" rhyme="aabb">
       <l xml:id="pbrp-l67145">
          <w xml:id="pbrp-1502210">A</w>
          <c> </c>

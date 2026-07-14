@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #iamb #tetrameter #triplet"
      corresp="#work01031"
      subtype="rppatext"
      type="poem"
      xml:id="text01471"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/ -+|-+|-+|-+/ -+|-+|-+|-+/"
+     rppa:syllab="8.8.8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00130" type="author"/>
    <link target="#pers00869" type="translator"/>
    <link target="#nott" type="nott"/>
@@ -24,7 +28,7 @@
    <head type="main" xml:lang="eng" xml:id="aowp-h00130">
       <w xml:id="aowp-111920">Cythere</w>
    </head>
-   <lg xml:id="aowp-s00670">
+   <lg xml:id="aowp-s00670" rhyme="aab">
       <l xml:id="aowp-l05990">
          <w xml:id="aowp-111950">By</w>
          <c> </c>
@@ -67,7 +71,7 @@
          <pc xml:id="aowp-112130">;</pc>
       </l>
    </lg>
-   <lg xml:id="aowp-s00675">
+   <lg xml:id="aowp-s00675" rhyme="aab">
       <l xml:id="aowp-l06005">
          <w xml:id="aowp-112160">The</w>
          <c> </c>
@@ -115,7 +119,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="aowp-s00680">
+   <lg xml:id="aowp-s00680" rhyme="abb">
       <l xml:id="aowp-l06020">
          <w xml:id="aowp-112400">True</w>
          <c> </c>
@@ -168,7 +172,7 @@
          <pc xml:id="aowp-112630">;</pc>
       </l>
    </lg>
-   <lg xml:id="aowp-s00685">
+   <lg xml:id="aowp-s00685" rhyme="abb">
       <l xml:id="aowp-l06035">
          <w xml:id="aowp-112660">And</w>
          <c> </c>

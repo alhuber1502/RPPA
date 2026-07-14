@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #octet"
      corresp="#work00635"
      rhyme="irregular"
      subtype="rppatext"
      type="poem"
      xml:id="text00781"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00604" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00770">
@@ -34,7 +36,13 @@
          <c> </c>
          <w xml:id="parr-0914740">I</w>
       </head>
-      <lg xml:id="parr-s08015">
+      <lg xml:id="parr-s08015"
+          ana="#iamb #tetrameter"
+          met="-+|-+|-+|-+/"
+          rhyme="xaxaxbxb"
+          rppa:syllab="7.7.8.7.8.7.8.7"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="parr-l39700">
             <pc xml:id="parr-0914770">“</pc>
             <w xml:id="parr-0914780">My</w>
@@ -136,7 +144,13 @@
             <pc xml:id="parr-0915280" unit="sentence">!</pc>
          </l>
       </lg>
-      <lg xml:id="parr-s08020">
+      <lg xml:id="parr-s08020"
+          ana="#iamb #tetrameter"
+          met="-+|-+|-+|-+/"
+          rhyme="xaxaxxxx"
+          rppa:syllab="8.7.8.7.8.7.8.7"
+          resp="#prosodic #rhymetagger"
+          cert="medium">
          <l xml:id="parr-l39740">
             <pc xml:id="parr-0915310">“</pc>
             <w xml:id="parr-0915320">About</w>
@@ -260,7 +274,13 @@
          </l>
       </lg>
    </lg>
-   <lg xml:id="parr-s08025">
+   <lg xml:id="parr-s08025"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xxxxxaxaxbxb"
+       rppa:syllab="7.7.8.7.8.7.8.7.8.7.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01315">
          <w xml:id="parr-0915970">Part</w>
          <c> </c>
@@ -456,7 +476,13 @@
          <pc xml:id="parr-0916970" unit="sentence">”</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s08030">
+   <lg xml:id="parr-s08030"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xaxabxbxxxxxxcxcxdxd"
+       rppa:syllab="7.7.8.7.8.7.8.7.8.7.8.8.8.7.8.7.8.7.8.7"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <head xml:id="parr-h01320">
          <w xml:id="parr-0917010">Part</w>
          <c> </c>

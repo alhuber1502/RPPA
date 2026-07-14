@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_spa"
+     ana="#translation_spa #quatrain"
      corresp="#work00441"
      subtype="rppatext"
      type="poem"
      xml:id="text01233"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00150" type="author"/>
    <link target="#pers00808" type="translator"/>
    <link target="#pers00809" type="translator"/>
@@ -19,7 +21,7 @@
       <c> </c>
       <w xml:id="erpa-1198110">I</w>
    </head>
-   <lg xml:id="erpa-s09495">
+   <lg xml:id="erpa-s09495" rhyme="axax">
       <l xml:id="erpa-l63365">
          <w xml:id="erpa-1198140">I</w>
          <c> </c>
@@ -94,7 +96,7 @@
          <pc xml:id="erpa-1198500" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s09500">
+   <lg xml:id="erpa-s09500" rhyme="xaxa">
       <l xml:id="erpa-l63385">
          <w xml:id="erpa-1198530">I</w>
          <c> </c>
@@ -157,7 +159,7 @@
          <pc xml:id="erpa-1198830" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s09505">
+   <lg xml:id="erpa-s09505" rhyme="xaxa">
       <l xml:id="erpa-l63405">
          <w xml:id="erpa-1198860">But</w>
          <c> </c>

@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #sestet #sestarima"
      corresp="#work00956"
      subtype="rppatext"
      type="poem"
      xml:id="text01326"
-     xml:lang="rus">
+     xml:lang="rus"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00107" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="erpa-n01810">
@@ -18,7 +20,10 @@
    <head type="main" xml:lang="rus" xml:id="erpa-h02435">
       <w xml:id="erpa-1563440">Родина</w>
    </head>
-   <lg xml:id="erpa-s12255">
+   <lg xml:id="erpa-s12255"
+       rhyme="ababcc"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l87380">
          <w xml:id="erpa-1563470">Люблю</w>
          <c> </c>
@@ -101,7 +106,10 @@
          <pc xml:id="erpa-1563860" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s12260">
+   <lg xml:id="erpa-s12260"
+       rhyme="abbacdcdefefghghijij"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="erpa-l87410">
          <w xml:id="erpa-1563890">‎</w>
          <c> </c>

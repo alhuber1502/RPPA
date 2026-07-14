@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_rus"
+     ana="#translation_rus #octet #twelve-line"
      corresp="#work00932"
      subtype="rppatext"
      type="poem"
      xml:id="text01279"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00120" type="author"/>
    <link target="#pers00818" type="translator"/>
    <link target="#text01278" type="translation"/>
@@ -18,7 +20,13 @@
       <c> </c>
       <w xml:id="erpa-1391190">Poet</w>
    </head>
-   <lg xml:id="erpa-s11035">
+   <lg xml:id="erpa-s11035"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababcdcd"
+       rppa:syllab="9.8.9.8.9.8.9.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l76255">
          <w xml:id="erpa-1391220">Until</w>
          <c> </c>
@@ -120,7 +128,13 @@
          <pc xml:id="erpa-1391700" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="erpa-s11040">
+   <lg xml:id="erpa-s11040"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="abbacdcdeffe"
+       rppa:syllab="8.9.10.8.9.8.9.8.9.8.8.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erpa-l76295">
          <w xml:id="erpa-1391730">But</w>
          <c> </c>

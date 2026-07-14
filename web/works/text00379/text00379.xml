@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #iamb #pentameter #pair"
      corresp="#work00357"
      subtype="rppatext"
      type="poem"
      xml:id="text00379"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="aa"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00013" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01905">
@@ -37,7 +42,7 @@
       <pc xml:id="pbrp-2859870" unit="sentence">]</pc>
    </head>
    <lg xml:id="pbrp-s22980">
-      <l n="96" xml:id="pbrp-l137910">
+      <l n="96" xml:id="pbrp-l137910" rhyme="x">
          <w xml:id="pbrp-2859900">Oh</w>
          <c> </c>
          <w xml:id="pbrp-2859910">for</w>
@@ -1261,7 +1266,7 @@
          <c> </c>
          <w xml:id="pbrp-2865700">alive</w>
       </l>
-      <l xml:id="pbrp-l138235">
+      <l xml:id="pbrp-l138235" rhyme="x">
          <c> </c>
          <w xml:id="pbrp-2865710">The</w>
          <c> </c>
@@ -1282,7 +1287,7 @@
          <c> </c>
          <w xml:id="pbrp-2865800">strange</w>
       </l>
-      <l xml:id="pbrp-l138240">
+      <l xml:id="pbrp-l138240" rhyme="x">
          <c> </c>
          <w xml:id="pbrp-2865810">Journey</w>
          <c> </c>

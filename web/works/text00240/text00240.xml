@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #pair #narrative"
      corresp="#work00237"
      subtype="rppatext"
      type="poem"
      xml:id="text00240"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00002" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01210">
@@ -63,7 +65,13 @@
          <pc xml:id="pbrp-1752240" unit="sentence">)</pc>
       </bibl>
    </epigraph>
-   <lg xml:id="pbrp-s14525">
+   <lg xml:id="pbrp-s14525"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghh"
+       rppa:syllab="8.8.8.8.9.9.8.8.8.8.10.8.9.9.9.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l79375">
          <w xml:id="pbrp-1752270">When</w>
          <c> </c>
@@ -330,7 +338,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14530">
+   <lg xml:id="pbrp-s14530"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xxaabbccxxddeeffgghh"
+       rppa:syllab="10.8.9.11.9.9.9.9.9.9.10.9.8.8.8.8.8.8.9.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l79455">
          <w xml:id="pbrp-1753570">Oh</w>
          <c> </c>
@@ -670,7 +684,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14535">
+   <lg xml:id="pbrp-s14535"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddeexxxxffgghhii"
+       rppa:syllab="8.8.9.9.9.9.9.9.9.9.9.9.9.9.9.9.11.10.9.9.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l79555">
          <w xml:id="pbrp-1755210">But</w>
          <c> </c>
@@ -1050,7 +1070,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14540">
+   <lg xml:id="pbrp-s14540"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddeexxxxffxxgghhiijjkkll"
+       rppa:syllab="8.9.9.9.8.8.8.8.8.8.9.9.9.9.8.9.9.9.8.8.8.7.8.8.9.9.9.8.8.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l79665">
          <w xml:id="pbrp-1757080">But</w>
          <c> </c>
@@ -1548,7 +1574,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14545">
+   <lg xml:id="pbrp-s14545"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccxxddeeffgghhiijj"
+       rppa:syllab="8.8.8.8.8.8.8.8.8.8.8.8.9.8.9.9.8.8.9.9.11.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l79815">
          <w xml:id="pbrp-1759440">By</w>
          <c> </c>
@@ -1911,7 +1943,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14550">
+   <lg xml:id="pbrp-s14550"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghhiijjkkllmmnnoopp"
+       rppa:syllab="9.9.8.8.8.8.8.8.8.8.8.8.8.8.9.9.8.8.9.9.9.8.8.8.10.9.9.9.8.8.9.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l79925">
          <w xml:id="pbrp-1761190">But</w>
          <c> </c>
@@ -2459,7 +2497,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14555">
+   <lg xml:id="pbrp-s14555"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddxxeeffgghhii"
+       rppa:syllab="10.10.8.8.9.9.8.8.9.8.9.10.8.8.9.9.8.9.9.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l80085">
          <w xml:id="pbrp-1763890">As</w>
          <c> </c>
@@ -2805,7 +2849,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14560">
+   <lg xml:id="pbrp-s14560"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbxxccxxxxddee"
+       rppa:syllab="9.9.8.8.9.9.8.8.8.8.9.9.9.9.9.9"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l80185">
          <w xml:id="pbrp-1765590">But</w>
          <c> </c>
@@ -3083,7 +3133,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14565">
+   <lg xml:id="pbrp-s14565"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbccddeeffgghhiijjkk"
+       rppa:syllab="8.9.8.8.8.8.9.8.9.9.8.8.9.9.8.9.8.8.8.8.9.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l80265">
          <w xml:id="pbrp-1766950">But</w>
          <c> </c>
@@ -3459,7 +3515,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14570">
+   <lg xml:id="pbrp-s14570"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aaxxxxbbccddeeffgg"
+       rppa:syllab="10.9.9.9.8.8.8.8.8.9.8.8.10.9.8.8.8.8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l80375">
          <w xml:id="pbrp-1768800">Ah</w>
          <pc xml:id="pbrp-1768810">,</pc>
@@ -3779,7 +3841,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14575">
+   <lg xml:id="pbrp-s14575"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbxx"
+       rppa:syllab="8"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l rendition="#h_3" xml:id="pbrp-l80465">
          <w xml:id="pbrp-1770350">Now</w>
          <pc xml:id="pbrp-1770360">,</pc>

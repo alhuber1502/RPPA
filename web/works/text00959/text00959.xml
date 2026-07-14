@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #cross"
+     ana="#original #cross #iamb #tetrameter #quatrain"
      corresp="#work00771"
      subtype="rppatext"
      type="poem"
      xml:id="text00959"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00158" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="rocp-n00510">
@@ -24,7 +28,7 @@
       <c> </c>
       <w xml:id="rocp-503870">Sat</w>
    </head>
-   <lg xml:id="rocp-s06585">
+   <lg xml:id="rocp-s06585" rhyme="aabb">
       <l xml:id="rocp-l13935">
          <w xml:id="rocp-503900">Alone</w>
          <c> </c>
@@ -86,7 +90,7 @@
          <pc xml:id="rocp-504190">;</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06590">
+   <lg xml:id="rocp-s06590" rhyme="abaccb">
       <l xml:id="rocp-l13955">
          <w xml:id="rocp-504220">And</w>
          <c> </c>
@@ -177,7 +181,7 @@
          <pc xml:id="rocp-504650" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06595">
+   <lg xml:id="rocp-s06595" rhyme="abab">
       <l xml:id="rocp-l13985">
          <w xml:id="rocp-504680">I</w>
          <c> </c>
@@ -237,7 +241,7 @@
          <pc xml:id="rocp-504960" unit="sentence">?</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06600">
+   <lg xml:id="rocp-s06600" rhyme="abab">
       <l xml:id="rocp-l14005">
          <pc xml:id="rocp-504990">“</pc>
          <w xml:id="rocp-505000">Dreams</w>
@@ -296,7 +300,7 @@
          <pc xml:id="rocp-505280" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06605">
+   <lg xml:id="rocp-s06605" rhyme="aabb">
       <l xml:id="rocp-l14025">
          <pc xml:id="rocp-505310">”</pc>
          <c> </c>

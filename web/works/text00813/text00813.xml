@@ -2,13 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #twelve-line #sonnet"
      corresp="#work00667"
      rhyme="irregular"
      subtype="rppatext"
      type="poem"
      xml:id="text00813"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00523" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="parr-n00930">
@@ -37,7 +39,13 @@
       <pc xml:id="parr-1005340">"</pc>
       <pc xml:id="parr-1005350" unit="sentence">]</pc>
    </head>
-   <lg xml:id="parr-s08715">
+   <lg xml:id="parr-s08715"
+       ana="#iamb #trimeter"
+       met="-+|-+|-+/"
+       rhyme="xaxaxbxbxxxx"
+       rppa:syllab="6.6.8.6.7.7.8.6.7.6.9.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l44395">
          <w xml:id="parr-1005380">He</w>
          <c> </c>
@@ -195,7 +203,13 @@
          <pc xml:id="parr-1006090">—</pc>
       </l>
    </lg>
-   <lg xml:id="parr-s08720">
+   <lg xml:id="parr-s08720"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xx"
+       rppa:syllab="8.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="parr-l44455">
          <w xml:id="parr-1006120">When</w>
          <c> </c>

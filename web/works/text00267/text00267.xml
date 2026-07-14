@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #pentameter #pair"
      corresp="#work00262"
      subtype="rppatext"
      type="poem"
      xml:id="text00267"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rhyme="aa"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00044" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01345">
@@ -367,7 +372,7 @@
          <c> </c>
          <pc xml:id="pbrp-2090110">–</pc>
       </l>
-      <l xml:id="pbrp-l98390">
+      <l xml:id="pbrp-l98390" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2090120">The</w>
          <c> </c>
@@ -385,7 +390,7 @@
          <w xml:id="pbrp-2090190">sincere</w>
          <pc xml:id="pbrp-2090200">,</pc>
       </l>
-      <l xml:id="pbrp-l98395">
+      <l xml:id="pbrp-l98395" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2090210">Thus</w>
          <c> </c>
@@ -401,7 +406,7 @@
          <w xml:id="pbrp-2090270">year</w>
          <pc xml:id="pbrp-2090280">,</pc>
       </l>
-      <l xml:id="pbrp-l98400">
+      <l xml:id="pbrp-l98400" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2090290">With</w>
          <c> </c>
@@ -4296,7 +4301,7 @@
          <pc xml:id="pbrp-2109180" unit="sentence">.</pc>
          <c> </c>
       </l>
-      <l xml:id="pbrp-l99395">
+      <l xml:id="pbrp-l99395" rhyme="aaa">
          <pc xml:id="pbrp-2109190">‘</pc>
          <w xml:id="pbrp-2109200">See</w>
          <pc xml:id="pbrp-2109210">,</pc>
@@ -4324,7 +4329,7 @@
          <c> </c>
          <pc xml:id="pbrp-2109330">–</pc>
       </l>
-      <l xml:id="pbrp-l99400">
+      <l xml:id="pbrp-l99400" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2109340">The</w>
          <c> </c>
@@ -4349,7 +4354,7 @@
          <pc xml:id="pbrp-2109450" unit="sentence">!</pc>
          <c> </c>
       </l>
-      <l xml:id="pbrp-l99405">
+      <l xml:id="pbrp-l99405" rhyme="aaa">
          <w xml:id="pbrp-2109460">Living</w>
          <c> </c>
          <w xml:id="pbrp-2109470">we</w>
@@ -5939,7 +5944,7 @@
          <w xml:id="pbrp-2117310">will</w>
          <pc xml:id="pbrp-2117320">,</pc>
       </l>
-      <l xml:id="pbrp-l99780">
+      <l xml:id="pbrp-l99780" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2117330">Or</w>
          <c> </c>
@@ -5961,7 +5966,7 @@
          <c> </c>
          <w xml:id="pbrp-2117430">threw</w>
       </l>
-      <l xml:id="pbrp-l99785">
+      <l xml:id="pbrp-l99785" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2117440">The</w>
          <c> </c>
@@ -5980,7 +5985,7 @@
          <c> </c>
          <w xml:id="pbrp-2117520">adieu</w>
       </l>
-      <l xml:id="pbrp-l99790">
+      <l xml:id="pbrp-l99790" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2117530">To</w>
          <c> </c>
@@ -6272,7 +6277,7 @@
          <pc xml:id="pbrp-2118930">)</pc>
          <pc xml:id="pbrp-2118940">;</pc>
       </l>
-      <l xml:id="pbrp-l99865">
+      <l xml:id="pbrp-l99865" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2118950">When</w>
          <c> </c>
@@ -6292,7 +6297,7 @@
          <w xml:id="pbrp-2119030">pace</w>
          <pc xml:id="pbrp-2119040">,</pc>
       </l>
-      <l xml:id="pbrp-l99870">
+      <l xml:id="pbrp-l99870" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2119050">Are</w>
          <c> </c>
@@ -6315,7 +6320,7 @@
          <w xml:id="pbrp-2119150">grace</w>
          <pc xml:id="pbrp-2119160">,</pc>
       </l>
-      <l xml:id="pbrp-l99875">
+      <l xml:id="pbrp-l99875" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2119170">And</w>
          <c> </c>
@@ -6611,7 +6616,7 @@
          <w xml:id="pbrp-2120590">away</w>
          <pc xml:id="pbrp-2120600">:</pc>
       </l>
-      <l xml:id="pbrp-l99950">
+      <l xml:id="pbrp-l99950" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2120610">Had</w>
          <c> </c>
@@ -6636,7 +6641,7 @@
          <w xml:id="pbrp-2120730">two</w>
          <pc xml:id="pbrp-2120740">,</pc>
       </l>
-      <l xml:id="pbrp-l99955">
+      <l xml:id="pbrp-l99955" rhyme="aaa">
          <c> </c>
          <w xml:id="pbrp-2120750">Would</w>
          <c> </c>
@@ -6657,7 +6662,7 @@
          <pc xml:id="pbrp-2120840" unit="sentence">?</pc>
          <c> </c>
       </l>
-      <l xml:id="pbrp-l99960">
+      <l xml:id="pbrp-l99960" rhyme="aaa">
          <w xml:id="pbrp-2120850">Or</w>
          <c> </c>
          <w xml:id="pbrp-2120860">knows</w>

@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_ron #excerpt"
+     ana="#translation_ron #excerpt #sestet #tail"
      corresp="#work00389"
      subtype="rppatext"
      type="poem"
      xml:id="text00429"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00175" type="author"/>
    <link target="#pers00709" type="translator"/>
    <link target="#text00428" type="translation"/>
@@ -27,7 +29,10 @@
       <w xml:id="erar-1778020">extracts</w>
       <pc xml:id="erar-1778030" unit="sentence">]</pc>
    </head>
-   <lg xml:id="erar-s16000">
+   <lg xml:id="erar-s16000"
+       rhyme="aabccb"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erar-l03080">
          <w xml:id="erar-1778060">When</w>
          <c> </c>
@@ -180,7 +185,10 @@
         reason="sampling"
         resp="#AH"
         xml:id="erar-1778760-gap0"/>
-   <lg xml:id="erar-s16005">
+   <lg xml:id="erar-s16005"
+       rhyme="aabccb"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erar-l03110">
          <w xml:id="erar-1778800">And</w>
          <c> </c>
@@ -334,7 +342,10 @@
         reason="sampling"
         resp="#AH"
         xml:id="erar-1779530-gap0"/>
-   <lg xml:id="erar-s16010">
+   <lg xml:id="erar-s16010"
+       rhyme="aabccbccdeedffghhgiijkkj"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="erar-l03140">
          <w xml:id="erar-1779570">We</w>
          <pc xml:id="erar-1779580" unit="sentence">?</pc>

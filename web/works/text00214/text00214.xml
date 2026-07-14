@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #sonnet"
+     ana="#original #sonnet #iamb #pentameter #octet #envelope"
      corresp="#work00211"
      subtype="rppatext"
      type="poem"
      xml:id="text00214"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00021" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01080">
@@ -41,7 +45,13 @@
       <c> </c>
       <w xml:id="pbrp-1694580">1814</w>
    </head>
-   <lg xml:id="pbrp-s14065">
+   <lg xml:id="pbrp-s14065"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abbaabba"
+       rppa:syllab="10.10.10.11.10.10.10.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l76955">
          <w xml:id="pbrp-1694610">Winter</w>
          <c> </c>
@@ -205,7 +215,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14070">
+   <lg xml:id="pbrp-s14070"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abcabc"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l76995">
          <w xml:id="pbrp-1695410">And</w>
          <c> </c>

@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_swe"
+     ana="#translation_swe #ode #hymn #iamb #trimeter"
      corresp="#work00468"
      subtype="rppatext"
      type="poem"
      xml:id="text00598"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+/"
+     rppa:syllab="6"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00377" type="author"/>
    <link target="#pers00706" type="translator"/>
    <link target="#text00597" type="translation"/>
@@ -26,7 +30,7 @@
       <c> </c>
       <w xml:id="erar-4854280">Sun</w>
    </head>
-   <lg xml:id="erar-s56340">
+   <lg xml:id="erar-s56340" rhyme="abbccdda">
       <l xml:id="erar-l57770">
          <w xml:id="erar-4854310">I</w>
          <c> </c>
@@ -133,7 +137,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="erar-s56345">
+   <lg xml:id="erar-s56345" rhyme="abccddbaeefgfghhiikkelel">
       <l xml:id="erar-l57810">
          <w xml:id="erar-4854810">Behold</w>
          <pc xml:id="erar-4854820" unit="sentence">!</pc>
@@ -440,7 +444,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="erar-s56350">
+   <lg xml:id="erar-s56350" rhyme="aabbccdedefgfghiihklklmnmonopp">
       <l xml:id="erar-l57930">
          <w xml:id="erar-4856220">O</w>
          <c> </c>
@@ -815,7 +819,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="erar-s56355">
+   <lg xml:id="erar-s56355" rhyme="ababacacdedeffgghhikik">
       <l xml:id="erar-l58080">
          <w xml:id="erar-4857860">Seems</w>
          <c> </c>
@@ -1082,7 +1086,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="erar-s56360">
+   <lg xml:id="erar-s56360" rhyme="aabbccddaxee">
       <l xml:id="erar-l58190">
          <w xml:id="erar-4859060">Now</w>
          <c> </c>
@@ -1234,7 +1238,7 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="erar-s56365">
+   <lg xml:id="erar-s56365" rhyme="ababcddc">
       <l xml:id="erar-l58250">
          <w xml:id="erar-4859750">Do</w>
          <c> </c>

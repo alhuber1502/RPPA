@@ -2,12 +2,14 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original #excerpt"
+     ana="#original #excerpt #fourteen-line"
      corresp="#work00236"
      subtype="rppatext"
      type="poem"
      xml:id="text00239"
-     xml:lang="eng">
+     xml:lang="eng"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00040" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01205">
@@ -55,7 +57,13 @@
       <w xml:id="pbrp-1748240">129-134</w>
       <pc xml:id="pbrp-1748250" unit="sentence">]</pc>
    </head>
-   <lg xml:id="pbrp-s14500">
+   <lg xml:id="pbrp-s14500"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="ababcdcdeffgge"
+       rppa:syllab="10.10.10.11.8.8.9.8.7.9.8.9.8.11"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l79140">
          <w xml:id="pbrp-1748280">Rise</w>
          <pc xml:id="pbrp-1748290">,</pc>
@@ -294,7 +302,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14505">
+   <lg xml:id="pbrp-s14505"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbxccddexffgeg"
+       rppa:syllab="8.6.11.12.8.8.6.8.8.9.9.8.8.11.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l n="15" rendition="#h_3" xml:id="pbrp-l79210">
          <w xml:id="pbrp-1749430">How</w>
          <c> </c>
@@ -560,7 +574,13 @@
          <c> </c>
       </l>
    </lg>
-   <lg xml:id="pbrp-s14510">
+   <lg xml:id="pbrp-s14510"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="aabbcdedce"
+       rppa:syllab="8.8.8.8.4.4.8.6.4.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l79290">
          <w xml:id="pbrp-1750680">Ye</w>
          <c> </c>
@@ -720,7 +740,13 @@
         reason="sampling"
         resp="#AH"
         xml:id="pbrp-1751400-gap0"/>
-   <lg xml:id="pbrp-s14515">
+   <lg xml:id="pbrp-s14515"
+       ana="#iamb #tetrameter"
+       met="-+|-+|-+|-+/"
+       rhyme="xxaabb"
+       rppa:syllab="8.8.8.6.9.6"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="pbrp-l79340">
          <w xml:id="pbrp-1751440">But</w>
          <c> </c>

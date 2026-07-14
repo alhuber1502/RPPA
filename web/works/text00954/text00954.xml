@@ -2,12 +2,16 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#translation_fra"
+     ana="#translation_fra #iamb #pentameter #quatrain #continuous #sonnet"
      corresp="#work00768"
      subtype="rppatext"
      type="poem"
      xml:id="text00954"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+|-+/"
+     rppa:syllab="10"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00113" type="author"/>
    <link target="#pers00774" type="translator"/>
    <link target="#text00953" type="translation"/>
@@ -16,7 +20,13 @@
    <head type="main" xml:lang="eng" xml:id="rocp-h00970">
       <w xml:id="rocp-485010">Sonnet</w>
    </head>
-   <lg xml:id="rocp-s06450">
+   <lg xml:id="rocp-s06450"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="abba"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13030">
          <w xml:id="rocp-485040">To</w>
          <c> </c>
@@ -98,7 +108,13 @@
          <pc xml:id="rocp-485460" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06455">
+   <lg xml:id="rocp-s06455"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="aabb"
+       rppa:syllab="10.9.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13050">
          <w xml:id="rocp-485490">Honor</w>
          <c> </c>
@@ -173,7 +189,13 @@
          <pc xml:id="rocp-485860" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06460">
+   <lg xml:id="rocp-s06460"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="cdd"
+       rppa:syllab="9.10.10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13070">
          <w xml:id="rocp-485890">You</w>
          <c> </c>
@@ -229,7 +251,13 @@
          <pc xml:id="rocp-486160" unit="sentence">.</pc>
       </l>
    </lg>
-   <lg xml:id="rocp-s06465">
+   <lg xml:id="rocp-s06465"
+       ana="#iamb #pentameter"
+       met="-+|-+|-+|-+|-+/"
+       rhyme="cdc"
+       rppa:syllab="10"
+       resp="#prosodic #rhymetagger"
+       cert="medium">
       <l xml:id="rocp-l13085">
          <w xml:id="rocp-486190">And</w>
          <c> </c>

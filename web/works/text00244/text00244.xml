@@ -2,12 +2,17 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #iamb #tetrameter #eleven-line"
      corresp="#work00241"
      subtype="rppatext"
      type="poem"
      xml:id="text00244"
-     xml:lang="eng">
+     xml:lang="eng"
+     met="-+|-+|-+|-+/"
+     rhyme="xaxaxbccbdd"
+     rppa:syllab="8"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00006" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01230">
@@ -218,6 +223,8 @@
          <pc xml:id="pbrp-1816180" unit="sentence">.</pc>
          <c> </c>
       </l>
+   </lg>
+   <lg xml:id="pbrp-s15247">
       <l xml:id="pbrp-l83245">
          <w xml:id="pbrp-1816190">Like</w>
          <c> </c>
@@ -2149,6 +2156,8 @@
          <pc xml:id="pbrp-1825330" unit="sentence">!</pc>
          <c> </c>
       </l>
+   </lg>
+   <lg xml:id="pbrp-s15297">
       <l xml:id="pbrp-l83850">
          <w xml:id="pbrp-1825340">They</w>
          <c> </c>

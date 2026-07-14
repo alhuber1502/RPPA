@@ -2,12 +2,15 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:rppa="https://www.romanticperiodpoetry.org/rppa/"
      xmlns:tei="http://www.tei-c.org/ns/1.0"
-     ana="#original"
+     ana="#original #nine-line"
      corresp="#work00244"
      subtype="rppatext"
      type="poem"
      xml:id="text00247"
-     xml:lang="eng">
+     xml:lang="eng"
+     rhyme="xaxabcbbc"
+     resp="#prosodic #rhymetagger"
+     cert="medium">
    <link target="#pers00008" type="author"/>
    <link target="#nott" type="nott"/>
    <note type="source" xml:id="pbrp-n01245">
@@ -80,8 +83,6 @@
          <pc xml:id="pbrp-1873490" unit="sentence">.</pc>
          <c> </c>
       </l>
-   </lg>
-   <lg xml:id="pbrp-s15745">
       <l n="5" xml:id="pbrp-l86785">
          <w xml:id="pbrp-1873520">The</w>
          <c> </c>
