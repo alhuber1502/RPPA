@@ -7,6 +7,7 @@
 ( function () {
     'use strict';
     var mapsGraphOn = false, mapsPrevOverlay = false, mapsSpiderKey = null;
+    var mapsAnchorLatLng = null, mapsAnchorPt = null, mapsZooming = false;   // pan-translate anchor + zoom guard (perf)
     var mapsExpandedSeeds = {};             // seed URI -> persid of every poet the user has expanded; kept across a
                                             // Markers<->Graph toggle (which destroys cy) so the expansions can be redrawn
     var mapsPortraits = true;               // poets always render as portrait avatars (matching the Markers view); the dots toggle was removed
@@ -66,6 +67,17 @@
             } );
         } );
         try { cy.zoom( 1 ); cy.pan( { x: 0, y: 0 } ); } catch ( e ) {}   // keep the canvas 1:1 with the map (zoom is locked, reset pan)
+        // re-anchor the pan-translate reference (mapsPanTrack shifts the whole viewport by this point's delta)
+        try { mapsAnchorLatLng = map.getCenter(); mapsAnchorPt = map.latLngToContainerPoint( mapsAnchorLatLng ); } catch ( e ) {}
+    }
+    // PERF: during a constant-zoom PAN the whole scene shifts by a uniform pixel delta, so translate the cy
+    // viewport (O(1); Cytoscape blits its cached layer) instead of reprojecting all nodes per frame (which
+    // repaints every image node + edge). moveend then commits with a full mapsProjectNodes (resets pan to 0,0).
+    function mapsPanTrack() {
+        if ( mapsZooming || typeof cy === 'undefined' || !cy || typeof map === 'undefined' || !map ) return;
+        if ( !mapsAnchorLatLng ) { mapsProjectNodes(); return; }
+        var p = map.latLngToContainerPoint( mapsAnchorLatLng );
+        try { cy.pan( { x: p.x - mapsAnchorPt.x, y: p.y - mapsAnchorPt.y } ); } catch ( e ) {}
     }
     // pixel offsets that pack `count` nodes into neat CONCENTRIC RINGS around a centre (like the marker
     // spiderfier), sized so co-located poets never overlap and small stacks stay tight.
@@ -118,10 +130,10 @@
     function mapsOnMoveStart( e ) {
         // Collapse the fan on a ZOOM (its offsets are fixed pixels, so they mis-scale at another zoom);
         // a PAN keeps it open (mapsProjectNodes carries the offsets with the point). Bound to both events.
-        if ( e && e.type === 'zoomstart' ) mapsUnspiderfy();
+        if ( e && e.type === 'zoomstart' ) { mapsZooming = true; mapsUnspiderfy(); }   // zoom is non-uniform -> pan-track can't translate; reproject per frame
         if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets();
     }
-    function mapsOnMoveEnd() { mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
+    function mapsOnMoveEnd() { mapsZooming = false; mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
 
     // build the cy graph in a transparent overlay INSIDE #map. Nodes are CREATED already at their
     // projected geo positions (a preset layout with explicit positions) so there is no placement race
@@ -419,7 +431,8 @@
         if ( nwGroupFacet ) nwMapRegroup( nwGroupFacet );
         mapsRestoreExpansions();                                // redraw any expansions the user had open before switching to Markers
         // NOW bind pan/zoom projection (so subsequent user interaction moves the dots with the map)
-        map.on( 'move zoom', mapsProjectNodes );
+        map.on( 'move', mapsPanTrack );                        // pan: O(1) viewport translate (no per-node reproject)
+        map.on( 'zoom', mapsProjectNodes );                    // zoom: full reproject (non-uniform projection)
         map.on( 'movestart zoomstart', mapsOnMoveStart );
         map.on( 'moveend zoomend', mapsOnMoveEnd );
         map.on( 'click', mapsMapClick );
@@ -432,7 +445,8 @@
 
     function mapsShowMarkers() {
         if ( mapsGraphOn ) {
-            map.off( 'move zoom', mapsProjectNodes );
+            map.off( 'move', mapsPanTrack );
+            map.off( 'zoom', mapsProjectNodes );
             map.off( 'movestart zoomstart', mapsOnMoveStart );
             map.off( 'moveend zoomend', mapsOnMoveEnd );
             map.off( 'click', mapsMapClick );
