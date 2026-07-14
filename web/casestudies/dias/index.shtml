@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies / Canção do Exílio" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+
+        <!-- masthead -->
+        <div class="cs-hero">
+          <div class="cs-eyebrow">Case Study 01 &middot; A reception network</div>
+          <h1>&ldquo;Minha terra tem palmeiras&rdquo;</h1>
+          <p class="cs-lede">Gon&ccedil;alves Dias&rsquo;s <em>Can&ccedil;&atilde;o do Ex&iacute;lio</em> (1846) and the
+            eighty-eight nineteenth-century poems that answer it, read as a network of imitation,
+            parody, homage and elegy across Brazil, Portugal, Angola and Goa.</p>
+          <div class="cs-note">
+            This study reads the reception as a network of <strong>contexts</strong>: interpretive
+            links, in RPPA&rsquo;s ontological model, between each response and Dias&rsquo;s poem. Each context
+            is computationally derived (text-reuse and embeddings), interpreted and adversarially checked, and
+            carries its <strong>confidence</strong> and its <strong>evidence</strong>; its relation type and
+            motifs are bound to shared <strong>SKOS</strong> vocabularies. Weak or oblique links are held back
+            rather than asserted.
+          </div>
+        </div>
+
+        <nav class="cs-subnav mb-4">
+          <a href="/casestudies/dias/" class="active">Overview</a>
+          <a href="/casestudies/dias/network/">Network</a>
+          <a href="/casestudies/dias/map/">Map</a>
+          <a href="/casestudies/dias/motifs/">Motifs</a>
+          <a href="/casestudies/dias/texts/">The 88 texts</a>
+          <a href="/casestudies/dias/methods/">Methods</a>
+        </nav>
+
+        <!-- overview (rendered) -->
+        <section id="cs-overview" class="mb-4" aria-label="Overview">
+          <div class="text-muted">Loading the reception&hellip;</div>
+        </section>
+
+        <!-- timeline (rendered) -->
+        <section class="mb-4">
+          <div class="cs-section-label">The reception over time</div>
+          <div id="cs-timeline"></div>
+        </section>
+
+        <!-- significant words (rendered) -->
+        <section class="mb-4">
+          <div class="cs-section-label">Significant words</div>
+          <div class="row"><div class="col-lg-6">
+            <div id="cs-sigwords"></div>
+            <div class="small text-muted mt-1">The nouns Dias&rsquo;s responses most keep: his
+              &ldquo;Significant Words&rdquo; (Enslen), the frequency nouns that thread the corpus together.
+              The count is how many of the eighty-eight use each.</div>
+          </div></div>
+        </section>
+
+        <!-- findings (interpretation) -->
+        <section class="cs-findings mb-4" aria-label="What the reception reveals">
+          <div class="cs-section-label">What the reception reveals <span class="cs-interp-badge">Interpretation</span></div>
+          <p class="cs-findings-lede">The four patterns below are the study&rsquo;s <strong>readings</strong> of
+            the contexts, not outputs of the pipeline. They are offered as interpretation and each can be
+            checked against the evidence, confidence and relation of every context in the
+            <a href="/casestudies/dias/texts/">texts</a>, <a href="/casestudies/dias/network/">network</a> and
+            <a href="/casestudies/dias/map/">map</a> views.</p>
+
+          <figure class="cs-origin-quote">
+            <blockquote>
+              <span class="pt">Minha terra tem palmeiras, / Onde canta o sabi&aacute;;</span>
+              <span class="en">&ldquo;My homeland has many palm-trees / and the thrush-song fills its air&rdquo;</span>
+            </blockquote>
+            <figcaption>Gon&ccedil;alves Dias, <em>Can&ccedil;&atilde;o do Ex&iacute;lio</em> (1846);
+              RPPA translation, <a href="/works/#text/text00421">text00421</a>. Its palm and <em>sabi&aacute;</em>
+              are the symbols the reception keeps, drops or replaces.</figcaption>
+          </figure>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="cs-finding">
+                <div class="fh">The song&rsquo;s affective modes stay home; only its imitations emigrate</div>
+                <p>Every <strong>parody</strong>, <strong>elegy</strong> and <strong>homage</strong> in the
+                  corpus is Brazilian. Across the Atlantic the <em>Can&ccedil;&atilde;o</em> is answered almost
+                  only as earnest <strong>imitation</strong> or as a distant <strong>thematic echo</strong>; it
+                  is never parodied or mourned abroad. To mock the poem, or to grieve through it, is an act of
+                  its own community.</p>
+                <div class="fig">All 38 parodies, elegies and homages are Brazilian &middot; the 14 responses
+                  from abroad are imitation (7), thematic echo (5) or reply (2).</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cs-finding">
+                <div class="fh">Mockery clings to the words; reverence departs from them</div>
+                <p>Textual closeness tracks appropriation, not admiration. The most literal responses are
+                  <strong>quotations</strong> and <strong>parodies</strong> (to parody the song you must first
+                  repeat it), while <strong>homages</strong> and <strong>elegies</strong> reuse Dias&rsquo;s
+                  wording least. Similarity is a poor guide to stance.</p>
+                <div class="fig">Verbatim reuse: parody 20/21 and quotation 3/3, against homage 2/7 and
+                  thematic echo 2/11 &middot; on Enslen &amp; Bell&rsquo;s scale, parody and quotation sit at the
+                  most literal T0&ndash;T1, homage and elegy at the loosest.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cs-finding">
+                <div class="fh">1873 is a year of mourning, not imitation</div>
+                <p>The sharpest spike in the timeline is not a wave of fresh imitation but a concentration of
+                  <strong>commemoration</strong>. Dias had drowned in a shipwreck off Maranh&atilde;o in 1864;
+                  nine years on, the poem becomes the vehicle for grieving its author.</p>
+                <div class="fig">The 1873 peak: 13 poems, 10 of them homage or elegy, 12 of 13 Brazilian &middot;
+                  the occasion is not yet identified, a candidate for archival confirmation.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cs-finding">
+                <div class="fh">Carried abroad, the homeland is re-territorialised</div>
+                <p>The Portuguese imitations keep Dias&rsquo;s &ldquo;Minha terra tem ___&rdquo; frame but
+                  transplant its nature: <em>palmeiras</em> become <em>salgueiros</em> (willows), the
+                  <em>sabi&aacute;</em> becomes the <em>rouxinol</em> (nightingale). The exile&rsquo;s
+                  idealising gaze is preserved and redirected onto a European landscape, so one syntactic
+                  template can voice a Portuguese, not a Brazilian, longing.</p>
+                <div class="fig">Six Portuguese imitations reuse the template with substituted symbols &middot;
+                  <a href="/casestudies/dias/text/?id=cdex-p001">see one worked example &rsaquo;</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- method -->
+        <section class="cs-prose mb-4">
+          <div class="cs-section-label">How each context was formed</div>
+          <p>Each context is the product of three passes. <strong>Discovery</strong> is grounded, not
+            invented: verbatim n-gram reuse and BGE-M3 embeddings locate the poems that echo the
+            <em>Can&ccedil;&atilde;o</em> and cluster those that echo one another. <strong>Interpretation</strong>
+            classifies each echo against a controlled vocabulary (imitation, parody, homage, reply,
+            quotation, thematic echo, elegy), each bound to a SKOS concept in the reference vocabularies
+            RPPA already uses (the Princeton Encyclopedia of Poetry &amp; Poetics, Burwick, Ferber), and proposes
+            the equivalence-and-difference note for human review.
+            <strong>Refutation</strong> asks, adversarially, whether the link is real at all; weak or oblique
+            candidates are held back rather than asserted.</p>
+          <p>An independent similarity coefficient and a Positive / Negative / Other mode (from Enslen&rsquo;s
+            <em>Song of Exile</em>) are carried alongside as a cross-check, never copied; they surface as a
+            score on each context where they bear on the reading.</p>
+          <p class="mb-0"><a href="/casestudies/dias/methods/">The full toolchain and citations &rsaquo;</a></p>
+        </section>
+
+        <!-- knowledge-graph framing -->
+        <section class="cs-kg mb-4">
+          <h2>How this fits the RPPA knowledge graph</h2>
+          <p class="mb-1">Every reading here is a <strong>context</strong> in RPPA&rsquo;s
+            sense: an <code>intro:INT_Interpretation</code> that <em>discusses</em> Dias&rsquo;s poem
+            (<code>work00385</code>), typed by an <code>intro:INT3</code> intertextual relation (a SKOS concept),
+            actualising <code>INT2</code> motif concepts, and anchored to passages of the verse. These candidate
+            contexts stand alone for now; because they already use the archive&rsquo;s ontology and vocabularies,
+            a ratified one <strong>promotes into the live RPPA graph unchanged</strong>. The case study is thus
+            not only a reading of the Dias reception but a contribution to the archive&rsquo;s growing web of
+            contextuality.</p>
+        </section>
+
+        <!-- explore: entry points to the deeper views -->
+        <section class="mb-4">
+          <div class="cs-section-label">Explore</div>
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-3">
+              <a class="text-decoration-none" href="/casestudies/dias/network/">
+                <div class="cs-card h-100" style="border-left-color:var(--cs-accent-2)">
+                  <div class="title">The reception network &rsaquo;</div>
+                  <div class="meta">The eighty-eight responses as a graph of <strong>contexts</strong>,
+                    coloured by relation, sized by confidence, clustered by shared reuse, with Dias&rsquo;s poem
+                    at the centre.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <a class="text-decoration-none" href="/casestudies/dias/map/">
+                <div class="cs-card h-100" style="border-left-color:var(--cs-green)">
+                  <div class="title">The reception map &rsaquo;</div>
+                  <div class="meta">A Lusophone-global spread (Brazil, Portugal, Angola and Goa) that plays out
+                    across the century, with propagation and reuse layers.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <a class="text-decoration-none" href="/casestudies/dias/motifs/">
+                <div class="cs-card h-100" style="border-left-color:var(--cs-coral)">
+                  <div class="title">The motifs &rsaquo;</div>
+                  <div class="meta">The palm, the <em>sabi&aacute;</em>, the &ldquo;Minha terra tem&rdquo; frame:
+                    which responses keep, drop or replace each, typed against shared SKOS vocabularies.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <a class="text-decoration-none" href="/casestudies/dias/texts/">
+                <div class="cs-card h-100" style="border-left-color:var(--cs-accent)">
+                  <div class="title">The eighty-eight responses &rsaquo;</div>
+                  <div class="meta">Browse and filter every context: evidence, motifs, confidence and the
+                    Enslen score, and open each poem&rsquo;s full record.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- sources -->
+        <section class="cs-prose mb-5">
+          <div class="cs-section-label">Sources</div>
+          <p class="small text-muted">Ant&ocirc;nio Gon&ccedil;alves Dias, &ldquo;Can&ccedil;&atilde;o do Ex&iacute;lio&rdquo;
+            (composed Coimbra, 1843; published Niter&oacute;i, 1846). Joshua Alma Enslen,
+            <em>Song of Exile: A Cultural History of Brazil&rsquo;s Most Popular Poem, 1846&ndash;2018</em>
+            (Purdue Studies in Romance Literatures, 2022): source of the corpus and the similarity
+            coefficient / modal classification. Joshua Alma Enslen &amp; Jocelyn R. Bell,
+            &ldquo;Minha Terra Tem ____: Patterns of Text Reuse in &lsquo;Song of Exile&rsquo; and its
+            Intertexts,&rdquo; <em>MATLIT</em> 10.1 (2023): 107&ndash;24.</p>
+        </section>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+    <script src="/js/casestudy.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,36 @@
+{
+  "id": "dias",
+  "title": "Canção do Exílio: nineteenth-century reception",
+  "origin": {
+    "work": "work00385",
+    "text": "text00420",
+    "poet": "pers00405",
+    "title": "Canção do Exílio",
+    "year": 1846,
+    "composed": 1843,
+    "published": 1846,
+    "note": "Gonçalves Dias; composed in Coimbra 1843, published in Niterói 1846; encoded in pcgd.xml. Referenced as the anchor, not re-encoded."
+  },
+  "source": "Joshua Alma Enslen, Song of Exile: A Cultural History of Brazil's Most Popular Poem, 1846-2018. Appendix ('Table of 500 Texts', catalogue rows 2-89 are this corpus) gives a String-Similarity coefficient + Positive/Negative/Other mode per poem — attached as the Stage 1 validation set (poem.enslen / context.validation).",
+  "counts": {
+    "poems": 88,
+    "authors": 80,
+    "sameAs": 4,
+    "anonymous": 15,
+    "byCountryPerPoem": {
+      "AO": 4,
+      "BR": 74,
+      "IN": 1,
+      "PT": 9
+    },
+    "enslenMatched": 88,
+    "byEnslenMode": {
+      "Positive": 45,
+      "Negative": 22,
+      "Other": 21
+    }
+  },
+  "idPolicy": "cdex-p### poems (textid order), cdex-a### authors (persid order); work layer dropped; anchored to origin work00385.",
+  "titlePolicy": "printed in-file <head> = title; Enslen/filename title = altTitle (present only when it differs beyond accent/case).",
+  "notPipeline": "Standalone case-study bundle. NOT ingested into RPPA; no named graphs. contexts.json is a proto-context scaffold for the Stage 1 harness to fill."
+}

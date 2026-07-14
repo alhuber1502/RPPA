@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+
+        <div class="cs-hero">
+          <div class="cs-eyebrow">Case Studies</div>
+          <h1>Reading the archive as a knowledge graph</h1>
+          <p class="cs-lede">Focused studies that follow a single poem or theme through its network of
+            <strong>contexts</strong>: the interpretive links, typed against shared vocabularies, that RPPA is
+            built from. Each study is independent research; ratified findings feed the live graph.</p>
+        </div>
+
+        <!-- the studies -->
+        <section class="mb-5">
+          <div class="cs-section-label">The studies</div>
+          <div class="cs-featured">
+            <div class="cs-eyebrow" style="margin:0">Case Study 01</div>
+            <h2 class="cs-featured-title"><a href="/casestudies/dias/">&ldquo;Minha terra tem palmeiras&rdquo;</a></h2>
+            <p class="cs-featured-thesis">Gon&ccedil;alves Dias&rsquo;s <em>Can&ccedil;&atilde;o do
+              Ex&iacute;lio</em> (1846) and the eighty-eight nineteenth-century poems that answer it, read as a
+              network of imitation, parody, homage and elegy across the Portuguese-speaking world.</p>
+            <div class="cs-facts">
+              <span><strong>88</strong> responses</span>
+              <span>Brazil &middot; Portugal &middot; Angola &middot; Goa</span>
+              <span>1846&ndash;1898</span>
+            </div>
+            <div class="cs-entry-links">
+              <span class="lbl">Enter</span>
+              <a href="/casestudies/dias/">Overview</a>
+              <a href="/casestudies/dias/network/">Network</a>
+              <a href="/casestudies/dias/map/">Map</a>
+              <a href="/casestudies/dias/motifs/">Motifs</a>
+              <a href="/casestudies/dias/texts/">The 88 texts</a>
+              <a href="/casestudies/dias/methods/">Methods</a>
+            </div>
+          </div>
+          <p class="small text-muted mt-3">Case Study 01 of a planned series. The method generalises to any
+            author or theme.</p>
+        </section>
+
+        <!-- how these studies work -->
+        <section class="mb-5">
+          <div class="cs-section-label">How these studies work</div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="cs-how-step">
+                <div class="n">1</div>
+                <div class="h">Proposed</div>
+                <p>A tool chain surfaces the <strong>candidates</strong>; a pipeline
+                then classifies each
+                  candidate, its relation, its motifs, and proposes
+                  the equivalence-and-difference rationale for human review.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cs-how-step">
+                <div class="n">2</div>
+                <div class="h">Refuted</div>
+                <p>A further adversarial pass asks whether each link is real at all. Weak or oblique cases are
+                  held back rather than asserted; what survives is shown with its <strong>confidence</strong>
+                  and its <strong>evidence</strong>.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cs-how-step">
+                <div class="n">3</div>
+                <div class="h">Grounded</div>
+                <p>Every relation, motif and mode binds to a shared <strong>SKOS</strong> vocabulary, so that an
+                expert-ratified context <strong>promotes into the live RPPA
+                graph</strong> on approval.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+  </body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies / Canção do Exílio / map" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+
+        <div class="cs-hero" style="padding-bottom:.75rem">
+          <div class="cs-eyebrow">Case Study 01 &middot; Can&ccedil;&atilde;o do Ex&iacute;lio</div>
+          <h1>A Lusophone-global reception</h1>
+          <p class="cs-lede" style="font-size:1.05rem">The responses placed by their author&rsquo;s country and
+            coloured by relation: Brazil (74), Portugal (9), Angola (4) and Goa (1). The map traces how
+            Dias&rsquo;s song of exile was answered across three continents of the Portuguese-speaking world.</p>
+        </div>
+
+        <nav class="cs-subnav mb-3">
+          <a href="/casestudies/dias/">Overview</a>
+          <a href="/casestudies/dias/network/">Network</a>
+          <a href="/casestudies/dias/map/" class="active">Map</a>
+          <a href="/casestudies/dias/motifs/">Motifs</a>
+          <a href="/casestudies/dias/texts/">The 88 texts</a>
+          <a href="/casestudies/dias/methods/">Methods</a>
+        </nav>
+
+        <div class="cs-map-toolbar">
+          <div class="cs-map-layers">
+            <span class="lbl">Layers</span>
+            <button type="button" class="cs-toggle" data-layer="territories" aria-pressed="true">Territories</button>
+            <button type="button" class="cs-toggle" data-layer="propagation" aria-pressed="true">Propagation</button>
+            <button type="button" class="cs-toggle" data-layer="affinity" aria-pressed="false">Reuse&nbsp;web</button>
+          </div>
+          <div id="cs-legend" class="cs-legend"></div>
+        </div>
+
+        <div id="cs-map"></div>
+
+        <div class="cs-timeslider">
+          <button type="button" id="cs-play" class="cs-play" aria-label="Play the reception through the century">&#9654;</button>
+          <input type="range" id="cs-year" min="1846" max="1898" value="1898" step="1" aria-label="Year of the reception">
+          <div class="cs-year-readout"><span id="cs-year-val">1898</span><span id="cs-era" class="cs-era"></span></div>
+          <div class="cs-year-count"><span id="cs-year-n">88</span> of 88</div>
+        </div>
+        <div id="cs-ticker" class="cs-ticker" aria-live="polite"></div>
+
+        <div class="small text-muted mt-2">Press <strong>play</strong> (or drag the slider) to watch the
+          reception spread across the century, the ticker names each year&rsquo;s new responses.
+          <strong>Propagation</strong> arcs run from Dias&rsquo;s poem in Rio to each response, coloured by
+          relation; <strong>Reuse&nbsp;web</strong> links poems that echo one another textually;
+          <strong>Territories</strong> outline each country&rsquo;s cluster. Hover a relation in the legend to
+          isolate it (click to lock). Markers are placed by author country and distributed across the
+          period&rsquo;s literary centres; within-country positions are schematic (Goa is shown at Nova Goa),
+          except four poets pinned to their actual birthplaces (Machado de Assis in Rio de Janeiro, Casimiro
+          de Abreu at Barra de S&atilde;o Jo&atilde;o, Maia Ferreira in Luanda, Antero de Quental in the
+          Azores). Click a marker for the poem&rsquo;s context.</div>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+    <script src="/js/casestudy-map.js"></script>
+  </body>
+
+</html>

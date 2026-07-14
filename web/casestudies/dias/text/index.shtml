@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies / Canção do Exílio / a context" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+        <nav class="small mt-1 mb-3" aria-label="breadcrumb">
+          <a href="/casestudies/">Case Studies</a> &rsaquo;
+          <a href="/casestudies/dias/">Canção do Exílio</a> &rsaquo;
+          <span class="text-muted" id="cs-crumb">a context</span>
+        </nav>
+        <div id="cs-text"><div class="text-muted">Loading the context&hellip;</div></div>
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+    <script src="/js/casestudy-text.js"></script>
+  </body>
+
+</html>

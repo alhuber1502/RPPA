@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+
+  <head>
+    <!--#config timefmt="%d %b %Y" -->
+    <!--#set var="title" value="Case Studies / Canção do Exílio / motifs" -->
+    <!--#set var="bodyid" value="casestudies" -->
+    <!--#set var="casestudies" value="active" -->
+
+    <!--#include virtual="/templates/head.shtml" -->
+    <link href="/css/casestudy.css" rel="stylesheet">
+  </head>
+
+  <body class="d-flex flex-column h-100" id="<!--#echo var='bodyid' -->">
+    <!--#include virtual="/templates/header.shtml" -->
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid" style="max-width:1400px">
+
+        <div class="cs-hero" style="padding-bottom:.75rem">
+          <div class="cs-eyebrow">Case Study 01 &middot; Can&ccedil;&atilde;o do Ex&iacute;lio</div>
+          <h1>The motifs and modes the reception carries</h1>
+          <p class="cs-lede" style="font-size:1.05rem">The symbols and structures of Dias&rsquo;s poem (the
+            palm, the <em>sabi&aacute;</em>, the &ldquo;Minha terra tem ___&rdquo; frame, the note of
+            <em>saudade</em>), and the modes and devices the responses enact (eulogy, satire, amplification).
+            Each is bound to a real concept in a shared vocabulary: Ferber&rsquo;s symbols, the Enslen set and
+            the Princeton Encyclopedia of Poetry &amp; Poetics.</p>
+        </div>
+
+        <nav class="cs-subnav mb-3">
+          <a href="/casestudies/dias/">Overview</a>
+          <a href="/casestudies/dias/network/">Network</a>
+          <a href="/casestudies/dias/map/">Map</a>
+          <a href="/casestudies/dias/motifs/" class="active">Motifs</a>
+          <a href="/casestudies/dias/texts/">The 88 texts</a>
+          <a href="/casestudies/dias/methods/">Methods</a>
+        </nav>
+
+        <section class="mb-5">
+          <div id="cs-motifs">
+            <div class="text-muted">Loading the motifs&hellip;</div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!--#include virtual="/templates/footer.shtml" -->
+    <!--#include virtual="/templates/bottom.shtml" -->
+    <script src="/js/casestudy.js"></script>
+  </body>
+
+</html>

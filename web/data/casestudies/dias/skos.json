@@ -1,0 +1,191 @@
+{
+  "note": "SKOS grounding for the Dias reception contexts. Relation types are intro:INT11 concepts under rppa/kos/contextuality/intertextual, mapped to Princeton Encyclopedia (PEPP2012) / Burwick / ECEP; motifs are Ferber symbols + an Enslen2022 KOS. This is the 'fit' that makes a ratified proto-context promotable (JSON -> .ru) into the live graph.",
+  "relationScheme": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual",
+  "relationParent": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality/intertextual",
+  "relations": {
+    "imitation": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/imitation",
+      "prefLabel": "imitation",
+      "matches": {
+        "exactMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/imitation",
+          "https://www.romanticperiodpoetry.org/rppa/kos/BurwickRK2015/Imitation",
+          "https://www.romanticperiodpoetry.org/rppa/kos/ECEP/imitation"
+        ]
+      }
+    },
+    "parody": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/parody",
+      "prefLabel": "parody",
+      "matches": {
+        "exactMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/parody",
+          "https://www.romanticperiodpoetry.org/rppa/kos/BurwickRK2015/Parody",
+          "https://www.romanticperiodpoetry.org/rppa/kos/ECEP/parody"
+        ]
+      }
+    },
+    "homage": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/homage",
+      "prefLabel": "homage",
+      "matches": {
+        "closeMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/encomium"
+        ]
+      }
+    },
+    "quotation": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/quotation",
+      "prefLabel": "quotation",
+      "matches": {
+        "closeMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/allusion"
+        ]
+      }
+    },
+    "thematic-echo": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/thematic-echo",
+      "prefLabel": "thematic echo",
+      "matches": {
+        "closeMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/echo_verse"
+        ]
+      }
+    },
+    "reply": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/reply",
+      "prefLabel": "reply",
+      "matches": {
+        "relatedMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/allusion"
+        ]
+      }
+    },
+    "elegy": {
+      "id": "https://www.romanticperiodpoetry.org/rppa/kos/contextuality-intertextual/elegy",
+      "prefLabel": "elegy",
+      "matches": {
+        "closeMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/elegy",
+          "https://www.romanticperiodpoetry.org/rppa/kos/ECEP/elegy"
+        ]
+      }
+    }
+  },
+  "motifs": {
+    "palmeiras": {
+      "prefLabel": "Palm",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/FerberDLS2017/Palm",
+      "kos": "FerberDLS2017",
+      "note": null
+    },
+    "sabia": {
+      "prefLabel": "Nightingale (sabiá)",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/FerberDLS2017/Nightingale",
+      "kos": "FerberDLS2017",
+      "note": "the sabiá as Brazil's nightingale-symbol"
+    },
+    "bird": {
+      "prefLabel": "Bird",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/FerberDLS2017/Bird",
+      "kos": "FerberDLS2017",
+      "note": "a generic or substituted bird (rouxinol, juriti, sanhaço…), as against the sabiá"
+    },
+    "ceu-estrelas": {
+      "prefLabel": "Star",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/FerberDLS2017/Star",
+      "kos": "FerberDLS2017",
+      "note": null
+    },
+    "flores": {
+      "prefLabel": "Flower",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/FerberDLS2017/Flower",
+      "kos": "FerberDLS2017",
+      "note": null
+    },
+    "saudade-exile": {
+      "prefLabel": "exile / saudade",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/Enslen2022/exile",
+      "kos": "Enslen2022",
+      "note": null
+    },
+    "terra-natal": {
+      "prefLabel": "homeland (terra)",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/Enslen2022/homeland",
+      "kos": "Enslen2022",
+      "note": "Enslen's Significant Word 'terra'"
+    },
+    "template:minha-terra-tem": {
+      "prefLabel": "Syntactic Template “Minha terra tem ___”",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/Enslen2022/syntactic-template",
+      "kos": "Enslen2022",
+      "note": "Enslen & Bell 2024"
+    }
+  },
+  "devices": {
+    "eulogy": {
+      "prefLabel": "eulogy",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/eulogy",
+      "kos": "PEPP2012",
+      "note": "the response mourns or praises Dias himself",
+      "matches": {
+        "closeMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/elegy",
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/encomium"
+        ]
+      }
+    },
+    "satire": {
+      "prefLabel": "satire",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/satire",
+      "kos": "PEPP2012",
+      "note": "the mocking mode of the parodies",
+      "matches": {
+        "exactMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/BurwickRK2015/Satire",
+          "https://www.romanticperiodpoetry.org/rppa/kos/ECEP/satire"
+        ]
+      }
+    },
+    "amplification": {
+      "prefLabel": "amplification",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/amplification",
+      "kos": "PEPP2012",
+      "note": "the “temos… mais” escalation (climax / incremental repetition)",
+      "matches": {
+        "relatedMatch": [
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/climax",
+          "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/incremental-repetition"
+        ]
+      }
+    },
+    "meditation": {
+      "prefLabel": "meditation",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/meditation",
+      "kos": "PEPP2012",
+      "note": "the nocturnal “cismar” reverie",
+      "matches": null
+    },
+    "indianism": {
+      "prefLabel": "Indianism",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/indianism",
+      "kos": "PEPP2012",
+      "note": "the Brazilian Indianist current (Timbiras, indigenous imagery)",
+      "matches": null
+    },
+    "irony": {
+      "prefLabel": "irony",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/irony",
+      "kos": "PEPP2012",
+      "note": "the anti-saudade inversion",
+      "matches": null
+    },
+    "apostrophe": {
+      "prefLabel": "apostrophe",
+      "concept": "https://www.romanticperiodpoetry.org/rppa/kos/PEPP2012/apostrophe",
+      "kos": "PEPP2012",
+      "note": "the closing “Permita Deus” supplication",
+      "matches": null
+    }
+  }
+}
