@@ -8,6 +8,7 @@
     'use strict';
     var mapsGraphOn = false, mapsPrevOverlay = false, mapsSpiderKey = null;
     var mapsAnchorLatLng = null, mapsAnchorPt = null, mapsZooming = false;   // pan-translate anchor + zoom guard (perf)
+    var mapsInGesture = false, mapsHoverRAF = 0, mapsHoverEvt = null, mapsPanRAF = 0;   // suspend hover during a gesture; rAF-throttle hover + pan (perf)
     var mapsExpandedSeeds = {};             // seed URI -> persid of every poet the user has expanded; kept across a
                                             // Markers<->Graph toggle (which destroys cy) so the expansions can be redrawn
     var mapsPortraits = true;               // poets always render as portrait avatars (matching the Markers view); the dots toggle was removed
@@ -74,10 +75,13 @@
     // viewport (O(1); Cytoscape blits its cached layer) instead of reprojecting all nodes per frame (which
     // repaints every image node + edge). moveend then commits with a full mapsProjectNodes (resets pan to 0,0).
     function mapsPanTrack() {
-        if ( mapsZooming || typeof cy === 'undefined' || !cy || typeof map === 'undefined' || !map ) return;
-        if ( !mapsAnchorLatLng ) { mapsProjectNodes(); return; }
-        var p = map.latLngToContainerPoint( mapsAnchorLatLng );
-        try { cy.pan( { x: p.x - mapsAnchorPt.x, y: p.y - mapsAnchorPt.y } ); } catch ( e ) {}
+        if ( mapsZooming || mapsPanRAF || typeof cy === 'undefined' || !cy || typeof map === 'undefined' || !map ) return;
+        mapsPanRAF = requestAnimationFrame( function () {   // coalesce many Leaflet 'move' fires into one cy.pan per frame
+            mapsPanRAF = 0;
+            if ( !mapsAnchorLatLng ) { mapsProjectNodes(); return; }
+            var p = map.latLngToContainerPoint( mapsAnchorLatLng );
+            try { cy.pan( { x: p.x - mapsAnchorPt.x, y: p.y - mapsAnchorPt.y } ); } catch ( e ) {}
+        } );
     }
     // pixel offsets that pack `count` nodes into neat CONCENTRIC RINGS around a centre (like the marker
     // spiderfier), sized so co-located poets never overlap and small stacks stay tight.
@@ -130,10 +134,11 @@
     function mapsOnMoveStart( e ) {
         // Collapse the fan on a ZOOM (its offsets are fixed pixels, so they mis-scale at another zoom);
         // a PAN keeps it open (mapsProjectNodes carries the offsets with the point). Bound to both events.
+        mapsInGesture = true; mapsHideTip();   // suspend the O(N) hover hit-test for the whole pan/zoom gesture
         if ( e && e.type === 'zoomstart' ) { mapsZooming = true; mapsUnspiderfy(); }   // zoom is non-uniform -> pan-track can't translate; reproject per frame
         if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets();
     }
-    function mapsOnMoveEnd() { mapsZooming = false; mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
+    function mapsOnMoveEnd() { mapsInGesture = false; mapsZooming = false; mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
 
     // build the cy graph in a transparent overlay INSIDE #map. Nodes are CREATED already at their
     // projected geo positions (a preset layout with explicit positions) so there is no placement race
@@ -198,7 +203,13 @@
     // a node still stacked with others (co-located, not yet fanned out)?
     function mapsIsStacked( n ) { return n && n.data( 'stackSize' ) > 1 && n.data( 'stackKey' ) !== mapsSpiderKey; }
     function mapsMapMove( e ) {
-        if ( !mapsGraphOn ) return;
+        if ( !mapsGraphOn || mapsInGesture ) return;   // no hover hit-test mid-gesture; its O(N) scan is why pan (mouse dragging) lagged worse than zoom
+        mapsHoverEvt = e;
+        if ( mapsHoverRAF ) return;                    // at most one hit-test per animation frame
+        mapsHoverRAF = requestAnimationFrame( function () { mapsHoverRAF = 0; if ( mapsHoverEvt ) mapsDoHover( mapsHoverEvt ); } );
+    }
+    function mapsDoHover( e ) {
+        if ( !mapsGraphOn || mapsInGesture ) return;
         var n = mapsNearestNode( e ), c = map.getContainer();
         if ( n ) {
             var label;
