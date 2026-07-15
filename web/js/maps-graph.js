@@ -135,10 +135,16 @@
         // Collapse the fan on a ZOOM (its offsets are fixed pixels, so they mis-scale at another zoom);
         // a PAN keeps it open (mapsProjectNodes carries the offsets with the point). Bound to both events.
         mapsInGesture = true; mapsHideTip();   // suspend the O(N) hover hit-test for the whole pan/zoom gesture
+        if ( typeof cy !== 'undefined' && cy ) cy.edges().style( 'display', 'none' );   // drop edges while moving (per-frame bezier repaint is costly); restored at moveend
         if ( e && e.type === 'zoomstart' ) { mapsZooming = true; mapsUnspiderfy(); }   // zoom is non-uniform -> pan-track can't translate; reproject per frame
         if ( typeof nwClearBubblesets === 'function' ) nwClearBubblesets();
     }
-    function mapsOnMoveEnd() { mapsInGesture = false; mapsZooming = false; mapsProjectNodes(); if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets(); }
+    function mapsOnMoveEnd() {
+        mapsInGesture = false; mapsZooming = false;
+        mapsProjectNodes();
+        mapsApplyLayerToggles();   // restore edges to their per-layer toggle state (NOT a blanket show, so a switched-off layer stays off)
+        if ( typeof nwRedrawMapBubblesets === 'function' ) nwRedrawMapBubblesets();
+    }
 
     // build the cy graph in a transparent overlay INSIDE #map. Nodes are CREATED already at their
     // projected geo positions (a preset layout with explicit positions) so there is no placement race
