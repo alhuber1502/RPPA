@@ -737,6 +737,8 @@ $( document ).on( "click", ".sso-sign-in", function(e) {
                         <i class="fa-brands fa-google"></i> Continue with Google
                     </button><br>
 
+                    <div class="text-muted small mb-2">Connecting uses the <em>PRISMS Network SSO</em>,
+                        the name ORCID, Google and Facebook will show (<a href="/about/#privacy">privacy</a>).</div>
                     <div>
                         <span class="text-muted small">Having trouble authenticating? Please <a href="mailto:help@romanticperiodpoetry.org?subject=RPPA authentication">get in touch</a>.
                     </div>
