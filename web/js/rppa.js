@@ -3443,12 +3443,12 @@ function print_user( contributors ) {
         formatted_users += 
             `<dt>Name</dt>`+
             `<dd>`+v['foaf:name']+`</dd>`+
+            (v.hasOwnProperty("foaf:accountName")?
             `<dt>Account</dt>`+
-            `<dd><a class="external" target="_blank" href="`+v['foaf:accountName'].id+`">`+v['foaf:accountName'].id+`</a></dd>`+
-            `<dt>E-mail</dt>`+
-            `<dd><a class="external" target="_blank" href="`+v['foaf:mbox'].id+`">`+v['foaf:mbox'].id.split('mailto:')[1]+`</a></dd>`+
+            `<dd><a class="external" target="_blank" href="`+v['foaf:accountName'].id+`">`+v['foaf:accountName'].id+`</a></dd>`:``)+
+            (v.hasOwnProperty("foaf:homepage")?
             `<dt>Web</dt>`+
-            `<dd><a class="external" target="_blank" href="`+v['foaf:homepage'].id+`">`+v['foaf:homepage'].id+`</a></dd>`
+            `<dd><a class="external" target="_blank" href="`+v['foaf:homepage'].id+`">`+v['foaf:homepage'].id+`</a></dd>`:``)
             ;
     });
     formatted_users += `</dl></div>`
