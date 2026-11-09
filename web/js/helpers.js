@@ -268,7 +268,7 @@ function formatEntity( entity, graph ) {
     // get statements for a single node for graphInfo/detailsTab
     info = "<h2>"+heading+"</h2><p>&lt;"+entity+"&gt;</p>"+
             "<h3>Properties</h3>"+contentP+"<h3>Relationships</h3>"+contentL+contentR+"";
-    return( info );
+    return( clean_html( info ) );
 }
 
 var cyLayouts = {};

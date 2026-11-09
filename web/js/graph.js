@@ -610,10 +610,10 @@ function nwUpdateLegend( groups, labels ) {
     var $l = $( '.nw-panel .nw-legend' ); if ( !$l.length ) return;
     if ( !groups ) { $l.empty(); return; }
     labels = labels || {};
-    $l.html( Object.keys( groups ).map( function( k ) {
+    $l.html( clean_html( Object.keys( groups ).map( function( k ) {
         var name = labels[ k ] || k;
         return `<span style="white-space:nowrap;margin-right:8px;" title="${ String( name ).replace( /"/g, '&quot;' ) }"><span style="display:inline-block;width:10px;height:10px;background:${ nwFacetColour( k ) };border-radius:2px;"></span> ${ String( name ).substring( 0, 24 ) } (${ groups[ k ].length })</span>`;
-    } ).join( '' ) );
+    } ).join( '' ) ) );
 }
 // bubbleset outline (soft, multi-membership, NON-interactive so it never blocks node
 // right-clicks) around each facet-value group
@@ -3024,8 +3024,8 @@ function tippyNodes( nodes, graph, all ) {
 					contentP += `<li><span style="font-style:italic;">target</span> &nbsp; <span><a href="`+node.data().target+`" class="nodejump">`+node.data().target+`</a></span></li>`;
 					contentP += contentPadd+"</ul>";
 				}
-				info = "<div><p><b>Id:</b> "+node.id()+((node.data("private") == true)?" <a href='#' data-id='"+node.id()+"' data-closest='div' class='delete_element_id'><i class='far fa-trash-alt'></i></a>":"")+"</p>"+
-					"<p><b>Properties</b></p>"+contentP+(( node.classes().toString() != "edge" )?"<p><b>Relationships</b></p>"+contentL+contentR:``)+"</div>";
+				info = clean_html( "<div><p><b>Id:</b> "+node.id()+((node.data("private") == true)?" <a href='#' data-id='"+node.id()+"' data-closest='div' class='delete_element_id'><i class='far fa-trash-alt'></i></a>":"")+"</p>"+
+					"<p><b>Properties</b></p>"+contentP+(( node.classes().toString() != "edge" )?"<p><b>Relationships</b></p>"+contentL+contentR:``)+"</div>" );
 			} else {
 			// apply statements to tippies for the graph
 				if ( tippy1[ node.id() ]) { tippy1[ node.id() ].destroy(); }
@@ -3033,14 +3033,14 @@ function tippyNodes( nodes, graph, all ) {
 				tippy1[ node.id() ] = node.popper({
                     content: () => {
                        let content = document.createElement('div');
-                       content.innerHTML = "<p><b>Relationships</b></p>"+contentL+contentR;
+                       content.innerHTML = clean_html( "<p><b>Relationships</b></p>"+contentL+contentR );
                        return content;
                     },
                 });
                 tippy2[ node.id()] = node.popper({
                     content: () => {
                        let content = document.createElement('div');
-                       content.innerHTML = "<p><b>Properties</b></p>"+contentP;
+                       content.innerHTML = clean_html( "<p><b>Properties</b></p>"+contentP );
                        return content;
                     },
                 });
@@ -3794,7 +3794,7 @@ async function cs_lists() {
 		</li>`
 	});
 	concepts_list += `</ul>`
-	$( "#networks_vocabs" ).html( concepts_list );
+	$( "#networks_vocabs" ).html( clean_html( concepts_list ) );
 }
 // export model (visible part only) as PNG 
 //$(document.body).on('click', 'a.consLink', function(e) { 
@@ -3852,7 +3852,7 @@ $(document.body).on('submit', '#keywordsearchForm', async function(e) {
 		if ( entities_list != '' ) {
 			$( '#keywordsearch' ).attr( "list", list_id );
 			$( "#keywordsearch" ).append( `<datalist id="`+list_id+`"/>` );
-			$( '#keywordsearch datalist#'+jqu( list_id ) ).html( entities_list );
+			$( '#keywordsearch datalist#'+jqu( list_id ) ).html( clean_html( entities_list ) );
 		} else {
 			$( '#keywordsearch' ).attr( "list", "none" );
 		}
@@ -3905,7 +3905,7 @@ $( document.body ).on( 'click', '#collapseOne a.relsLink', function(e) {
 		+`">`+truncateString(v.pref, 35)+((v.alt != false)?` (`+v.alt+`)`:``)+`</a></li>`;
 	});
 	instancesInfo += `</ul>`;
-	$( "#collapseTwo .accordion-body" ).html( instancesInfo );
+	$( "#collapseTwo .accordion-body" ).html( clean_html( instancesInfo ) );
 	$( "#headingTwo button" ).trigger( 'click' );
 });
 $( document.body ).on( 'click', '#collapseTwo a', async function(e) {

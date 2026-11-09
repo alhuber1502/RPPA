@@ -1,5 +1,14 @@
     <!-- Framework -->
-    <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script src="/js/purify.min.js"></script>
+    <script>
+        // Contributed text can hold HTML such as <em>, which is kept, but anything that could
+        // run a script is removed before it goes into a page. Defined here, not in a .js file,
+        // so that a browser's older cached copy of that file cannot leave it missing (9 November 2026)
+        function clean_html( html ) {
+            return DOMPurify.sanitize( String( html ), { ADD_ATTR: [ 'target' ] } );
+        }
+    </script>
     <script src="/js/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 

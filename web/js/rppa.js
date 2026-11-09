@@ -2515,7 +2515,7 @@ async function contribute_step3( tid, wid ) {
                         });
                         entities_list += `</select>`;
                         $( "#jForm" ).append( `<datalist id="`+list_id+`"/>` );
-                        $( '#jForm datalist#'+jqu( list_id ) ).html( entities_list );
+                        $( '#jForm datalist#'+jqu( list_id ) ).html( clean_html( entities_list ) );
                     }
                 }, items: [
                     {},
@@ -2603,7 +2603,7 @@ async function contribute_step3( tid, wid ) {
                                     if ( entities_list != '' ) {
                                         $(evt.target).prev().find( "input" ).attr( "list", list_id );
                                         $(evt.target).prev().find( "input" ).append( `<datalist id="`+list_id+`"/>` );
-                                        $(evt.target).prev().find( "datalist#"+jqu( list_id ) ).html( entities_list );
+                                        $(evt.target).prev().find( "datalist#"+jqu( list_id ) ).html( clean_html( entities_list ) );
                                     } else {
                                         $(evt.target).prev().find( "input" ).attr( "list", "none" );
                                     }
@@ -3025,7 +3025,7 @@ async function contribute_step3( tid, wid ) {
             entities_list += `<option data-value="`+v.s.value+`">`+v.q.value+`</option>`;
         }
         $( "#jForm" ).append( `<datalist id="itype"/>` );
-		$( '#jForm datalist#'+jqu( "itype" ) ).html( entities_list );
+		$( '#jForm datalist#'+jqu( "itype" ) ).html( clean_html( entities_list ) );
     }
 }
 $(document.body).on('submit', '#jForm', function(e) {
@@ -3452,7 +3452,7 @@ function print_user( contributors ) {
             ;
     });
     formatted_users += `</dl></div>`
-    return( formatted_users );
+    return( clean_html( formatted_users ) );
 }
 
 // format tool
@@ -3474,7 +3474,7 @@ function print_tool( tool ) {
             ;
     });
     formatted_tools += `</dl></div>`
-    return( formatted_tools );
+    return( clean_html( formatted_tools ) );
 }
 
 // format metadata
@@ -3510,7 +3510,7 @@ function print_cxtmd( md, skos ) {
             ;
     });
     formatted_metadata += `</dl></div>`
-    return( formatted_metadata );
+    return( clean_html( formatted_metadata ) );
 }
 
 // format context work
@@ -3568,7 +3568,7 @@ function print_cxtwrk( md, content, skos ) {
             ;
     });
     formatted_metadata += `</dl></div>`
-    return( formatted_metadata );
+    return( clean_html( formatted_metadata ) );
 }
 
 
@@ -3787,9 +3787,9 @@ async function display_context( context ) {
         await display_globaltext( cxtloc[0],texts[cxtloc[0]]["work"] );
     }
     // context label
-    $( ".context-container .context" ).append( `<h3><i class="fa-solid fa-layer-group"></i> Context: `+truncateString(cxtmd[context]["skos:prefLabel"],50)+`</h3>` );
+    $( ".context-container .context" ).append( clean_html( `<h3><i class="fa-solid fa-layer-group"></i> Context: `+truncateString(cxtmd[context]["skos:prefLabel"],50)+`</h3>` ) );
     if ( cxtmd[context]["crm:P3_has_note"] ) {
-        $( ".context-container .context" ).append( `<p>`+cxtmd[context]["crm:P3_has_note"]+`</p>` );
+        $( ".context-container .context" ).append( clean_html( `<p>`+cxtmd[context]["crm:P3_has_note"]+`</p>` ) );
     }
     // iterate through whatever was identified with intro:R21_identifies 
     for (var i in parts ) {
