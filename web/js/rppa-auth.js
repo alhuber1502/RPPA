@@ -31,6 +31,7 @@ var RPPAAuth = (function () {
             Cookies.remove("RPPA-login-user");
             Cookies.remove("RPPA-login-username");
             Cookies.remove("RPPA-login-provider");
+            Cookies.remove("RPPA-login-token");
             window.location.reload();
         },
 
@@ -39,13 +40,29 @@ var RPPAAuth = (function () {
          * If present, set legacy cookies and clean the URL.
          * @returns {{authenticated: boolean, user: string, username: string, provider: string}|null}
          */
+        /** The signed login token, if the user logged in since contributions needed one. */
+        token: function () {
+            return Cookies.get("RPPA-login-token");
+        },
+
+        /** Where contributions go: the auth server checks them, then writes them. */
+        contributeUrl: function () {
+            return authOrigin + "/api/auth/rppa-contribute";
+        },
+
         handleCallback: function () {
             var params = new URLSearchParams(window.location.search);
             var user = params.get("rppa_user");
             var username = params.get("rppa_username");
             var provider = params.get("rppa_provider");
+            // signed by the auth server; sent back with each contribution
+            var token = params.get("rppa_token");
 
             if (user && username && provider) {
+                if (token) {
+                    Cookies.set("RPPA-login-token", token,
+                        Object.assign({ secure: true, sameSite: "Strict" }, cookieDefaults));
+                }
                 Cookies.set("RPPA-login-user", user, cookieDefaults);
                 Cookies.set("RPPA-login-username", username, cookieDefaults);
                 Cookies.set("RPPA-login-provider", provider,
@@ -55,6 +72,7 @@ var RPPAAuth = (function () {
                 params.delete("rppa_user");
                 params.delete("rppa_username");
                 params.delete("rppa_provider");
+                params.delete("rppa_token");
                 var cleanUrl = window.location.pathname;
                 var remaining = params.toString();
                 if (remaining) cleanUrl += "?" + remaining;

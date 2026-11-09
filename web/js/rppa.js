@@ -1694,13 +1694,23 @@ function getJSONLD( BGquery, mode ) {
 }
 
 // update RDF store (on completed publishable user-contribution)
+// On the public site a contribution goes to the RPPA auth server with the
+// signed login token; the server checks the login and the contribution and
+// only then writes it (the store's own update endpoint is private). Locally
+// (development) it goes to the local store as before.
 function putTRIPLES( BGupdate ) {
     if ( user.startsWith( "rppa:" ) && RPPA_Auth.verify( user ) ) {
+        var live = /romanticperiodpoetry\.org/.test( window.location.hostname );
+        var token = ( live && typeof RPPAAuth !== 'undefined' ) ? RPPAAuth.token() : undefined;
+        if ( live && !token ) {
+            show_alert_mod( "Please log out and log in again to contribute: your login needs renewing.", "warning", false, 0 );
+            throw 'no login token';
+        }
         return new Promise(function(resolve, reject) {
             $.ajax({
                 type: "POST",
-                url: SPARQL_RPPA+"update",
-                data: { update: BGupdate },
+                url: live ? RPPAAuth.contributeUrl() : SPARQL_RPPA+"update",
+                data: live ? { update: BGupdate, token: token } : { update: BGupdate },
                 headers: {
                     Accept : "application/json"
                 }
@@ -1709,6 +1719,10 @@ function putTRIPLES( BGupdate ) {
                 publish( BGupdate );
             }).fail( function( error ) {
                 console.log( "FATAL UPDATE error!",error );
+                if ( live ) {
+                    show_alert_mod( ( error.status == 401 ? "Please log out and log in again to contribute: your login has expired." :
+                        "The contribution was not accepted: " + ( error.responseText || error.statusText ) ), "danger", false, 0 );
+                }
             });
         })
     } else {
