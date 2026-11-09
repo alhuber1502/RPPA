@@ -4318,9 +4318,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     $( ".sso" ).append(
-        `Contributing as: <em><span id="username">`+((user != undefined && username != 'undefined')?username:'Not connected')+`</span></em> <span id="provider">`+((user != undefined && username != 'undefined')?provider_img:'')+`</span>`+
+        `Contributing as: <em><span id="username"></span></em> <span id="provider">`+((user != undefined && username != 'undefined')?provider_img:'')+`</span>`+
         ((user != undefined && username != 'undefined')?'':' <button type="button" class="btn btn-sm sso-sign-in" style="background-color:var(--bs-orange);color:#fff;margin-left:5px;margin-top:-4px;">Connect to RPPA</button>' )
     );
+    // Added as text, not HTML: the name can come from the address of the page (9 November 2026)
+    $( ".sso #username" ).text( (user != undefined && username != 'undefined')?username:'Not connected' );
 
     // Layout management
     $.when( loadPlaces(), loadPersons(), loadNations(), loadTexts(), loadWorks() ).done( function() {
